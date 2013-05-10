@@ -1,15 +1,31 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://minimaxir.github.io/2011/10/blog-commenting-2011/</loc>
+        <lastmod>2013-05-09T20:37:43-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://minimaxir.github.io/2011/11/like-x-for-y/</loc>
+        <lastmod>2013-05-09T20:37:43-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://minimaxir.github.io/2011/11/how-startups-make-money/</loc>
+        <lastmod>2013-05-09T20:37:43-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://minimaxir.github.io/blog/archives/</loc>
-        <lastmod>2013-05-08T21:15:57-07:00</lastmod>
+        <lastmod>2013-05-09T20:37:43-07:00</lastmod>
     </url>
     <url>
         <loc>http://minimaxir.github.io/</loc>
-        <lastmod>2013-05-08T21:15:57-07:00</lastmod>
+        <lastmod>2013-05-09T20:37:43-07:00</lastmod>
     </url>
     <url>
         <loc>http://minimaxir.github.io/robots.txt</loc>
-        <lastmod>2013-05-08T21:15:57-07:00</lastmod>
+        <lastmod>2013-05-09T20:37:43-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://minimaxir.github.io/search.html</loc>
+        <lastmod>2013-05-09T20:37:43-07:00</lastmod>
     </url>
 </urlset>
