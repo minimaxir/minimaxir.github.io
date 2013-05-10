@@ -1,10 +1,6 @@
 body > nav {
   position: relative;
   background-color: $nav-bg;
-  @include background($nav-bg-front, $nav-bg-back);
-  border: {
-    top: 1px solid $nav-border-top;
-    bottom: 1px solid $nav-border-bottom; }
   padding-top: .35em;
   padding-bottom: .35em;
   form {
@@ -16,12 +12,8 @@ body > nav {
       font-family: $sans;
       line-height: 1.1em;
       width: 95%;
-      @include border-radius(.5em);
-      @include background-clip(padding-box);
-      @include box-shadow(lighten($nav-bg, 2) 0 1px);
-      background-color: lighten($nav-bg, 15);
-      border: 1px solid $nav-border;
-      color: #888;
+      background-color: #fff;
+      color: #222;
       &:focus {
         color: #444;
         border-color: #80b1df;
@@ -63,11 +55,9 @@ body > nav {
       line-height: 1.5em;
     }
     li + li {
-      border-left: 1px solid $nav-border-left;
       margin-left: .8em;
       a {
         padding-left: .8em;
-        border-left: 1px solid $nav-border-right;
       }
     }
     form {
@@ -106,7 +96,6 @@ body > nav {
 @mixin mask-subscription-nav($feed: 'rss.png'){
   position: relative; top: 0px;
   text-indent: -999999em;
-  background-color: $nav-border-right;
   border: 0;
   padding: 0;
   &,&:after { @include mask-image($feed); }

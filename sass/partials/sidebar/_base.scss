@@ -1,21 +1,18 @@
-.side-shadow-border {
-  @include box-shadow(lighten($sidebar-bg, 5) 0 1px);
-}
+// .side-shadow-border {
+//   @include box-shadow(lighten($sidebar-bg, 5) 0 1px);
+// }
 aside.sidebar {
   overflow: hidden;
-  color: $sidebar-color;
-  text-shadow: lighten($sidebar-bg, 8) 0 1px;
+  color: $white;
   a { @extend .force-wrap; }
   section {
     @extend .sans;
-    font-size: .8em;
+    font-size: 1em;
     line-height: 1.4em;
     margin-bottom: 1.5em;
     h1 {
       margin: 1.5em 0 0;
       padding-bottom: .2em;
-      border-bottom: 1px solid $sidebar-border;
-      @extend .side-shadow-border;
       + p {
         padding-top: .4em;
       }
@@ -34,19 +31,33 @@ aside.sidebar {
     list-style: none;
     padding: .5em 0;
     margin: 0;
-    border-bottom: 1px solid $sidebar-border;
-    @extend .side-shadow-border;
     p:last-child {
       margin-bottom: 0;
     }
   }
   a {
-    color: inherit;
+    color: $white;
+    text-decoration: none;
     @include transition(color .5s);
   }
   &:hover a {
     color: $sidebar-link-color;
     &:hover { color: $sidebar-link-color-hover; }
+  }
+  .search {
+    border: none;
+    padding: .5em .5em;
+    font-size: .85em;
+    font-family: $sans;
+    line-height: 1.1em;
+    width: 80%;
+    background-color: $lightBrick;
+    color: $yellow;
+    &:focus {
+      color: #444;
+      background-color: $white;
+      outline: none;
+    }
   }
 }
 .aside-alt-link {

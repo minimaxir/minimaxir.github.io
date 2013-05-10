@@ -1,10 +1,13 @@
 body > header {
+  margin: 0 auto;
+  min-height: 200px;
   background: $header-bg;
+  text-align: center;
   h1 {
     display: inline-block;
     margin: 0;
     a, a:visited, a:hover {
-      color: $title_color;
+      color: $gray;
       text-decoration: none;
     }
   }
@@ -14,5 +17,21 @@ body > header {
     font-size: 1em;
     color: $subtitle-color;
     font-weight: normal;
+  }
+  img {
+    max-width: 100px;
+    max-height: 100px;
+    padding-right: 30px;
+    position: relative;
+    top: 30px;
+  }
+}
+
+
+@media only screen and (max-width: 550px) {
+  body > header {
+    h1 {
+      padding-top: 40px;
+    }
   }
 }

@@ -11,10 +11,11 @@
     }
     footer { padding: 0; margin: 0;}
   }
-  h1 { color: $text-color; margin-bottom: .3em; }
   h2 { display: none; }
   h1 {
-    font-size: 1.5em;
+    color: $white;
+    margin-bottom: .3em;
+    font-size: 1.2em;
     a {
       @include hover-link;
       color: inherit;
@@ -46,20 +47,27 @@
       display: inline-block;
       position: relative; top: -1px;
       float: left;
-      &:first-child { padding-top: .75em; }
+      color: $white;
+      padding-top: .75em;
     }
     time {
       position: absolute;
       text-align: right;
       left: 0em;
       top: 1.8em;
+      color: $white;
     }
     .year { display: none; }
     article {
       padding:{left: 4.5em; bottom: .7em;}
     }
-  a.category {
-    line-height: 1.1em;
+    a.category {
+      line-height: 1.1em;
+      color: $yellow;
+      padding: 5px;
+      &:hover {
+        color: $darkBrick;
+      }
     }
   }
 }
