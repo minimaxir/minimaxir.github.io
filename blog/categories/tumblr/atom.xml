@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Tumblr | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
-  <link href="http://minimaxir.github.io/blog/categories/tumblr/atom.xml" rel="self"/>
-  <link href="http://minimaxir.github.io/"/>
-  <updated>2013-05-09T23:09:55-07:00</updated>
-  <id>http://minimaxir.github.io/</id>
+  <link href="http://minimaxir.com/blog/categories/tumblr/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2013-05-09T23:16:51-07:00</updated>
+  <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[If You're Going to Blog, Use Tumblr, Not WordPress]]></title>
-    <link href="http://minimaxir.github.io/2012/03/a-wordpress-about-tumblr/"/>
+    <link href="http://minimaxir.com/2012/03/a-wordpress-about-tumblr/"/>
     <updated>2012-03-09T21:14:00-08:00</updated>
-    <id>http://minimaxir.github.io/2012/03/a-wordpress-about-tumblr</id>
+    <id>http://minimaxir.com/2012/03/a-wordpress-about-tumblr</id>
     <content type="html"><![CDATA[<p>I&rsquo;ll admit: <a href="http://www.tumblr.com/">Tumblr</a> surprised me. Tumblr is a wildly popular microblogging platform where users can make small posts, in either text or visual format, and other users can share them. Users can then share another user&rsquo;s share, creating an endless sharing cycle. When the service first caught my eye a couple years ago, I thought it was merely a platform for reblogging incredibly old internet memes with nauseating, unintuitive blog themes. I remember thinking &ldquo;why can&rsquo;t this be done on <a href="http://wordpress.org/">WordPress</a>, which is the foundation of nearly every blog on the internet? It offers much more flexibility with blog functionality (especially with plugins) and likewise more theme distinctiveness.&rdquo;</p>
 
 <p>As it turns out, the arguments of plugin-functionality and unique themes <strong>are irrelevant</strong> to the typical blogger. 99% of bloggers just want a place, preferably free, where they can blog. And with the added value Tumblr provides with integrated social networking, Tumblr provides <a href="http://www.tumblr.com/why-tumblr">more utility for the typical blogger</a> than competing services such as <a href="http://www.blogger.com/home">Blogger</a>, <a href="https://posterous.com/">Posterous</a>, and even WordPress.</p>
@@ -55,9 +55,9 @@
   
   <entry>
     <title type="html"><![CDATA[Blog Commenting in 2011]]></title>
-    <link href="http://minimaxir.github.io/2011/10/blog-commenting-2011/"/>
+    <link href="http://minimaxir.com/2011/10/blog-commenting-2011/"/>
     <updated>2011-10-10T20:05:00-07:00</updated>
-    <id>http://minimaxir.github.io/2011/10/blog-commenting-2011</id>
+    <id>http://minimaxir.com/2011/10/blog-commenting-2011</id>
     <content type="html"><![CDATA[<p>One of the most important things about blogs is having a comment section. Not only does it allow the blogs reader the ability to participate in discussions about similar topics, but it also offers a medium which the author can communicate with the readers themselves. This allows authors to get feedback from readers regarding what they like about your post, what they think of your posts, and how to improve your blog in general. Also, you get spam. It &rsquo;s not an authentic blog without it.</p>
 
 <p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png" alt="" /></a></p>

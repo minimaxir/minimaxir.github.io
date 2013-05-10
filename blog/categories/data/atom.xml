@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
-  <link href="http://minimaxir.github.io/blog/categories/data/atom.xml" rel="self"/>
-  <link href="http://minimaxir.github.io/"/>
-  <updated>2013-05-09T23:09:55-07:00</updated>
-  <id>http://minimaxir.github.io/</id>
+  <link href="http://minimaxir.com/blog/categories/data/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2013-05-09T23:16:51-07:00</updated>
+  <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses]]></title>
-    <link href="http://minimaxir.github.io/2012/10/questions-equals-reponses/"/>
+    <link href="http://minimaxir.com/2012/10/questions-equals-reponses/"/>
     <updated>2012-10-07T21:19:00-07:00</updated>
-    <id>http://minimaxir.github.io/2012/10/questions-equals-reponses</id>
+    <id>http://minimaxir.com/2012/10/questions-equals-reponses</id>
     <content type="html"><![CDATA[<p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
 
 <p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>

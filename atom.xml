@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[minimaxir | Max Woolf's Internet Blog Thingy]]></title>
-  <link href="http://minimaxir.github.io/atom.xml" rel="self"/>
-  <link href="http://minimaxir.github.io/"/>
-  <updated>2013-05-09T23:09:55-07:00</updated>
-  <id>http://minimaxir.github.io/</id>
+  <link href="http://minimaxir.com/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2013-05-09T23:16:51-07:00</updated>
+  <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Diablo III Economy Broken by an Integer Overflow Bug]]></title>
-    <link href="http://minimaxir.github.io/2013/05/stones-of-jordan/"/>
+    <link href="http://minimaxir.com/2013/05/stones-of-jordan/"/>
     <updated>2013-05-07T21:53:00-07:00</updated>
-    <id>http://minimaxir.github.io/2013/05/stones-of-jordan</id>
+    <id>http://minimaxir.com/2013/05/stones-of-jordan</id>
     <content type="html"><![CDATA[<p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
 
 <p>Diablo III is also noted for its economy, with an emphasis on a region-wide auction house where players can trade one-in-a-million items for millions and billions of gold. (inflation is crazy). Additionally, Diablo III emphasized the use of a Real World Auction House, where players can sell gold or items for real world cash.</p>
@@ -73,9 +73,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
   
   <entry>
     <title type="html"><![CDATA[A Blog Comment System That Steals Comments From Facebook]]></title>
-    <link href="http://minimaxir.github.io/2013/05/comments-everywhere/"/>
+    <link href="http://minimaxir.com/2013/05/comments-everywhere/"/>
     <updated>2013-05-04T21:59:00-07:00</updated>
-    <id>http://minimaxir.github.io/2013/05/comments-everywhere</id>
+    <id>http://minimaxir.com/2013/05/comments-everywhere</id>
     <content type="html"><![CDATA[<p>I&rsquo;m not a fan of the LiveFyre comments system for blogs. As I&rsquo;ve talked about before, LiveFyre is difficult to use, and actually hurts blogs more than it helps. But more and more blogs, such as CNet and AllThingsD, have switched to LiveFyre.</p>
 
 <p>AllThingsD&rsquo;s <a href="http://allthingsd.com/20130330/introducing-livefyre-commenting-at-allthingsd/?mod=atd-desktop">reasons</a> for switching to LiveFyre from the widely-used Disqus are interesting. Under LiveFyre, users can &ldquo;more readily share comments to Facebook and Twitter&rdquo; which Disqus already did; &ldquo;tag friends and draw them into the stream&rdquo; which increases clutter; and &ldquo;accurately flag other comments as spam or offensive&rdquo; which flat-out doesn&rsquo;t work, if the spam on TechCrunch is any indication. Additionally, they can &ldquo;follow conversations across multiple platforms,&rdquo; which the post doesn&rsquo;t elaborate upon. Does it aggregate social media which links to the parent post, a la Disqus?</p>
@@ -138,9 +138,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
   
   <entry>
     <title type="html"><![CDATA[Facebook Outage: All Webpage Likes and Comments Reset]]></title>
-    <link href="http://minimaxir.github.io/2013/03/facebook-outage/"/>
+    <link href="http://minimaxir.com/2013/03/facebook-outage/"/>
     <updated>2013-03-25T21:47:00-07:00</updated>
-    <id>http://minimaxir.github.io/2013/03/facebook-outage</id>
+    <id>http://minimaxir.com/2013/03/facebook-outage</id>
     <content type="html"><![CDATA[<p><strong>UPDATE: The issue was resolved about 11 hours after the post was published. Like counts and comment counts are back. See <a href="http://techcrunch.com/2013/03/25/facebook-comments-bug/">TechCrunch&rsquo;s post</a>.</strong></p>
 
 <p>Today (3/25/13), Facebook appears to have made a change that has nuked all existing Facebook Like counts and Facebook Comments. I can verify that on this particular blog, my non-cached Like counts and my Comments are gone, even after checking Facebook&rsquo;s Graph API directly. This can be verified on older blog posts, such as <a href="http://techcrunch.com/2012/05/19/day-after-ipo-mark-zuckerberg-marries-longtime-girlfriend-priscilla-chan/">this one</a>.  It is also <a href="http://stackoverflow.com/questions/15623582/facebook-like-count-for-articles-reset-to-zero">being tracked on Stack Overflow</a>.</p>
@@ -160,9 +160,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
   
   <entry>
     <title type="html"><![CDATA[Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM]]></title>
-    <link href="http://minimaxir.github.io/2013/03/127-yoshis-in-slot-6/"/>
+    <link href="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
     <updated>2013-03-24T21:44:00-07:00</updated>
-    <id>http://minimaxir.github.io/2013/03/127-yoshis-in-slot-6</id>
+    <id>http://minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
     <content type="html"><![CDATA[<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
 
 <p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
@@ -198,9 +198,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
   
   <entry>
     <title type="html"><![CDATA[How To Kill The Reader Comments Of A Popular Tech Blog]]></title>
-    <link href="http://minimaxir.github.io/2013/01/its-a-metaphor-maybe/"/>
+    <link href="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"/>
     <updated>2013-01-23T21:38:00-08:00</updated>
-    <id>http://minimaxir.github.io/2013/01/its-a-metaphor-maybe</id>
+    <id>http://minimaxir.com/2013/01/its-a-metaphor-maybe</id>
     <content type="html"><![CDATA[<p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog,.</p>
 
 <p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
@@ -268,9 +268,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
   
   <entry>
     <title type="html"><![CDATA[Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet]]></title>
-    <link href="http://minimaxir.github.io/2013/01/sexy-will-haunt-your-dreams/"/>
+    <link href="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"/>
     <updated>2013-01-15T21:36:00-08:00</updated>
-    <id>http://minimaxir.github.io/2013/01/sexy-will-haunt-your-dreams</id>
+    <id>http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams</id>
     <content type="html"><![CDATA[<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N&#8217;Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
 
 <p>I&rsquo;m OK with this. There are certainly far <a href="http://minimaxir.com/2012/03/ethics-self-promotion/"><em>worse</em></a> ways to promote a startup.</p>
@@ -352,9 +352,9 @@ background-attachment: fixed !important;
   
   <entry>
     <title type="html"><![CDATA[Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)]]></title>
-    <link href="http://minimaxir.github.io/2013/01/if-cute-then-happiness/"/>
+    <link href="http://minimaxir.com/2013/01/if-cute-then-happiness/"/>
     <updated>2013-01-13T21:32:00-08:00</updated>
-    <id>http://minimaxir.github.io/2013/01/if-cute-then-happiness</id>
+    <id>http://minimaxir.com/2013/01/if-cute-then-happiness</id>
     <content type="html"><![CDATA[<p><strong><em>TL;DR: Use this <a href="https://ifttt.com/recipes/74285">IFTTT recipe</a>, and change the subreddit value in the parameter of the Feed URL as needed.</em></strong></p>
 
 <p>In <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">a previous post</a>, I joked about a hypothetical social media strategy in which an automated script does Facebook brand management by stealing the top cute images from <a href="http://www.reddit.com/">Reddit</a> &ndash; an aggregator of trending topics and images &ndash;  and reposting them on the Facebook page, additionally adding a cute message encouraging users to LIKE, SHARE, and COMMENT!  We get easy social media fame for no monetary cost.</p>
@@ -409,9 +409,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[Why Do Many Tweets Begin With A Period?]]></title>
-    <link href="http://minimaxir.github.io/2013/01/prefixed-period/"/>
+    <link href="http://minimaxir.com/2013/01/prefixed-period/"/>
     <updated>2013-01-04T21:30:00-08:00</updated>
-    <id>http://minimaxir.github.io/2013/01/prefixed-period</id>
+    <id>http://minimaxir.com/2013/01/prefixed-period</id>
     <content type="html"><![CDATA[<p>I&rsquo;m not a Twitter fanatic. Although I do have <a href="https://twitter.com/minimaxir">a Twitter account</a> with about 300 followers,  Facebook&rsquo;s Subscribe feature <a href="http://www.facebook.com/max.woolf">on my Facebook profile</a> has met my use case for publishing sarcastic quips and cool links for a broad audience over the internet. I mostly use my Twitter account to read tweets from tech columnists, yet I don&rsquo;t even comment on their tweets because <strong>tweets that are replies to someone are not visible in the home timeline of my followers</strong>. I can understand the intuition behind this behavior: Twitter conversations can contain a lot of low-content tweets, and Twitter doesn&rsquo;t want its users to be spammed.</p>
 
 <p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that <strong>beginning your reply Tweet with a period (.) allows it to be seen by all your followers. </strong>Otherwise, only the replyee will receive notification of the reply.</p>
@@ -457,9 +457,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[Creating a Startup Promo Video Using... PowerPoint?]]></title>
-    <link href="http://minimaxir.github.io/2012/12/powerpoint-promo-party/"/>
+    <link href="http://minimaxir.com/2012/12/powerpoint-promo-party/"/>
     <updated>2012-12-29T21:28:00-08:00</updated>
-    <id>http://minimaxir.github.io/2012/12/powerpoint-promo-party</id>
+    <id>http://minimaxir.com/2012/12/powerpoint-promo-party</id>
     <content type="html"><![CDATA[<p>I noticed deep in the documentation for PowerPoint 2010 that it <a href="http://office.microsoft.com/en-us/powerpoint-help/turn-your-presentation-into-a-video-HA010336763.aspx">supports video output</a> for presentations. Like a good nerd, I experimented to see what it could actually do. My first test of the functionality was a humor video about pitching a <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">hypothetical startup named NegaCycl</a>, complete with animation and narration, which I trashed and eventually retooled because I&rsquo;m bad at verbal comedic delivery. Interestingly, the output video was a 1:1 comparison to what was displayed on my own computer screen during the presentation. Naturally, I decided to test it even harder.</p>
 
 <p>What I have here is another hypothetical, non-real startup named Filtrzzz (based on a <a href="http://www.facebook.com/photo.php?fbid=10151356495205450&amp;set=a.432190050449.225968.582270449&amp;type=1">popular Facebook post</a> I made), animated and rendered using PowerPoint, with more complicated objects such as embedded audio and video, and an attempt to sync the presentation timing with the audio for dramatic effect. Plus sarcastic humor, of course.</p>
@@ -498,9 +498,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[A Totally-Real Totally-Serious Startup Pitch For Venture Capital]]></title>
-    <link href="http://minimaxir.github.io/2012/12/totally-real-totally-serious/"/>
+    <link href="http://minimaxir.com/2012/12/totally-real-totally-serious/"/>
     <updated>2012-12-26T21:26:00-08:00</updated>
-    <id>http://minimaxir.github.io/2012/12/totally-real-totally-serious</id>
+    <id>http://minimaxir.com/2012/12/totally-real-totally-serious</id>
     <content type="html"><![CDATA[<p><em>Here are presentation slides and a transcript from a totally-real totally-serious startup pitch I did recently for a group of<strong> </strong></em>totally-real totally-serious venture capitalists for <em>totally-real totally-serious venture capital.</em>**</p>
 
 <p><em>This presentation is totally-real totally-serious and not fabricated in any way whatsoever for the purpose of humor. The business and technical terminologies used in this presentation are totally-real totally-serious representations of my own knowledge. I </em>totally-real totally-serious <em>pinky-swear!</em></p>
@@ -635,9 +635,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation]]></title>
-    <link href="http://minimaxir.github.io/2012/10/client-side-validation-is-hard-mode/"/>
+    <link href="http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"/>
     <updated>2012-10-14T21:21:00-07:00</updated>
-    <id>http://minimaxir.github.io/2012/10/client-side-validation-is-hard-mode</id>
+    <id>http://minimaxir.com/2012/10/client-side-validation-is-hard-mode</id>
     <content type="html"><![CDATA[<p>Early Saturday morning, <a href="http://www.gamefaqs.com/boards/916373-pc/64312901">various gaming forums</a> (and, more importantly, <a href="http://www.reddit.com/r/GameDeals/comments/11ewb0/use_the_code_os3874xvc_to_get_20_off_origin/">Reddit</a>) obtained a promotional code from mega gaming company Electronic Arts for their Origin gaming distribution service. This code entitled the user to purchase any EA published or developed game for $20 off, and if the game was less than $20, the game was free. <a href="http://www.gamers-association.com/2012/10/free-game-from-eas-origin/">Games that were made free</a> using this coupon included hit series such as Dead Space, Mass Effect, Dragon Age, and Battlefield, so the rewards for the coupon were actually pretty worthwhile. Best of all, there are no catches and no gimmicks; input promo code OS3874XVC, get game.</p>
 
 <p>The code was apparently rewarded after taking a survey regarding Origin, with the reward being one free game. The operative word being &ldquo;one.&rdquo; Some gamers, out of curiosity, discovered that by entering the code via both the store browser-interface and the store client-interface, they could get a free game twice. Gamers inferred the logical technical conclusion; EA was not checking server-side that the code was only being used once. Later, gamers noted that <a href="http://www.overclock.net/t/1315674/free-20-in-origin-code/410#post_18359737">simply inputting the code while logged-out</a> allows them to use the promo code an <em>unlimited</em> amount of times.</p>
@@ -697,9 +697,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses]]></title>
-    <link href="http://minimaxir.github.io/2012/10/questions-equals-reponses/"/>
+    <link href="http://minimaxir.com/2012/10/questions-equals-reponses/"/>
     <updated>2012-10-07T21:19:00-07:00</updated>
-    <id>http://minimaxir.github.io/2012/10/questions-equals-reponses</id>
+    <id>http://minimaxir.com/2012/10/questions-equals-reponses</id>
     <content type="html"><![CDATA[<p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
 
 <p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>
@@ -777,9 +777,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[Google Drive, And Why Dropbox Really Is In Trouble]]></title>
-    <link href="http://minimaxir.github.io/2012/04/drivebox/"/>
+    <link href="http://minimaxir.com/2012/04/drivebox/"/>
     <updated>2012-04-25T21:16:00-07:00</updated>
-    <id>http://minimaxir.github.io/2012/04/drivebox</id>
+    <id>http://minimaxir.com/2012/04/drivebox</id>
     <content type="html"><![CDATA[<p>Despite spending a lot of time talking about startups (and commenting about them on <a href="http://techcrunch.com/">TechCrunch</a>), there are very few which I actually use on a daily basis. I don&rsquo;t use a service because it&rsquo;s popular or the <strong>NEXT BIG THING</strong>, but because it&rsquo;s worthwhile use of my time and energy. (the correlation between startup popularity and worthwhileness is, unfortunately, not always strong). As a business major, I&rsquo;m prone toward productivity applications which help save time that would otherwise be wasted, allowing me to spend my time elsewhere doing much more important tasks, such as the aforementioned commenting on TechCrunch.</p>
 
 <p>The one app I&rsquo;ve used throughout my college years has been Dropbox. As an early adopter way back in 2008, I thought that Dropbox was a clever scam, because it was too good to be true. &ldquo;2 gigabytes of data, that I can access on any computer without needing a $30 flash drive or e-mailing myself constantly? I won&rsquo;t have to fumble around with hardware that I&rsquo;ll probably lose or fill up valuable inbox space! <strong>And</strong> I can access my files remotely with my iPhone 3G?! Awesome!&rdquo; And thus I began to love Dropbox, and have used it extremely frequently for the past four years. I have never tried any alternatives: <a href="http://box.com/">Box.net </a>and <a href="https://www.sugarsync.com/">Sugarsync</a> were nowhere as seamless. And throughout those four years, no real competitors arose&hellip;</p>
@@ -833,9 +833,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[Why Every New Website Will Use Bootstrap]]></title>
-    <link href="http://minimaxir.github.io/2012/03/bootstrap-for-everyone/"/>
+    <link href="http://minimaxir.com/2012/03/bootstrap-for-everyone/"/>
     <updated>2012-03-24T21:10:00-07:00</updated>
-    <id>http://minimaxir.github.io/2012/03/bootstrap-for-everyone</id>
+    <id>http://minimaxir.com/2012/03/bootstrap-for-everyone</id>
     <content type="html"><![CDATA[<p>So, I decided to spruce up the blog a little bit. The old WordPress theme I had used, <a href="http://wordpress.org/extend/themes/graphene">Graphene</a>, had a lot of useful functionality, such as a featured post slider and a topbar for placing social media buttons, but the theme itself didn&rsquo;t make the blog look <em>unique</em>. Even with a few CSS tweaks to add custom styling, such as forcing the titles of blog posts to be in all-capital letters, (which makes users more likely to click them!), it still <a href="http://i.imgur.com/LQVNK.png">looked very generic</a>. When building a personal brand, generic is never good.</p>
 
 <p>Therefore, I resolved to develop and design a unique WordPress blog theme effectively <em>from scratch</em>, in order to ensure that my blog had a truly distinctive look and functionality. Although modifying the blogging backend was simple (it&rsquo;s WordPress; there are <em>tons</em> of well-written documentation for that platform), modifying the CSS frontend, which my blog readers would actually <em>see</em>, was just as important. For that task, I chose to use the Twitter Bootstrap CSS framework, which many recent startups have utilized to great effect due to its focus on minimalism and efficiency.</p>
@@ -881,9 +881,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[If You're Going to Blog, Use Tumblr, Not WordPress]]></title>
-    <link href="http://minimaxir.github.io/2012/03/a-wordpress-about-tumblr/"/>
+    <link href="http://minimaxir.com/2012/03/a-wordpress-about-tumblr/"/>
     <updated>2012-03-09T21:14:00-08:00</updated>
-    <id>http://minimaxir.github.io/2012/03/a-wordpress-about-tumblr</id>
+    <id>http://minimaxir.com/2012/03/a-wordpress-about-tumblr</id>
     <content type="html"><![CDATA[<p>I&rsquo;ll admit: <a href="http://www.tumblr.com/">Tumblr</a> surprised me. Tumblr is a wildly popular microblogging platform where users can make small posts, in either text or visual format, and other users can share them. Users can then share another user&rsquo;s share, creating an endless sharing cycle. When the service first caught my eye a couple years ago, I thought it was merely a platform for reblogging incredibly old internet memes with nauseating, unintuitive blog themes. I remember thinking &ldquo;why can&rsquo;t this be done on <a href="http://wordpress.org/">WordPress</a>, which is the foundation of nearly every blog on the internet? It offers much more flexibility with blog functionality (especially with plugins) and likewise more theme distinctiveness.&rdquo;</p>
 
 <p>As it turns out, the arguments of plugin-functionality and unique themes <strong>are irrelevant</strong> to the typical blogger. 99% of bloggers just want a place, preferably free, where they can blog. And with the added value Tumblr provides with integrated social networking, Tumblr provides <a href="http://www.tumblr.com/why-tumblr">more utility for the typical blogger</a> than competing services such as <a href="http://www.blogger.com/home">Blogger</a>, <a href="https://posterous.com/">Posterous</a>, and even WordPress.</p>
@@ -921,9 +921,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[The Ethics of Self-Promotion on the Internet]]></title>
-    <link href="http://minimaxir.github.io/2012/03/ethics-self-promotion/"/>
+    <link href="http://minimaxir.com/2012/03/ethics-self-promotion/"/>
     <updated>2012-03-01T21:07:00-08:00</updated>
-    <id>http://minimaxir.github.io/2012/03/ethics-self-promotion</id>
+    <id>http://minimaxir.com/2012/03/ethics-self-promotion</id>
     <content type="html"><![CDATA[<p>So, you&rsquo;ve made your new blog or startup, and you want people to know about it. The first thing you will likely do is link to it on your Facebook or Twitter, telling your friends who are most likely to listen to you. Unless you&rsquo;re a superstar tech personality with thousands of subscribers/followers, chances are your social media posts will only drive a few people to your website, leading to your disappointment. Sure, you can repost your website multiple times, but chances are you&rsquo;ll upset your friends through your spam&hellip;which doesn&rsquo;t lead to users who keep coming back.</p>
 
 <p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self6.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self6.png" alt="The article prompted East Coast entrepreneurs to *e-mail* their startups..." /></a></p>
@@ -974,9 +974,9 @@ Posted in an article titled &ldquo;HTC Unites New Android Smartphones Under &lsq
   
   <entry>
     <title type="html"><![CDATA[My Startup Success Criteria Checklist]]></title>
-    <link href="http://minimaxir.github.io/2011/12/startup-checklist/"/>
+    <link href="http://minimaxir.com/2011/12/startup-checklist/"/>
     <updated>2011-12-27T21:03:00-08:00</updated>
-    <id>http://minimaxir.github.io/2011/12/startup-checklist</id>
+    <id>http://minimaxir.com/2011/12/startup-checklist</id>
     <content type="html"><![CDATA[<p><strong>All</strong> internet startups are businesses. Whether they provide a product or a service, their goal is to grow and make money, using any means necessary. However, there are thousands of startups on the internet, with many more being founded daily. How do you make your business stand out from the crowd? Why should customers use your startup as opposed to another, more established service? Does it have an innovative business model? Does it look very nice and clean? Does it leverage the established userbases on <a href="http://www.facebook.com/">Facebook</a> and <a href="http://twitter.com/">Twitter</a>?</p>
 
 <p>I have been working with several web startups regarding their business ideas and presentation. I&rsquo;m not acting as an expert on startups nor on entrepreneurship, instead I&rsquo;m acting as someone far more important: a potential consumer, who in the end determine whether a startup succeeds or fails. These consultations have been very successful, and although they show that innovation is still abundant outside of the usual startup hubs, they have also exposed many issues which are in common amongst prospective businesses.</p>
@@ -1086,9 +1086,9 @@ Posted in an article titled &ldquo;HTC Unites New Android Smartphones Under &lsq
   
   <entry>
     <title type="html"><![CDATA[How Startups Make Money: Do They *Need* A Revenue Model?]]></title>
-    <link href="http://minimaxir.github.io/2011/11/how-startups-make-money/"/>
+    <link href="http://minimaxir.com/2011/11/how-startups-make-money/"/>
     <updated>2011-11-11T20:28:00-08:00</updated>
-    <id>http://minimaxir.github.io/2011/11/how-startups-make-money</id>
+    <id>http://minimaxir.com/2011/11/how-startups-make-money</id>
     <content type="html"><![CDATA[<p>Startups. The biggest movement in the technology world since the beginning of the 20th century. Never has it been so easy for teams of entrepreneurs, or even individuals, to create a business from scratch. The barrier of entry has been virtually eliminated thanks to the advent of cloud computing services, such as <a href="http://aws.amazon.com/ec2/">Amazon EC2</a> and <a href="http://www.rackspace.com/">Rackspace</a>, which allow businesses to only spend hundreds of dollars for server infrastructure for databases and processing where, only a few years ago, entrepreneurs would normally spend tens of thousands for the same capabilities, and thousands more in upkeep and maintenance. Yes, <a href="http://minimaxir.com/2011/11/like-x-for-y/" title="Startups, Please Stop Saying You're &quot;Like X for Y&quot;">I&rsquo;ve said these words before</a>, but the lack of significant upkeep costs is a significant factor in startup economics.</p>
 
 <p>Businesses thrive when they have a positive net profit. For any business, profit can be measured by taking total revenue and subtracting total cost. Because total cost for startups is much lower due to the aforementioned cloud services, they can have a proportionally lower revenue and still hold significant profit margins. This allows them to more easily prove that their business is successful and lends the startup credibility when they attempt to expand by asking for venture capital. At the least, your business needs to make enough money to cover employee expenses, which is one reason why startups go &ldquo;lean&rdquo; and have less than 10 employees to save on costs.</p>
@@ -1131,9 +1131,9 @@ First, let&rsquo;s look at how internet startups typically make money in 2011:</
   
   <entry>
     <title type="html"><![CDATA[Startups, Please Stop Saying You're "Like X for Y"]]></title>
-    <link href="http://minimaxir.github.io/2011/11/like-x-for-y/"/>
+    <link href="http://minimaxir.com/2011/11/like-x-for-y/"/>
     <updated>2011-11-04T20:19:00-07:00</updated>
-    <id>http://minimaxir.github.io/2011/11/like-x-for-y</id>
+    <id>http://minimaxir.com/2011/11/like-x-for-y</id>
     <content type="html"><![CDATA[<p>Startups. The biggest movement in the technology world since the beginning of the 20th century. Never has it been so easy for teams of entrepreneurs, or even individuals, to create a business from scratch. The barrier of entry has been virtually eliminated thanks to the advent of cloud computing services, such as <a href="http://aws.amazon.com/ec2/">Amazon EC2</a> and <a href="http://www.rackspace.com/">Rackspace</a>, which allow businesses to only spend hundreds of dollars for server infrastructure for databases and processing where, only a few years ago, entrepreneurs would normally spend tens of thousands for the same capabilities, and thousands more in upkeep and maintenance. Therefore, more and more tech companies now have the ability to bring their ideas to fruition, and afterwards they will compete in the most vicious and cutthroat marketplace ever: the Internet.</p>
 
 <p>With so many new companies entering the tech marketplace, it is very difficult for an individual startup to stand out from the crowd. Product differentiation is the key tenant: how is your startup different from your competitors? Would customers be willing to discard the time and effort they&rsquo;ve already invested in a similar product to switch to your product?</p>
@@ -1176,9 +1176,9 @@ In 2011, it&rsquo;s also safe to assume that the users who would be interested i
   
   <entry>
     <title type="html"><![CDATA[Blog Commenting in 2011]]></title>
-    <link href="http://minimaxir.github.io/2011/10/blog-commenting-2011/"/>
+    <link href="http://minimaxir.com/2011/10/blog-commenting-2011/"/>
     <updated>2011-10-10T20:05:00-07:00</updated>
-    <id>http://minimaxir.github.io/2011/10/blog-commenting-2011</id>
+    <id>http://minimaxir.com/2011/10/blog-commenting-2011</id>
     <content type="html"><![CDATA[<p>One of the most important things about blogs is having a comment section. Not only does it allow the blogs reader the ability to participate in discussions about similar topics, but it also offers a medium which the author can communicate with the readers themselves. This allows authors to get feedback from readers regarding what they like about your post, what they think of your posts, and how to improve your blog in general. Also, you get spam. It &rsquo;s not an authentic blog without it.</p>
 
 <p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png" alt="" /></a></p>

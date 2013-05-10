@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Technology | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
-  <link href="http://minimaxir.github.io/blog/categories/technology/atom.xml" rel="self"/>
-  <link href="http://minimaxir.github.io/"/>
-  <updated>2013-05-09T23:09:55-07:00</updated>
-  <id>http://minimaxir.github.io/</id>
+  <link href="http://minimaxir.com/blog/categories/technology/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2013-05-09T23:16:51-07:00</updated>
+  <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation]]></title>
-    <link href="http://minimaxir.github.io/2012/10/client-side-validation-is-hard-mode/"/>
+    <link href="http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"/>
     <updated>2012-10-14T21:21:00-07:00</updated>
-    <id>http://minimaxir.github.io/2012/10/client-side-validation-is-hard-mode</id>
+    <id>http://minimaxir.com/2012/10/client-side-validation-is-hard-mode</id>
     <content type="html"><![CDATA[<p>Early Saturday morning, <a href="http://www.gamefaqs.com/boards/916373-pc/64312901">various gaming forums</a> (and, more importantly, <a href="http://www.reddit.com/r/GameDeals/comments/11ewb0/use_the_code_os3874xvc_to_get_20_off_origin/">Reddit</a>) obtained a promotional code from mega gaming company Electronic Arts for their Origin gaming distribution service. This code entitled the user to purchase any EA published or developed game for $20 off, and if the game was less than $20, the game was free. <a href="http://www.gamers-association.com/2012/10/free-game-from-eas-origin/">Games that were made free</a> using this coupon included hit series such as Dead Space, Mass Effect, Dragon Age, and Battlefield, so the rewards for the coupon were actually pretty worthwhile. Best of all, there are no catches and no gimmicks; input promo code OS3874XVC, get game.</p>
 
 <p>The code was apparently rewarded after taking a survey regarding Origin, with the reward being one free game. The operative word being &ldquo;one.&rdquo; Some gamers, out of curiosity, discovered that by entering the code via both the store browser-interface and the store client-interface, they could get a free game twice. Gamers inferred the logical technical conclusion; EA was not checking server-side that the code was only being used once. Later, gamers noted that <a href="http://www.overclock.net/t/1315674/free-20-in-origin-code/410#post_18359737">simply inputting the code while logged-out</a> allows them to use the promo code an <em>unlimited</em> amount of times.</p>
@@ -77,9 +77,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why Every New Website Will Use Bootstrap]]></title>
-    <link href="http://minimaxir.github.io/2012/03/bootstrap-for-everyone/"/>
+    <link href="http://minimaxir.com/2012/03/bootstrap-for-everyone/"/>
     <updated>2012-03-24T21:10:00-07:00</updated>
-    <id>http://minimaxir.github.io/2012/03/bootstrap-for-everyone</id>
+    <id>http://minimaxir.com/2012/03/bootstrap-for-everyone</id>
     <content type="html"><![CDATA[<p>So, I decided to spruce up the blog a little bit. The old WordPress theme I had used, <a href="http://wordpress.org/extend/themes/graphene">Graphene</a>, had a lot of useful functionality, such as a featured post slider and a topbar for placing social media buttons, but the theme itself didn&rsquo;t make the blog look <em>unique</em>. Even with a few CSS tweaks to add custom styling, such as forcing the titles of blog posts to be in all-capital letters, (which makes users more likely to click them!), it still <a href="http://i.imgur.com/LQVNK.png">looked very generic</a>. When building a personal brand, generic is never good.</p>
 
 <p>Therefore, I resolved to develop and design a unique WordPress blog theme effectively <em>from scratch</em>, in order to ensure that my blog had a truly distinctive look and functionality. Although modifying the blogging backend was simple (it&rsquo;s WordPress; there are <em>tons</em> of well-written documentation for that platform), modifying the CSS frontend, which my blog readers would actually <em>see</em>, was just as important. For that task, I chose to use the Twitter Bootstrap CSS framework, which many recent startups have utilized to great effect due to its focus on minimalism and efficiency.</p>
