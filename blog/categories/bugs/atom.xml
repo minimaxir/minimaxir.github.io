@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bugs | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
+  <link href="http://minimaxir.github.io/blog/categories/bugs/atom.xml" rel="self"/>
+  <link href="http://minimaxir.github.io/"/>
+  <updated>2013-05-09T22:27:39-07:00</updated>
+  <id>http://minimaxir.github.io/</id>
+  <author>
+    <name><![CDATA[Max Woolf]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Diablo III Economy Broken by an Integer Overflow Bug]]></title>
+    <link href="http://minimaxir.github.io/2013/05/stones-of-jordan/"/>
+    <updated>2013-05-07T21:53:00-07:00</updated>
+    <id>http://minimaxir.github.io/2013/05/stones-of-jordan</id>
+    <content type="html"><![CDATA[<p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
+
+<p>Diablo III is also noted for its economy, with an emphasis on a region-wide auction house where players can trade one-in-a-million items for millions and billions of gold. (inflation is crazy). Additionally, Diablo III emphasized the use of a Real World Auction House, where players can sell gold or items for real world cash.</p>
+
+<p>Today was the launch of <a href="http://us.battle.net/d3/en/blog/9647272/patch-108-now-live-5-7-2013">Patch 1.0.8</a>, a patch which promised improvements to character progression. After spending a few weeks on a Public Test Realm, where players volunteered to tested the patch to ensure that there were game-breaking exploits, the patch released successfully.</p>
+
+<p>Except for one patch note that was added last minute and not tested in the PTR. And it&rsquo;s a patch note that broke the economy to tiny pieces.</p>
+
+<!-- more -->
+
+
+<p>The patch notes from the final build contained this change:</p>
+
+<blockquote><p>The stack size for gold sales on the auction house has been increased from 1 million to 10 million.</p></blockquote>
+
+<p>Normally, on the Real Money Auction House, the player can only sell money in 1 million gold increments. In 1.0.8, the player can sell it in 10 million increments. So, what happens when the player tries putting an absurd amount of money on the Auction House?</p>
+
+<p>Reddit user tyropro <a href="http://www.reddit.com/r/Diablo/comments/1dx3wv/some_speculation_on_how_the_gold_bug_made_it_to/">has a nice explanation</a>:</p>
+
+<blockquote><p>The gold &ldquo;dupe&rdquo; involved creating a RMAH auction for billions of gold while staying under the $250 limit. The example I saw in a video was 6 billion gold (600 x 10,000,000 at $0.39 per stack, for $234). When they posted this auction only ~1.7 billion appeared to be for sale, with the rest &ldquo;missing&rdquo; until they sent it to their stash and ended up with more than they started with. The exact numbers from a duping video:</p>
+
+<pre><code>Create RMAH auction for:            6,000,000,000 gold
+Auction shows up as:                1,705,032,704 gold
+This much is missing!               4,294,967,296 gold
+The missing amount, divided by 2:   2,147,483,648 gold
+</code></pre>
+
+<p>2,147,483,648 (or 231) is the maximum value you can store in an int32 in programming. I&rsquo;m no programmer, but I took one class in high school and was taught about the limits of different variable types. See:</p>
+
+<p>Simply put, their RMAH gold selling code wasn&rsquo;t written to handle numbers over 2,147,483,648 properly, and the result was duplicate gold being added to people&rsquo;s stashes.</p></blockquote>
+
+<p>4,294,967,296 is also 232, or the bound on an <a href="https://en.wikipedia.org/wiki/Integer_(computer_science)#Common_long_integer_sizes">unsigned integer</a>, which would be an interesting implementation choice on Blizzard&rsquo;s part.</p>
+
+<p>And so, the dupers created these 6-billion-gold auctions which only appears to sell as 1.7 billion (and therefore only had 1.7 billion deducted from the current balance), canceled them, and were fully refunded the 6 billion for a net profit of the difference (4.2 billion). Repeat <em>ad nauseum</em>.</p>
+
+<p>A popular game streamer showed off the exploit. Other streamers followed. It was easily reproducible and <a href="http://www.reddit.com/r/Diablo/comments/1dw9kr/there_is_a_gold_dupe_on_na_currently_this_is_the/">everyone knew how to reproduce it</a>.</p>
+
+<p>Hilarity ensued.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/05/diablo31.png?resize=625%2C280" alt="diablo31" /></p>
+
+<p>Yes, that&rsquo;s 420 <em>billion</em> gold.</p>
+
+<p>After buying up all the duped items in the Auction House, the items were then sold on the Real Money Auction House. For real money. And people bought them.</p>
+
+<p>This is the definition of a worst-case scenario for Diablo III. All because of an untested patch note. What could Blizzard do? Performing a roll-back would wipe all progress obtained by players for the patch day, which would result in a lot of bad PR. But leaving the economy as-is will devalue all items in the game (and Diablo III is all about getting items).</p>
+
+<p>In the end, Blizzard <a href="http://www.reddit.com/r/Diablo/comments/1dx4a7/there_will_officially_be_no_rollback_after_the/">has not done a roll-back</a>, but instead <a href="http://www.reddit.com/r/Diablo/comments/1dwk6x/d3_inigomontoya_just_got_banned_for_real/">banned anyone who duped</a>, and <a href="http://i.imgur.com/x5S9Zcx.png">refunded</a> anyone who spent real money. The bug was temporarily fixed by reverting the patch note which caused the entire mess.</p>
+
+<p>Let this be a lesson on what happens when you include an untested change at the last minute. You could break an entire economy. Eh, no big deal.</p>
+]]></content>
+  </entry>
+  
+</feed>

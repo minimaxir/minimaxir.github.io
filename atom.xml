@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Internet Blog Thingy]]></title>
   <link href="http://minimaxir.github.io/atom.xml" rel="self"/>
   <link href="http://minimaxir.github.io/"/>
-  <updated>2013-05-09T20:38:38-07:00</updated>
+  <updated>2013-05-09T22:27:39-07:00</updated>
   <id>http://minimaxir.github.io/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -14,15 +14,1086 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Diablo III Economy Broken by an Integer Overflow Bug]]></title>
+    <link href="http://minimaxir.github.io/2013/05/stones-of-jordan/"/>
+    <updated>2013-05-07T21:53:00-07:00</updated>
+    <id>http://minimaxir.github.io/2013/05/stones-of-jordan</id>
+    <content type="html"><![CDATA[<p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
+
+<p>Diablo III is also noted for its economy, with an emphasis on a region-wide auction house where players can trade one-in-a-million items for millions and billions of gold. (inflation is crazy). Additionally, Diablo III emphasized the use of a Real World Auction House, where players can sell gold or items for real world cash.</p>
+
+<p>Today was the launch of <a href="http://us.battle.net/d3/en/blog/9647272/patch-108-now-live-5-7-2013">Patch 1.0.8</a>, a patch which promised improvements to character progression. After spending a few weeks on a Public Test Realm, where players volunteered to tested the patch to ensure that there were game-breaking exploits, the patch released successfully.</p>
+
+<p>Except for one patch note that was added last minute and not tested in the PTR. And it&rsquo;s a patch note that broke the economy to tiny pieces.</p>
+
+<!-- more -->
+
+
+<p>The patch notes from the final build contained this change:</p>
+
+<blockquote><p>The stack size for gold sales on the auction house has been increased from 1 million to 10 million.</p></blockquote>
+
+<p>Normally, on the Real Money Auction House, the player can only sell money in 1 million gold increments. In 1.0.8, the player can sell it in 10 million increments. So, what happens when the player tries putting an absurd amount of money on the Auction House?</p>
+
+<p>Reddit user tyropro <a href="http://www.reddit.com/r/Diablo/comments/1dx3wv/some_speculation_on_how_the_gold_bug_made_it_to/">has a nice explanation</a>:</p>
+
+<blockquote><p>The gold &ldquo;dupe&rdquo; involved creating a RMAH auction for billions of gold while staying under the $250 limit. The example I saw in a video was 6 billion gold (600 x 10,000,000 at $0.39 per stack, for $234). When they posted this auction only ~1.7 billion appeared to be for sale, with the rest &ldquo;missing&rdquo; until they sent it to their stash and ended up with more than they started with. The exact numbers from a duping video:</p>
+
+<pre><code>Create RMAH auction for:            6,000,000,000 gold
+Auction shows up as:                1,705,032,704 gold
+This much is missing!               4,294,967,296 gold
+The missing amount, divided by 2:   2,147,483,648 gold
+</code></pre>
+
+<p>2,147,483,648 (or 231) is the maximum value you can store in an int32 in programming. I&rsquo;m no programmer, but I took one class in high school and was taught about the limits of different variable types. See:</p>
+
+<p>Simply put, their RMAH gold selling code wasn&rsquo;t written to handle numbers over 2,147,483,648 properly, and the result was duplicate gold being added to people&rsquo;s stashes.</p></blockquote>
+
+<p>4,294,967,296 is also 232, or the bound on an <a href="https://en.wikipedia.org/wiki/Integer_(computer_science)#Common_long_integer_sizes">unsigned integer</a>, which would be an interesting implementation choice on Blizzard&rsquo;s part.</p>
+
+<p>And so, the dupers created these 6-billion-gold auctions which only appears to sell as 1.7 billion (and therefore only had 1.7 billion deducted from the current balance), canceled them, and were fully refunded the 6 billion for a net profit of the difference (4.2 billion). Repeat <em>ad nauseum</em>.</p>
+
+<p>A popular game streamer showed off the exploit. Other streamers followed. It was easily reproducible and <a href="http://www.reddit.com/r/Diablo/comments/1dw9kr/there_is_a_gold_dupe_on_na_currently_this_is_the/">everyone knew how to reproduce it</a>.</p>
+
+<p>Hilarity ensued.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/05/diablo31.png?resize=625%2C280" alt="diablo31" /></p>
+
+<p>Yes, that&rsquo;s 420 <em>billion</em> gold.</p>
+
+<p>After buying up all the duped items in the Auction House, the items were then sold on the Real Money Auction House. For real money. And people bought them.</p>
+
+<p>This is the definition of a worst-case scenario for Diablo III. All because of an untested patch note. What could Blizzard do? Performing a roll-back would wipe all progress obtained by players for the patch day, which would result in a lot of bad PR. But leaving the economy as-is will devalue all items in the game (and Diablo III is all about getting items).</p>
+
+<p>In the end, Blizzard <a href="http://www.reddit.com/r/Diablo/comments/1dx4a7/there_will_officially_be_no_rollback_after_the/">has not done a roll-back</a>, but instead <a href="http://www.reddit.com/r/Diablo/comments/1dwk6x/d3_inigomontoya_just_got_banned_for_real/">banned anyone who duped</a>, and <a href="http://i.imgur.com/x5S9Zcx.png">refunded</a> anyone who spent real money. The bug was temporarily fixed by reverting the patch note which caused the entire mess.</p>
+
+<p>Let this be a lesson on what happens when you include an untested change at the last minute. You could break an entire economy. Eh, no big deal.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Blog Comment System That Steals Comments From Facebook]]></title>
+    <link href="http://minimaxir.github.io/2013/05/comments-everywhere/"/>
+    <updated>2013-05-04T21:59:00-07:00</updated>
+    <id>http://minimaxir.github.io/2013/05/comments-everywhere</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m not a fan of the LiveFyre comments system for blogs. As I&rsquo;ve talked about before, LiveFyre is difficult to use, and actually hurts blogs more than it helps. But more and more blogs, such as CNet and AllThingsD, have switched to LiveFyre.</p>
+
+<p>AllThingsD&rsquo;s <a href="http://allthingsd.com/20130330/introducing-livefyre-commenting-at-allthingsd/?mod=atd-desktop">reasons</a> for switching to LiveFyre from the widely-used Disqus are interesting. Under LiveFyre, users can &ldquo;more readily share comments to Facebook and Twitter&rdquo; which Disqus already did; &ldquo;tag friends and draw them into the stream&rdquo; which increases clutter; and &ldquo;accurately flag other comments as spam or offensive&rdquo; which flat-out doesn&rsquo;t work, if the spam on TechCrunch is any indication. Additionally, they can &ldquo;follow conversations across multiple platforms,&rdquo; which the post doesn&rsquo;t elaborate upon. Does it aggregate social media which links to the parent post, a la Disqus?</p>
+
+<p>No, it&rsquo;s something much more important.</p>
+
+<!-- more -->
+
+
+<h2>Comments From Everywhere!</h2>
+
+<p>Recently, LiveFyre implemented a <a href="http://www.livefyre.com/comments/">comment feature</a> called SocialSync:</p>
+
+<p>With Livefyre SocialSync, the conversation happening on Facebook and Twitter automatically syncs directly to your content, where it belongs. SocialSync comments can be replied to and interacted with just like any other comment, including being automatically posted back to Twitter or Facebook.</p>
+
+<p>Currently, this feature is enabled for TechCrunch and Mashable.* Let&rsquo;s say a Facebook user comments on one of TechCrunch&rsquo;s <a href="https://www.facebook.com/photo.php?fbid=10151659746677952&amp;set=a.114456157951.118433.8062627951&amp;type=1">Facebook posts</a>. Those comments are synchronized to the LiveFyre comments for the <a href="http://techcrunch.com/2013/05/02/smartphonetographers/">linked post</a>.</p>
+
+<p>Those comments become LiveFyre comments. And the Facebook user has no input, nor any notification that their comments are being used this way.</p>
+
+<h2>SocialSync&rsquo;s Flat-Out Lie</h2>
+
+<p>In LiveFyre&rsquo;s own words, the conversations &ldquo;sync&rdquo; across platforms. <a href="http://en.wikipedia.org/wiki/Synchronization">Synchronization</a> implies a two-way interation, i.e. actions on one platform affect the other. In this example, there are four use cases for the interaction to be called &ldquo;sync&rdquo;:</p>
+
+<ol>
+<li>Comments on Facebook should appear on LiveFyre.</li>
+<li>Comments on LiveFyre should appear on Facebook.</li>
+<li>Replies and Likes on comments on Facebook should appear on the corresponding comment in LiveFyre.</li>
+<li>Replies and Likes on comments on LiveFyre should appear on the corresponding comment in Facebook.</li>
+</ol>
+
+
+<p>Out of those four scenarios, only #1 is true, and even more importantly, #2, #3, and #4 are impossible to implement.</p>
+
+<p>LiveFyre doesn&rsquo;t know what your Facebook account is and cannot perform actions on your behalf on Facebook unless you register solely with that account. Therefore, your comments won&rsquo;t sync to the Facebook comment thread if you use any other login type. (the ability to use multiple types of logins being another touted feature of LiveFyre, of course). Likewise, Likes on Facebook Comments can&rsquo;t translate to LiveFyre Likes if the users don&rsquo;t have a LiveFyre account.</p>
+
+<p>The lack of connection also breaks notifications of replies. Since there&rsquo;s no way to ensure the two accounts are linked, there&rsquo;s no way to notify a Facebook user when their synced comment on LiveFyre has a reply. This has two effects: a) the Facebook user won&rsquo;t continue the discussion and b) the replier is wasting his time making a comment to a person who likely won&rsquo;t ever read it. Both result in less fruitful discussions.</p>
+
+<p>SocialSync is broken and impossible to fix. Also, the lag from when comments are synced from Facebook to LiveFyre takes about 10-20 minutes, making sync worthless on highly-discussed event blogs posts anyways..</p>
+
+<h2>Who Owns Your Facebook Comments?</h2>
+
+<p>When I said that LiveFyre &ldquo;steals&rdquo; Facebook comments in the headline, I wasn&rsquo;t being facetious. It&rsquo;s not obvious that this feature even exists in the first place, especially if you&rsquo;re not a comment addict (I sent a <a href="https://twitter.com/minimaxir/status/311959448694435840">tweet</a> to the TechCrunch head editor to confirm that this was intended behavior). How is the typical person supposed to know what their comments are being used for?</p>
+
+<p>Yes, your comments on TechCrunch&rsquo;s Facebook wall post that are synced to LiveFyre are Public to everyone, and there is no expectation of privacy. But who owns those comments?</p>
+
+<p>The comments appear in LiveFyre matching the style and functionality of any other LiveFyre comment, except with a &ldquo;from Facebook&rdquo; designation. For all intents and purposes, it&rsquo;s a LiveFyre comment that you have no controll over. It&rsquo;s worth noting that since LiveFyre doesn&rsquo;t know your Facebook account, you can&rsquo;t even delete the syndicated comment in LiveFyre . LiveFyre comments on the post have greater SEO than Facebook comments, so hopefully you don&rsquo;t say anything embarrassing on the Facebook page. LiveFyre is in control of your destiny.</p>
+
+<p>What are the benefits to SocialSync anyways, when it barely works? Bigger numbers for the comment count of a post? That&rsquo;s irrelevant when the comments on the Facebook posts are made spur-of-the-moment, and are usually very low quality.</p>
+
+<p>The idea of sync between isn&rsquo;t terrible in itself. Facebook Comments and the recently announced Google%2B Comment System essentially does sync by blurring the lines between a Google%2B post and a comment, but unlike LiveFyre, the user still retains control over the comment, receives reply notifications, and can delete their comment when necessary.</p>
+
+<p>At the least, I&rsquo;ve stopped posting on TechCrunch&rsquo;s Facebook page. That&rsquo;s not a good thing for either TechCrunch or LiveFyre.</p>
+
+<ul>
+<li>Interestingly, SocialSync is not enabled on CNet or AllThingsD&rsquo;s implementations of LiveFyre.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook Outage: All Webpage Likes and Comments Reset]]></title>
+    <link href="http://minimaxir.github.io/2013/03/facebook-outage/"/>
+    <updated>2013-03-25T21:47:00-07:00</updated>
+    <id>http://minimaxir.github.io/2013/03/facebook-outage</id>
+    <content type="html"><![CDATA[<p><strong>UPDATE: The issue was resolved about 11 hours after the post was published. Like counts and comment counts are back. See <a href="http://techcrunch.com/2013/03/25/facebook-comments-bug/">TechCrunch&rsquo;s post</a>.</strong></p>
+
+<p>Today (3/25/13), Facebook appears to have made a change that has nuked all existing Facebook Like counts and Facebook Comments. I can verify that on this particular blog, my non-cached Like counts and my Comments are gone, even after checking Facebook&rsquo;s Graph API directly. This can be verified on older blog posts, such as <a href="http://techcrunch.com/2012/05/19/day-after-ipo-mark-zuckerberg-marries-longtime-girlfriend-priscilla-chan/">this one</a>.  It is also <a href="http://stackoverflow.com/questions/15623582/facebook-like-count-for-articles-reset-to-zero">being tracked on Stack Overflow</a>.</p>
+
+<!-- more -->
+
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/03/Zuck.png?resize=625%2C208" alt="Zuck" /></p>
+
+<p>Note the lack of comments and Likes, on what was the article with the second-most pageviews on TC (and one I can testify that had hundreds of comments.) A quick glance at multiple blogs and other old posts confirms that Likes were reset. New posts have several likes, but all old posts have 0 likes.</p>
+
+<p>I&rsquo;m sure the lost Likes/Comments temporary, but this is an error of incredible magnitude, especially given on how many sites rely on Facebook&rsquo;s data.</p>
+
+<p>Because comments here may be broken, you can comment on the <a href="https://news.ycombinator.com/item?id=5439712">Hacker News thread</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM]]></title>
+    <link href="http://minimaxir.github.io/2013/03/127-yoshis-in-slot-6/"/>
+    <updated>2013-03-24T21:44:00-07:00</updated>
+    <id>http://minimaxir.github.io/2013/03/127-yoshis-in-slot-6</id>
+    <content type="html"><![CDATA[<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
+
+<p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
+
+<!-- more -->
+
+
+<p>So, what the heck is happening in this speedrun? curtmack on Reddit <a href="http://www.reddit.com/r/Games/comments/1aldvz/major_glitch_discovered_in_luigis_mansion_that/c8yk3g3">explains it succinctly</a>:</p>
+
+<blockquote><p>So, for those who are wondering just what the f- happened&hellip; there&rsquo;s a glitch that&rsquo;s been known for a while, where Yoshi can end up in the &ldquo;I have an item in my mouth&rdquo; state, but not actually have an item in his mouth. When he spits out this nothingness, the game crashes. That&rsquo;s all we knew about the glitch&hellip; until recently.</p>
+
+<p>Somebody decided to take a debugging emulator and step through the crash. He discovered that the crash occurred because the game tried to jump to a specific address in memory, and execute code there. That address did not contain code, and so the system crashed.</p>
+
+<p>But wait a second. What if, by some sheer coincidence, that address <em>did</em> contain code? The specific address dropped him in somewhere amongst various data for the game&rsquo;s internal random number generator, and the random number generator can be manipulated in a TAS. Could the game be coerced into running arbitrary code?</p>
+
+<p>Well, as it turns out, it&rsquo;s extremely limited. You have the RNG state and a few sprite positions that can be manipulated, but after that is some internal game stuff that can&rsquo;t be. So the length of the &ldquo;program&rdquo; is extremely limited, but as it turns out, it&rsquo;s just long enough to send the signal to the game to switch to the &ldquo;The End&rdquo; screen.</p>
+
+<p>There&rsquo;s a related glitch where you can spawn a bouncing fish by doing certain odd things as you spit out an item as Yoshi, and every time a fish bounces, it uses up a randomly-generated number (since it bounces in a random direction). So, putting it all together, you have to spawn a billion fish and have them all bounce a f-jillion times to get the RNG in just the right spot, leave the area, and then fiddle around with some objects to get the last few bits you need in the right place, all while setting up the original spit-nothing glitch in the first place.</p></blockquote>
+
+<p>Crazy, isn&rsquo;t it?</p>
+
+<h2>I Call Hax!</h2>
+
+<p>This <a href="http://tasvideos.org/1945M.html">SMW TAS</a>, posted in 2011, was so crazy that it inspired the creation of a new category of speed runs: &ldquo;Corrupts Memory.&rdquo; The <a href="http://tasvideos.org/forum/viewtopic.php?t=12215">discussion on the speed run</a> provides a technical explanation of of the glitch, which started a debate: &ldquo;does this <em>count</em> as a speed run?&rdquo; (96% of voters said yes.)</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/03/smw.png?resize=625%2C227" alt="smw" /></p>
+
+<p>To be fair, this is far from the first time where manipulated RAM has been used to complete a game. The classic Nintendo 64 title Legend of Zelda: Ocarina of Time has the infamous <a href="http://zeldaspeedruns.com/oot/ba/reverse-bottle-adventure">Reverse Bottle glitch</a> that allows players to transform items into others, and a <a href="http://youtu.be/PaUCFrW_mEE?t=13m44s">memory glitch</a> that teleports you from the first dungeon to the final cutscene, In <em>Pokemon</em> on the GameBoy, players discovered how to reprogram the game to <a href="http://tasvideos.org/forum/viewtopic.php?p=332488&amp;sid=1d8670bd80327418d202b6608e5cd2a9#332488">run arbitrary code</a>, but many gamers may remember the classic <a href="http://bulbapedia.bulbagarden.net/wiki/Missingno.">Missingno glitch</a>, which was very easy to reproduce on an actual console and provided many beneficial effects.</p>
+
+<p>Still, it&rsquo;s not every day that spawning a ton of fishes out of mid-air = victory.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How To Kill The Reader Comments Of A Popular Tech Blog]]></title>
+    <link href="http://minimaxir.github.io/2013/01/its-a-metaphor-maybe/"/>
+    <updated>2013-01-23T21:38:00-08:00</updated>
+    <id>http://minimaxir.github.io/2013/01/its-a-metaphor-maybe</id>
+    <content type="html"><![CDATA[<p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog,.</p>
+
+<p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
+
+<p>Fast forward to 2012. Other blogs on the Aol blogging network, such as Engadget, Joystiq, and TechCrunch itself, have <a href="http://www.engadget.com/2012/10/11/engadget-livefyre-commenting-system/">decided</a> to <a href="http://www.joystiq.com/2012/04/04/joystiqs-new-commenting-system-is-live/">migrate</a> to <a href="http://www.livefyre.com/">LiveFyre</a>, another blog commenting system which allows readers to comment using their social identities, in addition to a few flashy Web 2.0 features. I figured it was a matter of time until TechCrunch implemented it themselves. And in January 2013, <a href="http://techcrunch.com/2013/01/22/we-want-you-back/">they did</a>.</p>
+
+<p>At first, I thought I would like the change. Facebook Comments has their own problems that a switch to Livefyre could solve. I was wrong. The stated reasons for the change were &ldquo;we want more comments,&rdquo; but a large amount of low-value comments (and images), with no way to identify good ones, along with the increased hassle of commenting, will end up backfiring. I&rsquo;m honestly afraid that the switch from Facebook Comments could kill quality comments on TechCrunch completely.</p>
+
+<!-- more -->
+
+
+<h2>The Pros and Cons of Facebook Comments</h2>
+
+<p>As said earlier, Facebook comments excel in their ease of implementation, light aesthetic, and zero-click registration. More importantly, it lends a lot of credibility to the comments, as they have (usually) been authenticated as a real person. Whenever a <em>real</em> person likes or comments on your own comment, it is very satisfying.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/alexia.png?resize=625%2C256" alt="alexia" /></p>
+
+<p>That said, there are a few unobvious nuances:</p>
+
+<ul>
+<li>For most blog systems, you receive a notification whenever someone replies to your post. In the original implementation of FB Comments, you receive one whenever someone likes or replies to your comment, in the same manner you&rsquo;re notified on a typical Facebook status. This has changed recently: now, you don&rsquo;t receive notification for likes/replies on your comment, and instead you <strong><em>only receive notifications when other people comment on the same post</em></strong>. I haven&rsquo;t figured out if this is a bug or a feature.</li>
+<li><strong>There is no spam filter.</strong> As many can attest, Facebook has been terrible at combating spam both on the main website and off. All spam cleaning must be done <em>ad hoc</em>, which can be time-consuming.</li>
+<li><strong>Virtually no customization for the comments</strong>. On the administrative side, the only significant options you have for commenting are how many comments appear initially, and the default sort order. It makes sense for Facebook to limit customization to protect their own branding, but it&rsquo;s frustrating for both the admin and readers.</li>
+<li><strong>Commenters do not have access to a list of comments that they&rsquo;ve made.</strong> This one in particular upset me, which is one of the reasons I&rsquo;ve aggregated all my comments <a href="http://minimaxir.com/category/blog-comments/">here</a>.</li>
+<li><strong>Facebook&rsquo;s count of comments lies. </strong>The count provided by Facebook does <em>not</em> include replies to comments, unlike every blog comment system since the beginning of time.</li>
+</ul>
+
+
+<p>There have been zero improvements to Facebook Comments since 2011. It&rsquo;s disappointing, but there&rsquo;s not much that can be done&hellip; except considing competitors.</p>
+
+<h2>LiveFyre Makes Comments BURN!</h2>
+
+<p>LiveFyre, on a typical blog like this one, has quite a few perks that Facebook Comments does not. It allows users to comment just by linking a social identity, such as Facebook or Twitter. Or you can remain anonymous. You receive notifications by email. Images and video are embedded into posts. Posts appear in real time, increasing the interaction for live events. And, you have a profile which lists all the comments you&rsquo;ve ever made.</p>
+
+<p>LiveFyre also has comment editing and an indicator of how many users are viewing the current blog post, but for some reason, the implementation of LiveFyre on TechCrunch disabled these features. Hmm.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/comments2.png?resize=625%2C211" alt="comments2" /></p>
+
+<p>The core features good on paper. The problem is with the implementation. <a href="http://fyre.it/u2jnrP">This comment</a> does a good summary, but here&rsquo;s the gist when compared to Facebook Comments:</p>
+
+<ul>
+<li><strong>Anonymous comments are <em>usually</em> low-quality comments. </strong>With Facebook Comments, rational people will not make stupid comments that are tied with their real name. With anonymous comments, people can troll as much as they want without any repercussions.  Yes, with more accessible to comments leads to a higher chance of quality comments by the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">law of large numbers</a>, but that is completely irrelevant because&hellip;</li>
+<li><strong>There is no way to sort by high-quality comments</strong>. Facebook Comments, by default, sorts comments by the number of likes that they have received: more likes, the higher up they are in the comment thread. LiveFyre only allows sorting in chronological order and reverse chronological order. No exception. This strongly reduces the <em>motivation</em> for high-quality posts.</li>
+<li><strong>New comments that are loaded live forcibly scroll down all comments.</strong> Imagine: you&rsquo;re reading a good comment, and a new comment loads and <em>pushes</em> the comment away. With spam. You&rsquo;ll become frustrated very quickly. This may not be a concern for blogs with low user-bases, but for popular blogs, this can become irritating very quickly.</li>
+<li><strong>Images and video appear in-line, and are very large.</strong> This makes them more visible, which is a good thing, <em>unless</em> they&rsquo;re memes and spam. Then it&rsquo;s terrible. And since people can comment anonymously, there&rsquo;s a significant risk factor. Images/video, due to their size, cause comment scrolling even faster!</li>
+</ul>
+
+
+<h2>The impact of LiveFyre on TechCrunch</h2>
+
+<p>LiveFyre works on a typical WordPress blog, but when applied to <img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/ToKillACommentsSection.png?resize=187%2C300" alt="ToKillACommentsSection" />large sites such as Engadget and TechCrunch, whose size attracts trolls, it can be crippling. It&rsquo;s like <a href="http://en.wikipedia.org/wiki/Dunbar's_number">Dunbar&rsquo;s Number</a> on a macro scale: there&rsquo;s a mathematical limit on the number of people who visit one place on the internet until it degenerates into madness and memes.</p>
+
+<p>Even with the criticisms above, I still prefer Facebook Comments, and I implement it on my own site, as zero-click registration and real name validation is paramount. It&rsquo;s definitely the lesser of two evils.</p>
+
+<p>The main argument TechCrunch used to justify the switch from Facebook Comments to LiveFyre is that users aren&rsquo;t commenting as much. That&rsquo;s a given, since you can&rsquo;t comment anonymously. It&rsquo;s the old debate of quantity vs. quality: in the case of comments, however, it&rsquo;s <em>always</em> in favor of quality. I&rsquo;d rather read a comments section with one or two comments than a comments section consisting of 90% anonymous spammers who make me lose faith in humanity. Losing faith in humanity is not healthy.</p>
+
+<p>I&rsquo;ll probably be toning down my comments on TechCrunch even moreso. My <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">primary motivation for commenting</a> was, and still is, making people laugh and smile. But if other readers have to dig through anonymous spam just to find my comments, then there&rsquo;s not much point. I could spam my comments to my Facebook profile every time I make one, but that would cause the <em>opposite</em> issue.*<br/>
+*</p>
+
+<p>I realize that this is a first-world problem. Even more of a first world problem than <a href="http://minimaxir.com/2013/01/if-cute-then-happiness/">auto-downloading pictures of cute puppies</a>. I&rsquo;m not mad.</p>
+
+<p>I&rsquo;m just sad. <img src="http://i2.wp.com/minimaxir.com/wp-includes/images/smilies/icon_sad.gif?w=625" alt=":(" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet]]></title>
+    <link href="http://minimaxir.github.io/2013/01/sexy-will-haunt-your-dreams/"/>
+    <updated>2013-01-15T21:36:00-08:00</updated>
+    <id>http://minimaxir.github.io/2013/01/sexy-will-haunt-your-dreams</id>
+    <content type="html"><![CDATA[<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N&#8217;Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
+
+<p>I&rsquo;m OK with this. There are certainly far <a href="http://minimaxir.com/2012/03/ethics-self-promotion/"><em>worse</em></a> ways to promote a startup.</p>
+
+<p>His moody yet charmful face adds a touch of class to any website. But why does he have to stay constrained to Myspace? Why not let Justin Timberlake dominate the world?</p>
+
+<!-- more -->
+
+
+<h2>No Such Thing As Too Much Sexy</h2>
+
+<p>If you are reading this post on a desktop or laptop, you&rsquo;ll see a handsome fellow in the lower-right corner. This is Justin Timberlake of the Mickey Mouse Club. Say hi.</p>
+
+<p>Using the power of the Stylish extension for Chrome and Firefox, Mr. Timberlake has already made his mark on many startups around the internet.</p>
+
+<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest2-e1358404534897.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest2-e1358404534897.png" alt="" /></a>
+TechCrunch</p>
+
+<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest9-e1358404467980.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest9-e1358404467980.png" alt="" /></a>
+Facebook</p>
+
+<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest8-e1358404790348.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest8-e1358404790348.png" alt="" /></a>
+Twitter</p>
+
+<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest7-e1358404639594.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest7-e1358404639594.png" alt="" /></a>
+Instagram</p>
+
+<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest5-e1358404610346.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest5-e1358404610346.png" alt="" /></a>
+Dropbox</p>
+
+<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest4-e1358404660737.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest4-e1358404660737.png" alt="" /></a>
+Imgur</p>
+
+<p><a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en"><img src="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en" alt="" /></a>
+Google Search</p>
+
+<p>To accomplish this magic, I use the Stylish browser extension, which can be used with either <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Chrome</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/stylish/">Firefox</a>. I have used Stylish <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">before, with browser filters</a>, and it worked very well. If you want your own moody Justin, follow these steps:</p>
+
+<ol>
+<li>Install the Stylish extension for your browser.</li>
+<li>In the extension preferences, go to &ldquo;Managed Installed Styles&rdquo; and select &ldquo;Write New Style&rdquo;</li>
+<li>Paste this CSS code in the &ldquo;Code&rdquo; textbox:
+&lsquo;&rsquo;&lsquo;
+body, ._li, .main {
+ background-image: url(<a href="http://i.imgur.com/UN5HE.png">http://i.imgur.com/UN5HE.png</a>) !important;
+ background-position: right bottom !important;
+ background-repeat: no-repeat !important;
+ background-attachment: fixed !important;
+}
+&rsquo;&lsquo;&rsquo;</li>
+</ol>
+
+
+<p>And you&rsquo;re done! Justin will appear pretty much everywhere. Yes, there are a lot of <em>!important</em> declarations, but Justin Timberlake is an important man.</p>
+
+<p>In fact, by using the HTML snippet in this <a href="https://github.com/minimaxir/display-justin-timberlake-sexiness">GitHub repository</a>, you can add Justin to your own site!</p>
+
+<p>Feel free to narrow down the domains where Justin appears by using Stylish as necessary. Although, why would you do such a thing!?</p>
+
+<h2>Taking Justin To The Next Level</h2>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/816440400_1965379.gif?resize=400%2C232" alt="816440400_1965379" /></p>
+
+<p>Now that we can make Justin appear anywhere, let&rsquo;s put his power to good use. TechCrunch writer Alexia Tsostis recently made a post about the <a href="http://techcrunch.com/2013/01/16/were-bringing-techcrunch-back/">upcoming redesign of TechCrunch</a>, which, I admit, is long overdue.</p>
+
+<p>In the post, Alexia spoils that the redesign will include lots of sparkles. And a picture of the Justin-man himself. Above is a mockup made by Chris Velazco, another TechCrunch writer, and it is indeed marvelous. (except for the lack of a comments section!)</p>
+
+<p>But why wait for the redesign? We have Timberlake Technology. We can do it <em>now</em>.</p>
+
+<p>Using the power of Stylish, I present to you, a sneak peek into TechCrunch&rsquo;s 2013 redesign.</p>
+
+<p>I made a <em>few</em> stylistic additions as well. It&rsquo;s magic.</p>
+
+<p>You can find a copy of the CSS I used to emulate this wonderful layout in <a href="https://github.com/minimaxir/techcrunch-1999">this GitHub repository</a>.</p>
+
+<p>Will you let Timberlake enrich <em>your</em> life? He&rsquo;s waiting. In the lower-right corner of your screen.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)]]></title>
+    <link href="http://minimaxir.github.io/2013/01/if-cute-then-happiness/"/>
+    <updated>2013-01-13T21:32:00-08:00</updated>
+    <id>http://minimaxir.github.io/2013/01/if-cute-then-happiness</id>
+    <content type="html"><![CDATA[<p><strong><em>TL;DR: Use this <a href="https://ifttt.com/recipes/74285">IFTTT recipe</a>, and change the subreddit value in the parameter of the Feed URL as needed.</em></strong></p>
+
+<p>In <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">a previous post</a>, I joked about a hypothetical social media strategy in which an automated script does Facebook brand management by stealing the top cute images from <a href="http://www.reddit.com/">Reddit</a> &ndash; an aggregator of trending topics and images &ndash;  and reposting them on the Facebook page, additionally adding a cute message encouraging users to LIKE, SHARE, and COMMENT!  We get easy social media fame for no monetary cost.</p>
+
+<p>Out of curiosity, I wanted to see if it was feasible to create such a script. Both Reddit and Facebook indeed have APIs that make it easy. But then I have to set up a server to check Reddit periodically, ensure that no images are duplicated, etc., and that can take time to implement and ensure that it works correctly (<em>all</em> the images must be cute!). I looked into <a href="https://ifttt.com/">IFTTT</a>, a relatively new startup that talks between different popular web services to automate simple tasks, like posting to Twitter whenever you post to Facebook.</p>
+
+<p>As it turns out, yes, this is possible, and you can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too! Just use <a href="https://ifttt.com/recipes/74285">this IFTTT recipe</a>! There are a few interesting caveats, though&hellip;</p>
+
+<!-- more -->
+
+
+<h2>Really Simple Syndication is&hellip;Really Simple?</h2>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditrss2.png?resize=304%2C242" alt="redditrss2" /></p>
+
+<p>IFTTT allows users to extract information from RSS feeds, which one might typically be used to read blogs and news articles. The RSS feed typically provides the title, author, date, and content of a post: the important things. However, RSS has more applications: it can distribute other data, such as weather and desktop wallpapers. IFTTT allows other apps to load image and audio files from an RSS feed, but only if the RSS feed link links to the content itself.</p>
+
+<p>Unfortunately, this won&rsquo;t work on Reddit by default, as its RSS feeds do not contain a direct link to the photo and instead link to the Reddit comments on the image. Image-based websites, such as <a href="http://www.buzzfeed.com/">BuzzFeed</a> and <a href="http://interfacelift.com/wallpaper/downloads/date/any/">InterfaceLift</a> also implement a similar system because they don&rsquo;t want their users just to use a script to download images and bypass the website and its lovely revenue-generating advertisements. Therefore, the RSS feed alone won&rsquo;t work with IFTTT.</p>
+
+<p>During my research into my social media exploitation hypothesis, I found a <a href="http://blog.stevemould.com/rss-feed-reddit-stories-score-threshold/">blog post by Steve Mould</a> that provides a way to translate data from Reddit&rsquo;s JSON API to an RSS feed using a service called <a href="http://pipes.yahoo.com/pipes/">Yahoo Pipes</a>. This modified RSS feed, when given a subreddit and a score threshold, obtains the top Reddit posts in that subreddit above that karma threshold (upvotes &ndash; downvotes), and returns a feed item which contains direct link to the referenced URL.</p>
+
+<p>Here is <a href="http://bit.ly/W1ypdf">my variation of his Reddit Pipe</a>. My script to process the API has a few changes (such as using Reddit&rsquo;s &ldquo;hot&rdquo; posts, instead of the top posts; hot posts update much more frequently). Testing it with r/aww and a threshold of 50 karma, I received 177 very cute pictures on my computer in a week.</p>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditcute.png?resize=625%2C382" alt="redditcute" /><br/>
+From that Pipe, you can get the data in a RSS feed URL. Right-click and copy that feed URL into a IFTTT recipe as the source. For the action, use the **** variable to retrieve the image URL.</p>
+
+<h2>With Great Power Comes Great Cuteness</h2>
+
+<p>Yes, you can save the Reddit images to your computer automatically using <a href="https://www.dropbox.com/">Dropbox</a>. Or <a href="https://drive.google.com">Google Drive</a>. Or <a href="https://skydrive.live.com/">SkyDrive</a>. Or even get a cute email every hour!</p>
+
+<p>Thanks to IFTTT, there are many other creative things you can do with the feed that you can include in a recipe:</p>
+
+<ul>
+<li>Auto-post the image to your Tumblr or WordPress blog. Easy cuteness, and you&rsquo;ll be the source!</li>
+<li>Auto-curate the cute photos to your Facebook or Twitter account. All your friends will love you!</li>
+<li>Get social media fame for no additional monetary cost by publishing the cute images to your Facebook Page, with an encouragement to LIKE SHARE and COMMENT! My original hypothesis was correct!</li>
+</ul>
+
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditnega.png?resize=625%2C418" alt="redditnega" /></p>
+
+<h2>Caveats</h2>
+
+<p>One caveat in using Yahoo Pipes is that it is rate limited to 200 runs in a 10 minute interval, meaning that the IFTTT recipe provided will likely fail if more than 200 people use the feed. If that does happen, just clone my pipe, and use the RSS feed from the clone for your own personal recipe.</p>
+
+<p>Also, there&rsquo;s no rate limiting on when recipes are triggered and images are posted/downloaded. You can trigger multiple images simultaneously, which may be considered spammy if you are posting to social media. In that case, increase the karma threshold to reduce the frequency of the postings and to maintain a high quality of the images.</p>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditifttt.png?resize=625%2C239" alt="redditifttt" /><br/>
+Getting socially-vetted photos on your computer without any effort is a useful timesaver. A solution to a first world problem, perhaps, but it&rsquo;s the little things that count!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why Do Many Tweets Begin With A Period?]]></title>
+    <link href="http://minimaxir.github.io/2013/01/prefixed-period/"/>
+    <updated>2013-01-04T21:30:00-08:00</updated>
+    <id>http://minimaxir.github.io/2013/01/prefixed-period</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m not a Twitter fanatic. Although I do have <a href="https://twitter.com/minimaxir">a Twitter account</a> with about 300 followers,  Facebook&rsquo;s Subscribe feature <a href="http://www.facebook.com/max.woolf">on my Facebook profile</a> has met my use case for publishing sarcastic quips and cool links for a broad audience over the internet. I mostly use my Twitter account to read tweets from tech columnists, yet I don&rsquo;t even comment on their tweets because <strong>tweets that are replies to someone are not visible in the home timeline of my followers</strong>. I can understand the intuition behind this behavior: Twitter conversations can contain a lot of low-content tweets, and Twitter doesn&rsquo;t want its users to be spammed.</p>
+
+<p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that <strong>beginning your reply Tweet with a period (.) allows it to be seen by all your followers. </strong>Otherwise, only the replyee will receive notification of the reply.</p>
+
+<p>Having your reply tweets appear to your followers only if you begin them with a prefixed period is not intuitive at all. And this particular behavior and its workaround are not documented in <a href="https://support.twitter.com/groups/31-twitter-basics/topics/109-tweets-messages/articles/14023-what-are-replies-and-mentions">Twitter&rsquo;s help docs</a>. And replying to tweets is a core feature of Twitter. How many users would be able to deduce this behavior? How many brands, who rely on user engagement, are even aware of this behavior?</p>
+
+<p>As it turns out, I was only partially correct. It&rsquo;s even <em>less</em> intuitive.</p>
+
+<!-- more -->
+
+
+<h2>XY = @(Z)</h2>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/twitter2.png?resize=513%2C181" alt="twitter2" /></p>
+
+<p>I recently saw <a href="https://twitter.com/ScottyLabs/status/286921265514700801">a tweet</a> in my timeline that had a prefixed period, but clearly was not a reply to anyone. Confused, I pointed out that prefixed periods aren&rsquo;t necessary if the tweet is not a reply. <a href="https://twitter.com/amyquispe">Amy Quispe</a>, founder of ScottyLabs and a CS senior at Carnegie Mellon University with much more startup knowledge than myself, pointed out that I was wrong, and <strong>if the tweet begins with a @, it will not appear in your follower&rsquo;s timelines, regardless of whether it&rsquo;s a reply or a mention</strong>.</p>
+
+<p>Anyone who tweets, for example, &ldquo;<em>@SHO_Dexter is my favorite television show! Season 7 was AWESOME!!!</em>&rdquo;, will likely not have that tweet seen by any of their followers. Therefore, it&rsquo;s incredibly easy, and incredibly likely, for that behavior to unintentionally trigger a false positive for spam. Again, would a person notice that one of his/her tweets is not being seen? It&rsquo;s bad for the user, and it&rsquo;s even bad for @SHO_Dexter, who misses out on the free advertising.</p>
+
+<p>As it turns out, <em>that</em> <em>correction** was still only partially correct</em>, as there&rsquo;s one more important caveat:<strong> if a tweet by X begins a tweet with an @ mention of Y, and if Z is a follower of <em>both</em> X and Y, then Z will see the tweet. If the second condition is not true, then Z will not see the tweet.</strong></p>
+
+<p>Twitter is apparently a course in deductive reasoning. To be fair, this caveat is clearly stated in the help docs, and this behavior makes sense in the context of mutual friends among users. Nevertheless, it&rsquo;s not intuitive at all, and it&rsquo;s mostly irrelevant: a prefixed period tweet reaches all of your followers, 100% of the time.</p>
+
+<h2>The Pestilent Prefixed Period Problem</h2>
+
+<p>Twitter users want maximum reach. Brands want maximum reach. Therefore, everyone will use the prefixed period for replies and mentions. Those who don&rsquo;t use prefixed periods on Twitter will be left behind in this cutthroat game of social media.</p>
+
+<p>There are two problems with encouraging prefixed periods:</p>
+
+<ol>
+<li>It alienates newcomers to Twitter. Some online communities do have unwritten behaviors: <a href="http://www.reddit.com/">Reddit</a>, for example, invokes &ldquo;vote fuzzing&rdquo; on popular posts, which disguises the true amount of upvotes and downvotes on any particular post by adding fake upvotes/downvotes. You won&rsquo;t find that in any Reddit documentation, which leads to the frequent outbursts of &ldquo;WHO THE HELL WOULD DOWNVOTE THIS PUPPY?&rdquo; Quirks like these don&rsquo;t make communities exclusive: it makes them insular.</li>
+<li><strong>It looks tacky and ugly</strong>. That&rsquo;s not a trivial complaint. Every @mention tweet looks like someone made a typo. I don&rsquo;t think that&rsquo;s the brand image Twitter wants.</li>
+</ol>
+
+
+<p>How could Twitter address this? An option would be to adopt a system similar to Facebook&rsquo;s <em>ad hoc</em> post visibility settings, and allow users to set the reach of an individual tweet as necessary. Another option is to have an <em>All your replies and @mentions are shown to all your followers</em> account option that is opt-in, and let the user&rsquo;s followers determine whether the content is spam.</p>
+
+<p>Twitter, with an impending IPO, needs to help potential newcomers out in any way possible. Eliminating the need for prefixed periods is a great start to increasing accessibility.</p>
+
+<p><em>PS: I am not a huge dork.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a Startup Promo Video Using... PowerPoint?]]></title>
+    <link href="http://minimaxir.github.io/2012/12/powerpoint-promo-party/"/>
+    <updated>2012-12-29T21:28:00-08:00</updated>
+    <id>http://minimaxir.github.io/2012/12/powerpoint-promo-party</id>
+    <content type="html"><![CDATA[<p>I noticed deep in the documentation for PowerPoint 2010 that it <a href="http://office.microsoft.com/en-us/powerpoint-help/turn-your-presentation-into-a-video-HA010336763.aspx">supports video output</a> for presentations. Like a good nerd, I experimented to see what it could actually do. My first test of the functionality was a humor video about pitching a <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">hypothetical startup named NegaCycl</a>, complete with animation and narration, which I trashed and eventually retooled because I&rsquo;m bad at verbal comedic delivery. Interestingly, the output video was a 1:1 comparison to what was displayed on my own computer screen during the presentation. Naturally, I decided to test it even harder.</p>
+
+<p>What I have here is another hypothetical, non-real startup named Filtrzzz (based on a <a href="http://www.facebook.com/photo.php?fbid=10151356495205450&amp;set=a.432190050449.225968.582270449&amp;type=1">popular Facebook post</a> I made), animated and rendered using PowerPoint, with more complicated objects such as embedded audio and video, and an attempt to sync the presentation timing with the audio for dramatic effect. Plus sarcastic humor, of course.</p>
+
+<p>PowerPoint video creation is feasible if you don&rsquo;t have or can&rsquo;t afford dedicated video software and need a promo video in a pinch, as may be the case with an actual startup.</p>
+
+<!-- more -->
+
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/filtrzzz-ppt.png?resize=625%2C288" alt="filtrzzz ppt" /></p>
+
+<p>The Filtrzzz video relies heavily on slide transitions (the &ldquo;zoom&rdquo; effects at the beginning), text animations (the fade in/fade out on the text at the end), and embedding of media (the background song and the product demos), all of which are very easy to implement, although as with any video, a little trial-and-error is necessary to get a good &ldquo;feel&rdquo; for effect duration, effect intensity, etc.</p>
+
+<p>PowerPoint has the native ability to record timings (i.e. when to progress to the next slide/animation) and voice narrations on a per-slide basis in the Slide Show tab. You can either record the timings while running through a presentation normally (good for maintaining a consistent pace through animations), or record <em>ad hoc</em> per slide (good for voice narration, which is independent from other slides). If timings and narrations are present, when the presentation runs, it will use those timings and play in auto-pilot. When the presentation is exported as a video, it will follow these timings and include the spoken narrations.</p>
+
+<p>The maximum quality output for video through PowerPoint is 720p WMV, which is sufficient for a startup video since users likely are watching the video YouTube-embedded in a webpage. For comparison, I video-captured the presentation using Camtasia at 1080p and rendered the final video as a high-bit rate MP4: the visual quality between the two versions is indistinguishable at non-full screen resolutions. (when watching a video in 1080p at small sizes, the quality is actually even worse!)</p>
+
+<p>You can see the 1080p MP4 version of the Filtrzzz video <a href="http://www.youtube.com/watch?v=s2ZajsuPomg">here</a>.</p>
+
+<p>If you&rsquo;re developing a startup promo video where you narrate a description of your product, include a few pictures, and add a few animations/transitions for added flare, PowerPoint videos might be an option to consider. At the least, it&rsquo;s a good introduction to those looking to break into organized video production.</p>
+
+<hr />
+
+<p><em>By the way, Filterzzz would never work as a real product (nor would I ever publicly post hypothetical startups that could actually be feasible business ideas) for a few reasons:</em></p>
+
+<ol>
+<li><em>The way the filters work depends on the internal design of the webpage. Since many websites have highly maverick designs, the filter isn&rsquo;t guaranteed to work 100% on all websites.</em></li>
+<li><em>As you saw in the video, the performance impact of the filters on browser speed varies, at least with my implementation. The performance would need to be consistent among all websites in order to avoid user outrage.</em></li>
+<li><em>The biggest point: reading text on a filtered background for long periods of time <strong>hurts eyes</strong>. Any startup which tried to promote this business idea would be sued into bankruptcy within a month.</em></li>
+</ol>
+
+
+<p><em>Per #3 and the personal liability it poses, I won&rsquo;t be releasing my source code for the filters, but you can easily create your own by using the <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Stylish extension for Chrome</a> and implementing <a href="http://www.html5rocks.com/en/tutorials/filters/understanding-css/">CSS filters</a> into a style.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Totally-Real Totally-Serious Startup Pitch For Venture Capital]]></title>
+    <link href="http://minimaxir.github.io/2012/12/totally-real-totally-serious/"/>
+    <updated>2012-12-26T21:26:00-08:00</updated>
+    <id>http://minimaxir.github.io/2012/12/totally-real-totally-serious</id>
+    <content type="html"><![CDATA[<p><em>Here are presentation slides and a transcript from a totally-real totally-serious startup pitch I did recently for a group of<strong> </strong></em>totally-real totally-serious venture capitalists for <em>totally-real totally-serious venture capital.</em>**</p>
+
+<p><em>This presentation is totally-real totally-serious and not fabricated in any way whatsoever for the purpose of humor. The business and technical terminologies used in this presentation are totally-real totally-serious representations of my own knowledge. I </em>totally-real totally-serious <em>pinky-swear!</em></p>
+
+<p><em>[This isn&rsquo;t real.]</em></p>
+
+<!-- more -->
+
+
+<p></p>
+
+<h2><strong>Introduction</strong></h2>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide1.png?resize=625%2C352" alt="Slide1" /></p>
+
+<p>Good afternoon, and thank you all for giving me the opportunity to present my startup proposal. I&rsquo;m Max Woolf, I&rsquo;m here with NegaCycl, and I&rsquo;m going to make you a billion dollars, no problem.</p>
+
+<p>Today, I&rsquo;ll be talking about NegaCycl, and I hope that by end of the presentation, you&rsquo;ll agree that this startup is timeless. First, I&rsquo;ll be discussing the inspiring, book-and-movie-deal-worthy events that led toward this business idea. I&rsquo;ll tell you a bit about NegaCycl and how it works, and lastly, you&rsquo;ll see a few cool ways we plan to market the business.</p>
+
+<p>Our mission at NegaCycl is simple: <strong>we are a web application that allows us to provide our users the quickest routes &ndash; regardless of where and <em>when</em> they want to go to.</strong></p>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide4.png?resize=625%2C352" alt="Slide4" /></p>
+
+<p>I&rsquo;m here today to formally ask you for $2.01 million in seed money for NegaCycl. Yes, that $0.01 million is significant.</p>
+
+<h2><strong>The Eureka Moment</strong></h2>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide6.png?resize=625%2C352" alt="Slide6" /></p>
+
+<p>On a cold Monday night in November after work, I turned on my TV and began to watch the pilot episode of Start-Ups: Silicon Valley: a reality TV show on Bravo that captures the entrepreneurial essence of the Bay Area&hellip; which apparently involves a lot of dating and partying. Huh, you learn something new every day.</p>
+
+<p>During the episode, the cast members throw an extremely classy toga party to celebrate the launch of some fitness startup no one really cares about.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide7.png?resize=625%2C352" alt="Slide7" /></p>
+
+<p>After becoming incredibly inebriated at the party, the cast members played <em>the</em> most popular party game for nerds: Drunk Computer Science Trivia.</p>
+
+<p>One question asked to a cast member was<em> &ldquo;How do you solve negative cycles?&rdquo;</em> I thought that was weird; I personally had never heard of the term &ldquo;negative cycle&rdquo; before, and the question didn&rsquo;t seem scripted like a typical Bravo show. What the heck are negative cycles, and how do you solve them?</p>
+
+<p>After a few vicious Google searches, I discovered what negative cycles were. More importantly, I made a startling realization: people in the real world actually care about these negative cycles! And just think, if negative cycles are relevant to those who are incredibly drunk, imagine how important they&rsquo;ll be to those who are sober! Clearly, this market has been vali &ndash; <em>wait for it</em> &ndash;</p>
+
+<p>dated! Yes, reality shows on Bravo are heavily edited for added drama, but no one can edit&hellip; inspiration.</p>
+
+<h2><strong>What is NegaCycl?</strong></h2>
+
+<p>Now, you may be asking &ldquo;What is NegaCycl?&rdquo; Yes, as you&rsquo;ve likely figured out, it&rsquo;s a portmanteau of &ldquo;negative&rdquo; and &ldquo;cycle&rdquo;, but there&rsquo;s a lot more to it.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/gxfgcfg.png?resize=625%2C352" alt="Slide10" /></p>
+
+<p>Cycles are a part of a branch of computer science known as Graph Theory. In Graph Theory, graphs are networks which connect<em> blah blah blah</em>&hellip;</p>
+
+<p>&hellip;this slide is boring. Moving on.</p>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide11.png?resize=625%2C352" alt="Slide11" /></p>
+
+<p>On this map are arbitrary numbers for each path which represent the amount of time it takes to go between each city. Let&rsquo;s say, for example, a person wants to go from Boston to New York. What&rsquo;s the route that will take the shortest total amount of time? Do you go Boston &ndash; San Diego &ndash; New York, or Boston &ndash; Atlanta &ndash; New York, or even Boston &ndash; Atlanta &ndash; St. Louis &ndash; New York? Solving it through brute force by calculating every possible route and their respective total times is not sexy.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/jchjghjghj.png?resize=625%2C352" alt="Slide12" /></p>
+
+<p>In the previous slide, we made the implicit assumption that time always moves forward. That isn&rsquo;t necessarily true. Maybe in the future, some startup offering particle-accelerators-as-a-service gets too popular, their users accidently form a few black holes, and boom, time and space crack. Oops! It could happen to anyone, and once it does, time can move backward. In this example, you could go back and forth, or &ldquo;cycle&rdquo;, between Atlanta and St. Louis to go further and further back in time. In that case, the math to find the shortest route between Boston and New York becomes even less sexy.</p>
+
+<p>We can&rsquo;t have unsexiness. We&rsquo;re a startup. We&rsquo;re sexy. And we know it.</p>
+
+<p>Back to the Drunk Computer Science Trivia on Bravo: how do you solve negative cycles anyways? The cast member replied with<em> &ldquo;Are we talking Bellman&rsquo;s algorithm or Dijkstra&rsquo;s algorithm?&rdquo;</em></p>
+
+<p>And after a few more vicious Google searches, I discovered that the answer is&hellip; neither of those two algorithms because the show&rsquo;s cast members are dum-dums.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide14.png?resize=625%2C352" alt="Slide14" /></p>
+
+<p>Now, let&rsquo;s get to the meat of the pitch: what<em> is</em> NegaCycl? It&rsquo;s simply a web app that calculates the route of the shortest amount of time for travel using the Bellman-Ford algorithm. The Bellman-Ford algorithm solves graphs containing these negative cycles, and thus in the context of travel, it can account for time moving backwards, as with Atlanta and St. Louis. Easy peasy lemon squeezy.</p>
+
+<p>Currently, NegaCycl is the <em>only</em> startup that accounts for fractures in the space-time continuum. Sure, startups might use APIs from Facebook and Twitter in their own code, but no other startup uses the API&hellip; of the universe. Since the underlying 12 lines of pseudocode are so elegant and efficient, we&rsquo;ll be able to scale without breaking a sweat. We&rsquo;re going to do PHP, because Facebook uses PHP for their server language and Facebook has over 1 billion users, so it&rsquo;s legit. Lastly, this time-routing technology would be very useful for enterprise shipping companies, such as UPS and FedEx, and we could potentially license it to them. Imagine: you could receive your delivery from an online order&hellip;before you even order it.</p>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide15.png?resize=625%2C352" alt="Slide15" /></p>
+
+<p>Unfortunately, I don&rsquo;t have a working demo of the app to show you today, but here&rsquo;s a screenshot of the prototype. We&rsquo;re using Twitter Bootstrap as the core framework for our front-end interface, as it looks cool and it&rsquo;s free, and that&rsquo;s good enough for me!</p>
+
+<h2><strong>How will we market NegaCycl?</strong></h2>
+
+<p>There are a lot of players in the travel space. How will we market NegaCycl so that it stands out from the crowd? You&rsquo;ll see that we have that very well planned.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide18.png?resize=625%2C352" alt="Slide18" /></p>
+
+<p>With startups, one of the key drivers of success is who you know, and who <em>they</em> know. That&rsquo;s why I&rsquo;ve decided to utilize two very influential tech celebrities to help publicize NegaCycl: Michael Arrington, the founder and former head editor of TechCrunch, and Robert Scoble, a popular journalist with hundreds of thousands of social media followers,</p>
+
+<p>I, personally, am Facebook friends with both of them. They&rsquo;re my biffles, my best friends for life!</p>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide19.png?resize=625%2C352" alt="Slide19" /></p>
+
+<p>During my time as a business major at Carnegie Mellon University, I&rsquo;ve learnt that brand identity is one of the most important assets for a business. Between two otherwise equal startups, the one whose logo is cleanest and whose web pages are shiniest will be the winner.</p>
+
+<p>The name &ldquo;NegaCycl&rdquo; is very catchy. Note how there&rsquo;s no vowels in Cycl! Poor literacy is kewl nowadays, and the blatant deliberate typographical mistake will make our grammar-obsessed potential users much more likely to remember our name and curse us out on public forums. Hey, free advertising!</p>
+
+<p>Additionally,  I&rsquo;ve taken great care in designing a unique logo myself for NegaCycl, one that will be remembered forever. Do you know how long it took me to align all the vectors to create this excellent logo? Like, 20 minutes. 20 minutes! Have you noticed that the logo looks like a bicycle? That&rsquo;s completely intentional. Have you noticed that the face is negative? That&rsquo;s also completely intentional. The visual subtext in this logo is quite clearly indicative of a logo for a future Fortune 500 company: a company named NegaCycl!</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide22.png?resize=625%2C352" alt="Slide22" /></p>
+
+<p>And now, my plan for social media promotion with NegaCycl. I&rsquo;ve developed a automated script that does community management for our Facebook brand page by using a proven effective strategy. At no additional cost. Trust me, I read <em>The Lean Startup</em> by Eric Ries, I&rsquo;m an expert at being lean.*<br/>
+*</p>
+
+<p>We start by finding cute pictures, which are statistically proven to have a greater response rate than boring startup press announcements <em>ugh</em>. The automated script parses Reddit, a link and image aggregator, and its API for the top cute pictures of the day. Then, the script applies a NegaCycl watermark in the lower-right corner of the image, and posts the image on our Facebook page for our fans to see. When our users inevitably share the image, we get <strong>all</strong> the credit. Everyone on Facebook will see NegaCycl as the harbinger of happiness and cuddles.</p>
+
+<p>In the post message, we will ask questions to users, as they also make people more likely to respond. &ldquo;What do you think of this picture?&rdquo; &ldquo;What are you doing today?&rdquo; &ldquo;What is the answer to life, the universe, and everything?&rdquo; Things like that. The automated script does not spend time reading the user responses to the question because it&rsquo;s an asshole.</p>
+
+<p>Lastly, we will encourage the users to Like, Share, and Comment on our pictures. Whenever a Facebook user does any of those three things on a NegaCycl post, the NegaCycl post then appears on the News Feeds of that user&rsquo;s friends, and the cycle repeats until Facebook is <em>ours. </em>And once we conquer Facebook, we&rsquo;ll conquer Twitter as well, and I guess we&rsquo;ll also conquer Google%2B because why not it&rsquo;s not hard.</p>
+
+<p>We become a successful travel startup, or we pivot into a generic image regurgitator. Either works for me, really.</p>
+
+<h2><strong>Conclusion</strong></h2>
+
+<p>You&rsquo;ve seen how we came up with the idea. You&rsquo;ve seen how we&rsquo;re going to execute the idea. You&rsquo;ve seen how we&rsquo;re going to promote the idea. NegaCycl will indeed change the way you use travel apps: you no longer have to ask &ldquo;where do I want to go to&rdquo;, but <em>when</em> do I want to go to.</p>
+
+<p>NegaCycl may be a crazy idea for a startup, sure. We don&rsquo;t use any photo filters! However, it&rsquo;s the crazy ideas that are the most disruptive in Silicon Valley, and not only will we disrupt the travel space, but we will also disrupt the travel time.</p>
+
+<p>As we said earlier, we ask you for $2.01 million, and we&rsquo;ll use this couple of millions to make a couple of billions. Piece of cake. Chocolate cake.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide25.png?resize=625%2C352" alt="Slide25" /></p>
+
+<p>We will put your money to very good use.</p>
+
+<p>We&rsquo;re going to spend $1 million for a waterfront office in San Francisco. I want to look outside the window and be able to see the Golden Gate Bridge and Alcatraz. Alcatraz is so much fun!</p>
+
+<p>We&rsquo;ll use another $1 million to throw the most epic toga launch party ever. Bravo had a good one, and we&rsquo;re to going to top that. One word: Lions. Gladiatorial combat, anyone? We&rsquo;ll get so much press and word-of-mouth advertising, especially if someone gets killed!</p>
+
+<p>Lastly, we&rsquo;ll use the remaining $0.01 million to hire a programmer to make the damn app.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide26.png?resize=625%2C352" alt="Slide1" /></p>
+
+<p>In all, I hope that you&rsquo;ll invest your money in our startup. So, what did you think of this presentation? Do you think you&rsquo;ll invest in NegaCycl? Like, share, and comment!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation]]></title>
+    <link href="http://minimaxir.github.io/2012/10/client-side-validation-is-hard-mode/"/>
+    <updated>2012-10-14T21:21:00-07:00</updated>
+    <id>http://minimaxir.github.io/2012/10/client-side-validation-is-hard-mode</id>
+    <content type="html"><![CDATA[<p>Early Saturday morning, <a href="http://www.gamefaqs.com/boards/916373-pc/64312901">various gaming forums</a> (and, more importantly, <a href="http://www.reddit.com/r/GameDeals/comments/11ewb0/use_the_code_os3874xvc_to_get_20_off_origin/">Reddit</a>) obtained a promotional code from mega gaming company Electronic Arts for their Origin gaming distribution service. This code entitled the user to purchase any EA published or developed game for $20 off, and if the game was less than $20, the game was free. <a href="http://www.gamers-association.com/2012/10/free-game-from-eas-origin/">Games that were made free</a> using this coupon included hit series such as Dead Space, Mass Effect, Dragon Age, and Battlefield, so the rewards for the coupon were actually pretty worthwhile. Best of all, there are no catches and no gimmicks; input promo code OS3874XVC, get game.</p>
+
+<p>The code was apparently rewarded after taking a survey regarding Origin, with the reward being one free game. The operative word being &ldquo;one.&rdquo; Some gamers, out of curiosity, discovered that by entering the code via both the store browser-interface and the store client-interface, they could get a free game twice. Gamers inferred the logical technical conclusion; EA was not checking server-side that the code was only being used once. Later, gamers noted that <a href="http://www.overclock.net/t/1315674/free-20-in-origin-code/410#post_18359737">simply inputting the code while logged-out</a> allows them to use the promo code an <em>unlimited</em> amount of times.</p>
+
+<p>Needless to say, hilarity ensued.</p>
+
+<!-- more -->
+
+
+<h2>What Went Wrong</h2>
+
+<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/10/origin2.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/10/origin2.png" alt="A picture of the Origin desktop client. Not as pretty as a startup website." /></a></p>
+
+<p>Even the most amateur web developer knows to follow three important rules for data validation:</p>
+
+<ol>
+<li>Never trust the client.</li>
+<li>Never trust the client.</li>
+<li><strong>Never trust the damn client!</strong></li>
+</ol>
+
+
+<p>The proper way to implement a promo code is logical: when the user attempts to apply a promo code, the server checks, <em>has the user used this promo code before?</em> by querying<em> SELECT FROM transactions WHERE user_id = current_user AND promo_code = &ldquo;OS3874XVC&rdquo;</em>. If the result set is empty, then the user hasn&rsquo;t used the code, and everything&rsquo;s good to go. Otherwise, then that user has used the promo code before, and an appropriate error should be thrown are displayed to the user. This would be repeated at the checkout phase when the server actually charges the credit card, to ensure that the correct amount is charged and that the user has not committed and shenanigans in the meantime. All would be well. *****</p>
+
+<p>For some reason, inputting the code in different clients (which should validate against the same backend database) still allowed the code to be input twice. And, for a very confusing reason, a workflow exists that allows the user to input a promo code while logged out, with presumably the intention of it being validated when the user eventually logs in (which it isn&rsquo;t).</p>
+
+<h2>Aftermath</h2>
+
+<p><a href="http://www.forbes.com/sites/erikkain/2012/04/09/why-ea-won-the-worst-company-in-america-award/"><img src="http://www.forbes.com/sites/erikkain/2012/04/09/why-ea-won-the-worst-company-in-america-award/" alt="Two wrongs make a right...?" /></a></p>
+
+<p>The exploit was closed at around 1AM PST, 18 hours after its discovery (which, to be honest, it pretty embarrassing for an exploit that causes a significant amount of lost potential revenue). Here&rsquo;s where it gets interesting.</p>
+
+<p>A little background: in the gaming community, EA is not the most liked company; in fact, it was voted <a href="http://www.forbes.com/sites/erikkain/2012/04/09/why-ea-won-the-worst-company-in-america-award/">the worst company in America</a> due to a very large number of privacy, security, and ethical debacles. Last year, EA launched its own digital distribution service, Origin, which would compete with Valve&rsquo;s Steam service by being the sole provider of high-profile EA-published games, including Battlefield 3 and Mass Effect 3. (the former being the only reason I downloaded Origin). Speaking from experience, Origin is very buggy and unpolished compared to Steam, and actually drains system resources when idle.</p>
+
+<p>According to <a href="http://www.reddit.com/r/gaming/comments/11ggi2/reddit_during_the_recent_origin_discount_coupon/">another Reddit thread</a>, when news of this exploit hit, many gamers went on a downloading spree, and downloaded nearly every free game possible for two reasons. One, if EA is technically incompetent enough to allow such a severe bug to exist, they won&rsquo;t have the technical skills to discern who used the promo code more than once. Two, <em>it is retribution for EA being a terrible company</em>.</p>
+
+<p>What will EA do to punish people who exploited? Are the users at fault here since it&rsquo;s very possible to accidently use the code twice? If so, is it fair to ban <em>ever</em>y<em>one</em> who has used multiple promo codes if innocent people might be banned?</p>
+
+<p>UPDATE (10/15 1:14AM): EA will <a href="http://forum.ea.com/eaforum/posts/list/60/9040620.page">&ldquo;honor all sales made with the coupon code,&rdquo;</a>  implying that they will <strong>not</strong> ban people who utilized the exploit.</p>
+
+<p>If the promo was a marketing tactic from Electronic Arts to promote Origin usage, it failed immensely on their end, due to a trivial amount missing lines of code on their server.</p>
+
+<p>-Max</p>
+
+<p><em>PS: I downloaded exactly one game through the promo code as was intended and stated by a <a href="http://i.imgur.com/4zg7X.jpg">forum user&rsquo;s chat log with Origin Support</a>; I did not attempt to reproduce the exploit itself for verification purposes due to the potential consequences. I like my Battlefield 3!</em></p>
+
+<ul>
+<li><strong>I admit that the SQL pseudocode provided here is an oversimplified, general </strong>solution for the validation issue<strong>, since that I do not have knowledge of EA&rsquo;s database structure and scale.</strong></li>
+</ul>
+
+
+<p><strong>** Discussion on Hacker News <a href="http://news.ycombinator.com/item?id=4652129">here</a>!</strong></p>
+
+<p><strong>*</strong>| Discussion on Reddit <a href="http://www.reddit.com/r/technology/comments/11hem0/electronic_arts_gives_away_thousands_of_free/">here</a> and <a href="http://www.reddit.com/r/Games/comments/11h9nj/electronic_arts_gives_away_thousands_of_free/">here</a>.**</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses]]></title>
+    <link href="http://minimaxir.github.io/2012/10/questions-equals-reponses/"/>
+    <updated>2012-10-07T21:19:00-07:00</updated>
+    <id>http://minimaxir.github.io/2012/10/questions-equals-reponses</id>
+    <content type="html"><![CDATA[<p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
+
+<p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>
+
+<p>Like any math nerd, I wasn&rsquo;t comfortable with simple circumstantial evidence. When I <a href="http://www.facebook.com/max.woolf/posts/10151223309670450">asked on Facebook</a> if there is any statistical data indicating that including a question to the community at the end of a blog post / Facebook post increases the response rate, TechCrunch writer and Facebook specialist Josh Constine responded and linked to<a href="http://www.facebook.com/notes/facebook-journalists/study-how-people-are-engaging-journalists-on-facebook-best-practices/245775148767840"> a Facebook report</a> stating that such posts have double the comments and significantly greater feedback.</p>
+
+<p>I decided to put that to the test. I wrote a quick script in R that parses the Facebook page of a brand and extracts the number of likes for all of their posts, the number of comments on all posts, and whether or not each post contained a question. The brand I chose for my testing is none other than <a href="http://www.techcrunch.com/">TechCrunch</a>, because <a href="http://www.facebook.com/techcrunch">its Facebook page</a>, managed by the wonderful <a href="https://twitter.com/elinblesener">Elin Blesner</a>, has large sample sizes in terms of both unique postings and response rates on each post, ensuring that the analysis of the data is statistically significant. Additionally, having a<em>nother</em> perspective on TechCrunch to comment about certainly doesn&rsquo;t hurt either.</p>
+
+<p>After collecting about 2,500 posts &ndash; 12 months of data &ndash; I analyzed the data conditional on whether or not the post was a question, among other things. The results surprised me.</p>
+
+<!-- more -->
+
+
+<p><strong>tl;dr: Asking a question to the readers in a Facebook post <em>does</em> increase the number of comments very significantly, but <em>decreases</em> the number of Likes!</strong></p>
+
+<h2>How many Comments and Likes do TechCrunch posts receive?</h2>
+
+<p>Since the data goes back a year, we can more easily detect seasonal trends in the data. First, let&rsquo;s see the real world numbers as a sanity check.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb1.png?resize=625%2C345" title="How many Comments and Likes do TechCrunch posts receive?" alt="It's much more than you may think." /></p>
+
+<p>The number of Likes per month appears to be positively correlated with the number of comments, which is to be expected. Some months have significantly more activity than others; September 2012 had the most because of TechCrunch Disrupt SF. (interestingly, there wasn&rsquo;t such a spike in May 2012 with Disrupt NYC) The average number of likes/comments per post per month, as opposed to the sum, is a more consistent measurement, so we will be using that going forward.</p>
+
+<h2>How many Comments and Likes do TechCrunch Facebook posts receive on average?</h2>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb2.png?resize=625%2C345" title="How many Comments and Likes do TechCrunch posts receive on average?" alt="Triple-Digit Likes and double-digit Comments. Not too shabby." /></p>
+
+<p>Overall average is 162 Likes and 30 Comments per post. The average number of Likes/Comments are consistent across the past year, with growth in the last few months. Nothing too surprising here. ## Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?</p>
+
+<p>Here&rsquo;s a fun measurement I decided to analyze. TechCrunch makes postings at all hours as it&rsquo;s a globally-targeted blog, but readers in the US may be asleep at the time. This could be a possible confounding variable (social activity may be correlated with geographic location), so it&rsquo;s best to see whether or not we can rule it out.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb3.png?resize=625%2C273" title="Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?" alt="The spike in average comments at 4AM PST / 7AM EST is interesting. European workday?" /></p>
+
+<p>As it turns out, time of day does <strong>not</strong> appear to have an effect on number of Likes/Comments received for TechCrunch!</p>
+
+<h2>How many TechCrunch Facebook posts ask a question, relative to the ones that do not?</h2>
+
+<p>Here&rsquo;s the main question that began this entire investigation. Has the TechCrunch Facebook been writing posts that ask questions more frequently?</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb41.png?resize=625%2C379" title="How many TechCrunch Facebook posts ask a question, relative to the ones that do not?" alt="TechCrunch-themed columns!" /></p>
+
+<p>As it turns out, no, TechCrunch has asked the same proportion of questions on their Facebook page, as there is no change in trend. Overall average is 31.38% of TC&rsquo;s posts ask a question. (about a third of the posts)</p>
+
+<h2>Does including a question to the community increase the number of Likes/Comments on the post?</h2>
+
+<p>And here&rsquo;s the analysis of the main hypothesis. The results were quite surprising.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb51.png?resize=625%2C299" title="Does including a question to the community increase the number of Likes/Comments on the post?" alt="Now with more DROP SHADOWS!" /></p>
+
+<p>The average amount of Likes for a post that asked a question is <em>lower</em> than a post that does not! (141 Likes for post that asks question, 172 for post that does not, a 18% decrease) That&rsquo;s unexpected!</p>
+
+<p>For Comments, the average amount of Comments for a post that asked a question is significantly higher than a post that does not (45 Comments for a post that asks question, 23 comments for post that does not, a 97% increase). This is nearly double, which is what the Facebook report had stated.</p>
+
+<p>What could explain this behavior? A quick theory is that Liking and Commenting on a brand post are mutually exclusive; asking a question in the post drives the user to comment, but not to Like the post, but since the user has already acknowledged the post socially, there&rsquo;s no need for the user to Like it. This follows my personal behavior on brands; if I comment, I usually do not like the post as it seems redundant.</p>
+
+<p>Regardless, I will now admit that there are benefits to asking your users questions in your Facebook or blog posts. Although there appears to be a drop in Likes by asking users what their opinions are, the increase in comments more than counteracts it.</p>
+
+<p>This data raises an interesting dilemma: let&rsquo;s say everyone catches on and <em>most</em> of the top brands start asking their users questions. It&rsquo;ll quickly become an cliché, as it is essentially a subliminal form of the infamous Facebook News Feed spam. Would that cause brands to stop asking questions? If so, how long would it take for the brands to switch back to asking their users questions?</p>
+
+<p>Who knew that social media marketing involved game theory?</p>
+
+<p>-Max</p>
+
+<p><em>(Since all the data is public anyways, <a href="https://dl.dropbox.com/u/2017402/TechCrunch%20Facebook%20Data%20Analysis.xlsx">I am releasing my data and graphs</a> for your perusal. If you decide to use it and find something else interesting, please let me know!)</em></p>
+
+<p>EDIT: One more.</p>
+
+<h2>Do photo posts have greater response rates than posts without photos?</h2>
+
+<p>[![][15]][15]</p>
+
+<p>Yep. Not too surprising. It&rsquo;s why Facebook bought Instagram! (although I&rsquo;m curious what happened in April&hellip;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Google Drive, And Why Dropbox Really Is In Trouble]]></title>
+    <link href="http://minimaxir.github.io/2012/04/drivebox/"/>
+    <updated>2012-04-25T21:16:00-07:00</updated>
+    <id>http://minimaxir.github.io/2012/04/drivebox</id>
+    <content type="html"><![CDATA[<p>Despite spending a lot of time talking about startups (and commenting about them on <a href="http://techcrunch.com/">TechCrunch</a>), there are very few which I actually use on a daily basis. I don&rsquo;t use a service because it&rsquo;s popular or the <strong>NEXT BIG THING</strong>, but because it&rsquo;s worthwhile use of my time and energy. (the correlation between startup popularity and worthwhileness is, unfortunately, not always strong). As a business major, I&rsquo;m prone toward productivity applications which help save time that would otherwise be wasted, allowing me to spend my time elsewhere doing much more important tasks, such as the aforementioned commenting on TechCrunch.</p>
+
+<p>The one app I&rsquo;ve used throughout my college years has been Dropbox. As an early adopter way back in 2008, I thought that Dropbox was a clever scam, because it was too good to be true. &ldquo;2 gigabytes of data, that I can access on any computer without needing a $30 flash drive or e-mailing myself constantly? I won&rsquo;t have to fumble around with hardware that I&rsquo;ll probably lose or fill up valuable inbox space! <strong>And</strong> I can access my files remotely with my iPhone 3G?! Awesome!&rdquo; And thus I began to love Dropbox, and have used it extremely frequently for the past four years. I have never tried any alternatives: <a href="http://box.com/">Box.net </a>and <a href="https://www.sugarsync.com/">Sugarsync</a> were nowhere as seamless. And throughout those four years, no real competitors arose&hellip;</p>
+
+<p>&hellip;until Tuesday, when Microsoft released Windows Skydrive, and Wednesday, when Google released Google Drive, both of which <a href="http://www.engadget.com/2012/04/24/google-drive-vs-the-competition-dropbox-skydrive-icloud/">offer very similar functionality to Dropbox</a>. Both of them offer &ldquo;a folder that sync everywhere&rdquo;, a considerable amount of free storage by default (more than Dropbox), and, more importantly, both are services which are typically used by people who may not necessarily be technical. Microsoft will <a href="http://techcrunch.com/2012/02/29/windows-8-the-road-ahead/">tightly integrate SkyDrive into Windows 8</a>, which will introduce the magic of one-folder-sync to every customer who buys a new computer in the next few years, and Google <a href="http://thenextweb.com/google/2012/04/24/google-drive-is-live-and-available-right-now-but-its-no-dropbox-killer/">automatically converted</a> the popular Google Documents feature into Google Drive, which <em>automatically</em> established an equally-large customer base, and Google will likely leverage their extensive marketing budget to further captivate potential users. The average person has heard of Microsoft and Google and trust them: conversely, they likely have never heard of Dropbox. Why would a typical internet user ever use Dropbox now?</p>
+
+<!-- more -->
+
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/04/Photo-Apr-25-11-28-57-AM.png?resize=300%2C300" title="Dropbox" alt="A t-shirt I obtained from Dropbox during an on-campus visit. But now...?" /></p>
+
+<p>There&rsquo;s <a href="http://www.quora.com/Google-Drive/Will-Google-Drive-kill-Dropbox">a lot of speculation</a> that Google Drive, at the least, will kill Dropbox. Although &ldquo;kill&rdquo; may be overdramatic, the rise of new competitors will stunt Dropbox&rsquo;s growth, which is a death sentence in the startup industry.</p>
+
+<h2>Will Existing Dropbox Users Switch?</h2>
+
+<p>We&rsquo;ve already established that non-Dropbox users will be more inclined to use the more &ldquo;mainstream&rdquo; Google Drive. But what about existing users of Dropbox? Would they be inclined to switch? The answer, which should greatly concern Dropbox, is <em>possibly.</em></p>
+
+<p>I have <a href="http://minimaxir.com/2011/12/startup-checklist/">talked before</a> about network effects, and how they can drive the growth of a startup by encouraging users to invite their friends to the service, which adds more users and increases potential revenue. Dropbox actually pioneered an innovative way to utilize network effects by using a referral system with a very <em>substantial reward</em>: a 250MB increase in storage space for free can contain a surprising amount of files, and has encouraged <em>organic</em> promotion of referral links relentlessly in blog comments. Another aspect of network effects, if done properly, is that it builds switching cost: if a user switches to another service, they lose the social graph created in the original service.</p>
+
+<p>Dropbox has no such switching cost. You want to move from Dropbox to Google Drive? Just <em>copy and paste all your files from your Dropbox folder to your Google Drive folder</em>.</p>
+
+<p>The aforementioned storage space increase is not tied to the number of the users on the service. The only interaction that the user might lose from switching are his or her Shared Folders with other users, which synchronizes files between users automatically. While an impressive feature (I use it to share 100%2BMB files that would normally break e-mail clients), it&rsquo;s a narrow, less popular use-case than &ldquo;a folder that syncs everywhere&rdquo;.</p>
+
+<p>I&rsquo;m a free user on Dropbox; if I moved all my files to Google Drive, they wouldn&rsquo;t care. But Dropbox does offer a payment plan of 100GB for $200/year, which is useful for those who wish to store music and movies in their Dropbox. However, Google Drive also offers 100GB of storage for $60/year. That&rsquo;s less than a third of the Dropbox price!</p>
+
+<p>At the moment, Dropbox doesn&rsquo;t have any features that truly differentiate it. On Monday, Dropbox announced that you can now <a href="http://blog.dropbox.com/?p=1138">share files anywhere in your Dropbox</a> with a link! But unfortunately for Dropbox since Google Drive is derived from Google Docs, all files on Google Drive have the same functionality, with even more permission control. Not to mention that Google Docs has two-factor authentication, comments on files, OCR, and image recognition. Dropbox has strong third-party support with their API since they were first&hellip;but Google Drive&rsquo;s API is <a href="https://developers.google.com/drive/">indeed strong</a>, and with App Integration in Chrome, Google could have exclusive features that not even Dropbox would replicate.</p>
+
+<p>In a simple cost-benefit analysis, the switching cost of losing your shared folders will never outweigh spending an extra $140/year. And so, paid Dropbox users will likely migrate to Google Drive, which is a serious, serious problem for a for-profit business.</p>
+
+<h2>But Wait, Google%2B Didn&rsquo;t Kill Facebook, LOL!</h2>
+
+<p>&hellip;which is irrelevant.</p>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/04/quora.png?resize=575%2C186" title="The Third Most Popular Response on Quora" alt="28 upvotes?!" /></p>
+
+<p>A frequent counterpoint in the linked Quora thread against Google Drive impacting Dropbox is that Google%2B, Google&rsquo;s attempt at a social network to beat Facebook, indisputably did not succeed at achieving its goal. Since Google couldn&rsquo;t defeat Facebook, therefore Google can&rsquo;t defeat Dropbox. That conclusion fails every test of causal logic ever.</p>
+
+<p>Actually, the main reason that Google%2B failed was due to the aforementioned switching costs via network effect! Users (including me) felt no reason to lose their social graphs on Facebook to spend the time rebuilding the social graph on Google%2B. As shown earlier, Dropbox does not have that issue; switching from Dropbox to Google Drive is one CTRL%2BC, CTRL%2BV away, and at most you lose a few shared folders. The two situations aren&rsquo;t comparable.</p>
+
+<h2>What Will Dropbox Do?</h2>
+
+<p>Proving that history is indeed hilarious in hindsight (or Dropbox founder Drew Houston is psychic), on Dropbox&rsquo;s <a href="http://dl.dropbox.com/u/27532820/app.html">Y-Combinator application</a>, in response to the question &ldquo;What might go wrong?&rdquo;, he answers &ldquo;<em>Google might finally unleash GDrive and steal a lot of Dropbox&rsquo;s thunder</em>&rdquo;</p>
+
+<p>In the short term, Dropbox will definitely a) they&rsquo;ll have to ramp up development of new functionality to compete with Google Drive&rsquo;s unique functionality and b) lower prices of their paid plan. The former will be difficult, especially since both Google and Microsoft can likely replicate any new features that Dropbox implements, and the latter sends a signal to potential investors that the company&rsquo;s strategic position is weakening. It&rsquo;s a lose-lose situation.</p>
+
+<p>Meanwhile, with Google Drive, there are a ton of potential use-cases since the sharing/collaboration and preview tools from Google Docs are now integrated with all your documents on your computer as well. This is a <strong>huge</strong> productivity win. Get a file in your Gmail: Export it to Google Drive, and it&rsquo;s automatically downloaded to your computer (apparently this will be implemented soon). Have a custom made spreadsheet: upload it to Google Drive and it converts it automatically, and you can collaborate on it with peers and changes sync automatically to your computer. Once Google Drive incorporates Shared Folders, the sky&rsquo;s the limit, and even I might use Google Drive full-time.</p>
+
+<p>I&rsquo;m a huge fan of Dropbox, so I&rsquo;m sad to see it turn out this way, especially since it&rsquo;s not the company&rsquo;s direct fault. Everyone I know has a Google account, and it&rsquo;s relatively hard to get friends to switch to Dropbox: the potential install base is huge. Between that and the future integration with Windows SkyDrive and Windows 8, Dropbox will be seeing a huge hit in growth.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why Every New Website Will Use Bootstrap]]></title>
+    <link href="http://minimaxir.github.io/2012/03/bootstrap-for-everyone/"/>
+    <updated>2012-03-24T21:10:00-07:00</updated>
+    <id>http://minimaxir.github.io/2012/03/bootstrap-for-everyone</id>
+    <content type="html"><![CDATA[<p>So, I decided to spruce up the blog a little bit. The old WordPress theme I had used, <a href="http://wordpress.org/extend/themes/graphene">Graphene</a>, had a lot of useful functionality, such as a featured post slider and a topbar for placing social media buttons, but the theme itself didn&rsquo;t make the blog look <em>unique</em>. Even with a few CSS tweaks to add custom styling, such as forcing the titles of blog posts to be in all-capital letters, (which makes users more likely to click them!), it still <a href="http://i.imgur.com/LQVNK.png">looked very generic</a>. When building a personal brand, generic is never good.</p>
+
+<p>Therefore, I resolved to develop and design a unique WordPress blog theme effectively <em>from scratch</em>, in order to ensure that my blog had a truly distinctive look and functionality. Although modifying the blogging backend was simple (it&rsquo;s WordPress; there are <em>tons</em> of well-written documentation for that platform), modifying the CSS frontend, which my blog readers would actually <em>see</em>, was just as important. For that task, I chose to use the Twitter Bootstrap CSS framework, which many recent startups have utilized to great effect due to its focus on minimalism and efficiency.</p>
+
+<p>After completing my implementation and having hands-on experience, I can say that within the next few years, every startup will be using Bootstrap to design a website frontend both because it&rsquo;s incredibly easy to implement and because it allows for functionality that would take months to develop otherwise: both of which are useful properties for a startup which does not have the luxuries of time and money.</p>
+
+<!-- more -->
+
+
+<h2>About Bootstrap</h2>
+
+<p><a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a> is primarily developed by Twitter employees <a href="https://twitter.com/#!/mdo">Mark Otto</a> and <a href="https://twitter.com/#!/fat">Jacob Thorton</a> (you can tell they work for Twitter because they are one of the lucky few with a 3-character Twitter handle), developed primarily to speed up the development of new websites, and is open-sourced on GitHub for anyone to contribute changes to the project. At its core, Bootstrap provides typical CSS styling, such as text headings and large form inputs (like Twitter&rsquo;s).</p>
+
+<p>However, Bootstrap&rsquo;s strength lies in the <strong>additional</strong> CSS styles that are included for free, including animated buttons, icons, static navigation bars, and image thumbnails, all of which are staples of the design of modern startups (because they&rsquo;re classy!). Additionally, Bootstrap offers custom Javascript plugins which integrate into the aforementioned CSS, such as dropdown menus, tooltips, popovers, and interactive alerts. The aforementioned button styles, for example, would traditionally be implemented as jQuery buttons; CSS buttons are easier to implement (<em>one</em> line of code!) and load faster, which is better for both the user, and the startup who wants to maximize the happiness of the user. The aforementioned Javascript plugins are just as easy to implement (also <em>one</em> line of code!), and help preserve a website&rsquo;s minimalistic design by hiding content on default, and only presenting it when requested. Both of these features would require an extensive amount of testing to ensure that they worked 100% of the time, so developing using the framework is a useful time-saver.</p>
+
+<p>The most interesting feature, however, is the implementation of a responsive layout, also included for free. Responsive layouts, which allow websites to change their CSS in response to the width of the user&rsquo;s internet browser, are a very new trend in web development due to the fact that we now visit websites on so many different types of devices, from iPhones to iPads. If you use Bootstrap&rsquo;s 12 column grid system to format your website, it will automatically be able to conform to the display width of an iPhone, iPad, small desktop, and even a large desktop layout without any additional code. No longer do websites need to spend weeks creating and maintaining a separate mobile-friendly website!</p>
+
+<p>Bootstrap has received a surprising amount of third-party support as well, and interestingly has become a platform in itself. <a href="http://stylebootstrap.info/">StyleBootstrap.info</a> allows users to create their own Bootstrap design using an interactive GUI that makes adjustments in real-time, and <a href="http://bootswatch.com/">Bootswatch</a> distributes some these custom themes for free. Switching between these themes is simply a trivial matter of changing the CSS. <a href="http://wrapbootstrap.com/">WrapBootstrap</a> is an <em>entire marketplace</em> dedicated to selling custom webpage templates based around Bootstrap!</p>
+
+<h2>Bootstrap on Minimaxir</h2>
+
+<p>Minimaxir implements many of these features. The most notable of these is the responsive functionality: if you&rsquo;re on a desktop, try and resize the browser window in which you&rsquo;re reading this article. You&rsquo;ll notice the content resizing as well, and if you shrink it far enough, the top navigation bar collapsing into a small, compact form. On tablets, which have both portrait and landscape modes depending on their orientation, the responsive effect is very noticeable:</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/Responsive2.png?resize=625%2C352" title="Minimaxir as Responsive" alt="How Minimaxir looks on an iPad, in both Landscape and Portrait modes. Notice the difference in content density." /></p>
+
+<p>Other UI elements are scattered around logical areas of the website. The traditional &ldquo;read more&rdquo; at the end of each post excerpt is now a Bootstrap button. The hand-implemented  featured posts grouping at the top of index pages, and the bottom of article pages, uses Bootstrap&rsquo;s thumbnail grid, to group images in a clean and logical manner. There&rsquo;s a navigation menu at the top of every page with contains a dropdown, and on individual posts there&rsquo;s a sub-navigation menu which contains the share buttons (I <strong>loathe </strong>the &ldquo;distracting-share-buttons-on-the-left-of-posts-that-scroll-with-you approach that other blogs implement.) Lastly, all article images have a popover on mouseover, which allows for&hellip;creative captioning those images.</p>
+
+<h2>Limitations on Responsive Layouts</h2>
+
+<p>Since Bootstrap is based on a custom 12 column grid system, websites must be built from the ground up to accommodate such a layout, especially if they want to take advantage of the responsive features. It&rsquo;s very difficult for an established website or blog to justify the costs of development to implement such a rebuilding since they will likely outweigh the potential benefits, but a new website would not be subject to that issue. (note to startups: if you can develop a way for existing websites to go responsive for cheap, you&rsquo;ll make millions).</p>
+
+<p>Another unforeseen issue that was particularly annoying when implementing Bootstrap for Minimaxir was the lack of third-party plugin support. The Facebook Comments plugin and the YouTube embedded videos allow only a fixed width: if the user ever changes their browser width, then there will be a size discrepancy and that could cause aesthetic problems. After a little research, it turns out that the solution to these problems is to hack the plugin themselves. (a CSS hack for Facebook, a <a href="https://github.com/davatron5000/FitVids.js">jQuery plugin</a> for YouTube). That&rsquo;s not intuitive, and given the rise of responsive layouts, I hope these vendors make changes to accommodate these use cases.</p>
+
+<p>One last concern with responsive layouts, which is not Bootstrap&rsquo;s fault, is that some elements, such as social buttons, can dramatically slow down the loading of a website on mobile clients with less processing power than a desktop. Bootstrap contains mechanisms to hide content on mobile/tablets, but that doesn&rsquo;t prevent the content from <em>loading</em>, so it&rsquo;s moot for social buttons. To get around this problem, I had implemented a function that determines server-side whether or not the user is on a mobile client by parsing the user-agent property (which is how websites know if you&rsquo;re using Chrome, Firefox, etc.), and then displaying the social buttons if and only if they are on a desktop. (Otherwise, they see image-based social buttons which load easier). Honestly, in the future I expect to see a native function implemented in server-side languages for native mobile detection given the rise of responsive layouts.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/03/mobilecode.png?resize=625%2C158" title="Is The User On A Mobile Device?" alt="And this is about *half* of the necessary code required!" /></p>
+
+<p>Twitter Bootstrap is the best and easiest way for your new website to be future-proof, and if you&rsquo;re creating a startup, I strongly urge you to consider using that framework. The amount of time saved for a bootstrapped startup is invaluable, especially for startups ran by coders instead of designers.</p>
+
+<p><em>If you want to see more use-cases for Bootstrap, check out the <a href="http://builtwithbootstrap.com/">BuiltWithBootstrap</a> Tumblr. If you&rsquo;re looking for a WordPress Theme built on Bootstrap (which I wish I knew before attempting to build my own theme), you can use the <a href="http://320press.com/wpbs/">WPBS theme by 320press</a>, which even allows you to use the Bootswatch themes variations as well!</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[If You're Going to Blog, Use Tumblr, Not WordPress]]></title>
+    <link href="http://minimaxir.github.io/2012/03/a-wordpress-about-tumblr/"/>
+    <updated>2012-03-09T21:14:00-08:00</updated>
+    <id>http://minimaxir.github.io/2012/03/a-wordpress-about-tumblr</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ll admit: <a href="http://www.tumblr.com/">Tumblr</a> surprised me. Tumblr is a wildly popular microblogging platform where users can make small posts, in either text or visual format, and other users can share them. Users can then share another user&rsquo;s share, creating an endless sharing cycle. When the service first caught my eye a couple years ago, I thought it was merely a platform for reblogging incredibly old internet memes with nauseating, unintuitive blog themes. I remember thinking &ldquo;why can&rsquo;t this be done on <a href="http://wordpress.org/">WordPress</a>, which is the foundation of nearly every blog on the internet? It offers much more flexibility with blog functionality (especially with plugins) and likewise more theme distinctiveness.&rdquo;</p>
+
+<p>As it turns out, the arguments of plugin-functionality and unique themes <strong>are irrelevant</strong> to the typical blogger. 99% of bloggers just want a place, preferably free, where they can blog. And with the added value Tumblr provides with integrated social networking, Tumblr provides <a href="http://www.tumblr.com/why-tumblr">more utility for the typical blogger</a> than competing services such as <a href="http://www.blogger.com/home">Blogger</a>, <a href="https://posterous.com/">Posterous</a>, and even WordPress.</p>
+
+<p>However, for the other 1% of bloggers, especially those that want to earn money from blogging, WordPress is still unrivaled due to the aforementioned functionality tweaking. Tumblr won&rsquo;t ever kill WordPress, but if Tumblr fully captures the long-tail, WordPress could be in trouble.</p>
+
+<!-- more -->
+
+
+<p>At the beginning of 2012, I decided to start a Tumblr called <a href="http://techcommntr.com/">techcommntr</a>, whose title intentionally ignores the e&rsquo;s at the end of the word (like Tumblr itself) because poor literacy is kewl, is a blog that sardonically comments on the technology community. I wanted a place outside of <a href="http://techcrunch.com/">TechCrunch</a> to archive and share my blog comments, and also experiment with Tumblr&rsquo;s features hands-on to determine why it&rsquo;s so popular. I had some practice implementing custom CSS and Facebook Comments as well (Tumblr uses a single-file template system which is actually very elegant). Although I haven&rsquo;t posted on it in a while due to real life %2B working on <a href="http://minimaxir.com/2012/03/bootstrap-for-everyone/">a certain other project</a>, I have learnt quite a lot about the platform, and there are a <strong>lot</strong> of unpublicized features and benefits which Tumblr does not advertise.</p>
+
+<p><a href="https://plus.google.com/"><img src="https://plus.google.com/" alt="*Another* startup idea in the bathroom? Is lavatorial inspiration a common thing for him?" /></a></p>
+
+<h2>Tumblr vs. WordPress</h2>
+
+<p>Whenever one of my friends decides to create a blog, they always do it on Blogger, WordPress.com, or Tumblr. I&rsquo;ll be blunt: Blogger is terrible and you should never use it, especially in 2012. Even though Google has very recently tried to improve the feature parity of Blogger to that of other free blogging services, such as having a post editor that doesn&rsquo;t require the poster to type in <strong>raw HTML</strong>, there&rsquo;s a very limited social component, with merely generic social buttons and a barely functional commenting system. When <a href="https://plus.google.com/">Google%2B</a>, Google&rsquo;s social network, is a better blogging tool than the actual blogging tool, purely due to the social networking component, there&rsquo;s a problem. (Given the &ldquo;success&rdquo; of Google%2B as of recently, that says volumes).</p>
+
+<p><a href="http://wordpress.com/">WordPress.com</a>, the free-hosted version of the WordPress platform, has some oddities when compared apples-to-apples to the free Tumblr. WordPress.com has <a href="http://en.wordpress.com/products/">&ldquo;premium&rdquo; addons</a>&hellip;which are complete ripoffs. WordPress.com charges $12/year for the <em>right</em> to use a custom domain on the blog (so it doesn&rsquo;t have a <em>.wordpress.com URL), and you still have to pay an additional $9-10/year for the domain itself; Tumblr lets you map a domain to your blog for absolutely free with an existing domain. WordPress.com also charges $30/year for the </em>right<em> to use custom CSS to create a unique styling for your blog; Tumblr lets you add CSS for free. And, most ridiculously, WordPress charges $29.97/yr (why not $30, like custom CSS?) for the </em>right* to remove third-party advertisements from your blog; on Tumblr, you only have ads if you implement them yourself. So, in order to get feature parity with Tumblr while on WordPress.com, you would need to pay $72/year. At that point, you might as well self-host. Even worse, after all of that, you may not even be able to implement desired custom functionality on WordPress.com, as the underlying blog code cannot be altered and the usable plugins are limited. So, using WordPress.com is moot.</p>
+
+<p>In addition to the aforementioned features that Tumblr has that WordPress.com makes you egregiously pay for, Tumblr&rsquo;s strongest advantage is its focus on content promotion. Users can like or reblog posts on any Tumblr, regardless of theme design or settings, and all likes/shares are attributed to the original poster. Posts can be tagged, which go into a pool of all other Tumblr posts with the same tag; tagging your posts with a very large amount of tags is not a bad strategy. While yes, age-old viral pictures or ragefaces tend to pop up frequently, original content and images that cannot easily be replicated can be very valuable for spreading your personal brand. (although if you&rsquo;re able to watermark your photos, I&rsquo;d recommending doing that to deter uncredited repostings.)</p>
+
+<p><a href="http://gawker.com/"><img src="http://gawker.com/" alt="My most successful Tumblr post, with 20 notes. This happened because this post had a #trollface tag, and a trollface Tumblr caught it and reblogged it." /></a></p>
+
+<h2>Tumblr vs. Professional Bloggers</h2>
+
+<p>So, how does Tumblr compare with professional blogs that utilize WordPress, like TechCrunch? Well&hellip;not at all. For one, professional blogs depend on advertisement revenue to pay hosting costs and writers; while Tumblr allows users to implement ads, blog follows tend to access their aggregated content in their Tumblr dashboard, where the blog author earns no revenue. (While the average author will earn some revenue from direct visits from Facebook/Twitter users, it will likely result in less revenue in the long-term than if self-hosted and forced viewers to the main blog). Culturally, Tumblr content tends to be short, while professional blogs tend to have longer, more researched articles. (unless they&rsquo;re <a href="http://gawker.com/">Gawker</a>. Ahem.) <a href="http://www.tumblr.com/docs/en/custom_themes">Programmically</a>, Tumblr does not allow many useful content-highlight techniques such as featured posts, related posts, etc. that many professional blogs use/abuse: you get your posts, your static HTML, and that&rsquo;s it. There aren&rsquo;t enough tools to entice professional bloggers to Tumblr&hellip;but Tumblr doesn&rsquo;t <strong>need</strong> to entice professional bloggers. They&rsquo;re doing pretty well on their own.</p>
+
+<p>Tumblr has been rapidly getting traction. While it won&rsquo;t kill WordPress, Tumblr signals a shift toward microblogging in lieu of the traditional, 2000&rsquo;s era long-prose style of blogging. If you want to blog on the internet, and don&rsquo;t want to pay any money, Tumblr is the clear winner with its strong emphasis on content distribution: what use is a blog that no one reads?</p>
+
+<p>Would Minimaxir benefit from being on Tumblr instead of being self-hosted on WordPress? That&rsquo;s hard to say. While the social networking aspects are enticing for expanding my potential reach&hellip;the businessman/programmer within me thinks that content highlight capabilities and complete blog flexibility are too important to give up.</p>
+
+<p>And my blog posts are <em>wayyy</em> too long for Tumblr.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Ethics of Self-Promotion on the Internet]]></title>
+    <link href="http://minimaxir.github.io/2012/03/ethics-self-promotion/"/>
+    <updated>2012-03-01T21:07:00-08:00</updated>
+    <id>http://minimaxir.github.io/2012/03/ethics-self-promotion</id>
+    <content type="html"><![CDATA[<p>So, you&rsquo;ve made your new blog or startup, and you want people to know about it. The first thing you will likely do is link to it on your Facebook or Twitter, telling your friends who are most likely to listen to you. Unless you&rsquo;re a superstar tech personality with thousands of subscribers/followers, chances are your social media posts will only drive a few people to your website, leading to your disappointment. Sure, you can repost your website multiple times, but chances are you&rsquo;ll upset your friends through your spam&hellip;which doesn&rsquo;t lead to users who keep coming back.</p>
+
+<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self6.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self6.png" alt="The article prompted East Coast entrepreneurs to *e-mail* their startups..." /></a></p>
+
+<p>A solution startups have recently developed is to promote themselves within the comments section of blogs. It&rsquo;s not a new technique: self-promotion through blog comments has been around since the dawn of blogging. However, thanks to the advent of Facebook Comments and similar comment systems which tie your posts to real identities, such self-promotional posts within the comments section of blogs are no longer seen as spam simply generated by bots, and actually serve an unintended side effect of extending credibility to website. I have noticed many people in the comments section of TechCrunch articles, for example, are using it as a platform to promote their own blog/startup, as it reaches many potential tech-savvy customers.</p>
+
+<p>However, since this technique can lead to internet fame for blogs and a userbase for startups, both of which are easily monetizable, self-promotion constitutes an ethically gray area on the internet. When and where is it appropriate to link to your own website or business?</p>
+
+<!-- more -->
+
+
+<h2>Your Website Is Relevant To The Article/Comment At Hand</h2>
+
+<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self1.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self1.png" alt="" /></a>
+Posted in an article titled &ldquo;HTC Unites New Android Smartphones Under &lsquo;One&rsquo; Brand&rdquo;</p>
+
+<p>TechCrunch covers many different aspects of technology, from startups, gadgets, and social media. It doesn&rsquo;t make sense to say, advertise your startup on an article about a smartphone, unless your startup specifically deals with the smartphone. Likewise, linking to your blog post about iOS vs. Android when the article discusses enterprise software is not appropriate. Both situations give the impression that you just want to promote your brand in any way possible. From a business perspective, it&rsquo;s actually a terrible idea: you want to build quality users, not just have a large quantity of users.</p>
+
+<p>&ldquo;Relevant&rdquo; is a subjective term, of course, but as long as you put forth due diligence toward the appropriateness of linking to your website, you&rsquo;ll be in the clear.</p>
+
+<h2>Your Website/Service Is Polished And Professional-Looking</h2>
+
+<p><a href="http://i.imgur.com/EtevP.png"><img src="http://i.imgur.com/EtevP.png" alt="" /></a></p>
+
+<p>This is more of a warning than a rule. When you self-promote, you attract attention, whether it be positive or negative. You only have one chance to make a first impression: if you are going to promote your website, you need to make sure all your ducks are in a row. Otherwise, expect some snark.</p>
+
+<p>In this particular case, if you<a href="http://i.imgur.com/EtevP.png"> look at the website</a>, the snark is well-warranted.</p>
+
+<h2>You Disclose That The Your Website Is Indeed &ldquo;Your&rdquo; Website</h2>
+
+<p>[![][6]][6]</p>
+
+<p>The issue of disclosure has been frequently discussed on tech blogs, given that some bloggers have made investments in startups that they cover. It&rsquo;s an issue because it affects impartiality; a recommendation for a business from a third party customer means more than a recommendation from a first party developer/investor of the service. Startups have done this practice, and it&rsquo;s very sleazy.</p>
+
+<p>Whenever I see a startup promoted in the TC comments without such disclosure (i.e. when they say &ldquo;this website is awesome and you should visit it!&rdquo; when THE COMMENT AUTHOR actually made it,  instead of being upfront and saying &ldquo;my website is new and upcoming.&rdquo;), I immediately check their About page to check if the author is actually an employee. You&rsquo;d be surprised at how often that assumption is correct. (then again, it compels me to check out the startup. I&rsquo;m a sucker.)</p>
+
+<h2>You Don&rsquo;t Sandbag Other Websites With Your Own</h2>
+
+<p>It&rsquo;s professional courtesy. As shown with the aforementioned picture, it&rsquo;s not appropriate to say &ldquo;this startup sucks, use mine instead!&rdquo; They are entrepreneurs, just like you, and they have the same promotional issues that you have.</p>
+
+<p>Likewise, saying &ldquo;Facebook sucks, use my social media network instead!&rdquo; or anything claiming your website will take down multibillion-dollar companies isn&rsquo;t good, as it&rsquo;s hyperbolic and probably not true. You&rsquo;re *asking* for snarky responses there.</p>
+
+<p>It&rsquo;s hard to resist egregrious self-promotion. There are <strong>millions</strong> of blogs and startups out there; users usually don&rsquo;t find them by a magic Google search. Should you remain ethical with self-promotion when it puts you at a disadvantage, when everyone else on the internet is spamming their website as often on the internet? That&rsquo;s your personal decision, but keep in mind that you want your users to respect you for the product itself, not how they found it.</p>
+
+<p>-Max</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My Startup Success Criteria Checklist]]></title>
+    <link href="http://minimaxir.github.io/2011/12/startup-checklist/"/>
+    <updated>2011-12-27T21:03:00-08:00</updated>
+    <id>http://minimaxir.github.io/2011/12/startup-checklist</id>
+    <content type="html"><![CDATA[<p><strong>All</strong> internet startups are businesses. Whether they provide a product or a service, their goal is to grow and make money, using any means necessary. However, there are thousands of startups on the internet, with many more being founded daily. How do you make your business stand out from the crowd? Why should customers use your startup as opposed to another, more established service? Does it have an innovative business model? Does it look very nice and clean? Does it leverage the established userbases on <a href="http://www.facebook.com/">Facebook</a> and <a href="http://twitter.com/">Twitter</a>?</p>
+
+<p>I have been working with several web startups regarding their business ideas and presentation. I&rsquo;m not acting as an expert on startups nor on entrepreneurship, instead I&rsquo;m acting as someone far more important: a potential consumer, who in the end determine whether a startup succeeds or fails. These consultations have been very successful, and although they show that innovation is still abundant outside of the usual startup hubs, they have also exposed many issues which are in common amongst prospective businesses.</p>
+
+<p>Sure, you may have an innovative startup that you spent hundreds of hours developing, but if your product is not well-differentiated from its competitors, if the website is neither clean nor intuitive, or if your business model is shortsighted, then your startup will definitely not succeed. That is the reason why I began consulting with startups, because it is tragic to see a good idea be damaged by flawed implementation and execution, and it is my belief that constructive criticism is more effective in improving an emerging business than endless praise from tech blogs.</p>
+
+<!-- more -->
+
+
+<p>The typical business-MBA method of analyzing a business is by conducting a <a href="http://en.wikipedia.org/wiki/SWOT_analysis">SWOT analysis</a>, which diagrams the Strengths, Weaknesses, Opportunities, and Threats of a business, giving a quick and easy graphical representation of a business as a whole. However, the last two aspects aren&rsquo;t particularly helpful and unique in this circumstance: all early stage start-ups innately have the large opportunity to grow, and all startups innately have large threats from established direct and indirect competitors. Therefore, I do not believe a SWOT analysis is as well-tailored for emerging technology startups. Instead, I&rsquo;ve developed my own criteria for which to measure a startup: <strong>Product Differentiation, Presentation Logic, and Business Logic.</strong></p>
+
+<p><a href="https://path.com/"><img src="https://path.com/" alt="Quick and dirty!" /></a></p>
+
+<p>Almost *every* startup I&rsquo;ve worked with has had an idea that&rsquo;s extremely similar to an already existing business. This is OK from a business perspective as long as your own startup has attribute(s) that your competitors do not have, and therefore your business will be relatively more valuable. Bases for differentiation include tangible concepts, such as aesthetics, and intangible concepts, such as reputation.</p>
+
+<p>Of course, the startup has to be differentiated to a significant degree: for example, creating a startup that&rsquo;s exactly the same as Twitter except changing the <em>What&rsquo;s happening?</em> prompt to <em>How are you feeling?</em> is not a significant differentiation.</p>
+
+<p>Product differentiation must satisfy the <strong>VRIO</strong> criteria: Value, Rareness, Imitability, and Organization.</p>
+
+<h3>Value</h3>
+
+<p>In the Twitter example, changing the tweet prompt would make very, very little impact on the user. Therefore, they have no reason to switch to your startup clone of Twitter. One important goal of a startup is to differentiate your product such that the added value of the differentiation is greater than the switching cost of the user leaving their current service for your startup.</p>
+
+<p><a href="https://path.com/">Path</a>, for example, differentiated itself from all the other &ldquo;new wave of social&rdquo; apps by having a killer user interface, which makes users happier to use it than its competitors, therefore adding value.</p>
+
+<h3>Rarity</h3>
+
+<p>If the user can&rsquo;t immediately think of a direct competitor to your business, then consumers will be more inclined to stick with your business instead of searching for competitors. The product should be differentiated such that comparisons are not as easy to identify.</p>
+
+<p><a href="http://tcrn.ch/tVtyeu">Very frequently</a> I&rsquo;ve had people suggest to me business models such as &ldquo;a bounty board where people can offer payments for tasks,&rdquo; which I respond by pointing them to freelancer.com. That&rsquo;s a problem, especially since the other company will be more established and therefore users will be less willing to try out the incumbent</p>
+
+<h3>Imitability</h3>
+
+<p>If another company can easily copy your product, then it will be harder to maintain differentiation. This is an extremely hard criterion for startups to follow, especially since website aspects such as user interface are not inherently protected works. (see the <a href="http://techcrunch.com/2011/09/07/tweetbook/">infamous spats between Facebook and Twitter regarding UIs</a>).  Even worse, if your startup is truly innovative, larger companies can just create their own version of your company, and wipe you out due to sheer resources. (such as how Twitter killed <a href="http://twitpic.com/">TwitPic</a> by implementing native photos)</p>
+
+<p>Therefore, startups should focus on creating some form of strategic assets that cannot be easily replicated, such as personalized data and patents. Facebook built a failed competitor to Foursquare called <a href="http://www.facebook.com/facebookplaces">Facebook Places</a>, but Foursquare was unaffected due to its Badge system and personalized deals (more on that later).</p>
+
+<h3>Organization</h3>
+
+<p>The business must be well-organized in order to maximize degree of differentiation, otherwise how will the startup know that it has successfully invoked the differentiation? Given that many startups have less than 5 people, this is either incredibly easy or incredibly hard. Employees at startups with few employees need to have more diversified skill sets, while employees at startups with many employees can have more specialized skill sets. At minimum, the founder(s) of the company must be very diligent in laying out the foundations of the company, for both present and future.</p>
+
+<p><em><a href="http://www.tweetdeck.com/"><img src="http://www.tweetdeck.com/" alt="" /></a></em></p>
+
+<p>Presentation Logic refers to the basic user experience. Users have been trained to expect elegant, uncluttered design in websites due to Facebook and Twitter&rsquo;s user-interfaces (which is why users protest whenever they make changes).  If the basic necessities are immediately available on the website, the user will immediately be more comfortable, and therefore be more likely to use your startup.</p>
+
+<p>A big Web 2.0 trend is minimalism though having as little information as possible with generous amounts of white space, but there is a point where being minimalistic can make your website seem like every other website. It&rsquo;s an artistic balance with no right answers, but many wrong ones. However, in 2011, there are several essential components of a startup&rsquo;s website that are absolutely crucial and cannot be exempted.</p>
+
+<h3>The &ldquo;About&rdquo; Page</h3>
+
+<p>Can prospective users find what the startup does, and why you should use it? That&rsquo;s the fundamental goal of the About/Learn More page, and also the landing page should the startup take a minimalism route. About pages do not have to be detailed; just a couple of sentences about each function of your startup that will give your prospective users a general idea about why they should use your startup (make sure to include how your product is differentiated from competitors!) Answering a couple Frequently Asked Questions (FAQs) will also be helpful. If your website is privatized / invite only, screenshots of the private interfaces will be helpful to prospective users to judge your business.</p>
+
+<p>Some About pages contain a professionally produced video marketing their product in a more traditional manner. This is fine, as long as the video is a reasonable length (less than 2 minutes), and the user has the option of watching the video <em>or</em> reading text. Some startups have required me to watch a five-minute video just to tell me what the company was about. It&rsquo;s needlessly gaudy, especially since the premise of the company could have otherwise been stated in a couple of paragraphs.</p>
+
+<p>You only have one chance to make a first impression after all, and the About page is likely the first page the prospective user will visit after hitting your homepage.</p>
+
+<h3>&ldquo;Contact&rdquo; Through Website And Social Media</h3>
+
+<p>Since customers are the lifeblood of startups, it is absolutely essential that you build a rapport with them. A Contact page on a startup website is a simple way to get feedback: add a form where users can input suggestions and errors, which can then be emailed directly to you. Feedback is<strong> incredibly</strong> important for a startup, as it lets the startup know <em>exactly</em> what to fix: if one user has that issue, it&rsquo;s likely that many others have that issue as well.</p>
+
+<p>In 2011, it&rsquo;s assumed that every company has a Facebook Fan Page and Twitter account. Both can be created in 5 minutes and can be easily managed with external clients such as <a href="http://www.tweetdeck.com/">TweetDeck</a>, so there is no reason for a web startup to lack these fundamental social tools. Users can subscribe to these media channels with a click of a button (instead of typing a long e-mail to subscribe to an e-mail list), and messages sent through either of these channels immediately reach your users, both of which make it much easier to communicate with your users than ever before.  More importantly, make sure to link to both these accounts in the Contact page and/or elsewhere on the site, so that users can easily find them.</p>
+
+<p>Ideally (hint hint) you would use social plugins such as <a href="http://developers.facebook.com/docs/reference/plugins/like-box/">Facebook&rsquo;s Like Box</a> and the <a href="https://dev.twitter.com/docs/follow-button">Twitter Follow</a> button, so that users can subscribe to these feeds without even leaving the site. Both are incredibly easy to implement (you literally copy-and-paste strings of HTML in both cases), so there&rsquo;s no technical excuse for lack of these buttons. If your website is user-content based, having social media buttons such as the <a href="http://developers.facebook.com/docs/reference/plugins/like/">Facebook Like button</a> and <a href="https://dev.twitter.com/docs/tweet-button">Twitter Tweet button</a> (which are marginally more difficult to implement) for each individual piece of content will help your website spread much easier.</p>
+
+<p>For social media, one-click interaction is everything. The easier you make things for your users, the more likely they will be to use your service.</p>
+
+<h3>The Design is &ldquo;Not Bad&rdquo;</h3>
+
+<p>Good design is incredibly, incredibly subjective, and I am definitely not an expert. What&rsquo;s most important is that users can find your content easily, as content is king with internet startups. Likewise, users should be able to find the aforementioned About and Contact pages easily.</p>
+
+<p>As long as the basics are addressed, design is not an immediate concern. Website design is a good thing to constantly evolve, as it keeps your startup fresh and new. Just make sure your colors don&rsquo;t clash!</p>
+
+<p><em><a href="http://www.color.com/"><img src="http://www.color.com/" alt="" /></a></em></p>
+
+<p>Business logic is the most invisible of the three criteria, and consequently the most difficult to satisfy. If your business idea is fundamentally flawed, no amount of differentiation nor design can save it. Look at <a href="http://www.color.com/">Color</a>, who <a href="http://techcrunch.com/2011/04/29/how-many-mulligans-does-color-get/">squandered $41 million</a> because their business idea was not as &ldquo;revolutionary&rdquo; as they thought.</p>
+
+<p>The exact business logic varies wildly depending on the industry, consumer demographics, and <a href="http://minimaxir.com/2011/11/how-startups-make-money/" title="How Startups Make Money: Do They *Need* A Revenue Model?">especially pricing scheme</a>. While there is no perfect fit for business logic, there are many considerations that, at the least, all web startups should recognize.</p>
+
+<h3>Facebook/Twitter Connect Integration</h3>
+
+<p>Since the dawn of the internet, websites have asked prospective users to create a username and password to register for their site, and then fill in a million personal information forms, including a long e-mail. This isn&rsquo;t fun for the users, especially since they have to memorize <em>another</em> username and password combo. Cue Facebook and Twitter Connect. Both Facebook and Twitter offer APIs that allow users to use their credentials for either service to log onto websites, without usernames or passwords. This allows for a &ldquo;two-click&rdquo; effortless registration, which increases the likelihood that users will register for your service. Attaching a Facebook/Twitter account to a user has three more noticeable benefits: the startup is reasonably guaranteed that the user-in-question is a real, breathing person; your startup can use APIs to easily share content through the connected accounts; and on user content-based websites, you can have users &ldquo;autofollow&rdquo; their Facebook and Twitter friends who are already using the service (<a href="https://foursquare.com/">Foursquare </a>and <a href="http://www.quora.com/">Quora</a> have excellent implementations of all these attributes).</p>
+
+<p>Implementing Facebook/Twitter Connect is simple enough that any startup should have the functionality available. Of course, the startup should allow for traditional registration with username %2B password as well to avoid alienating those without a social network. It is important to address all aspects of your potential consumer base.</p>
+
+<h3>Keeps Users Coming Back</h3>
+
+<p>A sign of a healthy startup is one that users keep using. However, some business models (such as niche apps) don&rsquo;t tempt the user to use the app more than once or twice, and therefore they are then  quickly forgotten. There are many ways of making sure that users continue to visit your website. The most traditional method is adding new content and features on a frequent and consistent basis. Other methods include gameification, loyalty programs, and contests (giving away free stuff on your Facebook/Twitter is an incredibly easy way to maintain users!)</p>
+
+<h3>Builds Switching Cost</h3>
+
+<p>Switching cost is one of the most important, and most often neglected considerations when designing a startup. The more switching cost that is built up, the harder it will be for the user to switch to a competing service (and given the rate that startups pop up, there <em>will</em> be competing services). Rating systems, such as the one used by Netflix, are a good example of switching costs because if the user switches to a competing service, they will lose all of that personalized rating data, and therefore users will be less inclined to switch. The 2011 ultra-cool way of building switching costs is gameification, through the use of achievements for completing certain tasks (Foursquare&rsquo;s Badges, which can be shared through Facebook/Twitter for added synergy!), and/or some quantitative form of achievement (<a href="http://www.reddit.com/">Reddit&rsquo;s</a> karma system). Customers are usually not willing to give up what they have rightfully earned, and you can use that to your advantage.</p>
+
+<h3>Incorporates Network Effects</h3>
+
+<p>Network effects are the primary reason that startups are able to exhibit exponential growth. Networks effects occur when there is a change in benefit when the number of people using the startup changes: if more people are using the startup, then the amount that a single user of the startup enjoys it also increases. This entices users to encourage their friends to join your startup, which adds even more users!</p>
+
+<p>Network effects can occur as long as the three prior business logic criteria are fulfilled: Facebook/Twitter connectivity to automatically connect with others; keeping users to ensure that the startup grows; and switching costs to ensure that the users stay. The exact nature varies depending on the startup business model itself, but every business model should account for these network effects.</p>
+
+<p>There&rsquo;s no exact way to run any business. However, in 2011, there is very little room to make mistakes, and startup founders need to give their startup any advantages they can get in order to succeed in the hyper-competitive internet marketplace. A little polish on a business can have an <em>incredible</em> return on investment.</p>
+
+<p>Entrepreneurs are not just from Silicon Valley with access to mentoring and capital; they are from all over the U.S., and all over the world. I made this list to help entrepreneurs who have great ideas, but might be missing essential business attributes, which is unfortunately what matters in the end as such flaws may sink great website ideas, and that would be a true shame. Yes, there are many other considerations to be given to a startup in the long run, both business (economics, marketing, public relations) and technical (development, maintenance, project management), but startups first need to get off the ground.</p>
+
+<p>I admit that feel like a jerk when I point out that &ldquo;yes, your startup that you undeniably spent hundreds of hours developing is not original or is incredibly flawed.&rdquo; I&rsquo;ve always been critical and realistic analyzing the ideas of entrepreneurs when they approach me. Needless to say I usually don&rsquo;t get a &ldquo;thank you,&rdquo; but I don&rsquo;t regret anything, because I feel it&rsquo;s more appropriate they learn the weaknesses in their product earlier than later: otherwise there might not even <em>be</em> a &ldquo;later.&rdquo;</p>
+
+<p>-Max</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[How Startups Make Money: Do They *Need* A Revenue Model?]]></title>
     <link href="http://minimaxir.github.io/2011/11/how-startups-make-money/"/>
     <updated>2011-11-11T20:28:00-08:00</updated>
     <id>http://minimaxir.github.io/2011/11/how-startups-make-money</id>
-    <content type="html"><![CDATA[<p>Startups. The biggest movement in the technology world since the beginning of the 20th century. Never has it been so easy for teams of entrepreneurs, or even individuals, to create a business from scratch. The barrier of entry has been virtually eliminated thanks to the advent of cloud computing services, such as <a href="http://aws.amazon.com/ec2/">Amazon EC2</a> and <a href="http://www.rackspace.com/">Rackspace</a>, which allow businesses to only spend hundreds of dollars for server infrastructure for databases and processing where, only a few years ago, entrepreneurs would normally spend tens of thousands for the same capabilities, and thousands more in upkeep and maintenance. Yes, <a href="http://minimaxir.com/2011/11/like-x-for-y/" title="Startups, Please Stop Saying You’re “Like X for Y”">I’ve said these words before</a>, but the lack of significant upkeep costs is a significant factor in startup economics.</p>
+    <content type="html"><![CDATA[<p>Startups. The biggest movement in the technology world since the beginning of the 20th century. Never has it been so easy for teams of entrepreneurs, or even individuals, to create a business from scratch. The barrier of entry has been virtually eliminated thanks to the advent of cloud computing services, such as <a href="http://aws.amazon.com/ec2/">Amazon EC2</a> and <a href="http://www.rackspace.com/">Rackspace</a>, which allow businesses to only spend hundreds of dollars for server infrastructure for databases and processing where, only a few years ago, entrepreneurs would normally spend tens of thousands for the same capabilities, and thousands more in upkeep and maintenance. Yes, <a href="http://minimaxir.com/2011/11/like-x-for-y/" title="Startups, Please Stop Saying You're &quot;Like X for Y&quot;">I&rsquo;ve said these words before</a>, but the lack of significant upkeep costs is a significant factor in startup economics.</p>
 
-<p>Businesses thrive when they have a positive net profit. For any business, profit can be measured by taking total revenue and subtracting total cost. Because total cost for startups is much lower due to the aforementioned cloud services, they can have a proportionally lower revenue and still hold significant profit margins. This allows them to more easily prove that their business is successful and lends the startup credibility when they attempt to expand by asking for venture capital. At the least, your business needs to make enough money to cover employee expenses, which is one reason why startups go “lean” and have less than 10 employees to save on costs.</p>
+<p>Businesses thrive when they have a positive net profit. For any business, profit can be measured by taking total revenue and subtracting total cost. Because total cost for startups is much lower due to the aforementioned cloud services, they can have a proportionally lower revenue and still hold significant profit margins. This allows them to more easily prove that their business is successful and lends the startup credibility when they attempt to expand by asking for venture capital. At the least, your business needs to make enough money to cover employee expenses, which is one reason why startups go &ldquo;lean&rdquo; and have less than 10 employees to save on costs.</p>
 
-<p>But what’s the best way for startups to make money? Investors in your startup want to earn their capital back at some point in time, after all.There’s the tried-and-true method of getting customers to use your service, then charging a subscription fee. However, there are many startups, such as <a href="http://instagr.am/">Instagram</a>, a photo sharing service, that have no current method of earning money from consumers! (Instagram <a href="http://instagr.am/about/faq/">says outright </a>that they have no revenue model! Most impressive use of transparency ever.) Is that business model, or lack thereof, sustainable?</p>
+<p>But what&rsquo;s the best way for startups to make money? Investors in your startup want to earn their capital back at some point in time, after all.There&rsquo;s the tried-and-true method of getting customers to use your service, then charging a subscription fee. However, there are many startups, such as <a href="http://instagr.am/">Instagram</a>, a photo sharing service, that have no current method of earning money from consumers! (Instagram <a href="http://instagr.am/about/faq/">says outright </a>that they have no revenue model! Most impressive use of transparency ever.) Is that business model, or lack thereof, sustainable?</p>
 
 <!-- more -->
 
@@ -31,28 +1102,28 @@
 
 <p>Dave McClure, a very successful investor, states that<a href="http://techcrunch.com/2011/09/14/i-got-five-on-it/"> his five criteria for investing in startups</a> are: Market, Product, Team, Customers, and Revenue. Revenue and Customers are two distinct points, even though an increase in customers implies an increase in revenue. Can startups forgo a revenue model if they compensate by having a killer product and team, and targeting the right market and obtain lots of customers?</p>
 
-<p>99% of startups need a reliable, effective way to make money, or else they’ll go out of business. But for the remaining 1% who have an incredible product and team, they can defy the principles of microeconomics and manage to succeed without an explicit way of obtaining revenue.<br/>
-First, let’s look at how internet startups typically make money in 2011:</p>
+<p>99% of startups need a reliable, effective way to make money, or else they&rsquo;ll go out of business. But for the remaining 1% who have an incredible product and team, they can defy the principles of microeconomics and manage to succeed without an explicit way of obtaining revenue.<br/>
+First, let&rsquo;s look at how internet startups typically make money in 2011:</p>
 
-<p><strong>1. Advertisement Revenue (<a href="https://www.google.com/">Google</a>, <a href="http://www.facebook.com/">Facebook</a>):</strong> The oldest, and still best, way of making money on the internet. Pioneered by Google with their AdWords platform in the 2000’s, where relevant advertisements accompanied internet searches, Google earned $billions and billions in revenue each year, and became the technology juggernaut it is today. Even individuals who are not creating a business, such as bloggers, can earn revenue on their own blogs by implementing an ad distribution network such as Google AdSense. Large scale startups and professional blogs, however, cut out the middle-man and distribute the ads themselves, which allows them to earn even more money.</p>
+<p><strong>1. Advertisement Revenue (<a href="https://www.google.com/">Google</a>, <a href="http://www.facebook.com/">Facebook</a>):</strong> The oldest, and still best, way of making money on the internet. Pioneered by Google with their AdWords platform in the 2000&rsquo;s, where relevant advertisements accompanied internet searches, Google earned $billions and billions in revenue each year, and became the technology juggernaut it is today. Even individuals who are not creating a business, such as bloggers, can earn revenue on their own blogs by implementing an ad distribution network such as Google AdSense. Large scale startups and professional blogs, however, cut out the middle-man and distribute the ads themselves, which allows them to earn even more money.</p>
 
 <p><strong>2. Free/Premium Tiered Subscription Models (<a href="https://www.dropbox.com/">Dropbox</a>)</strong>: Subscriptions for services have existed well before the internet, with newspapers and gym memberships, and even with software such as shareware. However, due to the decreasing costs of IT from cloud computing, the cost per user is neligible, so startups can feasibly give away their entire service for free. This free service can be used to tempt the consumer into buying a premium version of the service with added perks; the revenue from a user paying for a subscription far outweighs the additional cost of the perks. Dropbox is one of the pioneers of this strategy: they offer 2GB of cloud storage space for free (which costs them less than $0.001/user), and users can pay $10/month for 50GB of space (which only costs them slightly more than $0.001).</p>
 
-<p><strong>3. Freemium (<a href="http://company.zynga.com/">Zynga</a>)</strong>: Similar to #2, freemium is where the service is completely free, and customers can pay for perks or additional content <em>a la carte</em>. Zynga is the pioneer here with games such as FarmVille, where players can always play for free, but only for a certain amount of time; paying real money can help speed things up. It’s not my favorite business model; wayyy too many gaming startups, especially on the PC (<a href="http://na.leagueoflegends.com/">League of Legends</a>, <a href="http://www.teamfortress.com/">Team Fortress 2</a>) and iOS (everything in the Top Grossing section of the App Store), use this model, but it’s simple, effective, and down to an exact science. Many users are willing-to-pay for an advantage, and many aren’t; freemium caters to both of those types of users.</p>
+<p><strong>3. Freemium (<a href="http://company.zynga.com/">Zynga</a>)</strong>: Similar to #2, freemium is where the service is completely free, and customers can pay for perks or additional content <em>a la carte</em>. Zynga is the pioneer here with games such as FarmVille, where players can always play for free, but only for a certain amount of time; paying real money can help speed things up. It&rsquo;s not my favorite business model; wayyy too many gaming startups, especially on the PC (<a href="http://na.leagueoflegends.com/">League of Legends</a>, <a href="http://www.teamfortress.com/">Team Fortress 2</a>) and iOS (everything in the Top Grossing section of the App Store), use this model, but it&rsquo;s simple, effective, and down to an exact science. Many users are willing-to-pay for an advantage, and many aren&rsquo;t; freemium caters to both of those types of users.</p>
 
 <p>Most internet services will use one of these models, or some combination thereof. <a href="http://www.hulu.com/">Hulu</a> and <a href="http://www.pandora.com/">Pandora</a>, for example, uses #1 to earn revenue off of free users, but offer a premium service to exploit #2. There are exceptions for the more niche startups (i.e. which offer a physical product/services or use brand merchandising), but in general, the three models are safest for a startup, especially since all three are easily scalable.</p>
 
-<p>Let’s look back at Instagram. Could they implement one of the three mentioned revenue models? Easily. Ads could be shown to the user on the iOS client or beside the picture on the web, although adding ads to a previously ad-free app usually upsets customers. Instagram could charge a subscription fee  or an in-app purchase for premium filters, however “high-quality photo filters” is an oxymoron, and might not succeed in user adoption.</p>
+<p>Let&rsquo;s look back at Instagram. Could they implement one of the three mentioned revenue models? Easily. Ads could be shown to the user on the iOS client or beside the picture on the web, although adding ads to a previously ad-free app usually upsets customers. Instagram could charge a subscription fee  or an in-app purchase for premium filters, however &ldquo;high-quality photo filters&rdquo; is an oxymoron, and might not succeed in user adoption.</p>
 
-<p>It’s highly likely that Instagram <em>doesn’t intend to monetize itself at all</em>, and instead use the product as a springboard for much better, larger things. Anyone in the Silicon Valley can make a product, but very few people can make good products, and very few startups are as popular as Instagram in recent months.</p>
+<p>It&rsquo;s highly likely that Instagram <em>doesn&rsquo;t intend to monetize itself at all</em>, and instead use the product as a springboard for much better, larger things. Anyone in the Silicon Valley can make a product, but very few people can make good products, and very few startups are as popular as Instagram in recent months.</p>
 
 <p><a href="http://belugapods.com/">Beluga</a> was a startup that specialized in mobile chatting. It was later <a href="http://techcrunch.com/2011/03/01/facebook-beluga/">bought by Facebook</a>, and their team was folded into the company and helped develop the Facebook Messager app for mobile. <a href="http://groupme.com/">GroupMe</a> was another social solution, which was later<a href="http://techcrunch.com/2011/08/21/skype-to-acquire-year-old-group-messaging-service-groupme/"> bought by Skype</a>. Both startups received multi-million dollar buyouts.</p>
 
-<p>In 2011, positioning yourself for a buyout by a multibillion dollar corporation is a legitimate exit strategy. Yes, there’s a considerable amount of risk involved because there’s no certainty that someone will buy your startup. However, if the startup first builds a  large userbase, larger companies will certainly take note, and in some cases, buy you out just to take your users as their own.</p>
+<p>In 2011, positioning yourself for a buyout by a multibillion dollar corporation is a legitimate exit strategy. Yes, there&rsquo;s a considerable amount of risk involved because there&rsquo;s no certainty that someone will buy your startup. However, if the startup first builds a  large userbase, larger companies will certainly take note, and in some cases, buy you out just to take your users as their own.</p>
 
 <p>Instagram has many options, to be sure. Should startups follow in their foot steps? Well, obviously they should try to create an excellent product with an excellent team. But can the typical startup pull off having no revenue model? I would not recommend it. The off chance of a buyout or investment support drastically outweighs the inability to pay your employees and maintain your servers five or ten years down the road.</p>
 
-<p>If you’re making a startup in 2011, make sure it has a way to make money. There are many tried and true methods, pick the one(s) which best fit your business model! If the opportunity hits to make it big, don’t neglect it, but be pragmatic and realistic with your expectations.</p>
+<p>If you&rsquo;re making a startup in 2011, make sure it has a way to make money. There are many tried and true methods, pick the one(s) which best fit your business model! If the opportunity hits to make it big, don&rsquo;t neglect it, but be pragmatic and realistic with your expectations.</p>
 
 <p>-Max</p>
 ]]></content>
@@ -65,39 +1136,39 @@ First, let’s look at how internet startups typically make money in 2011:</p>
     <id>http://minimaxir.github.io/2011/11/like-x-for-y</id>
     <content type="html"><![CDATA[<p>Startups. The biggest movement in the technology world since the beginning of the 20th century. Never has it been so easy for teams of entrepreneurs, or even individuals, to create a business from scratch. The barrier of entry has been virtually eliminated thanks to the advent of cloud computing services, such as <a href="http://aws.amazon.com/ec2/">Amazon EC2</a> and <a href="http://www.rackspace.com/">Rackspace</a>, which allow businesses to only spend hundreds of dollars for server infrastructure for databases and processing where, only a few years ago, entrepreneurs would normally spend tens of thousands for the same capabilities, and thousands more in upkeep and maintenance. Therefore, more and more tech companies now have the ability to bring their ideas to fruition, and afterwards they will compete in the most vicious and cutthroat marketplace ever: the Internet.</p>
 
-<p>With so many new companies entering the tech marketplace, it is very difficult for an individual startup to stand out from the crowd. Product differentiation is the key tenant: how is your startup different from your competitors? Would customers be willing to discard the time and effort they’ve already invested in a similar product to switch to your product?</p>
+<p>With so many new companies entering the tech marketplace, it is very difficult for an individual startup to stand out from the crowd. Product differentiation is the key tenant: how is your startup different from your competitors? Would customers be willing to discard the time and effort they&rsquo;ve already invested in a similar product to switch to your product?</p>
 
 <p><a href="http://techcrunch.com/2011/10/31/500-startups-peels-back-the-curtain-on-its-third-and-largest-batch-yet/"><img src="http://techcrunch.com/2011/10/31/500-startups-peels-back-the-curtain-on-its-third-and-largest-batch-yet/" alt="...until it's lost." /></a></p>
 
-<p>Of course, if your product is <em>truly</em> 100% innovative, that would not be a problem. Alas, true innovation in the Silicon Valley has been stagnant; most products and services have been slight tweaks of existing business models (Google%2B from Facebook; Spotify from every Internet music service ever). That’s not necessarily a bad thing: in order to think outside the box, you must first define the box, in order to determine what is inside the box, and consequently what is outside the box. And this “outside the box” innovation can introduce an aspect which the company can differentiate itself, and become incredibly successful.</p>
+<p>Of course, if your product is <em>truly</em> 100% innovative, that would not be a problem. Alas, true innovation in the Silicon Valley has been stagnant; most products and services have been slight tweaks of existing business models (Google%2B from Facebook; Spotify from every Internet music service ever). That&rsquo;s not necessarily a bad thing: in order to think outside the box, you must first define the box, in order to determine what is inside the box, and consequently what is outside the box. And this &ldquo;outside the box&rdquo; innovation can introduce an aspect which the company can differentiate itself, and become incredibly successful.</p>
 
 <!-- more -->
 
 
-<p>Such innovation, however, is very expensive, very time-consuming, and very risky. Much more expensive and risky than an individual or a group of people simply creating an account at Amazon and publishing some PHP and jQuery. And so, startups tend to target more simple, safer issues, such as “What are big companies missing?” Necessity is the mother of invention, after all.</p>
+<p>Such innovation, however, is very expensive, very time-consuming, and very risky. Much more expensive and risky than an individual or a group of people simply creating an account at Amazon and publishing some PHP and jQuery. And so, startups tend to target more simple, safer issues, such as &ldquo;What are big companies missing?&rdquo; Necessity is the mother of invention, after all.</p>
 
-<p>A very common pitch for a company is that it’s “Like X for Y.” As demonstrated by <a href="http://techcrunch.com/2011/10/31/500-startups-peels-back-the-curtain-on-its-third-and-largest-batch-yet/">this TechCrunch post</a>, there are many up-and-coming startups who, for example, bill themselves as “Instagram for Yelp” or <a href="http://allthingsd.com/20110909/loku-wants-to-beat-yelp-and-google-at-local-search-with-some-help-from-big-data/">another company</a> that bills itself as “like Google for local.” Advertising shtick from a 90’s movie trailer, natch.</p>
+<p>A very common pitch for a company is that it&rsquo;s &ldquo;Like X for Y.&rdquo; As demonstrated by <a href="http://techcrunch.com/2011/10/31/500-startups-peels-back-the-curtain-on-its-third-and-largest-batch-yet/">this TechCrunch post</a>, there are many up-and-coming startups who, for example, bill themselves as &ldquo;Instagram for Yelp&rdquo; or <a href="http://allthingsd.com/20110909/loku-wants-to-beat-yelp-and-google-at-local-search-with-some-help-from-big-data/">another company</a> that bills itself as &ldquo;like Google for local.&rdquo; Advertising shtick from a 90&rsquo;s movie trailer, natch.</p>
 
-<p>However, marketing your new business with such a focus is an incredible business liability because it’s condescending to your prospective userbase, it could potentially confuse your users, and it gives the companies you’re referencing a potential use case that they could use to wipe you out completely.</p>
+<p>However, marketing your new business with such a focus is an incredible business liability because it&rsquo;s condescending to your prospective userbase, it could potentially confuse your users, and it gives the companies you&rsquo;re referencing a potential use case that they could use to wipe you out completely.</p>
 
-<p>It’s safe to assume that the average person knows atleast a few major businesses on the internet. They might know about services such as <a href="https://foursquare.com/">Foursquare</a>, <a href="http://www.pandora.com/">Pandora</a>, and <a href="https://www.dropbox.com">Dropbox</a>. That’s what makes them an compelling target: sure, they might use or know about those services, but what if they want something different? I’m sure you’ve seen the endless posts that occur when Facebook undergoes a redesign, and the numerous threats that users will quit Facebook unless they revert the changes.  Sure, Facebook users adapt and forget the whole thing happened, but dissent is a great opportunity for a startup to position itself in an established market. (See the <a href="http://xkcd.com/918/">XKCD</a> comic above; Google knows when to release their products!)
-In 2011, it’s also safe to assume that the users who would be interested in your startup aren’t idiots. Learning how to use the full functionality of Twitter, Facebook, and Foursquare is just like learning calculus or a programming language: it’s straightforward and somewhat intuitive, until you learn that they all have annoying little exceptions to their rules, and you need to know when and where they occur. (and in the case of programming languages, actual Exceptions.) Many industries, especially music and movies, tend to appeal to the lowest common denominator because they don’t care if the money earned is from a dumbo or a genius; dollars are dollars. On the Internet, where most business are selling services instead of products, users cannot be treated like idiots. Customers retention is one of the most important metrics for ensuring the growth of a startup, especially those with subscription or freemium revenue models, because it ensures that the revenue per customer is high, and therefore the company can safely increase scale and grow</p>
+<p>It&rsquo;s safe to assume that the average person knows atleast a few major businesses on the internet. They might know about services such as <a href="https://foursquare.com/">Foursquare</a>, <a href="http://www.pandora.com/">Pandora</a>, and <a href="https://www.dropbox.com">Dropbox</a>. That&rsquo;s what makes them an compelling target: sure, they might use or know about those services, but what if they want something different? I&rsquo;m sure you&rsquo;ve seen the endless posts that occur when Facebook undergoes a redesign, and the numerous threats that users will quit Facebook unless they revert the changes.  Sure, Facebook users adapt and forget the whole thing happened, but dissent is a great opportunity for a startup to position itself in an established market. (See the <a href="http://xkcd.com/918/">XKCD</a> comic above; Google knows when to release their products!)
+In 2011, it&rsquo;s also safe to assume that the users who would be interested in your startup aren&rsquo;t idiots. Learning how to use the full functionality of Twitter, Facebook, and Foursquare is just like learning calculus or a programming language: it&rsquo;s straightforward and somewhat intuitive, until you learn that they all have annoying little exceptions to their rules, and you need to know when and where they occur. (and in the case of programming languages, actual Exceptions.) Many industries, especially music and movies, tend to appeal to the lowest common denominator because they don&rsquo;t care if the money earned is from a dumbo or a genius; dollars are dollars. On the Internet, where most business are selling services instead of products, users cannot be treated like idiots. Customers retention is one of the most important metrics for ensuring the growth of a startup, especially those with subscription or freemium revenue models, because it ensures that the revenue per customer is high, and therefore the company can safely increase scale and grow</p>
 
-<p>Your customers don’t need to be told that your business is “Like <a href="http://instagr.am/">Instagram</a> for <a href="http://www.yelp.com/">Yelp</a>.” If your prospective userbase knows what Instagram and Yelp are, you can assume they can reasonably infer that comparison upon simply knowing that the service is “simple sharing for restaurant reviews.” Internet-dwellers are much smarter than some companies give them credit. At best, it doesn’t add anything to your marketing pitch. At worst, comparing your product to an already existing company can be dishonest marketing hyperbole, making your company seem more impressive than it is. (“Instagram for Yelp” particularly doesn’t make any sense. I thought Instragram was primarily used for photo filter abuse, not for ease of sharing!)</p>
+<p>Your customers don&rsquo;t need to be told that your business is &ldquo;Like <a href="http://instagr.am/">Instagram</a> for <a href="http://www.yelp.com/">Yelp</a>.&rdquo; If your prospective userbase knows what Instagram and Yelp are, you can assume they can reasonably infer that comparison upon simply knowing that the service is &ldquo;simple sharing for restaurant reviews.&rdquo; Internet-dwellers are much smarter than some companies give them credit. At best, it doesn&rsquo;t add anything to your marketing pitch. At worst, comparing your product to an already existing company can be dishonest marketing hyperbole, making your company seem more impressive than it is. (&ldquo;Instagram for Yelp&rdquo; particularly doesn&rsquo;t make any sense. I thought Instragram was primarily used for photo filter abuse, not for ease of sharing!)</p>
 
-<p>The comments in the aforementioned TechCrunch article pointed out that the “Like X for Y” basis works well for investors. It is indeed the easiest way to explain your business in few words, and venture capitalists have limited amounts of time to hear investment requests from each and every startup. However, easiest does not mean best. If I was an investor and a company began its presentation to a group of venture capitalists stating “our business is like Google for local,” I wouldn’t know what to think. Is it a search engine for local areas? Is it a hub to the internet with e-mail and RSS syndication with a streamlined UI intended primarily for local communities? Is it a company that’s just boasting about how awesome it is? Of course, it’s the first one, but there should be zero ambiguity when illustrating the underlying principles of the business that will [hopefully] make millions of dollars.</p>
+<p>The comments in the aforementioned TechCrunch article pointed out that the &ldquo;Like X for Y&rdquo; basis works well for investors. It is indeed the easiest way to explain your business in few words, and venture capitalists have limited amounts of time to hear investment requests from each and every startup. However, easiest does not mean best. If I was an investor and a company began its presentation to a group of venture capitalists stating &ldquo;our business is like Google for local,&rdquo; I wouldn&rsquo;t know what to think. Is it a search engine for local areas? Is it a hub to the internet with e-mail and RSS syndication with a streamlined UI intended primarily for local communities? Is it a company that&rsquo;s just boasting about how awesome it is? Of course, it&rsquo;s the first one, but there should be zero ambiguity when illustrating the underlying principles of the business that will [hopefully] make millions of dollars.</p>
 
-<p>More importantly, if you can’t explain your business in simple terms with investors, how can you possibly explain it to your potential users? Sure, your investors are giving you money in the short term, but your users are far more important, and will give you many, many times that amount throughout the lifetime of your business.</p>
+<p>More importantly, if you can&rsquo;t explain your business in simple terms with investors, how can you possibly explain it to your potential users? Sure, your investors are giving you money in the short term, but your users are far more important, and will give you many, many times that amount throughout the lifetime of your business.</p>
 
-<p>For startups targeting a particular niche, your market is not the average user, but the userbase of the niche, who may not be as tech-savvy as others (for example, business that target Generation X/Y instead of teenagers and young adults who have grown up with the Internet). Consequently, you might confuse your potential users by using a simile to describe your business, if they aren’t likely to know the business at all. Look at “<a href="http://www.gilt.com/">Gilt</a> for Weddings.” That product is targeting a specific niche because it has a very narrow use. But what is Gilt? It’s apparently the “darling of luxury-obsessed bargain hunters,” but would those who know about Gilt also want that service for weddings? In actuality, the service is just a shop for cheap wedding dresses. Admittingly I’m not in the target market because I’m a guy. [Note: The founder of the service pointed out in the TechCrunch article comments that yes, their target market knows what Gilt, and therefore the comparison is simple and accurate. Again, would brides want “bargain” wedding dresses?]</p>
+<p>For startups targeting a particular niche, your market is not the average user, but the userbase of the niche, who may not be as tech-savvy as others (for example, business that target Generation X/Y instead of teenagers and young adults who have grown up with the Internet). Consequently, you might confuse your potential users by using a simile to describe your business, if they aren&rsquo;t likely to know the business at all. Look at &ldquo;<a href="http://www.gilt.com/">Gilt</a> for Weddings.&rdquo; That product is targeting a specific niche because it has a very narrow use. But what is Gilt? It&rsquo;s apparently the &ldquo;darling of luxury-obsessed bargain hunters,&rdquo; but would those who know about Gilt also want that service for weddings? In actuality, the service is just a shop for cheap wedding dresses. Admittingly I&rsquo;m not in the target market because I&rsquo;m a guy. [Note: The founder of the service pointed out in the TechCrunch article comments that yes, their target market knows what Gilt, and therefore the comparison is simple and accurate. Again, would brides want &ldquo;bargain&rdquo; wedding dresses?]</p>
 
-<p>Another weakness marketing your product to a specific niche is that the existing company, who likely has much more resources than your startup, can simply copy your idea, and wipe you out of business because you haven’t had a chance to diversify. Look at <a href="http://twitpic.com/">TwitPic</a>, one of the first services to allow users to easily post images to Twitter. It targeted a very specific, very important need, and it was very successful. A few years later, Twitter<a href="http://thenextweb.com/twitter/2011/08/09/twitter-now-rolling-out-direct-image-upload-at-twitter-com/"> implemented native picture uploading</a> to its official Twitter clients. And thus, since the company did not diversify, TwitPic was forced to slowly fade into obscurity. (the founder, Noah Everett, hilariously attempted to stage a counterattack by creating <a href="https://heello.com/">Heello</a>…a clone of Twitter in every way. That’ll show them!)</p>
+<p>Another weakness marketing your product to a specific niche is that the existing company, who likely has much more resources than your startup, can simply copy your idea, and wipe you out of business because you haven&rsquo;t had a chance to diversify. Look at <a href="http://twitpic.com/">TwitPic</a>, one of the first services to allow users to easily post images to Twitter. It targeted a very specific, very important need, and it was very successful. A few years later, Twitter<a href="http://thenextweb.com/twitter/2011/08/09/twitter-now-rolling-out-direct-image-upload-at-twitter-com/"> implemented native picture uploading</a> to its official Twitter clients. And thus, since the company did not diversify, TwitPic was forced to slowly fade into obscurity. (the founder, Noah Everett, hilariously attempted to stage a counterattack by creating <a href="https://heello.com/">Heello</a>&hellip;a clone of Twitter in every way. That&rsquo;ll show them!)</p>
 
-<p>Business that exist solely by leveraging an APIs from large companies such as Facebook or Twitter, allowing startups to access and manipulate data from those users, are a risky proposition. On one hand, the fate of the startup is now tied to the company in a symbiotic bond. Look at <a href="http://company.zynga.com/">Zynga</a>, makers of Farmville, who had to admit <a href="http://techcrunch.com/2011/07/01/zynga-and-facebook-pray-they-dont-alter-the-deal-any-further/">in their filing for an IPO</a> that “If Facebook goes under, so do we,” and have only recently begun precautions to guard against this incredible risk factor.</p>
+<p>Business that exist solely by leveraging an APIs from large companies such as Facebook or Twitter, allowing startups to access and manipulate data from those users, are a risky proposition. On one hand, the fate of the startup is now tied to the company in a symbiotic bond. Look at <a href="http://company.zynga.com/">Zynga</a>, makers of Farmville, who had to admit <a href="http://techcrunch.com/2011/07/01/zynga-and-facebook-pray-they-dont-alter-the-deal-any-further/">in their filing for an IPO</a> that &ldquo;If Facebook goes under, so do we,&rdquo; and have only recently begun precautions to guard against this incredible risk factor.</p>
 
-<p>Many, many startups are founded by those with technical computer science backgrounds, as they are the ones who can both identify a problem/need in the technical space, and implement the solution. Usually, they do not have an immediate background in business nor have learned the skills needed needed to make a product succeed (marketing, finance, etc.), and startups cannot afford hiring a CEO with an MBA without money from venture capitalists. This can create a Catch-22 situation: startups can’t create a business-aligned strategy until they can prove to investors that they can create a business-aligned strategy. Sure, you can code the Web 2.0 app of awesomeness, but so can a million other people. Without the proper investment in balancing the books, getting your product known, and most importantly, product differentiation, you won’t have a chance to succeed. In lieu of business skills, entrepreneurs simply follow what other startups have done: target your niche, and prosper.</p>
+<p>Many, many startups are founded by those with technical computer science backgrounds, as they are the ones who can both identify a problem/need in the technical space, and implement the solution. Usually, they do not have an immediate background in business nor have learned the skills needed needed to make a product succeed (marketing, finance, etc.), and startups cannot afford hiring a CEO with an MBA without money from venture capitalists. This can create a Catch-22 situation: startups can&rsquo;t create a business-aligned strategy until they can prove to investors that they can create a business-aligned strategy. Sure, you can code the Web 2.0 app of awesomeness, but so can a million other people. Without the proper investment in balancing the books, getting your product known, and most importantly, product differentiation, you won&rsquo;t have a chance to succeed. In lieu of business skills, entrepreneurs simply follow what other startups have done: target your niche, and prosper.</p>
 
-<p>Entrepreneurs who are creating startups in 2011 do not have <em>any</em> leeway in their product implementation and promotion: they need to strike the market viciously, otherwise they will be swallowed up by the competition in an instant. It’s fair for entrepreneurs to learn business skills as they create their business, <em>a la</em> Bill Gates and Mark Zuckerberg, but without knowing <em>why</em> certain marketing strategies are bad for business and <em>why</em> product differentiation is so important, their startups won’t be able to get off the ground, and, tragically, they won’t have the ability to make a difference in the world.</p>
+<p>Entrepreneurs who are creating startups in 2011 do not have <em>any</em> leeway in their product implementation and promotion: they need to strike the market viciously, otherwise they will be swallowed up by the competition in an instant. It&rsquo;s fair for entrepreneurs to learn business skills as they create their business, <em>a la</em> Bill Gates and Mark Zuckerberg, but without knowing <em>why</em> certain marketing strategies are bad for business and <em>why</em> product differentiation is so important, their startups won&rsquo;t be able to get off the ground, and, tragically, they won&rsquo;t have the ability to make a difference in the world.</p>
 
 <p>-Max</p>
 ]]></content>
@@ -112,7 +1183,7 @@ In 2011, it’s also safe to assume that the users who would be interested in your
 
 <p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png" alt="" /></a></p>
 
-<p>Sure, blog comment sections have been around since the dawn of blogs themselves, and nowadays creating a blog comments section is the “Hello World!” of web development. However, most blogging platforms, such as Tumblr, Blogger, native WordPress installs offer rudimentary commenting; you input a name and a comment, press “post comment,” and then you &rsquo;re done. As you can see above, Blogger just lists a name and comment, and it &rsquo;s been that way since 2004, and no one has seen a “need” to improve it. But in 2011, with the advent of persistent identities due to social networks such as Facebook and Twitter, it &rsquo;s very archaic to have to enter your name and email every time you just want to leave a comment on a blog. It &rsquo;s not a matter of being lazy/Generation-X, it &rsquo;s a matter of whether the cost of having to reinput your information a million times just to post a comment outweighs the benefits of doing so. And if everyone feels that way, it becomes a “chicken” problem: no one comments because others don &rsquo;t comment, blogs gets less readers/feedback, everyone loses.</p>
+<p>Sure, blog comment sections have been around since the dawn of blogs themselves, and nowadays creating a blog comments section is the &ldquo;Hello World!&rdquo; of web development. However, most blogging platforms, such as Tumblr, Blogger, native WordPress installs offer rudimentary commenting; you input a name and a comment, press &ldquo;post comment,&rdquo; and then you &rsquo;re done. As you can see above, Blogger just lists a name and comment, and it &rsquo;s been that way since 2004, and no one has seen a &ldquo;need&rdquo; to improve it. But in 2011, with the advent of persistent identities due to social networks such as Facebook and Twitter, it &rsquo;s very archaic to have to enter your name and email every time you just want to leave a comment on a blog. It &rsquo;s not a matter of being lazy/Generation-X, it &rsquo;s a matter of whether the cost of having to reinput your information a million times just to post a comment outweighs the benefits of doing so. And if everyone feels that way, it becomes a &ldquo;chicken&rdquo; problem: no one comments because others don &rsquo;t comment, blogs gets less readers/feedback, everyone loses.</p>
 
 <p>In 2011, if your blog does not have some sort of easily accessible commenting system, then your blog is in serious trouble.</p>
 
@@ -126,11 +1197,11 @@ In 2011, it’s also safe to assume that the users who would be interested in your
 
 <p>A couple years later, Facebook released their own commenting system, not as a competitor to Disqus, but as another method to keep people on the internet far longer than they need to be. Facebook actually makes it easier for bloggers to implement because registering an account for admin use is optional! For users, Facebook tops Disqus in that it takes <strong>zero</strong> clicks to be able to comment on a Facebook Comments section: you &rsquo;re logged into Facebook, bam, you can comment.</p>
 
-<p>As it turns out, the use of Disqus and Facebook Comments lead to something unexpected: it increased the <em>quality</em> of the comments! Not only were users happier because they didn &rsquo;t need to register, but their comments were now tied to their real identity. In fact, it will also list your occupation by your name, which lends a large amount of authority to your comments, especially if you work at a Fortune 500 company or are a CEO. People will [hopefully] not troll or spam comments when their comments can be directly traced by clicking their picture. Both systems also incorporate a “Like” feature which most basic comment systems lack, which also incentivizes users to post higher-quality comments as well.</p>
+<p>As it turns out, the use of Disqus and Facebook Comments lead to something unexpected: it increased the <em>quality</em> of the comments! Not only were users happier because they didn &rsquo;t need to register, but their comments were now tied to their real identity. In fact, it will also list your occupation by your name, which lends a large amount of authority to your comments, especially if you work at a Fortune 500 company or are a CEO. People will [hopefully] not troll or spam comments when their comments can be directly traced by clicking their picture. Both systems also incorporate a &ldquo;Like&rdquo; feature which most basic comment systems lack, which also incentivizes users to post higher-quality comments as well.</p>
 
 <p>At the least, knowing you are chatting with a real person in the comments makes a big different. The use of Facebook profile pictures with the comments helps more than you might think.</p>
 
-<p>I know many bloggers who don &rsquo;t see a need to modify the comments system: “if it ain &rsquo;t broke, don &rsquo;t fit it” after all. What they don &rsquo;t realize is that blogging is a two-way street: it &rsquo;s a <em>rapport</em> between the bloggers and the readers, and one has no reason to exist without the other. If bloggers make their reader happy, the readers will be happier to help the bloggers. Just saving a few seconds for your readers will pay off incredible dividends in the future.</p>
+<p>I know many bloggers who don &rsquo;t see a need to modify the comments system: &ldquo;if it ain &rsquo;t broke, don &rsquo;t fit it&rdquo; after all. What they don &rsquo;t realize is that blogging is a two-way street: it &rsquo;s a <em>rapport</em> between the bloggers and the readers, and one has no reason to exist without the other. If bloggers make their reader happy, the readers will be happier to help the bloggers. Just saving a few seconds for your readers will pay off incredible dividends in the future.</p>
 
 <p><a href="http://i2.wp.com/minimaxir.com/wp-content/uploads/2011/10/wordpress.png"><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2011/10/wordpress.png" alt="" /></a></p>
 

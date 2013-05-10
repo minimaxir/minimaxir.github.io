@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses - minimaxir | Max Woolf's Internet Blog Thingy</title>
+  <meta name="author" content="Max Woolf">
+
+  
+  <meta name="description" content="Does Asking Questions to Readers Increase Response Rate? - and Other TechCrunch Analyses Oct 7th, 2012 A long-standing trend in blogging is having &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.github.io/2012/10/questions-equals-reponses">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+  <link href="/stylesheets/flat-ui.css" rel="stylesheet">
+  <link href="/atom.xml" rel="alternate" title="minimaxir | Max Woolf's Internet Blog Thingy" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+	
+      
+   		<li><a href="/">Home</a></li>
+   	       
+    
+      
+   		<li><a href="/about">About</a></li>
+   	       
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+    <div class="span12">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Does Asking Questions to Readers Increase Response Rate? - and Other TechCrunch Analyses
+    <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-07T21:19:00-07:00" pubdate data-updated="true">Oct 7<span>th</span>, 2012</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
+
+<p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>
+
+<p>Like any math nerd, I wasn&rsquo;t comfortable with simple circumstantial evidence. When I <a href="http://www.facebook.com/max.woolf/posts/10151223309670450">asked on Facebook</a> if there is any statistical data indicating that including a question to the community at the end of a blog post / Facebook post increases the response rate, TechCrunch writer and Facebook specialist Josh Constine responded and linked to<a href="http://www.facebook.com/notes/facebook-journalists/study-how-people-are-engaging-journalists-on-facebook-best-practices/245775148767840"> a Facebook report</a> stating that such posts have double the comments and significantly greater feedback.</p>
+
+<p>I decided to put that to the test. I wrote a quick script in R that parses the Facebook page of a brand and extracts the number of likes for all of their posts, the number of comments on all posts, and whether or not each post contained a question. The brand I chose for my testing is none other than <a href="http://www.techcrunch.com/">TechCrunch</a>, because <a href="http://www.facebook.com/techcrunch">its Facebook page</a>, managed by the wonderful <a href="https://twitter.com/elinblesener">Elin Blesner</a>, has large sample sizes in terms of both unique postings and response rates on each post, ensuring that the analysis of the data is statistically significant. Additionally, having a<em>nother</em> perspective on TechCrunch to comment about certainly doesn&rsquo;t hurt either.</p>
+
+<p>After collecting about 2,500 posts &ndash; 12 months of data &ndash; I analyzed the data conditional on whether or not the post was a question, among other things. The results surprised me.</p>
+
+<!-- more -->
+
+
+<p><strong>tl;dr: Asking a question to the readers in a Facebook post <em>does</em> increase the number of comments very significantly, but <em>decreases</em> the number of Likes!</strong></p>
+
+<h2>How many Comments and Likes do TechCrunch posts receive?</h2>
+
+<p>Since the data goes back a year, we can more easily detect seasonal trends in the data. First, let&rsquo;s see the real world numbers as a sanity check.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb1.png?resize=625%2C345" title="How many Comments and Likes do TechCrunch posts receive?" alt="It's much more than you may think." /></p>
+
+<p>The number of Likes per month appears to be positively correlated with the number of comments, which is to be expected. Some months have significantly more activity than others; September 2012 had the most because of TechCrunch Disrupt SF. (interestingly, there wasn&rsquo;t such a spike in May 2012 with Disrupt NYC) The average number of likes/comments per post per month, as opposed to the sum, is a more consistent measurement, so we will be using that going forward.</p>
+
+<h2>How many Comments and Likes do TechCrunch Facebook posts receive on average?</h2>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb2.png?resize=625%2C345" title="How many Comments and Likes do TechCrunch posts receive on average?" alt="Triple-Digit Likes and double-digit Comments. Not too shabby." /></p>
+
+<p>Overall average is 162 Likes and 30 Comments per post. The average number of Likes/Comments are consistent across the past year, with growth in the last few months. Nothing too surprising here. ## Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?</p>
+
+<p>Here&rsquo;s a fun measurement I decided to analyze. TechCrunch makes postings at all hours as it&rsquo;s a globally-targeted blog, but readers in the US may be asleep at the time. This could be a possible confounding variable (social activity may be correlated with geographic location), so it&rsquo;s best to see whether or not we can rule it out.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb3.png?resize=625%2C273" title="Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?" alt="The spike in average comments at 4AM PST / 7AM EST is interesting. European workday?" /></p>
+
+<p>As it turns out, time of day does <strong>not</strong> appear to have an effect on number of Likes/Comments received for TechCrunch!</p>
+
+<h2>How many TechCrunch Facebook posts ask a question, relative to the ones that do not?</h2>
+
+<p>Here&rsquo;s the main question that began this entire investigation. Has the TechCrunch Facebook been writing posts that ask questions more frequently?</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb41.png?resize=625%2C379" title="How many TechCrunch Facebook posts ask a question, relative to the ones that do not?" alt="TechCrunch-themed columns!" /></p>
+
+<p>As it turns out, no, TechCrunch has asked the same proportion of questions on their Facebook page, as there is no change in trend. Overall average is 31.38% of TC&rsquo;s posts ask a question. (about a third of the posts)</p>
+
+<h2>Does including a question to the community increase the number of Likes/Comments on the post?</h2>
+
+<p>And here&rsquo;s the analysis of the main hypothesis. The results were quite surprising.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb51.png?resize=625%2C299" title="Does including a question to the community increase the number of Likes/Comments on the post?" alt="Now with more DROP SHADOWS!" /></p>
+
+<p>The average amount of Likes for a post that asked a question is <em>lower</em> than a post that does not! (141 Likes for post that asks question, 172 for post that does not, a 18% decrease) That&rsquo;s unexpected!</p>
+
+<p>For Comments, the average amount of Comments for a post that asked a question is significantly higher than a post that does not (45 Comments for a post that asks question, 23 comments for post that does not, a 97% increase). This is nearly double, which is what the Facebook report had stated.</p>
+
+<p>What could explain this behavior? A quick theory is that Liking and Commenting on a brand post are mutually exclusive; asking a question in the post drives the user to comment, but not to Like the post, but since the user has already acknowledged the post socially, there&rsquo;s no need for the user to Like it. This follows my personal behavior on brands; if I comment, I usually do not like the post as it seems redundant.</p>
+
+<p>Regardless, I will now admit that there are benefits to asking your users questions in your Facebook or blog posts. Although there appears to be a drop in Likes by asking users what their opinions are, the increase in comments more than counteracts it.</p>
+
+<p>This data raises an interesting dilemma: let&rsquo;s say everyone catches on and <em>most</em> of the top brands start asking their users questions. It&rsquo;ll quickly become an cliché, as it is essentially a subliminal form of the infamous Facebook News Feed spam. Would that cause brands to stop asking questions? If so, how long would it take for the brands to switch back to asking their users questions?</p>
+
+<p>Who knew that social media marketing involved game theory?</p>
+
+<p>-Max</p>
+
+<p><em>(Since all the data is public anyways, <a href="https://dl.dropbox.com/u/2017402/TechCrunch%20Facebook%20Data%20Analysis.xlsx">I am releasing my data and graphs</a> for your perusal. If you decide to use it and find something else interesting, please let me know!)</em></p>
+
+<p>EDIT: One more.</p>
+
+<h2>Do photo posts have greater response rates than posts without photos?</h2>
+
+<p>[![][15]][15]</p>
+
+<p>Yep. Not too surprising. It&rsquo;s why Facebook bought Instagram! (although I&rsquo;m curious what happened in April&hellip;)</p>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <p class="meta">
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/blogging/'>Blogging</a>, <a class='category' href='/blog/categories/data/'>Data</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://minimaxir.github.io/2012/10/questions-equals-reponses/" data-via="minimaxir" data-counturl="http://minimaxir.github.io/2012/10/questions-equals-reponses/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/04/drivebox/" title="Previous Post: Google Drive, And Why Dropbox Really Is In Trouble">&laquo; Google Drive, And Why Dropbox Really Is In Trouble</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/10/client-side-validation-is-hard-mode/" title="Next Post: Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation">Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2013 - Max Woolf -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

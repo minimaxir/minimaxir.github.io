@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Wordpress | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
   <link href="http://minimaxir.github.io/blog/categories/wordpress/atom.xml" rel="self"/>
   <link href="http://minimaxir.github.io/"/>
-  <updated>2013-05-09T20:38:38-07:00</updated>
+  <updated>2013-05-09T22:27:39-07:00</updated>
   <id>http://minimaxir.github.io/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[If You're Going to Blog, Use Tumblr, Not WordPress]]></title>
+    <link href="http://minimaxir.github.io/2012/03/a-wordpress-about-tumblr/"/>
+    <updated>2012-03-09T21:14:00-08:00</updated>
+    <id>http://minimaxir.github.io/2012/03/a-wordpress-about-tumblr</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ll admit: <a href="http://www.tumblr.com/">Tumblr</a> surprised me. Tumblr is a wildly popular microblogging platform where users can make small posts, in either text or visual format, and other users can share them. Users can then share another user&rsquo;s share, creating an endless sharing cycle. When the service first caught my eye a couple years ago, I thought it was merely a platform for reblogging incredibly old internet memes with nauseating, unintuitive blog themes. I remember thinking &ldquo;why can&rsquo;t this be done on <a href="http://wordpress.org/">WordPress</a>, which is the foundation of nearly every blog on the internet? It offers much more flexibility with blog functionality (especially with plugins) and likewise more theme distinctiveness.&rdquo;</p>
+
+<p>As it turns out, the arguments of plugin-functionality and unique themes <strong>are irrelevant</strong> to the typical blogger. 99% of bloggers just want a place, preferably free, where they can blog. And with the added value Tumblr provides with integrated social networking, Tumblr provides <a href="http://www.tumblr.com/why-tumblr">more utility for the typical blogger</a> than competing services such as <a href="http://www.blogger.com/home">Blogger</a>, <a href="https://posterous.com/">Posterous</a>, and even WordPress.</p>
+
+<p>However, for the other 1% of bloggers, especially those that want to earn money from blogging, WordPress is still unrivaled due to the aforementioned functionality tweaking. Tumblr won&rsquo;t ever kill WordPress, but if Tumblr fully captures the long-tail, WordPress could be in trouble.</p>
+
+<!-- more -->
+
+
+<p>At the beginning of 2012, I decided to start a Tumblr called <a href="http://techcommntr.com/">techcommntr</a>, whose title intentionally ignores the e&rsquo;s at the end of the word (like Tumblr itself) because poor literacy is kewl, is a blog that sardonically comments on the technology community. I wanted a place outside of <a href="http://techcrunch.com/">TechCrunch</a> to archive and share my blog comments, and also experiment with Tumblr&rsquo;s features hands-on to determine why it&rsquo;s so popular. I had some practice implementing custom CSS and Facebook Comments as well (Tumblr uses a single-file template system which is actually very elegant). Although I haven&rsquo;t posted on it in a while due to real life %2B working on <a href="http://minimaxir.com/2012/03/bootstrap-for-everyone/">a certain other project</a>, I have learnt quite a lot about the platform, and there are a <strong>lot</strong> of unpublicized features and benefits which Tumblr does not advertise.</p>
+
+<p><a href="https://plus.google.com/"><img src="https://plus.google.com/" alt="*Another* startup idea in the bathroom? Is lavatorial inspiration a common thing for him?" /></a></p>
+
+<h2>Tumblr vs. WordPress</h2>
+
+<p>Whenever one of my friends decides to create a blog, they always do it on Blogger, WordPress.com, or Tumblr. I&rsquo;ll be blunt: Blogger is terrible and you should never use it, especially in 2012. Even though Google has very recently tried to improve the feature parity of Blogger to that of other free blogging services, such as having a post editor that doesn&rsquo;t require the poster to type in <strong>raw HTML</strong>, there&rsquo;s a very limited social component, with merely generic social buttons and a barely functional commenting system. When <a href="https://plus.google.com/">Google%2B</a>, Google&rsquo;s social network, is a better blogging tool than the actual blogging tool, purely due to the social networking component, there&rsquo;s a problem. (Given the &ldquo;success&rdquo; of Google%2B as of recently, that says volumes).</p>
+
+<p><a href="http://wordpress.com/">WordPress.com</a>, the free-hosted version of the WordPress platform, has some oddities when compared apples-to-apples to the free Tumblr. WordPress.com has <a href="http://en.wordpress.com/products/">&ldquo;premium&rdquo; addons</a>&hellip;which are complete ripoffs. WordPress.com charges $12/year for the <em>right</em> to use a custom domain on the blog (so it doesn&rsquo;t have a <em>.wordpress.com URL), and you still have to pay an additional $9-10/year for the domain itself; Tumblr lets you map a domain to your blog for absolutely free with an existing domain. WordPress.com also charges $30/year for the </em>right<em> to use custom CSS to create a unique styling for your blog; Tumblr lets you add CSS for free. And, most ridiculously, WordPress charges $29.97/yr (why not $30, like custom CSS?) for the </em>right* to remove third-party advertisements from your blog; on Tumblr, you only have ads if you implement them yourself. So, in order to get feature parity with Tumblr while on WordPress.com, you would need to pay $72/year. At that point, you might as well self-host. Even worse, after all of that, you may not even be able to implement desired custom functionality on WordPress.com, as the underlying blog code cannot be altered and the usable plugins are limited. So, using WordPress.com is moot.</p>
+
+<p>In addition to the aforementioned features that Tumblr has that WordPress.com makes you egregiously pay for, Tumblr&rsquo;s strongest advantage is its focus on content promotion. Users can like or reblog posts on any Tumblr, regardless of theme design or settings, and all likes/shares are attributed to the original poster. Posts can be tagged, which go into a pool of all other Tumblr posts with the same tag; tagging your posts with a very large amount of tags is not a bad strategy. While yes, age-old viral pictures or ragefaces tend to pop up frequently, original content and images that cannot easily be replicated can be very valuable for spreading your personal brand. (although if you&rsquo;re able to watermark your photos, I&rsquo;d recommending doing that to deter uncredited repostings.)</p>
+
+<p><a href="http://gawker.com/"><img src="http://gawker.com/" alt="My most successful Tumblr post, with 20 notes. This happened because this post had a #trollface tag, and a trollface Tumblr caught it and reblogged it." /></a></p>
+
+<h2>Tumblr vs. Professional Bloggers</h2>
+
+<p>So, how does Tumblr compare with professional blogs that utilize WordPress, like TechCrunch? Well&hellip;not at all. For one, professional blogs depend on advertisement revenue to pay hosting costs and writers; while Tumblr allows users to implement ads, blog follows tend to access their aggregated content in their Tumblr dashboard, where the blog author earns no revenue. (While the average author will earn some revenue from direct visits from Facebook/Twitter users, it will likely result in less revenue in the long-term than if self-hosted and forced viewers to the main blog). Culturally, Tumblr content tends to be short, while professional blogs tend to have longer, more researched articles. (unless they&rsquo;re <a href="http://gawker.com/">Gawker</a>. Ahem.) <a href="http://www.tumblr.com/docs/en/custom_themes">Programmically</a>, Tumblr does not allow many useful content-highlight techniques such as featured posts, related posts, etc. that many professional blogs use/abuse: you get your posts, your static HTML, and that&rsquo;s it. There aren&rsquo;t enough tools to entice professional bloggers to Tumblr&hellip;but Tumblr doesn&rsquo;t <strong>need</strong> to entice professional bloggers. They&rsquo;re doing pretty well on their own.</p>
+
+<p>Tumblr has been rapidly getting traction. While it won&rsquo;t kill WordPress, Tumblr signals a shift toward microblogging in lieu of the traditional, 2000&rsquo;s era long-prose style of blogging. If you want to blog on the internet, and don&rsquo;t want to pay any money, Tumblr is the clear winner with its strong emphasis on content distribution: what use is a blog that no one reads?</p>
+
+<p>Would Minimaxir benefit from being on Tumblr instead of being self-hosted on WordPress? That&rsquo;s hard to say. While the social networking aspects are enticing for expanding my potential reach&hellip;the businessman/programmer within me thinks that content highlight capabilities and complete blog flexibility are too important to give up.</p>
+
+<p>And my blog posts are <em>wayyy</em> too long for Tumblr.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blog Commenting in 2011]]></title>
@@ -22,7 +62,7 @@
 
 <p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png" alt="" /></a></p>
 
-<p>Sure, blog comment sections have been around since the dawn of blogs themselves, and nowadays creating a blog comments section is the “Hello World!” of web development. However, most blogging platforms, such as Tumblr, Blogger, native WordPress installs offer rudimentary commenting; you input a name and a comment, press “post comment,” and then you &rsquo;re done. As you can see above, Blogger just lists a name and comment, and it &rsquo;s been that way since 2004, and no one has seen a “need” to improve it. But in 2011, with the advent of persistent identities due to social networks such as Facebook and Twitter, it &rsquo;s very archaic to have to enter your name and email every time you just want to leave a comment on a blog. It &rsquo;s not a matter of being lazy/Generation-X, it &rsquo;s a matter of whether the cost of having to reinput your information a million times just to post a comment outweighs the benefits of doing so. And if everyone feels that way, it becomes a “chicken” problem: no one comments because others don &rsquo;t comment, blogs gets less readers/feedback, everyone loses.</p>
+<p>Sure, blog comment sections have been around since the dawn of blogs themselves, and nowadays creating a blog comments section is the &ldquo;Hello World!&rdquo; of web development. However, most blogging platforms, such as Tumblr, Blogger, native WordPress installs offer rudimentary commenting; you input a name and a comment, press &ldquo;post comment,&rdquo; and then you &rsquo;re done. As you can see above, Blogger just lists a name and comment, and it &rsquo;s been that way since 2004, and no one has seen a &ldquo;need&rdquo; to improve it. But in 2011, with the advent of persistent identities due to social networks such as Facebook and Twitter, it &rsquo;s very archaic to have to enter your name and email every time you just want to leave a comment on a blog. It &rsquo;s not a matter of being lazy/Generation-X, it &rsquo;s a matter of whether the cost of having to reinput your information a million times just to post a comment outweighs the benefits of doing so. And if everyone feels that way, it becomes a &ldquo;chicken&rdquo; problem: no one comments because others don &rsquo;t comment, blogs gets less readers/feedback, everyone loses.</p>
 
 <p>In 2011, if your blog does not have some sort of easily accessible commenting system, then your blog is in serious trouble.</p>
 
@@ -36,11 +76,11 @@
 
 <p>A couple years later, Facebook released their own commenting system, not as a competitor to Disqus, but as another method to keep people on the internet far longer than they need to be. Facebook actually makes it easier for bloggers to implement because registering an account for admin use is optional! For users, Facebook tops Disqus in that it takes <strong>zero</strong> clicks to be able to comment on a Facebook Comments section: you &rsquo;re logged into Facebook, bam, you can comment.</p>
 
-<p>As it turns out, the use of Disqus and Facebook Comments lead to something unexpected: it increased the <em>quality</em> of the comments! Not only were users happier because they didn &rsquo;t need to register, but their comments were now tied to their real identity. In fact, it will also list your occupation by your name, which lends a large amount of authority to your comments, especially if you work at a Fortune 500 company or are a CEO. People will [hopefully] not troll or spam comments when their comments can be directly traced by clicking their picture. Both systems also incorporate a “Like” feature which most basic comment systems lack, which also incentivizes users to post higher-quality comments as well.</p>
+<p>As it turns out, the use of Disqus and Facebook Comments lead to something unexpected: it increased the <em>quality</em> of the comments! Not only were users happier because they didn &rsquo;t need to register, but their comments were now tied to their real identity. In fact, it will also list your occupation by your name, which lends a large amount of authority to your comments, especially if you work at a Fortune 500 company or are a CEO. People will [hopefully] not troll or spam comments when their comments can be directly traced by clicking their picture. Both systems also incorporate a &ldquo;Like&rdquo; feature which most basic comment systems lack, which also incentivizes users to post higher-quality comments as well.</p>
 
 <p>At the least, knowing you are chatting with a real person in the comments makes a big different. The use of Facebook profile pictures with the comments helps more than you might think.</p>
 
-<p>I know many bloggers who don &rsquo;t see a need to modify the comments system: “if it ain &rsquo;t broke, don &rsquo;t fit it” after all. What they don &rsquo;t realize is that blogging is a two-way street: it &rsquo;s a <em>rapport</em> between the bloggers and the readers, and one has no reason to exist without the other. If bloggers make their reader happy, the readers will be happier to help the bloggers. Just saving a few seconds for your readers will pay off incredible dividends in the future.</p>
+<p>I know many bloggers who don &rsquo;t see a need to modify the comments system: &ldquo;if it ain &rsquo;t broke, don &rsquo;t fit it&rdquo; after all. What they don &rsquo;t realize is that blogging is a two-way street: it &rsquo;s a <em>rapport</em> between the bloggers and the readers, and one has no reason to exist without the other. If bloggers make their reader happy, the readers will be happier to help the bloggers. Just saving a few seconds for your readers will pay off incredible dividends in the future.</p>
 
 <p><a href="http://i2.wp.com/minimaxir.com/wp-content/uploads/2011/10/wordpress.png"><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2011/10/wordpress.png" alt="" /></a></p>
 
