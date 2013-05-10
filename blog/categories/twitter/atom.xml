@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Twitter | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
-  <link href="http://minimaxir.com/blog/categories/twitter/atom.xml" rel="self"/>
-  <link href="http://minimaxir.com/"/>
-  <updated>2013-05-09T23:16:51-07:00</updated>
-  <id>http://minimaxir.com/</id>
+  <link href="minimaxir.com/blog/categories/twitter/atom.xml" rel="self"/>
+  <link href="minimaxir.com/"/>
+  <updated>2013-05-09T23:24:58-07:00</updated>
+  <id>minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why Do Many Tweets Begin With A Period?]]></title>
-    <link href="http://minimaxir.com/2013/01/prefixed-period/"/>
+    <link href="minimaxir.com/2013/01/prefixed-period/"/>
     <updated>2013-01-04T21:30:00-08:00</updated>
-    <id>http://minimaxir.com/2013/01/prefixed-period</id>
+    <id>minimaxir.com/2013/01/prefixed-period</id>
     <content type="html"><![CDATA[<p>I&rsquo;m not a Twitter fanatic. Although I do have <a href="https://twitter.com/minimaxir">a Twitter account</a> with about 300 followers,  Facebook&rsquo;s Subscribe feature <a href="http://www.facebook.com/max.woolf">on my Facebook profile</a> has met my use case for publishing sarcastic quips and cool links for a broad audience over the internet. I mostly use my Twitter account to read tweets from tech columnists, yet I don&rsquo;t even comment on their tweets because <strong>tweets that are replies to someone are not visible in the home timeline of my followers</strong>. I can understand the intuition behind this behavior: Twitter conversations can contain a lot of low-content tweets, and Twitter doesn&rsquo;t want its users to be spammed.</p>
 
 <p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that <strong>beginning your reply Tweet with a period (.) allows it to be seen by all your followers. </strong>Otherwise, only the replyee will receive notification of the reply.</p>

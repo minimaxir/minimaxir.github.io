@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Bugs | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
-  <link href="http://minimaxir.com/blog/categories/bugs/atom.xml" rel="self"/>
-  <link href="http://minimaxir.com/"/>
-  <updated>2013-05-09T23:16:51-07:00</updated>
-  <id>http://minimaxir.com/</id>
+  <link href="minimaxir.com/blog/categories/bugs/atom.xml" rel="self"/>
+  <link href="minimaxir.com/"/>
+  <updated>2013-05-09T23:24:58-07:00</updated>
+  <id>minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Diablo III Economy Broken by an Integer Overflow Bug]]></title>
-    <link href="http://minimaxir.com/2013/05/stones-of-jordan/"/>
+    <link href="minimaxir.com/2013/05/stones-of-jordan/"/>
     <updated>2013-05-07T21:53:00-07:00</updated>
-    <id>http://minimaxir.com/2013/05/stones-of-jordan</id>
+    <id>minimaxir.com/2013/05/stones-of-jordan</id>
     <content type="html"><![CDATA[<p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
 
 <p>Diablo III is also noted for its economy, with an emphasis on a region-wide auction house where players can trade one-in-a-million items for millions and billions of gold. (inflation is crazy). Additionally, Diablo III emphasized the use of a Real World Auction House, where players can sell gold or items for real world cash.</p>

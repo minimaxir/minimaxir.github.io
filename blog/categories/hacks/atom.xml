@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Hacks | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
-  <link href="http://minimaxir.com/blog/categories/hacks/atom.xml" rel="self"/>
-  <link href="http://minimaxir.com/"/>
-  <updated>2013-05-09T23:16:51-07:00</updated>
-  <id>http://minimaxir.com/</id>
+  <link href="minimaxir.com/blog/categories/hacks/atom.xml" rel="self"/>
+  <link href="minimaxir.com/"/>
+  <updated>2013-05-09T23:24:58-07:00</updated>
+  <id>minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM]]></title>
-    <link href="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
+    <link href="minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
     <updated>2013-03-24T21:44:00-07:00</updated>
-    <id>http://minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
+    <id>minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
     <content type="html"><![CDATA[<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
 
 <p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
@@ -53,9 +53,9 @@
   
   <entry>
     <title type="html"><![CDATA[Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet]]></title>
-    <link href="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"/>
+    <link href="minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"/>
     <updated>2013-01-15T21:36:00-08:00</updated>
-    <id>http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams</id>
+    <id>minimaxir.com/2013/01/sexy-will-haunt-your-dreams</id>
     <content type="html"><![CDATA[<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N'Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
 
 <p>I&rsquo;m OK with this. There are certainly far <a href="http://minimaxir.com/2012/03/ethics-self-promotion/"><em>worse</em></a> ways to promote a startup.</p>
@@ -137,9 +137,9 @@ background-attachment: fixed !important;
   
   <entry>
     <title type="html"><![CDATA[Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)]]></title>
-    <link href="http://minimaxir.com/2013/01/if-cute-then-happiness/"/>
+    <link href="minimaxir.com/2013/01/if-cute-then-happiness/"/>
     <updated>2013-01-13T21:32:00-08:00</updated>
-    <id>http://minimaxir.com/2013/01/if-cute-then-happiness</id>
+    <id>minimaxir.com/2013/01/if-cute-then-happiness</id>
     <content type="html"><![CDATA[<p><strong><em>TL;DR: Use this <a href="https://ifttt.com/recipes/74285">IFTTT recipe</a>, and change the subreddit value in the parameter of the Feed URL as needed.</em></strong></p>
 
 <p>In <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">a previous post</a>, I joked about a hypothetical social media strategy in which an automated script does Facebook brand management by stealing the top cute images from <a href="http://www.reddit.com/">Reddit</a> &ndash; an aggregator of trending topics and images &ndash;  and reposting them on the Facebook page, additionally adding a cute message encouraging users to LIKE, SHARE, and COMMENT!  We get easy social media fame for no monetary cost.</p>
@@ -194,9 +194,9 @@ Getting socially-vetted photos on your computer without any effort is a useful t
   
   <entry>
     <title type="html"><![CDATA[Creating a Startup Promo Video Using... PowerPoint?]]></title>
-    <link href="http://minimaxir.com/2012/12/powerpoint-promo-party/"/>
+    <link href="minimaxir.com/2012/12/powerpoint-promo-party/"/>
     <updated>2012-12-29T21:28:00-08:00</updated>
-    <id>http://minimaxir.com/2012/12/powerpoint-promo-party</id>
+    <id>minimaxir.com/2012/12/powerpoint-promo-party</id>
     <content type="html"><![CDATA[<p>I noticed deep in the documentation for PowerPoint 2010 that it <a href="http://office.microsoft.com/en-us/powerpoint-help/turn-your-presentation-into-a-video-HA010336763.aspx">supports video output</a> for presentations. Like a good nerd, I experimented to see what it could actually do. My first test of the functionality was a humor video about pitching a <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">hypothetical startup named NegaCycl</a>, complete with animation and narration, which I trashed and eventually retooled because I&rsquo;m bad at verbal comedic delivery. Interestingly, the output video was a 1:1 comparison to what was displayed on my own computer screen during the presentation. Naturally, I decided to test it even harder.</p>
 
 <p>What I have here is another hypothetical, non-real startup named Filtrzzz (based on a <a href="http://www.facebook.com/photo.php?fbid=10151356495205450&amp;set=a.432190050449.225968.582270449&amp;type=1">popular Facebook post</a> I made), animated and rendered using PowerPoint, with more complicated objects such as embedded audio and video, and an attempt to sync the presentation timing with the audio for dramatic effect. Plus sarcastic humor, of course.</p>

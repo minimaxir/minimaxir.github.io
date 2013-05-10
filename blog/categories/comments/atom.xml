@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Comments | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
-  <link href="http://minimaxir.com/blog/categories/comments/atom.xml" rel="self"/>
-  <link href="http://minimaxir.com/"/>
-  <updated>2013-05-09T23:16:51-07:00</updated>
-  <id>http://minimaxir.com/</id>
+  <link href="minimaxir.com/blog/categories/comments/atom.xml" rel="self"/>
+  <link href="minimaxir.com/"/>
+  <updated>2013-05-09T23:24:58-07:00</updated>
+  <id>minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Blog Comment System That Steals Comments From Facebook]]></title>
-    <link href="http://minimaxir.com/2013/05/comments-everywhere/"/>
+    <link href="minimaxir.com/2013/05/comments-everywhere/"/>
     <updated>2013-05-04T21:59:00-07:00</updated>
-    <id>http://minimaxir.com/2013/05/comments-everywhere</id>
+    <id>minimaxir.com/2013/05/comments-everywhere</id>
     <content type="html"><![CDATA[<p>I&rsquo;m not a fan of the LiveFyre comments system for blogs. As I&rsquo;ve talked about before, LiveFyre is difficult to use, and actually hurts blogs more than it helps. But more and more blogs, such as CNet and AllThingsD, have switched to LiveFyre.</p>
 
 <p>AllThingsD&rsquo;s <a href="http://allthingsd.com/20130330/introducing-livefyre-commenting-at-allthingsd/?mod=atd-desktop">reasons</a> for switching to LiveFyre from the widely-used Disqus are interesting. Under LiveFyre, users can &ldquo;more readily share comments to Facebook and Twitter&rdquo; which Disqus already did; &ldquo;tag friends and draw them into the stream&rdquo; which increases clutter; and &ldquo;accurately flag other comments as spam or offensive&rdquo; which flat-out doesn&rsquo;t work, if the spam on TechCrunch is any indication. Additionally, they can &ldquo;follow conversations across multiple platforms,&rdquo; which the post doesn&rsquo;t elaborate upon. Does it aggregate social media which links to the parent post, a la Disqus?</p>

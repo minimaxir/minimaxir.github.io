@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Facebook | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
-  <link href="http://minimaxir.com/blog/categories/facebook/atom.xml" rel="self"/>
-  <link href="http://minimaxir.com/"/>
-  <updated>2013-05-09T23:16:51-07:00</updated>
-  <id>http://minimaxir.com/</id>
+  <link href="minimaxir.com/blog/categories/facebook/atom.xml" rel="self"/>
+  <link href="minimaxir.com/"/>
+  <updated>2013-05-09T23:24:58-07:00</updated>
+  <id>minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Facebook Outage: All Webpage Likes and Comments Reset]]></title>
-    <link href="http://minimaxir.com/2013/03/facebook-outage/"/>
+    <link href="minimaxir.com/2013/03/facebook-outage/"/>
     <updated>2013-03-25T21:47:00-07:00</updated>
-    <id>http://minimaxir.com/2013/03/facebook-outage</id>
+    <id>minimaxir.com/2013/03/facebook-outage</id>
     <content type="html"><![CDATA[<p><strong>UPDATE: The issue was resolved about 11 hours after the post was published. Like counts and comment counts are back. See <a href="http://techcrunch.com/2013/03/25/facebook-comments-bug/">TechCrunch&rsquo;s post</a>.</strong></p>
 
 <p>Today (3/25/13), Facebook appears to have made a change that has nuked all existing Facebook Like counts and Facebook Comments. I can verify that on this particular blog, my non-cached Like counts and my Comments are gone, even after checking Facebook&rsquo;s Graph API directly. This can be verified on older blog posts, such as <a href="http://techcrunch.com/2012/05/19/day-after-ipo-mark-zuckerberg-marries-longtime-girlfriend-priscilla-chan/">this one</a>.  It is also <a href="http://stackoverflow.com/questions/15623582/facebook-like-count-for-articles-reset-to-zero">being tracked on Stack Overflow</a>.</p>

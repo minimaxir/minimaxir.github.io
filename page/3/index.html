@@ -11,6 +11,324 @@
   
   <meta name="description" content="Hi. I&#8217;m Max Woolf. This is a blog thingy. Oct 14th, 2012 Gaming Technology Electronic Arts &#8220;Gives Away&#8221; Thousands Of Free Games &hellip;">
   
+  <!-- Rich Object stuff -->
+  <meta property="og:url" value="minimaxir.com/page/3/index.html">
+	<meta property="og:type" content="website" />
+	<meta property="og:title" value="minimaxir | Max Woolf's Internet Blog Thingy">
+	<meta property="og:description" value="<div class="jumbotron">
+  <div class="container">
+    Hi. I&#8217;m Max Woolf.
+    <h3 class="tagline">This is a blog thingy.</h3>
+  </div>
+</div>
+<div class="blog-index">
+  
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+        <h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-14T21:21:00-07:00" pubdate data-updated="true">Oct 14<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <span class="badge">Gaming</span>
+          
+          <span class="badge">Technology</span>
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/2012/10/client-side-validation-is-hard-mode/">Electronic Arts &#8220;Gives Away&#8221; Thousands Of Free Games Due To No Server-Side Validation</a></h1>
+      <p>Early Saturday morning, <a href="http://www.gamefaqs.com/boards/916373-pc/64312901">various gaming forums</a> (and, more importantly, <a href="http://www.reddit.com/r/GameDeals/comments/11ewb0/use_the_code_os3874xvc_to_get_20_off_origin/">Reddit</a>) obtained a promotional code from mega gaming company Electronic Arts for their Origin gaming distribution service. This code entitled the user to purchase any EA published or developed game for $20 off, and if the game was less than $20, the game was free. <a href="http://www.gamers-association.com/2012/10/free-game-from-eas-origin/">Games that were made free</a> using this coupon included hit series such as Dead Space, Mass Effect, Dragon Age, and Battlefield, so the rewards for the coupon were actually pretty worthwhile. Best of all, there are no catches and no gimmicks; input promo code OS3874XVC, get game.</p>
+
+<p>The code was apparently rewarded after taking a survey regarding Origin, with the reward being one free game. The operative word being &ldquo;one.&rdquo; Some gamers, out of curiosity, discovered that by entering the code via both the store browser-interface and the store client-interface, they could get a free game twice. Gamers inferred the logical technical conclusion; EA was not checking server-side that the code was only being used once. Later, gamers noted that <a href="http://www.overclock.net/t/1315674/free-20-in-origin-code/410#post_18359737">simply inputting the code while logged-out</a> allows them to use the promo code an <em>unlimited</em> amount of times.</p>
+
+<p>Needless to say, hilarity ensued.</p>
+
+
+      
+	  
+	 
+    <footer>
+      <a rel="badge" href="/2012/10/client-side-validation-is-hard-mode/">Read on &rarr;</a>
+    </footer>
+  
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+        <h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-07T21:19:00-07:00" pubdate data-updated="true">Oct 7<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <span class="badge">Blogging</span>
+          
+          <span class="badge">Data</span>
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/2012/10/questions-equals-reponses/">Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses</a></h1>
+      <p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
+
+<p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>
+
+<p>Like any math nerd, I wasn&rsquo;t comfortable with simple circumstantial evidence. When I <a href="http://www.facebook.com/max.woolf/posts/10151223309670450">asked on Facebook</a> if there is any statistical data indicating that including a question to the community at the end of a blog post / Facebook post increases the response rate, TechCrunch writer and Facebook specialist Josh Constine responded and linked to<a href="http://www.facebook.com/notes/facebook-journalists/study-how-people-are-engaging-journalists-on-facebook-best-practices/245775148767840"> a Facebook report</a> stating that such posts have double the comments and significantly greater feedback.</p>
+
+<p>I decided to put that to the test. I wrote a quick script in R that parses the Facebook page of a brand and extracts the number of likes for all of their posts, the number of comments on all posts, and whether or not each post contained a question. The brand I chose for my testing is none other than <a href="http://www.techcrunch.com/">TechCrunch</a>, because <a href="http://www.facebook.com/techcrunch">its Facebook page</a>, managed by the wonderful <a href="https://twitter.com/elinblesener">Elin Blesner</a>, has large sample sizes in terms of both unique postings and response rates on each post, ensuring that the analysis of the data is statistically significant. Additionally, having a<em>nother</em> perspective on TechCrunch to comment about certainly doesn&rsquo;t hurt either.</p>
+
+<p>After collecting about 2,500 posts &ndash; 12 months of data &ndash; I analyzed the data conditional on whether or not the post was a question, among other things. The results surprised me.</p>
+
+
+      
+	  
+	 
+    <footer>
+      <a rel="badge" href="/2012/10/questions-equals-reponses/">Read on &rarr;</a>
+    </footer>
+  
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+        <h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-25T21:16:00-07:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <span class="badge">Startups</span>
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/2012/04/drivebox/">Google Drive, And Why Dropbox Really Is In Trouble</a></h1>
+      <p>Despite spending a lot of time talking about startups (and commenting about them on <a href="http://techcrunch.com/">TechCrunch</a>), there are very few which I actually use on a daily basis. I don&rsquo;t use a service because it&rsquo;s popular or the <strong>NEXT BIG THING</strong>, but because it&rsquo;s worthwhile use of my time and energy. (the correlation between startup popularity and worthwhileness is, unfortunately, not always strong). As a business major, I&rsquo;m prone toward productivity applications which help save time that would otherwise be wasted, allowing me to spend my time elsewhere doing much more important tasks, such as the aforementioned commenting on TechCrunch.</p>
+
+<p>The one app I&rsquo;ve used throughout my college years has been Dropbox. As an early adopter way back in 2008, I thought that Dropbox was a clever scam, because it was too good to be true. &ldquo;2 gigabytes of data, that I can access on any computer without needing a $30 flash drive or e-mailing myself constantly? I won&rsquo;t have to fumble around with hardware that I&rsquo;ll probably lose or fill up valuable inbox space! <strong>And</strong> I can access my files remotely with my iPhone 3G?! Awesome!&rdquo; And thus I began to love Dropbox, and have used it extremely frequently for the past four years. I have never tried any alternatives: <a href="http://box.com/">Box.net </a>and <a href="https://www.sugarsync.com/">Sugarsync</a> were nowhere as seamless. And throughout those four years, no real competitors arose&hellip;</p>
+
+<p>&hellip;until Tuesday, when Microsoft released Windows Skydrive, and Wednesday, when Google released Google Drive, both of which <a href="http://www.engadget.com/2012/04/24/google-drive-vs-the-competition-dropbox-skydrive-icloud/">offer very similar functionality to Dropbox</a>. Both of them offer &ldquo;a folder that sync everywhere&rdquo;, a considerable amount of free storage by default (more than Dropbox), and, more importantly, both are services which are typically used by people who may not necessarily be technical. Microsoft will <a href="http://techcrunch.com/2012/02/29/windows-8-the-road-ahead/">tightly integrate SkyDrive into Windows 8</a>, which will introduce the magic of one-folder-sync to every customer who buys a new computer in the next few years, and Google <a href="http://thenextweb.com/google/2012/04/24/google-drive-is-live-and-available-right-now-but-its-no-dropbox-killer/">automatically converted</a> the popular Google Documents feature into Google Drive, which <em>automatically</em> established an equally-large customer base, and Google will likely leverage their extensive marketing budget to further captivate potential users. The average person has heard of Microsoft and Google and trust them: conversely, they likely have never heard of Dropbox. Why would a typical internet user ever use Dropbox now?</p>
+
+
+      
+	  
+	 
+    <footer>
+      <a rel="badge" href="/2012/04/drivebox/">Read on &rarr;</a>
+    </footer>
+  
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+        <h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-24T21:10:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <span class="badge">Technology</span>
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/2012/03/bootstrap-for-everyone/">Why Every New Website Will Use Bootstrap</a></h1>
+      <p>So, I decided to spruce up the blog a little bit. The old WordPress theme I had used, <a href="http://wordpress.org/extend/themes/graphene">Graphene</a>, had a lot of useful functionality, such as a featured post slider and a topbar for placing social media buttons, but the theme itself didn&rsquo;t make the blog look <em>unique</em>. Even with a few CSS tweaks to add custom styling, such as forcing the titles of blog posts to be in all-capital letters, (which makes users more likely to click them!), it still <a href="http://i.imgur.com/LQVNK.png">looked very generic</a>. When building a personal brand, generic is never good.</p>
+
+<p>Therefore, I resolved to develop and design a unique WordPress blog theme effectively <em>from scratch</em>, in order to ensure that my blog had a truly distinctive look and functionality. Although modifying the blogging backend was simple (it&rsquo;s WordPress; there are <em>tons</em> of well-written documentation for that platform), modifying the CSS frontend, which my blog readers would actually <em>see</em>, was just as important. For that task, I chose to use the Twitter Bootstrap CSS framework, which many recent startups have utilized to great effect due to its focus on minimalism and efficiency.</p>
+
+<p>After completing my implementation and having hands-on experience, I can say that within the next few years, every startup will be using Bootstrap to design a website frontend both because it&rsquo;s incredibly easy to implement and because it allows for functionality that would take months to develop otherwise: both of which are useful properties for a startup which does not have the luxuries of time and money.</p>
+
+
+      
+	  
+	 
+    <footer>
+      <a rel="badge" href="/2012/03/bootstrap-for-everyone/">Read on &rarr;</a>
+    </footer>
+  
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+        <h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-09T21:14:00-08:00" pubdate data-updated="true">Mar 9<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <span class="badge">Startups</span>
+          
+          <span class="badge">Tumblr</span>
+          
+          <span class="badge">Wordpress</span>
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/2012/03/a-wordpress-about-tumblr/">If You&#8217;re Going to Blog, Use Tumblr, Not WordPress</a></h1>
+      <p>I&rsquo;ll admit: <a href="http://www.tumblr.com/">Tumblr</a> surprised me. Tumblr is a wildly popular microblogging platform where users can make small posts, in either text or visual format, and other users can share them. Users can then share another user&rsquo;s share, creating an endless sharing cycle. When the service first caught my eye a couple years ago, I thought it was merely a platform for reblogging incredibly old internet memes with nauseating, unintuitive blog themes. I remember thinking &ldquo;why can&rsquo;t this be done on <a href="http://wordpress.org/">WordPress</a>, which is the foundation of nearly every blog on the internet? It offers much more flexibility with blog functionality (especially with plugins) and likewise more theme distinctiveness.&rdquo;</p>
+
+<p>As it turns out, the arguments of plugin-functionality and unique themes <strong>are irrelevant</strong> to the typical blogger. 99% of bloggers just want a place, preferably free, where they can blog. And with the added value Tumblr provides with integrated social networking, Tumblr provides <a href="http://www.tumblr.com/why-tumblr">more utility for the typical blogger</a> than competing services such as <a href="http://www.blogger.com/home">Blogger</a>, <a href="https://posterous.com/">Posterous</a>, and even WordPress.</p>
+
+<p>However, for the other 1% of bloggers, especially those that want to earn money from blogging, WordPress is still unrivaled due to the aforementioned functionality tweaking. Tumblr won&rsquo;t ever kill WordPress, but if Tumblr fully captures the long-tail, WordPress could be in trouble.</p>
+
+
+      
+	  
+	 
+    <footer>
+      <a rel="badge" href="/2012/03/a-wordpress-about-tumblr/">Read on &rarr;</a>
+    </footer>
+  
+    </div>
+  </div>
+
+
+
+    </article>
+    
+  
+  <div class="pagination">
+    
+    <a class="prev" href="/page/4/">&larr; Older</a>
+    
+
+    
+    <a class="next" href="/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+">
+	
+	
+  
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +336,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://minimaxir.com/page/3">
+  <link rel="canonical" href="minimaxir.com/page/3">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
