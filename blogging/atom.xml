@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Blogging | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
+  <link href="minimaxir.com//blogging/atom.xml" rel="self"/>
+  <link href="minimaxir.com/"/>
+  <updated>2013-05-10T21:55:01-07:00</updated>
+  <id>minimaxir.com/</id>
+  <author>
+    <name><![CDATA[Max Woolf]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Blog Comment System That Steals Comments From Facebook]]></title>
+    <link href="minimaxir.com/2013/05/comments-everywhere/"/>
+    <updated>2013-05-04T21:59:00-07:00</updated>
+    <id>minimaxir.com/2013/05/comments-everywhere</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m not a fan of the LiveFyre comments system for blogs. As I&rsquo;ve talked about before, LiveFyre is difficult to use, and actually hurts blogs more than it helps. But more and more blogs, such as CNet and AllThingsD, have switched to LiveFyre.</p>
+
+<p>AllThingsD&rsquo;s <a href="http://allthingsd.com/20130330/introducing-livefyre-commenting-at-allthingsd/?mod=atd-desktop">reasons</a> for switching to LiveFyre from the widely-used Disqus are interesting. Under LiveFyre, users can &ldquo;more readily share comments to Facebook and Twitter&rdquo; which Disqus already did; &ldquo;tag friends and draw them into the stream&rdquo; which increases clutter; and &ldquo;accurately flag other comments as spam or offensive&rdquo; which flat-out doesn&rsquo;t work, if the spam on TechCrunch is any indication. Additionally, they can &ldquo;follow conversations across multiple platforms,&rdquo; which the post doesn&rsquo;t elaborate upon. Does it aggregate social media which links to the parent post, a la Disqus?</p>
+
+<p>No, it&rsquo;s something much more important.</p>
+
+<!-- more -->
+
+
+<h2>Comments From Everywhere!</h2>
+
+<p>Recently, LiveFyre implemented a <a href="http://www.livefyre.com/comments/">comment feature</a> called SocialSync:</p>
+
+<p>With Livefyre SocialSync, the conversation happening on Facebook and Twitter automatically syncs directly to your content, where it belongs. SocialSync comments can be replied to and interacted with just like any other comment, including being automatically posted back to Twitter or Facebook.</p>
+
+<p>Currently, this feature is enabled for TechCrunch and Mashable.* Let&rsquo;s say a Facebook user comments on one of TechCrunch&rsquo;s <a href="https://www.facebook.com/photo.php?fbid=10151659746677952&amp;set=a.114456157951.118433.8062627951&amp;type=1">Facebook posts</a>. Those comments are synchronized to the LiveFyre comments for the <a href="http://techcrunch.com/2013/05/02/smartphonetographers/">linked post</a>.</p>
+
+<p>Those comments become LiveFyre comments. And the Facebook user has no input, nor any notification that their comments are being used this way.</p>
+
+<h2>SocialSync&rsquo;s Flat-Out Lie</h2>
+
+<p>In LiveFyre&rsquo;s own words, the conversations &ldquo;sync&rdquo; across platforms. <a href="http://en.wikipedia.org/wiki/Synchronization">Synchronization</a> implies a two-way interation, i.e. actions on one platform affect the other. In this example, there are four use cases for the interaction to be called &ldquo;sync&rdquo;:</p>
+
+<ol>
+<li>Comments on Facebook should appear on LiveFyre.</li>
+<li>Comments on LiveFyre should appear on Facebook.</li>
+<li>Replies and Likes on comments on Facebook should appear on the corresponding comment in LiveFyre.</li>
+<li>Replies and Likes on comments on LiveFyre should appear on the corresponding comment in Facebook.</li>
+</ol>
+
+
+<p>Out of those four scenarios, only #1 is true, and even more importantly, #2, #3, and #4 are impossible to implement.</p>
+
+<p>LiveFyre doesn&rsquo;t know what your Facebook account is and cannot perform actions on your behalf on Facebook unless you register solely with that account. Therefore, your comments won&rsquo;t sync to the Facebook comment thread if you use any other login type. (the ability to use multiple types of logins being another touted feature of LiveFyre, of course). Likewise, Likes on Facebook Comments can&rsquo;t translate to LiveFyre Likes if the users don&rsquo;t have a LiveFyre account.</p>
+
+<p>The lack of connection also breaks notifications of replies. Since there&rsquo;s no way to ensure the two accounts are linked, there&rsquo;s no way to notify a Facebook user when their synced comment on LiveFyre has a reply. This has two effects: a) the Facebook user won&rsquo;t continue the discussion and b) the replier is wasting his time making a comment to a person who likely won&rsquo;t ever read it. Both result in less fruitful discussions.</p>
+
+<p>SocialSync is broken and impossible to fix. Also, the lag from when comments are synced from Facebook to LiveFyre takes about 10-20 minutes, making sync worthless on highly-discussed event blogs posts anyways..</p>
+
+<h2>Who Owns Your Facebook Comments?</h2>
+
+<p>When I said that LiveFyre &ldquo;steals&rdquo; Facebook comments in the headline, I wasn&rsquo;t being facetious. It&rsquo;s not obvious that this feature even exists in the first place, especially if you&rsquo;re not a comment addict (I sent a <a href="https://twitter.com/minimaxir/status/311959448694435840">tweet</a> to the TechCrunch head editor to confirm that this was intended behavior). How is the typical person supposed to know what their comments are being used for?</p>
+
+<p>Yes, your comments on TechCrunch&rsquo;s Facebook wall post that are synced to LiveFyre are Public to everyone, and there is no expectation of privacy. But who owns those comments?</p>
+
+<p>The comments appear in LiveFyre matching the style and functionality of any other LiveFyre comment, except with a &ldquo;from Facebook&rdquo; designation. For all intents and purposes, it&rsquo;s a LiveFyre comment that you have no controll over. It&rsquo;s worth noting that since LiveFyre doesn&rsquo;t know your Facebook account, you can&rsquo;t even delete the syndicated comment in LiveFyre . LiveFyre comments on the post have greater SEO than Facebook comments, so hopefully you don&rsquo;t say anything embarrassing on the Facebook page. LiveFyre is in control of your destiny.</p>
+
+<p>What are the benefits to SocialSync anyways, when it barely works? Bigger numbers for the comment count of a post? That&rsquo;s irrelevant when the comments on the Facebook posts are made spur-of-the-moment, and are usually very low quality.</p>
+
+<p>The idea of sync between isn&rsquo;t terrible in itself. Facebook Comments and the recently announced Google%2B Comment System essentially does sync by blurring the lines between a Google%2B post and a comment, but unlike LiveFyre, the user still retains control over the comment, receives reply notifications, and can delete their comment when necessary.</p>
+
+<p>At the least, I&rsquo;ve stopped posting on TechCrunch&rsquo;s Facebook page. That&rsquo;s not a good thing for either TechCrunch or LiveFyre.</p>
+
+<ul>
+<li>Interestingly, SocialSync is not enabled on CNet or AllThingsD&rsquo;s implementations of LiveFyre.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How To Kill The Reader Comments Of A Popular Tech Blog]]></title>
+    <link href="minimaxir.com/2013/01/its-a-metaphor-maybe/"/>
+    <updated>2013-01-23T21:38:00-08:00</updated>
+    <id>minimaxir.com/2013/01/its-a-metaphor-maybe</id>
+    <content type="html"><![CDATA[<p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog,.</p>
+
+<p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
+
+<p>Fast forward to 2012. Other blogs on the Aol blogging network, such as Engadget, Joystiq, and TechCrunch itself, have <a href="http://www.engadget.com/2012/10/11/engadget-livefyre-commenting-system/">decided</a> to <a href="http://www.joystiq.com/2012/04/04/joystiqs-new-commenting-system-is-live/">migrate</a> to <a href="http://www.livefyre.com/">LiveFyre</a>, another blog commenting system which allows readers to comment using their social identities, in addition to a few flashy Web 2.0 features. I figured it was a matter of time until TechCrunch implemented it themselves. And in January 2013, <a href="http://techcrunch.com/2013/01/22/we-want-you-back/">they did</a>.</p>
+
+<p>At first, I thought I would like the change. Facebook Comments has their own problems that a switch to Livefyre could solve. I was wrong. The stated reasons for the change were &ldquo;we want more comments,&rdquo; but a large amount of low-value comments (and images), with no way to identify good ones, along with the increased hassle of commenting, will end up backfiring. I&rsquo;m honestly afraid that the switch from Facebook Comments could kill quality comments on TechCrunch completely.</p>
+
+<!-- more -->
+
+
+<h2>The Pros and Cons of Facebook Comments</h2>
+
+<p>As said earlier, Facebook comments excel in their ease of implementation, light aesthetic, and zero-click registration. More importantly, it lends a lot of credibility to the comments, as they have (usually) been authenticated as a real person. Whenever a <em>real</em> person likes or comments on your own comment, it is very satisfying.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/alexia.png?resize=625%2C256" alt="alexia" /></p>
+
+<p>That said, there are a few unobvious nuances:</p>
+
+<ul>
+<li>For most blog systems, you receive a notification whenever someone replies to your post. In the original implementation of FB Comments, you receive one whenever someone likes or replies to your comment, in the same manner you&rsquo;re notified on a typical Facebook status. This has changed recently: now, you don&rsquo;t receive notification for likes/replies on your comment, and instead you <strong><em>only receive notifications when other people comment on the same post</em></strong>. I haven&rsquo;t figured out if this is a bug or a feature.</li>
+<li><strong>There is no spam filter.</strong> As many can attest, Facebook has been terrible at combating spam both on the main website and off. All spam cleaning must be done <em>ad hoc</em>, which can be time-consuming.</li>
+<li><strong>Virtually no customization for the comments</strong>. On the administrative side, the only significant options you have for commenting are how many comments appear initially, and the default sort order. It makes sense for Facebook to limit customization to protect their own branding, but it&rsquo;s frustrating for both the admin and readers.</li>
+<li><strong>Commenters do not have access to a list of comments that they&rsquo;ve made.</strong> This one in particular upset me, which is one of the reasons I&rsquo;ve aggregated all my comments <a href="http://minimaxir.com/category/blog-comments/">here</a>.</li>
+<li><strong>Facebook&rsquo;s count of comments lies. </strong>The count provided by Facebook does <em>not</em> include replies to comments, unlike every blog comment system since the beginning of time.</li>
+</ul>
+
+
+<p>There have been zero improvements to Facebook Comments since 2011. It&rsquo;s disappointing, but there&rsquo;s not much that can be done&hellip; except considing competitors.</p>
+
+<h2>LiveFyre Makes Comments BURN!</h2>
+
+<p>LiveFyre, on a typical blog like this one, has quite a few perks that Facebook Comments does not. It allows users to comment just by linking a social identity, such as Facebook or Twitter. Or you can remain anonymous. You receive notifications by email. Images and video are embedded into posts. Posts appear in real time, increasing the interaction for live events. And, you have a profile which lists all the comments you&rsquo;ve ever made.</p>
+
+<p>LiveFyre also has comment editing and an indicator of how many users are viewing the current blog post, but for some reason, the implementation of LiveFyre on TechCrunch disabled these features. Hmm.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/comments2.png?resize=625%2C211" alt="comments2" /></p>
+
+<p>The core features good on paper. The problem is with the implementation. <a href="http://fyre.it/u2jnrP">This comment</a> does a good summary, but here&rsquo;s the gist when compared to Facebook Comments:</p>
+
+<ul>
+<li><strong>Anonymous comments are <em>usually</em> low-quality comments. </strong>With Facebook Comments, rational people will not make stupid comments that are tied with their real name. With anonymous comments, people can troll as much as they want without any repercussions.  Yes, with more accessible to comments leads to a higher chance of quality comments by the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">law of large numbers</a>, but that is completely irrelevant because&hellip;</li>
+<li><strong>There is no way to sort by high-quality comments</strong>. Facebook Comments, by default, sorts comments by the number of likes that they have received: more likes, the higher up they are in the comment thread. LiveFyre only allows sorting in chronological order and reverse chronological order. No exception. This strongly reduces the <em>motivation</em> for high-quality posts.</li>
+<li><strong>New comments that are loaded live forcibly scroll down all comments.</strong> Imagine: you&rsquo;re reading a good comment, and a new comment loads and <em>pushes</em> the comment away. With spam. You&rsquo;ll become frustrated very quickly. This may not be a concern for blogs with low user-bases, but for popular blogs, this can become irritating very quickly.</li>
+<li><strong>Images and video appear in-line, and are very large.</strong> This makes them more visible, which is a good thing, <em>unless</em> they&rsquo;re memes and spam. Then it&rsquo;s terrible. And since people can comment anonymously, there&rsquo;s a significant risk factor. Images/video, due to their size, cause comment scrolling even faster!</li>
+</ul>
+
+
+<h2>The impact of LiveFyre on TechCrunch</h2>
+
+<p>LiveFyre works on a typical WordPress blog, but when applied to <img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/ToKillACommentsSection.png?resize=187%2C300" alt="ToKillACommentsSection" />large sites such as Engadget and TechCrunch, whose size attracts trolls, it can be crippling. It&rsquo;s like <a href="http://en.wikipedia.org/wiki/Dunbar's_number">Dunbar&rsquo;s Number</a> on a macro scale: there&rsquo;s a mathematical limit on the number of people who visit one place on the internet until it degenerates into madness and memes.</p>
+
+<p>Even with the criticisms above, I still prefer Facebook Comments, and I implement it on my own site, as zero-click registration and real name validation is paramount. It&rsquo;s definitely the lesser of two evils.</p>
+
+<p>The main argument TechCrunch used to justify the switch from Facebook Comments to LiveFyre is that users aren&rsquo;t commenting as much. That&rsquo;s a given, since you can&rsquo;t comment anonymously. It&rsquo;s the old debate of quantity vs. quality: in the case of comments, however, it&rsquo;s <em>always</em> in favor of quality. I&rsquo;d rather read a comments section with one or two comments than a comments section consisting of 90% anonymous spammers who make me lose faith in humanity. Losing faith in humanity is not healthy.</p>
+
+<p>I&rsquo;ll probably be toning down my comments on TechCrunch even moreso. My <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">primary motivation for commenting</a> was, and still is, making people laugh and smile. But if other readers have to dig through anonymous spam just to find my comments, then there&rsquo;s not much point. I could spam my comments to my Facebook profile every time I make one, but that would cause the <em>opposite</em> issue.*<br/>
+*</p>
+
+<p>I realize that this is a first-world problem. Even more of a first world problem than <a href="http://minimaxir.com/2013/01/if-cute-then-happiness/">auto-downloading pictures of cute puppies</a>. I&rsquo;m not mad.</p>
+
+<p>I&rsquo;m just sad. <img src="http://i2.wp.com/minimaxir.com/wp-includes/images/smilies/icon_sad.gif?w=625" alt=":(" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses]]></title>
+    <link href="minimaxir.com/2012/10/questions-equals-reponses/"/>
+    <updated>2012-10-07T21:19:00-07:00</updated>
+    <id>minimaxir.com/2012/10/questions-equals-reponses</id>
+    <content type="html"><![CDATA[<p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
+
+<p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>
+
+<p>Like any math nerd, I wasn&rsquo;t comfortable with simple circumstantial evidence. When I <a href="http://www.facebook.com/max.woolf/posts/10151223309670450">asked on Facebook</a> if there is any statistical data indicating that including a question to the community at the end of a blog post / Facebook post increases the response rate, TechCrunch writer and Facebook specialist Josh Constine responded and linked to<a href="http://www.facebook.com/notes/facebook-journalists/study-how-people-are-engaging-journalists-on-facebook-best-practices/245775148767840"> a Facebook report</a> stating that such posts have double the comments and significantly greater feedback.</p>
+
+<p>I decided to put that to the test. I wrote a quick script in R that parses the Facebook page of a brand and extracts the number of likes for all of their posts, the number of comments on all posts, and whether or not each post contained a question. The brand I chose for my testing is none other than <a href="http://www.techcrunch.com/">TechCrunch</a>, because <a href="http://www.facebook.com/techcrunch">its Facebook page</a>, managed by the wonderful <a href="https://twitter.com/elinblesener">Elin Blesner</a>, has large sample sizes in terms of both unique postings and response rates on each post, ensuring that the analysis of the data is statistically significant. Additionally, having a<em>nother</em> perspective on TechCrunch to comment about certainly doesn&rsquo;t hurt either.</p>
+
+<p>After collecting about 2,500 posts &ndash; 12 months of data &ndash; I analyzed the data conditional on whether or not the post was a question, among other things. The results surprised me.</p>
+
+<!-- more -->
+
+
+<p><strong>tl;dr: Asking a question to the readers in a Facebook post <em>does</em> increase the number of comments very significantly, but <em>decreases</em> the number of Likes!</strong></p>
+
+<h2>How many Comments and Likes do TechCrunch posts receive?</h2>
+
+<p>Since the data goes back a year, we can more easily detect seasonal trends in the data. First, let&rsquo;s see the real world numbers as a sanity check.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb1.png?resize=625%2C345" title="How many Comments and Likes do TechCrunch posts receive?" alt="It's much more than you may think." /></p>
+
+<p>The number of Likes per month appears to be positively correlated with the number of comments, which is to be expected. Some months have significantly more activity than others; September 2012 had the most because of TechCrunch Disrupt SF. (interestingly, there wasn&rsquo;t such a spike in May 2012 with Disrupt NYC) The average number of likes/comments per post per month, as opposed to the sum, is a more consistent measurement, so we will be using that going forward.</p>
+
+<h2>How many Comments and Likes do TechCrunch Facebook posts receive on average?</h2>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb2.png?resize=625%2C345" title="How many Comments and Likes do TechCrunch posts receive on average?" alt="Triple-Digit Likes and double-digit Comments. Not too shabby." /></p>
+
+<p>Overall average is 162 Likes and 30 Comments per post. The average number of Likes/Comments are consistent across the past year, with growth in the last few months. Nothing too surprising here. ## Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?</p>
+
+<p>Here&rsquo;s a fun measurement I decided to analyze. TechCrunch makes postings at all hours as it&rsquo;s a globally-targeted blog, but readers in the US may be asleep at the time. This could be a possible confounding variable (social activity may be correlated with geographic location), so it&rsquo;s best to see whether or not we can rule it out.</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb3.png?resize=625%2C273" title="Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?" alt="The spike in average comments at 4AM PST / 7AM EST is interesting. European workday?" /></p>
+
+<p>As it turns out, time of day does <strong>not</strong> appear to have an effect on number of Likes/Comments received for TechCrunch!</p>
+
+<h2>How many TechCrunch Facebook posts ask a question, relative to the ones that do not?</h2>
+
+<p>Here&rsquo;s the main question that began this entire investigation. Has the TechCrunch Facebook been writing posts that ask questions more frequently?</p>
+
+<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb41.png?resize=625%2C379" title="How many TechCrunch Facebook posts ask a question, relative to the ones that do not?" alt="TechCrunch-themed columns!" /></p>
+
+<p>As it turns out, no, TechCrunch has asked the same proportion of questions on their Facebook page, as there is no change in trend. Overall average is 31.38% of TC&rsquo;s posts ask a question. (about a third of the posts)</p>
+
+<h2>Does including a question to the community increase the number of Likes/Comments on the post?</h2>
+
+<p>And here&rsquo;s the analysis of the main hypothesis. The results were quite surprising.</p>
+
+<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb51.png?resize=625%2C299" title="Does including a question to the community increase the number of Likes/Comments on the post?" alt="Now with more DROP SHADOWS!" /></p>
+
+<p>The average amount of Likes for a post that asked a question is <em>lower</em> than a post that does not! (141 Likes for post that asks question, 172 for post that does not, a 18% decrease) That&rsquo;s unexpected!</p>
+
+<p>For Comments, the average amount of Comments for a post that asked a question is significantly higher than a post that does not (45 Comments for a post that asks question, 23 comments for post that does not, a 97% increase). This is nearly double, which is what the Facebook report had stated.</p>
+
+<p>What could explain this behavior? A quick theory is that Liking and Commenting on a brand post are mutually exclusive; asking a question in the post drives the user to comment, but not to Like the post, but since the user has already acknowledged the post socially, there&rsquo;s no need for the user to Like it. This follows my personal behavior on brands; if I comment, I usually do not like the post as it seems redundant.</p>
+
+<p>Regardless, I will now admit that there are benefits to asking your users questions in your Facebook or blog posts. Although there appears to be a drop in Likes by asking users what their opinions are, the increase in comments more than counteracts it.</p>
+
+<p>This data raises an interesting dilemma: let&rsquo;s say everyone catches on and <em>most</em> of the top brands start asking their users questions. It&rsquo;ll quickly become an cliché, as it is essentially a subliminal form of the infamous Facebook News Feed spam. Would that cause brands to stop asking questions? If so, how long would it take for the brands to switch back to asking their users questions?</p>
+
+<p>Who knew that social media marketing involved game theory?</p>
+
+<p>-Max</p>
+
+<p><em>(Since all the data is public anyways, <a href="https://dl.dropbox.com/u/2017402/TechCrunch%20Facebook%20Data%20Analysis.xlsx">I am releasing my data and graphs</a> for your perusal. If you decide to use it and find something else interesting, please let me know!)</em></p>
+
+<p>EDIT: One more.</p>
+
+<h2>Do photo posts have greater response rates than posts without photos?</h2>
+
+<p>[![][15]][15]</p>
+
+<p>Yep. Not too surprising. It&rsquo;s why Facebook bought Instagram! (although I&rsquo;m curious what happened in April&hellip;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Ethics of Self-Promotion on the Internet]]></title>
+    <link href="minimaxir.com/2012/03/ethics-self-promotion/"/>
+    <updated>2012-03-01T21:07:00-08:00</updated>
+    <id>minimaxir.com/2012/03/ethics-self-promotion</id>
+    <content type="html"><![CDATA[<p>So, you&rsquo;ve made your new blog or startup, and you want people to know about it. The first thing you will likely do is link to it on your Facebook or Twitter, telling your friends who are most likely to listen to you. Unless you&rsquo;re a superstar tech personality with thousands of subscribers/followers, chances are your social media posts will only drive a few people to your website, leading to your disappointment. Sure, you can repost your website multiple times, but chances are you&rsquo;ll upset your friends through your spam&hellip;which doesn&rsquo;t lead to users who keep coming back.</p>
+
+<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self6.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self6.png" alt="The article prompted East Coast entrepreneurs to *e-mail* their startups..." /></a></p>
+
+<p>A solution startups have recently developed is to promote themselves within the comments section of blogs. It&rsquo;s not a new technique: self-promotion through blog comments has been around since the dawn of blogging. However, thanks to the advent of Facebook Comments and similar comment systems which tie your posts to real identities, such self-promotional posts within the comments section of blogs are no longer seen as spam simply generated by bots, and actually serve an unintended side effect of extending credibility to website. I have noticed many people in the comments section of TechCrunch articles, for example, are using it as a platform to promote their own blog/startup, as it reaches many potential tech-savvy customers.</p>
+
+<p>However, since this technique can lead to internet fame for blogs and a userbase for startups, both of which are easily monetizable, self-promotion constitutes an ethically gray area on the internet. When and where is it appropriate to link to your own website or business?</p>
+
+<!-- more -->
+
+
+<h2>Your Website Is Relevant To The Article/Comment At Hand</h2>
+
+<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self1.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self1.png" alt="" /></a>
+Posted in an article titled &ldquo;HTC Unites New Android Smartphones Under &lsquo;One&rsquo; Brand&rdquo;</p>
+
+<p>TechCrunch covers many different aspects of technology, from startups, gadgets, and social media. It doesn&rsquo;t make sense to say, advertise your startup on an article about a smartphone, unless your startup specifically deals with the smartphone. Likewise, linking to your blog post about iOS vs. Android when the article discusses enterprise software is not appropriate. Both situations give the impression that you just want to promote your brand in any way possible. From a business perspective, it&rsquo;s actually a terrible idea: you want to build quality users, not just have a large quantity of users.</p>
+
+<p>&ldquo;Relevant&rdquo; is a subjective term, of course, but as long as you put forth due diligence toward the appropriateness of linking to your website, you&rsquo;ll be in the clear.</p>
+
+<h2>Your Website/Service Is Polished And Professional-Looking</h2>
+
+<p><a href="http://i.imgur.com/EtevP.png"><img src="http://i.imgur.com/EtevP.png" alt="" /></a></p>
+
+<p>This is more of a warning than a rule. When you self-promote, you attract attention, whether it be positive or negative. You only have one chance to make a first impression: if you are going to promote your website, you need to make sure all your ducks are in a row. Otherwise, expect some snark.</p>
+
+<p>In this particular case, if you<a href="http://i.imgur.com/EtevP.png"> look at the website</a>, the snark is well-warranted.</p>
+
+<h2>You Disclose That The Your Website Is Indeed &ldquo;Your&rdquo; Website</h2>
+
+<p>[![][6]][6]</p>
+
+<p>The issue of disclosure has been frequently discussed on tech blogs, given that some bloggers have made investments in startups that they cover. It&rsquo;s an issue because it affects impartiality; a recommendation for a business from a third party customer means more than a recommendation from a first party developer/investor of the service. Startups have done this practice, and it&rsquo;s very sleazy.</p>
+
+<p>Whenever I see a startup promoted in the TC comments without such disclosure (i.e. when they say &ldquo;this website is awesome and you should visit it!&rdquo; when THE COMMENT AUTHOR actually made it,  instead of being upfront and saying &ldquo;my website is new and upcoming.&rdquo;), I immediately check their About page to check if the author is actually an employee. You&rsquo;d be surprised at how often that assumption is correct. (then again, it compels me to check out the startup. I&rsquo;m a sucker.)</p>
+
+<h2>You Don&rsquo;t Sandbag Other Websites With Your Own</h2>
+
+<p>It&rsquo;s professional courtesy. As shown with the aforementioned picture, it&rsquo;s not appropriate to say &ldquo;this startup sucks, use mine instead!&rdquo; They are entrepreneurs, just like you, and they have the same promotional issues that you have.</p>
+
+<p>Likewise, saying &ldquo;Facebook sucks, use my social media network instead!&rdquo; or anything claiming your website will take down multibillion-dollar companies isn&rsquo;t good, as it&rsquo;s hyperbolic and probably not true. You&rsquo;re *asking* for snarky responses there.</p>
+
+<p>It&rsquo;s hard to resist egregrious self-promotion. There are <strong>millions</strong> of blogs and startups out there; users usually don&rsquo;t find them by a magic Google search. Should you remain ethical with self-promotion when it puts you at a disadvantage, when everyone else on the internet is spamming their website as often on the internet? That&rsquo;s your personal decision, but keep in mind that you want your users to respect you for the product itself, not how they found it.</p>
+
+<p>-Max</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Blog Commenting in 2011]]></title>
+    <link href="minimaxir.com/2011/10/blog-commenting-2011/"/>
+    <updated>2011-10-10T20:05:00-07:00</updated>
+    <id>minimaxir.com/2011/10/blog-commenting-2011</id>
+    <content type="html"><![CDATA[<p>One of the most important things about blogs is having a comment section. Not only does it allow the blogs reader the ability to participate in discussions about similar topics, but it also offers a medium which the author can communicate with the readers themselves. This allows authors to get feedback from readers regarding what they like about your post, what they think of your posts, and how to improve your blog in general. Also, you get spam. It &rsquo;s not an authentic blog without it.</p>
+
+<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png" alt="" /></a></p>
+
+<p>Sure, blog comment sections have been around since the dawn of blogs themselves, and nowadays creating a blog comments section is the &ldquo;Hello World!&rdquo; of web development. However, most blogging platforms, such as Tumblr, Blogger, native WordPress installs offer rudimentary commenting; you input a name and a comment, press &ldquo;post comment,&rdquo; and then you &rsquo;re done. As you can see above, Blogger just lists a name and comment, and it &rsquo;s been that way since 2004, and no one has seen a &ldquo;need&rdquo; to improve it. But in 2011, with the advent of persistent identities due to social networks such as Facebook and Twitter, it &rsquo;s very archaic to have to enter your name and email every time you just want to leave a comment on a blog. It &rsquo;s not a matter of being lazy/Generation-X, it &rsquo;s a matter of whether the cost of having to reinput your information a million times just to post a comment outweighs the benefits of doing so. And if everyone feels that way, it becomes a &ldquo;chicken&rdquo; problem: no one comments because others don &rsquo;t comment, blogs gets less readers/feedback, everyone loses.</p>
+
+<p>In 2011, if your blog does not have some sort of easily accessible commenting system, then your blog is in serious trouble.</p>
+
+<p> <!-- more --></p>
+
+<p><a href="http://i2.wp.com/minimaxir.com/wp-content/uploads/2011/10/disqus2.png"><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2011/10/disqus2.png" alt="" /></a></p>
+
+<p>A large stride toward easier blog commenting occurred in 2007 with Disqus, a startup whose sole purpose was to create a system for blog comments. The blogger can install Disqus by registering for an account, then install a plugin or put some HTML code on a webpage; none of which difficult for even the most computer illiterate. Users can create a Disqus account using their Facebook, Twitter, or Google credentials, with just two button clicks. After creating a Disqus account for use on a website, you can use that account to comment on any other website that has installed Disqus.  The more blogs that use Disqus, the more time you save, and thus the more inclined you will be to comment on blogs! As a result of these things, Disqus grew rapidly in popularity, and became used by huge, 1M%2B/month viewer blogs as Engadget. (A competitor did enter at around the same time named IntenseDebate, and had essentially the same functionality as Disqus. Except Disqus was adopted first, and so IntenseDebate lost and no one uses it nowadays. The technology world is cruel like that.)</p>
+
+<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/fbcomments.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/fbcomments.png" alt="" /></a></p>
+
+<p>A couple years later, Facebook released their own commenting system, not as a competitor to Disqus, but as another method to keep people on the internet far longer than they need to be. Facebook actually makes it easier for bloggers to implement because registering an account for admin use is optional! For users, Facebook tops Disqus in that it takes <strong>zero</strong> clicks to be able to comment on a Facebook Comments section: you &rsquo;re logged into Facebook, bam, you can comment.</p>
+
+<p>As it turns out, the use of Disqus and Facebook Comments lead to something unexpected: it increased the <em>quality</em> of the comments! Not only were users happier because they didn &rsquo;t need to register, but their comments were now tied to their real identity. In fact, it will also list your occupation by your name, which lends a large amount of authority to your comments, especially if you work at a Fortune 500 company or are a CEO. People will [hopefully] not troll or spam comments when their comments can be directly traced by clicking their picture. Both systems also incorporate a &ldquo;Like&rdquo; feature which most basic comment systems lack, which also incentivizes users to post higher-quality comments as well.</p>
+
+<p>At the least, knowing you are chatting with a real person in the comments makes a big different. The use of Facebook profile pictures with the comments helps more than you might think.</p>
+
+<p>I know many bloggers who don &rsquo;t see a need to modify the comments system: &ldquo;if it ain &rsquo;t broke, don &rsquo;t fit it&rdquo; after all. What they don &rsquo;t realize is that blogging is a two-way street: it &rsquo;s a <em>rapport</em> between the bloggers and the readers, and one has no reason to exist without the other. If bloggers make their reader happy, the readers will be happier to help the bloggers. Just saving a few seconds for your readers will pay off incredible dividends in the future.</p>
+
+<p><a href="http://i2.wp.com/minimaxir.com/wp-content/uploads/2011/10/wordpress.png"><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2011/10/wordpress.png" alt="" /></a></p>
+
+<p>Fortunately, WordPress.com, one of the largest free blog platforms, is now making the push toward a single sign-on solution, as evidenced above, by allowing blog owners on that platform to allow readers to comment with their Facebook or Twitter credentials. In fact, it &rsquo;s enabled by default, unlike most WordPress installations. This is a big step, and hopefully other bloggers will be able to see hands-on the benefits of allowing easier commenting. Also, it leads to much higher quality commenting, and less spam and trolling.</p>
+
+<p>Commenting is such a huge part of the blogging experience for both bloggers and readers, and I speak from years of experience.</p>
+
+<p>-Max</p>
+
+<p><em>(PS: It &rsquo;s worth nothing that Automattic, the company that owns WordPress.com, also owns IntenseDebate. Why didn &rsquo;t they vertically integrate IntenseDebate into WordPress.com, and then get massive users via the same network effects that made Disqus popular? That alone would have killed Disqus!)</em></p>
+]]></content>
+  </entry>
+  
+</feed>

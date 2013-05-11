@@ -1,0 +1,35 @@
+body {
+background: white;
+color: #34495e
+}
+
+h1, h2 {
+color: #2980B9
+}
+
+
+h3, h4, h5, h6,.date-time {
+color: #95A5A6
+}
+
+p {
+margin: 0 0 20px;
+}
+
+.badge {
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden; }
+  .badge:hover {
+    background-color: #2980B9;
+    text-decoration: none; }
+	
+.badge a, .badge a:hover {
+color: white;
+}
+
+.nav {
+font-size: 170%
+}

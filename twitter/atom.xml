@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Twitter | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
+  <link href="minimaxir.com//twitter/atom.xml" rel="self"/>
+  <link href="minimaxir.com/"/>
+  <updated>2013-05-10T21:55:01-07:00</updated>
+  <id>minimaxir.com/</id>
+  <author>
+    <name><![CDATA[Max Woolf]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Why Do Many Tweets Begin With A Period?]]></title>
+    <link href="minimaxir.com/2013/01/prefixed-period/"/>
+    <updated>2013-01-04T21:30:00-08:00</updated>
+    <id>minimaxir.com/2013/01/prefixed-period</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m not a Twitter fanatic. Although I do have <a href="https://twitter.com/minimaxir">a Twitter account</a> with about 300 followers,  Facebook&rsquo;s Subscribe feature <a href="http://www.facebook.com/max.woolf">on my Facebook profile</a> has met my use case for publishing sarcastic quips and cool links for a broad audience over the internet. I mostly use my Twitter account to read tweets from tech columnists, yet I don&rsquo;t even comment on their tweets because <strong>tweets that are replies to someone are not visible in the home timeline of my followers</strong>. I can understand the intuition behind this behavior: Twitter conversations can contain a lot of low-content tweets, and Twitter doesn&rsquo;t want its users to be spammed.</p>
+
+<p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that <strong>beginning your reply Tweet with a period (.) allows it to be seen by all your followers. </strong>Otherwise, only the replyee will receive notification of the reply.</p>
+
+<p>Having your reply tweets appear to your followers only if you begin them with a prefixed period is not intuitive at all. And this particular behavior and its workaround are not documented in <a href="https://support.twitter.com/groups/31-twitter-basics/topics/109-tweets-messages/articles/14023-what-are-replies-and-mentions">Twitter&rsquo;s help docs</a>. And replying to tweets is a core feature of Twitter. How many users would be able to deduce this behavior? How many brands, who rely on user engagement, are even aware of this behavior?</p>
+
+<p>As it turns out, I was only partially correct. It&rsquo;s even <em>less</em> intuitive.</p>
+
+<!-- more -->
+
+
+<h2>XY = @(Z)</h2>
+
+<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/twitter2.png?resize=513%2C181" alt="twitter2" /></p>
+
+<p>I recently saw <a href="https://twitter.com/ScottyLabs/status/286921265514700801">a tweet</a> in my timeline that had a prefixed period, but clearly was not a reply to anyone. Confused, I pointed out that prefixed periods aren&rsquo;t necessary if the tweet is not a reply. <a href="https://twitter.com/amyquispe">Amy Quispe</a>, founder of ScottyLabs and a CS senior at Carnegie Mellon University with much more startup knowledge than myself, pointed out that I was wrong, and <strong>if the tweet begins with a @, it will not appear in your follower&rsquo;s timelines, regardless of whether it&rsquo;s a reply or a mention</strong>.</p>
+
+<p>Anyone who tweets, for example, &ldquo;<em>@SHO_Dexter is my favorite television show! Season 7 was AWESOME!!!</em>&rdquo;, will likely not have that tweet seen by any of their followers. Therefore, it&rsquo;s incredibly easy, and incredibly likely, for that behavior to unintentionally trigger a false positive for spam. Again, would a person notice that one of his/her tweets is not being seen? It&rsquo;s bad for the user, and it&rsquo;s even bad for @SHO_Dexter, who misses out on the free advertising.</p>
+
+<p>As it turns out, <em>that</em> <em>correction** was still only partially correct</em>, as there&rsquo;s one more important caveat:<strong> if a tweet by X begins a tweet with an @ mention of Y, and if Z is a follower of <em>both</em> X and Y, then Z will see the tweet. If the second condition is not true, then Z will not see the tweet.</strong></p>
+
+<p>Twitter is apparently a course in deductive reasoning. To be fair, this caveat is clearly stated in the help docs, and this behavior makes sense in the context of mutual friends among users. Nevertheless, it&rsquo;s not intuitive at all, and it&rsquo;s mostly irrelevant: a prefixed period tweet reaches all of your followers, 100% of the time.</p>
+
+<h2>The Pestilent Prefixed Period Problem</h2>
+
+<p>Twitter users want maximum reach. Brands want maximum reach. Therefore, everyone will use the prefixed period for replies and mentions. Those who don&rsquo;t use prefixed periods on Twitter will be left behind in this cutthroat game of social media.</p>
+
+<p>There are two problems with encouraging prefixed periods:</p>
+
+<ol>
+<li>It alienates newcomers to Twitter. Some online communities do have unwritten behaviors: <a href="http://www.reddit.com/">Reddit</a>, for example, invokes &ldquo;vote fuzzing&rdquo; on popular posts, which disguises the true amount of upvotes and downvotes on any particular post by adding fake upvotes/downvotes. You won&rsquo;t find that in any Reddit documentation, which leads to the frequent outbursts of &ldquo;WHO THE HELL WOULD DOWNVOTE THIS PUPPY?&rdquo; Quirks like these don&rsquo;t make communities exclusive: it makes them insular.</li>
+<li><strong>It looks tacky and ugly</strong>. That&rsquo;s not a trivial complaint. Every @mention tweet looks like someone made a typo. I don&rsquo;t think that&rsquo;s the brand image Twitter wants.</li>
+</ol>
+
+
+<p>How could Twitter address this? An option would be to adopt a system similar to Facebook&rsquo;s <em>ad hoc</em> post visibility settings, and allow users to set the reach of an individual tweet as necessary. Another option is to have an <em>All your replies and @mentions are shown to all your followers</em> account option that is opt-in, and let the user&rsquo;s followers determine whether the content is spam.</p>
+
+<p>Twitter, with an impending IPO, needs to help potential newcomers out in any way possible. Eliminating the need for prefixed periods is a great start to increasing accessibility.</p>
+
+<p><em>PS: I am not a huge dork.</em></p>
+]]></content>
+  </entry>
+  
+</feed>
