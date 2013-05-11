@@ -38,20 +38,40 @@ color: white;
 background-color: #2980B9;
 }
 
+.facebook a:hover{
+color: #2980B9 !important;
+}
+
 .badge.twitter {
 background-color: #3498DB;
 }
 
-.badge.google-plus {
+.twitter a:hover{
+color: #3498DB !important;
+}
+
+.badge.googleplus {
 background-color: #C0392B;
+}
+
+.googleplus a:hover {
+color: #C0392B !important;
 }
 
 .badge.linkedin {
 background-color: #34495E;
 }
 
+.linkedin a:hover{
+color: #34495E !important;
+}
+
+.github a:hover {
+color: #7F8C8D !important;
+}
+
 .sharing .badge:hover {
-background-color: #BDC3C7;
+background-color: #ECF0F1;
 }
 
 
@@ -76,13 +96,17 @@ padding-top: 10px;
 margin-bottom: 20px;
 }
 
+.sharing  .badge{
+font-size:75%;
+}
+
 @media (max-width: 979px) {
 	.nav.social {
 float: left;
 }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 767px) {
 .categories {
 display: none;
 }
