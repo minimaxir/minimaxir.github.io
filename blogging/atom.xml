@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Blogging | minimaxir | Max Woolf's Internet Blog Thingy]]></title>
+  <title><![CDATA[Category: Blogging | minimaxir]]></title>
   <link href="minimaxir.com//blogging/atom.xml" rel="self"/>
   <link href="minimaxir.com/"/>
-  <updated>2013-05-11T00:03:56-07:00</updated>
+  <updated>2013-05-11T13:20:07-07:00</updated>
   <id>minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>

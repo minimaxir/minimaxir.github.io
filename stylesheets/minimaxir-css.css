@@ -12,6 +12,10 @@ h3, h4, h5, h6,.date-time {
 color: #95A5A6
 }
 
+a:hover {
+color: #ff5544
+}
+
 p {
 margin: 0 0 20px;
 }
@@ -30,6 +34,56 @@ margin: 0 0 20px;
 color: white;
 }
 
-.nav {
-font-size: 170%
+.badge.facebook {
+background-color: #2980B9;
+}
+
+.badge.twitter {
+background-color: #3498DB;
+}
+
+.badge.google-plus {
+background-color: #C0392B;
+}
+
+.badge.linkedin {
+background-color: #34495E;
+}
+
+.sharing .badge:hover {
+background-color: #BDC3C7;
+}
+
+
+
+.nav, .sharing {
+font-size: 150%;
+}
+
+.nav.social {
+float: right;
+}
+
+.categories {
+
+border-top: 1px solid #ededed;
+margin-top: 30px;
+padding-top: 10px;
+
+}
+
+.sharing {
+margin-bottom: 20px;
+}
+
+@media (max-width: 979px) {
+	.nav.social {
+float: left;
+}
+}
+
+@media (max-width: 480px) {
+.categories {
+display: none;
+}
 }

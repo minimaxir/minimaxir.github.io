@@ -5,11 +5,17 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation - minimaxir | Max Woolf's Internet Blog Thingy</title>
+  <title>Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation - minimaxir</title>
   <meta name="author" content="Max Woolf">
 
+         <meta property="og:type" content="article" />    <meta property="og:title" content="Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation | minimaxir" />          <meta property="og:url" content="minimaxir.com/2012/10/client-side-validation-is-hard-mode/" />             <meta property="og:site_name" content="minimaxir" />   <!--    <meta property="og:description" content="Electronic Arts "Gives Away" Thousands of Free Games Due to No Server-Side Validation Oct 14th, 2012 <a href="http://www.facebook.com/share.php?u= &hellip;" /> -->      
+ 
+  <meta property="og:locale"    content="en_us" />
+  <meta property="fb:admins"    content="272535582777707" />
+  <meta property="og:image"     content="minimaxir.com/MaxFB.png" />
   
-  <meta name="description" content="Electronic Arts "Gives Away" Thousands of Free Games Due to No Server-Side Validation Oct 14th, 2012 Early Saturday morning, various gaming forums ( &hellip;">
+
+  <meta name="description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -27,7 +33,7 @@
   <link href="/stylesheets/flat-ui.css" rel="stylesheet">
   <link href="/stylesheets/minimaxir-css.css" rel="stylesheet">
   <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
-  <link href="/atom.xml" rel="alternate" title="minimaxir | Max Woolf's Internet Blog Thingy" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="minimaxir" type="application/atom+xml">
   <script src="/js/jquery.js"></script>
   <script src="/js/bootstrap-collapse.js"></script>
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -46,21 +52,21 @@
   <div class="navbar navbar-inverse navbar-static-top">
   	<div class="navbar-inner">
   	  <div class="container">
-	  <ul class="nav pull-right">
+	  <ul class="nav social">
 		<li>
-			<a href="http://facebook.com/max.woolf"> <i class="icon-facebook-sign"></i> </a>
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="icon-facebook-sign"></i> </a>
 		</li>
 		
 		<li>
-			<a href="http://twitter.com/minimaxir"> <i class="icon-twitter-sign"></i> </a>
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="icon-twitter-sign"></i> </a>
 		</li>
 		
 		<li>
-			<a href="http://linkedin.com/in/minimaxir"> <i class="icon-linkedin-sign"></i> </a>
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="icon-linkedin-sign"></i> </a>
 		</li>
 		
 		<li>
-			<a href="http://github.com/minimaxir"> <i class="icon-github-sign"></i> </a>
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="icon-github-sign"></i> </a>
 		</li>
 	</ul>
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -111,6 +117,16 @@
 </header>
   <div class="row-fluid">
     <div class="span12">
+	  <div class="row-fluid sharing">
+		  <div class="span2"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-facebook"></i> Facebook</a> </span></div>
+			<div class="span2"><span class="badge twitter"><a href="http://twitter.com/home/?status= - minimaxir.com - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-twitter"></i> Twitter</a></span></div>
+  <div class="span2"><span class="badge google-plus"><a href="https://plus.google.com/share?url=minimaxir.com"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-google-plus"></i> Google+</a></span></div>
+  <div class="span2"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=minimaxir.com"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;"><i class="icon-linkedin"></i> LinkedIn</a></span></div>
+			</div>
       <p>Early Saturday morning, <a href="http://www.gamefaqs.com/boards/916373-pc/64312901">various gaming forums</a> (and, more importantly, <a href="http://www.reddit.com/r/GameDeals/comments/11ewb0/use_the_code_os3874xvc_to_get_20_off_origin/">Reddit</a>) obtained a promotional code from mega gaming company Electronic Arts for their Origin gaming distribution service. This code entitled the user to purchase any EA published or developed game for $20 off, and if the game was less than $20, the game was free. <a href="http://www.gamers-association.com/2012/10/free-game-from-eas-origin/">Games that were made free</a> using this coupon included hit series such as Dead Space, Mass Effect, Dragon Age, and Battlefield, so the rewards for the coupon were actually pretty worthwhile. Best of all, there are no catches and no gimmicks; input promo code OS3874XVC, get game.</p>
 
 <p>The code was apparently rewarded after taking a survey regarding Origin, with the reward being one free game. The operative word being &ldquo;one.&rdquo; Some gamers, out of curiosity, discovered that by entering the code via both the store browser-interface and the store client-interface, they could get a free game twice. Gamers inferred the logical technical conclusion; EA was not checking server-side that the code was only being used once. Later, gamers noted that <a href="http://www.overclock.net/t/1315674/free-20-in-origin-code/410#post_18359737">simply inputting the code while logged-out</a> allows them to use the promo code an <em>unlimited</em> amount of times.</p>
@@ -166,6 +182,16 @@
 
 <p><strong>*</strong>| Discussion on Reddit <a href="http://www.reddit.com/r/technology/comments/11hem0/electronic_arts_gives_away_thousands_of_free/">here</a> and <a href="http://www.reddit.com/r/Games/comments/11h9nj/electronic_arts_gives_away_thousands_of_free/">here</a>.**</p>
 
+	    <div class="row-fluid sharing">
+		  <div class="span2"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-facebook"></i> Facebook</a> </span></div>
+			<div class="span2"><span class="badge twitter"><a href="http://twitter.com/home/?status= - minimaxir.com - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-twitter"></i> Twitter</a></span></div>
+  <div class="span2"><span class="badge google-plus"><a href="https://plus.google.com/share?url=minimaxir.com"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-google-plus"></i> Google+</a></span></div>
+  <div class="span2"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=minimaxir.com"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;"><i class="icon-linkedin"></i> LinkedIn</a></span></div>
+			</div>
     </div>
   </div>
 
@@ -186,13 +212,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="minimaxir.com/2012/10/client-side-validation-is-hard-mode/" data-via="minimaxir" data-counturl="minimaxir.com/2012/10/client-side-validation-is-hard-mode/" >Tweet</a>
   
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
   
 </div>
 
@@ -230,36 +250,9 @@
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 
 
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
 
 
 
