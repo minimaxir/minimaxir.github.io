@@ -98,10 +98,27 @@ margin-bottom: 20px;
 
 .sharing  .badge{
 font-size:100%;
+
+display: block;
+width: 75%
+}
+
+.sharing .badge a {
+	text-align: center;
+	display: block;
+}
+
+.sharing .badge a i{
+	float:left;
 }
 
 .hentry .sharing .badge {
-font-size: 175%
+font-size: 225%;
+margin: 0 auto;
+}
+
+.hentry .sharing .badge a i{
+float: none;
 }
 
 @media (max-width: 979px) {
@@ -119,5 +136,8 @@ display: none;
 padding: 70px 10px 70px 0px;
 }
 
+.sharing .badge {
+margin: 0 auto;
+}
 
 }
