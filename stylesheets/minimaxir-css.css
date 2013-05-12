@@ -97,7 +97,11 @@ margin-bottom: 20px;
 }
 
 .sharing  .badge{
-font-size:150%;
+font-size:100%;
+}
+
+.hentry .sharing .badge {
+font-size: 175%
 }
 
 @media (max-width: 979px) {
@@ -111,9 +115,9 @@ float: left;
 display: none;
 }
 
-body {
-padding-right: 30px;
-padding-left: 30px;
+.jumbotron {
+padding: 70px 10px 70px 0px;
 }
+
 
 }
