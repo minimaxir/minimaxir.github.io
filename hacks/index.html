@@ -51,7 +51,8 @@
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
   });
   });
  

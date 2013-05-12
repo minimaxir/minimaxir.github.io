@@ -117,9 +117,17 @@ font-size: 225%;
 margin: 0 auto;
 }
 
+@-moz-document url-prefix() {
+                      .sharing .badge a i{
+					margin-top: -5px;
+					}
+                    }
+
 .hentry .sharing .badge a i{
 float: none;
 }
+
+
 
 @media (max-width: 979px) {
 	.nav.social {
@@ -139,5 +147,15 @@ padding: 70px 10px 70px 0px;
 .sharing .badge {
 margin: 0 auto;
 }
+
+#main {
+padding: 0 10px;
+}
+
+
+@media (max-width: 767px) {
+	.date-time {
+	text-align: center;
+	}
 
 }

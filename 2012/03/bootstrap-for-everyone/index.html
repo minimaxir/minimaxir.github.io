@@ -51,7 +51,8 @@
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
   });
   });
  
@@ -164,12 +165,12 @@
     <div class="span12">
 	  <div class="row-fluid sharing">
 		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/bootstrap-for-everyone/"><i class="icon-facebook-sign"></i></a> </span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/bootstrap-for-everyone/"><i class="icon-facebook-sign"></i> -</a></span></div>
 			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Why Every New Website Will Use Bootstrap - minimaxir.com/2012/03/bootstrap-for-everyone/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-twitter-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-twitter-sign"></i> -</a> </span></div>
 
   <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Every New Website Will Use Bootstrap&url=minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-linkedin-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-linkedin-sign"></i> -</a> </span></div>
    
 			</div>
       <p>So, I decided to spruce up the blog a little bit. The old WordPress theme I had used, <a href="http://wordpress.org/extend/themes/graphene">Graphene</a>, had a lot of useful functionality, such as a featured post slider and a topbar for placing social media buttons, but the theme itself didn&rsquo;t make the blog look <em>unique</em>. Even with a few CSS tweaks to add custom styling, such as forcing the titles of blog posts to be in all-capital letters, (which makes users more likely to click them!), it still <a href="http://i.imgur.com/LQVNK.png">looked very generic</a>. When building a personal brand, generic is never good.</p>
@@ -215,12 +216,12 @@
 
 	  <div class="row-fluid sharing">
 		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/bootstrap-for-everyone/"><i class="icon-facebook-sign"></i></a> </span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/bootstrap-for-everyone/"><i class="icon-facebook-sign"></i> -</a> </span></div>
 			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Why Every New Website Will Use Bootstrap - minimaxir.com/2012/03/bootstrap-for-everyone/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-twitter-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-twitter-sign"></i> -</a></span></div>
 
   <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Every New Website Will Use Bootstrap&url=minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-linkedin-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-linkedin-sign"></i> -</a></span></div>
    
 			</div>
     </div>

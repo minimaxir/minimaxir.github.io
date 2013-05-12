@@ -51,7 +51,8 @@
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
   });
   });
  
@@ -164,12 +165,12 @@
     <div class="span12">
 	  <div class="row-fluid sharing">
 		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"><i class="icon-facebook-sign"></i></a> </span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"><i class="icon-facebook-sign"></i> -</a></span></div>
 			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet - minimaxir.com/2013/01/sexy-will-haunt-your-dreams/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-twitter-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-twitter-sign"></i> -</a> </span></div>
 
   <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet&url=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-linkedin-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-linkedin-sign"></i> -</a> </span></div>
    
 			</div>
       <p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N&#8217;Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
@@ -251,12 +252,12 @@ background-attachment: fixed !important;
 
 	  <div class="row-fluid sharing">
 		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"><i class="icon-facebook-sign"></i></a> </span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"><i class="icon-facebook-sign"></i> -</a> </span></div>
 			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet - minimaxir.com/2013/01/sexy-will-haunt-your-dreams/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-twitter-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-twitter-sign"></i> -</a></span></div>
 
   <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet&url=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-linkedin-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-linkedin-sign"></i> -</a></span></div>
    
 			</div>
     </div>

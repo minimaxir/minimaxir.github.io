@@ -51,7 +51,8 @@
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
   });
   });
  
@@ -164,12 +165,12 @@
     <div class="span12">
 	  <div class="row-fluid sharing">
 		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="icon-facebook-sign"></i></a> </span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="icon-facebook-sign"></i> -</a></span></div>
 			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT) - minimaxir.com/2013/01/if-cute-then-happiness/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-twitter-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-twitter-sign"></i> -</a> </span></div>
 
   <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)&url=minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-linkedin-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-linkedin-sign"></i> -</a> </span></div>
    
 			</div>
       <p><strong><em>TL;DR: Use this <a href="https://ifttt.com/recipes/74285">IFTTT recipe</a>, and change the subreddit value in the parameter of the Feed URL as needed.</em></strong></p>
@@ -224,12 +225,12 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 
 	  <div class="row-fluid sharing">
 		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="icon-facebook-sign"></i></a> </span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="icon-facebook-sign"></i> -</a> </span></div>
 			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT) - minimaxir.com/2013/01/if-cute-then-happiness/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-twitter-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-twitter-sign"></i> -</a></span></div>
 
   <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)&url=minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-linkedin-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-linkedin-sign"></i> -</a></span></div>
    
 			</div>
     </div>

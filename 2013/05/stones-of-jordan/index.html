@@ -51,7 +51,8 @@
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
   });
   });
  
@@ -164,12 +165,12 @@
     <div class="span12">
 	  <div class="row-fluid sharing">
 		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="icon-facebook-sign"></i></a> </span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="icon-facebook-sign"></i> -</a></span></div>
 			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Diablo III Economy Broken by an Integer Overflow Bug - minimaxir.com/2013/05/stones-of-jordan/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/05/stones-of-jordan/><i class="icon-twitter-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/05/stones-of-jordan/><i class="icon-twitter-sign"></i> -</a> </span></div>
 
   <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Diablo III Economy Broken by an Integer Overflow Bug&url=minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/05/stones-of-jordan/><i class="icon-linkedin-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/05/stones-of-jordan/><i class="icon-linkedin-sign"></i> -</a> </span></div>
    
 			</div>
       <p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
@@ -225,12 +226,12 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 	  <div class="row-fluid sharing">
 		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="icon-facebook-sign"></i></a> </span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="icon-facebook-sign"></i> -</a> </span></div>
 			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Diablo III Economy Broken by an Integer Overflow Bug - minimaxir.com/2013/05/stones-of-jordan/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/05/stones-of-jordan/><i class="icon-twitter-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/05/stones-of-jordan/><i class="icon-twitter-sign"></i> -</a></span></div>
 
   <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Diablo III Economy Broken by an Integer Overflow Bug&url=minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/05/stones-of-jordan/><i class="icon-linkedin-sign"></i></a></span></div>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/05/stones-of-jordan/><i class="icon-linkedin-sign"></i> -</a></span></div>
    
 			</div>
     </div>
