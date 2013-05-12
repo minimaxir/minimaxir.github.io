@@ -97,7 +97,7 @@ margin-bottom: 20px;
 }
 
 .sharing  .badge{
-font-size:75%;
+font-size:150%;
 }
 
 @media (max-width: 979px) {
@@ -110,4 +110,10 @@ float: left;
 .categories {
 display: none;
 }
+
+body {
+padding-right: 30px;
+padding-left: 30px;
+}
+
 }

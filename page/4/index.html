@@ -14,9 +14,9 @@
   <meta property="fb:admins"    content="272535582777707" />
   <meta property="og:image"     content="minimaxir.com/MaxFB.png" />
   
-
+<!--
   <meta name="description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
-  
+   -->
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -37,12 +37,55 @@
   <script src="/js/jquery.js"></script>
   <script src="/js/bootstrap-collapse.js"></script>
   <script src="/javascripts/modernizr-2.0.js"></script>
+  
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+  <!--<script src="/javascripts/octopress.js" type="text/javascript"></script>-->
+  
+ <script>
+ $(document).ready(function() {
+ 
+  // Facebook
+	$( ".badge.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  });
+  });
+ 
+ // Twitter
+	$( ".badge.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"icon-twitter-sign\"></i> " + data.count);
+  });
+  });
+  
+ 
+  
+  
+  // LinkedIn
+	$( ".badge.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"icon-linkedin-sign\"></i> " + data.count);
+  });
+  });
+  
+  
+  
+});
+</script>
+ 
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts 
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
 
   
 
@@ -129,14 +172,15 @@
 		  
 		  
 		    <div class="row-fluid sharing">
-		  <span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2012/03/ethics-self-promotion/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-facebook"></i> Facebook</a> </span>
+		  <span class="badge facebook" data-url="minimaxir.com/2012/03/ethics-self-promotion/"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2012/03/ethics-self-promotion/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/ethics-self-promotion/"><i class="icon-facebook-sign"></i></a> </span>
 			<span class="badge twitter"><a href="http://twitter.com/home/?status=The Ethics of Self-Promotion on the Internet - minimaxir.com/2012/03/ethics-self-promotion/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-twitter"></i> Twitter</a></span>
-  <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2012/03/ethics-self-promotion/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-google-plus"></i> Google+</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2012/03/ethics-self-promotion/><i class="icon-twitter-sign"></i></a></span>
+
   <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=The Ethics of Self-Promotion on the Internet&url=minimaxir.com/2012/03/ethics-self-promotion/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;"><i class="icon-linkedin"></i> LinkedIn</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2012/03/ethics-self-promotion/><i class="icon-linkedin-sign"></i></a></span>
+    <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2012/03/ethics-self-promotion/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" data=minimaxir.com/2012/03/ethics-self-promotion/><i class="icon-google-plus-sign"></i></a></span>
 			</div>
 		  
           
@@ -206,14 +250,15 @@
 		  
 		  
 		    <div class="row-fluid sharing">
-		  <span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2011/12/startup-checklist/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-facebook"></i> Facebook</a> </span>
+		  <span class="badge facebook" data-url="minimaxir.com/2011/12/startup-checklist/"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2011/12/startup-checklist/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2011/12/startup-checklist/"><i class="icon-facebook-sign"></i></a> </span>
 			<span class="badge twitter"><a href="http://twitter.com/home/?status=My Startup Success Criteria Checklist - minimaxir.com/2011/12/startup-checklist/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-twitter"></i> Twitter</a></span>
-  <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2011/12/startup-checklist/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-google-plus"></i> Google+</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2011/12/startup-checklist/><i class="icon-twitter-sign"></i></a></span>
+
   <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=My Startup Success Criteria Checklist&url=minimaxir.com/2011/12/startup-checklist/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;"><i class="icon-linkedin"></i> LinkedIn</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2011/12/startup-checklist/><i class="icon-linkedin-sign"></i></a></span>
+    <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2011/12/startup-checklist/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" data=minimaxir.com/2011/12/startup-checklist/><i class="icon-google-plus-sign"></i></a></span>
 			</div>
 		  
           
@@ -279,14 +324,15 @@
 		  
 		  
 		    <div class="row-fluid sharing">
-		  <span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2011/11/how-startups-make-money/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-facebook"></i> Facebook</a> </span>
+		  <span class="badge facebook" data-url="minimaxir.com/2011/11/how-startups-make-money/"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2011/11/how-startups-make-money/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2011/11/how-startups-make-money/"><i class="icon-facebook-sign"></i></a> </span>
 			<span class="badge twitter"><a href="http://twitter.com/home/?status=How Startups Make Money: Do They *Need* A Revenue Model? - minimaxir.com/2011/11/how-startups-make-money/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-twitter"></i> Twitter</a></span>
-  <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2011/11/how-startups-make-money/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-google-plus"></i> Google+</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2011/11/how-startups-make-money/><i class="icon-twitter-sign"></i></a></span>
+
   <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How Startups Make Money: Do They *Need* A Revenue Model?&url=minimaxir.com/2011/11/how-startups-make-money/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;"><i class="icon-linkedin"></i> LinkedIn</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2011/11/how-startups-make-money/><i class="icon-linkedin-sign"></i></a></span>
+    <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2011/11/how-startups-make-money/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" data=minimaxir.com/2011/11/how-startups-make-money/><i class="icon-google-plus-sign"></i></a></span>
 			</div>
 		  
           
@@ -352,14 +398,15 @@
 		  
 		  
 		    <div class="row-fluid sharing">
-		  <span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2011/11/like-x-for-y/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-facebook"></i> Facebook</a> </span>
+		  <span class="badge facebook" data-url="minimaxir.com/2011/11/like-x-for-y/"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2011/11/like-x-for-y/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2011/11/like-x-for-y/"><i class="icon-facebook-sign"></i></a> </span>
 			<span class="badge twitter"><a href="http://twitter.com/home/?status=Startups, Please Stop Saying You're "Like X for Y" - minimaxir.com/2011/11/like-x-for-y/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-twitter"></i> Twitter</a></span>
-  <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2011/11/like-x-for-y/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-google-plus"></i> Google+</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2011/11/like-x-for-y/><i class="icon-twitter-sign"></i></a></span>
+
   <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Startups, Please Stop Saying You're "Like X for Y"&url=minimaxir.com/2011/11/like-x-for-y/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;"><i class="icon-linkedin"></i> LinkedIn</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2011/11/like-x-for-y/><i class="icon-linkedin-sign"></i></a></span>
+    <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2011/11/like-x-for-y/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" data=minimaxir.com/2011/11/like-x-for-y/><i class="icon-google-plus-sign"></i></a></span>
 			</div>
 		  
           
@@ -427,14 +474,15 @@
 		  
 		  
 		    <div class="row-fluid sharing">
-		  <span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2011/10/blog-commenting-2011/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-facebook"></i> Facebook</a> </span>
+		  <span class="badge facebook" data-url="minimaxir.com/2011/10/blog-commenting-2011/"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2011/10/blog-commenting-2011/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2011/10/blog-commenting-2011/"><i class="icon-facebook-sign"></i></a> </span>
 			<span class="badge twitter"><a href="http://twitter.com/home/?status=Blog Commenting in 2011 - minimaxir.com/2011/10/blog-commenting-2011/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;"><i class="icon-twitter"></i> Twitter</a></span>
-  <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2011/10/blog-commenting-2011/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-google-plus"></i> Google+</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2011/10/blog-commenting-2011/><i class="icon-twitter-sign"></i></a></span>
+
   <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Blog Commenting in 2011&url=minimaxir.com/2011/10/blog-commenting-2011/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;"><i class="icon-linkedin"></i> LinkedIn</a></span>
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2011/10/blog-commenting-2011/><i class="icon-linkedin-sign"></i></a></span>
+    <span class="badge googleplus"><a href="https://plus.google.com/share?url=minimaxir.com/2011/10/blog-commenting-2011/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" data=minimaxir.com/2011/10/blog-commenting-2011/><i class="icon-google-plus-sign"></i></a></span>
 			</div>
 		  
           
