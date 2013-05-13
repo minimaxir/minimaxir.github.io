@@ -113,8 +113,12 @@ width: 75%
 }
 
 .hentry .sharing .badge {
-font-size: 225%;
+font-size: 200%;
 margin: 0 auto;
+}
+
+blockquote p {
+margin-bottom: 10px;
 }
 
 @-moz-document url-prefix() {
@@ -125,6 +129,14 @@ margin: 0 auto;
 
 .hentry .sharing .badge a i{
 float: none;
+}
+
+li {
+margin-bottom: 10px;
+}
+
+.nav li {
+margin-bottom: 0px;
 }
 
 
@@ -152,10 +164,29 @@ margin: 0 auto;
 padding: 0 10px;
 }
 
+.jumbotron {
+	font-size: 48px;
+}
 
-@media (max-width: 767px) {
+
+
+
+}
+
+@media (min-width: 767px) {
+#content {
+margin-right: 60px !important;
+}
+}
+
+
+@media (max-width: 479px) {
 	.date-time {
 	text-align: center;
 	}
-
+	
+	.span2 {
+	border-bottom: 2px solid #ededed;
+	}
+	
 }
