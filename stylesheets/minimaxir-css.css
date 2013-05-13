@@ -189,4 +189,8 @@ margin-right: 30px !important;
 	border-bottom: 2px solid #ededed;
 	}
 	
+	.jumbotron {
+	font-size: 40px;
+}
+	
 }
