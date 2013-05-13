@@ -195,5 +195,9 @@ margin-right: 30px !important;
 	.jumbotron {
 	font-size: 40px;
 }
+
+.span4 {
+margin: 10px 0;
+}
 	
 }
