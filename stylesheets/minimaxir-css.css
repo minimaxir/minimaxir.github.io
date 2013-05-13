@@ -139,6 +139,9 @@ margin-bottom: 10px;
 margin-bottom: 0px;
 }
 
+#global-nav, #thread-votes {
+display: none !important;
+}
 
 
 @media (max-width: 979px) {
