@@ -181,7 +181,7 @@ margin-right: 30px !important;
 
 
 @media (max-width: 479px) {
-	.date-time {
+	.date-time, h1.link {
 	text-align: center;
 	}
 	
