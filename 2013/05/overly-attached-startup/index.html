@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>When a Startup Sends Passive-Aggressive Emails Once A Day | minimaxir</title>
+  <meta name="author" content="Max Woolf">
+
+  
+ 
+ 
+ 
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="When a Startup Sends Passive-Aggressive Emails Once A Day">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2013/05/overly-attached-startup/">
+
+
+  <meta name="twitter:description" content="It's just one email, I think, so I ignore it. And then I receive another e-mail, the next day, that's much less subtle: Your website misses you! This is certainly &hellip;">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/weebly1.png">
+
+ 
+ <meta content="minimaxir" property="og:site_name">
+
+  <meta content="When a Startup Sends Passive-Aggressive Emails Once A Day" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="It's just one email, I think, so I ignore it. And then I receive another e-mail, the next day, that's much less subtle: Your website misses you! This is certainly &hellip;" property="og:description">
+
+
+  <meta content="http://minimaxir.com/2013/05/overly-attached-startup/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/weebly1.png" property="og:image">
+
+
+  
+  <meta content="Startups" property="article:section">
+  
+
+
+  
+
+ 
+  
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  
+<!--
+  <meta name="description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
+   -->
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2013/05/overly-attached-startup">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+  <link href="/stylesheets/flat-ui.css" rel="stylesheet">
+  <link href="/stylesheets/minimaxir-css.css" rel="stylesheet">
+  <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+  <link href="/atom.xml" rel="alternate" title="minimaxir" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <!--<script src="/javascripts/octopress.js" type="text/javascript"></script>-->
+  
+ <script>
+ $(document).ready(function() {
+ 
+  // Facebook
+	$( ".badge.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
+  });
+  });
+ 
+ // Twitter
+	$( ".badge.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"icon-twitter-sign\"></i> " + data.count);
+  });
+  });
+  
+ 
+  
+  
+  // LinkedIn
+	$( ".badge.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"icon-linkedin-sign\"></i> " + data.count);
+  });
+  });
+  
+  
+  
+});
+</script>
+ 
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+	  <ul class="nav social">
+		<li class="facebook">
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="icon-facebook-sign"></i> </a>
+		</li>
+		
+		<li class="twitter">
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="icon-twitter-sign"></i> </a>
+		</li>
+		
+		<li class="linkedin">
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="icon-linkedin-sign"></i> </a>
+		</li>
+		
+		<li class="github">
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="icon-github-sign"></i> </a>
+		</li>
+		
+		
+	</ul>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+	
+      
+   		<li><a href="/">Home</a></li>
+   	       
+    
+      
+   		<li><a href="/about">About</a></li>
+   	       
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+    <div class="span12">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    When a Startup Sends Passive-Aggressive Emails Once a Day
+    <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-13T18:51:00-07:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+	  <div class="row-fluid sharing">
+		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/overly-attached-startup/"><i class="icon-facebook-sign"></i> -</a></span></div>
+			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=When a Startup Sends Passive-Aggressive Emails Once A Day - minimaxir.com/2013/05/overly-attached-startup/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/05/overly-attached-startup/><i class="icon-twitter-sign"></i> -</a> </span></div>
+
+  <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=When a Startup Sends Passive-Aggressive Emails Once A Day&url=minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/05/overly-attached-startup/><i class="icon-linkedin-sign"></i> -</a> </span></div>
+   
+			</div>
+      <p>A couple weeks ago, my best friend wanted to make a personal website. After talking with her about what types of features she wanted (home page, photo galleries, low price, etc.) I recommended that she use a website-building platform with a <a href="http://en.wikipedia.org/wiki/WYSIWYG">WYSIWYG</a> editor, such as <a href="http://www.wix.com/">Wix</a> or <a href="http://www.weebly.com/">Weebly</a>. I had heard good things about both websites, especially Weebly, a <a href="http://techcrunch.com/2007/01/15/weebly-goes-with-ycombinator/">Y Combinator startup</a> which has been <a href="http://techcrunch.com/2013/05/03/with-over-15m-sites-built-weebly-launches-new-planner-and-mobile-editor-brings-website-creation-service-to-android/">rolling out new features</a> and receiving positive reviews.</p>
+
+<p>She registered for Weebly and loved it. I registered as well to check it out, and I was also impressed after creating a draft test website and experimenting with both drag-and-drop UI elements and raw HTML/CSS editing. Since Weebly has Contributor functionality, I was able to edit her website without having to access her account. I made a few CSS tweaks and that was it: I didn&rsquo;t publish my own website on Weebly, as I&rsquo;m very happy with this blog. :)</p>
+
+<p>A day after her website was published, I received an e-mail from Weebly: a generic &ldquo;First Steps to Creating Your Website.&rdquo; It&rsquo;s just one email, I think, so I ignore it. And then, the next day, I receive another e-mail that was much less subtle: &ldquo;Your website misses you!&rdquo;</p>
+
+<p>This is certainly the first time a startup&rsquo;s emails have tried to <em>guilt</em> me into using the service.</p>
+
+<!-- more -->
+
+
+<h1>An Email A Day Keeps The Users Away</h1>
+
+<p><img src="/img/weebly1.png" alt="" /></p>
+
+<p>When I register for <em>any</em> business, not just including startups, I don&rsquo;t enjoy seeing any emails that aren&rsquo;t helpful or aren&rsquo;t expected. I&rsquo;m OK when businesses send emails that alert me when a new service has been launched or when a scheduled newsletter is released. In the former case, the email is directly relevant to my interests, in the latter case, the email is not an unexpected surprise.</p>
+
+<p>In Weebly&rsquo;s case, and any other startup that resorts to forward emailing strategies as a form of &ldquo;growth hacking,&rdquo; they&rsquo;re invalidating my trust. A once-a-month announcement about your business is OK, but if I want to visit your website, I don&rsquo;t need to be reminded every <em>day</em>.</p>
+
+<p>Let&rsquo;s look at the emails that Weebly has sent:</p>
+
+<h2>May 5th: First Steps to Creating Your Website</h2>
+
+<p><img src="/img/weebly2.png" alt="" /></p>
+
+<p>This is actually a good first e-mail.</p>
+
+<p>It adds a personal touch. I didn&rsquo;t pay much attention to it since I didn&rsquo;t plan on publishing my own website, but to a new customer, it makes them feel welcome.</p>
+
+<h2>May 6th: Your website misses you!</h2>
+
+<p><img src="/img/weebly3.png" alt="" /></p>
+
+<p>I received this <em>the next day</em> after the previous email. My website misses me? It&rsquo;s been two days! Which you tell me with a rather disturbing amount of precision!</p>
+
+<p>My website is not a cow in FarmVille. I don&rsquo;t need to publish my website immediately. In fact, if I were to publish a website, I would make sure it&rsquo;s polished first, in which case the email&rsquo;s push toward publishing ASAP would actually be insulting.</p>
+
+<h2>May 7th: Need Any Help?</h2>
+
+<p><img src="/img/weebly4.png" alt="" /></p>
+
+<p>Here&rsquo;s a totally-not-automatically-generated e-mail by a employee at Weebly. It lacks any Weebly branding, which supposedly gives it a more &ldquo;personal&rdquo; touch&hellip;except if Richard wanted to give it a personal touch, he would have included <em>my name</em>. The <a href="http://emailmarketing.comm100.com/email-marketing-ebook/can-spam-law.aspx">legally-mandated</a> unsubscribe link, a requirement for commercial emails, doesn&rsquo;t make me feel any more comfortable.</p>
+
+<p>And again, it&rsquo;s only been three days.</p>
+
+<h2>May 8th: Max, check out your mobile website!</h2>
+
+<p><img src="/img/weebly5.png" alt="" /></p>
+
+<p>While that feature may be cool, finding an <em>excuse</em> to send me an e-mail really isn&rsquo;t necessary.</p>
+
+<p>Weebly skipped May 9th, fortunately.</p>
+
+<h2>May 10th: Free vs. Pro: Which One is Right for You?</h2>
+
+<p><img src="/img/weebly6.png" alt="" /></p>
+
+<p>&ldquo;As you may have noticed.&rdquo; In that case, why bother sending the e-mail? Will the e-mail&rsquo;s argument be any different?</p>
+
+<h2>May 11th: Max, get 33% off at Weebly!</h2>
+
+<p><img src="/img/weebly7.png" alt="" /></p>
+
+<p>Now we&rsquo;re mixing both overly precise user registration dates <em>and</em> &ldquo;as you may have noticed&rdquo; verbage! I did notice, as a matter of fact! I noticed <em>yesterday</em>!</p>
+
+<h2>May 12th: It&rsquo;s been 8 days, 2 hours, 30 minutes and 6 seconds&hellip;</h2>
+
+<p><img src="/img/weebly8.png" alt="" /></p>
+
+<p>Ok, seriously, what the hell?</p>
+
+<p>At this point, Weebly is seriously <em>threatening</em> me into publishing my website. Gone are the informative email subject lines: now, Weebly simply <em>reminds</em> me how much time I&rsquo;ve spent not working on a website. They&rsquo;ve graduated from passive-aggressive to just aggressive.</p>
+
+<p>What&rsquo;s genuinely terrifying is that Weebly actually created a custom email message to send to users to send after a week of having an unpublished site. <em>They tested this email behavior and thought this was a good idea.</em> Apparently, they never considered that a user could exist solely to contribute to another user&rsquo;s website.</p>
+
+<p>Some might say that I should have unsubscribed if I was unhappy with Weebly&rsquo;s emails. Indeed, all the e-mails had unsubscribe links, hidden where most people won&rsquo;t see them of course. But that&rsquo;s not the point: if startups keep sending forward e-mails, <em>everyone</em> loses.</p>
+
+<p>At the least, I&rsquo;m very cautious to recommend Weebly to anyone else.</p>
+
+	  <div class="row-fluid sharing">
+		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/overly-attached-startup/"><i class="icon-facebook-sign"></i> -</a> </span></div>
+			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=When a Startup Sends Passive-Aggressive Emails Once A Day - minimaxir.com/2013/05/overly-attached-startup/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=minimaxir.com/2013/05/overly-attached-startup/><i class="icon-twitter-sign"></i> -</a></span></div>
+
+  <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=When a Startup Sends Passive-Aggressive Emails Once A Day&url=minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=minimaxir.com/2013/05/overly-attached-startup/><i class="icon-linkedin-sign"></i> -</a></span></div>
+   
+			</div>
+    </div>
+  </div>
+
+
+  <footer>
+    <p class="meta">
+
+      
+
+<span class="categories">
+  
+    
+          <span class="badge"><a href="/startups">Startups</a></span>
+     
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/05/stones-of-jordan/" title="Previous Post: Diablo III Economy Broken by an Integer Overflow Bug">&laquo; Diablo III Economy Broken by an Integer Overflow Bug</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2013 - Max Woolf -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a> - Heavily <a href="https://github.com/minimaxir/octoflat">modified</a> by Max Woolf
+</p>
+<p><em>All opinions stated by Max Woolf are his own.</em></p>
+
+        </footer>
+      </div>
+    </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2013/05/overly-attached-startup/';
+        var disqus_url = 'http://minimaxir.com/2013/05/overly-attached-startup/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

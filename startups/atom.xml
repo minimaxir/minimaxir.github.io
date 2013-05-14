@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Startups | minimaxir]]></title>
   <link href="minimaxir.com//startups/atom.xml" rel="self"/>
   <link href="minimaxir.com/"/>
-  <updated>2013-05-12T20:36:21-07:00</updated>
+  <updated>2013-05-13T22:20:12-07:00</updated>
   <id>minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[When a Startup Sends Passive-Aggressive Emails Once A Day]]></title>
+    <link href="minimaxir.com/2013/05/overly-attached-startup/"/>
+    <updated>2013-05-13T18:51:00-07:00</updated>
+    <id>minimaxir.com/2013/05/overly-attached-startup</id>
+    <content type="html"><![CDATA[<p>A couple weeks ago, my best friend wanted to make a personal website. After talking with her about what types of features she wanted (home page, photo galleries, low price, etc.) I recommended that she use a website-building platform with a <a href="http://en.wikipedia.org/wiki/WYSIWYG">WYSIWYG</a> editor, such as <a href="http://www.wix.com/">Wix</a> or <a href="http://www.weebly.com/">Weebly</a>. I had heard good things about both websites, especially Weebly, a <a href="http://techcrunch.com/2007/01/15/weebly-goes-with-ycombinator/">Y Combinator startup</a> which has been <a href="http://techcrunch.com/2013/05/03/with-over-15m-sites-built-weebly-launches-new-planner-and-mobile-editor-brings-website-creation-service-to-android/">rolling out new features</a> and receiving positive reviews.</p>
+
+<p>She registered for Weebly and loved it. I registered as well to check it out, and I was also impressed after creating a draft test website and experimenting with both drag-and-drop UI elements and raw HTML/CSS editing. Since Weebly has Contributor functionality, I was able to edit her website without having to access her account. I made a few CSS tweaks and that was it: I didn&rsquo;t publish my own website on Weebly, as I&rsquo;m very happy with this blog. :)</p>
+
+<p>A day after her website was published, I received an e-mail from Weebly: a generic &ldquo;First Steps to Creating Your Website.&rdquo; It&rsquo;s just one email, I think, so I ignore it. And then, the next day, I receive another e-mail that was much less subtle: &ldquo;Your website misses you!&rdquo;</p>
+
+<p>This is certainly the first time a startup&rsquo;s emails have tried to <em>guilt</em> me into using the service.</p>
+
+<!-- more -->
+
+
+<h1>An Email A Day Keeps The Users Away</h1>
+
+<p><img src="/img/weebly1.png" alt="" /></p>
+
+<p>When I register for <em>any</em> business, not just including startups, I don&rsquo;t enjoy seeing any emails that aren&rsquo;t helpful or aren&rsquo;t expected. I&rsquo;m OK when businesses send emails that alert me when a new service has been launched or when a scheduled newsletter is released. In the former case, the email is directly relevant to my interests, in the latter case, the email is not an unexpected surprise.</p>
+
+<p>In Weebly&rsquo;s case, and any other startup that resorts to forward emailing strategies as a form of &ldquo;growth hacking,&rdquo; they&rsquo;re invalidating my trust. A once-a-month announcement about your business is OK, but if I want to visit your website, I don&rsquo;t need to be reminded every <em>day</em>.</p>
+
+<p>Let&rsquo;s look at the emails that Weebly has sent:</p>
+
+<h2>May 5th: First Steps to Creating Your Website</h2>
+
+<p><img src="/img/weebly2.png" alt="" /></p>
+
+<p>This is actually a good first e-mail.</p>
+
+<p>It adds a personal touch. I didn&rsquo;t pay much attention to it since I didn&rsquo;t plan on publishing my own website, but to a new customer, it makes them feel welcome.</p>
+
+<h2>May 6th: Your website misses you!</h2>
+
+<p><img src="/img/weebly3.png" alt="" /></p>
+
+<p>I received this <em>the next day</em> after the previous email. My website misses me? It&rsquo;s been two days! Which you tell me with a rather disturbing amount of precision!</p>
+
+<p>My website is not a cow in FarmVille. I don&rsquo;t need to publish my website immediately. In fact, if I were to publish a website, I would make sure it&rsquo;s polished first, in which case the email&rsquo;s push toward publishing ASAP would actually be insulting.</p>
+
+<h2>May 7th: Need Any Help?</h2>
+
+<p><img src="/img/weebly4.png" alt="" /></p>
+
+<p>Here&rsquo;s a totally-not-automatically-generated e-mail by a employee at Weebly. It lacks any Weebly branding, which supposedly gives it a more &ldquo;personal&rdquo; touch&hellip;except if Richard wanted to give it a personal touch, he would have included <em>my name</em>. The <a href="http://emailmarketing.comm100.com/email-marketing-ebook/can-spam-law.aspx">legally-mandated</a> unsubscribe link, a requirement for commercial emails, doesn&rsquo;t make me feel any more comfortable.</p>
+
+<p>And again, it&rsquo;s only been three days.</p>
+
+<h2>May 8th: Max, check out your mobile website!</h2>
+
+<p><img src="/img/weebly5.png" alt="" /></p>
+
+<p>While that feature may be cool, finding an <em>excuse</em> to send me an e-mail really isn&rsquo;t necessary.</p>
+
+<p>Weebly skipped May 9th, fortunately.</p>
+
+<h2>May 10th: Free vs. Pro: Which One is Right for You?</h2>
+
+<p><img src="/img/weebly6.png" alt="" /></p>
+
+<p>&ldquo;As you may have noticed.&rdquo; In that case, why bother sending the e-mail? Will the e-mail&rsquo;s argument be any different?</p>
+
+<h2>May 11th: Max, get 33% off at Weebly!</h2>
+
+<p><img src="/img/weebly7.png" alt="" /></p>
+
+<p>Now we&rsquo;re mixing both overly precise user registration dates <em>and</em> &ldquo;as you may have noticed&rdquo; verbage! I did notice, as a matter of fact! I noticed <em>yesterday</em>!</p>
+
+<h2>May 12th: It&rsquo;s been 8 days, 2 hours, 30 minutes and 6 seconds&hellip;</h2>
+
+<p><img src="/img/weebly8.png" alt="" /></p>
+
+<p>Ok, seriously, what the hell?</p>
+
+<p>At this point, Weebly is seriously <em>threatening</em> me into publishing my website. Gone are the informative email subject lines: now, Weebly simply <em>reminds</em> me how much time I&rsquo;ve spent not working on a website. They&rsquo;ve graduated from passive-aggressive to just aggressive.</p>
+
+<p>What&rsquo;s genuinely terrifying is that Weebly actually created a custom email message to send to users to send after a week of having an unpublished site. <em>They tested this email behavior and thought this was a good idea.</em> Apparently, they never considered that a user could exist solely to contribute to another user&rsquo;s website.</p>
+
+<p>Some might say that I should have unsubscribed if I was unhappy with Weebly&rsquo;s emails. Indeed, all the e-mails had unsubscribe links, hidden where most people won&rsquo;t see them of course. But that&rsquo;s not the point: if startups keep sending forward e-mails, <em>everyone</em> loses.</p>
+
+<p>At the least, I&rsquo;m very cautious to recommend Weebly to anyone else.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet]]></title>
@@ -240,143 +326,6 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 
 
 <p><em>Per #3 and the personal liability it poses, I won&rsquo;t be releasing my source code for the filters, but you can easily create your own by using the <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Stylish extension for Chrome</a> and implementing <a href="http://www.html5rocks.com/en/tutorials/filters/understanding-css/">CSS filters</a> into a style.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Totally-Real Totally-Serious Startup Pitch For Venture Capital]]></title>
-    <link href="minimaxir.com/2012/12/totally-real-totally-serious/"/>
-    <updated>2012-12-26T21:26:00-08:00</updated>
-    <id>minimaxir.com/2012/12/totally-real-totally-serious</id>
-    <content type="html"><![CDATA[<p><em>Here are presentation slides and a transcript from a totally-real totally-serious startup pitch I did recently for a group of<strong> </strong></em>totally-real totally-serious venture capitalists for <em>totally-real totally-serious venture capital.</em>**</p>
-
-<p><em>This presentation is totally-real totally-serious and not fabricated in any way whatsoever for the purpose of humor. The business and technical terminologies used in this presentation are totally-real totally-serious representations of my own knowledge. I </em>totally-real totally-serious <em>pinky-swear!</em></p>
-
-<p><em>[This isn&rsquo;t real.]</em></p>
-
-<!-- more -->
-
-
-<p></p>
-
-<h2><strong>Introduction</strong></h2>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide1.png?resize=625%2C352" alt="Slide1" /></p>
-
-<p>Good afternoon, and thank you all for giving me the opportunity to present my startup proposal. I&rsquo;m Max Woolf, I&rsquo;m here with NegaCycl, and I&rsquo;m going to make you a billion dollars, no problem.</p>
-
-<p>Today, I&rsquo;ll be talking about NegaCycl, and I hope that by end of the presentation, you&rsquo;ll agree that this startup is timeless. First, I&rsquo;ll be discussing the inspiring, book-and-movie-deal-worthy events that led toward this business idea. I&rsquo;ll tell you a bit about NegaCycl and how it works, and lastly, you&rsquo;ll see a few cool ways we plan to market the business.</p>
-
-<p>Our mission at NegaCycl is simple: <strong>we are a web application that allows us to provide our users the quickest routes &ndash; regardless of where and <em>when</em> they want to go to.</strong></p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide4.png?resize=625%2C352" alt="Slide4" /></p>
-
-<p>I&rsquo;m here today to formally ask you for $2.01 million in seed money for NegaCycl. Yes, that $0.01 million is significant.</p>
-
-<h2><strong>The Eureka Moment</strong></h2>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide6.png?resize=625%2C352" alt="Slide6" /></p>
-
-<p>On a cold Monday night in November after work, I turned on my TV and began to watch the pilot episode of Start-Ups: Silicon Valley: a reality TV show on Bravo that captures the entrepreneurial essence of the Bay Area&hellip; which apparently involves a lot of dating and partying. Huh, you learn something new every day.</p>
-
-<p>During the episode, the cast members throw an extremely classy toga party to celebrate the launch of some fitness startup no one really cares about.</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide7.png?resize=625%2C352" alt="Slide7" /></p>
-
-<p>After becoming incredibly inebriated at the party, the cast members played <em>the</em> most popular party game for nerds: Drunk Computer Science Trivia.</p>
-
-<p>One question asked to a cast member was<em> &ldquo;How do you solve negative cycles?&rdquo;</em> I thought that was weird; I personally had never heard of the term &ldquo;negative cycle&rdquo; before, and the question didn&rsquo;t seem scripted like a typical Bravo show. What the heck are negative cycles, and how do you solve them?</p>
-
-<p>After a few vicious Google searches, I discovered what negative cycles were. More importantly, I made a startling realization: people in the real world actually care about these negative cycles! And just think, if negative cycles are relevant to those who are incredibly drunk, imagine how important they&rsquo;ll be to those who are sober! Clearly, this market has been vali &ndash; <em>wait for it</em> &ndash;</p>
-
-<p>dated! Yes, reality shows on Bravo are heavily edited for added drama, but no one can edit&hellip; inspiration.</p>
-
-<h2><strong>What is NegaCycl?</strong></h2>
-
-<p>Now, you may be asking &ldquo;What is NegaCycl?&rdquo; Yes, as you&rsquo;ve likely figured out, it&rsquo;s a portmanteau of &ldquo;negative&rdquo; and &ldquo;cycle&rdquo;, but there&rsquo;s a lot more to it.</p>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/gxfgcfg.png?resize=625%2C352" alt="Slide10" /></p>
-
-<p>Cycles are a part of a branch of computer science known as Graph Theory. In Graph Theory, graphs are networks which connect<em> blah blah blah</em>&hellip;</p>
-
-<p>&hellip;this slide is boring. Moving on.</p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide11.png?resize=625%2C352" alt="Slide11" /></p>
-
-<p>On this map are arbitrary numbers for each path which represent the amount of time it takes to go between each city. Let&rsquo;s say, for example, a person wants to go from Boston to New York. What&rsquo;s the route that will take the shortest total amount of time? Do you go Boston &ndash; San Diego &ndash; New York, or Boston &ndash; Atlanta &ndash; New York, or even Boston &ndash; Atlanta &ndash; St. Louis &ndash; New York? Solving it through brute force by calculating every possible route and their respective total times is not sexy.</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/jchjghjghj.png?resize=625%2C352" alt="Slide12" /></p>
-
-<p>In the previous slide, we made the implicit assumption that time always moves forward. That isn&rsquo;t necessarily true. Maybe in the future, some startup offering particle-accelerators-as-a-service gets too popular, their users accidently form a few black holes, and boom, time and space crack. Oops! It could happen to anyone, and once it does, time can move backward. In this example, you could go back and forth, or &ldquo;cycle&rdquo;, between Atlanta and St. Louis to go further and further back in time. In that case, the math to find the shortest route between Boston and New York becomes even less sexy.</p>
-
-<p>We can&rsquo;t have unsexiness. We&rsquo;re a startup. We&rsquo;re sexy. And we know it.</p>
-
-<p>Back to the Drunk Computer Science Trivia on Bravo: how do you solve negative cycles anyways? The cast member replied with<em> &ldquo;Are we talking Bellman&rsquo;s algorithm or Dijkstra&rsquo;s algorithm?&rdquo;</em></p>
-
-<p>And after a few more vicious Google searches, I discovered that the answer is&hellip; neither of those two algorithms because the show&rsquo;s cast members are dum-dums.</p>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide14.png?resize=625%2C352" alt="Slide14" /></p>
-
-<p>Now, let&rsquo;s get to the meat of the pitch: what<em> is</em> NegaCycl? It&rsquo;s simply a web app that calculates the route of the shortest amount of time for travel using the Bellman-Ford algorithm. The Bellman-Ford algorithm solves graphs containing these negative cycles, and thus in the context of travel, it can account for time moving backwards, as with Atlanta and St. Louis. Easy peasy lemon squeezy.</p>
-
-<p>Currently, NegaCycl is the <em>only</em> startup that accounts for fractures in the space-time continuum. Sure, startups might use APIs from Facebook and Twitter in their own code, but no other startup uses the API&hellip; of the universe. Since the underlying 12 lines of pseudocode are so elegant and efficient, we&rsquo;ll be able to scale without breaking a sweat. We&rsquo;re going to do PHP, because Facebook uses PHP for their server language and Facebook has over 1 billion users, so it&rsquo;s legit. Lastly, this time-routing technology would be very useful for enterprise shipping companies, such as UPS and FedEx, and we could potentially license it to them. Imagine: you could receive your delivery from an online order&hellip;before you even order it.</p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide15.png?resize=625%2C352" alt="Slide15" /></p>
-
-<p>Unfortunately, I don&rsquo;t have a working demo of the app to show you today, but here&rsquo;s a screenshot of the prototype. We&rsquo;re using Twitter Bootstrap as the core framework for our front-end interface, as it looks cool and it&rsquo;s free, and that&rsquo;s good enough for me!</p>
-
-<h2><strong>How will we market NegaCycl?</strong></h2>
-
-<p>There are a lot of players in the travel space. How will we market NegaCycl so that it stands out from the crowd? You&rsquo;ll see that we have that very well planned.</p>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide18.png?resize=625%2C352" alt="Slide18" /></p>
-
-<p>With startups, one of the key drivers of success is who you know, and who <em>they</em> know. That&rsquo;s why I&rsquo;ve decided to utilize two very influential tech celebrities to help publicize NegaCycl: Michael Arrington, the founder and former head editor of TechCrunch, and Robert Scoble, a popular journalist with hundreds of thousands of social media followers,</p>
-
-<p>I, personally, am Facebook friends with both of them. They&rsquo;re my biffles, my best friends for life!</p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide19.png?resize=625%2C352" alt="Slide19" /></p>
-
-<p>During my time as a business major at Carnegie Mellon University, I&rsquo;ve learnt that brand identity is one of the most important assets for a business. Between two otherwise equal startups, the one whose logo is cleanest and whose web pages are shiniest will be the winner.</p>
-
-<p>The name &ldquo;NegaCycl&rdquo; is very catchy. Note how there&rsquo;s no vowels in Cycl! Poor literacy is kewl nowadays, and the blatant deliberate typographical mistake will make our grammar-obsessed potential users much more likely to remember our name and curse us out on public forums. Hey, free advertising!</p>
-
-<p>Additionally,  I&rsquo;ve taken great care in designing a unique logo myself for NegaCycl, one that will be remembered forever. Do you know how long it took me to align all the vectors to create this excellent logo? Like, 20 minutes. 20 minutes! Have you noticed that the logo looks like a bicycle? That&rsquo;s completely intentional. Have you noticed that the face is negative? That&rsquo;s also completely intentional. The visual subtext in this logo is quite clearly indicative of a logo for a future Fortune 500 company: a company named NegaCycl!</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide22.png?resize=625%2C352" alt="Slide22" /></p>
-
-<p>And now, my plan for social media promotion with NegaCycl. I&rsquo;ve developed a automated script that does community management for our Facebook brand page by using a proven effective strategy. At no additional cost. Trust me, I read <em>The Lean Startup</em> by Eric Ries, I&rsquo;m an expert at being lean.*<br/>
-*</p>
-
-<p>We start by finding cute pictures, which are statistically proven to have a greater response rate than boring startup press announcements <em>ugh</em>. The automated script parses Reddit, a link and image aggregator, and its API for the top cute pictures of the day. Then, the script applies a NegaCycl watermark in the lower-right corner of the image, and posts the image on our Facebook page for our fans to see. When our users inevitably share the image, we get <strong>all</strong> the credit. Everyone on Facebook will see NegaCycl as the harbinger of happiness and cuddles.</p>
-
-<p>In the post message, we will ask questions to users, as they also make people more likely to respond. &ldquo;What do you think of this picture?&rdquo; &ldquo;What are you doing today?&rdquo; &ldquo;What is the answer to life, the universe, and everything?&rdquo; Things like that. The automated script does not spend time reading the user responses to the question because it&rsquo;s an asshole.</p>
-
-<p>Lastly, we will encourage the users to Like, Share, and Comment on our pictures. Whenever a Facebook user does any of those three things on a NegaCycl post, the NegaCycl post then appears on the News Feeds of that user&rsquo;s friends, and the cycle repeats until Facebook is <em>ours. </em>And once we conquer Facebook, we&rsquo;ll conquer Twitter as well, and I guess we&rsquo;ll also conquer Google%2B because why not it&rsquo;s not hard.</p>
-
-<p>We become a successful travel startup, or we pivot into a generic image regurgitator. Either works for me, really.</p>
-
-<h2><strong>Conclusion</strong></h2>
-
-<p>You&rsquo;ve seen how we came up with the idea. You&rsquo;ve seen how we&rsquo;re going to execute the idea. You&rsquo;ve seen how we&rsquo;re going to promote the idea. NegaCycl will indeed change the way you use travel apps: you no longer have to ask &ldquo;where do I want to go to&rdquo;, but <em>when</em> do I want to go to.</p>
-
-<p>NegaCycl may be a crazy idea for a startup, sure. We don&rsquo;t use any photo filters! However, it&rsquo;s the crazy ideas that are the most disruptive in Silicon Valley, and not only will we disrupt the travel space, but we will also disrupt the travel time.</p>
-
-<p>As we said earlier, we ask you for $2.01 million, and we&rsquo;ll use this couple of millions to make a couple of billions. Piece of cake. Chocolate cake.</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide25.png?resize=625%2C352" alt="Slide25" /></p>
-
-<p>We will put your money to very good use.</p>
-
-<p>We&rsquo;re going to spend $1 million for a waterfront office in San Francisco. I want to look outside the window and be able to see the Golden Gate Bridge and Alcatraz. Alcatraz is so much fun!</p>
-
-<p>We&rsquo;ll use another $1 million to throw the most epic toga launch party ever. Bravo had a good one, and we&rsquo;re to going to top that. One word: Lions. Gladiatorial combat, anyone? We&rsquo;ll get so much press and word-of-mouth advertising, especially if someone gets killed!</p>
-
-<p>Lastly, we&rsquo;ll use the remaining $0.01 million to hire a programmer to make the damn app.</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide26.png?resize=625%2C352" alt="Slide1" /></p>
-
-<p>In all, I hope that you&rsquo;ll invest your money in our startup. So, what did you think of this presentation? Do you think you&rsquo;ll invest in NegaCycl? Like, share, and comment!</p>
 ]]></content>
   </entry>
   

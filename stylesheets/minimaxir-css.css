@@ -7,14 +7,18 @@ h1, h2 {
 color: #2980B9
 }
 
+hr {
+border-top: 1px solid #3498DB;
+}
+
+.jumbotron {
+color: #2980B9;
+}
 
 h3, h4, h5, h6,.date-time {
 color: #95A5A6
 }
 
-a:hover {
-color: #ff5544
-}
 
 p {
 margin: 0 0 20px;
