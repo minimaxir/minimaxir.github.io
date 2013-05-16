@@ -78,6 +78,18 @@ color: #7F8C8D !important;
 background-color: #ECF0F1;
 }
 
+.badge.max-header {
+background-color: #2980B9;
+}
+
+.badge.max-header:hover {
+background-color: #34495e;
+}
+
+.jumbotron:after  {
+content: none;
+}
+
 
 
 .nav, .sharing {
@@ -198,6 +210,7 @@ margin-right: 30px !important;
 	
 	.jumbotron {
 	font-size: 40px;
+	line-height: 50px;
 }
 
 .span4 {

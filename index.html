@@ -92,7 +92,8 @@
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
   if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
-  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
+  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + " 0");
   });
   });
  
@@ -184,10 +185,19 @@
       <div class="row-fluid">
         <div id="content">
           <div class="jumbotron">
-  <div class="container">
+
+<div class="row-fluid">
+    <div class="span2 badge visible-desktop max-header">
+	<a href="/about"><img src="/MaxFB.png"></a>
+	</div>
+	<div class="span10">
+  <div>
     Max Woolf 
-    <h3 class="tagline">CMU alum, software QA engineer in San Francisco</h3>
+    <h3 class="tagline">CMU business IT graduate, software QA engineer in San Francisco, sarcastic tech blog commenter.</h3>
   </div>
+  
+  </div>
+</div>
 </div>
 <div class="blog-index">
   

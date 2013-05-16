@@ -92,7 +92,8 @@
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
   if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
-  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
+  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + " 0");
   });
   });
  
@@ -204,7 +205,7 @@
 <time datetime="2013-05-14T23:21:00-07:00" pubdate data-updated="true">May 14<span>th</span>, 2013</time></p>
   </header>
   
-  <p>You can contact through any of the following channels, although e-mail at <a href="&#x6d;&#97;&#x69;&#108;&#116;&#111;&#58;&#109;&#x61;&#120;&#64;&#x6d;&#105;&#110;&#105;&#x6d;&#x61;&#x78;&#x69;&#114;&#x2e;&#99;&#111;&#109;">&#x6d;&#97;&#x78;&#64;&#x6d;&#x69;&#x6e;&#105;&#109;&#x61;&#x78;&#x69;&#114;&#46;&#x63;&#111;&#x6d;</a> is preferred. Following me on Facebook and Twitter certainly doesn&rsquo;t hurt either. ;)</p>
+  <p>You can contact through any of the following channels, although e-mail at <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#109;&#x61;&#x78;&#x40;&#109;&#105;&#x6e;&#105;&#x6d;&#x61;&#120;&#105;&#114;&#x2e;&#99;&#x6f;&#x6d;">&#109;&#97;&#120;&#64;&#109;&#x69;&#x6e;&#x69;&#x6d;&#97;&#x78;&#105;&#x72;&#x2e;&#99;&#x6f;&#109;</a> is preferred. Following me on Facebook and Twitter certainly doesn&rsquo;t hurt either. ;)</p>
 
 <hr />
 
