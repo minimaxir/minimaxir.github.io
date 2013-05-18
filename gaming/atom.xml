@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Gaming | minimaxir]]></title>
+  <title><![CDATA[Category: Gaming | minimaxir | Max Woolf's Blog]]></title>
   <link href="minimaxir.com//gaming/atom.xml" rel="self"/>
   <link href="minimaxir.com/"/>
-  <updated>2013-05-15T23:16:09-07:00</updated>
+  <updated>2013-05-18T10:00:44-07:00</updated>
   <id>minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Profanity-Laced Video Game Password That Breaks Everything]]></title>
+    <link href="minimaxir.com/2013/05/its-a-livin/"/>
+    <updated>2013-05-16T20:50:00-07:00</updated>
+    <id>minimaxir.com/2013/05/its-a-livin</id>
+    <content type="html"><![CDATA[<p><img class="pull-right" src="/img/metroidboxart.jpg"></p>
+
+<p>If you&rsquo;re a fan of video games, you&rsquo;ve likely heard of the Metroid franchise. Released for the NES in 1986 by Nintendo, Metroid set a new standard for 2-D exploration in video games with its expansive power-up system, well-hidden secrets, and polished platforming controls. Due to its popularity, Metroid has been rereleased multiple times: as an unlockable in <a href="http://en.wikipedia.org/wiki/Metroid_Prime">Metroid Prime</a>, an unlockable in the remake <a href="http://en.wikipedia.org/wiki/Metroid_Zero_Mission">Metroid: Zero Mission</a>, a <a href="http://en.wikipedia.org/wiki/Classic_NES_Series">standalone game</a> on the Game Boy Advance, the Wii Virtual Console, and the 3DS Virtual Console.</p>
+
+<p>You play as Samus Aran, an armored bounty hunter who has infiltrated the base of the dreaded Space Pirates on Planet Zebes. Samus must defeat the leaders of the Space Pirates: the dinosaur Kraid, the dragon and memetic badass of the series <a href="http://en.wikipedia.org/wiki/Ridley_(Metroid)">Ridley</a>, and the AI construct <a href="http://en.wikipedia.org/wiki/Mother_Brain_(Metroid)">Mother Brain</a>. Additionally, Samus must find a way to defeat the Metroids, which are nearly-indestructible parasites that threaten all life. Yes, this was a plot written in the 80&rsquo;s.</p>
+
+<p>Since the NES Metroid cartridge did not have the ability to save games, and the game itself took awhile to complete, Nintendo developed a password system to allow players to continue at a later time. Upon death, the player received a 24-character alphanumeric password that could be entered to restore all items the player has unlocked and remember which bosses the player has defeated. Most of these passwords were gibberish that required a pen-and-paper to write down and remember.</p>
+
+<p>One password, however, is more memorable, and much more sinister.</p>
+
+<!-- more -->
+
+
+<h1>The Password is Always Swordfish</h1>
+
+<p>Even before the days of the internet and personal computing, players <a href="http://metroid.wikia.com/wiki/List_of_Metroid_passwords">found passwords</a> with unique properties.</p>
+
+<p>The <a href="http://metroid.wikia.com/wiki/Narpas_Sword">Narpas Sword password</a>:</p>
+
+<p><img src="/img/narpassword.png"></p>
+
+<p>is essentially the debug mode for the game, with all items unlocked, infinite health, and infinite health for Samus.</p>
+
+<p>Another, more revealing password is the <a href="http://metroid.wikia.com/wiki/Justin_Bailey">Justin Bailey password</a>:</p>
+
+<p><img src="/img/justinbailey.png"></p>
+
+<p>This password starts the game with most unlockables obtained, but more notably, it changes Samus&rsquo;s sprite from an armored powersuit to a bikini swimsuit.</p>
+
+<p>One password, discovered over 20 years later, long after the Metroid password system had been completely reverse-engineered, does not grant you all items. <em>This</em> password just crashes and resets the game:</p>
+
+<p><img src="/img/engageridley.png"></p>
+
+<h1>WTF?</h1>
+
+<p>On a NES and various other rereleases, inputting that code will cause the game to either simply reset or transform the game into a glitched wonderland:</p>
+
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/x3UyVylP7AI "></iframe></div></p>
+
+<p>But what happens when you enter the password on an emulated Virtual Console, where the game environment is sandboxed? In the case of the 3DS Virtual Console, the <em>3DS completely crashes</em>:</p>
+
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/pjQ7SjB_6a8 "></iframe></div></p>
+
+<h1>Rated E for Everyone?</h1>
+
+<p>You may be asking &ldquo;did someone at Nintendo actually program a consequence for profanity in the game? Is the glitching and crashing a punishment for the perverse player?&rdquo; In truth, the password is merely a coincidence.</p>
+
+<p>As mentioned earlier, the password algorithm for Metroid has been reverse-engineered, and you can actually download a program to both generate and interpret such passwords <a href="http://games.technoplaza.net/mpg/">here</a>.</p>
+
+<p><img class="center" src="/img/metroidpassgen.png"></p>
+
+<p>The profane password is indeed a legitimate password (in which Ridley is already defeated, ironically enough). But why does it crash the game? The <a href="http://games.technoplaza.net/mpg/password.txt">Metroid Password Format Guide</a> explains the secret:</p>
+
+<blockquote><p> There are five valid start locations. They are specified using bits 64-66.
+  To start in Brinstar, all the bits should be off. Norfair, Kraid&rsquo;s Lair, and
+  Ridley&rsquo;s Lair can be specified by turning their bit on and leaving the others
+  off. Tourian is specified by turning on Norfair and Kraid&rsquo;s Lair
+  simultaneously. Any other combination of these three bits is invalid and will
+  cause Metroid to reset.</p>
+
+<p>  The reset bit is part of the start location. There are 16 possible values,
+  but only 5 valid ones. Turning on the reset bit will produce and invalid
+  start location and cause Metroid to reset. This is why it is called it is
+  called the reset bit, because it guarantees an invalid password.</p></blockquote>
+
+<p>For the profane password, the reset bit is turned on, so it will always cause a reset. And that&rsquo;s why the weird behavior happens.</p>
+
+<p>If you manually disable the reset bit using this tool in order to make the password valid, the new password becomes:</p>
+
+<p><img class="center" src="/img/metroidpassgen2.png"></p>
+
+<p>Not as catchy, unfortunately.</p>
+
+<p>In fact, the Justin Bailey password is also a completely coincidental password. Sometimes, passwords can just do very unexpected things.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Diablo III Economy Broken by an Integer Overflow Bug]]></title>

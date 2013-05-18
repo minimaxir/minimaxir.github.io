@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[minimaxir]]></title>
+  <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="minimaxir.com/atom.xml" rel="self"/>
   <link href="minimaxir.com/"/>
-  <updated>2013-05-15T23:16:09-07:00</updated>
+  <updated>2013-05-18T10:00:44-07:00</updated>
   <id>minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Profanity-Laced Video Game Password That Breaks Everything]]></title>
+    <link href="minimaxir.com/2013/05/its-a-livin/"/>
+    <updated>2013-05-16T20:50:00-07:00</updated>
+    <id>minimaxir.com/2013/05/its-a-livin</id>
+    <content type="html"><![CDATA[<p><img class="pull-right" src="minimaxir.com/img/metroidboxart.jpg"></p>
+
+<p>If you&rsquo;re a fan of video games, you&rsquo;ve likely heard of the Metroid franchise. Released for the NES in 1986 by Nintendo, Metroid set a new standard for 2-D exploration in video games with its expansive power-up system, well-hidden secrets, and polished platforming controls. Due to its popularity, Metroid has been rereleased multiple times: as an unlockable in <a href="http://en.wikipedia.org/wiki/Metroid_Prime">Metroid Prime</a>, an unlockable in the remake <a href="http://en.wikipedia.org/wiki/Metroid_Zero_Mission">Metroid: Zero Mission</a>, a <a href="http://en.wikipedia.org/wiki/Classic_NES_Series">standalone game</a> on the Game Boy Advance, the Wii Virtual Console, and the 3DS Virtual Console.</p>
+
+<p>You play as Samus Aran, an armored bounty hunter who has infiltrated the base of the dreaded Space Pirates on Planet Zebes. Samus must defeat the leaders of the Space Pirates: the dinosaur Kraid, the dragon and memetic badass of the series <a href="http://en.wikipedia.org/wiki/Ridley_(Metroid)">Ridley</a>, and the AI construct <a href="http://en.wikipedia.org/wiki/Mother_Brain_(Metroid)">Mother Brain</a>. Additionally, Samus must find a way to defeat the Metroids, which are nearly-indestructible parasites that threaten all life. Yes, this was a plot written in the 80&rsquo;s.</p>
+
+<p>Since the NES Metroid cartridge did not have the ability to save games, and the game itself took awhile to complete, Nintendo developed a password system to allow players to continue at a later time. Upon death, the player received a 24-character alphanumeric password that could be entered to restore all items the player has unlocked and remember which bosses the player has defeated. Most of these passwords were gibberish that required a pen-and-paper to write down and remember.</p>
+
+<p>One password, however, is more memorable, and much more sinister.</p>
+
+<!-- more -->
+
+
+<h1>The Password is Always Swordfish</h1>
+
+<p>Even before the days of the internet and personal computing, players <a href="http://metroid.wikia.com/wiki/List_of_Metroid_passwords">found passwords</a> with unique properties.</p>
+
+<p>The <a href="http://metroid.wikia.com/wiki/Narpas_Sword">Narpas Sword password</a>:</p>
+
+<p><img src="minimaxir.com/img/narpassword.png"></p>
+
+<p>is essentially the debug mode for the game, with all items unlocked, infinite health, and infinite health for Samus.</p>
+
+<p>Another, more revealing password is the <a href="http://metroid.wikia.com/wiki/Justin_Bailey">Justin Bailey password</a>:</p>
+
+<p><img src="minimaxir.com/img/justinbailey.png"></p>
+
+<p>This password starts the game with most unlockables obtained, but more notably, it changes Samus&rsquo;s sprite from an armored powersuit to a bikini swimsuit.</p>
+
+<p>One password, discovered over 20 years later, long after the Metroid password system had been completely reverse-engineered, does not grant you all items. <em>This</em> password just crashes and resets the game:</p>
+
+<p><img src="minimaxir.com/img/engageridley.png"></p>
+
+<h1>WTF?</h1>
+
+<p>On a NES and various other rereleases, inputting that code will cause the game to either simply reset or transform the game into a glitched wonderland:</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/x3UyVylP7AI "></iframe></div>
+
+
+<p>But what happens when you enter the password on an emulated Virtual Console, where the game environment is sandboxed? In the case of the 3DS Virtual Console, the <em>3DS completely crashes</em>:</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/pjQ7SjB_6a8 "></iframe></div>
+
+
+<h1>Rated E for Everyone?</h1>
+
+<p>You may be asking &ldquo;did someone at Nintendo actually program a consequence for profanity in the game? Is the glitching and crashing a punishment for the perverse player?&rdquo; In truth, the password is merely a coincidence.</p>
+
+<p>As mentioned earlier, the password algorithm for Metroid has been reverse-engineered, and you can actually download a program to both generate and interpret such passwords <a href="http://games.technoplaza.net/mpg/">here</a>.</p>
+
+<p><img class="center" src="minimaxir.com/img/metroidpassgen.png"></p>
+
+<p>The profane password is indeed a legitimate password (in which Ridley is already defeated, ironically enough). But why does it crash the game? The <a href="http://games.technoplaza.net/mpg/password.txt">Metroid Password Format Guide</a> explains the secret:</p>
+
+<blockquote><p> There are five valid start locations. They are specified using bits 64-66.
+  To start in Brinstar, all the bits should be off. Norfair, Kraid&rsquo;s Lair, and
+  Ridley&rsquo;s Lair can be specified by turning their bit on and leaving the others
+  off. Tourian is specified by turning on Norfair and Kraid&rsquo;s Lair
+  simultaneously. Any other combination of these three bits is invalid and will
+  cause Metroid to reset.</p>
+
+<p>  The reset bit is part of the start location. There are 16 possible values,
+  but only 5 valid ones. Turning on the reset bit will produce and invalid
+  start location and cause Metroid to reset. This is why it is called it is
+  called the reset bit, because it guarantees an invalid password.</p></blockquote>
+
+<p>For the profane password, the reset bit is turned on, so it will always cause a reset. And that&rsquo;s why the weird behavior happens.</p>
+
+<p>If you manually disable the reset bit using this tool in order to make the password valid, the new password becomes:</p>
+
+<p><img class="center" src="minimaxir.com/img/metroidpassgen2.png"></p>
+
+<p>Not as catchy, unfortunately.</p>
+
+<p>In fact, the Justin Bailey password is also a completely coincidental password. Sometimes, passwords can just do very unexpected things.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[When a Startup Sends a Passive-Aggressive Email Every Day]]></title>
@@ -1249,51 +1333,6 @@ First, let&rsquo;s look at how internet startups typically make money in 2011:</
 <p>Instagram has many options, to be sure. Should startups follow in their foot steps? Well, obviously they should try to create an excellent product with an excellent team. But can the typical startup pull off having no revenue model? I would not recommend it. The off chance of a buyout or investment support drastically outweighs the inability to pay your employees and maintain your servers five or ten years down the road.</p>
 
 <p>If you&rsquo;re making a startup in 2011, make sure it has a way to make money. There are many tried and true methods, pick the one(s) which best fit your business model! If the opportunity hits to make it big, don&rsquo;t neglect it, but be pragmatic and realistic with your expectations.</p>
-
-<p>-Max</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Startups, Please Stop Saying You're "Like X for Y"]]></title>
-    <link href="minimaxir.com/2011/11/like-x-for-y/"/>
-    <updated>2011-11-04T20:19:00-07:00</updated>
-    <id>minimaxir.com/2011/11/like-x-for-y</id>
-    <content type="html"><![CDATA[<p>Startups. The biggest movement in the technology world since the beginning of the 20th century. Never has it been so easy for teams of entrepreneurs, or even individuals, to create a business from scratch. The barrier of entry has been virtually eliminated thanks to the advent of cloud computing services, such as <a href="http://aws.amazon.com/ec2/">Amazon EC2</a> and <a href="http://www.rackspace.com/">Rackspace</a>, which allow businesses to only spend hundreds of dollars for server infrastructure for databases and processing where, only a few years ago, entrepreneurs would normally spend tens of thousands for the same capabilities, and thousands more in upkeep and maintenance. Therefore, more and more tech companies now have the ability to bring their ideas to fruition, and afterwards they will compete in the most vicious and cutthroat marketplace ever: the Internet.</p>
-
-<p>With so many new companies entering the tech marketplace, it is very difficult for an individual startup to stand out from the crowd. Product differentiation is the key tenant: how is your startup different from your competitors? Would customers be willing to discard the time and effort they&rsquo;ve already invested in a similar product to switch to your product?</p>
-
-<p><a href="http://techcrunch.com/2011/10/31/500-startups-peels-back-the-curtain-on-its-third-and-largest-batch-yet/"><img src="http://techcrunch.com/2011/10/31/500-startups-peels-back-the-curtain-on-its-third-and-largest-batch-yet/" alt="...until it's lost." /></a></p>
-
-<p>Of course, if your product is <em>truly</em> 100% innovative, that would not be a problem. Alas, true innovation in the Silicon Valley has been stagnant; most products and services have been slight tweaks of existing business models (Google%2B from Facebook; Spotify from every Internet music service ever). That&rsquo;s not necessarily a bad thing: in order to think outside the box, you must first define the box, in order to determine what is inside the box, and consequently what is outside the box. And this &ldquo;outside the box&rdquo; innovation can introduce an aspect which the company can differentiate itself, and become incredibly successful.</p>
-
-<!-- more -->
-
-
-<p>Such innovation, however, is very expensive, very time-consuming, and very risky. Much more expensive and risky than an individual or a group of people simply creating an account at Amazon and publishing some PHP and jQuery. And so, startups tend to target more simple, safer issues, such as &ldquo;What are big companies missing?&rdquo; Necessity is the mother of invention, after all.</p>
-
-<p>A very common pitch for a company is that it&rsquo;s &ldquo;Like X for Y.&rdquo; As demonstrated by <a href="http://techcrunch.com/2011/10/31/500-startups-peels-back-the-curtain-on-its-third-and-largest-batch-yet/">this TechCrunch post</a>, there are many up-and-coming startups who, for example, bill themselves as &ldquo;Instagram for Yelp&rdquo; or <a href="http://allthingsd.com/20110909/loku-wants-to-beat-yelp-and-google-at-local-search-with-some-help-from-big-data/">another company</a> that bills itself as &ldquo;like Google for local.&rdquo; Advertising shtick from a 90&rsquo;s movie trailer, natch.</p>
-
-<p>However, marketing your new business with such a focus is an incredible business liability because it&rsquo;s condescending to your prospective userbase, it could potentially confuse your users, and it gives the companies you&rsquo;re referencing a potential use case that they could use to wipe you out completely.</p>
-
-<p>It&rsquo;s safe to assume that the average person knows atleast a few major businesses on the internet. They might know about services such as <a href="https://foursquare.com/">Foursquare</a>, <a href="http://www.pandora.com/">Pandora</a>, and <a href="https://www.dropbox.com">Dropbox</a>. That&rsquo;s what makes them an compelling target: sure, they might use or know about those services, but what if they want something different? I&rsquo;m sure you&rsquo;ve seen the endless posts that occur when Facebook undergoes a redesign, and the numerous threats that users will quit Facebook unless they revert the changes.  Sure, Facebook users adapt and forget the whole thing happened, but dissent is a great opportunity for a startup to position itself in an established market. (See the <a href="http://xkcd.com/918/">XKCD</a> comic above; Google knows when to release their products!)
-In 2011, it&rsquo;s also safe to assume that the users who would be interested in your startup aren&rsquo;t idiots. Learning how to use the full functionality of Twitter, Facebook, and Foursquare is just like learning calculus or a programming language: it&rsquo;s straightforward and somewhat intuitive, until you learn that they all have annoying little exceptions to their rules, and you need to know when and where they occur. (and in the case of programming languages, actual Exceptions.) Many industries, especially music and movies, tend to appeal to the lowest common denominator because they don&rsquo;t care if the money earned is from a dumbo or a genius; dollars are dollars. On the Internet, where most business are selling services instead of products, users cannot be treated like idiots. Customers retention is one of the most important metrics for ensuring the growth of a startup, especially those with subscription or freemium revenue models, because it ensures that the revenue per customer is high, and therefore the company can safely increase scale and grow</p>
-
-<p>Your customers don&rsquo;t need to be told that your business is &ldquo;Like <a href="http://instagr.am/">Instagram</a> for <a href="http://www.yelp.com/">Yelp</a>.&rdquo; If your prospective userbase knows what Instagram and Yelp are, you can assume they can reasonably infer that comparison upon simply knowing that the service is &ldquo;simple sharing for restaurant reviews.&rdquo; Internet-dwellers are much smarter than some companies give them credit. At best, it doesn&rsquo;t add anything to your marketing pitch. At worst, comparing your product to an already existing company can be dishonest marketing hyperbole, making your company seem more impressive than it is. (&ldquo;Instagram for Yelp&rdquo; particularly doesn&rsquo;t make any sense. I thought Instragram was primarily used for photo filter abuse, not for ease of sharing!)</p>
-
-<p>The comments in the aforementioned TechCrunch article pointed out that the &ldquo;Like X for Y&rdquo; basis works well for investors. It is indeed the easiest way to explain your business in few words, and venture capitalists have limited amounts of time to hear investment requests from each and every startup. However, easiest does not mean best. If I was an investor and a company began its presentation to a group of venture capitalists stating &ldquo;our business is like Google for local,&rdquo; I wouldn&rsquo;t know what to think. Is it a search engine for local areas? Is it a hub to the internet with e-mail and RSS syndication with a streamlined UI intended primarily for local communities? Is it a company that&rsquo;s just boasting about how awesome it is? Of course, it&rsquo;s the first one, but there should be zero ambiguity when illustrating the underlying principles of the business that will [hopefully] make millions of dollars.</p>
-
-<p>More importantly, if you can&rsquo;t explain your business in simple terms with investors, how can you possibly explain it to your potential users? Sure, your investors are giving you money in the short term, but your users are far more important, and will give you many, many times that amount throughout the lifetime of your business.</p>
-
-<p>For startups targeting a particular niche, your market is not the average user, but the userbase of the niche, who may not be as tech-savvy as others (for example, business that target Generation X/Y instead of teenagers and young adults who have grown up with the Internet). Consequently, you might confuse your potential users by using a simile to describe your business, if they aren&rsquo;t likely to know the business at all. Look at &ldquo;<a href="http://www.gilt.com/">Gilt</a> for Weddings.&rdquo; That product is targeting a specific niche because it has a very narrow use. But what is Gilt? It&rsquo;s apparently the &ldquo;darling of luxury-obsessed bargain hunters,&rdquo; but would those who know about Gilt also want that service for weddings? In actuality, the service is just a shop for cheap wedding dresses. Admittingly I&rsquo;m not in the target market because I&rsquo;m a guy. [Note: The founder of the service pointed out in the TechCrunch article comments that yes, their target market knows what Gilt, and therefore the comparison is simple and accurate. Again, would brides want &ldquo;bargain&rdquo; wedding dresses?]</p>
-
-<p>Another weakness marketing your product to a specific niche is that the existing company, who likely has much more resources than your startup, can simply copy your idea, and wipe you out of business because you haven&rsquo;t had a chance to diversify. Look at <a href="http://twitpic.com/">TwitPic</a>, one of the first services to allow users to easily post images to Twitter. It targeted a very specific, very important need, and it was very successful. A few years later, Twitter<a href="http://thenextweb.com/twitter/2011/08/09/twitter-now-rolling-out-direct-image-upload-at-twitter-com/"> implemented native picture uploading</a> to its official Twitter clients. And thus, since the company did not diversify, TwitPic was forced to slowly fade into obscurity. (the founder, Noah Everett, hilariously attempted to stage a counterattack by creating <a href="https://heello.com/">Heello</a>&hellip;a clone of Twitter in every way. That&rsquo;ll show them!)</p>
-
-<p>Business that exist solely by leveraging an APIs from large companies such as Facebook or Twitter, allowing startups to access and manipulate data from those users, are a risky proposition. On one hand, the fate of the startup is now tied to the company in a symbiotic bond. Look at <a href="http://company.zynga.com/">Zynga</a>, makers of Farmville, who had to admit <a href="http://techcrunch.com/2011/07/01/zynga-and-facebook-pray-they-dont-alter-the-deal-any-further/">in their filing for an IPO</a> that &ldquo;If Facebook goes under, so do we,&rdquo; and have only recently begun precautions to guard against this incredible risk factor.</p>
-
-<p>Many, many startups are founded by those with technical computer science backgrounds, as they are the ones who can both identify a problem/need in the technical space, and implement the solution. Usually, they do not have an immediate background in business nor have learned the skills needed needed to make a product succeed (marketing, finance, etc.), and startups cannot afford hiring a CEO with an MBA without money from venture capitalists. This can create a Catch-22 situation: startups can&rsquo;t create a business-aligned strategy until they can prove to investors that they can create a business-aligned strategy. Sure, you can code the Web 2.0 app of awesomeness, but so can a million other people. Without the proper investment in balancing the books, getting your product known, and most importantly, product differentiation, you won&rsquo;t have a chance to succeed. In lieu of business skills, entrepreneurs simply follow what other startups have done: target your niche, and prosper.</p>
-
-<p>Entrepreneurs who are creating startups in 2011 do not have <em>any</em> leeway in their product implementation and promotion: they need to strike the market viciously, otherwise they will be swallowed up by the competition in an instant. It&rsquo;s fair for entrepreneurs to learn business skills as they create their business, <em>a la</em> Bill Gates and Mark Zuckerberg, but without knowing <em>why</em> certain marketing strategies are bad for business and <em>why</em> product differentiation is so important, their startups won&rsquo;t be able to get off the ground, and, tragically, they won&rsquo;t have the ability to make a difference in the world.</p>
 
 <p>-Max</p>
 ]]></content>
