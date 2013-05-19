@@ -74,6 +74,16 @@ color: #34495E !important;
 color: #7F8C8D !important;
 }
 
+.rss a:hover {
+color: #FF6600 !important;
+}
+
+.nav .rss {
+border-right: 1px dotted white;
+padding-right: 5px;
+margin-right: 5px;
+}
+
 .sharing .badge:hover {
 background-color: #ECF0F1;
 }
@@ -141,8 +151,7 @@ margin-bottom: 20px;
 }
 
 .sharing  .badge{
-font-size:100%;
-
+font-size:105%;
 display: block;
 width: 75%
 }
@@ -165,10 +174,12 @@ blockquote p {
 margin-bottom: 10px;
 }
 
-@-moz-document url-prefix() {
                       .sharing .badge a i{
-					margin-top: -5px;
+					margin-top: -4px;
 					}
+
+@-moz-document url-prefix() {
+
                     }
 
 .hentry .sharing .badge a i{
@@ -181,6 +192,10 @@ margin-bottom: 10px;
 
 .nav li {
 margin-bottom: 0px;
+}
+
+.nav.social a {
+height: 20px;
 }
 
 #global-nav, #thread-votes {

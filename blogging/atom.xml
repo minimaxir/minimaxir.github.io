@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Blogging | minimaxir | Max Woolf's Blog]]></title>
-  <link href="minimaxir.com//blogging/atom.xml" rel="self"/>
-  <link href="minimaxir.com/"/>
-  <updated>2013-05-18T10:00:44-07:00</updated>
-  <id>minimaxir.com/</id>
+  <link href="http://minimaxir.com//blogging/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2013-05-19T14:28:13-07:00</updated>
+  <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Blog Comment System That Steals Comments From Facebook]]></title>
-    <link href="minimaxir.com/2013/05/comments-everywhere/"/>
+    <link href="http://minimaxir.com/2013/05/comments-everywhere/"/>
     <updated>2013-05-04T21:59:00-07:00</updated>
-    <id>minimaxir.com/2013/05/comments-everywhere</id>
+    <id>http://minimaxir.com/2013/05/comments-everywhere</id>
     <content type="html"><![CDATA[<p>I&rsquo;m not a fan of the LiveFyre comments system for blogs. As I&rsquo;ve talked about before, LiveFyre is difficult to use, and actually hurts blogs more than it helps. But more and more blogs, such as CNet and AllThingsD, have switched to LiveFyre.</p>
 
 <p>AllThingsD&rsquo;s <a href="http://allthingsd.com/20130330/introducing-livefyre-commenting-at-allthingsd/?mod=atd-desktop">reasons</a> for switching to LiveFyre from the widely-used Disqus are interesting. Under LiveFyre, users can &ldquo;more readily share comments to Facebook and Twitter&rdquo; which Disqus already did; &ldquo;tag friends and draw them into the stream&rdquo; which increases clutter; and &ldquo;accurately flag other comments as spam or offensive&rdquo; which flat-out doesn&rsquo;t work, if the spam on TechCrunch is any indication. Additionally, they can &ldquo;follow conversations across multiple platforms,&rdquo; which the post doesn&rsquo;t elaborate upon. Does it aggregate social media which links to the parent post, a la Disqus?</p>
@@ -80,9 +80,9 @@
   
   <entry>
     <title type="html"><![CDATA[How To Kill The Reader Comments Of A Popular Tech Blog]]></title>
-    <link href="minimaxir.com/2013/01/its-a-metaphor-maybe/"/>
+    <link href="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"/>
     <updated>2013-01-23T21:38:00-08:00</updated>
-    <id>minimaxir.com/2013/01/its-a-metaphor-maybe</id>
+    <id>http://minimaxir.com/2013/01/its-a-metaphor-maybe</id>
     <content type="html"><![CDATA[<p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog,.</p>
 
 <p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
@@ -150,9 +150,9 @@
   
   <entry>
     <title type="html"><![CDATA[Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses]]></title>
-    <link href="minimaxir.com/2012/10/questions-equals-reponses/"/>
+    <link href="http://minimaxir.com/2012/10/questions-equals-reponses/"/>
     <updated>2012-10-07T21:19:00-07:00</updated>
-    <id>minimaxir.com/2012/10/questions-equals-reponses</id>
+    <id>http://minimaxir.com/2012/10/questions-equals-reponses</id>
     <content type="html"><![CDATA[<p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
 
 <p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>
@@ -210,7 +210,7 @@
 
 <p>Regardless, I will now admit that there are benefits to asking your users questions in your Facebook or blog posts. Although there appears to be a drop in Likes by asking users what their opinions are, the increase in comments more than counteracts it.</p>
 
-<p>This data raises an interesting dilemma: let&rsquo;s say everyone catches on and <em>most</em> of the top brands start asking their users questions. It&rsquo;ll quickly become an cliché, as it is essentially a subliminal form of the infamous Facebook News Feed spam. Would that cause brands to stop asking questions? If so, how long would it take for the brands to switch back to asking their users questions?</p>
+<p>This data raises an interesting dilemma: let&rsquo;s say everyone catches on and <em>most</em> of the top brands start asking their users questions. It&rsquo;ll quickly become an cliche, as it is essentially a subliminal form of the infamous Facebook News Feed spam. Would that cause brands to stop asking questions? If so, how long would it take for the brands to switch back to asking their users questions?</p>
 
 <p>Who knew that social media marketing involved game theory?</p>
 
@@ -230,9 +230,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Ethics of Self-Promotion on the Internet]]></title>
-    <link href="minimaxir.com/2012/03/ethics-self-promotion/"/>
+    <link href="http://minimaxir.com/2012/03/ethics-self-promotion/"/>
     <updated>2012-03-01T21:07:00-08:00</updated>
-    <id>minimaxir.com/2012/03/ethics-self-promotion</id>
+    <id>http://minimaxir.com/2012/03/ethics-self-promotion</id>
     <content type="html"><![CDATA[<p>So, you&rsquo;ve made your new blog or startup, and you want people to know about it. The first thing you will likely do is link to it on your Facebook or Twitter, telling your friends who are most likely to listen to you. Unless you&rsquo;re a superstar tech personality with thousands of subscribers/followers, chances are your social media posts will only drive a few people to your website, leading to your disappointment. Sure, you can repost your website multiple times, but chances are you&rsquo;ll upset your friends through your spam&hellip;which doesn&rsquo;t lead to users who keep coming back.</p>
 
 <p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self6.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/self6.png" alt="The article prompted East Coast entrepreneurs to *e-mail* their startups..." /></a></p>
@@ -283,9 +283,9 @@ Posted in an article titled &ldquo;HTC Unites New Android Smartphones Under &lsq
   
   <entry>
     <title type="html"><![CDATA[Blog Commenting in 2011]]></title>
-    <link href="minimaxir.com/2011/10/blog-commenting-2011/"/>
+    <link href="http://minimaxir.com/2011/10/blog-commenting-2011/"/>
     <updated>2011-10-10T20:05:00-07:00</updated>
-    <id>minimaxir.com/2011/10/blog-commenting-2011</id>
+    <id>http://minimaxir.com/2011/10/blog-commenting-2011</id>
     <content type="html"><![CDATA[<p>One of the most important things about blogs is having a comment section. Not only does it allow the blogs reader the ability to participate in discussions about similar topics, but it also offers a medium which the author can communicate with the readers themselves. This allows authors to get feedback from readers regarding what they like about your post, what they think of your posts, and how to improve your blog in general. Also, you get spam. It &rsquo;s not an authentic blog without it.</p>
 
 <p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2011/10/blogger.png" alt="" /></a></p>

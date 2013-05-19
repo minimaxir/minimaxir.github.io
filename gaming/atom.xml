@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Gaming | minimaxir | Max Woolf's Blog]]></title>
-  <link href="minimaxir.com//gaming/atom.xml" rel="self"/>
-  <link href="minimaxir.com/"/>
-  <updated>2013-05-18T10:00:44-07:00</updated>
-  <id>minimaxir.com/</id>
+  <link href="http://minimaxir.com//gaming/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2013-05-19T14:28:13-07:00</updated>
+  <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Profanity-Laced Video Game Password That Breaks Everything]]></title>
-    <link href="minimaxir.com/2013/05/its-a-livin/"/>
+    <link href="http://minimaxir.com/2013/05/its-a-livin/"/>
     <updated>2013-05-16T20:50:00-07:00</updated>
-    <id>minimaxir.com/2013/05/its-a-livin</id>
+    <id>http://minimaxir.com/2013/05/its-a-livin</id>
     <content type="html"><![CDATA[<p><img class="pull-right" src="/img/metroidboxart.jpg"></p>
 
 <p>If you&rsquo;re a fan of video games, you&rsquo;ve likely heard of the Metroid franchise. Released for the NES in 1986 by Nintendo, Metroid set a new standard for 2-D exploration in video games with its expansive power-up system, well-hidden secrets, and polished platforming controls. Due to its popularity, Metroid has been rereleased multiple times: as an unlockable in <a href="http://en.wikipedia.org/wiki/Metroid_Prime">Metroid Prime</a>, an unlockable in the remake <a href="http://en.wikipedia.org/wiki/Metroid_Zero_Mission">Metroid: Zero Mission</a>, a <a href="http://en.wikipedia.org/wiki/Classic_NES_Series">standalone game</a> on the Game Boy Advance, the Wii Virtual Console, and the 3DS Virtual Console.</p>
@@ -97,9 +97,9 @@
   
   <entry>
     <title type="html"><![CDATA[Diablo III Economy Broken by an Integer Overflow Bug]]></title>
-    <link href="minimaxir.com/2013/05/stones-of-jordan/"/>
+    <link href="http://minimaxir.com/2013/05/stones-of-jordan/"/>
     <updated>2013-05-07T21:53:00-07:00</updated>
-    <id>minimaxir.com/2013/05/stones-of-jordan</id>
+    <id>http://minimaxir.com/2013/05/stones-of-jordan</id>
     <content type="html"><![CDATA[<p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
 
 <p>Diablo III is also noted for its economy, with an emphasis on a region-wide auction house where players can trade one-in-a-million items for millions and billions of gold. (inflation is crazy). Additionally, Diablo III emphasized the use of a Real World Auction House, where players can sell gold or items for real world cash.</p>
@@ -155,9 +155,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
   
   <entry>
     <title type="html"><![CDATA[Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM]]></title>
-    <link href="minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
+    <link href="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
     <updated>2013-03-24T21:44:00-07:00</updated>
-    <id>minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
+    <id>http://minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
     <content type="html"><![CDATA[<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
 
 <p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
@@ -193,9 +193,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
   
   <entry>
     <title type="html"><![CDATA[Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation]]></title>
-    <link href="minimaxir.com/2012/10/client-side-validation-is-hard-mode/"/>
+    <link href="http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"/>
     <updated>2012-10-14T21:21:00-07:00</updated>
-    <id>minimaxir.com/2012/10/client-side-validation-is-hard-mode</id>
+    <id>http://minimaxir.com/2012/10/client-side-validation-is-hard-mode</id>
     <content type="html"><![CDATA[<p>Early Saturday morning, <a href="http://www.gamefaqs.com/boards/916373-pc/64312901">various gaming forums</a> (and, more importantly, <a href="http://www.reddit.com/r/GameDeals/comments/11ewb0/use_the_code_os3874xvc_to_get_20_off_origin/">Reddit</a>) obtained a promotional code from mega gaming company Electronic Arts for their Origin gaming distribution service. This code entitled the user to purchase any EA published or developed game for $20 off, and if the game was less than $20, the game was free. <a href="http://www.gamers-association.com/2012/10/free-game-from-eas-origin/">Games that were made free</a> using this coupon included hit series such as Dead Space, Mass Effect, Dragon Age, and Battlefield, so the rewards for the coupon were actually pretty worthwhile. Best of all, there are no catches and no gimmicks; input promo code OS3874XVC, get game.</p>
 
 <p>The code was apparently rewarded after taking a survey regarding Origin, with the reward being one free game. The operative word being &ldquo;one.&rdquo; Some gamers, out of curiosity, discovered that by entering the code via both the store browser-interface and the store client-interface, they could get a free game twice. Gamers inferred the logical technical conclusion; EA was not checking server-side that the code was only being used once. Later, gamers noted that <a href="http://www.overclock.net/t/1315674/free-20-in-origin-code/410#post_18359737">simply inputting the code while logged-out</a> allows them to use the promo code an <em>unlimited</em> amount of times.</p>

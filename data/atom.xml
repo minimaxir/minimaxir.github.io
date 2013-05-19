@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
-  <link href="minimaxir.com//data/atom.xml" rel="self"/>
-  <link href="minimaxir.com/"/>
-  <updated>2013-05-18T10:00:44-07:00</updated>
-  <id>minimaxir.com/</id>
+  <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2013-05-19T14:28:13-07:00</updated>
+  <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses]]></title>
-    <link href="minimaxir.com/2012/10/questions-equals-reponses/"/>
+    <link href="http://minimaxir.com/2012/10/questions-equals-reponses/"/>
     <updated>2012-10-07T21:19:00-07:00</updated>
-    <id>minimaxir.com/2012/10/questions-equals-reponses</id>
+    <id>http://minimaxir.com/2012/10/questions-equals-reponses</id>
     <content type="html"><![CDATA[<p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
 
 <p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>
@@ -75,7 +75,7 @@
 
 <p>Regardless, I will now admit that there are benefits to asking your users questions in your Facebook or blog posts. Although there appears to be a drop in Likes by asking users what their opinions are, the increase in comments more than counteracts it.</p>
 
-<p>This data raises an interesting dilemma: let&rsquo;s say everyone catches on and <em>most</em> of the top brands start asking their users questions. It&rsquo;ll quickly become an cliché, as it is essentially a subliminal form of the infamous Facebook News Feed spam. Would that cause brands to stop asking questions? If so, how long would it take for the brands to switch back to asking their users questions?</p>
+<p>This data raises an interesting dilemma: let&rsquo;s say everyone catches on and <em>most</em> of the top brands start asking their users questions. It&rsquo;ll quickly become an cliche, as it is essentially a subliminal form of the infamous Facebook News Feed spam. Would that cause brands to stop asking questions? If so, how long would it take for the brands to switch back to asking their users questions?</p>
 
 <p>Who knew that social media marketing involved game theory?</p>
 

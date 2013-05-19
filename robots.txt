@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: minimaxir.com/sitemap.xml 
+Sitemap: http://minimaxir.com/sitemap.xml 
