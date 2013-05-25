@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-05-19T14:28:13-07:00</updated>
+  <updated>2013-05-25T10:35:33-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Role-Playing Game With an Easily Exploitable Random Number Generator]]></title>
+    <link href="http://minimaxir.com/2013/05/guaranteed-to-be-random/"/>
+    <updated>2013-05-23T20:26:00-07:00</updated>
+    <id>http://minimaxir.com/2013/05/guaranteed-to-be-random</id>
+    <content type="html"><![CDATA[<p><img class="pull-right" src="http://minimaxir.com/img/GoldenSun.png"></p>
+
+<p>When the Game Boy Advance was released in June 2001, Nintendo promised that the handheld device would be capable of delivering a home gaming console experience on-the-go. <a href="http://en.wikipedia.org/wiki/Golden_Sun">Golden Sun</a>, developed by Camelot and published by Nintendo a few months after the console&rsquo;s release, exemplified the GBA&rsquo;s full capabilities with its hand-drawn environments, flashy battle effects, and <em>very</em> difficult dungeon puzzles which undoubtedly resulted in the sale of many strategy guides.</p>
+
+<p>In Golden Sun, you play as a group of teenage mages called Adepts, who wield the power of the four elements (Earth, Fire, Wind, and Water) by casting spells with Psynergy. The antagonists of the game are a pair of jerks who are attempting to reawaken a dangerous and sealed power, and only four kids can stop them from destroying the world. Released two years later, <a href="http://en.wikipedia.org/wiki/Golden_Sun:_The_Lost_Age">Golden Sun: The Lost Age</a> takes place immediately after the conclusion of the first game with a different quartet of Adepts and a new pair of jerks. In this sequel, it is revealed that the jerks who keep trying to kill you are not the bad guys and the whole conflict is just one big misunderstanding! Yes, the plot is very reminiscent of other Japanese-developed RPGs such as <a href="http://en.wikipedia.org/wiki/Final_Fantasy_(video_game)">Final Fantasy</a> and <a href="http://en.wikipedia.org/wiki/Chrono_Trigger">Chrono Trigger</a>, but it&rsquo;s still impressive for a game I typically played in the backseat of a car.</p>
+
+<p>Like Final Fantasy and Chrono Trigger, Golden Sun has an inventory system where players earn new weapons and items by purchasing them at a store or by finding them as loot from defeating enemies in the world. The most powerful weapons, naturally, only drop from enemies at the end of the game with odds of less than 0.01% per kill. If you killed <a href="http://www.wolframalpha.com/input/?i=binomial+distribution%28100%2C1%2F256%29">such enemies 100 times</a>, for example, you would only have a 32% expected chance of seeing a rare drop among all the kills. And killing that many enemies could take hours. It depends on the almighty will of Golden Sun&rsquo;s Random Number Generator.</p>
+
+<p>As it turns out, the <a href="http://goldensun.wikia.com/wiki/Random_Number_Generator">Golden Sun RNG</a> is so poorly implemented that players have found out how to make events with 1/256 probability occur <em>one hundred percent</em> of the time.</p>
+
+<!-- more -->
+
+
+<h1>You Make Your Own Luck</h1>
+
+<p><a href="http://xkcd.com/221/"><img src="http://minimaxir.com/img/random_number.png" alt="" /></a></p>
+
+<p>Soon after the first Golden Sun was released, players discovered that the first random enemy encounter the player enters after turning the GBA on was always a First Strike, where the player&rsquo;s party gets a free turn. Was this a cute gameplay mechanic intended to give the player a quick advantage, or was it indicative of a flaw in the game&rsquo;s RNG?</p>
+
+<p>Most modern RNGs are partially seeded and randomized using a timer, i.e. the current time of the computer in microseconds. This makes it infeasable to reproduce the output of the RNG reliably.</p>
+
+<p>However, the GBA does not have an internal clock, so time-based methods of seeding aren&rsquo;t possible. By the time the sequel was released in 2003, the
+<a href="http://www.goldensunrealm.com/gs/nickpresta_rng-guide.txt">entire Golden Sun RNG</a> was reverse-engineered:</p>
+
+<blockquote><p>Golden Sun uses the ANSI-C standard rand function as its Pseudo-Random Number
+Generator.</p>
+
+<p>There is one difference: Golden Sun&rsquo;s RNG uses an unsigned 4-byte number and
+returns it with no shifting, so you&rsquo;d replace &ldquo;return ((next >>16) &amp; 32757);&rdquo;
+with &ldquo;return (next &amp; 4294967295);&rdquo;</p>
+
+<p>This, ordinarily, is a perfectly capable RNG, but there is one flaw with what
+Golden Sun does with it.</p>
+
+<p>It only makes a new random number when something random happens. What&rsquo;s more,
+it uses <em>two</em> copies of the RNG to create two random numbers, and the
+first RNG only handles battle situations.</p>
+
+<p>As such, it is easy to control when a new random number is generated.</p>
+
+<p>On top of this, the RNGs are seeded with 0 when the GBA is reset, and because
+of the way the game has been programmed, the RNG controlling battle events will
+<em>continue</em> to be 0 even when you load the game&hellip;</p></blockquote>
+
+<p>Golden Sun&rsquo;s Random Number Generator isn&rsquo;t &ldquo;random&rdquo; at all. It&rsquo;s manipulated <em>entirely</em> from player-controlled actions, from the moment the Game Boy Advance is turned on.</p>
+
+<h1>Get Lucky</h1>
+
+<p><img src="http://minimaxir.com/img/kiku.png"></p>
+
+<p>One of Golden Sun&rsquo;s contributions to the typical RPG character class customization is the <a href="http://goldensun.wikia.com/wiki/Djinn">Djinn system</a>. In the game lore, Djinn are impish creatures that grant enhanced powers to Adepts. There are four types of Djinn, one for each element, that can be found in the overworld, and each Djinni can be used to either increase a character&rsquo;s statistics, or Unleashed to provide a powerful spell effect. Also, as with many other RPGs, Golden Sun implements an elemental rock-paper-scissors combat system: enemies are weak to an element and resistant to another.</p>
+
+<p>A <a href="http://www.gamefaqs.com/">GameFAQs</a> forum user by the name of &ldquo;darkpanther&rdquo; discovered that using a Djinn Unleash with an element that is the enemy&rsquo;s weakness will not only increase the amount of Experience and Coins earned, but also <em>quadruple</em> the chance of the enemy dropping a rare item. (this fact is neither hinted anywhere in the game nor stated in any strategy guides)</p>
+
+<p>This is essential toward manipulating the RNG. Normally, the rarest items such as <a href="http://goldensun.wikia.com/wiki/Tisiphone_Edge">Tisiphone Edge</a> and <a href="http://goldensun.wikia.com/wiki/Lachesis%27_Rule">Lachesis&#8217; Rule</a> have an &ldquo;Item-Class Chance&rdquo; of 9, meaning the item has a 1/(2<sup>9-1</sup>) = 1/256 chance of dropping per enemy kill. The &ldquo;DP Method&rdquo; decreases the ICC by 2, meaning the new drop rate becomes 1/(2<sup>7-1</sup>) = 1/64. But:</p>
+
+<blockquote><p>As &lsquo;unpredictable&rsquo; as RNGs seem to be, if they are always seeded to the same
+value and do not use a timer-based response, they will become predictable by
+anyone who is good at noticing patterns. One pattern being, for example, that
+the 31st random number that is calculated &ndash; 33727075 &ndash; will drop <em>any</em> item if
+the enemy dying when this random number was called was just killed by an
+elemental Djinn attack that it is weak to.</p></blockquote>
+
+<p>Calculating the 31st random number would fail against an ICC9 item, but now works against an ICC7 item. (and all items of lower ICC too)</p>
+
+<p>Therefore, <strong>in order to guarantee that an item drops, kill the appropriate enemy with an element-advantage Djinni such that the 30th random number is generated</strong>. (the 31st random number is generated on the enemy&rsquo;s death)</p>
+
+<p>How do you ensure that you only create 31 random numbers? From the Golden Sun Wikia:</p>
+
+<blockquote><p>Save the game and do a hard reset in the area where the monster that drops the item you need appears. Run around to get in a battle. If the encounter consists of a formation of 2 monsters, with at least one of them being the monster you want, proceed. If not, do another hard reset and try again.</p>
+
+<p>During battle, have the entire party use multi-targetting Psynergy on the targets in the first turn, and since a battle right after a hard reset always involve your party attacking first where possible, the monsters will not be able to act. During the second turn, use two multi-targetting Psynergy on the enemies, and have the third party member (or fourth, if one of the three party members that act before uses Defend) unleash an attack Djinni of the element the monster is weak to on the monster. If by this point, the monster flashes in colour and dies, you will obtain the drop of that monster at the end of the battle, however rare it is. If the monster does not die then (either dies too soon or doesn&rsquo;t die by this step), adjust the power of your attacks until you get it just right.</p></blockquote>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/UCJzuSBQ1hU "></iframe></div>
+
+
+<p>Moral of story: if you&rsquo;re making a video game, seed your RNGs with an algorithm that players can&rsquo;t manipulate 100%. Otherwise, hilarity will inevitably ensue. I forgive Camelot for implementing a simplistic RNG though; the two games&#8217; <a href="http://www.youtube.com/watch?v=DaxYYwMqiso&amp;list=PL8C84ECF55B28DC74">awesome</a> <a href="http://www.youtube.com/watch?v=M31afGXIGpQ&amp;list=PL586792F46D5A35D4&amp;index=13">soundtrack </a> more than makes up for it.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Profanity-Laced Video Game Password That Breaks Everything]]></title>
@@ -296,6 +381,8 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <h2>Comments From Everywhere!</h2>
 
+<p><img src="http://minimaxir.com/img/liveFyreSync.png"></p>
+
 <p>Recently, LiveFyre implemented a <a href="http://www.livefyre.com/comments/">comment feature</a> called SocialSync:</p>
 
 <p>With Livefyre SocialSync, the conversation happening on Facebook and Twitter automatically syncs directly to your content, where it belongs. SocialSync comments can be replied to and interacted with just like any other comment, including being automatically posted back to Twitter or Facebook.</p>
@@ -357,7 +444,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
 <!-- more -->
 
 
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/03/Zuck.png?resize=625%2C208" alt="Zuck" /></p>
+<p><img src="http://minimaxir.com/img/Zuck.png"></p>
 
 <p>Note the lack of comments and Likes, on what was the article with the second-most pageviews on TC (and one I can testify that had hundreds of comments.) A quick glance at multiple blogs and other old posts confirms that Likes were reset. New posts have several likes, but all old posts have 0 likes.</p>
 
@@ -372,7 +459,10 @@ The missing amount, divided by 2:   2,147,483,648 gold
     <link href="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
     <updated>2013-03-24T21:44:00-07:00</updated>
     <id>http://minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
-    <content type="html"><![CDATA[<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
+    <content type="html"><![CDATA[<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Syo5sI-iOgY "></iframe></div>
+
+
+<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
 
 <p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
 
@@ -397,7 +487,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>This <a href="http://tasvideos.org/1945M.html">SMW TAS</a>, posted in 2011, was so crazy that it inspired the creation of a new category of speed runs: &ldquo;Corrupts Memory.&rdquo; The <a href="http://tasvideos.org/forum/viewtopic.php?t=12215">discussion on the speed run</a> provides a technical explanation of of the glitch, which started a debate: &ldquo;does this <em>count</em> as a speed run?&rdquo; (96% of voters said yes.)</p>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/03/smw.png?resize=625%2C227" alt="smw" /></p>
+<p><img src="http://minimaxir.com/img/smw.png"></p>
 
 <p>To be fair, this is far from the first time where manipulated RAM has been used to complete a game. The classic Nintendo 64 title Legend of Zelda: Ocarina of Time has the infamous <a href="http://zeldaspeedruns.com/oot/ba/reverse-bottle-adventure">Reverse Bottle glitch</a> that allows players to transform items into others, and a <a href="http://youtu.be/PaUCFrW_mEE?t=13m44s">memory glitch</a> that teleports you from the first dungeon to the final cutscene, In <em>Pokemon</em> on the GameBoy, players discovered how to reprogram the game to <a href="http://tasvideos.org/forum/viewtopic.php?p=332488&amp;sid=1d8670bd80327418d202b6608e5cd2a9#332488">run arbitrary code</a>, but many gamers may remember the classic <a href="http://bulbapedia.bulbagarden.net/wiki/Missingno.">Missingno glitch</a>, which was very easy to reproduce on an actual console and provided many beneficial effects.</p>
 
@@ -410,7 +500,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
     <link href="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"/>
     <updated>2013-01-23T21:38:00-08:00</updated>
     <id>http://minimaxir.com/2013/01/its-a-metaphor-maybe</id>
-    <content type="html"><![CDATA[<p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog,.</p>
+    <content type="html"><![CDATA[<p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog.</p>
 
 <p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
 
@@ -425,7 +515,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>As said earlier, Facebook comments excel in their ease of implementation, light aesthetic, and zero-click registration. More importantly, it lends a lot of credibility to the comments, as they have (usually) been authenticated as a real person. Whenever a <em>real</em> person likes or comments on your own comment, it is very satisfying.</p>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/alexia.png?resize=625%2C256" alt="alexia" /></p>
+<p><img src="http://minimaxir.com/img/alexia.png"></p>
 
 <p>That said, there are a few unobvious nuances:</p>
 
@@ -446,7 +536,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>LiveFyre also has comment editing and an indicator of how many users are viewing the current blog post, but for some reason, the implementation of LiveFyre on TechCrunch disabled these features. Hmm.</p>
 
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/comments2.png?resize=625%2C211" alt="comments2" /></p>
+<p><img src="http://minimaxir.com/img/comments2.png"></p>
 
 <p>The core features good on paper. The problem is with the implementation. <a href="http://fyre.it/u2jnrP">This comment</a> does a good summary, but here&rsquo;s the gist when compared to Facebook Comments:</p>
 
@@ -460,7 +550,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <h2>The impact of LiveFyre on TechCrunch</h2>
 
-<p>LiveFyre works on a typical WordPress blog, but when applied to <img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/ToKillACommentsSection.png?resize=187%2C300" alt="ToKillACommentsSection" />large sites such as Engadget and TechCrunch, whose size attracts trolls, it can be crippling. It&rsquo;s like <a href="http://en.wikipedia.org/wiki/Dunbar's_number">Dunbar&rsquo;s Number</a> on a macro scale: there&rsquo;s a mathematical limit on the number of people who visit one place on the internet until it degenerates into madness and memes.</p>
+<p><img class="pull-right" src="http://minimaxir.com/img/ToKillACommentsSection.png"></p>
+
+<p>LiveFyre works on a typical WordPress blog, but when applied to large sites such as Engadget and TechCrunch, whose size attracts trolls, it can be crippling. It&rsquo;s like <a href="http://en.wikipedia.org/wiki/Dunbar's_number">Dunbar&rsquo;s Number</a> on a macro scale: there&rsquo;s a mathematical limit on the number of people who visit one place on the internet until it degenerates into madness and memes.</p>
 
 <p>Even with the criticisms above, I still prefer Facebook Comments, and I implement it on my own site, as zero-click registration and real name validation is paramount. It&rsquo;s definitely the lesser of two evils.</p>
 
@@ -471,7 +563,12 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>I realize that this is a first-world problem. Even more of a first world problem than <a href="http://minimaxir.com/2013/01/if-cute-then-happiness/">auto-downloading pictures of cute puppies</a>. I&rsquo;m not mad.</p>
 
-<p>I&rsquo;m just sad. <img src="http://i2.wp.com/minimaxir.com/wp-includes/images/smilies/icon_sad.gif?w=625" alt=":(" /></p>
+<p>I&rsquo;m just sad. :(</p>
+
+<hr>
+
+
+<p><strong>EDIT (May 2013)</strong>: When this article was published, this blog was using Facebook Comments, however I switched the comments system to Disqus just to try it out.</p>
 ]]></content>
   </entry>
   
@@ -480,7 +577,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
     <link href="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"/>
     <updated>2013-01-15T21:36:00-08:00</updated>
     <id>http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams</id>
-    <content type="html"><![CDATA[<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N&#8217;Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
+    <content type="html"><![CDATA[
+
+<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N&#8217;Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
 
 <p>I&rsquo;m OK with this. There are certainly far <a href="http://minimaxir.com/2012/03/ethics-self-promotion/"><em>worse</em></a> ways to promote a startup.</p>
 
@@ -495,26 +594,19 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>Using the power of the Stylish extension for Chrome and Firefox, Mr. Timberlake has already made his mark on many startups around the internet.</p>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest2-e1358404534897.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest2-e1358404534897.png" alt="" /></a>
-TechCrunch</p>
+<p><img src="http://minimaxir.com/img/justintest3.png"></p>
 
-<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest9-e1358404467980.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest9-e1358404467980.png" alt="" /></a>
-Facebook</p>
+<p><img src="http://minimaxir.com/img/justintest2.png"></p>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest8-e1358404790348.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest8-e1358404790348.png" alt="" /></a>
-Twitter</p>
+<p><img src="http://minimaxir.com/img/justintest9.png"></p>
 
-<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest7-e1358404639594.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest7-e1358404639594.png" alt="" /></a>
-Instagram</p>
+<p><img src="http://minimaxir.com/img/justintest8.png"></p>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest5-e1358404610346.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest5-e1358404610346.png" alt="" /></a>
-Dropbox</p>
+<p><img src="http://minimaxir.com/img/justintest7.png"></p>
 
-<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest4-e1358404660737.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest4-e1358404660737.png" alt="" /></a>
-Imgur</p>
+<p><img src="http://minimaxir.com/img/justintest5.png"></p>
 
-<p><a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en"><img src="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en" alt="" /></a>
-Google Search</p>
+<p><img src="http://minimaxir.com/img/justintest4.png"></p>
 
 <p>To accomplish this magic, I use the Stylish browser extension, which can be used with either <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Chrome</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/stylish/">Firefox</a>. I have used Stylish <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">before, with browser filters</a>, and it worked very well. If you want your own moody Justin, follow these steps:</p>
 
@@ -541,7 +633,7 @@ background-attachment: fixed !important;
 
 <h2>Taking Justin To The Next Level</h2>
 
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/816440400_1965379.gif?resize=400%2C232" alt="816440400_1965379" /></p>
+<p><img src="http://minimaxir.com/img/816440400_1965379.gif"></p>
 
 <p>Now that we can make Justin appear anywhere, let&rsquo;s put his power to good use. TechCrunch writer Alexia Tsostis recently made a post about the <a href="http://techcrunch.com/2013/01/16/were-bringing-techcrunch-back/">upcoming redesign of TechCrunch</a>, which, I admit, is long overdue.</p>
 
@@ -552,6 +644,9 @@ background-attachment: fixed !important;
 <p>Using the power of Stylish, I present to you, a sneak peek into TechCrunch&rsquo;s 2013 redesign.</p>
 
 <p>I made a <em>few</em> stylistic additions as well. It&rsquo;s magic.</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/j6m2pjjhnuU "></iframe></div>
+
 
 <p>You can find a copy of the CSS I used to emulate this wonderful layout in <a href="https://github.com/minimaxir/techcrunch-1999">this GitHub repository</a>.</p>
 
@@ -613,54 +708,6 @@ From that Pipe, you can get the data in a RSS feed URL. Right-click and copy tha
 
 <p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditifttt.png?resize=625%2C239" alt="redditifttt" /><br/>
 Getting socially-vetted photos on your computer without any effort is a useful timesaver. A solution to a first world problem, perhaps, but it&rsquo;s the little things that count!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why Do Many Tweets Begin With A Period?]]></title>
-    <link href="http://minimaxir.com/2013/01/prefixed-period/"/>
-    <updated>2013-01-04T21:30:00-08:00</updated>
-    <id>http://minimaxir.com/2013/01/prefixed-period</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m not a Twitter fanatic. Although I do have <a href="https://twitter.com/minimaxir">a Twitter account</a> with about 300 followers,  Facebook&rsquo;s Subscribe feature <a href="http://www.facebook.com/max.woolf">on my Facebook profile</a> has met my use case for publishing sarcastic quips and cool links for a broad audience over the internet. I mostly use my Twitter account to read tweets from tech columnists, yet I don&rsquo;t even comment on their tweets because <strong>tweets that are replies to someone are not visible in the home timeline of my followers</strong>. I can understand the intuition behind this behavior: Twitter conversations can contain a lot of low-content tweets, and Twitter doesn&rsquo;t want its users to be spammed.</p>
-
-<p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that <strong>beginning your reply Tweet with a period (.) allows it to be seen by all your followers. </strong>Otherwise, only the replyee will receive notification of the reply.</p>
-
-<p>Having your reply tweets appear to your followers only if you begin them with a prefixed period is not intuitive at all. And this particular behavior and its workaround are not documented in <a href="https://support.twitter.com/groups/31-twitter-basics/topics/109-tweets-messages/articles/14023-what-are-replies-and-mentions">Twitter&rsquo;s help docs</a>. And replying to tweets is a core feature of Twitter. How many users would be able to deduce this behavior? How many brands, who rely on user engagement, are even aware of this behavior?</p>
-
-<p>As it turns out, I was only partially correct. It&rsquo;s even <em>less</em> intuitive.</p>
-
-<!-- more -->
-
-
-<h2>XY = @(Z)</h2>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/twitter2.png?resize=513%2C181" alt="twitter2" /></p>
-
-<p>I recently saw <a href="https://twitter.com/ScottyLabs/status/286921265514700801">a tweet</a> in my timeline that had a prefixed period, but clearly was not a reply to anyone. Confused, I pointed out that prefixed periods aren&rsquo;t necessary if the tweet is not a reply. <a href="https://twitter.com/amyquispe">Amy Quispe</a>, founder of ScottyLabs and a CS senior at Carnegie Mellon University with much more startup knowledge than myself, pointed out that I was wrong, and <strong>if the tweet begins with a @, it will not appear in your follower&rsquo;s timelines, regardless of whether it&rsquo;s a reply or a mention</strong>.</p>
-
-<p>Anyone who tweets, for example, &ldquo;<em>@SHO_Dexter is my favorite television show! Season 7 was AWESOME!!!</em>&rdquo;, will likely not have that tweet seen by any of their followers. Therefore, it&rsquo;s incredibly easy, and incredibly likely, for that behavior to unintentionally trigger a false positive for spam. Again, would a person notice that one of his/her tweets is not being seen? It&rsquo;s bad for the user, and it&rsquo;s even bad for @SHO_Dexter, who misses out on the free advertising.</p>
-
-<p>As it turns out, <em>that</em> <em>correction** was still only partially correct</em>, as there&rsquo;s one more important caveat:<strong> if a tweet by X begins a tweet with an @ mention of Y, and if Z is a follower of <em>both</em> X and Y, then Z will see the tweet. If the second condition is not true, then Z will not see the tweet.</strong></p>
-
-<p>Twitter is apparently a course in deductive reasoning. To be fair, this caveat is clearly stated in the help docs, and this behavior makes sense in the context of mutual friends among users. Nevertheless, it&rsquo;s not intuitive at all, and it&rsquo;s mostly irrelevant: a prefixed period tweet reaches all of your followers, 100% of the time.</p>
-
-<h2>The Pestilent Prefixed Period Problem</h2>
-
-<p>Twitter users want maximum reach. Brands want maximum reach. Therefore, everyone will use the prefixed period for replies and mentions. Those who don&rsquo;t use prefixed periods on Twitter will be left behind in this cutthroat game of social media.</p>
-
-<p>There are two problems with encouraging prefixed periods:</p>
-
-<ol>
-<li>It alienates newcomers to Twitter. Some online communities do have unwritten behaviors: <a href="http://www.reddit.com/">Reddit</a>, for example, invokes &ldquo;vote fuzzing&rdquo; on popular posts, which disguises the true amount of upvotes and downvotes on any particular post by adding fake upvotes/downvotes. You won&rsquo;t find that in any Reddit documentation, which leads to the frequent outbursts of &ldquo;WHO THE HELL WOULD DOWNVOTE THIS PUPPY?&rdquo; Quirks like these don&rsquo;t make communities exclusive: it makes them insular.</li>
-<li><strong>It looks tacky and ugly</strong>. That&rsquo;s not a trivial complaint. Every @mention tweet looks like someone made a typo. I don&rsquo;t think that&rsquo;s the brand image Twitter wants.</li>
-</ol>
-
-
-<p>How could Twitter address this? An option would be to adopt a system similar to Facebook&rsquo;s <em>ad hoc</em> post visibility settings, and allow users to set the reach of an individual tweet as necessary. Another option is to have an <em>All your replies and @mentions are shown to all your followers</em> account option that is opt-in, and let the user&rsquo;s followers determine whether the content is spam.</p>
-
-<p>Twitter, with an impending IPO, needs to help potential newcomers out in any way possible. Eliminating the need for prefixed periods is a great start to increasing accessibility.</p>
-
-<p><em>PS: I am not a huge dork.</em></p>
 ]]></content>
   </entry>
   

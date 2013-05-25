@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-05-19T14:28:13-07:00</updated>
+  <updated>2013-05-25T10:35:33-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Role-Playing Game With an Easily Exploitable Random Number Generator]]></title>
+    <link href="http://minimaxir.com/2013/05/guaranteed-to-be-random/"/>
+    <updated>2013-05-23T20:26:00-07:00</updated>
+    <id>http://minimaxir.com/2013/05/guaranteed-to-be-random</id>
+    <content type="html"><![CDATA[<p><img class="pull-right" src="http://minimaxir.com/img/GoldenSun.png"></p>
+
+<p>When the Game Boy Advance was released in June 2001, Nintendo promised that the handheld device would be capable of delivering a home gaming console experience on-the-go. <a href="http://en.wikipedia.org/wiki/Golden_Sun">Golden Sun</a>, developed by Camelot and published by Nintendo a few months after the console&rsquo;s release, exemplified the GBA&rsquo;s full capabilities with its hand-drawn environments, flashy battle effects, and <em>very</em> difficult dungeon puzzles which undoubtedly resulted in the sale of many strategy guides.</p>
+
+<p>In Golden Sun, you play as a group of teenage mages called Adepts, who wield the power of the four elements (Earth, Fire, Wind, and Water) by casting spells with Psynergy. The antagonists of the game are a pair of jerks who are attempting to reawaken a dangerous and sealed power, and only four kids can stop them from destroying the world. Released two years later, <a href="http://en.wikipedia.org/wiki/Golden_Sun:_The_Lost_Age">Golden Sun: The Lost Age</a> takes place immediately after the conclusion of the first game with a different quartet of Adepts and a new pair of jerks. In this sequel, it is revealed that the jerks who keep trying to kill you are not the bad guys and the whole conflict is just one big misunderstanding! Yes, the plot is very reminiscent of other Japanese-developed RPGs such as <a href="http://en.wikipedia.org/wiki/Final_Fantasy_(video_game)">Final Fantasy</a> and <a href="http://en.wikipedia.org/wiki/Chrono_Trigger">Chrono Trigger</a>, but it&rsquo;s still impressive for a game I typically played in the backseat of a car.</p>
+
+<p>Like Final Fantasy and Chrono Trigger, Golden Sun has an inventory system where players earn new weapons and items by purchasing them at a store or by finding them as loot from defeating enemies in the world. The most powerful weapons, naturally, only drop from enemies at the end of the game with odds of less than 0.01% per kill. If you killed <a href="http://www.wolframalpha.com/input/?i=binomial+distribution%28100%2C1%2F256%29">such enemies 100 times</a>, for example, you would only have a 32% expected chance of seeing a rare drop among all the kills. And killing that many enemies could take hours. It depends on the almighty will of Golden Sun&rsquo;s Random Number Generator.</p>
+
+<p>As it turns out, the <a href="http://goldensun.wikia.com/wiki/Random_Number_Generator">Golden Sun RNG</a> is so poorly implemented that players have found out how to make events with 1/256 probability occur <em>one hundred percent</em> of the time.</p>
+
+<!-- more -->
+
+
+<h1>You Make Your Own Luck</h1>
+
+<p><a href="http://xkcd.com/221/"><img src="http://minimaxir.com/img/random_number.png" alt="" /></a></p>
+
+<p>Soon after the first Golden Sun was released, players discovered that the first random enemy encounter the player enters after turning the GBA on was always a First Strike, where the player&rsquo;s party gets a free turn. Was this a cute gameplay mechanic intended to give the player a quick advantage, or was it indicative of a flaw in the game&rsquo;s RNG?</p>
+
+<p>Most modern RNGs are partially seeded and randomized using a timer, i.e. the current time of the computer in microseconds. This makes it infeasable to reproduce the output of the RNG reliably.</p>
+
+<p>However, the GBA does not have an internal clock, so time-based methods of seeding aren&rsquo;t possible. By the time the sequel was released in 2003, the
+<a href="http://www.goldensunrealm.com/gs/nickpresta_rng-guide.txt">entire Golden Sun RNG</a> was reverse-engineered:</p>
+
+<blockquote><p>Golden Sun uses the ANSI-C standard rand function as its Pseudo-Random Number
+Generator.</p>
+
+<p>There is one difference: Golden Sun&rsquo;s RNG uses an unsigned 4-byte number and
+returns it with no shifting, so you&rsquo;d replace &ldquo;return ((next >>16) &amp; 32757);&rdquo;
+with &ldquo;return (next &amp; 4294967295);&rdquo;</p>
+
+<p>This, ordinarily, is a perfectly capable RNG, but there is one flaw with what
+Golden Sun does with it.</p>
+
+<p>It only makes a new random number when something random happens. What&rsquo;s more,
+it uses <em>two</em> copies of the RNG to create two random numbers, and the
+first RNG only handles battle situations.</p>
+
+<p>As such, it is easy to control when a new random number is generated.</p>
+
+<p>On top of this, the RNGs are seeded with 0 when the GBA is reset, and because
+of the way the game has been programmed, the RNG controlling battle events will
+<em>continue</em> to be 0 even when you load the game&hellip;</p></blockquote>
+
+<p>Golden Sun&rsquo;s Random Number Generator isn&rsquo;t &ldquo;random&rdquo; at all. It&rsquo;s manipulated <em>entirely</em> from player-controlled actions, from the moment the Game Boy Advance is turned on.</p>
+
+<h1>Get Lucky</h1>
+
+<p><img src="http://minimaxir.com/img/kiku.png"></p>
+
+<p>One of Golden Sun&rsquo;s contributions to the typical RPG character class customization is the <a href="http://goldensun.wikia.com/wiki/Djinn">Djinn system</a>. In the game lore, Djinn are impish creatures that grant enhanced powers to Adepts. There are four types of Djinn, one for each element, that can be found in the overworld, and each Djinni can be used to either increase a character&rsquo;s statistics, or Unleashed to provide a powerful spell effect. Also, as with many other RPGs, Golden Sun implements an elemental rock-paper-scissors combat system: enemies are weak to an element and resistant to another.</p>
+
+<p>A <a href="http://www.gamefaqs.com/">GameFAQs</a> forum user by the name of &ldquo;darkpanther&rdquo; discovered that using a Djinn Unleash with an element that is the enemy&rsquo;s weakness will not only increase the amount of Experience and Coins earned, but also <em>quadruple</em> the chance of the enemy dropping a rare item. (this fact is neither hinted anywhere in the game nor stated in any strategy guides)</p>
+
+<p>This is essential toward manipulating the RNG. Normally, the rarest items such as <a href="http://goldensun.wikia.com/wiki/Tisiphone_Edge">Tisiphone Edge</a> and <a href="http://goldensun.wikia.com/wiki/Lachesis%27_Rule">Lachesis&#8217; Rule</a> have an &ldquo;Item-Class Chance&rdquo; of 9, meaning the item has a 1/(2<sup>9-1</sup>) = 1/256 chance of dropping per enemy kill. The &ldquo;DP Method&rdquo; decreases the ICC by 2, meaning the new drop rate becomes 1/(2<sup>7-1</sup>) = 1/64. But:</p>
+
+<blockquote><p>As &lsquo;unpredictable&rsquo; as RNGs seem to be, if they are always seeded to the same
+value and do not use a timer-based response, they will become predictable by
+anyone who is good at noticing patterns. One pattern being, for example, that
+the 31st random number that is calculated &ndash; 33727075 &ndash; will drop <em>any</em> item if
+the enemy dying when this random number was called was just killed by an
+elemental Djinn attack that it is weak to.</p></blockquote>
+
+<p>Calculating the 31st random number would fail against an ICC9 item, but now works against an ICC7 item. (and all items of lower ICC too)</p>
+
+<p>Therefore, <strong>in order to guarantee that an item drops, kill the appropriate enemy with an element-advantage Djinni such that the 30th random number is generated</strong>. (the 31st random number is generated on the enemy&rsquo;s death)</p>
+
+<p>How do you ensure that you only create 31 random numbers? From the Golden Sun Wikia:</p>
+
+<blockquote><p>Save the game and do a hard reset in the area where the monster that drops the item you need appears. Run around to get in a battle. If the encounter consists of a formation of 2 monsters, with at least one of them being the monster you want, proceed. If not, do another hard reset and try again.</p>
+
+<p>During battle, have the entire party use multi-targetting Psynergy on the targets in the first turn, and since a battle right after a hard reset always involve your party attacking first where possible, the monsters will not be able to act. During the second turn, use two multi-targetting Psynergy on the enemies, and have the third party member (or fourth, if one of the three party members that act before uses Defend) unleash an attack Djinni of the element the monster is weak to on the monster. If by this point, the monster flashes in colour and dies, you will obtain the drop of that monster at the end of the battle, however rare it is. If the monster does not die then (either dies too soon or doesn&rsquo;t die by this step), adjust the power of your attacks until you get it just right.</p></blockquote>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/UCJzuSBQ1hU "></iframe></div>
+
+
+<p>Moral of story: if you&rsquo;re making a video game, seed your RNGs with an algorithm that players can&rsquo;t manipulate 100%. Otherwise, hilarity will inevitably ensue. I forgive Camelot for implementing a simplistic RNG though; the two games&#8217; <a href="http://www.youtube.com/watch?v=DaxYYwMqiso&amp;list=PL8C84ECF55B28DC74">awesome</a> <a href="http://www.youtube.com/watch?v=M31afGXIGpQ&amp;list=PL586792F46D5A35D4&amp;index=13">soundtrack </a> more than makes up for it.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Profanity-Laced Video Game Password That Breaks Everything]]></title>
@@ -296,6 +381,8 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <h2>Comments From Everywhere!</h2>
 
+<p><img src="http://minimaxir.com/img/liveFyreSync.png"></p>
+
 <p>Recently, LiveFyre implemented a <a href="http://www.livefyre.com/comments/">comment feature</a> called SocialSync:</p>
 
 <p>With Livefyre SocialSync, the conversation happening on Facebook and Twitter automatically syncs directly to your content, where it belongs. SocialSync comments can be replied to and interacted with just like any other comment, including being automatically posted back to Twitter or Facebook.</p>
@@ -357,7 +444,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
 <!-- more -->
 
 
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/03/Zuck.png?resize=625%2C208" alt="Zuck" /></p>
+<p><img src="http://minimaxir.com/img/Zuck.png"></p>
 
 <p>Note the lack of comments and Likes, on what was the article with the second-most pageviews on TC (and one I can testify that had hundreds of comments.) A quick glance at multiple blogs and other old posts confirms that Likes were reset. New posts have several likes, but all old posts have 0 likes.</p>
 
@@ -372,7 +459,10 @@ The missing amount, divided by 2:   2,147,483,648 gold
     <link href="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
     <updated>2013-03-24T21:44:00-07:00</updated>
     <id>http://minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
-    <content type="html"><![CDATA[<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
+    <content type="html"><![CDATA[<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Syo5sI-iOgY "></iframe></div>
+
+
+<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
 
 <p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
 
@@ -397,7 +487,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>This <a href="http://tasvideos.org/1945M.html">SMW TAS</a>, posted in 2011, was so crazy that it inspired the creation of a new category of speed runs: &ldquo;Corrupts Memory.&rdquo; The <a href="http://tasvideos.org/forum/viewtopic.php?t=12215">discussion on the speed run</a> provides a technical explanation of of the glitch, which started a debate: &ldquo;does this <em>count</em> as a speed run?&rdquo; (96% of voters said yes.)</p>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/03/smw.png?resize=625%2C227" alt="smw" /></p>
+<p><img src="http://minimaxir.com/img/smw.png"></p>
 
 <p>To be fair, this is far from the first time where manipulated RAM has been used to complete a game. The classic Nintendo 64 title Legend of Zelda: Ocarina of Time has the infamous <a href="http://zeldaspeedruns.com/oot/ba/reverse-bottle-adventure">Reverse Bottle glitch</a> that allows players to transform items into others, and a <a href="http://youtu.be/PaUCFrW_mEE?t=13m44s">memory glitch</a> that teleports you from the first dungeon to the final cutscene, In <em>Pokemon</em> on the GameBoy, players discovered how to reprogram the game to <a href="http://tasvideos.org/forum/viewtopic.php?p=332488&amp;sid=1d8670bd80327418d202b6608e5cd2a9#332488">run arbitrary code</a>, but many gamers may remember the classic <a href="http://bulbapedia.bulbagarden.net/wiki/Missingno.">Missingno glitch</a>, which was very easy to reproduce on an actual console and provided many beneficial effects.</p>
 
@@ -410,7 +500,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
     <link href="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"/>
     <updated>2013-01-23T21:38:00-08:00</updated>
     <id>http://minimaxir.com/2013/01/its-a-metaphor-maybe</id>
-    <content type="html"><![CDATA[<p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog,.</p>
+    <content type="html"><![CDATA[<p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog.</p>
 
 <p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
 
@@ -425,7 +515,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>As said earlier, Facebook comments excel in their ease of implementation, light aesthetic, and zero-click registration. More importantly, it lends a lot of credibility to the comments, as they have (usually) been authenticated as a real person. Whenever a <em>real</em> person likes or comments on your own comment, it is very satisfying.</p>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/alexia.png?resize=625%2C256" alt="alexia" /></p>
+<p><img src="http://minimaxir.com/img/alexia.png"></p>
 
 <p>That said, there are a few unobvious nuances:</p>
 
@@ -446,7 +536,7 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>LiveFyre also has comment editing and an indicator of how many users are viewing the current blog post, but for some reason, the implementation of LiveFyre on TechCrunch disabled these features. Hmm.</p>
 
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/comments2.png?resize=625%2C211" alt="comments2" /></p>
+<p><img src="http://minimaxir.com/img/comments2.png"></p>
 
 <p>The core features good on paper. The problem is with the implementation. <a href="http://fyre.it/u2jnrP">This comment</a> does a good summary, but here&rsquo;s the gist when compared to Facebook Comments:</p>
 
@@ -460,7 +550,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <h2>The impact of LiveFyre on TechCrunch</h2>
 
-<p>LiveFyre works on a typical WordPress blog, but when applied to <img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/ToKillACommentsSection.png?resize=187%2C300" alt="ToKillACommentsSection" />large sites such as Engadget and TechCrunch, whose size attracts trolls, it can be crippling. It&rsquo;s like <a href="http://en.wikipedia.org/wiki/Dunbar's_number">Dunbar&rsquo;s Number</a> on a macro scale: there&rsquo;s a mathematical limit on the number of people who visit one place on the internet until it degenerates into madness and memes.</p>
+<p><img class="pull-right" src="http://minimaxir.com/img/ToKillACommentsSection.png"></p>
+
+<p>LiveFyre works on a typical WordPress blog, but when applied to large sites such as Engadget and TechCrunch, whose size attracts trolls, it can be crippling. It&rsquo;s like <a href="http://en.wikipedia.org/wiki/Dunbar's_number">Dunbar&rsquo;s Number</a> on a macro scale: there&rsquo;s a mathematical limit on the number of people who visit one place on the internet until it degenerates into madness and memes.</p>
 
 <p>Even with the criticisms above, I still prefer Facebook Comments, and I implement it on my own site, as zero-click registration and real name validation is paramount. It&rsquo;s definitely the lesser of two evils.</p>
 
@@ -471,7 +563,12 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>I realize that this is a first-world problem. Even more of a first world problem than <a href="http://minimaxir.com/2013/01/if-cute-then-happiness/">auto-downloading pictures of cute puppies</a>. I&rsquo;m not mad.</p>
 
-<p>I&rsquo;m just sad. <img src="http://i2.wp.com/minimaxir.com/wp-includes/images/smilies/icon_sad.gif?w=625" alt=":(" /></p>
+<p>I&rsquo;m just sad. :(</p>
+
+<hr>
+
+
+<p><strong>EDIT (May 2013)</strong>: When this article was published, this blog was using Facebook Comments, however I switched the comments system to Disqus just to try it out.</p>
 ]]></content>
   </entry>
   
@@ -480,7 +577,9 @@ The missing amount, divided by 2:   2,147,483,648 gold
     <link href="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"/>
     <updated>2013-01-15T21:36:00-08:00</updated>
     <id>http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams</id>
-    <content type="html"><![CDATA[<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N&#8217;Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
+    <content type="html"><![CDATA[
+
+<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N&#8217;Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
 
 <p>I&rsquo;m OK with this. There are certainly far <a href="http://minimaxir.com/2012/03/ethics-self-promotion/"><em>worse</em></a> ways to promote a startup.</p>
 
@@ -495,26 +594,19 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>Using the power of the Stylish extension for Chrome and Firefox, Mr. Timberlake has already made his mark on many startups around the internet.</p>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest2-e1358404534897.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest2-e1358404534897.png" alt="" /></a>
-TechCrunch</p>
+<p><img src="http://minimaxir.com/img/justintest3.png"></p>
 
-<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest9-e1358404467980.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest9-e1358404467980.png" alt="" /></a>
-Facebook</p>
+<p><img src="http://minimaxir.com/img/justintest2.png"></p>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest8-e1358404790348.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest8-e1358404790348.png" alt="" /></a>
-Twitter</p>
+<p><img src="http://minimaxir.com/img/justintest9.png"></p>
 
-<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest7-e1358404639594.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest7-e1358404639594.png" alt="" /></a>
-Instagram</p>
+<p><img src="http://minimaxir.com/img/justintest8.png"></p>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest5-e1358404610346.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest5-e1358404610346.png" alt="" /></a>
-Dropbox</p>
+<p><img src="http://minimaxir.com/img/justintest7.png"></p>
 
-<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest4-e1358404660737.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest4-e1358404660737.png" alt="" /></a>
-Imgur</p>
+<p><img src="http://minimaxir.com/img/justintest5.png"></p>
 
-<p><a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en"><img src="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en" alt="" /></a>
-Google Search</p>
+<p><img src="http://minimaxir.com/img/justintest4.png"></p>
 
 <p>To accomplish this magic, I use the Stylish browser extension, which can be used with either <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Chrome</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/stylish/">Firefox</a>. I have used Stylish <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">before, with browser filters</a>, and it worked very well. If you want your own moody Justin, follow these steps:</p>
 
@@ -541,7 +633,7 @@ background-attachment: fixed !important;
 
 <h2>Taking Justin To The Next Level</h2>
 
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/816440400_1965379.gif?resize=400%2C232" alt="816440400_1965379" /></p>
+<p><img src="http://minimaxir.com/img/816440400_1965379.gif"></p>
 
 <p>Now that we can make Justin appear anywhere, let&rsquo;s put his power to good use. TechCrunch writer Alexia Tsostis recently made a post about the <a href="http://techcrunch.com/2013/01/16/were-bringing-techcrunch-back/">upcoming redesign of TechCrunch</a>, which, I admit, is long overdue.</p>
 
@@ -552,6 +644,9 @@ background-attachment: fixed !important;
 <p>Using the power of Stylish, I present to you, a sneak peek into TechCrunch&rsquo;s 2013 redesign.</p>
 
 <p>I made a <em>few</em> stylistic additions as well. It&rsquo;s magic.</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/j6m2pjjhnuU "></iframe></div>
+
 
 <p>You can find a copy of the CSS I used to emulate this wonderful layout in <a href="https://github.com/minimaxir/techcrunch-1999">this GitHub repository</a>.</p>
 
@@ -1288,51 +1383,6 @@ Posted in an article titled &ldquo;HTC Unites New Android Smartphones Under &lsq
 <p>Entrepreneurs are not just from Silicon Valley with access to mentoring and capital; they are from all over the U.S., and all over the world. I made this list to help entrepreneurs who have great ideas, but might be missing essential business attributes, which is unfortunately what matters in the end as such flaws may sink great website ideas, and that would be a true shame. Yes, there are many other considerations to be given to a startup in the long run, both business (economics, marketing, public relations) and technical (development, maintenance, project management), but startups first need to get off the ground.</p>
 
 <p>I admit that feel like a jerk when I point out that &ldquo;yes, your startup that you undeniably spent hundreds of hours developing is not original or is incredibly flawed.&rdquo; I&rsquo;ve always been critical and realistic analyzing the ideas of entrepreneurs when they approach me. Needless to say I usually don&rsquo;t get a &ldquo;thank you,&rdquo; but I don&rsquo;t regret anything, because I feel it&rsquo;s more appropriate they learn the weaknesses in their product earlier than later: otherwise there might not even <em>be</em> a &ldquo;later.&rdquo;</p>
-
-<p>-Max</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How Startups Make Money: Do They *Need* A Revenue Model?]]></title>
-    <link href="http://minimaxir.com/2011/11/how-startups-make-money/"/>
-    <updated>2011-11-11T20:28:00-08:00</updated>
-    <id>http://minimaxir.com/2011/11/how-startups-make-money</id>
-    <content type="html"><![CDATA[<p>Startups. The biggest movement in the technology world since the beginning of the 20th century. Never has it been so easy for teams of entrepreneurs, or even individuals, to create a business from scratch. The barrier of entry has been virtually eliminated thanks to the advent of cloud computing services, such as <a href="http://aws.amazon.com/ec2/">Amazon EC2</a> and <a href="http://www.rackspace.com/">Rackspace</a>, which allow businesses to only spend hundreds of dollars for server infrastructure for databases and processing where, only a few years ago, entrepreneurs would normally spend tens of thousands for the same capabilities, and thousands more in upkeep and maintenance. Yes, <a href="http://minimaxir.com/2011/11/like-x-for-y/" title="Startups, Please Stop Saying You're &quot;Like X for Y&quot;">I&rsquo;ve said these words before</a>, but the lack of significant upkeep costs is a significant factor in startup economics.</p>
-
-<p>Businesses thrive when they have a positive net profit. For any business, profit can be measured by taking total revenue and subtracting total cost. Because total cost for startups is much lower due to the aforementioned cloud services, they can have a proportionally lower revenue and still hold significant profit margins. This allows them to more easily prove that their business is successful and lends the startup credibility when they attempt to expand by asking for venture capital. At the least, your business needs to make enough money to cover employee expenses, which is one reason why startups go &ldquo;lean&rdquo; and have less than 10 employees to save on costs.</p>
-
-<p>But what&rsquo;s the best way for startups to make money? Investors in your startup want to earn their capital back at some point in time, after all.There&rsquo;s the tried-and-true method of getting customers to use your service, then charging a subscription fee. However, there are many startups, such as <a href="http://instagr.am/">Instagram</a>, a photo sharing service, that have no current method of earning money from consumers! (Instagram <a href="http://instagr.am/about/faq/">says outright </a>that they have no revenue model! Most impressive use of transparency ever.) Is that business model, or lack thereof, sustainable?</p>
-
-<!-- more -->
-
-
-<p><a href="http://techcrunch.com/2011/09/14/i-got-five-on-it/"><img src="http://techcrunch.com/2011/09/14/i-got-five-on-it/" alt="If you click the image to go to Instagram, you make them spend $0.0001 in bandwidth too!" /></a></p>
-
-<p>Dave McClure, a very successful investor, states that<a href="http://techcrunch.com/2011/09/14/i-got-five-on-it/"> his five criteria for investing in startups</a> are: Market, Product, Team, Customers, and Revenue. Revenue and Customers are two distinct points, even though an increase in customers implies an increase in revenue. Can startups forgo a revenue model if they compensate by having a killer product and team, and targeting the right market and obtain lots of customers?</p>
-
-<p>99% of startups need a reliable, effective way to make money, or else they&rsquo;ll go out of business. But for the remaining 1% who have an incredible product and team, they can defy the principles of microeconomics and manage to succeed without an explicit way of obtaining revenue.<br/>
-First, let&rsquo;s look at how internet startups typically make money in 2011:</p>
-
-<p><strong>1. Advertisement Revenue (<a href="https://www.google.com/">Google</a>, <a href="http://www.facebook.com/">Facebook</a>):</strong> The oldest, and still best, way of making money on the internet. Pioneered by Google with their AdWords platform in the 2000&rsquo;s, where relevant advertisements accompanied internet searches, Google earned $billions and billions in revenue each year, and became the technology juggernaut it is today. Even individuals who are not creating a business, such as bloggers, can earn revenue on their own blogs by implementing an ad distribution network such as Google AdSense. Large scale startups and professional blogs, however, cut out the middle-man and distribute the ads themselves, which allows them to earn even more money.</p>
-
-<p><strong>2. Free/Premium Tiered Subscription Models (<a href="https://www.dropbox.com/">Dropbox</a>)</strong>: Subscriptions for services have existed well before the internet, with newspapers and gym memberships, and even with software such as shareware. However, due to the decreasing costs of IT from cloud computing, the cost per user is neligible, so startups can feasibly give away their entire service for free. This free service can be used to tempt the consumer into buying a premium version of the service with added perks; the revenue from a user paying for a subscription far outweighs the additional cost of the perks. Dropbox is one of the pioneers of this strategy: they offer 2GB of cloud storage space for free (which costs them less than $0.001/user), and users can pay $10/month for 50GB of space (which only costs them slightly more than $0.001).</p>
-
-<p><strong>3. Freemium (<a href="http://company.zynga.com/">Zynga</a>)</strong>: Similar to #2, freemium is where the service is completely free, and customers can pay for perks or additional content <em>a la carte</em>. Zynga is the pioneer here with games such as FarmVille, where players can always play for free, but only for a certain amount of time; paying real money can help speed things up. It&rsquo;s not my favorite business model; wayyy too many gaming startups, especially on the PC (<a href="http://na.leagueoflegends.com/">League of Legends</a>, <a href="http://www.teamfortress.com/">Team Fortress 2</a>) and iOS (everything in the Top Grossing section of the App Store), use this model, but it&rsquo;s simple, effective, and down to an exact science. Many users are willing-to-pay for an advantage, and many aren&rsquo;t; freemium caters to both of those types of users.</p>
-
-<p>Most internet services will use one of these models, or some combination thereof. <a href="http://www.hulu.com/">Hulu</a> and <a href="http://www.pandora.com/">Pandora</a>, for example, uses #1 to earn revenue off of free users, but offer a premium service to exploit #2. There are exceptions for the more niche startups (i.e. which offer a physical product/services or use brand merchandising), but in general, the three models are safest for a startup, especially since all three are easily scalable.</p>
-
-<p>Let&rsquo;s look back at Instagram. Could they implement one of the three mentioned revenue models? Easily. Ads could be shown to the user on the iOS client or beside the picture on the web, although adding ads to a previously ad-free app usually upsets customers. Instagram could charge a subscription fee  or an in-app purchase for premium filters, however &ldquo;high-quality photo filters&rdquo; is an oxymoron, and might not succeed in user adoption.</p>
-
-<p>It&rsquo;s highly likely that Instagram <em>doesn&rsquo;t intend to monetize itself at all</em>, and instead use the product as a springboard for much better, larger things. Anyone in the Silicon Valley can make a product, but very few people can make good products, and very few startups are as popular as Instagram in recent months.</p>
-
-<p><a href="http://belugapods.com/">Beluga</a> was a startup that specialized in mobile chatting. It was later <a href="http://techcrunch.com/2011/03/01/facebook-beluga/">bought by Facebook</a>, and their team was folded into the company and helped develop the Facebook Messager app for mobile. <a href="http://groupme.com/">GroupMe</a> was another social solution, which was later<a href="http://techcrunch.com/2011/08/21/skype-to-acquire-year-old-group-messaging-service-groupme/"> bought by Skype</a>. Both startups received multi-million dollar buyouts.</p>
-
-<p>In 2011, positioning yourself for a buyout by a multibillion dollar corporation is a legitimate exit strategy. Yes, there&rsquo;s a considerable amount of risk involved because there&rsquo;s no certainty that someone will buy your startup. However, if the startup first builds a  large userbase, larger companies will certainly take note, and in some cases, buy you out just to take your users as their own.</p>
-
-<p>Instagram has many options, to be sure. Should startups follow in their foot steps? Well, obviously they should try to create an excellent product with an excellent team. But can the typical startup pull off having no revenue model? I would not recommend it. The off chance of a buyout or investment support drastically outweighs the inability to pay your employees and maintain your servers five or ten years down the road.</p>
-
-<p>If you&rsquo;re making a startup in 2011, make sure it has a way to make money. There are many tried and true methods, pick the one(s) which best fit your business model! If the opportunity hits to make it big, don&rsquo;t neglect it, but be pragmatic and realistic with your expectations.</p>
 
 <p>-Max</p>
 ]]></content>

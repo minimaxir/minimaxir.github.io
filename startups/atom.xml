@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Startups | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//startups/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-05-19T14:28:13-07:00</updated>
+  <updated>2013-05-25T10:35:33-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -143,7 +143,9 @@ Most of our customers (60%) consider themselves entrepreneurs. They are bringing
     <link href="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"/>
     <updated>2013-01-15T21:36:00-08:00</updated>
     <id>http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams</id>
-    <content type="html"><![CDATA[<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N'Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
+    <content type="html"><![CDATA[
+
+<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N'Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
 
 <p>I&rsquo;m OK with this. There are certainly far <a href="http://minimaxir.com/2012/03/ethics-self-promotion/"><em>worse</em></a> ways to promote a startup.</p>
 
@@ -158,26 +160,19 @@ Most of our customers (60%) consider themselves entrepreneurs. They are bringing
 
 <p>Using the power of the Stylish extension for Chrome and Firefox, Mr. Timberlake has already made his mark on many startups around the internet.</p>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest2-e1358404534897.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest2-e1358404534897.png" alt="" /></a>
-TechCrunch</p>
+<p><img src="/img/justintest3.png"></p>
 
-<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest9-e1358404467980.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest9-e1358404467980.png" alt="" /></a>
-Facebook</p>
+<p><img src="/img/justintest2.png"></p>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest8-e1358404790348.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest8-e1358404790348.png" alt="" /></a>
-Twitter</p>
+<p><img src="/img/justintest9.png"></p>
 
-<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest7-e1358404639594.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest7-e1358404639594.png" alt="" /></a>
-Instagram</p>
+<p><img src="/img/justintest8.png"></p>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest5-e1358404610346.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest5-e1358404610346.png" alt="" /></a>
-Dropbox</p>
+<p><img src="/img/justintest7.png"></p>
 
-<p><a href="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest4-e1358404660737.png"><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/justintest4-e1358404660737.png" alt="" /></a>
-Imgur</p>
+<p><img src="/img/justintest5.png"></p>
 
-<p><a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en"><img src="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en" alt="" /></a>
-Google Search</p>
+<p><img src="/img/justintest4.png"></p>
 
 <p>To accomplish this magic, I use the Stylish browser extension, which can be used with either <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Chrome</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/stylish/">Firefox</a>. I have used Stylish <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">before, with browser filters</a>, and it worked very well. If you want your own moody Justin, follow these steps:</p>
 
@@ -204,7 +199,7 @@ background-attachment: fixed !important;
 
 <h2>Taking Justin To The Next Level</h2>
 
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/816440400_1965379.gif?resize=400%2C232" alt="816440400_1965379" /></p>
+<p><img src="/img/816440400_1965379.gif"></p>
 
 <p>Now that we can make Justin appear anywhere, let&rsquo;s put his power to good use. TechCrunch writer Alexia Tsostis recently made a post about the <a href="http://techcrunch.com/2013/01/16/were-bringing-techcrunch-back/">upcoming redesign of TechCrunch</a>, which, I admit, is long overdue.</p>
 
@@ -215,6 +210,8 @@ background-attachment: fixed !important;
 <p>Using the power of Stylish, I present to you, a sneak peek into TechCrunch&rsquo;s 2013 redesign.</p>
 
 <p>I made a <em>few</em> stylistic additions as well. It&rsquo;s magic.</p>
+
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/j6m2pjjhnuU "></iframe></div></p>
 
 <p>You can find a copy of the CSS I used to emulate this wonderful layout in <a href="https://github.com/minimaxir/techcrunch-1999">this GitHub repository</a>.</p>
 

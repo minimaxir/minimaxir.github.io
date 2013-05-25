@@ -105,7 +105,7 @@ border-radius: 5px;
 content: none;
 }
 
-.blog-index img, .hentry img {
+img.pull-right {
 padding: 20px;
 }
 

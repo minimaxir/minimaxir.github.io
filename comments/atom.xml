@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Comments | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//comments/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-05-19T14:28:13-07:00</updated>
+  <updated>2013-05-25T10:35:33-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -28,6 +28,8 @@
 
 
 <h2>Comments From Everywhere!</h2>
+
+<p><img src="/img/liveFyreSync.png"></p>
 
 <p>Recently, LiveFyre implemented a <a href="http://www.livefyre.com/comments/">comment feature</a> called SocialSync:</p>
 
