@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-05-25T10:35:33-07:00</updated>
+  <updated>2013-05-31T07:57:33-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How MMO Players Proved that the Developers Bugged an Item Drop Rate]]></title>
+    <link href="http://minimaxir.com/2013/05/deep-breaths-more/"/>
+    <updated>2013-05-30T23:23:00-07:00</updated>
+    <id>http://minimaxir.com/2013/05/deep-breaths-more</id>
+    <content type="html"><![CDATA[<p><img class="pull-right" src="http://minimaxir.com/img/globecto.png"></p>
+
+<p><a href="https://www.guildwars2.com/en/">Guild Wars 2</a> is an incredible massively-multiplayer online role-playing game. The goal of Guild Wars 2, developed by ArenaNet, is to save the world, complete quests, and get awesome loot; objectives similar to that of many other MMORPGs such as <a href="http://us.battle.net/wow/en/">World of Warcraft</a>. However, Guild Wars 2 differentiates itself from its spiritual predecessors with its dynamically-changing world, incredible graphics, and the elimination of annoying and tedious time-wasters that have plagued the MMORPG genre.</p>
+
+<p>The best items in Guild Wars 2, naturally, require a large amount of effort and money to obtain. In order to create Legendary weapons, players must obtain large amounts of an item known as Globs of Ectoplasm. Globs of Ectoplasm (abbreviated as &ldquo;Ecto&rdquo;) are obtained randomly when a player salvages a Rare item using a Salvage Kit. Due to their high demand, Ecto effectively serve as a second currency in Guild Wars 2.</p>
+
+<p>Using the best Salvage Kit (that doesn&rsquo;t require paying real-world money), players received, on average, 0.9 Ecto per Rare Item Salvage, a value that has been well-documented and well-tested. But after a patch released a couple days ago, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">players on the Official Guild Wars 2 forums</a> and <a href="http://www.reddit.com/r/Guildwars2/comments/1fc540/ecto_salvage_rate_bug_being_looked_into_keep_your/">Reddit</a> began to notice that the drop rate for Ecto was <em>much</em> lower, with no mention in the patch notes.</p>
+
+<p>How do you <em>prove</em> something that occurs at random now occurs less frequently?</p>
+
+<!-- more -->
+
+
+<h1>What is &ldquo;Random&rdquo;?</h1>
+
+<p>The first rule of any official MMO forum: never accuse the developers of making implicit changes to the game unless you have proof. Such tactics are commonly employed by forum trolls and it makes building a community more difficult.</p>
+
+<p>The second rule of any official MMO forum: never accuse the developers of manipulating probability. As with normal gambling, players can hit a streak of bad luck with loot drops, enemy critical attacks, etc. But the anecdotal data from one player is not sufficient proof of any probability change. (an <a href="http://www.wowwiki.com/Why_does_Onyxia_cast_Deep_Breath%3F">old meme</a> from the World of Warcraft era mocked the userbase&rsquo;s inability to comprehend the definition of random)</p>
+
+<p>On May 28th, a player <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">noted on the official GW2 forums</a> that out of 166 salvages, he only received about 80 Ecto, or about 0.5 Ecto/Salvage. This is approximately <em>half</em> of the original rate of 0.9 Ecto/Salvage. Since the rate of new Ecto entering the market was halved with no change in demand, the Auction House <a href="http://www.gw2spidy.com/item/19721">price for Ecto</a> began to steadily rise.</p>
+
+<p><img src="http://minimaxir.com/img/gw2ecto.png"></p>
+
+<p>The price increase in the short-term was not <a href="http://minimaxir.com/2013/05/stones-of-jordan/">economy-breaking</a>, but when you need 250 Ectos to create a Legendary weapon in the long-term, it can add up very quickly.</p>
+
+<p>Other players provided their experiences in the thread, with limited results such as &ldquo;noticed this too, yesterday i salvaged 9 rares, got 4 ectos&rdquo; and &ldquo;20 rare at the end of my day, i save them before go bed: 0 ecto. wtf?&rdquo;. Such sample sizes are much too low to satisfy the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">Law of Large Numbers</a> and draw any remotely accurate conclusions.</p>
+
+<p>Regina Buenaobra, ArenaNet Community Manager, eventually <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2115818">responded</a>:</p>
+
+<blockquote><p>Changes to important things like salvage rates would be listed in the update notes if they have changed. If it’s not in the update notes, then no changes have been made by the development team.</p></blockquote>
+
+<p>So Word of God implies that everyone is wrong. Issue over?</p>
+
+<p>Of course not!</p>
+
+<h1>No Such Thing As Too Much Data</h1>
+
+<p>Despite Regina&rsquo;s dismissal, players continued to post in the thread and began quoting even larger sample sizes, such as a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2114853">salvaging 500 Rares</a> resulting in 286 Ectos (0.57 Ecto/Salvage) and <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2116461">salvaging 775 Rares</a> resulting in 402 Ecto (0.52 Ecto/Salvage). With those sample sizes, the probability that the true salvage rate is unchanged from 0.9 Ecto/Salvage is essentially zero.</p>
+
+<p>John Smith, ArenaNet&rsquo;s resident economist, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/4#post2116752">replied</a> that he&rsquo;ll &ldquo;look into this and get back to you.&rdquo; A day later, John made a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2122262">promise</a> that &ldquo;if we change anything involving ectos, there will be public information on it.&rdquo; Sure enough, on May 30th, a new patch was released with only <a href="https://forum-en.guildwars2.com/forum/info/news/Game-Update-Notes-May-28-2013/2124609">one patch note</a>:</p>
+
+<blockquote><p>Fixed a salvaging bug introduced in the last patch that sometimes caused salvage kits to yield incorrect results.</p></blockquote>
+
+<p>And that was that, the price of Ecto almost immediately dropped. All was well.</p>
+
+<p>John left one final <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2124684">message</a>: &ldquo;Thanks to everyone for your help identifying the issue and providing great data for me to start with in my research.&rdquo;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Role-Playing Game With an Easily Exploitable Random Number Generator]]></title>
@@ -651,63 +705,6 @@ background-attachment: fixed !important;
 <p>You can find a copy of the CSS I used to emulate this wonderful layout in <a href="https://github.com/minimaxir/techcrunch-1999">this GitHub repository</a>.</p>
 
 <p>Will you let Timberlake enrich <em>your</em> life? He&rsquo;s waiting. In the lower-right corner of your screen.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)]]></title>
-    <link href="http://minimaxir.com/2013/01/if-cute-then-happiness/"/>
-    <updated>2013-01-13T21:32:00-08:00</updated>
-    <id>http://minimaxir.com/2013/01/if-cute-then-happiness</id>
-    <content type="html"><![CDATA[<p><strong><em>TL;DR: Use this <a href="https://ifttt.com/recipes/74285">IFTTT recipe</a>, and change the subreddit value in the parameter of the Feed URL as needed.</em></strong></p>
-
-<p>In <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">a previous post</a>, I joked about a hypothetical social media strategy in which an automated script does Facebook brand management by stealing the top cute images from <a href="http://www.reddit.com/">Reddit</a> &ndash; an aggregator of trending topics and images &ndash;  and reposting them on the Facebook page, additionally adding a cute message encouraging users to LIKE, SHARE, and COMMENT!  We get easy social media fame for no monetary cost.</p>
-
-<p>Out of curiosity, I wanted to see if it was feasible to create such a script. Both Reddit and Facebook indeed have APIs that make it easy. But then I have to set up a server to check Reddit periodically, ensure that no images are duplicated, etc., and that can take time to implement and ensure that it works correctly (<em>all</em> the images must be cute!). I looked into <a href="https://ifttt.com/">IFTTT</a>, a relatively new startup that talks between different popular web services to automate simple tasks, like posting to Twitter whenever you post to Facebook.</p>
-
-<p>As it turns out, yes, this is possible, and you can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too! Just use <a href="https://ifttt.com/recipes/74285">this IFTTT recipe</a>! There are a few interesting caveats, though&hellip;</p>
-
-<!-- more -->
-
-
-<h2>Really Simple Syndication is&hellip;Really Simple?</h2>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditrss2.png?resize=304%2C242" alt="redditrss2" /></p>
-
-<p>IFTTT allows users to extract information from RSS feeds, which one might typically be used to read blogs and news articles. The RSS feed typically provides the title, author, date, and content of a post: the important things. However, RSS has more applications: it can distribute other data, such as weather and desktop wallpapers. IFTTT allows other apps to load image and audio files from an RSS feed, but only if the RSS feed link links to the content itself.</p>
-
-<p>Unfortunately, this won&rsquo;t work on Reddit by default, as its RSS feeds do not contain a direct link to the photo and instead link to the Reddit comments on the image. Image-based websites, such as <a href="http://www.buzzfeed.com/">BuzzFeed</a> and <a href="http://interfacelift.com/wallpaper/downloads/date/any/">InterfaceLift</a> also implement a similar system because they don&rsquo;t want their users just to use a script to download images and bypass the website and its lovely revenue-generating advertisements. Therefore, the RSS feed alone won&rsquo;t work with IFTTT.</p>
-
-<p>During my research into my social media exploitation hypothesis, I found a <a href="http://blog.stevemould.com/rss-feed-reddit-stories-score-threshold/">blog post by Steve Mould</a> that provides a way to translate data from Reddit&rsquo;s JSON API to an RSS feed using a service called <a href="http://pipes.yahoo.com/pipes/">Yahoo Pipes</a>. This modified RSS feed, when given a subreddit and a score threshold, obtains the top Reddit posts in that subreddit above that karma threshold (upvotes &ndash; downvotes), and returns a feed item which contains direct link to the referenced URL.</p>
-
-<p>Here is <a href="http://bit.ly/W1ypdf">my variation of his Reddit Pipe</a>. My script to process the API has a few changes (such as using Reddit&rsquo;s &ldquo;hot&rdquo; posts, instead of the top posts; hot posts update much more frequently). Testing it with r/aww and a threshold of 50 karma, I received 177 very cute pictures on my computer in a week.</p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditcute.png?resize=625%2C382" alt="redditcute" /><br/>
-From that Pipe, you can get the data in a RSS feed URL. Right-click and copy that feed URL into a IFTTT recipe as the source. For the action, use the **** variable to retrieve the image URL.</p>
-
-<h2>With Great Power Comes Great Cuteness</h2>
-
-<p>Yes, you can save the Reddit images to your computer automatically using <a href="https://www.dropbox.com/">Dropbox</a>. Or <a href="https://drive.google.com">Google Drive</a>. Or <a href="https://skydrive.live.com/">SkyDrive</a>. Or even get a cute email every hour!</p>
-
-<p>Thanks to IFTTT, there are many other creative things you can do with the feed that you can include in a recipe:</p>
-
-<ul>
-<li>Auto-post the image to your Tumblr or WordPress blog. Easy cuteness, and you&rsquo;ll be the source!</li>
-<li>Auto-curate the cute photos to your Facebook or Twitter account. All your friends will love you!</li>
-<li>Get social media fame for no additional monetary cost by publishing the cute images to your Facebook Page, with an encouragement to LIKE SHARE and COMMENT! My original hypothesis was correct!</li>
-</ul>
-
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditnega.png?resize=625%2C418" alt="redditnega" /></p>
-
-<h2>Caveats</h2>
-
-<p>One caveat in using Yahoo Pipes is that it is rate limited to 200 runs in a 10 minute interval, meaning that the IFTTT recipe provided will likely fail if more than 200 people use the feed. If that does happen, just clone my pipe, and use the RSS feed from the clone for your own personal recipe.</p>
-
-<p>Also, there&rsquo;s no rate limiting on when recipes are triggered and images are posted/downloaded. You can trigger multiple images simultaneously, which may be considered spammy if you are posting to social media. In that case, increase the karma threshold to reduce the frequency of the postings and to maintain a high quality of the images.</p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditifttt.png?resize=625%2C239" alt="redditifttt" /><br/>
-Getting socially-vetted photos on your computer without any effort is a useful timesaver. A solution to a first world problem, perhaps, but it&rsquo;s the little things that count!</p>
 ]]></content>
   </entry>
   

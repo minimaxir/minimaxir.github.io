@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-05-25T10:35:33-07:00</updated>
+  <updated>2013-05-31T07:57:33-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How MMO Players Proved that the Developers Bugged an Item Drop Rate]]></title>
+    <link href="http://minimaxir.com/2013/05/deep-breaths-more/"/>
+    <updated>2013-05-30T23:23:00-07:00</updated>
+    <id>http://minimaxir.com/2013/05/deep-breaths-more</id>
+    <content type="html"><![CDATA[<p><img class="pull-right" src="http://minimaxir.com/img/globecto.png"></p>
+
+<p><a href="https://www.guildwars2.com/en/">Guild Wars 2</a> is an incredible massively-multiplayer online role-playing game. The goal of Guild Wars 2, developed by ArenaNet, is to save the world, complete quests, and get awesome loot; objectives similar to that of many other MMORPGs such as <a href="http://us.battle.net/wow/en/">World of Warcraft</a>. However, Guild Wars 2 differentiates itself from its spiritual predecessors with its dynamically-changing world, incredible graphics, and the elimination of annoying and tedious time-wasters that have plagued the MMORPG genre.</p>
+
+<p>The best items in Guild Wars 2, naturally, require a large amount of effort and money to obtain. In order to create Legendary weapons, players must obtain large amounts of an item known as Globs of Ectoplasm. Globs of Ectoplasm (abbreviated as &ldquo;Ecto&rdquo;) are obtained randomly when a player salvages a Rare item using a Salvage Kit. Due to their high demand, Ecto effectively serve as a second currency in Guild Wars 2.</p>
+
+<p>Using the best Salvage Kit (that doesn&rsquo;t require paying real-world money), players received, on average, 0.9 Ecto per Rare Item Salvage, a value that has been well-documented and well-tested. But after a patch released a couple days ago, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">players on the Official Guild Wars 2 forums</a> and <a href="http://www.reddit.com/r/Guildwars2/comments/1fc540/ecto_salvage_rate_bug_being_looked_into_keep_your/">Reddit</a> began to notice that the drop rate for Ecto was <em>much</em> lower, with no mention in the patch notes.</p>
+
+<p>How do you <em>prove</em> something that occurs at random now occurs less frequently?</p>
+
+<!-- more -->
+
+
+<h1>What is &ldquo;Random&rdquo;?</h1>
+
+<p>The first rule of any official MMO forum: never accuse the developers of making implicit changes to the game unless you have proof. Such tactics are commonly employed by forum trolls and it makes building a community more difficult.</p>
+
+<p>The second rule of any official MMO forum: never accuse the developers of manipulating probability. As with normal gambling, players can hit a streak of bad luck with loot drops, enemy critical attacks, etc. But the anecdotal data from one player is not sufficient proof of any probability change. (an <a href="http://www.wowwiki.com/Why_does_Onyxia_cast_Deep_Breath%3F">old meme</a> from the World of Warcraft era mocked the userbase&rsquo;s inability to comprehend the definition of random)</p>
+
+<p>On May 28th, a player <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">noted on the official GW2 forums</a> that out of 166 salvages, he only received about 80 Ecto, or about 0.5 Ecto/Salvage. This is approximately <em>half</em> of the original rate of 0.9 Ecto/Salvage. Since the rate of new Ecto entering the market was halved with no change in demand, the Auction House <a href="http://www.gw2spidy.com/item/19721">price for Ecto</a> began to steadily rise.</p>
+
+<p><img src="http://minimaxir.com/img/gw2ecto.png"></p>
+
+<p>The price increase in the short-term was not <a href="http://minimaxir.com/2013/05/stones-of-jordan/">economy-breaking</a>, but when you need 250 Ectos to create a Legendary weapon in the long-term, it can add up very quickly.</p>
+
+<p>Other players provided their experiences in the thread, with limited results such as &ldquo;noticed this too, yesterday i salvaged 9 rares, got 4 ectos&rdquo; and &ldquo;20 rare at the end of my day, i save them before go bed: 0 ecto. wtf?&rdquo;. Such sample sizes are much too low to satisfy the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">Law of Large Numbers</a> and draw any remotely accurate conclusions.</p>
+
+<p>Regina Buenaobra, ArenaNet Community Manager, eventually <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2115818">responded</a>:</p>
+
+<blockquote><p>Changes to important things like salvage rates would be listed in the update notes if they have changed. If it’s not in the update notes, then no changes have been made by the development team.</p></blockquote>
+
+<p>So Word of God implies that everyone is wrong. Issue over?</p>
+
+<p>Of course not!</p>
+
+<h1>No Such Thing As Too Much Data</h1>
+
+<p>Despite Regina&rsquo;s dismissal, players continued to post in the thread and began quoting even larger sample sizes, such as a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2114853">salvaging 500 Rares</a> resulting in 286 Ectos (0.57 Ecto/Salvage) and <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2116461">salvaging 775 Rares</a> resulting in 402 Ecto (0.52 Ecto/Salvage). With those sample sizes, the probability that the true salvage rate is unchanged from 0.9 Ecto/Salvage is essentially zero.</p>
+
+<p>John Smith, ArenaNet&rsquo;s resident economist, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/4#post2116752">replied</a> that he&rsquo;ll &ldquo;look into this and get back to you.&rdquo; A day later, John made a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2122262">promise</a> that &ldquo;if we change anything involving ectos, there will be public information on it.&rdquo; Sure enough, on May 30th, a new patch was released with only <a href="https://forum-en.guildwars2.com/forum/info/news/Game-Update-Notes-May-28-2013/2124609">one patch note</a>:</p>
+
+<blockquote><p>Fixed a salvaging bug introduced in the last patch that sometimes caused salvage kits to yield incorrect results.</p></blockquote>
+
+<p>And that was that, the price of Ecto almost immediately dropped. All was well.</p>
+
+<p>John left one final <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2124684">message</a>: &ldquo;Thanks to everyone for your help identifying the issue and providing great data for me to start with in my research.&rdquo;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Role-Playing Game With an Easily Exploitable Random Number Generator]]></title>
@@ -1271,118 +1325,6 @@ Posted in an article titled &ldquo;HTC Unites New Android Smartphones Under &lsq
 <p>Likewise, saying &ldquo;Facebook sucks, use my social media network instead!&rdquo; or anything claiming your website will take down multibillion-dollar companies isn&rsquo;t good, as it&rsquo;s hyperbolic and probably not true. You&rsquo;re *asking* for snarky responses there.</p>
 
 <p>It&rsquo;s hard to resist egregrious self-promotion. There are <strong>millions</strong> of blogs and startups out there; users usually don&rsquo;t find them by a magic Google search. Should you remain ethical with self-promotion when it puts you at a disadvantage, when everyone else on the internet is spamming their website as often on the internet? That&rsquo;s your personal decision, but keep in mind that you want your users to respect you for the product itself, not how they found it.</p>
-
-<p>-Max</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My Startup Success Criteria Checklist]]></title>
-    <link href="http://minimaxir.com/2011/12/startup-checklist/"/>
-    <updated>2011-12-27T21:03:00-08:00</updated>
-    <id>http://minimaxir.com/2011/12/startup-checklist</id>
-    <content type="html"><![CDATA[<p><strong>All</strong> internet startups are businesses. Whether they provide a product or a service, their goal is to grow and make money, using any means necessary. However, there are thousands of startups on the internet, with many more being founded daily. How do you make your business stand out from the crowd? Why should customers use your startup as opposed to another, more established service? Does it have an innovative business model? Does it look very nice and clean? Does it leverage the established userbases on <a href="http://www.facebook.com/">Facebook</a> and <a href="http://twitter.com/">Twitter</a>?</p>
-
-<p>I have been working with several web startups regarding their business ideas and presentation. I&rsquo;m not acting as an expert on startups nor on entrepreneurship, instead I&rsquo;m acting as someone far more important: a potential consumer, who in the end determine whether a startup succeeds or fails. These consultations have been very successful, and although they show that innovation is still abundant outside of the usual startup hubs, they have also exposed many issues which are in common amongst prospective businesses.</p>
-
-<p>Sure, you may have an innovative startup that you spent hundreds of hours developing, but if your product is not well-differentiated from its competitors, if the website is neither clean nor intuitive, or if your business model is shortsighted, then your startup will definitely not succeed. That is the reason why I began consulting with startups, because it is tragic to see a good idea be damaged by flawed implementation and execution, and it is my belief that constructive criticism is more effective in improving an emerging business than endless praise from tech blogs.</p>
-
-<!-- more -->
-
-
-<p>The typical business-MBA method of analyzing a business is by conducting a <a href="http://en.wikipedia.org/wiki/SWOT_analysis">SWOT analysis</a>, which diagrams the Strengths, Weaknesses, Opportunities, and Threats of a business, giving a quick and easy graphical representation of a business as a whole. However, the last two aspects aren&rsquo;t particularly helpful and unique in this circumstance: all early stage start-ups innately have the large opportunity to grow, and all startups innately have large threats from established direct and indirect competitors. Therefore, I do not believe a SWOT analysis is as well-tailored for emerging technology startups. Instead, I&rsquo;ve developed my own criteria for which to measure a startup: <strong>Product Differentiation, Presentation Logic, and Business Logic.</strong></p>
-
-<p><a href="https://path.com/"><img src="https://path.com/" alt="Quick and dirty!" /></a></p>
-
-<p>Almost *every* startup I&rsquo;ve worked with has had an idea that&rsquo;s extremely similar to an already existing business. This is OK from a business perspective as long as your own startup has attribute(s) that your competitors do not have, and therefore your business will be relatively more valuable. Bases for differentiation include tangible concepts, such as aesthetics, and intangible concepts, such as reputation.</p>
-
-<p>Of course, the startup has to be differentiated to a significant degree: for example, creating a startup that&rsquo;s exactly the same as Twitter except changing the <em>What&rsquo;s happening?</em> prompt to <em>How are you feeling?</em> is not a significant differentiation.</p>
-
-<p>Product differentiation must satisfy the <strong>VRIO</strong> criteria: Value, Rareness, Imitability, and Organization.</p>
-
-<h3>Value</h3>
-
-<p>In the Twitter example, changing the tweet prompt would make very, very little impact on the user. Therefore, they have no reason to switch to your startup clone of Twitter. One important goal of a startup is to differentiate your product such that the added value of the differentiation is greater than the switching cost of the user leaving their current service for your startup.</p>
-
-<p><a href="https://path.com/">Path</a>, for example, differentiated itself from all the other &ldquo;new wave of social&rdquo; apps by having a killer user interface, which makes users happier to use it than its competitors, therefore adding value.</p>
-
-<h3>Rarity</h3>
-
-<p>If the user can&rsquo;t immediately think of a direct competitor to your business, then consumers will be more inclined to stick with your business instead of searching for competitors. The product should be differentiated such that comparisons are not as easy to identify.</p>
-
-<p><a href="http://tcrn.ch/tVtyeu">Very frequently</a> I&rsquo;ve had people suggest to me business models such as &ldquo;a bounty board where people can offer payments for tasks,&rdquo; which I respond by pointing them to freelancer.com. That&rsquo;s a problem, especially since the other company will be more established and therefore users will be less willing to try out the incumbent</p>
-
-<h3>Imitability</h3>
-
-<p>If another company can easily copy your product, then it will be harder to maintain differentiation. This is an extremely hard criterion for startups to follow, especially since website aspects such as user interface are not inherently protected works. (see the <a href="http://techcrunch.com/2011/09/07/tweetbook/">infamous spats between Facebook and Twitter regarding UIs</a>).  Even worse, if your startup is truly innovative, larger companies can just create their own version of your company, and wipe you out due to sheer resources. (such as how Twitter killed <a href="http://twitpic.com/">TwitPic</a> by implementing native photos)</p>
-
-<p>Therefore, startups should focus on creating some form of strategic assets that cannot be easily replicated, such as personalized data and patents. Facebook built a failed competitor to Foursquare called <a href="http://www.facebook.com/facebookplaces">Facebook Places</a>, but Foursquare was unaffected due to its Badge system and personalized deals (more on that later).</p>
-
-<h3>Organization</h3>
-
-<p>The business must be well-organized in order to maximize degree of differentiation, otherwise how will the startup know that it has successfully invoked the differentiation? Given that many startups have less than 5 people, this is either incredibly easy or incredibly hard. Employees at startups with few employees need to have more diversified skill sets, while employees at startups with many employees can have more specialized skill sets. At minimum, the founder(s) of the company must be very diligent in laying out the foundations of the company, for both present and future.</p>
-
-<p><em><a href="http://www.tweetdeck.com/"><img src="http://www.tweetdeck.com/" alt="" /></a></em></p>
-
-<p>Presentation Logic refers to the basic user experience. Users have been trained to expect elegant, uncluttered design in websites due to Facebook and Twitter&rsquo;s user-interfaces (which is why users protest whenever they make changes).  If the basic necessities are immediately available on the website, the user will immediately be more comfortable, and therefore be more likely to use your startup.</p>
-
-<p>A big Web 2.0 trend is minimalism though having as little information as possible with generous amounts of white space, but there is a point where being minimalistic can make your website seem like every other website. It&rsquo;s an artistic balance with no right answers, but many wrong ones. However, in 2011, there are several essential components of a startup&rsquo;s website that are absolutely crucial and cannot be exempted.</p>
-
-<h3>The &ldquo;About&rdquo; Page</h3>
-
-<p>Can prospective users find what the startup does, and why you should use it? That&rsquo;s the fundamental goal of the About/Learn More page, and also the landing page should the startup take a minimalism route. About pages do not have to be detailed; just a couple of sentences about each function of your startup that will give your prospective users a general idea about why they should use your startup (make sure to include how your product is differentiated from competitors!) Answering a couple Frequently Asked Questions (FAQs) will also be helpful. If your website is privatized / invite only, screenshots of the private interfaces will be helpful to prospective users to judge your business.</p>
-
-<p>Some About pages contain a professionally produced video marketing their product in a more traditional manner. This is fine, as long as the video is a reasonable length (less than 2 minutes), and the user has the option of watching the video <em>or</em> reading text. Some startups have required me to watch a five-minute video just to tell me what the company was about. It&rsquo;s needlessly gaudy, especially since the premise of the company could have otherwise been stated in a couple of paragraphs.</p>
-
-<p>You only have one chance to make a first impression after all, and the About page is likely the first page the prospective user will visit after hitting your homepage.</p>
-
-<h3>&ldquo;Contact&rdquo; Through Website And Social Media</h3>
-
-<p>Since customers are the lifeblood of startups, it is absolutely essential that you build a rapport with them. A Contact page on a startup website is a simple way to get feedback: add a form where users can input suggestions and errors, which can then be emailed directly to you. Feedback is<strong> incredibly</strong> important for a startup, as it lets the startup know <em>exactly</em> what to fix: if one user has that issue, it&rsquo;s likely that many others have that issue as well.</p>
-
-<p>In 2011, it&rsquo;s assumed that every company has a Facebook Fan Page and Twitter account. Both can be created in 5 minutes and can be easily managed with external clients such as <a href="http://www.tweetdeck.com/">TweetDeck</a>, so there is no reason for a web startup to lack these fundamental social tools. Users can subscribe to these media channels with a click of a button (instead of typing a long e-mail to subscribe to an e-mail list), and messages sent through either of these channels immediately reach your users, both of which make it much easier to communicate with your users than ever before.  More importantly, make sure to link to both these accounts in the Contact page and/or elsewhere on the site, so that users can easily find them.</p>
-
-<p>Ideally (hint hint) you would use social plugins such as <a href="http://developers.facebook.com/docs/reference/plugins/like-box/">Facebook&rsquo;s Like Box</a> and the <a href="https://dev.twitter.com/docs/follow-button">Twitter Follow</a> button, so that users can subscribe to these feeds without even leaving the site. Both are incredibly easy to implement (you literally copy-and-paste strings of HTML in both cases), so there&rsquo;s no technical excuse for lack of these buttons. If your website is user-content based, having social media buttons such as the <a href="http://developers.facebook.com/docs/reference/plugins/like/">Facebook Like button</a> and <a href="https://dev.twitter.com/docs/tweet-button">Twitter Tweet button</a> (which are marginally more difficult to implement) for each individual piece of content will help your website spread much easier.</p>
-
-<p>For social media, one-click interaction is everything. The easier you make things for your users, the more likely they will be to use your service.</p>
-
-<h3>The Design is &ldquo;Not Bad&rdquo;</h3>
-
-<p>Good design is incredibly, incredibly subjective, and I am definitely not an expert. What&rsquo;s most important is that users can find your content easily, as content is king with internet startups. Likewise, users should be able to find the aforementioned About and Contact pages easily.</p>
-
-<p>As long as the basics are addressed, design is not an immediate concern. Website design is a good thing to constantly evolve, as it keeps your startup fresh and new. Just make sure your colors don&rsquo;t clash!</p>
-
-<p><em><a href="http://www.color.com/"><img src="http://www.color.com/" alt="" /></a></em></p>
-
-<p>Business logic is the most invisible of the three criteria, and consequently the most difficult to satisfy. If your business idea is fundamentally flawed, no amount of differentiation nor design can save it. Look at <a href="http://www.color.com/">Color</a>, who <a href="http://techcrunch.com/2011/04/29/how-many-mulligans-does-color-get/">squandered $41 million</a> because their business idea was not as &ldquo;revolutionary&rdquo; as they thought.</p>
-
-<p>The exact business logic varies wildly depending on the industry, consumer demographics, and <a href="http://minimaxir.com/2011/11/how-startups-make-money/" title="How Startups Make Money: Do They *Need* A Revenue Model?">especially pricing scheme</a>. While there is no perfect fit for business logic, there are many considerations that, at the least, all web startups should recognize.</p>
-
-<h3>Facebook/Twitter Connect Integration</h3>
-
-<p>Since the dawn of the internet, websites have asked prospective users to create a username and password to register for their site, and then fill in a million personal information forms, including a long e-mail. This isn&rsquo;t fun for the users, especially since they have to memorize <em>another</em> username and password combo. Cue Facebook and Twitter Connect. Both Facebook and Twitter offer APIs that allow users to use their credentials for either service to log onto websites, without usernames or passwords. This allows for a &ldquo;two-click&rdquo; effortless registration, which increases the likelihood that users will register for your service. Attaching a Facebook/Twitter account to a user has three more noticeable benefits: the startup is reasonably guaranteed that the user-in-question is a real, breathing person; your startup can use APIs to easily share content through the connected accounts; and on user content-based websites, you can have users &ldquo;autofollow&rdquo; their Facebook and Twitter friends who are already using the service (<a href="https://foursquare.com/">Foursquare </a>and <a href="http://www.quora.com/">Quora</a> have excellent implementations of all these attributes).</p>
-
-<p>Implementing Facebook/Twitter Connect is simple enough that any startup should have the functionality available. Of course, the startup should allow for traditional registration with username %2B password as well to avoid alienating those without a social network. It is important to address all aspects of your potential consumer base.</p>
-
-<h3>Keeps Users Coming Back</h3>
-
-<p>A sign of a healthy startup is one that users keep using. However, some business models (such as niche apps) don&rsquo;t tempt the user to use the app more than once or twice, and therefore they are then  quickly forgotten. There are many ways of making sure that users continue to visit your website. The most traditional method is adding new content and features on a frequent and consistent basis. Other methods include gameification, loyalty programs, and contests (giving away free stuff on your Facebook/Twitter is an incredibly easy way to maintain users!)</p>
-
-<h3>Builds Switching Cost</h3>
-
-<p>Switching cost is one of the most important, and most often neglected considerations when designing a startup. The more switching cost that is built up, the harder it will be for the user to switch to a competing service (and given the rate that startups pop up, there <em>will</em> be competing services). Rating systems, such as the one used by Netflix, are a good example of switching costs because if the user switches to a competing service, they will lose all of that personalized rating data, and therefore users will be less inclined to switch. The 2011 ultra-cool way of building switching costs is gameification, through the use of achievements for completing certain tasks (Foursquare&rsquo;s Badges, which can be shared through Facebook/Twitter for added synergy!), and/or some quantitative form of achievement (<a href="http://www.reddit.com/">Reddit&rsquo;s</a> karma system). Customers are usually not willing to give up what they have rightfully earned, and you can use that to your advantage.</p>
-
-<h3>Incorporates Network Effects</h3>
-
-<p>Network effects are the primary reason that startups are able to exhibit exponential growth. Networks effects occur when there is a change in benefit when the number of people using the startup changes: if more people are using the startup, then the amount that a single user of the startup enjoys it also increases. This entices users to encourage their friends to join your startup, which adds even more users!</p>
-
-<p>Network effects can occur as long as the three prior business logic criteria are fulfilled: Facebook/Twitter connectivity to automatically connect with others; keeping users to ensure that the startup grows; and switching costs to ensure that the users stay. The exact nature varies depending on the startup business model itself, but every business model should account for these network effects.</p>
-
-<p>There&rsquo;s no exact way to run any business. However, in 2011, there is very little room to make mistakes, and startup founders need to give their startup any advantages they can get in order to succeed in the hyper-competitive internet marketplace. A little polish on a business can have an <em>incredible</em> return on investment.</p>
-
-<p>Entrepreneurs are not just from Silicon Valley with access to mentoring and capital; they are from all over the U.S., and all over the world. I made this list to help entrepreneurs who have great ideas, but might be missing essential business attributes, which is unfortunately what matters in the end as such flaws may sink great website ideas, and that would be a true shame. Yes, there are many other considerations to be given to a startup in the long run, both business (economics, marketing, public relations) and technical (development, maintenance, project management), but startups first need to get off the ground.</p>
-
-<p>I admit that feel like a jerk when I point out that &ldquo;yes, your startup that you undeniably spent hundreds of hours developing is not original or is incredibly flawed.&rdquo; I&rsquo;ve always been critical and realistic analyzing the ideas of entrepreneurs when they approach me. Needless to say I usually don&rsquo;t get a &ldquo;thank you,&rdquo; but I don&rsquo;t regret anything, because I feel it&rsquo;s more appropriate they learn the weaknesses in their product earlier than later: otherwise there might not even <em>be</em> a &ldquo;later.&rdquo;</p>
 
 <p>-Max</p>
 ]]></content>

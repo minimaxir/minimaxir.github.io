@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gaming | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//gaming/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-05-25T10:35:33-07:00</updated>
+  <updated>2013-05-31T07:57:33-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How MMO Players Proved that the Developers Bugged an Item Drop Rate]]></title>
+    <link href="http://minimaxir.com/2013/05/deep-breaths-more/"/>
+    <updated>2013-05-30T23:23:00-07:00</updated>
+    <id>http://minimaxir.com/2013/05/deep-breaths-more</id>
+    <content type="html"><![CDATA[<p><img class="pull-right" src="/img/globecto.png"></p>
+
+<p><a href="https://www.guildwars2.com/en/">Guild Wars 2</a> is an incredible massively-multiplayer online role-playing game. The goal of Guild Wars 2, developed by ArenaNet, is to save the world, complete quests, and get awesome loot; objectives similar to that of many other MMORPGs such as <a href="http://us.battle.net/wow/en/">World of Warcraft</a>. However, Guild Wars 2 differentiates itself from its spiritual predecessors with its dynamically-changing world, incredible graphics, and the elimination of annoying and tedious time-wasters that have plagued the MMORPG genre.</p>
+
+<p>The best items in Guild Wars 2, naturally, require a large amount of effort and money to obtain. In order to create Legendary weapons, players must obtain large amounts of an item known as Globs of Ectoplasm. Globs of Ectoplasm (abbreviated as &ldquo;Ecto&rdquo;) are obtained randomly when a player salvages a Rare item using a Salvage Kit. Due to their high demand, Ecto effectively serve as a second currency in Guild Wars 2.</p>
+
+<p>Using the best Salvage Kit (that doesn&rsquo;t require paying real-world money), players received, on average, 0.9 Ecto per Rare Item Salvage, a value that has been well-documented and well-tested. But after a patch released a couple days ago, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">players on the Official Guild Wars 2 forums</a> and <a href="http://www.reddit.com/r/Guildwars2/comments/1fc540/ecto_salvage_rate_bug_being_looked_into_keep_your/">Reddit</a> began to notice that the drop rate for Ecto was <em>much</em> lower, with no mention in the patch notes.</p>
+
+<p>How do you <em>prove</em> something that occurs at random now occurs less frequently?</p>
+
+<!-- more -->
+
+
+<h1>What is &ldquo;Random&rdquo;?</h1>
+
+<p>The first rule of any official MMO forum: never accuse the developers of making implicit changes to the game unless you have proof. Such tactics are commonly employed by forum trolls and it makes building a community more difficult.</p>
+
+<p>The second rule of any official MMO forum: never accuse the developers of manipulating probability. As with normal gambling, players can hit a streak of bad luck with loot drops, enemy critical attacks, etc. But the anecdotal data from one player is not sufficient proof of any probability change. (an <a href="http://www.wowwiki.com/Why_does_Onyxia_cast_Deep_Breath%3F">old meme</a> from the World of Warcraft era mocked the userbase&rsquo;s inability to comprehend the definition of random)</p>
+
+<p>On May 28th, a player <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">noted on the official GW2 forums</a> that out of 166 salvages, he only received about 80 Ecto, or about 0.5 Ecto/Salvage. This is approximately <em>half</em> of the original rate of 0.9 Ecto/Salvage. Since the rate of new Ecto entering the market was halved with no change in demand, the Auction House <a href="http://www.gw2spidy.com/item/19721">price for Ecto</a> began to steadily rise.</p>
+
+<p><img src="/img/gw2ecto.png"></p>
+
+<p>The price increase in the short-term was not <a href="http://minimaxir.com/2013/05/stones-of-jordan/">economy-breaking</a>, but when you need 250 Ectos to create a Legendary weapon in the long-term, it can add up very quickly.</p>
+
+<p>Other players provided their experiences in the thread, with limited results such as &ldquo;noticed this too, yesterday i salvaged 9 rares, got 4 ectos&rdquo; and &ldquo;20 rare at the end of my day, i save them before go bed: 0 ecto. wtf?&rdquo;. Such sample sizes are much too low to satisfy the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">Law of Large Numbers</a> and draw any remotely accurate conclusions.</p>
+
+<p>Regina Buenaobra, ArenaNet Community Manager, eventually <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2115818">responded</a>:</p>
+
+<blockquote><p>Changes to important things like salvage rates would be listed in the update notes if they have changed. If it’s not in the update notes, then no changes have been made by the development team.</p></blockquote>
+
+<p>So Word of God implies that everyone is wrong. Issue over?</p>
+
+<p>Of course not!</p>
+
+<h1>No Such Thing As Too Much Data</h1>
+
+<p>Despite Regina&rsquo;s dismissal, players continued to post in the thread and began quoting even larger sample sizes, such as a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2114853">salvaging 500 Rares</a> resulting in 286 Ectos (0.57 Ecto/Salvage) and <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2116461">salvaging 775 Rares</a> resulting in 402 Ecto (0.52 Ecto/Salvage). With those sample sizes, the probability that the true salvage rate is unchanged from 0.9 Ecto/Salvage is essentially zero.</p>
+
+<p>John Smith, ArenaNet&rsquo;s resident economist, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/4#post2116752">replied</a> that he&rsquo;ll &ldquo;look into this and get back to you.&rdquo; A day later, John made a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2122262">promise</a> that &ldquo;if we change anything involving ectos, there will be public information on it.&rdquo; Sure enough, on May 30th, a new patch was released with only <a href="https://forum-en.guildwars2.com/forum/info/news/Game-Update-Notes-May-28-2013/2124609">one patch note</a>:</p>
+
+<blockquote><p>Fixed a salvaging bug introduced in the last patch that sometimes caused salvage kits to yield incorrect results.</p></blockquote>
+
+<p>And that was that, the price of Ecto almost immediately dropped. All was well.</p>
+
+<p>John left one final <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2124684">message</a>: &ldquo;Thanks to everyone for your help identifying the issue and providing great data for me to start with in my research.&rdquo;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Role-Playing Game With an Easily Exploitable Random Number Generator]]></title>
@@ -274,68 +328,6 @@ The missing amount, divided by 2:   2,147,483,648 gold
 <p>To be fair, this is far from the first time where manipulated RAM has been used to complete a game. The classic Nintendo 64 title Legend of Zelda: Ocarina of Time has the infamous <a href="http://zeldaspeedruns.com/oot/ba/reverse-bottle-adventure">Reverse Bottle glitch</a> that allows players to transform items into others, and a <a href="http://youtu.be/PaUCFrW_mEE?t=13m44s">memory glitch</a> that teleports you from the first dungeon to the final cutscene, In <em>Pokemon</em> on the GameBoy, players discovered how to reprogram the game to <a href="http://tasvideos.org/forum/viewtopic.php?p=332488&amp;sid=1d8670bd80327418d202b6608e5cd2a9#332488">run arbitrary code</a>, but many gamers may remember the classic <a href="http://bulbapedia.bulbagarden.net/wiki/Missingno.">Missingno glitch</a>, which was very easy to reproduce on an actual console and provided many beneficial effects.</p>
 
 <p>Still, it&rsquo;s not every day that spawning a ton of fishes out of mid-air = victory.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation]]></title>
-    <link href="http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"/>
-    <updated>2012-10-14T21:21:00-07:00</updated>
-    <id>http://minimaxir.com/2012/10/client-side-validation-is-hard-mode</id>
-    <content type="html"><![CDATA[<p>Early Saturday morning, <a href="http://www.gamefaqs.com/boards/916373-pc/64312901">various gaming forums</a> (and, more importantly, <a href="http://www.reddit.com/r/GameDeals/comments/11ewb0/use_the_code_os3874xvc_to_get_20_off_origin/">Reddit</a>) obtained a promotional code from mega gaming company Electronic Arts for their Origin gaming distribution service. This code entitled the user to purchase any EA published or developed game for $20 off, and if the game was less than $20, the game was free. <a href="http://www.gamers-association.com/2012/10/free-game-from-eas-origin/">Games that were made free</a> using this coupon included hit series such as Dead Space, Mass Effect, Dragon Age, and Battlefield, so the rewards for the coupon were actually pretty worthwhile. Best of all, there are no catches and no gimmicks; input promo code OS3874XVC, get game.</p>
-
-<p>The code was apparently rewarded after taking a survey regarding Origin, with the reward being one free game. The operative word being &ldquo;one.&rdquo; Some gamers, out of curiosity, discovered that by entering the code via both the store browser-interface and the store client-interface, they could get a free game twice. Gamers inferred the logical technical conclusion; EA was not checking server-side that the code was only being used once. Later, gamers noted that <a href="http://www.overclock.net/t/1315674/free-20-in-origin-code/410#post_18359737">simply inputting the code while logged-out</a> allows them to use the promo code an <em>unlimited</em> amount of times.</p>
-
-<p>Needless to say, hilarity ensued.</p>
-
-<!-- more -->
-
-
-<h2>What Went Wrong</h2>
-
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/10/origin2.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/10/origin2.png" alt="A picture of the Origin desktop client. Not as pretty as a startup website." /></a></p>
-
-<p>Even the most amateur web developer knows to follow three important rules for data validation:</p>
-
-<ol>
-<li>Never trust the client.</li>
-<li>Never trust the client.</li>
-<li><strong>Never trust the damn client!</strong></li>
-</ol>
-
-
-<p>The proper way to implement a promo code is logical: when the user attempts to apply a promo code, the server checks, <em>has the user used this promo code before?</em> by querying<em> SELECT FROM transactions WHERE user_id = current_user AND promo_code = &ldquo;OS3874XVC&rdquo;</em>. If the result set is empty, then the user hasn&rsquo;t used the code, and everything&rsquo;s good to go. Otherwise, then that user has used the promo code before, and an appropriate error should be thrown are displayed to the user. This would be repeated at the checkout phase when the server actually charges the credit card, to ensure that the correct amount is charged and that the user has not committed and shenanigans in the meantime. All would be well. *****</p>
-
-<p>For some reason, inputting the code in different clients (which should validate against the same backend database) still allowed the code to be input twice. And, for a very confusing reason, a workflow exists that allows the user to input a promo code while logged out, with presumably the intention of it being validated when the user eventually logs in (which it isn&rsquo;t).</p>
-
-<h2>Aftermath</h2>
-
-<p><a href="http://www.forbes.com/sites/erikkain/2012/04/09/why-ea-won-the-worst-company-in-america-award/"><img src="http://www.forbes.com/sites/erikkain/2012/04/09/why-ea-won-the-worst-company-in-america-award/" alt="Two wrongs make a right...?" /></a></p>
-
-<p>The exploit was closed at around 1AM PST, 18 hours after its discovery (which, to be honest, it pretty embarrassing for an exploit that causes a significant amount of lost potential revenue). Here&rsquo;s where it gets interesting.</p>
-
-<p>A little background: in the gaming community, EA is not the most liked company; in fact, it was voted <a href="http://www.forbes.com/sites/erikkain/2012/04/09/why-ea-won-the-worst-company-in-america-award/">the worst company in America</a> due to a very large number of privacy, security, and ethical debacles. Last year, EA launched its own digital distribution service, Origin, which would compete with Valve&rsquo;s Steam service by being the sole provider of high-profile EA-published games, including Battlefield 3 and Mass Effect 3. (the former being the only reason I downloaded Origin). Speaking from experience, Origin is very buggy and unpolished compared to Steam, and actually drains system resources when idle.</p>
-
-<p>According to <a href="http://www.reddit.com/r/gaming/comments/11ggi2/reddit_during_the_recent_origin_discount_coupon/">another Reddit thread</a>, when news of this exploit hit, many gamers went on a downloading spree, and downloaded nearly every free game possible for two reasons. One, if EA is technically incompetent enough to allow such a severe bug to exist, they won&rsquo;t have the technical skills to discern who used the promo code more than once. Two, <em>it is retribution for EA being a terrible company</em>.</p>
-
-<p>What will EA do to punish people who exploited? Are the users at fault here since it&rsquo;s very possible to accidently use the code twice? If so, is it fair to ban <em>ever</em>y<em>one</em> who has used multiple promo codes if innocent people might be banned?</p>
-
-<p>UPDATE (10/15 1:14AM): EA will <a href="http://forum.ea.com/eaforum/posts/list/60/9040620.page">&ldquo;honor all sales made with the coupon code,&rdquo;</a>  implying that they will <strong>not</strong> ban people who utilized the exploit.</p>
-
-<p>If the promo was a marketing tactic from Electronic Arts to promote Origin usage, it failed immensely on their end, due to a trivial amount missing lines of code on their server.</p>
-
-<p>-Max</p>
-
-<p><em>PS: I downloaded exactly one game through the promo code as was intended and stated by a <a href="http://i.imgur.com/4zg7X.jpg">forum user&rsquo;s chat log with Origin Support</a>; I did not attempt to reproduce the exploit itself for verification purposes due to the potential consequences. I like my Battlefield 3!</em></p>
-
-<ul>
-<li><strong>I admit that the SQL pseudocode provided here is an oversimplified, general </strong>solution for the validation issue<strong>, since that I do not have knowledge of EA&rsquo;s database structure and scale.</strong></li>
-</ul>
-
-
-<p><strong>** Discussion on Hacker News <a href="http://news.ycombinator.com/item?id=4652129">here</a>!</strong></p>
-
-<p><strong>*</strong>| Discussion on Reddit <a href="http://www.reddit.com/r/technology/comments/11hem0/electronic_arts_gives_away_thousands_of_free/">here</a> and <a href="http://www.reddit.com/r/Games/comments/11h9nj/electronic_arts_gives_away_thousands_of_free/">here</a>.**</p>
 ]]></content>
   </entry>
   
