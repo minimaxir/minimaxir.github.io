@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-05-31T07:57:33-07:00</updated>
+  <updated>2013-06-05T07:06:41-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[When Uninstalling A PC Game Erases the Entire Hard Drive]]></title>
+    <link href="http://minimaxir.com/2013/06/working-as-intended/"/>
+    <updated>2013-06-05T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/06/working-as-intended</id>
+    <content type="html"><![CDATA[<p>There are many legitimate reasons for users to uninstall programs on their computer, such as freeing hard-disk space and lowering CPU overhead. A decade ago, when excessive hard-drive space was a luxury, avid PC gamers would frequently uninstall large, multi-gigabyte games that they were no longer playing in order to make space for new games.</p>
+
+<p>Obviously, developers would prefer that their users not uninstall the software that they spent years creating.  Regardless, developers should ensure that the uninstall process works properly.</p>
+
+<p>Otherwise, a poorly coded PC game uninstaller could delete not just the game, but the <em>entire hard drive</em>. That would be a problem.</p>
+
+<!-- more -->
+
+
+<h1>Ragnarok</h1>
+
+<p><span class="pull-right" style="padding: 20px"><a href="http://www.penny-arcade.com/comic/1999/01/06"><img src="http://minimaxir.com/img/pennyarcademyth2.jpg" alt="" /></a></span></p>
+
+<p>In late 1998, Bungie (which would later create the <a href="http://www.halowaypoint.com/en-us/">Halo</a> series) released <a href="http://mythipedia.wikia.com/wiki/Myth_II:_Soulblighter">Myth II: Soulblighter</a> for Windows. Myth II, a real-time tactics game, was received with great reception and highly-positive reviews.</p>
+
+<p>But before the worldwide release, a Bungie employee <a href="http://halo.bungie.net/inside/history.aspx?link=juggernougat">uninstalled version 1.0</a> of Myth II, and afterwards, her PC refused to reboot:</p>
+
+<blockquote><p>It was discovered by a very nice young lady in a Japanese office as she worked on the Asian versions of Myth – just as she was trying out the final build. She attempted to uninstall it from the main root folder of her hard drive – not brilliant, but pretty common practice – and perfectly fine for most games. The game proceeded to eat her hard drive like a fresh Bento Box.</p></blockquote>
+
+<p>The Myth II Uninstaller worked by deleting the folder which contained the game files. However, this implementation assumed that the user installed Myth II in the default directory. (i.e. C:\Program Files\Myth II). If the user installed Myth II in a <em>different</em> directory, such as the <em>system root C:\</em>, then when the user uninstalled the game, <strong>all the files in the C drive were deleted.</strong> Boom.</p>
+
+<p>As Bungie later explained <a href="http://www.macobserver.com/news/98/december/981229/bungierecall.html">in a press release</a>:</p>
+
+<blockquote><p>In certain unusual cases, using the Uninstaller can cause problems. If a user chooses an installation directory other than the default directory, they should NOT use the Uninstaller but should manually drag the Myth II folder into the Recycle bin and delete it.</p>
+
+<p>Anyone who has the game but has not yet installed it is asked to wait for a new version of the Installer which we will release shortly. If you have already installed the game, there is no harm in playing it, but players should be careful not to use the Uninstall executable. If you have already Uninstalled and not experienced obvious problems, there is nothing to worry about.</p></blockquote>
+
+<p>Calling the potential obliteration of an operating system a &ldquo;problem&rdquo; is an understatement.</p>
+
+<p>Although the issue was not widespread, Bungie decided to do a recall of all Myth II CDs and redistribute a version 1.1, eliminating most of the game&rsquo;s profits in the process.</p>
+
+<p>You could say that the Myth II version 1.0 uninstaller worked exactly as intended: it did indeed uninstall the game. It just worked <em>too</em> well.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How MMO Players Proved that the Developers Bugged an Item Drop Rate]]></title>
@@ -623,88 +663,6 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 
 <p><strong>EDIT (May 2013)</strong>: When this article was published, this blog was using Facebook Comments, however I switched the comments system to Disqus just to try it out.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet]]></title>
-    <link href="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"/>
-    <updated>2013-01-15T21:36:00-08:00</updated>
-    <id>http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams</id>
-    <content type="html"><![CDATA[
-
-<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N&#8217;Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
-
-<p>I&rsquo;m OK with this. There are certainly far <a href="http://minimaxir.com/2012/03/ethics-self-promotion/"><em>worse</em></a> ways to promote a startup.</p>
-
-<p>His moody yet charmful face adds a touch of class to any website. But why does he have to stay constrained to Myspace? Why not let Justin Timberlake dominate the world?</p>
-
-<!-- more -->
-
-
-<h2>No Such Thing As Too Much Sexy</h2>
-
-<p>If you are reading this post on a desktop or laptop, you&rsquo;ll see a handsome fellow in the lower-right corner. This is Justin Timberlake of the Mickey Mouse Club. Say hi.</p>
-
-<p>Using the power of the Stylish extension for Chrome and Firefox, Mr. Timberlake has already made his mark on many startups around the internet.</p>
-
-<p><img src="http://minimaxir.com/img/justintest3.png"></p>
-
-<p><img src="http://minimaxir.com/img/justintest2.png"></p>
-
-<p><img src="http://minimaxir.com/img/justintest9.png"></p>
-
-<p><img src="http://minimaxir.com/img/justintest8.png"></p>
-
-<p><img src="http://minimaxir.com/img/justintest7.png"></p>
-
-<p><img src="http://minimaxir.com/img/justintest5.png"></p>
-
-<p><img src="http://minimaxir.com/img/justintest4.png"></p>
-
-<p>To accomplish this magic, I use the Stylish browser extension, which can be used with either <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Chrome</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/stylish/">Firefox</a>. I have used Stylish <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">before, with browser filters</a>, and it worked very well. If you want your own moody Justin, follow these steps:</p>
-
-<ol>
-<li>Install the Stylish extension for your browser.</li>
-<li>In the extension preferences, go to &ldquo;Managed Installed Styles&rdquo; and select &ldquo;Write New Style&rdquo;</li>
-<li><p>Paste this CSS code in the &ldquo;Code&rdquo; textbox:</p>
-
-<pre><code>body, ._li, .main {
-background-image: url(http://i.imgur.com/UN5HE.png) !important;
-background-position: right bottom !important;
-background-repeat: no-repeat !important;
-background-attachment: fixed !important;
-}
-</code></pre></li>
-</ol>
-
-
-<p>And you&rsquo;re done! Justin will appear pretty much everywhere. Yes, there are a lot of <em>!important</em> declarations, but Justin Timberlake is an important man.</p>
-
-<p>In fact, by using the HTML snippet in this <a href="https://github.com/minimaxir/display-justin-timberlake-sexiness">GitHub repository</a>, you can add Justin to your own site!</p>
-
-<p>Feel free to narrow down the domains where Justin appears by using Stylish as necessary. Although, why would you do such a thing!?</p>
-
-<h2>Taking Justin To The Next Level</h2>
-
-<p><img src="http://minimaxir.com/img/816440400_1965379.gif"></p>
-
-<p>Now that we can make Justin appear anywhere, let&rsquo;s put his power to good use. TechCrunch writer Alexia Tsostis recently made a post about the <a href="http://techcrunch.com/2013/01/16/were-bringing-techcrunch-back/">upcoming redesign of TechCrunch</a>, which, I admit, is long overdue.</p>
-
-<p>In the post, Alexia spoils that the redesign will include lots of sparkles. And a picture of the Justin-man himself. Above is a mockup made by Chris Velazco, another TechCrunch writer, and it is indeed marvelous. (except for the lack of a comments section!)</p>
-
-<p>But why wait for the redesign? We have Timberlake Technology. We can do it <em>now</em>.</p>
-
-<p>Using the power of Stylish, I present to you, a sneak peek into TechCrunch&rsquo;s 2013 redesign.</p>
-
-<p>I made a <em>few</em> stylistic additions as well. It&rsquo;s magic.</p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/j6m2pjjhnuU "></iframe></div>
-
-
-<p>You can find a copy of the CSS I used to emulate this wonderful layout in <a href="https://github.com/minimaxir/techcrunch-1999">this GitHub repository</a>.</p>
-
-<p>Will you let Timberlake enrich <em>your</em> life? He&rsquo;s waiting. In the lower-right corner of your screen.</p>
 ]]></content>
   </entry>
   

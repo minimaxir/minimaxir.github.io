@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gaming | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//gaming/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-05-31T07:57:33-07:00</updated>
+  <updated>2013-06-05T07:06:41-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[When Uninstalling A PC Game Erases the Entire Hard Drive]]></title>
+    <link href="http://minimaxir.com/2013/06/working-as-intended/"/>
+    <updated>2013-06-05T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/06/working-as-intended</id>
+    <content type="html"><![CDATA[<p>There are many legitimate reasons for users to uninstall programs on their computer, such as freeing hard-disk space and lowering CPU overhead. A decade ago, when excessive hard-drive space was a luxury, avid PC gamers would frequently uninstall large, multi-gigabyte games that they were no longer playing in order to make space for new games.</p>
+
+<p>Obviously, developers would prefer that their users not uninstall the software that they spent years creating.  Regardless, developers should ensure that the uninstall process works properly.</p>
+
+<p>Otherwise, a poorly coded PC game uninstaller could delete not just the game, but the <em>entire hard drive</em>. That would be a problem.</p>
+
+<!-- more -->
+
+
+<h1>Ragnarok</h1>
+
+<p><span class="pull-right" style="padding: 20px"><a href="http://www.penny-arcade.com/comic/1999/01/06"><img src="/img/pennyarcademyth2.jpg" alt="" /></a></span></p>
+
+<p>In late 1998, Bungie (which would later create the <a href="http://www.halowaypoint.com/en-us/">Halo</a> series) released <a href="http://mythipedia.wikia.com/wiki/Myth_II:_Soulblighter">Myth II: Soulblighter</a> for Windows. Myth II, a real-time tactics game, was received with great reception and highly-positive reviews.</p>
+
+<p>But before the worldwide release, a Bungie employee <a href="http://halo.bungie.net/inside/history.aspx?link=juggernougat">uninstalled version 1.0</a> of Myth II, and afterwards, her PC refused to reboot:</p>
+
+<blockquote><p>It was discovered by a very nice young lady in a Japanese office as she worked on the Asian versions of Myth – just as she was trying out the final build. She attempted to uninstall it from the main root folder of her hard drive – not brilliant, but pretty common practice – and perfectly fine for most games. The game proceeded to eat her hard drive like a fresh Bento Box.</p></blockquote>
+
+<p>The Myth II Uninstaller worked by deleting the folder which contained the game files. However, this implementation assumed that the user installed Myth II in the default directory. (i.e. C:\Program Files\Myth II). If the user installed Myth II in a <em>different</em> directory, such as the <em>system root C:\</em>, then when the user uninstalled the game, <strong>all the files in the C drive were deleted.</strong> Boom.</p>
+
+<p>As Bungie later explained <a href="http://www.macobserver.com/news/98/december/981229/bungierecall.html">in a press release</a>:</p>
+
+<blockquote><p>In certain unusual cases, using the Uninstaller can cause problems. If a user chooses an installation directory other than the default directory, they should NOT use the Uninstaller but should manually drag the Myth II folder into the Recycle bin and delete it.</p>
+
+<p>Anyone who has the game but has not yet installed it is asked to wait for a new version of the Installer which we will release shortly. If you have already installed the game, there is no harm in playing it, but players should be careful not to use the Uninstall executable. If you have already Uninstalled and not experienced obvious problems, there is nothing to worry about.</p></blockquote>
+
+<p>Calling the potential obliteration of an operating system a &ldquo;problem&rdquo; is an understatement.</p>
+
+<p>Although the issue was not widespread, Bungie decided to do a recall of all Myth II CDs and redistribute a version 1.1, eliminating most of the game&rsquo;s profits in the process.</p>
+
+<p>You could say that the Myth II version 1.0 uninstaller worked exactly as intended: it did indeed uninstall the game. It just worked <em>too</em> well.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How MMO Players Proved that the Developers Bugged an Item Drop Rate]]></title>
@@ -288,46 +328,6 @@ The missing amount, divided by 2:   2,147,483,648 gold
 <p>In the end, Blizzard <a href="http://www.reddit.com/r/Diablo/comments/1dx4a7/there_will_officially_be_no_rollback_after_the/">has not done a roll-back</a>, but instead <a href="http://www.reddit.com/r/Diablo/comments/1dwk6x/d3_inigomontoya_just_got_banned_for_real/">banned anyone who duped</a>, and <a href="http://i.imgur.com/x5S9Zcx.png">refunded</a> anyone who spent real money. The bug was temporarily fixed by reverting the patch note which caused the entire mess.</p>
 
 <p>Let this be a lesson on what happens when you include an untested change at the last minute. You could break an entire economy. Eh, no big deal.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM]]></title>
-    <link href="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
-    <updated>2013-03-24T21:44:00-07:00</updated>
-    <id>http://minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
-    <content type="html"><![CDATA[<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Syo5sI-iOgY "></iframe></div></p>
-
-<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
-
-<p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
-
-<!-- more -->
-
-
-<p>So, what the heck is happening in this speedrun? curtmack on Reddit <a href="http://www.reddit.com/r/Games/comments/1aldvz/major_glitch_discovered_in_luigis_mansion_that/c8yk3g3">explains it succinctly</a>:</p>
-
-<blockquote><p>So, for those who are wondering just what the f- happened&hellip; there&rsquo;s a glitch that&rsquo;s been known for a while, where Yoshi can end up in the &ldquo;I have an item in my mouth&rdquo; state, but not actually have an item in his mouth. When he spits out this nothingness, the game crashes. That&rsquo;s all we knew about the glitch&hellip; until recently.</p>
-
-<p>Somebody decided to take a debugging emulator and step through the crash. He discovered that the crash occurred because the game tried to jump to a specific address in memory, and execute code there. That address did not contain code, and so the system crashed.</p>
-
-<p>But wait a second. What if, by some sheer coincidence, that address <em>did</em> contain code? The specific address dropped him in somewhere amongst various data for the game&rsquo;s internal random number generator, and the random number generator can be manipulated in a TAS. Could the game be coerced into running arbitrary code?</p>
-
-<p>Well, as it turns out, it&rsquo;s extremely limited. You have the RNG state and a few sprite positions that can be manipulated, but after that is some internal game stuff that can&rsquo;t be. So the length of the &ldquo;program&rdquo; is extremely limited, but as it turns out, it&rsquo;s just long enough to send the signal to the game to switch to the &ldquo;The End&rdquo; screen.</p>
-
-<p>There&rsquo;s a related glitch where you can spawn a bouncing fish by doing certain odd things as you spit out an item as Yoshi, and every time a fish bounces, it uses up a randomly-generated number (since it bounces in a random direction). So, putting it all together, you have to spawn a billion fish and have them all bounce a f-jillion times to get the RNG in just the right spot, leave the area, and then fiddle around with some objects to get the last few bits you need in the right place, all while setting up the original spit-nothing glitch in the first place.</p></blockquote>
-
-<p>Crazy, isn&rsquo;t it?</p>
-
-<h2>I Call Hax!</h2>
-
-<p>This <a href="http://tasvideos.org/1945M.html">SMW TAS</a>, posted in 2011, was so crazy that it inspired the creation of a new category of speed runs: &ldquo;Corrupts Memory.&rdquo; The <a href="http://tasvideos.org/forum/viewtopic.php?t=12215">discussion on the speed run</a> provides a technical explanation of of the glitch, which started a debate: &ldquo;does this <em>count</em> as a speed run?&rdquo; (96% of voters said yes.)</p>
-
-<p><img src="/img/smw.png"></p>
-
-<p>To be fair, this is far from the first time where manipulated RAM has been used to complete a game. The classic Nintendo 64 title Legend of Zelda: Ocarina of Time has the infamous <a href="http://zeldaspeedruns.com/oot/ba/reverse-bottle-adventure">Reverse Bottle glitch</a> that allows players to transform items into others, and a <a href="http://youtu.be/PaUCFrW_mEE?t=13m44s">memory glitch</a> that teleports you from the first dungeon to the final cutscene, In <em>Pokemon</em> on the GameBoy, players discovered how to reprogram the game to <a href="http://tasvideos.org/forum/viewtopic.php?p=332488&amp;sid=1d8670bd80327418d202b6608e5cd2a9#332488">run arbitrary code</a>, but many gamers may remember the classic <a href="http://bulbapedia.bulbagarden.net/wiki/Missingno.">Missingno glitch</a>, which was very easy to reproduce on an actual console and provided many beneficial effects.</p>
-
-<p>Still, it&rsquo;s not every day that spawning a ton of fishes out of mid-air = victory.</p>
 ]]></content>
   </entry>
   
