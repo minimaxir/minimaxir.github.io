@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Startups | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//startups/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-06-05T07:06:41-07:00</updated>
+  <updated>2013-06-14T07:49:16-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -283,7 +283,7 @@ Getting socially-vetted photos on your computer without any effort is a useful t
     <id>http://minimaxir.com/2013/01/prefixed-period</id>
     <content type="html"><![CDATA[<p>I&rsquo;m not a Twitter fanatic. Although I do have <a href="https://twitter.com/minimaxir">a Twitter account</a> with about 300 followers,  Facebook&rsquo;s Subscribe feature <a href="http://www.facebook.com/max.woolf">on my Facebook profile</a> has met my use case for publishing sarcastic quips and cool links for a broad audience over the internet. I mostly use my Twitter account to read tweets from tech columnists, yet I don&rsquo;t even comment on their tweets because <strong>tweets that are replies to someone are not visible in the home timeline of my followers</strong>. I can understand the intuition behind this behavior: Twitter conversations can contain a lot of low-content tweets, and Twitter doesn&rsquo;t want its users to be spammed.</p>
 
-<p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that <strong>beginning your reply Tweet with a period (.) allows it to be seen by all your followers. </strong>Otherwise, only the replyee will receive notification of the reply.</p>
+<p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that beginning your reply Tweet with a period (.) allows it to be seen by all your followers. **Otherwise, only the replyee will receive notification of the reply.</p>
 
 <p>Having your reply tweets appear to your followers only if you begin them with a prefixed period is not intuitive at all. And this particular behavior and its workaround are not documented in <a href="https://support.twitter.com/groups/31-twitter-basics/topics/109-tweets-messages/articles/14023-what-are-replies-and-mentions">Twitter&rsquo;s help docs</a>. And replying to tweets is a core feature of Twitter. How many users would be able to deduce this behavior? How many brands, who rely on user engagement, are even aware of this behavior?</p>
 
@@ -294,7 +294,7 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 
 <h2>XY = @(Z)</h2>
 
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/twitter2.png?resize=513%2C181" alt="twitter2" /></p>
+<p><img src="/img/twitter2.png"></p>
 
 <p>I recently saw <a href="https://twitter.com/ScottyLabs/status/286921265514700801">a tweet</a> in my timeline that had a prefixed period, but clearly was not a reply to anyone. Confused, I pointed out that prefixed periods aren&rsquo;t necessary if the tweet is not a reply. <a href="https://twitter.com/amyquispe">Amy Quispe</a>, founder of ScottyLabs and a CS senior at Carnegie Mellon University with much more startup knowledge than myself, pointed out that I was wrong, and <strong>if the tweet begins with a @, it will not appear in your follower&rsquo;s timelines, regardless of whether it&rsquo;s a reply or a mention</strong>.</p>
 

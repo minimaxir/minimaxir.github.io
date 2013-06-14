@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-06-05T07:06:41-07:00</updated>
+  <updated>2013-06-14T07:49:16-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook Hashtags Are Fundamentally Broken]]></title>
+    <link href="http://minimaxir.com/2013/06/hashtag-hashtag/"/>
+    <updated>2013-06-14T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/06/hashtag-hashtag</id>
+    <content type="html"><![CDATA[<p>This week, <a href="https://www.facebook.com/">Facebook</a> added <a href="http://newsroom.fb.com/News/633/Public-Conversations-on-Facebook">searchable hashtags</a> to all status updates and user comments. As with <a href="https://twitter.com/">Twitter</a>, whenever a Facebook user posts an status with a #hashtag, that hashtag becomes clickable and leads to a News Feed of all other publically-visible posts with that hashtag.</p>
+
+<p>The implementation of hashtags in Facebook is an obvious move. Advertisements and television shows display hashtags all the time to encourage users to Tweet about them: it&rsquo;s free marketing, after all. Facebook can piggy-back off those already-existing hashtags and grow user adoption <em>very</em> quickly, especially with Facebook-owned <a href="http://instagram.com/">Instagram</a> already supporting hashtags.</p>
+
+<p>However, Facebook is a fundamentally different social network than Twitter. While Twitter uses hashtags to quickly categorize a feed of 140-character thoughts, Facebook&rsquo;s content feeds  typically consist of long posts and large images. Additionally, while posts on Twitter are explicitly public or private, Facebook&rsquo;s privacy settings are more granular: if users don&rsquo;t make their posts Public, the hashtag is essentially useless. And the brands are going to <em>love</em> hashtags. Maybe too much.</p>
+
+<p>The magic of Facebook is flat-out incompatible with the magic of hashtags.</p>
+
+<!-- more -->
+
+
+<h2>Too Long; Didn&rsquo;t Read</h2>
+
+<p><img src="http://minimaxir.com/img/facebooktwitter.png"></p>
+
+<p>Since Twitter posts have a length limit, they&rsquo;re short and occupy a consistent amount of space on the webpage. Facebook posts can be near-unlimited length, utilize a large amount of a white space between posts, and also potentially contain an equally-long comment section. As a result, 5 Twitter posts can use the same amount of screen real-estate as 2 Facebook posts. Given the already incredibly low signal-to-noise quality ratio of #hashtag feeds (as evident above), this makes reading hashtag feeds on Facebook a chore.</p>
+
+<h2>A Thousand Words Takes A Lot Of Space</h2>
+
+<p><img src="http://minimaxir.com/img/bieber-twitter.png"></p>
+
+<p>Facebook displays pictures embedded in posts natively in the feed, while Twitter requires the user to click the Tweet to see the photo. In this case, the ratio of Twitter:Facebook posts can be even worse, in this case 6 Twitter posts for 1 Facebook post.</p>
+
+<h2>If A Hashtag Isn&rsquo;t Seen, Was It Posted?</h2>
+
+<p>Twitter is opt-in private posting. Facebook is opt-<em>out</em> private posting. That&rsquo;s a big usability problem.</p>
+
+<p>The Facebook hashtag feeds only show posts that are explicitly  made Public (or posts from your Friends which are set to a privacy of Friends Only). If the user is unaware that their posts are not Public by default, then their posts containing the hashtag will never be seen and the user won&rsquo;t be able to participate in social hashtag feeds.  Although Facebook has made improvements in helping users set the intended privacy level of a post, it makes the process of posting much more deliberate and much less impulsive than Twitter.</p>
+
+<h2>#brand #branding #marketing #yolo #swag</h2>
+
+<p><img src="http://minimaxir.com/img/hashtagabuse.png"></p>
+
+<p>Brands love hashtags. The more hashtags included in a Tweet, the more exposure the Tweet receives, right?</p>
+
+<p>With Twitter, there&rsquo;s a limit on the number of hashtags in a Tweet due to the delicate balance between the number of hashtags, the length of the hashtags, and the length of the Tweet itself. On Facebook, you can include <strong>25</strong> hashtags in any post!</p>
+
+<p>Since there&rsquo;s no consequence for abusing hashtags, expect to see more Facebook brands taking advantage this new free source of marketing. Expect to see Facebook get much more cluttered.</p>
+
+<h2>Explicit Image Bombing</h2>
+
+<p>A malicious user could theoretically insert shock images into popular hashtag feeds. During my testing of Facebook hashtags, there was a surprising amount of nudity in the seemingly-innocuous #many hashtag.</p>
+
+<p>On Twitter, the volume of Tweets is much higher and the images are hidden by default, so the odds of such an attack working on Facebook are much higher than on Twitter.</p>
+
+<h2>Comment Hashtags Different From Post Hashtags</h2>
+
+<p>You can hashtag comments on Facebook posts like you can hashtag Facebook posts themselves. But hashtagged comments won&rsquo;t appear in the hashtag News Feed. Whereas on Twitter, Replies are also Tweets and can be hashtagged accordingly. This behavior isn&rsquo;t surprising, but it&rsquo;s still a big inconsistency.</p>
+
+<hr />
+
+<p>Will Facebook Hashtags fail due to the massive differences between Facebook and Twitter? It&rsquo;s hard to say, but I&rsquo;m skeptical that Facebook will be able to capture the hashtag magic.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[When Uninstalling A PC Game Erases the Entire Hard Drive]]></title>
@@ -812,7 +872,7 @@ Getting socially-vetted photos on your computer without any effort is a useful t
     <id>http://minimaxir.com/2013/01/prefixed-period</id>
     <content type="html"><![CDATA[<p>I&rsquo;m not a Twitter fanatic. Although I do have <a href="https://twitter.com/minimaxir">a Twitter account</a> with about 300 followers,  Facebook&rsquo;s Subscribe feature <a href="http://www.facebook.com/max.woolf">on my Facebook profile</a> has met my use case for publishing sarcastic quips and cool links for a broad audience over the internet. I mostly use my Twitter account to read tweets from tech columnists, yet I don&rsquo;t even comment on their tweets because <strong>tweets that are replies to someone are not visible in the home timeline of my followers</strong>. I can understand the intuition behind this behavior: Twitter conversations can contain a lot of low-content tweets, and Twitter doesn&rsquo;t want its users to be spammed.</p>
 
-<p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that <strong>beginning your reply Tweet with a period (.) allows it to be seen by all your followers. </strong>Otherwise, only the replyee will receive notification of the reply.</p>
+<p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that beginning your reply Tweet with a period (.) allows it to be seen by all your followers. **Otherwise, only the replyee will receive notification of the reply.</p>
 
 <p>Having your reply tweets appear to your followers only if you begin them with a prefixed period is not intuitive at all. And this particular behavior and its workaround are not documented in <a href="https://support.twitter.com/groups/31-twitter-basics/topics/109-tweets-messages/articles/14023-what-are-replies-and-mentions">Twitter&rsquo;s help docs</a>. And replying to tweets is a core feature of Twitter. How many users would be able to deduce this behavior? How many brands, who rely on user engagement, are even aware of this behavior?</p>
 
@@ -823,7 +883,7 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 
 <h2>XY = @(Z)</h2>
 
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/twitter2.png?resize=513%2C181" alt="twitter2" /></p>
+<p><img src="http://minimaxir.com/img/twitter2.png"></p>
 
 <p>I recently saw <a href="https://twitter.com/ScottyLabs/status/286921265514700801">a tweet</a> in my timeline that had a prefixed period, but clearly was not a reply to anyone. Confused, I pointed out that prefixed periods aren&rsquo;t necessary if the tweet is not a reply. <a href="https://twitter.com/amyquispe">Amy Quispe</a>, founder of ScottyLabs and a CS senior at Carnegie Mellon University with much more startup knowledge than myself, pointed out that I was wrong, and <strong>if the tweet begins with a @, it will not appear in your follower&rsquo;s timelines, regardless of whether it&rsquo;s a reply or a mention</strong>.</p>
 
@@ -1274,46 +1334,6 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 <p>Twitter Bootstrap is the best and easiest way for your new website to be future-proof, and if you&rsquo;re creating a startup, I strongly urge you to consider using that framework. The amount of time saved for a bootstrapped startup is invaluable, especially for startups ran by coders instead of designers.</p>
 
 <p><em>If you want to see more use-cases for Bootstrap, check out the <a href="http://builtwithbootstrap.com/">BuiltWithBootstrap</a> Tumblr. If you&rsquo;re looking for a WordPress Theme built on Bootstrap (which I wish I knew before attempting to build my own theme), you can use the <a href="http://320press.com/wpbs/">WPBS theme by 320press</a>, which even allows you to use the Bootswatch themes variations as well!</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[If You're Going to Blog, Use Tumblr, Not WordPress]]></title>
-    <link href="http://minimaxir.com/2012/03/a-wordpress-about-tumblr/"/>
-    <updated>2012-03-09T21:14:00-08:00</updated>
-    <id>http://minimaxir.com/2012/03/a-wordpress-about-tumblr</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ll admit: <a href="http://www.tumblr.com/">Tumblr</a> surprised me. Tumblr is a wildly popular microblogging platform where users can make small posts, in either text or visual format, and other users can share them. Users can then share another user&rsquo;s share, creating an endless sharing cycle. When the service first caught my eye a couple years ago, I thought it was merely a platform for reblogging incredibly old internet memes with nauseating, unintuitive blog themes. I remember thinking &ldquo;why can&rsquo;t this be done on <a href="http://wordpress.org/">WordPress</a>, which is the foundation of nearly every blog on the internet? It offers much more flexibility with blog functionality (especially with plugins) and likewise more theme distinctiveness.&rdquo;</p>
-
-<p>As it turns out, the arguments of plugin-functionality and unique themes <strong>are irrelevant</strong> to the typical blogger. 99% of bloggers just want a place, preferably free, where they can blog. And with the added value Tumblr provides with integrated social networking, Tumblr provides <a href="http://www.tumblr.com/why-tumblr">more utility for the typical blogger</a> than competing services such as <a href="http://www.blogger.com/home">Blogger</a>, <a href="https://posterous.com/">Posterous</a>, and even WordPress.</p>
-
-<p>However, for the other 1% of bloggers, especially those that want to earn money from blogging, WordPress is still unrivaled due to the aforementioned functionality tweaking. Tumblr won&rsquo;t ever kill WordPress, but if Tumblr fully captures the long-tail, WordPress could be in trouble.</p>
-
-<!-- more -->
-
-
-<p>At the beginning of 2012, I decided to start a Tumblr called <a href="http://techcommntr.com/">techcommntr</a>, whose title intentionally ignores the e&rsquo;s at the end of the word (like Tumblr itself) because poor literacy is kewl, is a blog that sardonically comments on the technology community. I wanted a place outside of <a href="http://techcrunch.com/">TechCrunch</a> to archive and share my blog comments, and also experiment with Tumblr&rsquo;s features hands-on to determine why it&rsquo;s so popular. I had some practice implementing custom CSS and Facebook Comments as well (Tumblr uses a single-file template system which is actually very elegant). Although I haven&rsquo;t posted on it in a while due to real life %2B working on <a href="http://minimaxir.com/2012/03/bootstrap-for-everyone/">a certain other project</a>, I have learnt quite a lot about the platform, and there are a <strong>lot</strong> of unpublicized features and benefits which Tumblr does not advertise.</p>
-
-<p><a href="https://plus.google.com/"><img src="https://plus.google.com/" alt="*Another* startup idea in the bathroom? Is lavatorial inspiration a common thing for him?" /></a></p>
-
-<h2>Tumblr vs. WordPress</h2>
-
-<p>Whenever one of my friends decides to create a blog, they always do it on Blogger, WordPress.com, or Tumblr. I&rsquo;ll be blunt: Blogger is terrible and you should never use it, especially in 2012. Even though Google has very recently tried to improve the feature parity of Blogger to that of other free blogging services, such as having a post editor that doesn&rsquo;t require the poster to type in <strong>raw HTML</strong>, there&rsquo;s a very limited social component, with merely generic social buttons and a barely functional commenting system. When <a href="https://plus.google.com/">Google%2B</a>, Google&rsquo;s social network, is a better blogging tool than the actual blogging tool, purely due to the social networking component, there&rsquo;s a problem. (Given the &ldquo;success&rdquo; of Google%2B as of recently, that says volumes).</p>
-
-<p><a href="http://wordpress.com/">WordPress.com</a>, the free-hosted version of the WordPress platform, has some oddities when compared apples-to-apples to the free Tumblr. WordPress.com has <a href="http://en.wordpress.com/products/">&ldquo;premium&rdquo; addons</a>&hellip;which are complete ripoffs. WordPress.com charges $12/year for the <em>right</em> to use a custom domain on the blog (so it doesn&rsquo;t have a <em>.wordpress.com URL), and you still have to pay an additional $9-10/year for the domain itself; Tumblr lets you map a domain to your blog for absolutely free with an existing domain. WordPress.com also charges $30/year for the </em>right<em> to use custom CSS to create a unique styling for your blog; Tumblr lets you add CSS for free. And, most ridiculously, WordPress charges $29.97/yr (why not $30, like custom CSS?) for the </em>right* to remove third-party advertisements from your blog; on Tumblr, you only have ads if you implement them yourself. So, in order to get feature parity with Tumblr while on WordPress.com, you would need to pay $72/year. At that point, you might as well self-host. Even worse, after all of that, you may not even be able to implement desired custom functionality on WordPress.com, as the underlying blog code cannot be altered and the usable plugins are limited. So, using WordPress.com is moot.</p>
-
-<p>In addition to the aforementioned features that Tumblr has that WordPress.com makes you egregiously pay for, Tumblr&rsquo;s strongest advantage is its focus on content promotion. Users can like or reblog posts on any Tumblr, regardless of theme design or settings, and all likes/shares are attributed to the original poster. Posts can be tagged, which go into a pool of all other Tumblr posts with the same tag; tagging your posts with a very large amount of tags is not a bad strategy. While yes, age-old viral pictures or ragefaces tend to pop up frequently, original content and images that cannot easily be replicated can be very valuable for spreading your personal brand. (although if you&rsquo;re able to watermark your photos, I&rsquo;d recommending doing that to deter uncredited repostings.)</p>
-
-<p><a href="http://gawker.com/"><img src="http://gawker.com/" alt="My most successful Tumblr post, with 20 notes. This happened because this post had a #trollface tag, and a trollface Tumblr caught it and reblogged it." /></a></p>
-
-<h2>Tumblr vs. Professional Bloggers</h2>
-
-<p>So, how does Tumblr compare with professional blogs that utilize WordPress, like TechCrunch? Well&hellip;not at all. For one, professional blogs depend on advertisement revenue to pay hosting costs and writers; while Tumblr allows users to implement ads, blog follows tend to access their aggregated content in their Tumblr dashboard, where the blog author earns no revenue. (While the average author will earn some revenue from direct visits from Facebook/Twitter users, it will likely result in less revenue in the long-term than if self-hosted and forced viewers to the main blog). Culturally, Tumblr content tends to be short, while professional blogs tend to have longer, more researched articles. (unless they&rsquo;re <a href="http://gawker.com/">Gawker</a>. Ahem.) <a href="http://www.tumblr.com/docs/en/custom_themes">Programmically</a>, Tumblr does not allow many useful content-highlight techniques such as featured posts, related posts, etc. that many professional blogs use/abuse: you get your posts, your static HTML, and that&rsquo;s it. There aren&rsquo;t enough tools to entice professional bloggers to Tumblr&hellip;but Tumblr doesn&rsquo;t <strong>need</strong> to entice professional bloggers. They&rsquo;re doing pretty well on their own.</p>
-
-<p>Tumblr has been rapidly getting traction. While it won&rsquo;t kill WordPress, Tumblr signals a shift toward microblogging in lieu of the traditional, 2000&rsquo;s era long-prose style of blogging. If you want to blog on the internet, and don&rsquo;t want to pay any money, Tumblr is the clear winner with its strong emphasis on content distribution: what use is a blog that no one reads?</p>
-
-<p>Would Minimaxir benefit from being on Tumblr instead of being self-hosted on WordPress? That&rsquo;s hard to say. While the social networking aspects are enticing for expanding my potential reach&hellip;the businessman/programmer within me thinks that content highlight capabilities and complete blog flexibility are too important to give up.</p>
-
-<p>And my blog posts are <em>wayyy</em> too long for Tumblr.</p>
 ]]></content>
   </entry>
   
