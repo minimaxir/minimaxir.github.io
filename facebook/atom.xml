@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Facebook | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//facebook/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-06-14T07:54:29-07:00</updated>
+  <updated>2013-06-22T09:27:37-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,183 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis]]></title>
+    <link href="http://minimaxir.com/2013/06/big-social-data/"/>
+    <updated>2013-06-22T10:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/06/big-social-data</id>
+    <content type="html"><![CDATA[<p>What makes people click the Like button on Facebook Statuses? Does the status say something funny? Does it contain a cool link or a funny photo? Does the status actively engage its readers?</p>
+
+<p>Needless to say, brands on Facebook want to know the answers to these questions. The more people that Like their statuses on their Facebook Pages, the more exposure they gain, and the more money they earn. Many, many companies have been created for the sole purpose of maximizing the number of Facebook Likes.</p>
+
+<p>By 2013, most brands have realized that photo posts and statuses that ask a question <a href="http://minimaxir.com/2012/10/questions-equals-reponses/">will generate <em>much</em> higher numbers</a> of Likes. Personally, that&rsquo;s not why <em>I</em> like a given Facebook status: I Like statuses that contain new and exciting things that are relevant to my interests. The first thing I read in a status is the Message: if the message is boring and uninteresting, then there&rsquo;s no reason for me to Like the status needlessly.</p>
+
+<p>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</p>
+
+<p>Running multivariate regressions on keywords from thousands of Facebook statuses, I&rsquo;ve discovered that the language used in a status <em>does</em> help predict the number of Likes a status receives, and actually could help brands learn much more about their fans.</p>
+
+<!-- more -->
+
+
+<h1>Setup</h1>
+
+<p><img src="/img/rdataset.png"></p>
+
+<p>In order to draw accurate conclusions from the analysis, large amounts of data are needed (and there&rsquo;s no such thing as too much data).</p>
+
+<p>I decided to analyze the Facebook Pages of 3 extremely popular News sources: <a href="https://www.facebook.com/cnn">CNN</a>, the <a href="https://www.facebook.com/nytimes">New York Times</a>, and <a href="https://www.facebook.com/bbcworldnews">BBC World News</a>. All three Pages have millions of fans, post the same types of Facebook statuses, and post statuses extremely frequently to Facebook (around 8-9 times a day). The statuses analyzed will be from June 1st 2012 to June 1st 2013, in order to both gather a large sample size (~3,000  statuses from each Page) and a ensure a consistent apples-to-apples comparison between the three sources.</p>
+
+<p>The raw data, code, and a detailed technical explanation of the statistical techniques used to process the data can be found in <a href="https://github.com/minimaxir/facebook-keyword-regression-analysis">this GitHub repository</a>. (tl;dr, it&rsquo;s an optimized <a href="http://en.wikipedia.org/wiki/Least_squares">least squares</a> regression)</p>
+
+<p><em>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</em> We&rsquo;re ready to test this hypothesis.</p>
+
+<hr />
+
+<h1>CNN</h1>
+
+<p><img class="pull-right hidden-tablet" src="/img/cnn_Wordcloud.png"></p>
+
+<pre><code>                +Likes          P-Val
+Bourdain        1962.98         0
+NEWS            1272.64         0
+Photo           1154.6          0
+Barack          1002.45         0
+City            851.82          0
+Monday          705.42          0
+Obama           632.2           0
+United          578.77          0
+Mitt            562.29          0.01
+South           508.43          0.03
+America         505.83          0.01
+Watch           470.51          0
+Boston          398.13          0.05
+New             326.74          0.03
+ET              -433.96         0
+North           -467.05         0.02
+Check           -503.5          0
+Travel          -988.99         0.02
+</code></pre>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>The most impactful keywords for CNN are political keywords.</li>
+<li><strong>NEWS</strong> (&ldquo;BREAKING NEWS&rdquo;) predicts more Likes than <strong>Photo</strong> (i.e. <a href="http://www.facebook.com/5550296508/posts/10151626042186509">Travel Photo of the Day</a>).</li>
+<li><strong>Bourdain</strong> refers to Anthony Bourdain, who very recently began <a href="http://en.wikipedia.org/wiki/Anthony_Bourdain:_Parts_Unknown">a food and travel show</a> on CNN. I assume that targets CNN&rsquo;s primary demographic.</li>
+<li>The presence of <strong>Barack</strong> (Barack Obama) predicts more likes than just <strong>Obama</strong>.</li>
+<li>The presence of <strong>Monday</strong> predicts more likes most other keywords. Garfield would be disappointed.</li>
+<li>The presence of <strong>North</strong> (North Korea) predicts a <em>decrease</em> in Likes from the average. Is North Korea boring?</li>
+<li>The presence of <strong>Check</strong> (&ldquo;Check this out!&rdquo;) also predicts a decrease in Likes from the average. This is interesting because this call-to-action is usually associated with the other keywords. Perhaps it&rsquo;s not necessary?</li>
+</ul>
+
+
+<hr />
+
+<h1>NYTimes</h1>
+
+<p><img class="pull-right hidden-tablet" src="/img/nytimes_Wordcloud.png"></p>
+
+<pre><code>                +Likes          P-Val
+Mills           1022.9          0
+Democratic      496.32          0
+Krugman         456.31          0
+Senate          431.05          0
+London          373.67          0.01
+Oscar           367.64          0.01
+Sandy           364.61          0
+Olympics        339.15          0.01
+Sunday          317             0
+Clinton         314.64          0.02
+You             247.07          0
+Obama           237.98          0
+Opinion         221             0
+Michael         204.2           0.03
+Credit          191.92          0.05
+Tuesday         187.22          0.03
+Times           178.69          0
+See             160.12          0.01
+Romney          157.66          0.04
+Ed              140.86          0.01
+Read            -101.23         0.05
+Here            -182.72         0.04
+Facebook        -187.75         0.02
+Are             -216.3          0.01
+While           -293.77         0.04
+Quotation       -322.29         0.02
+House           -362.1          0.01
+Thanksgiving    -369.88         0.05
+Convention      -448.34         0.01
+Jersey          -505.98         0
+</code></pre>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>The most impactful keywords for NYTimes are political keywords and current events, such as Hurricane <strong>Sandy</strong> and the <strong>London</strong> <strong>Olympics</strong>.</li>
+<li><strong>Mills</strong> refers to Doug Mills, <a href="http://www.facebook.com/5281959998/posts/10150252479219999">photographer</a> for the New York Times. The power of photos!</li>
+<li><strong>You</strong> and <strong>See</strong> are impactful call-to-action keywords, even though they don&rsquo;t ask any questions. (Interestingly, <strong>Are</strong>, which implicitly asks a question, predicts a decrease in Likes. Maybe people don&rsquo;t Like questions?)</li>
+<li><strong>Clinton</strong> has a bigger impact than <strong>Obama</strong>.</li>
+<li>No one likes <strong>Jersey</strong>.</li>
+</ul>
+
+
+<hr />
+
+<h1>BBC World News</h1>
+
+<p><img class="pull-right hidden-tablet" src="/img/bbcworldnews_Wordcloud.png"></p>
+
+<pre><code>                +Likes          P-Val
+Malala          488.1           0
+Japan           186.32          0
+Britain         167.25          0.01
+That            155.01          0.01
+AFP             154.97          0.02
+Travel          153.41          0
+Now             148.39          0.02
+Would           146.45          0.03
+Delhi           137.85          0.04
+Let             134.93          0.03
+Future          127.49          0.02
+Barack          125.79          0.02
+An              122.18          0.03
+David           111.78          0.04
+Do              111.13          0
+Israel          101.31          0.04
+Impact          87.94           0.05
+South           78.62           0.03
+It              62.7            0.01
+The             55.7            0
+US              -47.84          0.02
+On              -86.22          0.04
+BBC             -103.58         0
+Sunday          -117.01         0.03
+After           -122.38         0.05
+Thursday        -143.91         0.03
+Twitter         -144.55         0
+City            -147.16         0.02
+Hi              -149.85         0.03
+BBCNewsUS       -150.48         0.03
+House           -176.86         0.01
+California      -187.57         0
+</code></pre>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>The most impactful keywords for BBC World News are keywords describing news around the world. Unlike CNN and NYTimes, there are very few impactful keywords related to domestic politics (such as Prime Minister <strong>David</strong> Cameron, and even <strong>Barack</strong> is more impactful than him.)</li>
+<li><strong>Malala</strong> refers to <a href="http://en.wikipedia.org/wiki/Malala_Yousafzai">Malala Youdsfzai</a>, a Pakistani activist who survived an assassination attempt.</li>
+<li>Implicit question keywords such as <strong>Let</strong>, <strong>Do</strong>, and <strong>Would</strong> are all very effective.</li>
+<li>The simple salutation of <strong>Hi</strong> predicts a decrease in Likes. There&rsquo;s a British joke here somewhere.</li>
+</ul>
+
+
+<hr />
+
+<p>The language used in Facebook Statuses can be very useful in identifying what words Fans like, and what words will be most useful in generating the most exposure. While my analysis can&rsquo;t predict the <em>exact</em> number of Likes a Status receives, and I likely <a href="http://xkcd.com/882/">broke a few rules of statistics</a> in the process of making this post, the impact of language and specific keywords on social media interaction is an endeavor worth pursuing.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Facebook Hashtags Are Fundamentally Broken]]></title>
@@ -92,6 +269,86 @@
 <p>I&rsquo;m sure the lost Likes/Comments temporary, but this is an error of incredible magnitude, especially given on how many sites rely on Facebook&rsquo;s data.</p>
 
 <p>Because comments here may be broken, you can comment on the <a href="https://news.ycombinator.com/item?id=5439712">Hacker News thread</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses]]></title>
+    <link href="http://minimaxir.com/2012/10/questions-equals-reponses/"/>
+    <updated>2012-10-07T21:19:00-07:00</updated>
+    <id>http://minimaxir.com/2012/10/questions-equals-reponses</id>
+    <content type="html"><![CDATA[<p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
+
+<p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>
+
+<p>Like any math nerd, I wasn&rsquo;t comfortable with simple circumstantial evidence. When I <a href="http://www.facebook.com/max.woolf/posts/10151223309670450">asked on Facebook</a> if there is any statistical data indicating that including a question to the community at the end of a blog post / Facebook post increases the response rate, TechCrunch writer and Facebook specialist Josh Constine responded and linked to<a href="http://www.facebook.com/notes/facebook-journalists/study-how-people-are-engaging-journalists-on-facebook-best-practices/245775148767840"> a Facebook report</a> stating that such posts have double the comments and significantly greater feedback.</p>
+
+<p>I decided to put that to the test. I wrote a quick script in R that parses the Facebook page of a brand and extracts the number of likes for all of their posts, the number of comments on all posts, and whether or not each post contained a question. The brand I chose for my testing is none other than <a href="http://www.techcrunch.com/">TechCrunch</a>, because <a href="http://www.facebook.com/techcrunch">its Facebook page</a>, managed by the wonderful <a href="https://twitter.com/elinblesener">Elin Blesner</a>, has large sample sizes in terms of both unique postings and response rates on each post, ensuring that the analysis of the data is statistically significant. Additionally, having a<em>nother</em> perspective on TechCrunch to comment about certainly doesn&rsquo;t hurt either.</p>
+
+<p>After collecting about 2,500 posts &ndash; 12 months of data &ndash; I analyzed the data conditional on whether or not the post was a question, among other things. The results surprised me.</p>
+
+<!-- more -->
+
+
+<p><strong>tl;dr: Asking a question to the readers in a Facebook post <em>does</em> increase the number of comments very significantly, but <em>decreases</em> the number of Likes!</strong></p>
+
+<h2>How many Comments and Likes do TechCrunch posts receive?</h2>
+
+<p>Since the data goes back a year, we can more easily detect seasonal trends in the data. First, let&rsquo;s see the real world numbers as a sanity check.</p>
+
+<p><img src="/img/tcfb1.png" title="How many Comments and Likes do TechCrunch posts receive?" alt="It's much more than you may think." /></p>
+
+<p>The number of Likes per month appears to be positively correlated with the number of comments, which is to be expected. Some months have significantly more activity than others; September 2012 had the most because of TechCrunch Disrupt SF. (interestingly, there wasn&rsquo;t such a spike in May 2012 with Disrupt NYC) The average number of likes/comments per post per month, as opposed to the sum, is a more consistent measurement, so we will be using that going forward.</p>
+
+<h2>How many Comments and Likes do TechCrunch Facebook posts receive on average?</h2>
+
+<p><img src="/img/tcfb2.png" title="How many Comments and Likes do TechCrunch posts receive on average?" alt="Triple-Digit Likes and double-digit Comments. Not too shabby." /></p>
+
+<p>Overall average is 162 Likes and 30 Comments per post. The average number of Likes/Comments are consistent across the past year, with growth in the last few months. Nothing too surprising here. ## Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?</p>
+
+<p>Here&rsquo;s a fun measurement I decided to analyze. TechCrunch makes postings at all hours as it&rsquo;s a globally-targeted blog, but readers in the US may be asleep at the time. This could be a possible confounding variable (social activity may be correlated with geographic location), so it&rsquo;s best to see whether or not we can rule it out.</p>
+
+<p><img src="/img/tcfb3.png" title="Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?" alt="The spike in average comments at 4AM PST / 7AM EST is interesting. European workday?" /></p>
+
+<p>As it turns out, time of day does <strong>not</strong> appear to have an effect on number of Likes/Comments received for TechCrunch!</p>
+
+<h2>How many TechCrunch Facebook posts ask a question, relative to the ones that do not?</h2>
+
+<p>Here&rsquo;s the main question that began this entire investigation. Has the TechCrunch Facebook been writing posts that ask questions more frequently?</p>
+
+<p><img src="/img/tcfb4.png" title="How many TechCrunch Facebook posts ask a question, relative to the ones that do not?" alt="TechCrunch-themed columns!" /></p>
+
+<p>As it turns out, no, TechCrunch has asked the same proportion of questions on their Facebook page, as there is no change in trend. Overall average is 31.38% of TC&rsquo;s posts ask a question. (about a third of the posts)</p>
+
+<h2>Does including a question to the community increase the number of Likes/Comments on the post?</h2>
+
+<p>And here&rsquo;s the analysis of the main hypothesis. The results were quite surprising.</p>
+
+<p><img src="/img/tcfb5.png" title="Does including a question to the community increase the number of Likes/Comments on the post?" alt="Now with more DROP SHADOWS!" /></p>
+
+<p>The average amount of Likes for a post that asked a question is <em>lower</em> than a post that does not! (141 Likes for post that asks question, 172 for post that does not, a 18% decrease) That&rsquo;s unexpected!</p>
+
+<p>For Comments, the average amount of Comments for a post that asked a question is significantly higher than a post that does not (45 Comments for a post that asks question, 23 comments for post that does not, a 97% increase). This is nearly double, which is what the Facebook report had stated.</p>
+
+<p>What could explain this behavior? A quick theory is that Liking and Commenting on a brand post are mutually exclusive; asking a question in the post drives the user to comment, but not to Like the post, but since the user has already acknowledged the post socially, there&rsquo;s no need for the user to Like it. This follows my personal behavior on brands; if I comment, I usually do not like the post as it seems redundant.</p>
+
+<p>Regardless, I will now admit that there are benefits to asking your users questions in your Facebook or blog posts. Although there appears to be a drop in Likes by asking users what their opinions are, the increase in comments more than counteracts it.</p>
+
+<p>This data raises an interesting dilemma: let&rsquo;s say everyone catches on and <em>most</em> of the top brands start asking their users questions. It&rsquo;ll quickly become an cliche, as it is essentially a subliminal form of the infamous Facebook News Feed spam. Would that cause brands to stop asking questions? If so, how long would it take for the brands to switch back to asking their users questions?</p>
+
+<p>Who knew that social media marketing involved game theory?</p>
+
+<p>-Max</p>
+
+<p><em>(Since all the data is public anyways, <a href="https://dl.dropbox.com/u/2017402/TechCrunch%20Facebook%20Data%20Analysis.xlsx">I am releasing my data and graphs</a> for your perusal. If you decide to use it and find something else interesting, please let me know!)</em></p>
+
+<p>EDIT: One more.</p>
+
+<h2>Do photo posts have greater response rates than posts without photos?</h2>
+
+<p><img src="/img/tc-graph.png" alt="14" /></p>
+
+<p>Yep. Not too surprising. It&rsquo;s why Facebook bought Instagram! (although I&rsquo;m curious what happened in April&hellip;)</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-06-14T07:54:29-07:00</updated>
+  <updated>2013-06-22T09:27:37-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,183 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis]]></title>
+    <link href="http://minimaxir.com/2013/06/big-social-data/"/>
+    <updated>2013-06-22T10:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/06/big-social-data</id>
+    <content type="html"><![CDATA[<p>What makes people click the Like button on Facebook Statuses? Does the status say something funny? Does it contain a cool link or a funny photo? Does the status actively engage its readers?</p>
+
+<p>Needless to say, brands on Facebook want to know the answers to these questions. The more people that Like their statuses on their Facebook Pages, the more exposure they gain, and the more money they earn. Many, many companies have been created for the sole purpose of maximizing the number of Facebook Likes.</p>
+
+<p>By 2013, most brands have realized that photo posts and statuses that ask a question <a href="http://minimaxir.com/2012/10/questions-equals-reponses/">will generate <em>much</em> higher numbers</a> of Likes. Personally, that&rsquo;s not why <em>I</em> like a given Facebook status: I Like statuses that contain new and exciting things that are relevant to my interests. The first thing I read in a status is the Message: if the message is boring and uninteresting, then there&rsquo;s no reason for me to Like the status needlessly.</p>
+
+<p>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</p>
+
+<p>Running multivariate regressions on keywords from thousands of Facebook statuses, I&rsquo;ve discovered that the language used in a status <em>does</em> help predict the number of Likes a status receives, and actually could help brands learn much more about their fans.</p>
+
+<!-- more -->
+
+
+<h1>Setup</h1>
+
+<p><img src="http://minimaxir.com/img/rdataset.png"></p>
+
+<p>In order to draw accurate conclusions from the analysis, large amounts of data are needed (and there&rsquo;s no such thing as too much data).</p>
+
+<p>I decided to analyze the Facebook Pages of 3 extremely popular News sources: <a href="https://www.facebook.com/cnn">CNN</a>, the <a href="https://www.facebook.com/nytimes">New York Times</a>, and <a href="https://www.facebook.com/bbcworldnews">BBC World News</a>. All three Pages have millions of fans, post the same types of Facebook statuses, and post statuses extremely frequently to Facebook (around 8-9 times a day). The statuses analyzed will be from June 1st 2012 to June 1st 2013, in order to both gather a large sample size (~3,000  statuses from each Page) and a ensure a consistent apples-to-apples comparison between the three sources.</p>
+
+<p>The raw data, code, and a detailed technical explanation of the statistical techniques used to process the data can be found in <a href="https://github.com/minimaxir/facebook-keyword-regression-analysis">this GitHub repository</a>. (tl;dr, it&rsquo;s an optimized <a href="http://en.wikipedia.org/wiki/Least_squares">least squares</a> regression)</p>
+
+<p><em>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</em> We&rsquo;re ready to test this hypothesis.</p>
+
+<hr />
+
+<h1>CNN</h1>
+
+<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/cnn_Wordcloud.png"></p>
+
+<pre><code>                +Likes          P-Val
+Bourdain        1962.98         0
+NEWS            1272.64         0
+Photo           1154.6          0
+Barack          1002.45         0
+City            851.82          0
+Monday          705.42          0
+Obama           632.2           0
+United          578.77          0
+Mitt            562.29          0.01
+South           508.43          0.03
+America         505.83          0.01
+Watch           470.51          0
+Boston          398.13          0.05
+New             326.74          0.03
+ET              -433.96         0
+North           -467.05         0.02
+Check           -503.5          0
+Travel          -988.99         0.02
+</code></pre>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>The most impactful keywords for CNN are political keywords.</li>
+<li><strong>NEWS</strong> (&ldquo;BREAKING NEWS&rdquo;) predicts more Likes than <strong>Photo</strong> (i.e. <a href="http://www.facebook.com/5550296508/posts/10151626042186509">Travel Photo of the Day</a>).</li>
+<li><strong>Bourdain</strong> refers to Anthony Bourdain, who very recently began <a href="http://en.wikipedia.org/wiki/Anthony_Bourdain:_Parts_Unknown">a food and travel show</a> on CNN. I assume that targets CNN&rsquo;s primary demographic.</li>
+<li>The presence of <strong>Barack</strong> (Barack Obama) predicts more likes than just <strong>Obama</strong>.</li>
+<li>The presence of <strong>Monday</strong> predicts more likes most other keywords. Garfield would be disappointed.</li>
+<li>The presence of <strong>North</strong> (North Korea) predicts a <em>decrease</em> in Likes from the average. Is North Korea boring?</li>
+<li>The presence of <strong>Check</strong> (&ldquo;Check this out!&rdquo;) also predicts a decrease in Likes from the average. This is interesting because this call-to-action is usually associated with the other keywords. Perhaps it&rsquo;s not necessary?</li>
+</ul>
+
+
+<hr />
+
+<h1>NYTimes</h1>
+
+<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/nytimes_Wordcloud.png"></p>
+
+<pre><code>                +Likes          P-Val
+Mills           1022.9          0
+Democratic      496.32          0
+Krugman         456.31          0
+Senate          431.05          0
+London          373.67          0.01
+Oscar           367.64          0.01
+Sandy           364.61          0
+Olympics        339.15          0.01
+Sunday          317             0
+Clinton         314.64          0.02
+You             247.07          0
+Obama           237.98          0
+Opinion         221             0
+Michael         204.2           0.03
+Credit          191.92          0.05
+Tuesday         187.22          0.03
+Times           178.69          0
+See             160.12          0.01
+Romney          157.66          0.04
+Ed              140.86          0.01
+Read            -101.23         0.05
+Here            -182.72         0.04
+Facebook        -187.75         0.02
+Are             -216.3          0.01
+While           -293.77         0.04
+Quotation       -322.29         0.02
+House           -362.1          0.01
+Thanksgiving    -369.88         0.05
+Convention      -448.34         0.01
+Jersey          -505.98         0
+</code></pre>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>The most impactful keywords for NYTimes are political keywords and current events, such as Hurricane <strong>Sandy</strong> and the <strong>London</strong> <strong>Olympics</strong>.</li>
+<li><strong>Mills</strong> refers to Doug Mills, <a href="http://www.facebook.com/5281959998/posts/10150252479219999">photographer</a> for the New York Times. The power of photos!</li>
+<li><strong>You</strong> and <strong>See</strong> are impactful call-to-action keywords, even though they don&rsquo;t ask any questions. (Interestingly, <strong>Are</strong>, which implicitly asks a question, predicts a decrease in Likes. Maybe people don&rsquo;t Like questions?)</li>
+<li><strong>Clinton</strong> has a bigger impact than <strong>Obama</strong>.</li>
+<li>No one likes <strong>Jersey</strong>.</li>
+</ul>
+
+
+<hr />
+
+<h1>BBC World News</h1>
+
+<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/bbcworldnews_Wordcloud.png"></p>
+
+<pre><code>                +Likes          P-Val
+Malala          488.1           0
+Japan           186.32          0
+Britain         167.25          0.01
+That            155.01          0.01
+AFP             154.97          0.02
+Travel          153.41          0
+Now             148.39          0.02
+Would           146.45          0.03
+Delhi           137.85          0.04
+Let             134.93          0.03
+Future          127.49          0.02
+Barack          125.79          0.02
+An              122.18          0.03
+David           111.78          0.04
+Do              111.13          0
+Israel          101.31          0.04
+Impact          87.94           0.05
+South           78.62           0.03
+It              62.7            0.01
+The             55.7            0
+US              -47.84          0.02
+On              -86.22          0.04
+BBC             -103.58         0
+Sunday          -117.01         0.03
+After           -122.38         0.05
+Thursday        -143.91         0.03
+Twitter         -144.55         0
+City            -147.16         0.02
+Hi              -149.85         0.03
+BBCNewsUS       -150.48         0.03
+House           -176.86         0.01
+California      -187.57         0
+</code></pre>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>The most impactful keywords for BBC World News are keywords describing news around the world. Unlike CNN and NYTimes, there are very few impactful keywords related to domestic politics (such as Prime Minister <strong>David</strong> Cameron, and even <strong>Barack</strong> is more impactful than him.)</li>
+<li><strong>Malala</strong> refers to <a href="http://en.wikipedia.org/wiki/Malala_Yousafzai">Malala Youdsfzai</a>, a Pakistani activist who survived an assassination attempt.</li>
+<li>Implicit question keywords such as <strong>Let</strong>, <strong>Do</strong>, and <strong>Would</strong> are all very effective.</li>
+<li>The simple salutation of <strong>Hi</strong> predicts a decrease in Likes. There&rsquo;s a British joke here somewhere.</li>
+</ul>
+
+
+<hr />
+
+<p>The language used in Facebook Statuses can be very useful in identifying what words Fans like, and what words will be most useful in generating the most exposure. While my analysis can&rsquo;t predict the <em>exact</em> number of Likes a Status receives, and I likely <a href="http://xkcd.com/882/">broke a few rules of statistics</a> in the process of making this post, the impact of language and specific keywords on social media interaction is an endeavor worth pursuing.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Facebook Hashtags Are Fundamentally Broken]]></title>
@@ -1177,19 +1354,19 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 
 <p>Since the data goes back a year, we can more easily detect seasonal trends in the data. First, let&rsquo;s see the real world numbers as a sanity check.</p>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb1.png?resize=625%2C345" title="How many Comments and Likes do TechCrunch posts receive?" alt="It's much more than you may think." /></p>
+<p><img src="http://minimaxir.com/img/tcfb1.png" title="How many Comments and Likes do TechCrunch posts receive?" alt="It's much more than you may think." /></p>
 
 <p>The number of Likes per month appears to be positively correlated with the number of comments, which is to be expected. Some months have significantly more activity than others; September 2012 had the most because of TechCrunch Disrupt SF. (interestingly, there wasn&rsquo;t such a spike in May 2012 with Disrupt NYC) The average number of likes/comments per post per month, as opposed to the sum, is a more consistent measurement, so we will be using that going forward.</p>
 
 <h2>How many Comments and Likes do TechCrunch Facebook posts receive on average?</h2>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb2.png?resize=625%2C345" title="How many Comments and Likes do TechCrunch posts receive on average?" alt="Triple-Digit Likes and double-digit Comments. Not too shabby." /></p>
+<p><img src="http://minimaxir.com/img/tcfb2.png" title="How many Comments and Likes do TechCrunch posts receive on average?" alt="Triple-Digit Likes and double-digit Comments. Not too shabby." /></p>
 
 <p>Overall average is 162 Likes and 30 Comments per post. The average number of Likes/Comments are consistent across the past year, with growth in the last few months. Nothing too surprising here. ## Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?</p>
 
 <p>Here&rsquo;s a fun measurement I decided to analyze. TechCrunch makes postings at all hours as it&rsquo;s a globally-targeted blog, but readers in the US may be asleep at the time. This could be a possible confounding variable (social activity may be correlated with geographic location), so it&rsquo;s best to see whether or not we can rule it out.</p>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb3.png?resize=625%2C273" title="Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?" alt="The spike in average comments at 4AM PST / 7AM EST is interesting. European workday?" /></p>
+<p><img src="http://minimaxir.com/img/tcfb3.png" title="Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?" alt="The spike in average comments at 4AM PST / 7AM EST is interesting. European workday?" /></p>
 
 <p>As it turns out, time of day does <strong>not</strong> appear to have an effect on number of Likes/Comments received for TechCrunch!</p>
 
@@ -1197,7 +1374,7 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 
 <p>Here&rsquo;s the main question that began this entire investigation. Has the TechCrunch Facebook been writing posts that ask questions more frequently?</p>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb41.png?resize=625%2C379" title="How many TechCrunch Facebook posts ask a question, relative to the ones that do not?" alt="TechCrunch-themed columns!" /></p>
+<p><img src="http://minimaxir.com/img/tcfb4.png" title="How many TechCrunch Facebook posts ask a question, relative to the ones that do not?" alt="TechCrunch-themed columns!" /></p>
 
 <p>As it turns out, no, TechCrunch has asked the same proportion of questions on their Facebook page, as there is no change in trend. Overall average is 31.38% of TC&rsquo;s posts ask a question. (about a third of the posts)</p>
 
@@ -1205,7 +1382,7 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 
 <p>And here&rsquo;s the analysis of the main hypothesis. The results were quite surprising.</p>
 
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/10/tcfb51.png?resize=625%2C299" title="Does including a question to the community increase the number of Likes/Comments on the post?" alt="Now with more DROP SHADOWS!" /></p>
+<p><img src="http://minimaxir.com/img/tcfb5.png" title="Does including a question to the community increase the number of Likes/Comments on the post?" alt="Now with more DROP SHADOWS!" /></p>
 
 <p>The average amount of Likes for a post that asked a question is <em>lower</em> than a post that does not! (141 Likes for post that asks question, 172 for post that does not, a 18% decrease) That&rsquo;s unexpected!</p>
 
@@ -1227,7 +1404,7 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 
 <h2>Do photo posts have greater response rates than posts without photos?</h2>
 
-<p>[![][15]][15]</p>
+<p><img src="http://minimaxir.com/img/tc-graph.png" alt="14" /></p>
 
 <p>Yep. Not too surprising. It&rsquo;s why Facebook bought Instagram! (although I&rsquo;m curious what happened in April&hellip;)</p>
 ]]></content>
@@ -1286,54 +1463,6 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 <p>Meanwhile, with Google Drive, there are a ton of potential use-cases since the sharing/collaboration and preview tools from Google Docs are now integrated with all your documents on your computer as well. This is a <strong>huge</strong> productivity win. Get a file in your Gmail: Export it to Google Drive, and it&rsquo;s automatically downloaded to your computer (apparently this will be implemented soon). Have a custom made spreadsheet: upload it to Google Drive and it converts it automatically, and you can collaborate on it with peers and changes sync automatically to your computer. Once Google Drive incorporates Shared Folders, the sky&rsquo;s the limit, and even I might use Google Drive full-time.</p>
 
 <p>I&rsquo;m a huge fan of Dropbox, so I&rsquo;m sad to see it turn out this way, especially since it&rsquo;s not the company&rsquo;s direct fault. Everyone I know has a Google account, and it&rsquo;s relatively hard to get friends to switch to Dropbox: the potential install base is huge. Between that and the future integration with Windows SkyDrive and Windows 8, Dropbox will be seeing a huge hit in growth.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why Every New Website Will Use Bootstrap]]></title>
-    <link href="http://minimaxir.com/2012/03/bootstrap-for-everyone/"/>
-    <updated>2012-03-24T21:10:00-07:00</updated>
-    <id>http://minimaxir.com/2012/03/bootstrap-for-everyone</id>
-    <content type="html"><![CDATA[<p>So, I decided to spruce up the blog a little bit. The old WordPress theme I had used, <a href="http://wordpress.org/extend/themes/graphene">Graphene</a>, had a lot of useful functionality, such as a featured post slider and a topbar for placing social media buttons, but the theme itself didn&rsquo;t make the blog look <em>unique</em>. Even with a few CSS tweaks to add custom styling, such as forcing the titles of blog posts to be in all-capital letters, (which makes users more likely to click them!), it still <a href="http://i.imgur.com/LQVNK.png">looked very generic</a>. When building a personal brand, generic is never good.</p>
-
-<p>Therefore, I resolved to develop and design a unique WordPress blog theme effectively <em>from scratch</em>, in order to ensure that my blog had a truly distinctive look and functionality. Although modifying the blogging backend was simple (it&rsquo;s WordPress; there are <em>tons</em> of well-written documentation for that platform), modifying the CSS frontend, which my blog readers would actually <em>see</em>, was just as important. For that task, I chose to use the Twitter Bootstrap CSS framework, which many recent startups have utilized to great effect due to its focus on minimalism and efficiency.</p>
-
-<p>After completing my implementation and having hands-on experience, I can say that within the next few years, every startup will be using Bootstrap to design a website frontend both because it&rsquo;s incredibly easy to implement and because it allows for functionality that would take months to develop otherwise: both of which are useful properties for a startup which does not have the luxuries of time and money.</p>
-
-<!-- more -->
-
-
-<h2>About Bootstrap</h2>
-
-<p><a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a> is primarily developed by Twitter employees <a href="https://twitter.com/#!/mdo">Mark Otto</a> and <a href="https://twitter.com/#!/fat">Jacob Thorton</a> (you can tell they work for Twitter because they are one of the lucky few with a 3-character Twitter handle), developed primarily to speed up the development of new websites, and is open-sourced on GitHub for anyone to contribute changes to the project. At its core, Bootstrap provides typical CSS styling, such as text headings and large form inputs (like Twitter&rsquo;s).</p>
-
-<p>However, Bootstrap&rsquo;s strength lies in the <strong>additional</strong> CSS styles that are included for free, including animated buttons, icons, static navigation bars, and image thumbnails, all of which are staples of the design of modern startups (because they&rsquo;re classy!). Additionally, Bootstrap offers custom Javascript plugins which integrate into the aforementioned CSS, such as dropdown menus, tooltips, popovers, and interactive alerts. The aforementioned button styles, for example, would traditionally be implemented as jQuery buttons; CSS buttons are easier to implement (<em>one</em> line of code!) and load faster, which is better for both the user, and the startup who wants to maximize the happiness of the user. The aforementioned Javascript plugins are just as easy to implement (also <em>one</em> line of code!), and help preserve a website&rsquo;s minimalistic design by hiding content on default, and only presenting it when requested. Both of these features would require an extensive amount of testing to ensure that they worked 100% of the time, so developing using the framework is a useful time-saver.</p>
-
-<p>The most interesting feature, however, is the implementation of a responsive layout, also included for free. Responsive layouts, which allow websites to change their CSS in response to the width of the user&rsquo;s internet browser, are a very new trend in web development due to the fact that we now visit websites on so many different types of devices, from iPhones to iPads. If you use Bootstrap&rsquo;s 12 column grid system to format your website, it will automatically be able to conform to the display width of an iPhone, iPad, small desktop, and even a large desktop layout without any additional code. No longer do websites need to spend weeks creating and maintaining a separate mobile-friendly website!</p>
-
-<p>Bootstrap has received a surprising amount of third-party support as well, and interestingly has become a platform in itself. <a href="http://stylebootstrap.info/">StyleBootstrap.info</a> allows users to create their own Bootstrap design using an interactive GUI that makes adjustments in real-time, and <a href="http://bootswatch.com/">Bootswatch</a> distributes some these custom themes for free. Switching between these themes is simply a trivial matter of changing the CSS. <a href="http://wrapbootstrap.com/">WrapBootstrap</a> is an <em>entire marketplace</em> dedicated to selling custom webpage templates based around Bootstrap!</p>
-
-<h2>Bootstrap on Minimaxir</h2>
-
-<p>Minimaxir implements many of these features. The most notable of these is the responsive functionality: if you&rsquo;re on a desktop, try and resize the browser window in which you&rsquo;re reading this article. You&rsquo;ll notice the content resizing as well, and if you shrink it far enough, the top navigation bar collapsing into a small, compact form. On tablets, which have both portrait and landscape modes depending on their orientation, the responsive effect is very noticeable:</p>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/Responsive2.png?resize=625%2C352" title="Minimaxir as Responsive" alt="How Minimaxir looks on an iPad, in both Landscape and Portrait modes. Notice the difference in content density." /></p>
-
-<p>Other UI elements are scattered around logical areas of the website. The traditional &ldquo;read more&rdquo; at the end of each post excerpt is now a Bootstrap button. The hand-implemented  featured posts grouping at the top of index pages, and the bottom of article pages, uses Bootstrap&rsquo;s thumbnail grid, to group images in a clean and logical manner. There&rsquo;s a navigation menu at the top of every page with contains a dropdown, and on individual posts there&rsquo;s a sub-navigation menu which contains the share buttons (I <strong>loathe </strong>the &ldquo;distracting-share-buttons-on-the-left-of-posts-that-scroll-with-you approach that other blogs implement.) Lastly, all article images have a popover on mouseover, which allows for&hellip;creative captioning those images.</p>
-
-<h2>Limitations on Responsive Layouts</h2>
-
-<p>Since Bootstrap is based on a custom 12 column grid system, websites must be built from the ground up to accommodate such a layout, especially if they want to take advantage of the responsive features. It&rsquo;s very difficult for an established website or blog to justify the costs of development to implement such a rebuilding since they will likely outweigh the potential benefits, but a new website would not be subject to that issue. (note to startups: if you can develop a way for existing websites to go responsive for cheap, you&rsquo;ll make millions).</p>
-
-<p>Another unforeseen issue that was particularly annoying when implementing Bootstrap for Minimaxir was the lack of third-party plugin support. The Facebook Comments plugin and the YouTube embedded videos allow only a fixed width: if the user ever changes their browser width, then there will be a size discrepancy and that could cause aesthetic problems. After a little research, it turns out that the solution to these problems is to hack the plugin themselves. (a CSS hack for Facebook, a <a href="https://github.com/davatron5000/FitVids.js">jQuery plugin</a> for YouTube). That&rsquo;s not intuitive, and given the rise of responsive layouts, I hope these vendors make changes to accommodate these use cases.</p>
-
-<p>One last concern with responsive layouts, which is not Bootstrap&rsquo;s fault, is that some elements, such as social buttons, can dramatically slow down the loading of a website on mobile clients with less processing power than a desktop. Bootstrap contains mechanisms to hide content on mobile/tablets, but that doesn&rsquo;t prevent the content from <em>loading</em>, so it&rsquo;s moot for social buttons. To get around this problem, I had implemented a function that determines server-side whether or not the user is on a mobile client by parsing the user-agent property (which is how websites know if you&rsquo;re using Chrome, Firefox, etc.), and then displaying the social buttons if and only if they are on a desktop. (Otherwise, they see image-based social buttons which load easier). Honestly, in the future I expect to see a native function implemented in server-side languages for native mobile detection given the rise of responsive layouts.</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/03/mobilecode.png?resize=625%2C158" title="Is The User On A Mobile Device?" alt="And this is about *half* of the necessary code required!" /></p>
-
-<p>Twitter Bootstrap is the best and easiest way for your new website to be future-proof, and if you&rsquo;re creating a startup, I strongly urge you to consider using that framework. The amount of time saved for a bootstrapped startup is invaluable, especially for startups ran by coders instead of designers.</p>
-
-<p><em>If you want to see more use-cases for Bootstrap, check out the <a href="http://builtwithbootstrap.com/">BuiltWithBootstrap</a> Tumblr. If you&rsquo;re looking for a WordPress Theme built on Bootstrap (which I wish I knew before attempting to build my own theme), you can use the <a href="http://320press.com/wpbs/">WPBS theme by 320press</a>, which even allows you to use the Bootswatch themes variations as well!</em></p>
 ]]></content>
   </entry>
   

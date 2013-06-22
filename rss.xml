@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-06-14T07:54:29-07:00</updated>
+  <updated>2013-06-22T09:27:37-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,183 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis]]></title>
+    <link href="http://minimaxir.com/2013/06/big-social-data/"/>
+    <updated>2013-06-22T10:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/06/big-social-data</id>
+    <content type="html"><![CDATA[<p>What makes people click the Like button on Facebook Statuses? Does the status say something funny? Does it contain a cool link or a funny photo? Does the status actively engage its readers?</p>
+
+<p>Needless to say, brands on Facebook want to know the answers to these questions. The more people that Like their statuses on their Facebook Pages, the more exposure they gain, and the more money they earn. Many, many companies have been created for the sole purpose of maximizing the number of Facebook Likes.</p>
+
+<p>By 2013, most brands have realized that photo posts and statuses that ask a question <a href="http://minimaxir.com/2012/10/questions-equals-reponses/">will generate <em>much</em> higher numbers</a> of Likes. Personally, that&rsquo;s not why <em>I</em> like a given Facebook status: I Like statuses that contain new and exciting things that are relevant to my interests. The first thing I read in a status is the Message: if the message is boring and uninteresting, then there&rsquo;s no reason for me to Like the status needlessly.</p>
+
+<p>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</p>
+
+<p>Running multivariate regressions on keywords from thousands of Facebook statuses, I&rsquo;ve discovered that the language used in a status <em>does</em> help predict the number of Likes a status receives, and actually could help brands learn much more about their fans.</p>
+
+<!-- more -->
+
+
+<h1>Setup</h1>
+
+<p><img src="http://minimaxir.com/img/rdataset.png"></p>
+
+<p>In order to draw accurate conclusions from the analysis, large amounts of data are needed (and there&rsquo;s no such thing as too much data).</p>
+
+<p>I decided to analyze the Facebook Pages of 3 extremely popular News sources: <a href="https://www.facebook.com/cnn">CNN</a>, the <a href="https://www.facebook.com/nytimes">New York Times</a>, and <a href="https://www.facebook.com/bbcworldnews">BBC World News</a>. All three Pages have millions of fans, post the same types of Facebook statuses, and post statuses extremely frequently to Facebook (around 8-9 times a day). The statuses analyzed will be from June 1st 2012 to June 1st 2013, in order to both gather a large sample size (~3,000  statuses from each Page) and a ensure a consistent apples-to-apples comparison between the three sources.</p>
+
+<p>The raw data, code, and a detailed technical explanation of the statistical techniques used to process the data can be found in <a href="https://github.com/minimaxir/facebook-keyword-regression-analysis">this GitHub repository</a>. (tl;dr, it&rsquo;s an optimized <a href="http://en.wikipedia.org/wiki/Least_squares">least squares</a> regression)</p>
+
+<p><em>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</em> We&rsquo;re ready to test this hypothesis.</p>
+
+<hr />
+
+<h1>CNN</h1>
+
+<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/cnn_Wordcloud.png"></p>
+
+<pre><code>                +Likes          P-Val
+Bourdain        1962.98         0
+NEWS            1272.64         0
+Photo           1154.6          0
+Barack          1002.45         0
+City            851.82          0
+Monday          705.42          0
+Obama           632.2           0
+United          578.77          0
+Mitt            562.29          0.01
+South           508.43          0.03
+America         505.83          0.01
+Watch           470.51          0
+Boston          398.13          0.05
+New             326.74          0.03
+ET              -433.96         0
+North           -467.05         0.02
+Check           -503.5          0
+Travel          -988.99         0.02
+</code></pre>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>The most impactful keywords for CNN are political keywords.</li>
+<li><strong>NEWS</strong> (&ldquo;BREAKING NEWS&rdquo;) predicts more Likes than <strong>Photo</strong> (i.e. <a href="http://www.facebook.com/5550296508/posts/10151626042186509">Travel Photo of the Day</a>).</li>
+<li><strong>Bourdain</strong> refers to Anthony Bourdain, who very recently began <a href="http://en.wikipedia.org/wiki/Anthony_Bourdain:_Parts_Unknown">a food and travel show</a> on CNN. I assume that targets CNN&rsquo;s primary demographic.</li>
+<li>The presence of <strong>Barack</strong> (Barack Obama) predicts more likes than just <strong>Obama</strong>.</li>
+<li>The presence of <strong>Monday</strong> predicts more likes most other keywords. Garfield would be disappointed.</li>
+<li>The presence of <strong>North</strong> (North Korea) predicts a <em>decrease</em> in Likes from the average. Is North Korea boring?</li>
+<li>The presence of <strong>Check</strong> (&ldquo;Check this out!&rdquo;) also predicts a decrease in Likes from the average. This is interesting because this call-to-action is usually associated with the other keywords. Perhaps it&rsquo;s not necessary?</li>
+</ul>
+
+
+<hr />
+
+<h1>NYTimes</h1>
+
+<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/nytimes_Wordcloud.png"></p>
+
+<pre><code>                +Likes          P-Val
+Mills           1022.9          0
+Democratic      496.32          0
+Krugman         456.31          0
+Senate          431.05          0
+London          373.67          0.01
+Oscar           367.64          0.01
+Sandy           364.61          0
+Olympics        339.15          0.01
+Sunday          317             0
+Clinton         314.64          0.02
+You             247.07          0
+Obama           237.98          0
+Opinion         221             0
+Michael         204.2           0.03
+Credit          191.92          0.05
+Tuesday         187.22          0.03
+Times           178.69          0
+See             160.12          0.01
+Romney          157.66          0.04
+Ed              140.86          0.01
+Read            -101.23         0.05
+Here            -182.72         0.04
+Facebook        -187.75         0.02
+Are             -216.3          0.01
+While           -293.77         0.04
+Quotation       -322.29         0.02
+House           -362.1          0.01
+Thanksgiving    -369.88         0.05
+Convention      -448.34         0.01
+Jersey          -505.98         0
+</code></pre>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>The most impactful keywords for NYTimes are political keywords and current events, such as Hurricane <strong>Sandy</strong> and the <strong>London</strong> <strong>Olympics</strong>.</li>
+<li><strong>Mills</strong> refers to Doug Mills, <a href="http://www.facebook.com/5281959998/posts/10150252479219999">photographer</a> for the New York Times. The power of photos!</li>
+<li><strong>You</strong> and <strong>See</strong> are impactful call-to-action keywords, even though they don&rsquo;t ask any questions. (Interestingly, <strong>Are</strong>, which implicitly asks a question, predicts a decrease in Likes. Maybe people don&rsquo;t Like questions?)</li>
+<li><strong>Clinton</strong> has a bigger impact than <strong>Obama</strong>.</li>
+<li>No one likes <strong>Jersey</strong>.</li>
+</ul>
+
+
+<hr />
+
+<h1>BBC World News</h1>
+
+<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/bbcworldnews_Wordcloud.png"></p>
+
+<pre><code>                +Likes          P-Val
+Malala          488.1           0
+Japan           186.32          0
+Britain         167.25          0.01
+That            155.01          0.01
+AFP             154.97          0.02
+Travel          153.41          0
+Now             148.39          0.02
+Would           146.45          0.03
+Delhi           137.85          0.04
+Let             134.93          0.03
+Future          127.49          0.02
+Barack          125.79          0.02
+An              122.18          0.03
+David           111.78          0.04
+Do              111.13          0
+Israel          101.31          0.04
+Impact          87.94           0.05
+South           78.62           0.03
+It              62.7            0.01
+The             55.7            0
+US              -47.84          0.02
+On              -86.22          0.04
+BBC             -103.58         0
+Sunday          -117.01         0.03
+After           -122.38         0.05
+Thursday        -143.91         0.03
+Twitter         -144.55         0
+City            -147.16         0.02
+Hi              -149.85         0.03
+BBCNewsUS       -150.48         0.03
+House           -176.86         0.01
+California      -187.57         0
+</code></pre>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>The most impactful keywords for BBC World News are keywords describing news around the world. Unlike CNN and NYTimes, there are very few impactful keywords related to domestic politics (such as Prime Minister <strong>David</strong> Cameron, and even <strong>Barack</strong> is more impactful than him.)</li>
+<li><strong>Malala</strong> refers to <a href="http://en.wikipedia.org/wiki/Malala_Yousafzai">Malala Youdsfzai</a>, a Pakistani activist who survived an assassination attempt.</li>
+<li>Implicit question keywords such as <strong>Let</strong>, <strong>Do</strong>, and <strong>Would</strong> are all very effective.</li>
+<li>The simple salutation of <strong>Hi</strong> predicts a decrease in Likes. There&rsquo;s a British joke here somewhere.</li>
+</ul>
+
+
+<hr />
+
+<p>The language used in Facebook Statuses can be very useful in identifying what words Fans like, and what words will be most useful in generating the most exposure. While my analysis can&rsquo;t predict the <em>exact</em> number of Likes a Status receives, and I likely <a href="http://xkcd.com/882/">broke a few rules of statistics</a> in the process of making this post, the impact of language and specific keywords on social media interaction is an endeavor worth pursuing.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Facebook Hashtags Are Fundamentally Broken]]></title>
@@ -605,47 +782,6 @@ The missing amount, divided by 2:   2,147,483,648 gold
 <p>I&rsquo;m sure the lost Likes/Comments temporary, but this is an error of incredible magnitude, especially given on how many sites rely on Facebook&rsquo;s data.</p>
 
 <p>Because comments here may be broken, you can comment on the <a href="https://news.ycombinator.com/item?id=5439712">Hacker News thread</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM]]></title>
-    <link href="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
-    <updated>2013-03-24T21:44:00-07:00</updated>
-    <id>http://minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
-    <content type="html"><![CDATA[<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Syo5sI-iOgY "></iframe></div>
-
-
-<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
-
-<p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
-
-<!-- more -->
-
-
-<p>So, what the heck is happening in this speedrun? curtmack on Reddit <a href="http://www.reddit.com/r/Games/comments/1aldvz/major_glitch_discovered_in_luigis_mansion_that/c8yk3g3">explains it succinctly</a>:</p>
-
-<blockquote><p>So, for those who are wondering just what the f- happened&hellip; there&rsquo;s a glitch that&rsquo;s been known for a while, where Yoshi can end up in the &ldquo;I have an item in my mouth&rdquo; state, but not actually have an item in his mouth. When he spits out this nothingness, the game crashes. That&rsquo;s all we knew about the glitch&hellip; until recently.</p>
-
-<p>Somebody decided to take a debugging emulator and step through the crash. He discovered that the crash occurred because the game tried to jump to a specific address in memory, and execute code there. That address did not contain code, and so the system crashed.</p>
-
-<p>But wait a second. What if, by some sheer coincidence, that address <em>did</em> contain code? The specific address dropped him in somewhere amongst various data for the game&rsquo;s internal random number generator, and the random number generator can be manipulated in a TAS. Could the game be coerced into running arbitrary code?</p>
-
-<p>Well, as it turns out, it&rsquo;s extremely limited. You have the RNG state and a few sprite positions that can be manipulated, but after that is some internal game stuff that can&rsquo;t be. So the length of the &ldquo;program&rdquo; is extremely limited, but as it turns out, it&rsquo;s just long enough to send the signal to the game to switch to the &ldquo;The End&rdquo; screen.</p>
-
-<p>There&rsquo;s a related glitch where you can spawn a bouncing fish by doing certain odd things as you spit out an item as Yoshi, and every time a fish bounces, it uses up a randomly-generated number (since it bounces in a random direction). So, putting it all together, you have to spawn a billion fish and have them all bounce a f-jillion times to get the RNG in just the right spot, leave the area, and then fiddle around with some objects to get the last few bits you need in the right place, all while setting up the original spit-nothing glitch in the first place.</p></blockquote>
-
-<p>Crazy, isn&rsquo;t it?</p>
-
-<h2>I Call Hax!</h2>
-
-<p>This <a href="http://tasvideos.org/1945M.html">SMW TAS</a>, posted in 2011, was so crazy that it inspired the creation of a new category of speed runs: &ldquo;Corrupts Memory.&rdquo; The <a href="http://tasvideos.org/forum/viewtopic.php?t=12215">discussion on the speed run</a> provides a technical explanation of of the glitch, which started a debate: &ldquo;does this <em>count</em> as a speed run?&rdquo; (96% of voters said yes.)</p>
-
-<p><img src="http://minimaxir.com/img/smw.png"></p>
-
-<p>To be fair, this is far from the first time where manipulated RAM has been used to complete a game. The classic Nintendo 64 title Legend of Zelda: Ocarina of Time has the infamous <a href="http://zeldaspeedruns.com/oot/ba/reverse-bottle-adventure">Reverse Bottle glitch</a> that allows players to transform items into others, and a <a href="http://youtu.be/PaUCFrW_mEE?t=13m44s">memory glitch</a> that teleports you from the first dungeon to the final cutscene, In <em>Pokemon</em> on the GameBoy, players discovered how to reprogram the game to <a href="http://tasvideos.org/forum/viewtopic.php?p=332488&amp;sid=1d8670bd80327418d202b6608e5cd2a9#332488">run arbitrary code</a>, but many gamers may remember the classic <a href="http://bulbapedia.bulbagarden.net/wiki/Missingno.">Missingno glitch</a>, which was very easy to reproduce on an actual console and provided many beneficial effects.</p>
-
-<p>Still, it&rsquo;s not every day that spawning a ton of fishes out of mid-air = victory.</p>
 ]]></content>
   </entry>
   
