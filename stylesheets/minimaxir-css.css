@@ -273,12 +273,16 @@ margin-right: 30px !important;
 	text-align: center;
 	}
 	
+	h1.link {
+	font-size: 34px;
+	}
+	
 	.span2 {
 	border-bottom: 2px solid #ededed;
 	}
 	
 	.jumbotron {
-	font-size: 36px;
+	font-size: 40px;
 	line-height: 50px;
 }
 
