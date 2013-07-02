@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Blogging | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//blogging/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-06-22T09:51:34-07:00</updated>
+  <updated>2013-07-02T07:56:01-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Statistical Analysis of Medium.com Submissions to Hacker News]]></title>
+    <link href="http://minimaxir.com/2013/07/medium-normal/"/>
+    <updated>2013-07-02T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/07/medium-normal</id>
+    <content type="html"><![CDATA[<p><a href="https://medium.com/">Medium</a>, a relatively new startup by Twitter cofounder Evan Williams, is a blog network that emphasizes simplicity and quality above everything else. Writers on the invite-only platform typically post stories about deeply personal topics, such as fighting adversity, never giving up your dreams, changing flawed systems, and other things that make the readers feel happy. One of my favorite articles on Medium, <a href="https://medium.com/editors-picks/57a0128b53c9">Choosing Minecraft Over Disney</a>, describe how a parent&rsquo;s children chose technology over television.</p>
+
+<p>As of recently, the frequency of links to Medium posts on the popular tech-oriented link aggregator <a href="https://news.ycombinator.com/news">Hacker News</a> has been increasing at an alarming rate. Since Medium&rsquo;s tales of triumph appeal to the ambitious entrepreneurs and startup founders of HN, the submissions are usually rapidly upvoted and easily make the front page, with  muted text helpfully noting that the link goes to medium.com. As a result, there has been <a href="https://news.ycombinator.com/item?id=5968593">cognitive</a> <a href="https://news.ycombinator.com/item?id=5974209">dissonance</a> on Hacker News whether Medium has too strong a presence on the aggregator, or worse,  potentially gaming the system.</p>
+
+<p>Using the <a href="https://www.hnsearch.com/api">HNSearch API</a>, I analyzed the submissions of links under the medium.com domain to Hacker News to see just how Medium keeps surging in popularity. The results, as always, are very revealing.</p>
+
+<!-- more -->
+
+
+<p>The collected data is a sample of 1,000 links (out of 1,355 total) submitted to Hacker News under the medium.com domain.  Each data point contains the Title of the article, the HN user who submitted it, the amount of upvotes it received, the time it was posted (in PST), and links to both the article and the HN comments thread for reference. You can view the <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddDBPNFlMQUYyX1FhUkVVY2g1TmVLM1E&amp;usp=sharing">data on Google Drive</a>, or download <a href="https://www.dropbox.com/s/xnktwi9kheyqf6v/medium.csv">the raw CSV</a> and play with the data yourself.</p>
+
+<p>What does the data tell us about Medium?</p>
+
+<hr />
+
+<h1>How quickly has medium.com grown in popularity in the past few months?</h1>
+
+<p><img src="/img/medium-month.png"></p>
+
+<p>Medium was launched <a href="http://techcrunch.com/2012/08/01/medium-obvious/">in August 2012</a>, and received relatively little attention as evidenced by the graph. But 8 months later, the frequency of medium.com submissions hockey-sticked, receiving almost 5x growth from March 2013 to April 2013. That certainly explains one of the reasons why the rise in medium.com links is just being noticed now.</p>
+
+<hr />
+
+<h1>When are medium.com posts being written and submitted to HN?</h1>
+
+<p><img src="/img/medium-by-hour.png"></p>
+
+<p>The time of day a blog post is submitted makes all the difference in the world, especially if your blog platform targets readers in a specific region. Medium links are frequently posted and submitted around 10am PST / 1pm EST, which is smart as it&rsquo;s relatively early in the day for those living in the United States, and your potential readers would be more likely to read your post, and HN users are more likely to upvote.</p>
+
+<hr />
+
+<h1>Who are the Hacker News users who most frequently submit medium.com articles?</h1>
+
+<p><img src="/img/medium-top-submitters.png"></p>
+
+<p>Of the 1,000 submissions, there were only 622 unique submitters of medium.com links, each submitting an average of 1.61 posts. Most only post their own articles, but others, like <a href="https://news.ycombinator.com/submitted?id=rpsubhub">rpsubhub</a>, <a href="https://news.ycombinator.com/submitted?id=mrbird">mrbird</a>, and <a href="https://news.ycombinator.com/submitted?id=nvk">nvk</a> submit Medium.com links more often. However, none of those users appear to be associated with Medium; they just submit links rather frequently.</p>
+
+<hr />
+
+<h1>What are the types of articles on medium.com submitted to Hacker News?</h1>
+
+<p><img src="/img/medium-wordcloud.png"></p>
+
+<p>Medium&rsquo;s category system is somewhat obtuse, so I parsed the keywords from the titles of the submissions (using a method similar to <a href="http://minimaxir.com/2013/06/big-social-data/">my last post</a>) in order to get an idea what type of content is submitted most from Medium. There are lots of posts that ask rhetorical questions (<strong>What?</strong>, <strong>How?</strong>, <strong>Why?</strong>), and even more posts about the personal self with <strong>I</strong>. Not only is Medium using the right language to facilitate interaction, it&rsquo;s also hitting the interests of HNers with keywords such as <strong>Design</strong> and <strong>Facebook</strong>.</p>
+
+<hr />
+
+<h1>How successful <em>are</em> medium.com articles on Hacker News?</h1>
+
+<p><img src="/img/medium-front-page.png"></p>
+
+<p>Out of the 1,000 submissions, only 158 had atleast 10 upvotes, which is enough to get the link to the front page, but not necessarily enough to keep it there. The graph is heavily right-skewed, with only 38 submissions getting above 100 points. It shows that medium.com links so not guarantee success, and even if you hit the front page, you have a low chance of hitting the coveted #1 ranking.</p>
+
+<hr />
+
+<p>Medium is definitely growing. HN is receiving more and more submissions which appeal to the average HN user, and posts are being submitted at all hours of the day. However, having a post at medium.com is not a panacea that will make your blog post be seen by thousands of people; you still need to write something interesting.</p>
+
+<p>Time will tell. But if HN does indeed get bored of Medium, I believe the problem will correct itself.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Blog Comment System That Steals Comments From Facebook]]></title>

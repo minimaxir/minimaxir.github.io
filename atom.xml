@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-06-22T09:51:34-07:00</updated>
+  <updated>2013-07-02T07:56:01-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Statistical Analysis of Medium.com Submissions to Hacker News]]></title>
+    <link href="http://minimaxir.com/2013/07/medium-normal/"/>
+    <updated>2013-07-02T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/07/medium-normal</id>
+    <content type="html"><![CDATA[<p><a href="https://medium.com/">Medium</a>, a relatively new startup by Twitter cofounder Evan Williams, is a blog network that emphasizes simplicity and quality above everything else. Writers on the invite-only platform typically post stories about deeply personal topics, such as fighting adversity, never giving up your dreams, changing flawed systems, and other things that make the readers feel happy. One of my favorite articles on Medium, <a href="https://medium.com/editors-picks/57a0128b53c9">Choosing Minecraft Over Disney</a>, describe how a parent&rsquo;s children chose technology over television.</p>
+
+<p>As of recently, the frequency of links to Medium posts on the popular tech-oriented link aggregator <a href="https://news.ycombinator.com/news">Hacker News</a> has been increasing at an alarming rate. Since Medium&rsquo;s tales of triumph appeal to the ambitious entrepreneurs and startup founders of HN, the submissions are usually rapidly upvoted and easily make the front page, with  muted text helpfully noting that the link goes to medium.com. As a result, there has been <a href="https://news.ycombinator.com/item?id=5968593">cognitive</a> <a href="https://news.ycombinator.com/item?id=5974209">dissonance</a> on Hacker News whether Medium has too strong a presence on the aggregator, or worse,  potentially gaming the system.</p>
+
+<p>Using the <a href="https://www.hnsearch.com/api">HNSearch API</a>, I analyzed the submissions of links under the medium.com domain to Hacker News to see just how Medium keeps surging in popularity. The results, as always, are very revealing.</p>
+
+<!-- more -->
+
+
+<p>The collected data is a sample of 1,000 links (out of 1,355 total) submitted to Hacker News under the medium.com domain.  Each data point contains the Title of the article, the HN user who submitted it, the amount of upvotes it received, the time it was posted (in PST), and links to both the article and the HN comments thread for reference. You can view the <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddDBPNFlMQUYyX1FhUkVVY2g1TmVLM1E&amp;usp=sharing">data on Google Drive</a>, or download <a href="https://www.dropbox.com/s/xnktwi9kheyqf6v/medium.csv">the raw CSV</a> and play with the data yourself.</p>
+
+<p>What does the data tell us about Medium?</p>
+
+<hr />
+
+<h1>How quickly has medium.com grown in popularity in the past few months?</h1>
+
+<p><img src="http://minimaxir.com/img/medium-month.png"></p>
+
+<p>Medium was launched <a href="http://techcrunch.com/2012/08/01/medium-obvious/">in August 2012</a>, and received relatively little attention as evidenced by the graph. But 8 months later, the frequency of medium.com submissions hockey-sticked, receiving almost 5x growth from March 2013 to April 2013. That certainly explains one of the reasons why the rise in medium.com links is just being noticed now.</p>
+
+<hr />
+
+<h1>When are medium.com posts being written and submitted to HN?</h1>
+
+<p><img src="http://minimaxir.com/img/medium-by-hour.png"></p>
+
+<p>The time of day a blog post is submitted makes all the difference in the world, especially if your blog platform targets readers in a specific region. Medium links are frequently posted and submitted around 10am PST / 1pm EST, which is smart as it&rsquo;s relatively early in the day for those living in the United States, and your potential readers would be more likely to read your post, and HN users are more likely to upvote.</p>
+
+<hr />
+
+<h1>Who are the Hacker News users who most frequently submit medium.com articles?</h1>
+
+<p><img src="http://minimaxir.com/img/medium-top-submitters.png"></p>
+
+<p>Of the 1,000 submissions, there were only 622 unique submitters of medium.com links, each submitting an average of 1.61 posts. Most only post their own articles, but others, like <a href="https://news.ycombinator.com/submitted?id=rpsubhub">rpsubhub</a>, <a href="https://news.ycombinator.com/submitted?id=mrbird">mrbird</a>, and <a href="https://news.ycombinator.com/submitted?id=nvk">nvk</a> submit Medium.com links more often. However, none of those users appear to be associated with Medium; they just submit links rather frequently.</p>
+
+<hr />
+
+<h1>What are the types of articles on medium.com submitted to Hacker News?</h1>
+
+<p><img src="http://minimaxir.com/img/medium-wordcloud.png"></p>
+
+<p>Medium&rsquo;s category system is somewhat obtuse, so I parsed the keywords from the titles of the submissions (using a method similar to <a href="http://minimaxir.com/2013/06/big-social-data/">my last post</a>) in order to get an idea what type of content is submitted most from Medium. There are lots of posts that ask rhetorical questions (<strong>What?</strong>, <strong>How?</strong>, <strong>Why?</strong>), and even more posts about the personal self with <strong>I</strong>. Not only is Medium using the right language to facilitate interaction, it&rsquo;s also hitting the interests of HNers with keywords such as <strong>Design</strong> and <strong>Facebook</strong>.</p>
+
+<hr />
+
+<h1>How successful <em>are</em> medium.com articles on Hacker News?</h1>
+
+<p><img src="http://minimaxir.com/img/medium-front-page.png"></p>
+
+<p>Out of the 1,000 submissions, only 158 had atleast 10 upvotes, which is enough to get the link to the front page, but not necessarily enough to keep it there. The graph is heavily right-skewed, with only 38 submissions getting above 100 points. It shows that medium.com links so not guarantee success, and even if you hit the front page, you have a low chance of hitting the coveted #1 ranking.</p>
+
+<hr />
+
+<p>Medium is definitely growing. HN is receiving more and more submissions which appeal to the average HN user, and posts are being submitted at all hours of the day. However, having a post at medium.com is not a panacea that will make your blog post be seen by thousands of people; you still need to write something interesting.</p>
+
+<p>Time will tell. But if HN does indeed get bored of Medium, I believe the problem will correct itself.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis]]></title>
@@ -1407,62 +1473,6 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 <p><img src="http://minimaxir.com/img/tc-graph.png" alt="14" /></p>
 
 <p>Yep. Not too surprising. It&rsquo;s why Facebook bought Instagram! (although I&rsquo;m curious what happened in April&hellip;)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Google Drive, And Why Dropbox Really Is In Trouble]]></title>
-    <link href="http://minimaxir.com/2012/04/drivebox/"/>
-    <updated>2012-04-25T21:16:00-07:00</updated>
-    <id>http://minimaxir.com/2012/04/drivebox</id>
-    <content type="html"><![CDATA[<p>Despite spending a lot of time talking about startups (and commenting about them on <a href="http://techcrunch.com/">TechCrunch</a>), there are very few which I actually use on a daily basis. I don&rsquo;t use a service because it&rsquo;s popular or the <strong>NEXT BIG THING</strong>, but because it&rsquo;s worthwhile use of my time and energy. (the correlation between startup popularity and worthwhileness is, unfortunately, not always strong). As a business major, I&rsquo;m prone toward productivity applications which help save time that would otherwise be wasted, allowing me to spend my time elsewhere doing much more important tasks, such as the aforementioned commenting on TechCrunch.</p>
-
-<p>The one app I&rsquo;ve used throughout my college years has been Dropbox. As an early adopter way back in 2008, I thought that Dropbox was a clever scam, because it was too good to be true. &ldquo;2 gigabytes of data, that I can access on any computer without needing a $30 flash drive or e-mailing myself constantly? I won&rsquo;t have to fumble around with hardware that I&rsquo;ll probably lose or fill up valuable inbox space! <strong>And</strong> I can access my files remotely with my iPhone 3G?! Awesome!&rdquo; And thus I began to love Dropbox, and have used it extremely frequently for the past four years. I have never tried any alternatives: <a href="http://box.com/">Box.net </a>and <a href="https://www.sugarsync.com/">Sugarsync</a> were nowhere as seamless. And throughout those four years, no real competitors arose&hellip;</p>
-
-<p>&hellip;until Tuesday, when Microsoft released Windows Skydrive, and Wednesday, when Google released Google Drive, both of which <a href="http://www.engadget.com/2012/04/24/google-drive-vs-the-competition-dropbox-skydrive-icloud/">offer very similar functionality to Dropbox</a>. Both of them offer &ldquo;a folder that sync everywhere&rdquo;, a considerable amount of free storage by default (more than Dropbox), and, more importantly, both are services which are typically used by people who may not necessarily be technical. Microsoft will <a href="http://techcrunch.com/2012/02/29/windows-8-the-road-ahead/">tightly integrate SkyDrive into Windows 8</a>, which will introduce the magic of one-folder-sync to every customer who buys a new computer in the next few years, and Google <a href="http://thenextweb.com/google/2012/04/24/google-drive-is-live-and-available-right-now-but-its-no-dropbox-killer/">automatically converted</a> the popular Google Documents feature into Google Drive, which <em>automatically</em> established an equally-large customer base, and Google will likely leverage their extensive marketing budget to further captivate potential users. The average person has heard of Microsoft and Google and trust them: conversely, they likely have never heard of Dropbox. Why would a typical internet user ever use Dropbox now?</p>
-
-<!-- more -->
-
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/04/Photo-Apr-25-11-28-57-AM.png?resize=300%2C300" title="Dropbox" alt="A t-shirt I obtained from Dropbox during an on-campus visit. But now...?" /></p>
-
-<p>There&rsquo;s <a href="http://www.quora.com/Google-Drive/Will-Google-Drive-kill-Dropbox">a lot of speculation</a> that Google Drive, at the least, will kill Dropbox. Although &ldquo;kill&rdquo; may be overdramatic, the rise of new competitors will stunt Dropbox&rsquo;s growth, which is a death sentence in the startup industry.</p>
-
-<h2>Will Existing Dropbox Users Switch?</h2>
-
-<p>We&rsquo;ve already established that non-Dropbox users will be more inclined to use the more &ldquo;mainstream&rdquo; Google Drive. But what about existing users of Dropbox? Would they be inclined to switch? The answer, which should greatly concern Dropbox, is <em>possibly.</em></p>
-
-<p>I have <a href="http://minimaxir.com/2011/12/startup-checklist/">talked before</a> about network effects, and how they can drive the growth of a startup by encouraging users to invite their friends to the service, which adds more users and increases potential revenue. Dropbox actually pioneered an innovative way to utilize network effects by using a referral system with a very <em>substantial reward</em>: a 250MB increase in storage space for free can contain a surprising amount of files, and has encouraged <em>organic</em> promotion of referral links relentlessly in blog comments. Another aspect of network effects, if done properly, is that it builds switching cost: if a user switches to another service, they lose the social graph created in the original service.</p>
-
-<p>Dropbox has no such switching cost. You want to move from Dropbox to Google Drive? Just <em>copy and paste all your files from your Dropbox folder to your Google Drive folder</em>.</p>
-
-<p>The aforementioned storage space increase is not tied to the number of the users on the service. The only interaction that the user might lose from switching are his or her Shared Folders with other users, which synchronizes files between users automatically. While an impressive feature (I use it to share 100%2BMB files that would normally break e-mail clients), it&rsquo;s a narrow, less popular use-case than &ldquo;a folder that syncs everywhere&rdquo;.</p>
-
-<p>I&rsquo;m a free user on Dropbox; if I moved all my files to Google Drive, they wouldn&rsquo;t care. But Dropbox does offer a payment plan of 100GB for $200/year, which is useful for those who wish to store music and movies in their Dropbox. However, Google Drive also offers 100GB of storage for $60/year. That&rsquo;s less than a third of the Dropbox price!</p>
-
-<p>At the moment, Dropbox doesn&rsquo;t have any features that truly differentiate it. On Monday, Dropbox announced that you can now <a href="http://blog.dropbox.com/?p=1138">share files anywhere in your Dropbox</a> with a link! But unfortunately for Dropbox since Google Drive is derived from Google Docs, all files on Google Drive have the same functionality, with even more permission control. Not to mention that Google Docs has two-factor authentication, comments on files, OCR, and image recognition. Dropbox has strong third-party support with their API since they were first&hellip;but Google Drive&rsquo;s API is <a href="https://developers.google.com/drive/">indeed strong</a>, and with App Integration in Chrome, Google could have exclusive features that not even Dropbox would replicate.</p>
-
-<p>In a simple cost-benefit analysis, the switching cost of losing your shared folders will never outweigh spending an extra $140/year. And so, paid Dropbox users will likely migrate to Google Drive, which is a serious, serious problem for a for-profit business.</p>
-
-<h2>But Wait, Google%2B Didn&rsquo;t Kill Facebook, LOL!</h2>
-
-<p>&hellip;which is irrelevant.</p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/04/quora.png?resize=575%2C186" title="The Third Most Popular Response on Quora" alt="28 upvotes?!" /></p>
-
-<p>A frequent counterpoint in the linked Quora thread against Google Drive impacting Dropbox is that Google%2B, Google&rsquo;s attempt at a social network to beat Facebook, indisputably did not succeed at achieving its goal. Since Google couldn&rsquo;t defeat Facebook, therefore Google can&rsquo;t defeat Dropbox. That conclusion fails every test of causal logic ever.</p>
-
-<p>Actually, the main reason that Google%2B failed was due to the aforementioned switching costs via network effect! Users (including me) felt no reason to lose their social graphs on Facebook to spend the time rebuilding the social graph on Google%2B. As shown earlier, Dropbox does not have that issue; switching from Dropbox to Google Drive is one CTRL%2BC, CTRL%2BV away, and at most you lose a few shared folders. The two situations aren&rsquo;t comparable.</p>
-
-<h2>What Will Dropbox Do?</h2>
-
-<p>Proving that history is indeed hilarious in hindsight (or Dropbox founder Drew Houston is psychic), on Dropbox&rsquo;s <a href="http://dl.dropbox.com/u/27532820/app.html">Y-Combinator application</a>, in response to the question &ldquo;What might go wrong?&rdquo;, he answers &ldquo;<em>Google might finally unleash GDrive and steal a lot of Dropbox&rsquo;s thunder</em>&rdquo;</p>
-
-<p>In the short term, Dropbox will definitely a) they&rsquo;ll have to ramp up development of new functionality to compete with Google Drive&rsquo;s unique functionality and b) lower prices of their paid plan. The former will be difficult, especially since both Google and Microsoft can likely replicate any new features that Dropbox implements, and the latter sends a signal to potential investors that the company&rsquo;s strategic position is weakening. It&rsquo;s a lose-lose situation.</p>
-
-<p>Meanwhile, with Google Drive, there are a ton of potential use-cases since the sharing/collaboration and preview tools from Google Docs are now integrated with all your documents on your computer as well. This is a <strong>huge</strong> productivity win. Get a file in your Gmail: Export it to Google Drive, and it&rsquo;s automatically downloaded to your computer (apparently this will be implemented soon). Have a custom made spreadsheet: upload it to Google Drive and it converts it automatically, and you can collaborate on it with peers and changes sync automatically to your computer. Once Google Drive incorporates Shared Folders, the sky&rsquo;s the limit, and even I might use Google Drive full-time.</p>
-
-<p>I&rsquo;m a huge fan of Dropbox, so I&rsquo;m sad to see it turn out this way, especially since it&rsquo;s not the company&rsquo;s direct fault. Everyone I know has a Google account, and it&rsquo;s relatively hard to get friends to switch to Dropbox: the potential install base is huge. Between that and the future integration with Windows SkyDrive and Windows 8, Dropbox will be seeing a huge hit in growth.</p>
 ]]></content>
   </entry>
   
