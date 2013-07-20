@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-07-02T07:56:01-07:00</updated>
+  <updated>2013-07-20T10:23:20-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Which Universities Produce the Most Successful Startup Founders?]]></title>
+    <link href="http://minimaxir.com/2013/07/alma-mater-data/"/>
+    <updated>2013-07-20T10:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/07/alma-mater-data</id>
+    <content type="html"><![CDATA[<p>If you read startup funding announcements on tech blogs frequently, you&rsquo;ve may have noticed that these startup founders have often attended prestigious universities. Founders who have graduated from Ivy League schools, such as Harvard, Yale and Princeton, unsurprisingly raise millions for their startups. Of course, top tier tech schools such as Stanford, MIT, and Carnegie Mellon foster a strong technical and entrepreneurial background: attributes which venture capitalists seek when investing in a startup founder. <em>(Disclosure: I&rsquo;m a Carnegie Mellon alumnus)</em></p>
+
+<p>Do the tech universities produce more funded graduates than the Ivy League universities? Do the founders from Ivy League Universities receive more funding than those from the top tier tech universities?</p>
+
+<p>Using TechCrunch&rsquo;s <a href="http://www.crunchbase.com/">CrunchBase</a> API, I obtained the data of about 2,500 startup founders in the United States who have created a startup which has received investment from venture capitalists.</p>
+
+<p>With that data, I found some rather interesting trends.</p>
+
+<!-- more -->
+
+
+<h1>Which universities produced the most amount of graduates who have received funding?</h1>
+
+<p>Thousands of university graduates attempt to make a startup, but most will not succeed. Are the graduates of some universities more frequently successful?</p>
+
+<p>Here are the Top 15 universities with the most number of successfully-funded graduates:</p>
+
+<p><img src="http://minimaxir.com/img/founder-colleges.png"></p>
+
+<p>Stanford has the most amount of funded graduates, which is unsurprising as it&rsquo;s located in the Silicon Valley heart of venture capital.</p>
+
+<p>Seven out of the eight Ivy League Universities (colored green on the chart) are present, but most of the Ivies are  in the middle of the chart. MIT and UC Berkeley each have nearly <em>double</em> the amount of successful graduates from Yale and Columbia.</p>
+
+<p>It&rsquo;s worth noting that Tel Aviv University, an Israeli university, is present on the chart.</p>
+
+<h1>Which university&rsquo;s graduates have cumulatively raised the most amount of total funding?</h1>
+
+<p>Another way to measure success is through the success of the founders&#8217; subsequent startups and the amount of venture capital they have raised.</p>
+
+<p>Here are the Top 8 universities whose graduates have received the most amount of funding:</p>
+
+<p><img src="http://minimaxir.com/img/sum-funding.png"></p>
+
+<p>Harvard and Stanford graduates are very close in terms of total funding raised. However, there&rsquo;s a clear <a href="http://en.wikipedia.org/wiki/Power_law">Power Law</a> in effect, as those two along with UC Berkeley, have  produced founders who&rsquo;ve generated much, much more venture funding than those of the other universities.</p>
+
+<h1>Which university&rsquo;s graduates raise the most amount of money in their first round of funding on average?</h1>
+
+<p>Startup founders with big, world changing ideas need lots of venture capital. Only the founders with <em>good</em> ideas will actually receive it.</p>
+
+<p>Here are the average amount of first-round funding for the top 15 universities with the most number of successfully-funded graduates:</p>
+
+<p><img src="http://minimaxir.com/img/avg-first-raised.png"></p>
+
+<p>Carnegie Mellon and Princeton, which had a relatively low number of funded founders and a relatively low number of total capital raised, instead have a <em>significantly</em> higher amount of average first funding. Tel Aviv University also placed higher than almost all US colleges. Perhaps the students from these three universities tend to have more ambitious startup ideas?</p>
+
+<p>At first glance, Stanford and Harvard appear to be the kings of startups. They have the most amount of graduates, and the most amount of total venture capital raised. The tech blogs would surely consider that a success, but could the greater funding for CMU/Princeton lead to the creation of the next billion-dollar startup? We can only wait and see.</p>
+
+<hr />
+
+<p>You are welcome to use the founder data from CrunchBase by <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddEV1LUpaQUVsdmJYcERoM0FNU3lPcVE&amp;usp=sharing">viewing the data on Google Drive</a>, or by <a href="https://www.dropbox.com/s/3jz2wsr4d6fc4t6/founders_w_college.csv">downloading the raw CSV</a>.</p>
+
+<p><em>Notes:</em></p>
+
+<ul>
+<li><em>University data was standardized to make analysis easier (e.g. for Carnegie Mellon, the founders who listed their institution as &ldquo;Carnegie Mellon University&rdquo;, &ldquo;Carnegie Mellon,&rdquo; and &ldquo;CMU,&rdquo; all had their institution changed to be &ldquo;CMU&rdquo;.)</em></li>
+<li><em>Chart #1 measures unique founders, so it does not double-count a founder who has founded more than one  funded startup.</em></li>
+<li><em>Chart #2 assumes equal contribution of each founder to the funding: if a startup has a total funding of $100,000 with 2 founders, the amount used for the chart will be $50,000 for each founder.</em></li>
+<li><em>Chart #3 ignores startup data for the chart which has a Series B, Series C, or Series D listed as their first round on CrunchBase, or if the amount raised was not provided.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of Medium.com Submissions to Hacker News]]></title>
@@ -1393,86 +1461,6 @@ Getting socially-vetted photos on your computer without any effort is a useful t
 <p><strong>** Discussion on Hacker News <a href="http://news.ycombinator.com/item?id=4652129">here</a>!</strong></p>
 
 <p><strong>*</strong>| Discussion on Reddit <a href="http://www.reddit.com/r/technology/comments/11hem0/electronic_arts_gives_away_thousands_of_free/">here</a> and <a href="http://www.reddit.com/r/Games/comments/11h9nj/electronic_arts_gives_away_thousands_of_free/">here</a>.**</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses]]></title>
-    <link href="http://minimaxir.com/2012/10/questions-equals-reponses/"/>
-    <updated>2012-10-07T21:19:00-07:00</updated>
-    <id>http://minimaxir.com/2012/10/questions-equals-reponses</id>
-    <content type="html"><![CDATA[<p>A long-standing trend in blogging is having the writer ask the readers what they think about your post and having the readers letting the writers know in the comments. Websites such as <a href="http://www.tvguide.com/">TVGuide</a> and <a href="http://mashable.com/">Mashable</a> have such requests in nearly <em>every</em> article. Reminding users to respond so frequently makes it seems insincere and deliberate, so I personally have been skeptical of the practice.</p>
-
-<p>Recently, I&rsquo;ve noticed more and more brands on their Facebook posts asking their readers for their own opinions on news. Anecdotally, I&rsquo;ve also observed that those same posts have more comments than usual. This technique <strong>must</strong> increase the social response rate, I thought, otherwise media companies wouldn&rsquo;t do it.</p>
-
-<p>Like any math nerd, I wasn&rsquo;t comfortable with simple circumstantial evidence. When I <a href="http://www.facebook.com/max.woolf/posts/10151223309670450">asked on Facebook</a> if there is any statistical data indicating that including a question to the community at the end of a blog post / Facebook post increases the response rate, TechCrunch writer and Facebook specialist Josh Constine responded and linked to<a href="http://www.facebook.com/notes/facebook-journalists/study-how-people-are-engaging-journalists-on-facebook-best-practices/245775148767840"> a Facebook report</a> stating that such posts have double the comments and significantly greater feedback.</p>
-
-<p>I decided to put that to the test. I wrote a quick script in R that parses the Facebook page of a brand and extracts the number of likes for all of their posts, the number of comments on all posts, and whether or not each post contained a question. The brand I chose for my testing is none other than <a href="http://www.techcrunch.com/">TechCrunch</a>, because <a href="http://www.facebook.com/techcrunch">its Facebook page</a>, managed by the wonderful <a href="https://twitter.com/elinblesener">Elin Blesner</a>, has large sample sizes in terms of both unique postings and response rates on each post, ensuring that the analysis of the data is statistically significant. Additionally, having a<em>nother</em> perspective on TechCrunch to comment about certainly doesn&rsquo;t hurt either.</p>
-
-<p>After collecting about 2,500 posts &ndash; 12 months of data &ndash; I analyzed the data conditional on whether or not the post was a question, among other things. The results surprised me.</p>
-
-<!-- more -->
-
-
-<p><strong>tl;dr: Asking a question to the readers in a Facebook post <em>does</em> increase the number of comments very significantly, but <em>decreases</em> the number of Likes!</strong></p>
-
-<h2>How many Comments and Likes do TechCrunch posts receive?</h2>
-
-<p>Since the data goes back a year, we can more easily detect seasonal trends in the data. First, let&rsquo;s see the real world numbers as a sanity check.</p>
-
-<p><img src="http://minimaxir.com/img/tcfb1.png" title="How many Comments and Likes do TechCrunch posts receive?" alt="It's much more than you may think." /></p>
-
-<p>The number of Likes per month appears to be positively correlated with the number of comments, which is to be expected. Some months have significantly more activity than others; September 2012 had the most because of TechCrunch Disrupt SF. (interestingly, there wasn&rsquo;t such a spike in May 2012 with Disrupt NYC) The average number of likes/comments per post per month, as opposed to the sum, is a more consistent measurement, so we will be using that going forward.</p>
-
-<h2>How many Comments and Likes do TechCrunch Facebook posts receive on average?</h2>
-
-<p><img src="http://minimaxir.com/img/tcfb2.png" title="How many Comments and Likes do TechCrunch posts receive on average?" alt="Triple-Digit Likes and double-digit Comments. Not too shabby." /></p>
-
-<p>Overall average is 162 Likes and 30 Comments per post. The average number of Likes/Comments are consistent across the past year, with growth in the last few months. Nothing too surprising here. ## Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?</p>
-
-<p>Here&rsquo;s a fun measurement I decided to analyze. TechCrunch makes postings at all hours as it&rsquo;s a globally-targeted blog, but readers in the US may be asleep at the time. This could be a possible confounding variable (social activity may be correlated with geographic location), so it&rsquo;s best to see whether or not we can rule it out.</p>
-
-<p><img src="http://minimaxir.com/img/tcfb3.png" title="Does the time of day of a Facebook posting affect the number of Likes/Comments it receives?" alt="The spike in average comments at 4AM PST / 7AM EST is interesting. European workday?" /></p>
-
-<p>As it turns out, time of day does <strong>not</strong> appear to have an effect on number of Likes/Comments received for TechCrunch!</p>
-
-<h2>How many TechCrunch Facebook posts ask a question, relative to the ones that do not?</h2>
-
-<p>Here&rsquo;s the main question that began this entire investigation. Has the TechCrunch Facebook been writing posts that ask questions more frequently?</p>
-
-<p><img src="http://minimaxir.com/img/tcfb4.png" title="How many TechCrunch Facebook posts ask a question, relative to the ones that do not?" alt="TechCrunch-themed columns!" /></p>
-
-<p>As it turns out, no, TechCrunch has asked the same proportion of questions on their Facebook page, as there is no change in trend. Overall average is 31.38% of TC&rsquo;s posts ask a question. (about a third of the posts)</p>
-
-<h2>Does including a question to the community increase the number of Likes/Comments on the post?</h2>
-
-<p>And here&rsquo;s the analysis of the main hypothesis. The results were quite surprising.</p>
-
-<p><img src="http://minimaxir.com/img/tcfb5.png" title="Does including a question to the community increase the number of Likes/Comments on the post?" alt="Now with more DROP SHADOWS!" /></p>
-
-<p>The average amount of Likes for a post that asked a question is <em>lower</em> than a post that does not! (141 Likes for post that asks question, 172 for post that does not, a 18% decrease) That&rsquo;s unexpected!</p>
-
-<p>For Comments, the average amount of Comments for a post that asked a question is significantly higher than a post that does not (45 Comments for a post that asks question, 23 comments for post that does not, a 97% increase). This is nearly double, which is what the Facebook report had stated.</p>
-
-<p>What could explain this behavior? A quick theory is that Liking and Commenting on a brand post are mutually exclusive; asking a question in the post drives the user to comment, but not to Like the post, but since the user has already acknowledged the post socially, there&rsquo;s no need for the user to Like it. This follows my personal behavior on brands; if I comment, I usually do not like the post as it seems redundant.</p>
-
-<p>Regardless, I will now admit that there are benefits to asking your users questions in your Facebook or blog posts. Although there appears to be a drop in Likes by asking users what their opinions are, the increase in comments more than counteracts it.</p>
-
-<p>This data raises an interesting dilemma: let&rsquo;s say everyone catches on and <em>most</em> of the top brands start asking their users questions. It&rsquo;ll quickly become an cliche, as it is essentially a subliminal form of the infamous Facebook News Feed spam. Would that cause brands to stop asking questions? If so, how long would it take for the brands to switch back to asking their users questions?</p>
-
-<p>Who knew that social media marketing involved game theory?</p>
-
-<p>-Max</p>
-
-<p><em>(Since all the data is public anyways, <a href="https://dl.dropbox.com/u/2017402/TechCrunch%20Facebook%20Data%20Analysis.xlsx">I am releasing my data and graphs</a> for your perusal. If you decide to use it and find something else interesting, please let me know!)</em></p>
-
-<p>EDIT: One more.</p>
-
-<h2>Do photo posts have greater response rates than posts without photos?</h2>
-
-<p><img src="http://minimaxir.com/img/tc-graph.png" alt="14" /></p>
-
-<p>Yep. Not too surprising. It&rsquo;s why Facebook bought Instagram! (although I&rsquo;m curious what happened in April&hellip;)</p>
 ]]></content>
   </entry>
   
