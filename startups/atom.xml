@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Startups | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//startups/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-07-20T10:23:20-07:00</updated>
+  <updated>2013-07-20T13:05:46-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -41,7 +41,7 @@
 
 <p>Seven out of the eight Ivy League Universities (colored green on the chart) are present, but most of the Ivies are  in the middle of the chart. MIT and UC Berkeley each have nearly <em>double</em> the amount of successful graduates from Yale and Columbia.</p>
 
-<p>It&rsquo;s worth noting that Tel Aviv University, an Israeli university, is present on the chart.</p>
+<p>It&rsquo;s worth noting that Tel Aviv University, an Israeli university, ties Duke University at 21 and unfortunately just missed making the chart.</p>
 
 <h1>Which university&rsquo;s graduates have cumulatively raised the most amount of total funding?</h1>
 
@@ -61,9 +61,11 @@
 
 <p><img src="/img/avg-first-raised.png"></p>
 
-<p>Carnegie Mellon and Princeton, which had a relatively low number of funded founders and a relatively low number of total capital raised, instead have a <em>significantly</em> higher amount of average first funding. Tel Aviv University also placed higher than almost all US colleges. Perhaps the students from these three universities tend to have more ambitious startup ideas?</p>
+<p>Carnegie Mellon and Princeton, which had a relatively low number of funded founders and a relatively low number of total capital raised, instead have a <em>significantly</em> higher amount of average first funding. UCLA also placed. Perhaps the students from these three universities tend to have more ambitious startup ideas?</p>
 
 <p>At first glance, Stanford and Harvard appear to be the kings of startups. They have the most amount of graduates, and the most amount of total venture capital raised. The tech blogs would surely consider that a success, but could the greater funding for CMU/Princeton lead to the creation of the next billion-dollar startup? We can only wait and see.</p>
+
+<p><em>UPDATE: As pointed out by robotcookies on the <a href="https://news.ycombinator.com/item?id=6075862">corresponding Hacker News thread</a>, I missed UCLA in the first draft, which had 29 funded graduates. The charts have been updated.</em></p>
 
 <hr />
 
