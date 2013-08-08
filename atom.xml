@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-07-20T13:22:55-07:00</updated>
+  <updated>2013-08-08T00:29:33-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -1139,7 +1139,7 @@ background-attachment: fixed !important;
 
 <h2>Really Simple Syndication is&hellip;Really Simple?</h2>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditrss2.png?resize=304%2C242" alt="redditrss2" /></p>
+<p><img src="http://minimaxir.com/img/redditrss2.png"></p>
 
 <p>IFTTT allows users to extract information from RSS feeds, which one might typically be used to read blogs and news articles. The RSS feed typically provides the title, author, date, and content of a post: the important things. However, RSS has more applications: it can distribute other data, such as weather and desktop wallpapers. IFTTT allows other apps to load image and audio files from an RSS feed, but only if the RSS feed link links to the content itself.</p>
 
@@ -1149,8 +1149,9 @@ background-attachment: fixed !important;
 
 <p>Here is <a href="http://bit.ly/W1ypdf">my variation of his Reddit Pipe</a>. My script to process the API has a few changes (such as using Reddit&rsquo;s &ldquo;hot&rdquo; posts, instead of the top posts; hot posts update much more frequently). Testing it with r/aww and a threshold of 50 karma, I received 177 very cute pictures on my computer in a week.</p>
 
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditcute.png?resize=625%2C382" alt="redditcute" /><br/>
-From that Pipe, you can get the data in a RSS feed URL. Right-click and copy that feed URL into a IFTTT recipe as the source. For the action, use the **** variable to retrieve the image URL.</p>
+<p><img src="http://minimaxir.com/img/redditcute.png"></p>
+
+<p>From that Pipe, you can get the data in a RSS feed URL. Right-click and copy that feed URL into a IFTTT recipe as the source. For the action, use the **** variable to retrieve the image URL.</p>
 
 <h2>With Great Power Comes Great Cuteness</h2>
 
@@ -1165,7 +1166,7 @@ From that Pipe, you can get the data in a RSS feed URL. Right-click and copy tha
 </ul>
 
 
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditnega.png?resize=625%2C418" alt="redditnega" /></p>
+<p><img src="http://minimaxir.com/img/redditnega.png"></p>
 
 <h2>Caveats</h2>
 
@@ -1173,8 +1174,9 @@ From that Pipe, you can get the data in a RSS feed URL. Right-click and copy tha
 
 <p>Also, there&rsquo;s no rate limiting on when recipes are triggered and images are posted/downloaded. You can trigger multiple images simultaneously, which may be considered spammy if you are posting to social media. In that case, increase the karma threshold to reduce the frequency of the postings and to maintain a high quality of the images.</p>
 
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2013/01/redditifttt.png?resize=625%2C239" alt="redditifttt" /><br/>
-Getting socially-vetted photos on your computer without any effort is a useful timesaver. A solution to a first world problem, perhaps, but it&rsquo;s the little things that count!</p>
+<p><img src="http://minimaxir.com/img/iftttrecipe.png"></p>
+
+<p>Getting socially-vetted photos on your computer without any effort is a useful timesaver. A solution to a first world problem, perhaps, but it&rsquo;s the little things that count!</p>
 ]]></content>
   </entry>
   
