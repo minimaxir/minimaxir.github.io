@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-08-08T00:29:33-07:00</updated>
+  <updated>2013-09-29T10:33:07-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube]]></title>
+    <link href="http://minimaxir.com/2013/09/reddit-imgur-youtube/"/>
+    <updated>2013-09-29T10:30:00-07:00</updated>
+    <id>http://minimaxir.com/2013/09/reddit-imgur-youtube</id>
+    <content type="html"><![CDATA[<p>If you&rsquo;ve been on <a href="http://www.reddit.com/">Reddit</a>, you may have noticed that many link submissions go to &ldquo;imgur.com&rdquo;. <a href="http://imgur.com/">Imgur</a>, an image hosting service that launched on Reddit a few years ago and has seen outstanding growth ever since, even <a href="http://venturebeat.com/2013/09/26/imgur-traffic-milestone-100m-uniques/">surpassing Reddit itself</a>.</p>
+
+<p>But how many of Reddit&rsquo;s many, many links are actually links to Imgur? As it turns out, Imgur, along with YouTube, account for <em>32%</em> of the links submitted to Reddit.</p>
+
+<p>Using Reddit&rsquo;s API, I have downloaded about 5 million link submissions from Reddit, accounting for nearly two months of activity from July 22nd to September 26th. I complied a list of the most-frequent link destination domains for the links submitted anywhere on Reddit. The results were interesting.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/links722_926.png"></p>
+
+<p>The imgur domains (i.imgur.com and imgur.com) account for <strong>23.7%</strong> of all links submitted to Reddit, and the YouTube domains (youtube.com and youtu.be) account for <strong>8.2%</strong> of all links.</p>
+
+<p>Two websites account for <strong>32%</strong> of all links submitted to Reddit (i.e. 1 in every 3 submitted links go to Imgur or YouTube), and no other website is remotely close. Not the meme sites, not the music sites, not the news sites, not the <em>porn</em> sites: Reddit is images and video.</p>
+
+<p>But <em>where</em> on Reddit are the Imgur and YouTube links most prominent?</p>
+
+<p>Here&rsquo;s a chart of the top subreddits, by percentage of all  Imgur links submitted on Reddit:</p>
+
+<p><img src="/img/imgur722_926.png"></p>
+
+<p>It&rsquo;s interesting to note how the <em>funny</em> subreddit has more Imgur links than the <em>pics</em> subreddit.</p>
+
+<p>For YouTube, and the percentage of all YouTube links submitted on Reddit by subreddit:</p>
+
+<p><img src="/img/youtube722_926.png"></p>
+
+<p><em>Videos</em> wins as you might expect, but <em>Music</em> is in second place. Along with <em>listentothis</em>,
+<em>Metal</em>, and <em>hiphopheads</em>, YouTube is the de facto website for <em>music</em> as well as video. Gaming is also  very popular with YouTube links, with <em>gaming</em>, <em>leagueoflegends</em>, and <em>Minecraft</em>.</p>
+
+<p>Images and video are the backbone of Reddit, and both Imgur and YouTube are the primary sources. Although, there appears to be a nontrivial demand for pure music websites such as <a href="https://soundcloud.com/">SoundCloud</a> and gaming video websites such as <a href="http://www.twitch.tv/">Twitch.tv</a> &hellip;could there be another big success story in the making?</p>
+
+<hr />
+
+<p><em>The tabulated data used to create each of the three charts is located at <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGxoVGFyX19hV2paMk5lOFRvNXlkcnc&amp;usp=sharing">this Google Spreadsheet</a> for your perusal.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Which Universities Produce the Most Successful Startup Founders?]]></title>
