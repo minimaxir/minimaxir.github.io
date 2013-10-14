@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Startups | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//startups/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-09-29T10:33:07-07:00</updated>
+  <updated>2013-10-14T06:55:09-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Do startups with short names containing few vowels raise more money?]]></title>
+    <link href="http://minimaxir.com/2013/10/wrds-and-vwls/"/>
+    <updated>2013-10-14T07:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/10/wrds-and-vwls</id>
+    <content type="html"><![CDATA[<p>One reason startups use crazy and bizarre names like <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">NegaCycl</a> and <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">Filtrzzz</a> is to ensure that their name is unique, making it easier to acquire the .com domain name and Twitter handle for their startup. Another reason is to make their startup sound <em>kewl</em> and theoretically make the name more memorable in the minds of users and potential investors.</p>
+
+<p>Dakwak, Wibki, Zeef, Funifi. These aren&rsquo;t random words: these are funded startups which were featured at <a href="http://startupalley.techcrunch.com/">TechCrunch Disrupt Startup Alley 2013</a>. And then you have startups such as Lyft, SCVNGR, and Fastly, which have all raised <em>tens of millions of dollars</em> in venture capital.</p>
+
+<p>Do startups with these short, low-vowel names actually raise more money than startups with traditional names?</p>
+
+<!-- more -->
+
+
+<p>First, let&rsquo;s take a look at the association between the length of words in the English language and the number of vowels that they contain:</p>
+
+<p><img class="center" src="/img/english-words.png" width="600" height="600"></p>
+
+<p>In the English language, the majority of the words have 8 letters, with 3 of those letters being vowels. (8,3) is also the center of the density distribution for the heat map, spreading outward.</p>
+
+<p>Let&rsquo;s compare the vowel distribution of normal English words to the distribution of the names of startups that have successfully raised venture capital, in order to identify just how many funded startups have quirky names:</p>
+
+<p><img class="center" src="/img/count-startups.png" width="600" height="600"></p>
+
+<p>Wait, the two distributions are nearly identical! Both graphs are centered at about (8,3), radiating outward. This implies that the number of startups with uniquely-constructed names are outliers and not the typical names for startups.</p>
+
+<p>But that doesn&rsquo;t answer the core question: sure, fewer funded startups have weird names relative to the amount of total funded startups, but do they raise more money on average than startups with typical names?</p>
+
+<p><img class="center" src="/img/mean-startups-fund.png" width="600" height="600"></p>
+
+<p>Nope.</p>
+
+<p>There is no discernible pattern for the average amount raised, unlike with the previous two charts. For the vast majority of the possible combinations of name length and $ vowels, the range of capital raised is between $5M and $25M. There are higher values at the lower-end of the graph (low length, low vowels), but that can be attributed to the relatively low amount of startup data for those combinations to smooth out the average. (e.g. the $78M spike at 3 length, 2 vowels is due to the always-lovely <a href="http://www.crunchbase.com/company/aol">AOL</a> and a <a href="http://googlepress.blogspot.com/2005/12/time-warners-aol-and-google-to-expand_20.html">$1 billion investment from Google</a>, and there are only 15 other startups in the segment.)</p>
+
+<p>In fact, the statistical correlation between name length and funding, number of vowels and funding, and ratio of length to vowels and funding, are all effectively <strong>zero</strong>.</p>
+
+<p>Sure, quirky startup names may make it easier to find a domain name, but it won&rsquo;t necessarily give an edge in the investment process.</p>
+
+<hr />
+
+<p><em>Data for English words from <a href="http://wordlist.sourceforge.net/">Kevin&rsquo;s Word List Page</a>, and data for the startup names/funding from <a href="http://info.crunchbase.com/about/crunchbase-data-exports/">CrunchBase&rsquo;s September Data Export</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube]]></title>
@@ -314,87 +358,6 @@ Most of our customers (60%) consider themselves entrepreneurs. They are bringing
 <p>In this case, we were emailing too often, and we&rsquo;ve stopped doing that. In general, most of our users do appreciate some help and encouragement along the way, and we will keep testing emails to try to make that as effective, helpful, and non-annoying as possible.</p></blockquote>
 
 <p>It&rsquo;s good to hear that Weebly is aware of the issue, and I&rsquo;m thankful for David&rsquo;s response, although I&rsquo;ll still be keeping an eye on the close eye on how much spam they&rsquo;re still sending out.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet]]></title>
-    <link href="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"/>
-    <updated>2013-01-15T21:36:00-08:00</updated>
-    <id>http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams</id>
-    <content type="html"><![CDATA[
-
-<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N'Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
-
-<p>I&rsquo;m OK with this. There are certainly far <a href="http://minimaxir.com/2012/03/ethics-self-promotion/"><em>worse</em></a> ways to promote a startup.</p>
-
-<p>His moody yet charmful face adds a touch of class to any website. But why does he have to stay constrained to Myspace? Why not let Justin Timberlake dominate the world?</p>
-
-<!-- more -->
-
-
-<h2>No Such Thing As Too Much Sexy</h2>
-
-<p>If you are reading this post on a desktop or laptop, you&rsquo;ll see a handsome fellow in the lower-right corner. This is Justin Timberlake of the Mickey Mouse Club. Say hi.</p>
-
-<p>Using the power of the Stylish extension for Chrome and Firefox, Mr. Timberlake has already made his mark on many startups around the internet.</p>
-
-<p><img src="/img/justintest3.png"></p>
-
-<p><img src="/img/justintest2.png"></p>
-
-<p><img src="/img/justintest9.png"></p>
-
-<p><img src="/img/justintest8.png"></p>
-
-<p><img src="/img/justintest7.png"></p>
-
-<p><img src="/img/justintest5.png"></p>
-
-<p><img src="/img/justintest4.png"></p>
-
-<p>To accomplish this magic, I use the Stylish browser extension, which can be used with either <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Chrome</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/stylish/">Firefox</a>. I have used Stylish <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">before, with browser filters</a>, and it worked very well. If you want your own moody Justin, follow these steps:</p>
-
-<ol>
-<li>Install the Stylish extension for your browser.</li>
-<li>In the extension preferences, go to &ldquo;Managed Installed Styles&rdquo; and select &ldquo;Write New Style&rdquo;</li>
-<li><p>Paste this CSS code in the &ldquo;Code&rdquo; textbox:</p>
-
-<pre><code>body, ._li, .main {
-background-image: url(http://i.imgur.com/UN5HE.png) !important;
-background-position: right bottom !important;
-background-repeat: no-repeat !important;
-background-attachment: fixed !important;
-}
-</code></pre></li>
-</ol>
-
-
-<p>And you&rsquo;re done! Justin will appear pretty much everywhere. Yes, there are a lot of <em>!important</em> declarations, but Justin Timberlake is an important man.</p>
-
-<p>In fact, by using the HTML snippet in this <a href="https://github.com/minimaxir/display-justin-timberlake-sexiness">GitHub repository</a>, you can add Justin to your own site!</p>
-
-<p>Feel free to narrow down the domains where Justin appears by using Stylish as necessary. Although, why would you do such a thing!?</p>
-
-<h2>Taking Justin To The Next Level</h2>
-
-<p><img src="/img/816440400_1965379.gif"></p>
-
-<p>Now that we can make Justin appear anywhere, let&rsquo;s put his power to good use. TechCrunch writer Alexia Tsostis recently made a post about the <a href="http://techcrunch.com/2013/01/16/were-bringing-techcrunch-back/">upcoming redesign of TechCrunch</a>, which, I admit, is long overdue.</p>
-
-<p>In the post, Alexia spoils that the redesign will include lots of sparkles. And a picture of the Justin-man himself. Above is a mockup made by Chris Velazco, another TechCrunch writer, and it is indeed marvelous. (except for the lack of a comments section!)</p>
-
-<p>But why wait for the redesign? We have Timberlake Technology. We can do it <em>now</em>.</p>
-
-<p>Using the power of Stylish, I present to you, a sneak peek into TechCrunch&rsquo;s 2013 redesign.</p>
-
-<p>I made a <em>few</em> stylistic additions as well. It&rsquo;s magic.</p>
-
-<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/j6m2pjjhnuU "></iframe></div></p>
-
-<p>You can find a copy of the CSS I used to emulate this wonderful layout in <a href="https://github.com/minimaxir/techcrunch-1999">this GitHub repository</a>.</p>
-
-<p>Will you let Timberlake enrich <em>your</em> life? He&rsquo;s waiting. In the lower-right corner of your screen.</p>
 ]]></content>
   </entry>
   

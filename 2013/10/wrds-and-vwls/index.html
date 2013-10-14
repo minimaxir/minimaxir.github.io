@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Do startups with short names containing few vowels raise more money? | minimaxir | Max Woolf's Blog</title>
+  <meta name="author" content="Max Woolf">
+
+  
+ 
+ 
+ 
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="Do startups with short names containing few vowels raise more money?">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2013/10/wrds-and-vwls/">
+
+
+  <meta name="twitter:description" content="tl;dr: No.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/mean-startups-fund.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="Do startups with short names containing few vowels raise more money?" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="tl;dr: No." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2013/10/wrds-and-vwls/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/mean-startups-fund.png" property="og:image">
+
+
+  
+  <meta content="Data" property="article:section">
+  
+
+
+  
+
+ 
+  
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  
+<!--
+  <meta name="description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
+   -->
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2013/10/wrds-and-vwls/">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+  <link href="/stylesheets/flat-ui.css" rel="stylesheet">
+  <link href="/stylesheets/minimaxir-css.css" rel="stylesheet">
+  <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <!--<script src="/javascripts/octopress.js" type="text/javascript"></script>-->
+  
+ <script>
+ $(document).ready(function() {
+ 
+  // Facebook
+	$( ".badge.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
+  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + " 0");
+  });
+  });
+ 
+ // Twitter
+	$( ".badge.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"icon-twitter-sign\"></i> " + data.count);
+  });
+  });
+  
+ 
+  
+  
+  // LinkedIn
+	$( ".badge.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"icon-linkedin-sign\"></i> " + data.count);
+  });
+  });
+  
+  
+  
+});
+</script>
+ 
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+	  <ul class="nav social">
+	  
+	  <li class="rss visible-desktop">
+			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="icon-rss-sign"></i>  </a>
+		</li>
+	  
+		<li class="facebook">
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="icon-facebook-sign"></i> </a>
+		</li>
+		
+		<li class="twitter">
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="icon-twitter-sign"></i> </a>
+		</li>
+		
+		<li class="linkedin">
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="icon-linkedin-sign"></i> </a>
+		</li>
+		
+		<li class="github">
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="icon-github-sign"></i> </a>
+		</li>
+		
+		
+	</ul>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+	
+      
+   		<li><a href="/">Home</a></li>
+   	       
+    
+      
+   		<li><a href="/about">About</a></li>
+   	       
+    
+      
+   		<li><a href="/contact">Contact</a></li>
+   	       
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+    <div class="span12">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Do Startups With Short Names Containing Few Vowels Raise More Money?
+    <h5>
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-14T07:00:00-07:00" pubdate data-updated="true">Oct 14<span>th</span>, 2013</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+	  <div class="row-fluid sharing">
+		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/10/wrds-and-vwls/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/10/wrds-and-vwls/"><i class="icon-facebook-sign"></i> -</a></span></div>
+			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Do startups with short names containing few vowels raise more money? - http://minimaxir.com/2013/10/wrds-and-vwls/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/10/wrds-and-vwls/><i class="icon-twitter-sign"></i> -</a> </span></div>
+
+  <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Do startups with short names containing few vowels raise more money?&url=http://minimaxir.com/2013/10/wrds-and-vwls/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/10/wrds-and-vwls/><i class="icon-linkedin-sign"></i> -</a> </span></div>
+   
+			</div>
+      <p>One reason startups use crazy and bizarre names like <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">NegaCycl</a> and <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">Filtrzzz</a> is to ensure that their name is unique, making it easier to acquire the .com domain name and Twitter handle for their startup. Another reason is to make their startup sound <em>kewl</em> and theoretically make the name more memorable in the minds of users and potential investors.</p>
+
+<p>Dakwak, Wibki, Zeef, Funifi. These aren&rsquo;t random words: these are funded startups which were featured at <a href="http://startupalley.techcrunch.com/">TechCrunch Disrupt Startup Alley 2013</a>. And then you have startups such as Lyft, SCVNGR, and Fastly, which have all raised <em>tens of millions of dollars</em> in venture capital.</p>
+
+<p>Do startups with these short, low-vowel names actually raise more money than startups with traditional names?</p>
+
+<!-- more -->
+
+
+<p>First, let&rsquo;s take a look at the association between the length of words in the English language and the number of vowels that they contain:</p>
+
+<p><img class="center" src="/img/english-words.png" width="600" height="600"></p>
+
+<p>In the English language, the majority of the words have 8 letters, with 3 of those letters being vowels. (8,3) is also the center of the density distribution for the heat map, spreading outward.</p>
+
+<p>Let&rsquo;s compare the vowel distribution of normal English words to the distribution of the names of startups that have successfully raised venture capital, in order to identify just how many funded startups have quirky names:</p>
+
+<p><img class="center" src="/img/count-startups.png" width="600" height="600"></p>
+
+<p>Wait, the two distributions are nearly identical! Both graphs are centered at about (8,3), radiating outward. This implies that the number of startups with uniquely-constructed names are outliers and not the typical names for startups.</p>
+
+<p>But that doesn&rsquo;t answer the core question: sure, fewer funded startups have weird names relative to the amount of total funded startups, but do they raise more money on average than startups with typical names?</p>
+
+<p><img class="center" src="/img/mean-startups-fund.png" width="600" height="600"></p>
+
+<p>Nope.</p>
+
+<p>There is no discernible pattern for the average amount raised, unlike with the previous two charts. For the vast majority of the possible combinations of name length and $ vowels, the range of capital raised is between $5M and $25M. There are higher values at the lower-end of the graph (low length, low vowels), but that can be attributed to the relatively low amount of startup data for those combinations to smooth out the average. (e.g. the $78M spike at 3 length, 2 vowels is due to the always-lovely <a href="http://www.crunchbase.com/company/aol">AOL</a> and a <a href="http://googlepress.blogspot.com/2005/12/time-warners-aol-and-google-to-expand_20.html">$1 billion investment from Google</a>, and there are only 15 other startups in the segment.)</p>
+
+<p>In fact, the statistical correlation between name length and funding, number of vowels and funding, and ratio of length to vowels and funding, are all effectively <strong>zero</strong>.</p>
+
+<p>Sure, quirky startup names may make it easier to find a domain name, but it won&rsquo;t necessarily give an edge in the investment process.</p>
+
+<hr />
+
+<p><em>Data for English words from <a href="http://wordlist.sourceforge.net/">Kevin&rsquo;s Word List Page</a>, and data for the startup names/funding from <a href="http://info.crunchbase.com/about/crunchbase-data-exports/">CrunchBase&rsquo;s September Data Export</a>.</em></p>
+
+	  <div class="row-fluid sharing">
+		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/10/wrds-and-vwls/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/10/wrds-and-vwls/"><i class="icon-facebook-sign"></i> -</a> </span></div>
+			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Do startups with short names containing few vowels raise more money? - http://minimaxir.com/2013/10/wrds-and-vwls/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/10/wrds-and-vwls/><i class="icon-twitter-sign"></i> -</a></span></div>
+
+  <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Do startups with short names containing few vowels raise more money?&url=http://minimaxir.com/2013/10/wrds-and-vwls/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/10/wrds-and-vwls/><i class="icon-linkedin-sign"></i> -</a></span></div>
+   
+			</div>
+    </div>
+  </div>
+
+
+  <footer>
+    <p class="meta">
+
+      
+
+<span class="categories">
+  
+    
+          <span class="badge"><a href="/data">Data</a></span>
+     
+          <span class="badge"><a href="/startups">Startups</a></span>
+     
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/09/reddit-imgur-youtube/" title="Previous Post: 1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube">&laquo; 1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<div class="jumbotron">
+
+<div class="row-fluid">
+    <div class="span2 badge visible-desktop max-header">
+	<a href="/about"><img src="/img/Max200.png"></a>
+	</div>
+	<div class="span10">
+  <div>
+    Max Woolf
+    <h3 class="tagline">CMU business IT graduate, software QA engineer in San Francisco, sarcastic tech blog commenter</h3>
+  </div>
+  
+  </div>
+</div>
+</div>
+
+
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2013 - Max Woolf -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a> - Heavily <a href="https://github.com/minimaxir/octoflat">modified</a> by Max Woolf
+</p>
+<p><em>All opinions stated by Max Woolf are his own.</em></p>
+
+        </footer>
+      </div>
+    </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2013/10/wrds-and-vwls/';
+        var disqus_url = 'http://minimaxir.com/2013/10/wrds-and-vwls/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

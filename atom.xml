@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-09-29T10:33:07-07:00</updated>
+  <updated>2013-10-14T06:55:09-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Do startups with short names containing few vowels raise more money?]]></title>
+    <link href="http://minimaxir.com/2013/10/wrds-and-vwls/"/>
+    <updated>2013-10-14T07:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/10/wrds-and-vwls</id>
+    <content type="html"><![CDATA[<p>One reason startups use crazy and bizarre names like <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">NegaCycl</a> and <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">Filtrzzz</a> is to ensure that their name is unique, making it easier to acquire the .com domain name and Twitter handle for their startup. Another reason is to make their startup sound <em>kewl</em> and theoretically make the name more memorable in the minds of users and potential investors.</p>
+
+<p>Dakwak, Wibki, Zeef, Funifi. These aren&rsquo;t random words: these are funded startups which were featured at <a href="http://startupalley.techcrunch.com/">TechCrunch Disrupt Startup Alley 2013</a>. And then you have startups such as Lyft, SCVNGR, and Fastly, which have all raised <em>tens of millions of dollars</em> in venture capital.</p>
+
+<p>Do startups with these short, low-vowel names actually raise more money than startups with traditional names?</p>
+
+<!-- more -->
+
+
+<p>First, let&rsquo;s take a look at the association between the length of words in the English language and the number of vowels that they contain:</p>
+
+<p><img class="center" src="http://minimaxir.com/img/english-words.png" width="600" height="600"></p>
+
+<p>In the English language, the majority of the words have 8 letters, with 3 of those letters being vowels. (8,3) is also the center of the density distribution for the heat map, spreading outward.</p>
+
+<p>Let&rsquo;s compare the vowel distribution of normal English words to the distribution of the names of startups that have successfully raised venture capital, in order to identify just how many funded startups have quirky names:</p>
+
+<p><img class="center" src="http://minimaxir.com/img/count-startups.png" width="600" height="600"></p>
+
+<p>Wait, the two distributions are nearly identical! Both graphs are centered at about (8,3), radiating outward. This implies that the number of startups with uniquely-constructed names are outliers and not the typical names for startups.</p>
+
+<p>But that doesn&rsquo;t answer the core question: sure, fewer funded startups have weird names relative to the amount of total funded startups, but do they raise more money on average than startups with typical names?</p>
+
+<p><img class="center" src="http://minimaxir.com/img/mean-startups-fund.png" width="600" height="600"></p>
+
+<p>Nope.</p>
+
+<p>There is no discernible pattern for the average amount raised, unlike with the previous two charts. For the vast majority of the possible combinations of name length and $ vowels, the range of capital raised is between $5M and $25M. There are higher values at the lower-end of the graph (low length, low vowels), but that can be attributed to the relatively low amount of startup data for those combinations to smooth out the average. (e.g. the $78M spike at 3 length, 2 vowels is due to the always-lovely <a href="http://www.crunchbase.com/company/aol">AOL</a> and a <a href="http://googlepress.blogspot.com/2005/12/time-warners-aol-and-google-to-expand_20.html">$1 billion investment from Google</a>, and there are only 15 other startups in the segment.)</p>
+
+<p>In fact, the statistical correlation between name length and funding, number of vowels and funding, and ratio of length to vowels and funding, are all effectively <strong>zero</strong>.</p>
+
+<p>Sure, quirky startup names may make it easier to find a domain name, but it won&rsquo;t necessarily give an edge in the investment process.</p>
+
+<hr />
+
+<p><em>Data for English words from <a href="http://wordlist.sourceforge.net/">Kevin&rsquo;s Word List Page</a>, and data for the startup names/funding from <a href="http://info.crunchbase.com/about/crunchbase-data-exports/">CrunchBase&rsquo;s September Data Export</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube]]></title>
@@ -1285,7 +1329,10 @@ background-attachment: fixed !important;
 <!-- more -->
 
 
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/filtrzzz-ppt.png?resize=625%2C288" alt="filtrzzz ppt" /></p>
+
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/s2ZajsuPomg "></iframe></div>
+
 
 <p>The Filtrzzz video relies heavily on slide transitions (the &ldquo;zoom&rdquo; effects at the beginning), text animations (the fade in/fade out on the text at the end), and embedding of media (the background song and the product demos), all of which are very easy to implement, although as with any video, a little trial-and-error is necessary to get a good &ldquo;feel&rdquo; for effect duration, effect intensity, etc.</p>
 
@@ -1293,7 +1340,7 @@ background-attachment: fixed !important;
 
 <p>The maximum quality output for video through PowerPoint is 720p WMV, which is sufficient for a startup video since users likely are watching the video YouTube-embedded in a webpage. For comparison, I video-captured the presentation using Camtasia at 1080p and rendered the final video as a high-bit rate MP4: the visual quality between the two versions is indistinguishable at non-full screen resolutions. (when watching a video in 1080p at small sizes, the quality is actually even worse!)</p>
 
-<p>You can see the 1080p MP4 version of the Filtrzzz video <a href="http://www.youtube.com/watch?v=s2ZajsuPomg">here</a>.</p>
+<p>You can see the 1080p MP4 version of the Filtrzzz video [here][5].</p>
 
 <p>If you&rsquo;re developing a startup promo video where you narrate a description of your product, include a few pictures, and add a few animations/transitions for added flare, PowerPoint videos might be an option to consider. At the least, it&rsquo;s a good introduction to those looking to break into organized video production.</p>
 
@@ -1309,143 +1356,6 @@ background-attachment: fixed !important;
 
 
 <p><em>Per #3 and the personal liability it poses, I won&rsquo;t be releasing my source code for the filters, but you can easily create your own by using the <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Stylish extension for Chrome</a> and implementing <a href="http://www.html5rocks.com/en/tutorials/filters/understanding-css/">CSS filters</a> into a style.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Totally-Real Totally-Serious Startup Pitch For Venture Capital]]></title>
-    <link href="http://minimaxir.com/2012/12/totally-real-totally-serious/"/>
-    <updated>2012-12-26T21:26:00-08:00</updated>
-    <id>http://minimaxir.com/2012/12/totally-real-totally-serious</id>
-    <content type="html"><![CDATA[<p><em>Here are presentation slides and a transcript from a totally-real totally-serious startup pitch I did recently for a group of<strong> </strong></em>totally-real totally-serious venture capitalists for <em>totally-real totally-serious venture capital.</em>**</p>
-
-<p><em>This presentation is totally-real totally-serious and not fabricated in any way whatsoever for the purpose of humor. The business and technical terminologies used in this presentation are totally-real totally-serious representations of my own knowledge. I </em>totally-real totally-serious <em>pinky-swear!</em></p>
-
-<p><em>[This isn&rsquo;t real.]</em></p>
-
-<!-- more -->
-
-
-<p></p>
-
-<h2><strong>Introduction</strong></h2>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide1.png?resize=625%2C352" alt="Slide1" /></p>
-
-<p>Good afternoon, and thank you all for giving me the opportunity to present my startup proposal. I&rsquo;m Max Woolf, I&rsquo;m here with NegaCycl, and I&rsquo;m going to make you a billion dollars, no problem.</p>
-
-<p>Today, I&rsquo;ll be talking about NegaCycl, and I hope that by end of the presentation, you&rsquo;ll agree that this startup is timeless. First, I&rsquo;ll be discussing the inspiring, book-and-movie-deal-worthy events that led toward this business idea. I&rsquo;ll tell you a bit about NegaCycl and how it works, and lastly, you&rsquo;ll see a few cool ways we plan to market the business.</p>
-
-<p>Our mission at NegaCycl is simple: <strong>we are a web application that allows us to provide our users the quickest routes &ndash; regardless of where and <em>when</em> they want to go to.</strong></p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide4.png?resize=625%2C352" alt="Slide4" /></p>
-
-<p>I&rsquo;m here today to formally ask you for $2.01 million in seed money for NegaCycl. Yes, that $0.01 million is significant.</p>
-
-<h2><strong>The Eureka Moment</strong></h2>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide6.png?resize=625%2C352" alt="Slide6" /></p>
-
-<p>On a cold Monday night in November after work, I turned on my TV and began to watch the pilot episode of Start-Ups: Silicon Valley: a reality TV show on Bravo that captures the entrepreneurial essence of the Bay Area&hellip; which apparently involves a lot of dating and partying. Huh, you learn something new every day.</p>
-
-<p>During the episode, the cast members throw an extremely classy toga party to celebrate the launch of some fitness startup no one really cares about.</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide7.png?resize=625%2C352" alt="Slide7" /></p>
-
-<p>After becoming incredibly inebriated at the party, the cast members played <em>the</em> most popular party game for nerds: Drunk Computer Science Trivia.</p>
-
-<p>One question asked to a cast member was<em> &ldquo;How do you solve negative cycles?&rdquo;</em> I thought that was weird; I personally had never heard of the term &ldquo;negative cycle&rdquo; before, and the question didn&rsquo;t seem scripted like a typical Bravo show. What the heck are negative cycles, and how do you solve them?</p>
-
-<p>After a few vicious Google searches, I discovered what negative cycles were. More importantly, I made a startling realization: people in the real world actually care about these negative cycles! And just think, if negative cycles are relevant to those who are incredibly drunk, imagine how important they&rsquo;ll be to those who are sober! Clearly, this market has been vali &ndash; <em>wait for it</em> &ndash;</p>
-
-<p>dated! Yes, reality shows on Bravo are heavily edited for added drama, but no one can edit&hellip; inspiration.</p>
-
-<h2><strong>What is NegaCycl?</strong></h2>
-
-<p>Now, you may be asking &ldquo;What is NegaCycl?&rdquo; Yes, as you&rsquo;ve likely figured out, it&rsquo;s a portmanteau of &ldquo;negative&rdquo; and &ldquo;cycle&rdquo;, but there&rsquo;s a lot more to it.</p>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/gxfgcfg.png?resize=625%2C352" alt="Slide10" /></p>
-
-<p>Cycles are a part of a branch of computer science known as Graph Theory. In Graph Theory, graphs are networks which connect<em> blah blah blah</em>&hellip;</p>
-
-<p>&hellip;this slide is boring. Moving on.</p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide11.png?resize=625%2C352" alt="Slide11" /></p>
-
-<p>On this map are arbitrary numbers for each path which represent the amount of time it takes to go between each city. Let&rsquo;s say, for example, a person wants to go from Boston to New York. What&rsquo;s the route that will take the shortest total amount of time? Do you go Boston &ndash; San Diego &ndash; New York, or Boston &ndash; Atlanta &ndash; New York, or even Boston &ndash; Atlanta &ndash; St. Louis &ndash; New York? Solving it through brute force by calculating every possible route and their respective total times is not sexy.</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/jchjghjghj.png?resize=625%2C352" alt="Slide12" /></p>
-
-<p>In the previous slide, we made the implicit assumption that time always moves forward. That isn&rsquo;t necessarily true. Maybe in the future, some startup offering particle-accelerators-as-a-service gets too popular, their users accidently form a few black holes, and boom, time and space crack. Oops! It could happen to anyone, and once it does, time can move backward. In this example, you could go back and forth, or &ldquo;cycle&rdquo;, between Atlanta and St. Louis to go further and further back in time. In that case, the math to find the shortest route between Boston and New York becomes even less sexy.</p>
-
-<p>We can&rsquo;t have unsexiness. We&rsquo;re a startup. We&rsquo;re sexy. And we know it.</p>
-
-<p>Back to the Drunk Computer Science Trivia on Bravo: how do you solve negative cycles anyways? The cast member replied with<em> &ldquo;Are we talking Bellman&rsquo;s algorithm or Dijkstra&rsquo;s algorithm?&rdquo;</em></p>
-
-<p>And after a few more vicious Google searches, I discovered that the answer is&hellip; neither of those two algorithms because the show&rsquo;s cast members are dum-dums.</p>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide14.png?resize=625%2C352" alt="Slide14" /></p>
-
-<p>Now, let&rsquo;s get to the meat of the pitch: what<em> is</em> NegaCycl? It&rsquo;s simply a web app that calculates the route of the shortest amount of time for travel using the Bellman-Ford algorithm. The Bellman-Ford algorithm solves graphs containing these negative cycles, and thus in the context of travel, it can account for time moving backwards, as with Atlanta and St. Louis. Easy peasy lemon squeezy.</p>
-
-<p>Currently, NegaCycl is the <em>only</em> startup that accounts for fractures in the space-time continuum. Sure, startups might use APIs from Facebook and Twitter in their own code, but no other startup uses the API&hellip; of the universe. Since the underlying 12 lines of pseudocode are so elegant and efficient, we&rsquo;ll be able to scale without breaking a sweat. We&rsquo;re going to do PHP, because Facebook uses PHP for their server language and Facebook has over 1 billion users, so it&rsquo;s legit. Lastly, this time-routing technology would be very useful for enterprise shipping companies, such as UPS and FedEx, and we could potentially license it to them. Imagine: you could receive your delivery from an online order&hellip;before you even order it.</p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide15.png?resize=625%2C352" alt="Slide15" /></p>
-
-<p>Unfortunately, I don&rsquo;t have a working demo of the app to show you today, but here&rsquo;s a screenshot of the prototype. We&rsquo;re using Twitter Bootstrap as the core framework for our front-end interface, as it looks cool and it&rsquo;s free, and that&rsquo;s good enough for me!</p>
-
-<h2><strong>How will we market NegaCycl?</strong></h2>
-
-<p>There are a lot of players in the travel space. How will we market NegaCycl so that it stands out from the crowd? You&rsquo;ll see that we have that very well planned.</p>
-
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide18.png?resize=625%2C352" alt="Slide18" /></p>
-
-<p>With startups, one of the key drivers of success is who you know, and who <em>they</em> know. That&rsquo;s why I&rsquo;ve decided to utilize two very influential tech celebrities to help publicize NegaCycl: Michael Arrington, the founder and former head editor of TechCrunch, and Robert Scoble, a popular journalist with hundreds of thousands of social media followers,</p>
-
-<p>I, personally, am Facebook friends with both of them. They&rsquo;re my biffles, my best friends for life!</p>
-
-<p><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide19.png?resize=625%2C352" alt="Slide19" /></p>
-
-<p>During my time as a business major at Carnegie Mellon University, I&rsquo;ve learnt that brand identity is one of the most important assets for a business. Between two otherwise equal startups, the one whose logo is cleanest and whose web pages are shiniest will be the winner.</p>
-
-<p>The name &ldquo;NegaCycl&rdquo; is very catchy. Note how there&rsquo;s no vowels in Cycl! Poor literacy is kewl nowadays, and the blatant deliberate typographical mistake will make our grammar-obsessed potential users much more likely to remember our name and curse us out on public forums. Hey, free advertising!</p>
-
-<p>Additionally,  I&rsquo;ve taken great care in designing a unique logo myself for NegaCycl, one that will be remembered forever. Do you know how long it took me to align all the vectors to create this excellent logo? Like, 20 minutes. 20 minutes! Have you noticed that the logo looks like a bicycle? That&rsquo;s completely intentional. Have you noticed that the face is negative? That&rsquo;s also completely intentional. The visual subtext in this logo is quite clearly indicative of a logo for a future Fortune 500 company: a company named NegaCycl!</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide22.png?resize=625%2C352" alt="Slide22" /></p>
-
-<p>And now, my plan for social media promotion with NegaCycl. I&rsquo;ve developed a automated script that does community management for our Facebook brand page by using a proven effective strategy. At no additional cost. Trust me, I read <em>The Lean Startup</em> by Eric Ries, I&rsquo;m an expert at being lean.*<br/>
-*</p>
-
-<p>We start by finding cute pictures, which are statistically proven to have a greater response rate than boring startup press announcements <em>ugh</em>. The automated script parses Reddit, a link and image aggregator, and its API for the top cute pictures of the day. Then, the script applies a NegaCycl watermark in the lower-right corner of the image, and posts the image on our Facebook page for our fans to see. When our users inevitably share the image, we get <strong>all</strong> the credit. Everyone on Facebook will see NegaCycl as the harbinger of happiness and cuddles.</p>
-
-<p>In the post message, we will ask questions to users, as they also make people more likely to respond. &ldquo;What do you think of this picture?&rdquo; &ldquo;What are you doing today?&rdquo; &ldquo;What is the answer to life, the universe, and everything?&rdquo; Things like that. The automated script does not spend time reading the user responses to the question because it&rsquo;s an asshole.</p>
-
-<p>Lastly, we will encourage the users to Like, Share, and Comment on our pictures. Whenever a Facebook user does any of those three things on a NegaCycl post, the NegaCycl post then appears on the News Feeds of that user&rsquo;s friends, and the cycle repeats until Facebook is <em>ours. </em>And once we conquer Facebook, we&rsquo;ll conquer Twitter as well, and I guess we&rsquo;ll also conquer Google%2B because why not it&rsquo;s not hard.</p>
-
-<p>We become a successful travel startup, or we pivot into a generic image regurgitator. Either works for me, really.</p>
-
-<h2><strong>Conclusion</strong></h2>
-
-<p>You&rsquo;ve seen how we came up with the idea. You&rsquo;ve seen how we&rsquo;re going to execute the idea. You&rsquo;ve seen how we&rsquo;re going to promote the idea. NegaCycl will indeed change the way you use travel apps: you no longer have to ask &ldquo;where do I want to go to&rdquo;, but <em>when</em> do I want to go to.</p>
-
-<p>NegaCycl may be a crazy idea for a startup, sure. We don&rsquo;t use any photo filters! However, it&rsquo;s the crazy ideas that are the most disruptive in Silicon Valley, and not only will we disrupt the travel space, but we will also disrupt the travel time.</p>
-
-<p>As we said earlier, we ask you for $2.01 million, and we&rsquo;ll use this couple of millions to make a couple of billions. Piece of cake. Chocolate cake.</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide25.png?resize=625%2C352" alt="Slide25" /></p>
-
-<p>We will put your money to very good use.</p>
-
-<p>We&rsquo;re going to spend $1 million for a waterfront office in San Francisco. I want to look outside the window and be able to see the Golden Gate Bridge and Alcatraz. Alcatraz is so much fun!</p>
-
-<p>We&rsquo;ll use another $1 million to throw the most epic toga launch party ever. Bravo had a good one, and we&rsquo;re to going to top that. One word: Lions. Gladiatorial combat, anyone? We&rsquo;ll get so much press and word-of-mouth advertising, especially if someone gets killed!</p>
-
-<p>Lastly, we&rsquo;ll use the remaining $0.01 million to hire a programmer to make the damn app.</p>
-
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/12/Slide26.png?resize=625%2C352" alt="Slide1" /></p>
-
-<p>In all, I hope that you&rsquo;ll invest your money in our startup. So, what did you think of this presentation? Do you think you&rsquo;ll invest in NegaCycl? Like, share, and comment!</p>
 ]]></content>
   </entry>
   

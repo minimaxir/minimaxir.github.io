@@ -3,6 +3,12 @@ background: white;
 color: #34495e
 }
 
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 h1, h2 {
 color: #2980B9
 }
@@ -254,7 +260,7 @@ padding: 0 10px;
 }
 
 
-.blog-index img, .hentry img {
+.blog-http://minimaxir.com/2013/06/big-social-data/index img, .hentry img {
 padding: 5px;
 }
 

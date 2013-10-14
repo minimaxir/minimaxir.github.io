@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-09-29T10:33:07-07:00</updated>
+  <updated>2013-10-14T06:55:09-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Do startups with short names containing few vowels raise more money?]]></title>
+    <link href="http://minimaxir.com/2013/10/wrds-and-vwls/"/>
+    <updated>2013-10-14T07:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/10/wrds-and-vwls</id>
+    <content type="html"><![CDATA[<p>One reason startups use crazy and bizarre names like <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">NegaCycl</a> and <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">Filtrzzz</a> is to ensure that their name is unique, making it easier to acquire the .com domain name and Twitter handle for their startup. Another reason is to make their startup sound <em>kewl</em> and theoretically make the name more memorable in the minds of users and potential investors.</p>
+
+<p>Dakwak, Wibki, Zeef, Funifi. These aren&rsquo;t random words: these are funded startups which were featured at <a href="http://startupalley.techcrunch.com/">TechCrunch Disrupt Startup Alley 2013</a>. And then you have startups such as Lyft, SCVNGR, and Fastly, which have all raised <em>tens of millions of dollars</em> in venture capital.</p>
+
+<p>Do startups with these short, low-vowel names actually raise more money than startups with traditional names?</p>
+
+<!-- more -->
+
+
+<p>First, let&rsquo;s take a look at the association between the length of words in the English language and the number of vowels that they contain:</p>
+
+<p><img class="center" src="http://minimaxir.com/img/english-words.png" width="600" height="600"></p>
+
+<p>In the English language, the majority of the words have 8 letters, with 3 of those letters being vowels. (8,3) is also the center of the density distribution for the heat map, spreading outward.</p>
+
+<p>Let&rsquo;s compare the vowel distribution of normal English words to the distribution of the names of startups that have successfully raised venture capital, in order to identify just how many funded startups have quirky names:</p>
+
+<p><img class="center" src="http://minimaxir.com/img/count-startups.png" width="600" height="600"></p>
+
+<p>Wait, the two distributions are nearly identical! Both graphs are centered at about (8,3), radiating outward. This implies that the number of startups with uniquely-constructed names are outliers and not the typical names for startups.</p>
+
+<p>But that doesn&rsquo;t answer the core question: sure, fewer funded startups have weird names relative to the amount of total funded startups, but do they raise more money on average than startups with typical names?</p>
+
+<p><img class="center" src="http://minimaxir.com/img/mean-startups-fund.png" width="600" height="600"></p>
+
+<p>Nope.</p>
+
+<p>There is no discernible pattern for the average amount raised, unlike with the previous two charts. For the vast majority of the possible combinations of name length and $ vowels, the range of capital raised is between $5M and $25M. There are higher values at the lower-end of the graph (low length, low vowels), but that can be attributed to the relatively low amount of startup data for those combinations to smooth out the average. (e.g. the $78M spike at 3 length, 2 vowels is due to the always-lovely <a href="http://www.crunchbase.com/company/aol">AOL</a> and a <a href="http://googlepress.blogspot.com/2005/12/time-warners-aol-and-google-to-expand_20.html">$1 billion investment from Google</a>, and there are only 15 other startups in the segment.)</p>
+
+<p>In fact, the statistical correlation between name length and funding, number of vowels and funding, and ratio of length to vowels and funding, are all effectively <strong>zero</strong>.</p>
+
+<p>Sure, quirky startup names may make it easier to find a domain name, but it won&rsquo;t necessarily give an edge in the investment process.</p>
+
+<hr />
+
+<p><em>Data for English words from <a href="http://wordlist.sourceforge.net/">Kevin&rsquo;s Word List Page</a>, and data for the startup names/funding from <a href="http://info.crunchbase.com/about/crunchbase-data-exports/">CrunchBase&rsquo;s September Data Export</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube]]></title>
@@ -689,131 +733,6 @@ elemental Djinn attack that it is weak to.</p></blockquote>
 <p>Not as catchy, unfortunately.</p>
 
 <p>In fact, the Justin Bailey password is also a completely coincidental password. Sometimes, passwords can just do very unexpected things.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[When a Startup Sends a Passive-Aggressive Email Every Day]]></title>
-    <link href="http://minimaxir.com/2013/05/overly-attached-startup/"/>
-    <updated>2013-05-13T18:51:00-07:00</updated>
-    <id>http://minimaxir.com/2013/05/overly-attached-startup</id>
-    <content type="html"><![CDATA[<p>A couple weeks ago, my best friend wanted to make a personal website. After talking with her about what types of features she wanted (home page, photo galleries, low price, etc.) I recommended that she use a website-building platform with a <a href="http://en.wikipedia.org/wiki/WYSIWYG">WYSIWYG</a> editor, such as <a href="http://www.wix.com/">Wix</a> or <a href="http://www.weebly.com/">Weebly</a>. I had heard good things about both websites, especially Weebly, a <a href="http://techcrunch.com/2007/01/15/weebly-goes-with-ycombinator/">Y Combinator startup</a> which has been <a href="http://techcrunch.com/2013/05/03/with-over-15m-sites-built-weebly-launches-new-planner-and-mobile-editor-brings-website-creation-service-to-android/">rolling out new features</a> and receiving positive reviews.</p>
-
-<p>She registered for Weebly and loved it. I registered as well to check it out, and I was also impressed after creating a draft test website and experimenting with both drag-and-drop UI elements and raw HTML/CSS editing. Since Weebly has Contributor functionality, I was able to edit her website without having to access her account. I made a few CSS tweaks and that was it: I didn&rsquo;t publish my own website on Weebly, as I&rsquo;m very happy with this blog. :)</p>
-
-<p>A day after her website was published, I received an e-mail from Weebly: a generic &ldquo;First Steps to Creating Your Website.&rdquo; It&rsquo;s just one email, I think, so I ignore it. And then, the next day, I receive another e-mail that was much less subtle: &ldquo;Your website misses you!&rdquo;</p>
-
-<p>This is certainly the first time a startup&rsquo;s emails have tried to <em>guilt</em> me into using the service.</p>
-
-<!-- more -->
-
-
-<h1>An Email A Day Keeps The Users Away</h1>
-
-<p><img src="http://minimaxir.com/img/weebly1.png" alt="" /></p>
-
-<p>When I register for <em>any</em> business, not just including startups, I don&rsquo;t enjoy seeing any emails that aren&rsquo;t helpful or aren&rsquo;t expected. I&rsquo;m OK when businesses send emails that alert me when a new service has been launched or when a scheduled newsletter is released. In the former case, the email is directly relevant to my interests, in the latter case, the email is not an unexpected surprise.</p>
-
-<p>In Weebly&rsquo;s case, and any other startup that resorts to forward emailing strategies as a form of &ldquo;growth hacking,&rdquo; they&rsquo;re invalidating my trust. A once-a-month announcement about your business is OK, but if I want to visit your website, I don&rsquo;t need to be reminded every <em>day</em>.</p>
-
-<p>Let&rsquo;s look at the emails that Weebly has sent:</p>
-
-<hr>
-
-
-<h2>May 5th: First Steps to Creating Your Website</h2>
-
-<p><img src="http://minimaxir.com/img/weebly2.png" alt="" /></p>
-
-<p>This is actually a good first e-mail.</p>
-
-<p>It adds a personal touch. I didn&rsquo;t pay much attention to it since I didn&rsquo;t plan on publishing my own website, but to a new customer, it makes them feel welcome.</p>
-
-<hr>
-
-
-<h2>May 6th: Your website misses you!</h2>
-
-<p><img src="http://minimaxir.com/img/weebly3.png" alt="" /></p>
-
-<p>I received this <em>the next day</em> after the previous email. My website misses me? It&rsquo;s been two days! Which you tell me with a rather disturbing amount of precision!</p>
-
-<p>My website is not a cow in FarmVille. I don&rsquo;t need to publish my website immediately. In fact, if I were to publish a website, I would make sure it&rsquo;s polished first, in which case the email&rsquo;s push toward publishing ASAP would actually be insulting.</p>
-
-<hr>
-
-
-<h2>May 7th: Need Any Help?</h2>
-
-<p><img src="http://minimaxir.com/img/weebly4.png" alt="" /></p>
-
-<p>Here&rsquo;s a totally-not-automatically-generated e-mail by a employee at Weebly. It lacks any Weebly branding, which supposedly gives it a more &ldquo;personal&rdquo; touch&hellip;except if Richard wanted to give it a personal touch, he would have included <em>my name</em>. The <a href="http://emailmarketing.comm100.com/email-marketing-ebook/can-spam-law.aspx">legally-mandated</a> unsubscribe link, a requirement for commercial emails, doesn&rsquo;t make me feel any more comfortable.</p>
-
-<p>And again, it&rsquo;s only been three days.</p>
-
-<hr>
-
-
-<h2>May 8th: Max, check out your mobile website!</h2>
-
-<p><img src="http://minimaxir.com/img/weebly5.png" alt="" /></p>
-
-<p>While that feature may be cool, finding an <em>excuse</em> to send me an e-mail really isn&rsquo;t necessary.</p>
-
-<p>Weebly skipped May 9th, fortunately.</p>
-
-<hr>
-
-
-<h2>May 10th: Free vs. Pro: Which One is Right for You?</h2>
-
-<p><img src="http://minimaxir.com/img/weebly6.png" alt="" /></p>
-
-<p>&ldquo;As you may have noticed.&rdquo; In that case, why bother sending the e-mail? Will the e-mail&rsquo;s argument be any different?</p>
-
-<hr>
-
-
-<h2>May 11th: Max, get 33% off at Weebly!</h2>
-
-<p><img src="http://minimaxir.com/img/weebly7.png" alt="" /></p>
-
-<p>Now we&rsquo;re mixing both overly precise user registration dates <em>and</em> &ldquo;as you may have noticed&rdquo; verbage! I did notice, as a matter of fact! I noticed <em>yesterday</em>!</p>
-
-<hr>
-
-
-<h2>May 12th: It&rsquo;s been 8 days, 2 hours, 30 minutes and 6 seconds&hellip;</h2>
-
-<p><img src="http://minimaxir.com/img/weebly8.png" alt="" /></p>
-
-<p>Ok, seriously, what the hell?</p>
-
-<p>At this point, Weebly is seriously <em>threatening</em> me into publishing my website. Gone are the informative email subject lines: now, Weebly simply <em>reminds</em> me how much time I&rsquo;ve spent not working on a website. They&rsquo;ve graduated from passive-aggressive to just aggressive.</p>
-
-<p>What&rsquo;s genuinely terrifying is that Weebly actually created a custom email message to send to users to send after a week of having an unpublished site. <em>They tested this email behavior and thought this was a good idea.</em> Apparently, they never considered that a user could exist solely to contribute to another user&rsquo;s website.</p>
-
-<p>Some might say that I should have unsubscribed if I was unhappy with Weebly&rsquo;s emails. Indeed, all the e-mails had unsubscribe links, hidden where most people won&rsquo;t see them of course. But that&rsquo;s not the point: if startups keep sending forward e-mails, <em>everyone</em> loses.</p>
-
-<p>At the least, I&rsquo;m very cautious to recommend Weebly to anyone else.</p>
-
-<hr>
-
-
-<p><strong>UPDATE (5/14/13)</strong>: On the corresponding <a href="https://news.ycombinator.com/item?id=5704860">Hacker News thread</a>, David Rusenko, founder and CEO of Weebly, posted a response:</p>
-
-<blockquote><p>I&rsquo;d like to jump in and clarify a few things. First, we have recently been testing the frequency of our email sending, and the author seems to have been bucketed into the &ldquo;more frequent&rdquo; group. That being said, we were actually planning on reducing the frequency of what we emailed the author by roughly 25%, including eliminating the &ldquo;Your website misses you&rdquo; and the &ldquo;It’s been 8 days, 2 hours, 30 minutes and 6 seconds…&rdquo; emails, among others. I just fast-tracked this and it&rsquo;s now live, so our email volume when you sign up is now much lower.</p>
-
-<p>Second, we put a lot of effort into trying to send personalized email communication that is specific to your use case, but it looks like we missed a very important group, contributors to others&#8217; sites. This was a mistake. These emails may make sense if you were starting your own site, but they certainly don&rsquo;t make sense if you were just contributing to someone else&rsquo;s. I&rsquo;m going to make sure we revise that set of emails within 2 weeks to something more appropriate and even less frequent.</p>
-
-<p>Last, as many here are correct to assume, we are constantly testing and refining our email communications. I think it&rsquo;s helpful to understand our customer&rsquo;s psychology when they are signing up for Weebly, it is instructive in understanding our thought process and why we send the emails we do.
-Most of our customers (60%) consider themselves entrepreneurs. They are bringing a new idea to life, things like chairigami.com, themintspace.com, stealthelectricbikesusa.com or weeknightbite.com. They are quitting their full-time jobs to do this and it&rsquo;s a very frightening process.</p>
-
-<p>Creating their site is especially daunting and difficult for them, even though it&rsquo;s so crucial to their success. Many of them start the process, want to finish, but give up. We&rsquo;ve found that the first week is the most crucial. In our email communications, it&rsquo;s our goal to try to help them across the finish line to a high-quality site.</p>
-
-<p>In this case, we were emailing too often, and we&rsquo;ve stopped doing that. In general, most of our users do appreciate some help and encouragement along the way, and we will keep testing emails to try to make that as effective, helpful, and non-annoying as possible.</p></blockquote>
-
-<p>It&rsquo;s good to hear that Weebly is aware of the issue, and I&rsquo;m thankful for David&rsquo;s response, although I&rsquo;ll still be keeping an eye on the close eye on how much spam they&rsquo;re still sending out.</p>
 ]]></content>
   </entry>
   
