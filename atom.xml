@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-10-14T06:55:09-07:00</updated>
+  <updated>2013-11-01T07:11:08-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Which Subreddits on Reddit Are The Largest?]]></title>
+    <link href="http://minimaxir.com/2013/11/subreddit-size/"/>
+    <updated>2013-11-01T07:30:00-07:00</updated>
+    <id>http://minimaxir.com/2013/11/subreddit-size</id>
+    <content type="html"><![CDATA[<p><a href="http://www.reddit.com/">Reddit&rsquo;s</a> subreddits cover, quite literally, an infinite amount of different topics. But which of its subreddits are the biggest?</p>
+
+<p>Sure, Reddit is known for subreddits such as /r/pics and /r/aww, but in actuality, many of the lesser-known subreddits are much bigger than you think.</p>
+
+<p>By tabulating the data of 37,561,369 total sitewide Link submissions, from 12/18/2011 to 9/26/2013, I created a tree map of the Top 100 subreddits by the number of Link submissions to that subreddit.</p>
+
+<!-- more -->
+
+
+<p><img src="http://minimaxir.com/img/subreddit-treemap.png" title="" ></p>
+
+<p>In the tree map, the size of the rectangle and the saturation of the blue color indicate the relative size of the subreddit.</p>
+
+<p>Unsurprisingly, the <a href="http://blog.reddit.com/2013/07/new-default-subreddits-omgomgomg.html">default subreddits</a>, which all new users are subscribed to, are ranked mostly at the top. However, subreddits such as /r/POLITICO, /r/leagueoflegends, and /r/trees are higher (no pun intended) than most of the default subreddits.</p>
+
+<p>And then you have the meta subreddits such as /r/ModerationLog and /r/reportthespammers, showing that people spend a considerable amount of time talking about Reddit itself.</p>
+
+<p>Gaming has a very significant presence as well, with /r/Minecraft, /r/DotA2, and /r/tf2. (notably for the latter two, the trading subreddits for the respective games have significantly more link submissions than the subreddits themselves.)</p>
+
+<p>It&rsquo;s worth nothing that these Top 100 subreddits only account for <strong>46.3% of all Reddit link submissions</strong>. Even the Top 500 subreddits only account for 66.2% of all Reddit submissions. The density of link submissions clearly follows a <a href="http://en.wikipedia.org/wiki/Long_tail">long-tail</a> distribution, where most of the content is centralized from the top subreddits. It&rsquo;ll be interesting to see if Reddit is able to utilize that treasure trove of links in the future.</p>
+
+<hr />
+
+<p><em>You can access the data for the Top 500 subreddits in  <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGQzd0dIQkk1aXRRRkxEY3g0ZmQtWGc&amp;usp=sharing">this Google Spreadsheet</a>, and you can see the code use to create the tree map in <a href="https://github.com/minimaxir/treemap-of-reddit-top-subreddits">this GitHub repository</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Do startups with short names containing few vowels raise more money?]]></title>
@@ -1312,50 +1344,6 @@ background-attachment: fixed !important;
 <p>Twitter, with an impending IPO, needs to help potential newcomers out in any way possible. Eliminating the need for prefixed periods is a great start to increasing accessibility.</p>
 
 <p><em>PS: I am not a huge dork.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Creating a Startup Promo Video Using... PowerPoint?]]></title>
-    <link href="http://minimaxir.com/2012/12/powerpoint-promo-party/"/>
-    <updated>2012-12-29T21:28:00-08:00</updated>
-    <id>http://minimaxir.com/2012/12/powerpoint-promo-party</id>
-    <content type="html"><![CDATA[<p>I noticed deep in the documentation for PowerPoint 2010 that it <a href="http://office.microsoft.com/en-us/powerpoint-help/turn-your-presentation-into-a-video-HA010336763.aspx">supports video output</a> for presentations. Like a good nerd, I experimented to see what it could actually do. My first test of the functionality was a humor video about pitching a <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">hypothetical startup named NegaCycl</a>, complete with animation and narration, which I trashed and eventually retooled because I&rsquo;m bad at verbal comedic delivery. Interestingly, the output video was a 1:1 comparison to what was displayed on my own computer screen during the presentation. Naturally, I decided to test it even harder.</p>
-
-<p>What I have here is another hypothetical, non-real startup named Filtrzzz (based on a <a href="http://www.facebook.com/photo.php?fbid=10151356495205450&amp;set=a.432190050449.225968.582270449&amp;type=1">popular Facebook post</a> I made), animated and rendered using PowerPoint, with more complicated objects such as embedded audio and video, and an attempt to sync the presentation timing with the audio for dramatic effect. Plus sarcastic humor, of course.</p>
-
-<p>PowerPoint video creation is feasible if you don&rsquo;t have or can&rsquo;t afford dedicated video software and need a promo video in a pinch, as may be the case with an actual startup.</p>
-
-<!-- more -->
-
-
-
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/s2ZajsuPomg "></iframe></div>
-
-
-<p>The Filtrzzz video relies heavily on slide transitions (the &ldquo;zoom&rdquo; effects at the beginning), text animations (the fade in/fade out on the text at the end), and embedding of media (the background song and the product demos), all of which are very easy to implement, although as with any video, a little trial-and-error is necessary to get a good &ldquo;feel&rdquo; for effect duration, effect intensity, etc.</p>
-
-<p>PowerPoint has the native ability to record timings (i.e. when to progress to the next slide/animation) and voice narrations on a per-slide basis in the Slide Show tab. You can either record the timings while running through a presentation normally (good for maintaining a consistent pace through animations), or record <em>ad hoc</em> per slide (good for voice narration, which is independent from other slides). If timings and narrations are present, when the presentation runs, it will use those timings and play in auto-pilot. When the presentation is exported as a video, it will follow these timings and include the spoken narrations.</p>
-
-<p>The maximum quality output for video through PowerPoint is 720p WMV, which is sufficient for a startup video since users likely are watching the video YouTube-embedded in a webpage. For comparison, I video-captured the presentation using Camtasia at 1080p and rendered the final video as a high-bit rate MP4: the visual quality between the two versions is indistinguishable at non-full screen resolutions. (when watching a video in 1080p at small sizes, the quality is actually even worse!)</p>
-
-<p>You can see the 1080p MP4 version of the Filtrzzz video [here][5].</p>
-
-<p>If you&rsquo;re developing a startup promo video where you narrate a description of your product, include a few pictures, and add a few animations/transitions for added flare, PowerPoint videos might be an option to consider. At the least, it&rsquo;s a good introduction to those looking to break into organized video production.</p>
-
-<hr />
-
-<p><em>By the way, Filterzzz would never work as a real product (nor would I ever publicly post hypothetical startups that could actually be feasible business ideas) for a few reasons:</em></p>
-
-<ol>
-<li><em>The way the filters work depends on the internal design of the webpage. Since many websites have highly maverick designs, the filter isn&rsquo;t guaranteed to work 100% on all websites.</em></li>
-<li><em>As you saw in the video, the performance impact of the filters on browser speed varies, at least with my implementation. The performance would need to be consistent among all websites in order to avoid user outrage.</em></li>
-<li><em>The biggest point: reading text on a filtered background for long periods of time <strong>hurts eyes</strong>. Any startup which tried to promote this business idea would be sued into bankruptcy within a month.</em></li>
-</ol>
-
-
-<p><em>Per #3 and the personal liability it poses, I won&rsquo;t be releasing my source code for the filters, but you can easily create your own by using the <a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe?hl=en">Stylish extension for Chrome</a> and implementing <a href="http://www.html5rocks.com/en/tutorials/filters/understanding-css/">CSS filters</a> into a style.</em></p>
 ]]></content>
   </entry>
   

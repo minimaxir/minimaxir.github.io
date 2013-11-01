@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Graphs | minimaxir | Max Woolf's Blog]]></title>
+  <link href="http://minimaxir.com//graphs/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2013-11-01T07:11:08-07:00</updated>
+  <id>http://minimaxir.com/</id>
+  <author>
+    <name><![CDATA[Max Woolf]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Which Subreddits on Reddit Are The Largest?]]></title>
+    <link href="http://minimaxir.com/2013/11/subreddit-size/"/>
+    <updated>2013-11-01T07:30:00-07:00</updated>
+    <id>http://minimaxir.com/2013/11/subreddit-size</id>
+    <content type="html"><![CDATA[<p><a href="http://www.reddit.com/">Reddit&rsquo;s</a> subreddits cover, quite literally, an infinite amount of different topics. But which of its subreddits are the biggest?</p>
+
+<p>Sure, Reddit is known for subreddits such as /r/pics and /r/aww, but in actuality, many of the lesser-known subreddits are much bigger than you think.</p>
+
+<p>By tabulating the data of 37,561,369 total sitewide Link submissions, from 12/18/2011 to 9/26/2013, I created a tree map of the Top 100 subreddits by the number of Link submissions to that subreddit.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/subreddit-treemap.png" title="" ></p>
+
+<p>In the tree map, the size of the rectangle and the saturation of the blue color indicate the relative size of the subreddit.</p>
+
+<p>Unsurprisingly, the <a href="http://blog.reddit.com/2013/07/new-default-subreddits-omgomgomg.html">default subreddits</a>, which all new users are subscribed to, are ranked mostly at the top. However, subreddits such as /r/POLITICO, /r/leagueoflegends, and /r/trees are higher (no pun intended) than most of the default subreddits.</p>
+
+<p>And then you have the meta subreddits such as /r/ModerationLog and /r/reportthespammers, showing that people spend a considerable amount of time talking about Reddit itself.</p>
+
+<p>Gaming has a very significant presence as well, with /r/Minecraft, /r/DotA2, and /r/tf2. (notably for the latter two, the trading subreddits for the respective games have significantly more link submissions than the subreddits themselves.)</p>
+
+<p>It&rsquo;s worth nothing that these Top 100 subreddits only account for <strong>46.3% of all Reddit link submissions</strong>. Even the Top 500 subreddits only account for 66.2% of all Reddit submissions. The density of link submissions clearly follows a <a href="http://en.wikipedia.org/wiki/Long_tail">long-tail</a> distribution, where most of the content is centralized from the top subreddits. It&rsquo;ll be interesting to see if Reddit is able to utilize that treasure trove of links in the future.</p>
+
+<hr />
+
+<p><em>You can access the data for the Top 500 subreddits in  <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGQzd0dIQkk1aXRRRkxEY3g0ZmQtWGc&amp;usp=sharing">this Google Spreadsheet</a>, and you can see the code use to create the tree map in <a href="https://github.com/minimaxir/treemap-of-reddit-top-subreddits">this GitHub repository</a>.</em></p>
+]]></content>
+  </entry>
+  
+</feed>
