@@ -22,10 +22,10 @@
   <meta name="twitter:url" content="http://minimaxir.com/2012/03/bootstrap-for-everyone/">
 
 
-  <meta name="twitter:description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
+  <meta name="twitter:description" content="I can say that within the next few years, every startup will be using Bootstrap.">
 
 
-  <meta name="twitter:image:src" content="http://minimaxir.com/MaxFB.png">
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/Responsive2.png">
 
  
  <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
@@ -36,14 +36,14 @@
   <meta content="article" property="og:type">
 
 
-  <meta content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym." property="og:description">
+  <meta content="I can say that within the next few years, every startup will be using Bootstrap." property="og:description">
 
 
   <meta content="http://minimaxir.com/2012/03/bootstrap-for-everyone/" property="og:url">
 
 
 
-  <meta content="http://minimaxir.com/MaxFB.png" property="og:image">
+  <meta content="http://minimaxir.com/img/Responsive2.png" property="og:image">
 
 
   
@@ -74,14 +74,16 @@
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
-  <link href="/stylesheets/flat-ui.css" rel="stylesheet">
-  <link href="/stylesheets/minimaxir-css.css" rel="stylesheet">
-  <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"> -->
+  
+  <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
+  
+  <link href="/stylesheets/uikit.css" rel="stylesheet">
+  <link href="/stylesheets/minimaxir-uikit.css" rel="stylesheet">
+  
   <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
   <script src="/js/jquery.js"></script>
-  <script src="/js/bootstrap-collapse.js"></script>
   <script src="/javascripts/modernizr-2.0.js"></script>
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -92,24 +94,24 @@
  $(document).ready(function() {
  
   // Facebook
-	$( ".badge.facebook" ).children().each(function(index,value) {
+	$( ".social.facebook" ).children().each(function(index,value) {
 	var facebook_button = $(this);
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
-  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
-  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + " 0");
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + " 0</span>");
   });
   });
  
  // Twitter
-	$( ".badge.twitter" ).children().each(function(index,value) {
+	$( ".social.twitter" ).children().each(function(index,value) {
 	var twitter_button = $(this);
 	var url = twitter_button.attr("data");
 
   jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
-  twitter_button.html("<i class=\"icon-twitter-sign\"></i> " + data.count);
+  twitter_button.html("<i class=\"ion-social-twitter\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
   });
   });
   
@@ -117,12 +119,12 @@
   
   
   // LinkedIn
-	$( ".badge.linkedin" ).children().each(function(index,value) {
+	$( ".social.linkedin" ).children().each(function(index,value) {
 	var linkedin_button = $(this);
 	var url = linkedin_button.attr("data");
 
   jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
-  linkedin_button.html("<i class=\"icon-linkedin-sign\"></i> " + data.count);
+  linkedin_button.html("<i class=\"ion-social-linkedin\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
   });
   });
   
@@ -140,69 +142,121 @@
 </head>
 
 <body   >
-  <div class="navbar navbar-inverse navbar-static-top">
-  	<div class="navbar-inner">
-  	  <div class="container">
-	  <ul class="nav social">
-	  
-	  <li class="rss visible-desktop">
-			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="icon-rss-sign"></i>  </a>
-		</li>
-	  
-		<li class="facebook">
-			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="icon-facebook-sign"></i> </a>
-		</li>
-		
-		<li class="twitter">
-			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="icon-twitter-sign"></i> </a>
-		</li>
-		
-		<li class="linkedin">
-			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="icon-linkedin-sign"></i> </a>
-		</li>
-		
-		<li class="github">
-			<a href="http://github.com/minimaxir" target="_blank"> <i class="icon-github-sign"></i> </a>
-		</li>
-		
-		
-	</ul>
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="fui-menu-24"></span>
-        </a>
-  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
-  	      <ul class="nav">
+
+
+
+  
+
+ <div class="hero top">
+  
+
+
+ <nav class="uk-navbar ">
+ <div class="uk-container uk-container-center">
+<div class="uk-grid">
+	<div class="uk-width-1-1">
+
+  	      <ul class="uk-navbar-nav">
 	
       
-   		<li><a href="/">Home</a></li>
+   		<li class="uk-parent"><a href="/">Home</a></li>
    	       
     
       
-   		<li><a href="/about">About</a></li>
+   		<li class="uk-parent"><a href="/about">About</a></li>
    	       
     
       
-   		<li><a href="/contact">Contact</a></li>
+   		<li class="uk-parent"><a href="/contact">Contact</a></li>
    	       
     
 </ul>
 
-  	    </div>
-  	  </div>
-  	</div>
+<div class="uk-navbar-flip uk-hidden-small">
+<ul class="uk-navbar-nav">
+
+<li class="social facebook-p">
+			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
+		</li>
+		
+</ul>
+</div>
+
   </div>
-  <div class="container" id="main">
-    <div class="span12">
-      <div class="row-fluid">
+  </div>
+  </div>
+
+  </nav>
+
+
+<style type="text/css">
+.hero.top {
+background: -moz-linear-gradient(top, rgba(44,62,80,0.9) 0%, rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/Responsive2.png); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(44,62,80,0.9)), color-stop(100%,rgba(44,62,80,0.9))), url(http://minimaxir.com/img/Responsive2.png); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/Responsive2.png); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/Responsive2.png); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/Responsive2.png); /* IE10+ */
+background: linear-gradient(to bottom, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/Responsive2.png); /* W3C */
+
+background-size: 100% auto;
+padding-bottom: 40px;
+}
+</style>
+
+ <div class="uk-container uk-container-center">
+ 
+ 
+
+	 <div class="uk-grid">
+    
+	
+	<div class="uk-width-1-1">
+ <h1 class="title">Why Every New Website Will Use Bootstrap</h1>
+	
+	
+  </div>
+  </div>
+  
+    <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/bootstrap-for-everyone/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=Why Every New Website Will Use Bootstrap - http://minimaxir.com/2012/03/bootstrap-for-everyone/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Every New Website Will Use Bootstrap&url=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+	
+	</div>
+  </div>
+
+  </div>
+
+
+
+
+</div>
+
+
+  
+  <div class="uk-container uk-container-center" id="main post">
+    
+      <div class="uk-grid" data-uk-grid-margin>
+	  <div class="uk-width-1-1">
         <div id="content">
-          <div>
-<article class="hentry" role="article">
+          <article class="hentry" role="article">
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
   
 
   <header>
-  <div class="jumbotron">
-    Why Every New Website Will Use Bootstrap
-    <h5>
+    <h1 class="date-time">
 
 
 
@@ -214,21 +268,14 @@
   
 
 
-<time datetime="2012-03-24T21:10:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2012</time></h5>
-  </div>
+<time datetime="2012-03-24T21:10:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2012</time></h1>
 </header>
-  <div class="row-fluid">
-    <div class="span12">
-	  <div class="row-fluid sharing">
-		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/bootstrap-for-everyone/"><i class="icon-facebook-sign"></i> -</a></span></div>
-			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Why Every New Website Will Use Bootstrap - http://minimaxir.com/2012/03/bootstrap-for-everyone/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-twitter-sign"></i> -</a> </span></div>
 
-  <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Every New Website Will Use Bootstrap&url=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-linkedin-sign"></i> -</a> </span></div>
-   
-			</div>
+  
+			
+			
+			
+			
       <p>So, I decided to spruce up the blog a little bit. The old WordPress theme I had used, <a href="http://wordpress.org/extend/themes/graphene">Graphene</a>, had a lot of useful functionality, such as a featured post slider and a topbar for placing social media buttons, but the theme itself didn&rsquo;t make the blog look <em>unique</em>. Even with a few CSS tweaks to add custom styling, such as forcing the titles of blog posts to be in all-capital letters, (which makes users more likely to click them!), it still <a href="http://i.imgur.com/LQVNK.png">looked very generic</a>. When building a personal brand, generic is never good.</p>
 
 <p>Therefore, I resolved to develop and design a unique WordPress blog theme effectively <em>from scratch</em>, in order to ensure that my blog had a truly distinctive look and functionality. Although modifying the blogging backend was simple (it&rsquo;s WordPress; there are <em>tons</em> of well-written documentation for that platform), modifying the CSS frontend, which my blog readers would actually <em>see</em>, was just as important. For that task, I chose to use the Twitter Bootstrap CSS framework, which many recent startups have utilized to great effect due to its focus on minimalism and efficiency.</p>
@@ -252,7 +299,7 @@
 
 <p>Minimaxir implements many of these features. The most notable of these is the responsive functionality: if you&rsquo;re on a desktop, try and resize the browser window in which you&rsquo;re reading this article. You&rsquo;ll notice the content resizing as well, and if you shrink it far enough, the top navigation bar collapsing into a small, compact form. On tablets, which have both portrait and landscape modes depending on their orientation, the responsive effect is very noticeable:</p>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/Responsive2.png?resize=625%2C352" title="Minimaxir as Responsive" alt="How Minimaxir looks on an iPad, in both Landscape and Portrait modes. Notice the difference in content density." /></p>
+<p><img src="/img/Responsive2.png"></p>
 
 <p>Other UI elements are scattered around logical areas of the website. The traditional &ldquo;read more&rdquo; at the end of each post excerpt is now a Bootstrap button. The hand-implemented  featured posts grouping at the top of index pages, and the bottom of article pages, uses Bootstrap&rsquo;s thumbnail grid, to group images in a clean and logical manner. There&rsquo;s a navigation menu at the top of every page with contains a dropdown, and on individual posts there&rsquo;s a sub-navigation menu which contains the share buttons (I <strong>loathe </strong>the &ldquo;distracting-share-buttons-on-the-left-of-posts-that-scroll-with-you approach that other blogs implement.) Lastly, all article images have a popover on mouseover, which allows for&hellip;creative captioning those images.</p>
 
@@ -264,28 +311,153 @@
 
 <p>One last concern with responsive layouts, which is not Bootstrap&rsquo;s fault, is that some elements, such as social buttons, can dramatically slow down the loading of a website on mobile clients with less processing power than a desktop. Bootstrap contains mechanisms to hide content on mobile/tablets, but that doesn&rsquo;t prevent the content from <em>loading</em>, so it&rsquo;s moot for social buttons. To get around this problem, I had implemented a function that determines server-side whether or not the user is on a mobile client by parsing the user-agent property (which is how websites know if you&rsquo;re using Chrome, Firefox, etc.), and then displaying the social buttons if and only if they are on a desktop. (Otherwise, they see image-based social buttons which load easier). Honestly, in the future I expect to see a native function implemented in server-side languages for native mobile detection given the rise of responsive layouts.</p>
 
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/03/mobilecode.png?resize=625%2C158" title="Is The User On A Mobile Device?" alt="And this is about *half* of the necessary code required!" /></p>
+<p><img src="/img/mobilecode.png"></p>
 
 <p>Twitter Bootstrap is the best and easiest way for your new website to be future-proof, and if you&rsquo;re creating a startup, I strongly urge you to consider using that framework. The amount of time saved for a bootstrapped startup is invaluable, especially for startups ran by coders instead of designers.</p>
 
 <p><em>If you want to see more use-cases for Bootstrap, check out the <a href="http://builtwithbootstrap.com/">BuiltWithBootstrap</a> Tumblr. If you&rsquo;re looking for a WordPress Theme built on Bootstrap (which I wish I knew before attempting to build my own theme), you can use the <a href="http://320press.com/wpbs/">WPBS theme by 320press</a>, which even allows you to use the Bootswatch themes variations as well!</em></p>
 
-	  <div class="row-fluid sharing">
-		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/bootstrap-for-everyone/"><i class="icon-facebook-sign"></i> -</a> </span></div>
-			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=Why Every New Website Will Use Bootstrap - http://minimaxir.com/2012/03/bootstrap-for-everyone/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-twitter-sign"></i> -</a></span></div>
+	  
+	  
 
-  <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Every New Website Will Use Bootstrap&url=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="icon-linkedin-sign"></i> -</a></span></div>
+
+	  
+
+
+
+  
+  
+      <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/bootstrap-for-everyone/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=Why Every New Website Will Use Bootstrap - http://minimaxir.com/2012/03/bootstrap-for-everyone/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Every New Website Will Use Bootstrap&url=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
    
 			</div>
-    </div>
+	
+	</div>
   </div>
 
 
-  <footer>
+
+</div>
+
+<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+
+<div class="sidebar-author">
+
+<h2>About The Author</h2>
+<div>Max Woolf is a 2012 graduate from Carnegie Mellon University in Business Administration with a concentration in Computing and Information Technology, and has worked as a Software QA Engineer in the San Francisco Bay Area for 1.5 years. Max also comments on blogs rather frequently.</div>
+
+<div>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</div>
+
+</div>
+
+  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/11/subreddit-size/">  
+		   Which Subreddits on Reddit are the Largest?</a></h2>
+		   <div>By tabulating the data of 37,561,369 sitewide Link submissions, I created a tree map of the Top 100 subreddits by the number of Link submissions to that subreddit.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/10/wrds-and-vwls/">  
+		   Do startups with short names containing few vowels raise more money?</a></h2>
+		   <div>tl;dr: No.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/09/reddit-imgur-youtube/">  
+		   1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube</a></h2>
+		   <div>As it turns out, Imgur, along with YouTube, account for 32% of the links submitted to Reddit.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/07/alma-mater-data/">  
+		   Which Universities Produce the Most Successful Startup Founders?</a></h2>
+		   <div>Do the tech universities produce more funded graduates than the Ivy League universities? Do the founders from Ivy League Universities receive more funding than those from the top tier tech universities?</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/07/medium-normal/">  
+		   A Statistical Analysis of Medium.com Submissions to Hacker News</a></h2>
+		   <div>I analyzed the submissions of links under the medium.com domain to Hacker News to see just how Medium keeps surging in popularity. The results, as always, are very revealing.</div>
+		   </div>
+
+	 
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
+	
+	
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+	
+	</div>
+	
+	
+	<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+	
+	
+	  <footer>
+
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
     <p class="meta">
+      
+	  <h2><i class="ion-arrow-left-c"></i> Previously...</h2>
+        <h2><a href="/2012/03/a-wordpress-about-tumblr/" title="Previous Post: If You're Going to Blog, Use Tumblr, Not WordPress">If You're Going to Blog, Use Tumblr, Not WordPress</a></h2>
+      
+	  
+	  
+	  
+      
+	  <h2><i class="ion-arrow-right-c"></i> Up Next...</h2>
+        <h2><a href="/2012/10/questions-equals-reponses/" title="Next Post: Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses">Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses</a></h2>
+      
+	  
+	  <hr>
+	  
+	  <h2><i class="ion-ios7-bookmarks-outline"></i> Categories:</h2>
+	      <p class="meta">
 
       
 
@@ -299,48 +471,24 @@
 
 
     </p>
-    
-      <div class="sharing">
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/2012/03/a-wordpress-about-tumblr/" title="Previous Post: If You're Going to Blog, Use Tumblr, Not WordPress">&laquo; If You're Going to Blog, Use Tumblr, Not WordPress</a>
-      
-      
-        <a class="basic-alignment right" href="/2012/04/drivebox/" title="Next Post: Google Drive, And Why Dropbox Really Is In Trouble">Google Drive, And Why Dropbox Really Is In Trouble &raquo;</a>
-      
+	  
     </p>
   </footer>
+	
+	
+	</div>
+	
+	</div>
+
+  
+ 
+  
+  
+
+
+  
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<div class="jumbotron">
-
-<div class="row-fluid">
-    <div class="span2 badge visible-desktop max-header">
-	<a href="/about"><img src="/img/Max200.png"></a>
-	</div>
-	<div class="span10">
-  <div>
-    Max Woolf
-    <h3 class="tagline">CMU business IT graduate, software QA engineer in San Francisco, sarcastic tech blog commenter</h3>
-  </div>
-  
-  </div>
-</div>
-</div>
 
 
 
@@ -348,18 +496,90 @@
 
         </div>
       </div>
-      <div class="row-fluid">
-        <footer class="footer-page" role="contentinfo">
+	  </div>
+	</div>
+  
+  	    
+	  <div class="hero max">
+  
+
+ <style type="text/css">
+.hero.max {
+padding-top: 4px;
+margin-bottom: 0px;
+}
+</style>
+ 
+ <div class="uk-container uk-container-center">
+	 <div class="uk-grid" data-uk-grid-match>
+    
+	
+	<div class="uk-width-large-2-3 uk-width-medium-1-1">
+  <div>
+    <h1 class="name">Max Woolf</h1>
+	<div class="tagline alias">@minimaxir</div>
+    <div class="tagline">Carnegie Mellon Class of 2012 Business IT Graduate</div>
+	 <div class="tagline">Software QA Engineer Living it up in San Francisco</div>
+
+	 
+	 
+	 <div class="uk-grid sharing">
+	 <div class="uk-width-1-4">
+	 <span class="social facebook-p">
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="ion-social-facebook"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social twitter-p">
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="ion-social-twitter"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social linkedin-p">
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="ion-social-linkedin"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social github-p">
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="ion-social-github"></i> </a>
+		</span>
+	 </div>
+	 </div>
+	
+	
+  </div>
+  </div>
+  
+  <div class="uk-width-large-1-3 uk-width-medium-1-1 uk-hidden-small">
+
+
+	<a href="/about"><img src="/Max388.png"></a>
+	
+	</div>
+  
+  </div>
+</div>
+</div>
+
+  
+  <div class="footer-page">
+    <div class="uk-container uk-container-center footer">
+    
+      <div class="uk-grid">
+	  <div class="uk-width-1-1">
+  
+         <footer  role="contentinfo">
           <p>
   Copyright &copy; 2013 - Max Woolf -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a> - Heavily <a href="https://github.com/minimaxir/octoflat">modified</a> by Max Woolf
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and the <a href="http://www.getuikit.com/">UIkit Framework</a></span> - Theme designed by Max Woolf
 </p>
-<p><em>All opinions stated by Max Woolf are his own.</em></p>
+<p><strong>All opinions stated by Max Woolf are his own.</strong></p>
 
         </footer>
-      </div>
-    </div>
-  </div>
+  
   
 
 <script type="text/javascript">
@@ -388,5 +608,12 @@
 
 
 
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
 </body>
 </html>

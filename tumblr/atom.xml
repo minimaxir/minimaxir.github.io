@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tumblr | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//tumblr/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-11-01T07:16:26-07:00</updated>
+  <updated>2013-11-16T00:14:56-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -29,7 +29,7 @@
 
 <p>At the beginning of 2012, I decided to start a Tumblr called <a href="http://techcommntr.com/">techcommntr</a>, whose title intentionally ignores the e&rsquo;s at the end of the word (like Tumblr itself) because poor literacy is kewl, is a blog that sardonically comments on the technology community. I wanted a place outside of <a href="http://techcrunch.com/">TechCrunch</a> to archive and share my blog comments, and also experiment with Tumblr&rsquo;s features hands-on to determine why it&rsquo;s so popular. I had some practice implementing custom CSS and Facebook Comments as well (Tumblr uses a single-file template system which is actually very elegant). Although I haven&rsquo;t posted on it in a while due to real life %2B working on <a href="http://minimaxir.com/2012/03/bootstrap-for-everyone/">a certain other project</a>, I have learnt quite a lot about the platform, and there are a <strong>lot</strong> of unpublicized features and benefits which Tumblr does not advertise.</p>
 
-<p><a href="https://plus.google.com/"><img src="https://plus.google.com/" alt="*Another* startup idea in the bathroom? Is lavatorial inspiration a common thing for him?" /></a></p>
+<p><img src="/img/techcommntr2.png"></p>
 
 <h2>Tumblr vs. WordPress</h2>
 
@@ -39,7 +39,7 @@
 
 <p>In addition to the aforementioned features that Tumblr has that WordPress.com makes you egregiously pay for, Tumblr&rsquo;s strongest advantage is its focus on content promotion. Users can like or reblog posts on any Tumblr, regardless of theme design or settings, and all likes/shares are attributed to the original poster. Posts can be tagged, which go into a pool of all other Tumblr posts with the same tag; tagging your posts with a very large amount of tags is not a bad strategy. While yes, age-old viral pictures or ragefaces tend to pop up frequently, original content and images that cannot easily be replicated can be very valuable for spreading your personal brand. (although if you&rsquo;re able to watermark your photos, I&rsquo;d recommending doing that to deter uncredited repostings.)</p>
 
-<p><a href="http://gawker.com/"><img src="http://gawker.com/" alt="My most successful Tumblr post, with 20 notes. This happened because this post had a #trollface tag, and a trollface Tumblr caught it and reblogged it." /></a></p>
+<p><img src="/img/techcommntr.png"></p>
 
 <h2>Tumblr vs. Professional Bloggers</h2>
 

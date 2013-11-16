@@ -68,14 +68,16 @@
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
-  <link href="/stylesheets/flat-ui.css" rel="stylesheet">
-  <link href="/stylesheets/minimaxir-css.css" rel="stylesheet">
-  <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"> -->
+  
+  <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
+  
+  <link href="/stylesheets/uikit.css" rel="stylesheet">
+  <link href="/stylesheets/minimaxir-uikit.css" rel="stylesheet">
+  
   <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
   <script src="/js/jquery.js"></script>
-  <script src="/js/bootstrap-collapse.js"></script>
   <script src="/javascripts/modernizr-2.0.js"></script>
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -86,24 +88,24 @@
  $(document).ready(function() {
  
   // Facebook
-	$( ".badge.facebook" ).children().each(function(index,value) {
+	$( ".social.facebook" ).children().each(function(index,value) {
 	var facebook_button = $(this);
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
-  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
-  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + " 0");
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + " 0</span>");
   });
   });
  
  // Twitter
-	$( ".badge.twitter" ).children().each(function(index,value) {
+	$( ".social.twitter" ).children().each(function(index,value) {
 	var twitter_button = $(this);
 	var url = twitter_button.attr("data");
 
   jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
-  twitter_button.html("<i class=\"icon-twitter-sign\"></i> " + data.count);
+  twitter_button.html("<i class=\"ion-social-twitter\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
   });
   });
   
@@ -111,12 +113,12 @@
   
   
   // LinkedIn
-	$( ".badge.linkedin" ).children().each(function(index,value) {
+	$( ".social.linkedin" ).children().each(function(index,value) {
 	var linkedin_button = $(this);
 	var url = linkedin_button.attr("data");
 
   jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
-  linkedin_button.html("<i class=\"icon-linkedin-sign\"></i> " + data.count);
+  linkedin_button.html("<i class=\"ion-social-linkedin\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
   });
   });
   
@@ -134,152 +136,193 @@
 </head>
 
 <body   >
-  <div class="navbar navbar-inverse navbar-static-top">
-  	<div class="navbar-inner">
-  	  <div class="container">
-	  <ul class="nav social">
-	  
-	  <li class="rss visible-desktop">
-			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="icon-rss-sign"></i>  </a>
-		</li>
-	  
-		<li class="facebook">
-			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="icon-facebook-sign"></i> </a>
-		</li>
-		
-		<li class="twitter">
-			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="icon-twitter-sign"></i> </a>
-		</li>
-		
-		<li class="linkedin">
-			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="icon-linkedin-sign"></i> </a>
-		</li>
-		
-		<li class="github">
-			<a href="http://github.com/minimaxir" target="_blank"> <i class="icon-github-sign"></i> </a>
-		</li>
-		
-		
-	</ul>
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="fui-menu-24"></span>
-        </a>
-  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
-  	      <ul class="nav">
+
+
+
+  
+
+ <div class="hero top">
+ 
+
+ 
+ 
+  <nav class="uk-navbar ">
+ <div class="uk-container uk-container-center">
+<div class="uk-grid">
+	<div class="uk-width-1-1">
+
+  	      <ul class="uk-navbar-nav">
 	
       
-   		<li><a href="/">Home</a></li>
+   		<li class="uk-parent"><a href="/">Home</a></li>
    	       
     
       
-   		<li><a href="/about">About</a></li>
+   		<li class="uk-parent"><a href="/about">About</a></li>
    	       
     
       
-   		<li><a href="/contact">Contact</a></li>
+   		<li class="uk-parent"><a href="/contact">Contact</a></li>
    	       
     
 </ul>
 
-  	    </div>
-  	  </div>
-  	</div>
-  </div>
-  <div class="container" id="main">
-    <div class="span12">
-      <div class="row-fluid">
-        <div id="content">
-          <div class="jumbotron">
+<div class="uk-navbar-flip uk-hidden-small">
+<ul class="uk-navbar-nav">
 
-<div class="row-fluid">
-    <div class="span2 badge visible-desktop max-header">
-	<a href="/about"><img src="/img/Max200.png"></a>
-	</div>
-	<div class="span10">
+<li class="social facebook-p">
+			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
+		</li>
+		
+</ul>
+</div>
+
+  </div>
+  </div>
+  </div>
+
+  </nav>
+
+  
+
+ <style type="text/css">
+.hero.max {
+padding-top: 4px;
+margin-bottom: 0px;
+}
+</style>
+ 
+ <div class="uk-container uk-container-center">
+	 <div class="uk-grid" data-uk-grid-match>
+    
+	
+	<div class="uk-width-large-2-3 uk-width-medium-1-1">
   <div>
-    Max Woolf
-    <h3 class="tagline">CMU business IT graduate, software QA engineer in San Francisco, sarcastic tech blog commenter</h3>
+    <h1 class="name">Max Woolf</h1>
+	<div class="tagline alias">@minimaxir</div>
+    <div class="tagline">Carnegie Mellon Class of 2012 Business IT Graduate</div>
+	 <div class="tagline">Software QA Engineer Living it up in San Francisco</div>
+
+	 
+	 
+	 <div class="uk-grid sharing">
+	 <div class="uk-width-1-4">
+	 <span class="social facebook-p">
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="ion-social-facebook"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social twitter-p">
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="ion-social-twitter"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social linkedin-p">
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="ion-social-linkedin"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social github-p">
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="ion-social-github"></i> </a>
+		</span>
+	 </div>
+	 </div>
+	
+	
   </div>
+  </div>
+  
+  <div class="uk-width-large-1-3 uk-width-medium-1-1 uk-hidden-small">
+
+
+	<a href="/about"><img src="/Max388.png"></a>
+	
+	</div>
   
   </div>
 </div>
+
+
+
 </div>
-<div class="blog-index">
+
+
+  
+  <div class="uk-container uk-container-center" id="main">
+    
+      <div class="uk-grid" data-uk-grid-margin>
+	  <div class="uk-width-1-1">
+        <div id="content">
+          <div class="uk-grid">
+
+<div class="uk-width-1-1">
   
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-24T21:44:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM - http://minimaxir.com/2013/03/127-yoshis-in-slot-6/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM&url=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/gaming">Gaming</a></span>
-          
-          <span class="badge"><a href="/hacks">Hacks</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/03/127-yoshis-in-slot-6/">Super Mario World &#8220;Completed&#8221; in Under 3 Minutes by Corrupting the RAM</a></h1>
-	  <div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Syo5sI-iOgY "></iframe></div>
-
-
-<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
-
-<p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
-
-
+	  This SMW TAS, posted in 2011, was so crazy that it inspired the creation of a new category of speed runs: Corrupts Memory.
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/03/127-yoshis-in-slot-6/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/03/127-yoshis-in-slot-6/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-24T21:44:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/4/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM&url=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
@@ -288,77 +331,67 @@
     
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-23T21:38:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=How To Kill The Reader Comments Of A Popular Tech Blog - http://minimaxir.com/2013/01/its-a-metaphor-maybe/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How To Kill The Reader Comments Of A Popular Tech Blog&url=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/blogging">Blogging</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/01/its-a-metaphor-maybe/">How To Kill The Reader Comments Of A Popular Tech Blog</a></h1>
-	  <p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog.</p>
-
-<p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
-
-<p>Fast forward to 2012. Other blogs on the Aol blogging network, such as Engadget, Joystiq, and TechCrunch itself, have <a href="http://www.engadget.com/2012/10/11/engadget-livefyre-commenting-system/">decided</a> to <a href="http://www.joystiq.com/2012/04/04/joystiqs-new-commenting-system-is-live/">migrate</a> to <a href="http://www.livefyre.com/">LiveFyre</a>, another blog commenting system which allows readers to comment using their social identities, in addition to a few flashy Web 2.0 features. I figured it was a matter of time until TechCrunch implemented it themselves. And in January 2013, <a href="http://techcrunch.com/2013/01/22/we-want-you-back/">they did</a>.</p>
-
-<p>At first, I thought I would like the change. Facebook Comments has their own problems that a switch to Livefyre could solve. I was wrong. The stated reasons for the change were &ldquo;we want more comments,&rdquo; but a large amount of low-value comments (and images), with no way to identify good ones, along with the increased hassle of commenting, will end up backfiring. I&rsquo;m honestly afraid that the switch from Facebook Comments could kill quality comments on TechCrunch completely.</p>
-
-
+	  I&#8217;m honestly afraid that the switch from Facebook Comments could kill quality comments on TechCrunch completely.
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/01/its-a-metaphor-maybe/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/01/its-a-metaphor-maybe/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-23T21:38:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/4/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How To Kill The Reader Comments Of A Popular Tech Blog&url=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
@@ -367,79 +400,67 @@
     
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-15T21:36:00-08:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet - http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet&url=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/hacks">Hacks</a></span>
-          
-          <span class="badge"><a href="/startups">Startups</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/01/sexy-will-haunt-your-dreams/">Let Myspace&#8217;s Justin Timberlake Bring Sexy To The Entire Internet</a></h1>
-	  
-
-<p>TechCrunch writer Sarah Perez recently wrote <a href="http://techcrunch.com/2013/01/15/lost-on-new-myspace-cant-escape-justin-send-help/">an incredibly hilarious article</a> about <a href="https://new.myspace.com/">Myspace</a>&rsquo;s recent redesign, and the&hellip;overemphasis of a certain former N&#8217;Sync band member. Justin Timberlake, the spearhead of Myspace&rsquo;s music-oriented redesign, stresses his clean-shaven image with a handsome yet somber black-and-white portrait that always seems to follow you where you go.</p>
-
-<p>I&rsquo;m OK with this. There are certainly far <a href="http://minimaxir.com/2012/03/ethics-self-promotion/"><em>worse</em></a> ways to promote a startup.</p>
-
-<p>His moody yet charmful face adds a touch of class to any website. But why does he have to stay constrained to Myspace? Why not let Justin Timberlake dominate the world?</p>
-
-
+	  His moody yet charmful face adds a touch of class to any website. But why does he have to stay constrained to Myspace? Why not let Justin Timberlake dominate the world?
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/01/sexy-will-haunt-your-dreams/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/01/sexy-will-haunt-your-dreams/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-15T21:36:00-08:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/4/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet&url=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
@@ -448,79 +469,67 @@
     
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-13T21:32:00-08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/01/if-cute-then-happiness/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT) - http://minimaxir.com/2013/01/if-cute-then-happiness/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)&url=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/hacks">Hacks</a></span>
-          
-          <span class="badge"><a href="/startups">Startups</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/01/if-cute-then-happiness/">Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)</a></h1>
-	  <p><strong><em>TL;DR: Use this <a href="https://ifttt.com/recipes/74285">IFTTT recipe</a>, and change the subreddit value in the parameter of the Feed URL as needed.</em></strong></p>
-
-<p>In <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">a previous post</a>, I joked about a hypothetical social media strategy in which an automated script does Facebook brand management by stealing the top cute images from <a href="http://www.reddit.com/">Reddit</a> &ndash; an aggregator of trending topics and images &ndash;  and reposting them on the Facebook page, additionally adding a cute message encouraging users to LIKE, SHARE, and COMMENT!  We get easy social media fame for no monetary cost.</p>
-
-<p>Out of curiosity, I wanted to see if it was feasible to create such a script. Both Reddit and Facebook indeed have APIs that make it easy. But then I have to set up a server to check Reddit periodically, ensure that no images are duplicated, etc., and that can take time to implement and ensure that it works correctly (<em>all</em> the images must be cute!). I looked into <a href="https://ifttt.com/">IFTTT</a>, a relatively new startup that talks between different popular web services to automate simple tasks, like posting to Twitter whenever you post to Facebook.</p>
-
-<p>As it turns out, yes, this is possible, and you can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too! Just use <a href="https://ifttt.com/recipes/74285">this IFTTT recipe</a>! There are a few interesting caveats, though&hellip;</p>
-
-
+	  You can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too!
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/01/if-cute-then-happiness/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/01/if-cute-then-happiness/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-13T21:32:00-08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/4/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)&url=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
@@ -529,110 +538,120 @@
     
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-04T21:30:00-08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/01/prefixed-period/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/prefixed-period/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/prefixed-period/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=Why Do Many Tweets Begin With A Period? - http://minimaxir.com/2013/01/prefixed-period/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/prefixed-period/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Do Many Tweets Begin With A Period?&url=http://minimaxir.com/2013/01/prefixed-period/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/prefixed-period/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/startups">Startups</a></span>
-          
-          <span class="badge"><a href="/twitter">Twitter</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/01/prefixed-period/">Why Do Many Tweets Begin With A Period?</a></h1>
-	  <p>I&rsquo;m not a Twitter fanatic. Although I do have <a href="https://twitter.com/minimaxir">a Twitter account</a> with about 300 followers,  Facebook&rsquo;s Subscribe feature <a href="http://www.facebook.com/max.woolf">on my Facebook profile</a> has met my use case for publishing sarcastic quips and cool links for a broad audience over the internet. I mostly use my Twitter account to read tweets from tech columnists, yet I don&rsquo;t even comment on their tweets because <strong>tweets that are replies to someone are not visible in the home timeline of my followers</strong>. I can understand the intuition behind this behavior: Twitter conversations can contain a lot of low-content tweets, and Twitter doesn&rsquo;t want its users to be spammed.</p>
-
-<p>I&rsquo;ve noticed that many tweets from actual Twitter fanatics begin with a prefixed period, such as <em>&ldquo;.@minimaxir wow funny joke!&rdquo; </em>and <em>&ldquo;.@minimaxir is a huge dork!&rdquo;</em>. I thought the dot was a typo, until I noticed many people also prefixing the period, seemingly randomly, in their own tweets. All of those tweets seemed like witty replies that begged for mass exposure, and so I eventually realized that beginning your reply Tweet with a period (.) allows it to be seen by all your followers. **Otherwise, only the replyee will receive notification of the reply.</p>
-
-<p>Having your reply tweets appear to your followers only if you begin them with a prefixed period is not intuitive at all. And this particular behavior and its workaround are not documented in <a href="https://support.twitter.com/groups/31-twitter-basics/topics/109-tweets-messages/articles/14023-what-are-replies-and-mentions">Twitter&rsquo;s help docs</a>. And replying to tweets is a core feature of Twitter. How many users would be able to deduce this behavior? How many brands, who rely on user engagement, are even aware of this behavior?</p>
-
-<p>As it turns out, I was only partially correct. It&rsquo;s even <em>less</em> intuitive.</p>
-
-
+	  I eventually realized that beginning your reply Tweet with a period (.) allows it to be seen by all your followers.
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/01/prefixed-period/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/01/prefixed-period/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-04T21:30:00-08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/prefixed-period/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/prefixed-period/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/4/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/prefixed-period/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Do Many Tweets Begin With A Period?&url=http://minimaxir.com/2013/01/prefixed-period/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/prefixed-period/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
     
   
+  
+  <div class="uk-grid page-nav">
+  <div class="uk-width-1-3 uk-width-small-1-1">
   <div class="pagination">
     
-    <a class="prev badge" href="/page/5/"><i class="icon-arrow-left"></i> Older</a>
+    <a class="prev badge" href="/page/5/"><i class="ion-arrow-left-c"></i>  Older</a>
     
+	</div>
+	</div>
+<div class="uk-width-1-3 uk-width-small-1-1">
+</div>
 
+<div class="uk-push-1-3 uk-width-1-3 uk-width-small-1-1">
+<div class="pagination">
     
-    <a class="next badge" href="/page/3/">Newer <i class="icon-arrow-right"></i></a>
+    <a class="next badge" href="/page/3/">Newer <i class="ion-arrow-right-c"></i> </a>
     
+	</div>
+	</div>
   </div>
+</div>
+
+
 </div>
 
 
         </div>
       </div>
-      <div class="row-fluid">
-        <footer class="footer-page" role="contentinfo">
+	  </div>
+	</div>
+  
+  	    
+  
+  <div class="footer-page">
+    <div class="uk-container uk-container-center footer">
+    
+      <div class="uk-grid">
+	  <div class="uk-width-1-1">
+  
+         <footer  role="contentinfo">
           <p>
   Copyright &copy; 2013 - Max Woolf -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a> - Heavily <a href="https://github.com/minimaxir/octoflat">modified</a> by Max Woolf
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and the <a href="http://www.getuikit.com/">UIkit Framework</a></span> - Theme designed by Max Woolf
 </p>
-<p><em>All opinions stated by Max Woolf are his own.</em></p>
+<p><strong>All opinions stated by Max Woolf are his own.</strong></p>
 
         </footer>
-      </div>
-    </div>
-  </div>
+  
   
 
 <script type="text/javascript">
@@ -658,5 +677,12 @@
 
 
 
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
 </body>
 </html>

@@ -74,14 +74,16 @@
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
-  <link href="/stylesheets/flat-ui.css" rel="stylesheet">
-  <link href="/stylesheets/minimaxir-css.css" rel="stylesheet">
-  <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"> -->
+  
+  <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
+  
+  <link href="/stylesheets/uikit.css" rel="stylesheet">
+  <link href="/stylesheets/minimaxir-uikit.css" rel="stylesheet">
+  
   <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
   <script src="/js/jquery.js"></script>
-  <script src="/js/bootstrap-collapse.js"></script>
   <script src="/javascripts/modernizr-2.0.js"></script>
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -92,24 +94,24 @@
  $(document).ready(function() {
  
   // Facebook
-	$( ".badge.facebook" ).children().each(function(index,value) {
+	$( ".social.facebook" ).children().each(function(index,value) {
 	var facebook_button = $(this);
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
-  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
-  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + " 0");
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + " 0</span>");
   });
   });
  
  // Twitter
-	$( ".badge.twitter" ).children().each(function(index,value) {
+	$( ".social.twitter" ).children().each(function(index,value) {
 	var twitter_button = $(this);
 	var url = twitter_button.attr("data");
 
   jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
-  twitter_button.html("<i class=\"icon-twitter-sign\"></i> " + data.count);
+  twitter_button.html("<i class=\"ion-social-twitter\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
   });
   });
   
@@ -117,12 +119,12 @@
   
   
   // LinkedIn
-	$( ".badge.linkedin" ).children().each(function(index,value) {
+	$( ".social.linkedin" ).children().each(function(index,value) {
 	var linkedin_button = $(this);
 	var url = linkedin_button.attr("data");
 
   jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
-  linkedin_button.html("<i class=\"icon-linkedin-sign\"></i> " + data.count);
+  linkedin_button.html("<i class=\"ion-social-linkedin\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
   });
   });
   
@@ -140,69 +142,121 @@
 </head>
 
 <body   >
-  <div class="navbar navbar-inverse navbar-static-top">
-  	<div class="navbar-inner">
-  	  <div class="container">
-	  <ul class="nav social">
-	  
-	  <li class="rss visible-desktop">
-			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="icon-rss-sign"></i>  </a>
-		</li>
-	  
-		<li class="facebook">
-			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="icon-facebook-sign"></i> </a>
-		</li>
-		
-		<li class="twitter">
-			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="icon-twitter-sign"></i> </a>
-		</li>
-		
-		<li class="linkedin">
-			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="icon-linkedin-sign"></i> </a>
-		</li>
-		
-		<li class="github">
-			<a href="http://github.com/minimaxir" target="_blank"> <i class="icon-github-sign"></i> </a>
-		</li>
-		
-		
-	</ul>
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="fui-menu-24"></span>
-        </a>
-  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
-  	      <ul class="nav">
+
+
+
+  
+
+ <div class="hero top">
+  
+
+
+ <nav class="uk-navbar ">
+ <div class="uk-container uk-container-center">
+<div class="uk-grid">
+	<div class="uk-width-1-1">
+
+  	      <ul class="uk-navbar-nav">
 	
       
-   		<li><a href="/">Home</a></li>
+   		<li class="uk-parent"><a href="/">Home</a></li>
    	       
     
       
-   		<li><a href="/about">About</a></li>
+   		<li class="uk-parent"><a href="/about">About</a></li>
    	       
     
       
-   		<li><a href="/contact">Contact</a></li>
+   		<li class="uk-parent"><a href="/contact">Contact</a></li>
    	       
     
 </ul>
 
-  	    </div>
-  	  </div>
-  	</div>
+<div class="uk-navbar-flip uk-hidden-small">
+<ul class="uk-navbar-nav">
+
+<li class="social facebook-p">
+			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
+		</li>
+		
+</ul>
+</div>
+
   </div>
-  <div class="container" id="main">
-    <div class="span12">
-      <div class="row-fluid">
+  </div>
+  </div>
+
+  </nav>
+
+
+<style type="text/css">
+.hero.top {
+background: -moz-linear-gradient(top, rgba(44,62,80,0.9) 0%, rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/ToKillACommentsSection.png); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(44,62,80,0.9)), color-stop(100%,rgba(44,62,80,0.9))), url(http://minimaxir.com/img/ToKillACommentsSection.png); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/ToKillACommentsSection.png); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/ToKillACommentsSection.png); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/ToKillACommentsSection.png); /* IE10+ */
+background: linear-gradient(to bottom, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/ToKillACommentsSection.png); /* W3C */
+
+background-size: 100% auto;
+padding-bottom: 40px;
+}
+</style>
+
+ <div class="uk-container uk-container-center">
+ 
+ 
+
+	 <div class="uk-grid">
+    
+	
+	<div class="uk-width-1-1">
+ <h1 class="title">How to Kill the Reader Comments of a Popular Tech Blog</h1>
+	
+	
+  </div>
+  </div>
+  
+    <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=How To Kill The Reader Comments Of A Popular Tech Blog - http://minimaxir.com/2013/01/its-a-metaphor-maybe/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How To Kill The Reader Comments Of A Popular Tech Blog&url=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+	
+	</div>
+  </div>
+
+  </div>
+
+
+
+
+</div>
+
+
+  
+  <div class="uk-container uk-container-center" id="main post">
+    
+      <div class="uk-grid" data-uk-grid-margin>
+	  <div class="uk-width-1-1">
         <div id="content">
-          <div>
-<article class="hentry" role="article">
+          <article class="hentry" role="article">
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
   
 
   <header>
-  <div class="jumbotron">
-    How to Kill the Reader Comments of a Popular Tech Blog
-    <h5>
+    <h1 class="date-time">
 
 
 
@@ -214,21 +268,14 @@
   
 
 
-<time datetime="2013-01-23T21:38:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time></h5>
-  </div>
+<time datetime="2013-01-23T21:38:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time></h1>
 </header>
-  <div class="row-fluid">
-    <div class="span12">
-	  <div class="row-fluid sharing">
-		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><i class="icon-facebook-sign"></i> -</a></span></div>
-			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=How To Kill The Reader Comments Of A Popular Tech Blog - http://minimaxir.com/2013/01/its-a-metaphor-maybe/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="icon-twitter-sign"></i> -</a> </span></div>
 
-  <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How To Kill The Reader Comments Of A Popular Tech Blog&url=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="icon-linkedin-sign"></i> -</a> </span></div>
-   
-			</div>
+  
+			
+			
+			
+			
       <p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog.</p>
 
 <p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
@@ -299,22 +346,147 @@
 
 <p><strong>EDIT (May 2013)</strong>: When this article was published, this blog was using Facebook Comments, however I switched the comments system to Disqus just to try it out.</p>
 
-	  <div class="row-fluid sharing">
-		  <div class="span4"><span class="badge facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><i class="icon-facebook-sign"></i> -</a> </span></div>
-			<div class="span4"><span class="badge twitter"><a href="http://twitter.com/home/?status=How To Kill The Reader Comments Of A Popular Tech Blog - http://minimaxir.com/2013/01/its-a-metaphor-maybe/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="icon-twitter-sign"></i> -</a></span></div>
+	  
+	  
 
-  <div class="span4"><span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How To Kill The Reader Comments Of A Popular Tech Blog&url=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="icon-linkedin-sign"></i> -</a></span></div>
+
+	  
+
+
+
+  
+  
+      <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=How To Kill The Reader Comments Of A Popular Tech Blog - http://minimaxir.com/2013/01/its-a-metaphor-maybe/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How To Kill The Reader Comments Of A Popular Tech Blog&url=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
    
 			</div>
-    </div>
+	
+	</div>
   </div>
 
 
-  <footer>
+
+</div>
+
+<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+
+<div class="sidebar-author">
+
+<h2>About The Author</h2>
+<div>Max Woolf is a 2012 graduate from Carnegie Mellon University in Business Administration with a concentration in Computing and Information Technology, and has worked as a Software QA Engineer in the San Francisco Bay Area for 1.5 years. Max also comments on blogs rather frequently.</div>
+
+<div>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</div>
+
+</div>
+
+  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/11/subreddit-size/">  
+		   Which Subreddits on Reddit are the Largest?</a></h2>
+		   <div>By tabulating the data of 37,561,369 sitewide Link submissions, I created a tree map of the Top 100 subreddits by the number of Link submissions to that subreddit.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/10/wrds-and-vwls/">  
+		   Do startups with short names containing few vowels raise more money?</a></h2>
+		   <div>tl;dr: No.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/09/reddit-imgur-youtube/">  
+		   1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube</a></h2>
+		   <div>As it turns out, Imgur, along with YouTube, account for 32% of the links submitted to Reddit.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/07/alma-mater-data/">  
+		   Which Universities Produce the Most Successful Startup Founders?</a></h2>
+		   <div>Do the tech universities produce more funded graduates than the Ivy League universities? Do the founders from Ivy League Universities receive more funding than those from the top tier tech universities?</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2013/07/medium-normal/">  
+		   A Statistical Analysis of Medium.com Submissions to Hacker News</a></h2>
+		   <div>I analyzed the submissions of links under the medium.com domain to Hacker News to see just how Medium keeps surging in popularity. The results, as always, are very revealing.</div>
+		   </div>
+
+	 
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
+	
+	
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+	
+	</div>
+	
+	
+	<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+	
+	
+	  <footer>
+
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
     <p class="meta">
+      
+	  <h2><i class="ion-arrow-left-c"></i> Previously...</h2>
+        <h2><a href="/2013/01/sexy-will-haunt-your-dreams/" title="Previous Post: Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet">Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet</a></h2>
+      
+	  
+	  
+	  
+      
+	  <h2><i class="ion-arrow-right-c"></i> Up Next...</h2>
+        <h2><a href="/2013/03/127-yoshis-in-slot-6/" title="Next Post: Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM">Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM</a></h2>
+      
+	  
+	  <hr>
+	  
+	  <h2><i class="ion-ios7-bookmarks-outline"></i> Categories:</h2>
+	      <p class="meta">
 
       
 
@@ -328,48 +500,24 @@
 
 
     </p>
-    
-      <div class="sharing">
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/2013/01/sexy-will-haunt-your-dreams/" title="Previous Post: Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet">&laquo; Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet</a>
-      
-      
-        <a class="basic-alignment right" href="/2013/03/127-yoshis-in-slot-6/" title="Next Post: Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM">Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM &raquo;</a>
-      
+	  
     </p>
   </footer>
+	
+	
+	</div>
+	
+	</div>
+
+  
+ 
+  
+  
+
+
+  
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<div class="jumbotron">
-
-<div class="row-fluid">
-    <div class="span2 badge visible-desktop max-header">
-	<a href="/about"><img src="/img/Max200.png"></a>
-	</div>
-	<div class="span10">
-  <div>
-    Max Woolf
-    <h3 class="tagline">CMU business IT graduate, software QA engineer in San Francisco, sarcastic tech blog commenter</h3>
-  </div>
-  
-  </div>
-</div>
-</div>
 
 
 
@@ -377,18 +525,90 @@
 
         </div>
       </div>
-      <div class="row-fluid">
-        <footer class="footer-page" role="contentinfo">
+	  </div>
+	</div>
+  
+  	    
+	  <div class="hero max">
+  
+
+ <style type="text/css">
+.hero.max {
+padding-top: 4px;
+margin-bottom: 0px;
+}
+</style>
+ 
+ <div class="uk-container uk-container-center">
+	 <div class="uk-grid" data-uk-grid-match>
+    
+	
+	<div class="uk-width-large-2-3 uk-width-medium-1-1">
+  <div>
+    <h1 class="name">Max Woolf</h1>
+	<div class="tagline alias">@minimaxir</div>
+    <div class="tagline">Carnegie Mellon Class of 2012 Business IT Graduate</div>
+	 <div class="tagline">Software QA Engineer Living it up in San Francisco</div>
+
+	 
+	 
+	 <div class="uk-grid sharing">
+	 <div class="uk-width-1-4">
+	 <span class="social facebook-p">
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="ion-social-facebook"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social twitter-p">
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="ion-social-twitter"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social linkedin-p">
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="ion-social-linkedin"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social github-p">
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="ion-social-github"></i> </a>
+		</span>
+	 </div>
+	 </div>
+	
+	
+  </div>
+  </div>
+  
+  <div class="uk-width-large-1-3 uk-width-medium-1-1 uk-hidden-small">
+
+
+	<a href="/about"><img src="/Max388.png"></a>
+	
+	</div>
+  
+  </div>
+</div>
+</div>
+
+  
+  <div class="footer-page">
+    <div class="uk-container uk-container-center footer">
+    
+      <div class="uk-grid">
+	  <div class="uk-width-1-1">
+  
+         <footer  role="contentinfo">
           <p>
   Copyright &copy; 2013 - Max Woolf -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a> - Heavily <a href="https://github.com/minimaxir/octoflat">modified</a> by Max Woolf
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and the <a href="http://www.getuikit.com/">UIkit Framework</a></span> - Theme designed by Max Woolf
 </p>
-<p><em>All opinions stated by Max Woolf are his own.</em></p>
+<p><strong>All opinions stated by Max Woolf are his own.</strong></p>
 
         </footer>
-      </div>
-    </div>
-  </div>
+  
   
 
 <script type="text/javascript">
@@ -417,5 +637,12 @@
 
 
 
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
 </body>
 </html>

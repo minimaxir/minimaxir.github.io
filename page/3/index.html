@@ -68,14 +68,16 @@
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
-  <link href="/stylesheets/flat-ui.css" rel="stylesheet">
-  <link href="/stylesheets/minimaxir-css.css" rel="stylesheet">
-  <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"> -->
+  
+  <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
+  
+  <link href="/stylesheets/uikit.css" rel="stylesheet">
+  <link href="/stylesheets/minimaxir-uikit.css" rel="stylesheet">
+  
   <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
   <script src="/js/jquery.js"></script>
-  <script src="/js/bootstrap-collapse.js"></script>
   <script src="/javascripts/modernizr-2.0.js"></script>
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -86,24 +88,24 @@
  $(document).ready(function() {
  
   // Facebook
-	$( ".badge.facebook" ).children().each(function(index,value) {
+	$( ".social.facebook" ).children().each(function(index,value) {
 	var facebook_button = $(this);
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.shares);
-  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + data.likes);
-  else facebook_button.html("<i class=\"icon-facebook-sign\"></i> " + " 0");
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + " 0</span>");
   });
   });
  
  // Twitter
-	$( ".badge.twitter" ).children().each(function(index,value) {
+	$( ".social.twitter" ).children().each(function(index,value) {
 	var twitter_button = $(this);
 	var url = twitter_button.attr("data");
 
   jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
-  twitter_button.html("<i class=\"icon-twitter-sign\"></i> " + data.count);
+  twitter_button.html("<i class=\"ion-social-twitter\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
   });
   });
   
@@ -111,12 +113,12 @@
   
   
   // LinkedIn
-	$( ".badge.linkedin" ).children().each(function(index,value) {
+	$( ".social.linkedin" ).children().each(function(index,value) {
 	var linkedin_button = $(this);
 	var url = linkedin_button.attr("data");
 
   jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
-  linkedin_button.html("<i class=\"icon-linkedin-sign\"></i> " + data.count);
+  linkedin_button.html("<i class=\"ion-social-linkedin\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
   });
   });
   
@@ -134,155 +136,193 @@
 </head>
 
 <body   >
-  <div class="navbar navbar-inverse navbar-static-top">
-  	<div class="navbar-inner">
-  	  <div class="container">
-	  <ul class="nav social">
-	  
-	  <li class="rss visible-desktop">
-			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="icon-rss-sign"></i>  </a>
-		</li>
-	  
-		<li class="facebook">
-			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="icon-facebook-sign"></i> </a>
-		</li>
-		
-		<li class="twitter">
-			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="icon-twitter-sign"></i> </a>
-		</li>
-		
-		<li class="linkedin">
-			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="icon-linkedin-sign"></i> </a>
-		</li>
-		
-		<li class="github">
-			<a href="http://github.com/minimaxir" target="_blank"> <i class="icon-github-sign"></i> </a>
-		</li>
-		
-		
-	</ul>
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="fui-menu-24"></span>
-        </a>
-  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
-  	      <ul class="nav">
+
+
+
+  
+
+ <div class="hero top">
+ 
+
+ 
+ 
+  <nav class="uk-navbar ">
+ <div class="uk-container uk-container-center">
+<div class="uk-grid">
+	<div class="uk-width-1-1">
+
+  	      <ul class="uk-navbar-nav">
 	
       
-   		<li><a href="/">Home</a></li>
+   		<li class="uk-parent"><a href="/">Home</a></li>
    	       
     
       
-   		<li><a href="/about">About</a></li>
+   		<li class="uk-parent"><a href="/about">About</a></li>
    	       
     
       
-   		<li><a href="/contact">Contact</a></li>
+   		<li class="uk-parent"><a href="/contact">Contact</a></li>
    	       
     
 </ul>
 
-  	    </div>
-  	  </div>
-  	</div>
-  </div>
-  <div class="container" id="main">
-    <div class="span12">
-      <div class="row-fluid">
-        <div id="content">
-          <div class="jumbotron">
+<div class="uk-navbar-flip uk-hidden-small">
+<ul class="uk-navbar-nav">
 
-<div class="row-fluid">
-    <div class="span2 badge visible-desktop max-header">
-	<a href="/about"><img src="/img/Max200.png"></a>
-	</div>
-	<div class="span10">
+<li class="social facebook-p">
+			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
+		</li>
+		
+</ul>
+</div>
+
+  </div>
+  </div>
+  </div>
+
+  </nav>
+
+  
+
+ <style type="text/css">
+.hero.max {
+padding-top: 4px;
+margin-bottom: 0px;
+}
+</style>
+ 
+ <div class="uk-container uk-container-center">
+	 <div class="uk-grid" data-uk-grid-match>
+    
+	
+	<div class="uk-width-large-2-3 uk-width-medium-1-1">
   <div>
-    Max Woolf
-    <h3 class="tagline">CMU business IT graduate, software QA engineer in San Francisco, sarcastic tech blog commenter</h3>
+    <h1 class="name">Max Woolf</h1>
+	<div class="tagline alias">@minimaxir</div>
+    <div class="tagline">Carnegie Mellon Class of 2012 Business IT Graduate</div>
+	 <div class="tagline">Software QA Engineer Living it up in San Francisco</div>
+
+	 
+	 
+	 <div class="uk-grid sharing">
+	 <div class="uk-width-1-4">
+	 <span class="social facebook-p">
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="ion-social-facebook"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social twitter-p">
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="ion-social-twitter"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social linkedin-p">
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="ion-social-linkedin"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social github-p">
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="ion-social-github"></i> </a>
+		</span>
+	 </div>
+	 </div>
+	
+	
   </div>
+  </div>
+  
+  <div class="uk-width-large-1-3 uk-width-medium-1-1 uk-hidden-small">
+
+
+	<a href="/about"><img src="/Max388.png"></a>
+	
+	</div>
   
   </div>
 </div>
+
+
+
 </div>
-<div class="blog-index">
+
+
+  
+  <div class="uk-container uk-container-center" id="main">
+    
+      <div class="uk-grid" data-uk-grid-margin>
+	  <div class="uk-width-1-1">
+        <div id="content">
+          <div class="uk-grid">
+
+<div class="uk-width-1-1">
   
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-16T20:50:00-07:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/05/its-a-livin/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/its-a-livin/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/its-a-livin/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=A Profanity-Laced Video Game Password That Breaks Everything - http://minimaxir.com/2013/05/its-a-livin/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/its-a-livin/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Profanity-Laced Video Game Password That Breaks Everything&url=http://minimaxir.com/2013/05/its-a-livin/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/its-a-livin/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/gaming">Gaming</a></span>
-          
-          <span class="badge"><a href="/hacks">Hacks</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/05/its-a-livin/">A Profanity-Laced Video Game Password That Breaks Everything</a></h1>
-	  <p><img class="pull-right" src="/img/metroidboxart.jpg"></p>
-
-<p>If you&rsquo;re a fan of video games, you&rsquo;ve likely heard of the Metroid franchise. Released for the NES in 1986 by Nintendo, Metroid set a new standard for 2-D exploration in video games with its expansive power-up system, well-hidden secrets, and polished platforming controls. Due to its popularity, Metroid has been rereleased multiple times: as an unlockable in <a href="http://en.wikipedia.org/wiki/Metroid_Prime">Metroid Prime</a>, an unlockable in the remake <a href="http://en.wikipedia.org/wiki/Metroid_Zero_Mission">Metroid: Zero Mission</a>, a <a href="http://en.wikipedia.org/wiki/Classic_NES_Series">standalone game</a> on the Game Boy Advance, the Wii Virtual Console, and the 3DS Virtual Console.</p>
-
-<p>You play as Samus Aran, an armored bounty hunter who has infiltrated the base of the dreaded Space Pirates on Planet Zebes. Samus must defeat the leaders of the Space Pirates: the dinosaur Kraid, the dragon and memetic badass of the series <a href="http://en.wikipedia.org/wiki/Ridley_(Metroid)">Ridley</a>, and the AI construct <a href="http://en.wikipedia.org/wiki/Mother_Brain_(Metroid)">Mother Brain</a>. Additionally, Samus must find a way to defeat the Metroids, which are nearly-indestructible parasites that threaten all life. Yes, this was a plot written in the 80&rsquo;s.</p>
-
-<p>Since the NES Metroid cartridge did not have the ability to save games, and the game itself took awhile to complete, Nintendo developed a password system to allow players to continue at a later time. Upon death, the player received a 24-character alphanumeric password that could be entered to restore all items the player has unlocked and remember which bosses the player has defeated. Most of these passwords were gibberish that required a pen-and-paper to write down and remember.</p>
-
-<p>One password, however, is more memorable, and much more sinister.</p>
-
-
+	  Most of these passwords were gibberish that required a pen-and-paper to write down and remember. One password, however, is more memorable, and much more sinister.
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/05/its-a-livin/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/05/its-a-livin/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-16T20:50:00-07:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/its-a-livin/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/its-a-livin/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/3/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/its-a-livin/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Profanity-Laced Video Game Password That Breaks Everything&url=http://minimaxir.com/2013/05/its-a-livin/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/its-a-livin/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
@@ -291,77 +331,67 @@
     
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-13T18:51:00-07:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/05/overly-attached-startup/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/overly-attached-startup/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=When a Startup Sends a Passive-Aggressive Email Every Day - http://minimaxir.com/2013/05/overly-attached-startup/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/overly-attached-startup/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=When a Startup Sends a Passive-Aggressive Email Every Day&url=http://minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/overly-attached-startup/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/startups">Startups</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/05/overly-attached-startup/">When a Startup Sends a Passive-Aggressive Email Every Day</a></h1>
-	  <p>A couple weeks ago, my best friend wanted to make a personal website. After talking with her about what types of features she wanted (home page, photo galleries, low price, etc.) I recommended that she use a website-building platform with a <a href="http://en.wikipedia.org/wiki/WYSIWYG">WYSIWYG</a> editor, such as <a href="http://www.wix.com/">Wix</a> or <a href="http://www.weebly.com/">Weebly</a>. I had heard good things about both websites, especially Weebly, a <a href="http://techcrunch.com/2007/01/15/weebly-goes-with-ycombinator/">Y Combinator startup</a> which has been <a href="http://techcrunch.com/2013/05/03/with-over-15m-sites-built-weebly-launches-new-planner-and-mobile-editor-brings-website-creation-service-to-android/">rolling out new features</a> and receiving positive reviews.</p>
-
-<p>She registered for Weebly and loved it. I registered as well to check it out, and I was also impressed after creating a draft test website and experimenting with both drag-and-drop UI elements and raw HTML/CSS editing. Since Weebly has Contributor functionality, I was able to edit her website without having to access her account. I made a few CSS tweaks and that was it: I didn&rsquo;t publish my own website on Weebly, as I&rsquo;m very happy with this blog. :)</p>
-
-<p>A day after her website was published, I received an e-mail from Weebly: a generic &ldquo;First Steps to Creating Your Website.&rdquo; It&rsquo;s just one email, I think, so I ignore it. And then, the next day, I receive another e-mail that was much less subtle: &ldquo;Your website misses you!&rdquo;</p>
-
-<p>This is certainly the first time a startup&rsquo;s emails have tried to <em>guilt</em> me into using the service.</p>
-
-
+	  It&#8217;s just one email, I think, so I ignore it. And then I receive another e-mail, the next day, that&#8217;s much less subtle: Your website misses you! This is certainly the first time a startup&#8217;s emails have tried to guilt me into using the service.
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/05/overly-attached-startup/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/05/overly-attached-startup/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-13T18:51:00-07:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/overly-attached-startup/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/3/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/overly-attached-startup/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=When a Startup Sends a Passive-Aggressive Email Every Day&url=http://minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/overly-attached-startup/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
@@ -370,79 +400,67 @@
     
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-07T21:53:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/05/stones-of-jordan/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=Diablo III Economy Broken by an Integer Overflow Bug - http://minimaxir.com/2013/05/stones-of-jordan/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Diablo III Economy Broken by an Integer Overflow Bug&url=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/bugs">Bugs</a></span>
-          
-          <span class="badge"><a href="/gaming">Gaming</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/05/stones-of-jordan/">Diablo III Economy Broken by an Integer Overflow Bug</a></h1>
-	  <p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
-
-<p>Diablo III is also noted for its economy, with an emphasis on a region-wide auction house where players can trade one-in-a-million items for millions and billions of gold. (inflation is crazy). Additionally, Diablo III emphasized the use of a Real World Auction House, where players can sell gold or items for real world cash.</p>
-
-<p>Today was the launch of <a href="http://us.battle.net/d3/en/blog/9647272/patch-108-now-live-5-7-2013">Patch 1.0.8</a>, a patch which promised improvements to character progression. After spending a few weeks on a Public Test Realm, where players volunteered to tested the patch to ensure that there were game-breaking exploits, the patch released successfully.</p>
-
-<p>Except for one patch note that was added last minute and not tested in the PTR. And it&rsquo;s a patch note that broke the economy to tiny pieces.</p>
-
-
+	  Diablo III, Blizzard&#8217;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From Error 37 to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/05/stones-of-jordan/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/05/stones-of-jordan/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T21:53:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/3/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Diablo III Economy Broken by an Integer Overflow Bug&url=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
@@ -451,77 +469,67 @@
     
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-04T21:59:00-07:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/05/comments-everywhere/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/comments-everywhere/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/comments-everywhere/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=A Blog Comment System That Steals Comments From Facebook - http://minimaxir.com/2013/05/comments-everywhere/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/comments-everywhere/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Blog Comment System That Steals Comments From Facebook&url=http://minimaxir.com/2013/05/comments-everywhere/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/comments-everywhere/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/blogging">Blogging</a></span>
-          
-          <span class="badge"><a href="/comments">Comments</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/05/comments-everywhere/">A Blog Comment System That Steals Comments From Facebook</a></h1>
-	  <p>I&rsquo;m not a fan of the LiveFyre comments system for blogs. As I&rsquo;ve talked about before, LiveFyre is difficult to use, and actually hurts blogs more than it helps. But more and more blogs, such as CNet and AllThingsD, have switched to LiveFyre.</p>
-
-<p>AllThingsD&rsquo;s <a href="http://allthingsd.com/20130330/introducing-livefyre-commenting-at-allthingsd/?mod=atd-desktop">reasons</a> for switching to LiveFyre from the widely-used Disqus are interesting. Under LiveFyre, users can &ldquo;more readily share comments to Facebook and Twitter&rdquo; which Disqus already did; &ldquo;tag friends and draw them into the stream&rdquo; which increases clutter; and &ldquo;accurately flag other comments as spam or offensive&rdquo; which flat-out doesn&rsquo;t work, if the spam on TechCrunch is any indication. Additionally, they can &ldquo;follow conversations across multiple platforms,&rdquo; which the post doesn&rsquo;t elaborate upon. Does it aggregate social media which links to the parent post, a la Disqus?</p>
-
-<p>No, it&rsquo;s something much more important.</p>
-
-
+	  Those comments become LiveFyre comments. And the Facebook user has no input, nor any notification that their comments are being used this way.
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/05/comments-everywhere/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/05/comments-everywhere/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-04T21:59:00-07:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/comments-everywhere/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/comments-everywhere/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/3/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/comments-everywhere/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Blog Comment System That Steals Comments From Facebook&url=http://minimaxir.com/2013/05/comments-everywhere/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/comments-everywhere/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
@@ -530,104 +538,120 @@
     
   
   
-    <article>
+    <article class="article-main">
       
 
-  <div class="row-fluid">
-    <div class="span2">
-        <h1 class="date-time">
+  <div class="uk-grid" data-uk-grid-margin>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-25T21:47:00-07:00" pubdate data-updated="true">Mar 25<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-		  
-		  
-		    <div class="row-fluid sharing">
-		  <span class="badge facebook" data-url="http://minimaxir.com/2013/03/facebook-outage/"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/03/facebook-outage/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/03/facebook-outage/"><i class="icon-facebook-sign"></i>- </a></span>
-  </div>
-  <div class="row-fluid sharing">
-			<span class="badge twitter"><a href="http://twitter.com/home/?status=Facebook Outage: All Webpage Likes and Comments Reset - http://minimaxir.com/2013/03/facebook-outage/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/03/facebook-outage/><i class="icon-twitter-sign"></i> -</a></span>
-   </div>
-<div class="row-fluid sharing">
-  <span class="badge linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Facebook Outage: All Webpage Likes and Comments Reset&url=http://minimaxir.com/2013/03/facebook-outage/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/03/facebook-outage/><i class="icon-linkedin-sign"></i> -</a></span>
-   </div>
-  
-			
-		  
-          
-          <div class="row-fluid categories">
-          
-          <span class="badge"><a href="/facebook">Facebook</a></span>
-          
-          </div>
-          
-		  
-		 
-		  
-
-    </div>
-    <div class="span10">
+	
+	 <div class="uk-width-large-2-3 uk-width-medium-2-3 uk-width-small-1-1">
+	
       <h1 class="link"><a href="/2013/03/facebook-outage/">Facebook Outage: All Webpage Likes and Comments Reset</a></h1>
-	  <p><strong>UPDATE: The issue was resolved about 11 hours after the post was published. Like counts and comment counts are back. See <a href="http://techcrunch.com/2013/03/25/facebook-comments-bug/">TechCrunch&rsquo;s post</a>.</strong></p>
-
-<p>Today (3/25/13), Facebook appears to have made a change that has nuked all existing Facebook Like counts and Facebook Comments. I can verify that on this particular blog, my non-cached Like counts and my Comments are gone, even after checking Facebook&rsquo;s Graph API directly. This can be verified on older blog posts, such as <a href="http://techcrunch.com/2012/05/19/day-after-ipo-mark-zuckerberg-marries-longtime-girlfriend-priscilla-chan/">this one</a>.  It is also <a href="http://stackoverflow.com/questions/15623582/facebook-like-count-for-articles-reset-to-zero">being tracked on Stack Overflow</a>.</p>
-
-
+	  Today (3/25/13), Facebook appears to have made a change that has nuked all existing Facebook Like counts and Facebook Comments.
       
 	  
 	  
       <footer>
-      <a rel="badge" class="badge" href="/2013/03/facebook-outage/">Read on &rarr;</a>
+      <a rel="" class="" href="/2013/03/facebook-outage/"></a>
       </footer>
       
+	  </div>
 	  
+	  
+	  
+	      <div class="uk-width-large-1-3 uk-width-medium-1-3 uk-hidden-small">
+        <h1 class="date-time index">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-25T21:47:00-07:00" pubdate data-updated="true">Mar 25<span>th</span>, 2013</time></h1>
+   
+          
+
+
+
+
+		  <div class="uk-grid sharing index">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/03/facebook-outage/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/03/facebook-outage/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status= - http://minimaxir.com/page/3/index.html - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/03/facebook-outage/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Facebook Outage: All Webpage Likes and Comments Reset&url=http://minimaxir.com/2013/03/facebook-outage/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/03/facebook-outage/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+
+  
+	
+		  
+
     </div>
-  </div>
+	</div>
+	  
+	  
+
 
 
     </article>
     
   
+  
+  <div class="uk-grid page-nav">
+  <div class="uk-width-1-3 uk-width-small-1-1">
   <div class="pagination">
     
-    <a class="prev badge" href="/page/4/"><i class="icon-arrow-left"></i> Older</a>
+    <a class="prev badge" href="/page/4/"><i class="ion-arrow-left-c"></i>  Older</a>
     
+	</div>
+	</div>
+<div class="uk-width-1-3 uk-width-small-1-1">
+</div>
 
+<div class="uk-push-1-3 uk-width-1-3 uk-width-small-1-1">
+<div class="pagination">
     
-    <a class="next badge" href="/page/2/">Newer <i class="icon-arrow-right"></i></a>
+    <a class="next badge" href="/page/2/">Newer <i class="ion-arrow-right-c"></i> </a>
     
+	</div>
+	</div>
   </div>
+</div>
+
+
 </div>
 
 
         </div>
       </div>
-      <div class="row-fluid">
-        <footer class="footer-page" role="contentinfo">
+	  </div>
+	</div>
+  
+  	    
+  
+  <div class="footer-page">
+    <div class="uk-container uk-container-center footer">
+    
+      <div class="uk-grid">
+	  <div class="uk-width-1-1">
+  
+         <footer  role="contentinfo">
           <p>
   Copyright &copy; 2013 - Max Woolf -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a> - Heavily <a href="https://github.com/minimaxir/octoflat">modified</a> by Max Woolf
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and the <a href="http://www.getuikit.com/">UIkit Framework</a></span> - Theme designed by Max Woolf
 </p>
-<p><em>All opinions stated by Max Woolf are his own.</em></p>
+<p><strong>All opinions stated by Max Woolf are his own.</strong></p>
 
         </footer>
-      </div>
-    </div>
-  </div>
+  
   
 
 <script type="text/javascript">
@@ -653,5 +677,12 @@
 
 
 
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
 </body>
 </html>

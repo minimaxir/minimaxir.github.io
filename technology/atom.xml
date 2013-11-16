@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Technology | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//technology/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-11-01T07:16:26-07:00</updated>
+  <updated>2013-11-16T00:14:56-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -29,7 +29,7 @@
 
 <h2>What Went Wrong</h2>
 
-<p><a href="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/10/origin2.png"><img src="http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/10/origin2.png" alt="A picture of the Origin desktop client. Not as pretty as a startup website." /></a></p>
+<p><img src="/img/origin.png"></p>
 
 <p>Even the most amateur web developer knows to follow three important rules for data validation:</p>
 
@@ -46,11 +46,11 @@
 
 <h2>Aftermath</h2>
 
-<p><a href="http://www.forbes.com/sites/erikkain/2012/04/09/why-ea-won-the-worst-company-in-america-award/"><img src="http://www.forbes.com/sites/erikkain/2012/04/09/why-ea-won-the-worst-company-in-america-award/" alt="Two wrongs make a right...?" /></a></p>
-
 <p>The exploit was closed at around 1AM PST, 18 hours after its discovery (which, to be honest, it pretty embarrassing for an exploit that causes a significant amount of lost potential revenue). Here&rsquo;s where it gets interesting.</p>
 
 <p>A little background: in the gaming community, EA is not the most liked company; in fact, it was voted <a href="http://www.forbes.com/sites/erikkain/2012/04/09/why-ea-won-the-worst-company-in-america-award/">the worst company in America</a> due to a very large number of privacy, security, and ethical debacles. Last year, EA launched its own digital distribution service, Origin, which would compete with Valve&rsquo;s Steam service by being the sole provider of high-profile EA-published games, including Battlefield 3 and Mass Effect 3. (the former being the only reason I downloaded Origin). Speaking from experience, Origin is very buggy and unpolished compared to Steam, and actually drains system resources when idle.</p>
+
+<p><img src="/img/origin2.png"></p>
 
 <p>According to <a href="http://www.reddit.com/r/gaming/comments/11ggi2/reddit_during_the_recent_origin_discount_coupon/">another Reddit thread</a>, when news of this exploit hit, many gamers went on a downloading spree, and downloaded nearly every free game possible for two reasons. One, if EA is technically incompetent enough to allow such a severe bug to exist, they won&rsquo;t have the technical skills to discern who used the promo code more than once. Two, <em>it is retribution for EA being a terrible company</em>.</p>
 
@@ -103,7 +103,7 @@
 
 <p>Minimaxir implements many of these features. The most notable of these is the responsive functionality: if you&rsquo;re on a desktop, try and resize the browser window in which you&rsquo;re reading this article. You&rsquo;ll notice the content resizing as well, and if you shrink it far enough, the top navigation bar collapsing into a small, compact form. On tablets, which have both portrait and landscape modes depending on their orientation, the responsive effect is very noticeable:</p>
 
-<p><img src="http://i1.wp.com/minimaxir.com/wp-content/uploads/2012/03/Responsive2.png?resize=625%2C352" title="Minimaxir as Responsive" alt="How Minimaxir looks on an iPad, in both Landscape and Portrait modes. Notice the difference in content density." /></p>
+<p><img src="/img/Responsive2.png"></p>
 
 <p>Other UI elements are scattered around logical areas of the website. The traditional &ldquo;read more&rdquo; at the end of each post excerpt is now a Bootstrap button. The hand-implemented  featured posts grouping at the top of index pages, and the bottom of article pages, uses Bootstrap&rsquo;s thumbnail grid, to group images in a clean and logical manner. There&rsquo;s a navigation menu at the top of every page with contains a dropdown, and on individual posts there&rsquo;s a sub-navigation menu which contains the share buttons (I <strong>loathe </strong>the &ldquo;distracting-share-buttons-on-the-left-of-posts-that-scroll-with-you approach that other blogs implement.) Lastly, all article images have a popover on mouseover, which allows for&hellip;creative captioning those images.</p>
 
@@ -115,7 +115,7 @@
 
 <p>One last concern with responsive layouts, which is not Bootstrap&rsquo;s fault, is that some elements, such as social buttons, can dramatically slow down the loading of a website on mobile clients with less processing power than a desktop. Bootstrap contains mechanisms to hide content on mobile/tablets, but that doesn&rsquo;t prevent the content from <em>loading</em>, so it&rsquo;s moot for social buttons. To get around this problem, I had implemented a function that determines server-side whether or not the user is on a mobile client by parsing the user-agent property (which is how websites know if you&rsquo;re using Chrome, Firefox, etc.), and then displaying the social buttons if and only if they are on a desktop. (Otherwise, they see image-based social buttons which load easier). Honestly, in the future I expect to see a native function implemented in server-side languages for native mobile detection given the rise of responsive layouts.</p>
 
-<p><img src="http://i2.wp.com/minimaxir.com/wp-content/uploads/2012/03/mobilecode.png?resize=625%2C158" title="Is The User On A Mobile Device?" alt="And this is about *half* of the necessary code required!" /></p>
+<p><img src="/img/mobilecode.png"></p>
 
 <p>Twitter Bootstrap is the best and easiest way for your new website to be future-proof, and if you&rsquo;re creating a startup, I strongly urge you to consider using that framework. The amount of time saved for a bootstrapped startup is invaluable, especially for startups ran by coders instead of designers.</p>
 
