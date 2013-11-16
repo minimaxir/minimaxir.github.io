@@ -292,9 +292,6 @@ display: none !important;
 
 
 @media (max-width: 979px) {
-	.nav.social {
-float: left;
-}
 
 
 .embed-video-container {
@@ -320,5 +317,9 @@ float: left;
 
 }
 
-	
+@media (max-width: 480px) {
+.hero .title {
+font-size: 50px;
+line-height: 50px;
+}
 }
