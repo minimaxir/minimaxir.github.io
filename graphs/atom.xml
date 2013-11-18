@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Graphs | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//graphs/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-11-16T00:45:48-08:00</updated>
+  <updated>2013-11-18T07:54:25-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Reddit is Growing Slowly, but Surely]]></title>
+    <link href="http://minimaxir.com/2013/11/daily-reddit/"/>
+    <updated>2013-11-18T07:30:00-08:00</updated>
+    <id>http://minimaxir.com/2013/11/daily-reddit</id>
+    <content type="html"><![CDATA[<p>Reddit has certainty received more attention in the mainstream media with its involvement in such events as the <a href="http://www.nytimes.com/2013/04/29/business/media/bombings-trip-up-reddit-in-its-turn-in-spotlight.html?_r=0">Boston Marathon Bombings</a> and <a href="hhttp://www.reddit.com/r/IAmA/comments/z1c9z/i_am_barack_obama_president_of_the_united_states/">President Obama&rsquo;s AMA</a>. But has this publicity led to increase in overall activity on the site?</p>
+
+<p>I analyzed the daily number of submissions from over two years, August 6th, 2011 to September 25, 2013 (41 million submissions total), to see which events, if any, have affected Reddit&rsquo;s growth rate. As it turns out, Reddit grows by itself.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/reddit_daily-mac.png"></p>
+
+<p>Reddit&rsquo;s growth over the past two years has been almost entirely <strong>linear</strong>, with no notable acceleration in submission activity at any point in time.</p>
+
+<p>Running a linear regression on daily number of submissions vs. number of days since the first date (8/6/11) reveals that the expected increase in number of submissions each successive day on average is <strong>66.48 submissions</strong>  (+1,948 submissions each successive month, +24,259 submissions each successive year)</p>
+
+<p>This growth rate alone explains <strong>86.83%</strong> of the variation in number of submissions, indicating that external factors such as media publicity explain the remaining 13% of the variation.</p>
+
+<p>From a business perspective, it&rsquo;s impressive that Reddit still continues to grow for being such a mature internet business, but prospective investors for a rumored <a href="http://techcrunch.com/2013/01/06/reddit-rumored-to-be-raising-money-at-a-400-million-valuation/">fundraising at a $400 Million valuation</a> might be weary that Reddit&rsquo;s growth is only linear, in contrast to the <strong>exponential</strong> growth of other startups such as Snapchat. (In fairness, submission activity may not necessarily correlate with revenue-driving content consumption activity)</p>
+
+<p>A couple stray observations:</p>
+
+<ul>
+<li><p>On January 18th, 2012, the daily number of Reddit submissions hit the minimum among the two-year period due to Reddit&rsquo;s participation in the Internet blackout in protest of SOPA. (Reddit&rsquo;s blackout was only from 8AM to 8PM EST, which is why there are a nonzero number of submissions for that day).</p></li>
+<li><p>On April 1st, 2013, the daily number of Reddit submissions hit the maximum among the two-year period due to April Fool&rsquo;s Day, and the numerous amount of submissions for <em>X</em> brand/website&rsquo;s well-timed joke. However, I&rsquo;m not entirely sure why there&rsquo;s a spike for April Fool&rsquo;s Day in 2013, but not April Fool&rsquo;s Day in 2012.</p></li>
+</ul>
+
+
+<hr />
+
+<p><em>You can access the data used to create the time-series chart at <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGZ2Zkk1MGF3SjZxdC1sRzV5SW9zRWc&amp;usp=sharing">this Google Spreadsheet</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Which Subreddits on Reddit are the Largest?]]></title>
