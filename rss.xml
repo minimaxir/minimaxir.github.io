@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-11-18T07:54:25-08:00</updated>
+  <updated>2013-11-29T08:38:32-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Probabilistically Generating GitHub Projects]]></title>
+    <link href="http://minimaxir.com/2013/11/innovation-rng/"/>
+    <updated>2013-11-29T10:30:00-08:00</updated>
+    <id>http://minimaxir.com/2013/11/innovation-rng</id>
+    <content type="html"><![CDATA[<p>Grant Slatton made an amusing post on Hacker News yesterday titled &ldquo;<a href="https://news.ycombinator.com/item?id=6815282">Show HN: Probabilistically Generating HN Post Titles</a>&rdquo;. By using the statistical principle of <a href="http://en.wikipedia.org/wiki/Markov_chain">Markov chains</a>, Slatton was able to <a href="http://grantslatton.com/hngen/">generate eerily-realistic Hacker News headlines</a> such as &ldquo;Facebook detects if you are not a pilot&rdquo; and &ldquo;The No. 1 Habit of Highly Effective Mediocre Entrepreneurs.&rdquo;</p>
+
+<p>Could Markov chains be applied to any other data sets for hilarious effect? By using Slatton&rsquo;s <a href="https://gist.github.com/grantslatton/7694811">Python implementation of Markov chains</a> plus 300,000 descriptions of public GitHub repositories retrieved from their API, I discovered that statistical randomness can indeed create funny innovation.</p>
+
+<p><img src="http://minimaxir.com/img/github-wordcloud-mac.png"></p>
+
+<p>You can download a list of 1,000 Markov chain-generated projects <a href="https://dl.dropboxusercontent.com/u/2017402/github_markov.txt">here</a>. Here are a few interesting ones:</p>
+
+<ul>
+<li>MaNGOS is a free, Open Source implementation of a tag at relatively random intervals.</li>
+<li>A Warhammer 40k simulator to teach myself both OpenGL and Clojure</li>
+<li>Perl interface to Git repositories via Ruby.</li>
+<li>A windows live messenger network client written in Erlang</li>
+<li>Rails plugin which allows to talk anonymously and use tripcodes if you want.</li>
+<li>A Firebug extension for displaying the latest from Hacker News</li>
+<li>Sinatra-inspired JavaScript node.js web development framework for lua. Inspired by rspec</li>
+<li>Inverted Index on top of Tornado</li>
+<li>Android LED interface library for various wave propagation techniques.</li>
+<li>CatchAPI is a Java API to remove the need for boring project setup.</li>
+<li>Adds basic social networking capabilities to your lighting system based on the concept of the Working with Rails</li>
+<li>Brute force your OpenERP data integration with flatfiles</li>
+<li>Culerity integrates Cucumber and Celerity in order to shutdown the computer.</li>
+<li>Parses ANSI color codes and converts them to iphone compatible mp4s using HandBrake</li>
+<li>A simple OFX (Open Financial Exchange) parser built on top of WordPress. Rolopress core theme</li>
+</ul>
+
+
+<hr />
+
+<p><em>The code used to get the project descriptions from the GitHub API is available in <a href="https://github.com/minimaxir/get-github-repo-descriptions">this GitHub repository</a>, and you can download the ~300k repo descriptions <a href="https://dl.dropboxusercontent.com/u/2017402/github_repo_desc.zip">here</a>. [5MB .zip]</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Reddit is Growing Slowly, but Surely]]></title>
@@ -578,60 +616,6 @@ California      -187.57         0
 <p>Although the issue was not widespread, Bungie decided to do a recall of all Myth II CDs and redistribute a version 1.1, eliminating most of the game&rsquo;s profits in the process.</p>
 
 <p>You could say that the Myth II version 1.0 uninstaller worked exactly as intended: it did indeed uninstall the game. It just worked <em>too</em> well.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How MMO Players Proved that the Developers Bugged an Item Drop Rate]]></title>
-    <link href="http://minimaxir.com/2013/05/deep-breaths-more/"/>
-    <updated>2013-05-30T23:23:00-07:00</updated>
-    <id>http://minimaxir.com/2013/05/deep-breaths-more</id>
-    <content type="html"><![CDATA[<p><img class="pull-right" src="http://minimaxir.com/img/globecto.png"></p>
-
-<p><a href="https://www.guildwars2.com/en/">Guild Wars 2</a> is an incredible massively-multiplayer online role-playing game. The goal of Guild Wars 2, developed by ArenaNet, is to save the world, complete quests, and get awesome loot; objectives similar to that of many other MMORPGs such as <a href="http://us.battle.net/wow/en/">World of Warcraft</a>. However, Guild Wars 2 differentiates itself from its spiritual predecessors with its dynamically-changing world, incredible graphics, and the elimination of annoying and tedious time-wasters that have plagued the MMORPG genre.</p>
-
-<p>The best items in Guild Wars 2, naturally, require a large amount of effort and money to obtain. In order to create Legendary weapons, players must obtain large amounts of an item known as Globs of Ectoplasm. Globs of Ectoplasm (abbreviated as &ldquo;Ecto&rdquo;) are obtained randomly when a player salvages a Rare item using a Salvage Kit. Due to their high demand, Ecto effectively serve as a second currency in Guild Wars 2.</p>
-
-<p>Using the best Salvage Kit (that doesn&rsquo;t require paying real-world money), players received, on average, 0.9 Ecto per Rare Item Salvage, a value that has been well-documented and well-tested. But after a patch released a couple days ago, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">players on the Official Guild Wars 2 forums</a> and <a href="http://www.reddit.com/r/Guildwars2/comments/1fc540/ecto_salvage_rate_bug_being_looked_into_keep_your/">Reddit</a> began to notice that the drop rate for Ecto was <em>much</em> lower, with no mention in the patch notes.</p>
-
-<p>How do you <em>prove</em> something that occurs at random now occurs less frequently?</p>
-
-<!-- more -->
-
-
-<h1>What is &ldquo;Random&rdquo;?</h1>
-
-<p>The first rule of any official MMO forum: never accuse the developers of making implicit changes to the game unless you have proof. Such tactics are commonly employed by forum trolls and it makes building a community more difficult.</p>
-
-<p>The second rule of any official MMO forum: never accuse the developers of manipulating probability. As with normal gambling, players can hit a streak of bad luck with loot drops, enemy critical attacks, etc. But the anecdotal data from one player is not sufficient proof of any probability change. (an <a href="http://www.wowwiki.com/Why_does_Onyxia_cast_Deep_Breath%3F">old meme</a> from the World of Warcraft era mocked the userbase&rsquo;s inability to comprehend the definition of random)</p>
-
-<p>On May 28th, a player <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">noted on the official GW2 forums</a> that out of 166 salvages, he only received about 80 Ecto, or about 0.5 Ecto/Salvage. This is approximately <em>half</em> of the original rate of 0.9 Ecto/Salvage. Since the rate of new Ecto entering the market was halved with no change in demand, the Auction House <a href="http://www.gw2spidy.com/item/19721">price for Ecto</a> began to steadily rise.</p>
-
-<p><img src="http://minimaxir.com/img/gw2ecto.png"></p>
-
-<p>The price increase in the short-term was not <a href="http://minimaxir.com/2013/05/stones-of-jordan/">economy-breaking</a>, but when you need 250 Ectos to create a Legendary weapon in the long-term, it can add up very quickly.</p>
-
-<p>Other players provided their experiences in the thread, with limited results such as &ldquo;noticed this too, yesterday i salvaged 9 rares, got 4 ectos&rdquo; and &ldquo;20 rare at the end of my day, i save them before go bed: 0 ecto. wtf?&rdquo;. Such sample sizes are much too low to satisfy the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">Law of Large Numbers</a> and draw any remotely accurate conclusions.</p>
-
-<p>Regina Buenaobra, ArenaNet Community Manager, eventually <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2115818">responded</a>:</p>
-
-<blockquote><p>Changes to important things like salvage rates would be listed in the update notes if they have changed. If it’s not in the update notes, then no changes have been made by the development team.</p></blockquote>
-
-<p>So Word of God implies that everyone is wrong. Issue over?</p>
-
-<p>Of course not!</p>
-
-<h1>No Such Thing As Too Much Data</h1>
-
-<p>Despite Regina&rsquo;s dismissal, players continued to post in the thread and began quoting even larger sample sizes, such as a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2114853">salvaging 500 Rares</a> resulting in 286 Ectos (0.57 Ecto/Salvage) and <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2116461">salvaging 775 Rares</a> resulting in 402 Ecto (0.52 Ecto/Salvage). With those sample sizes, the probability that the true salvage rate is unchanged from 0.9 Ecto/Salvage is essentially zero.</p>
-
-<p>John Smith, ArenaNet&rsquo;s resident economist, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/4#post2116752">replied</a> that he&rsquo;ll &ldquo;look into this and get back to you.&rdquo; A day later, John made a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2122262">promise</a> that &ldquo;if we change anything involving ectos, there will be public information on it.&rdquo; Sure enough, on May 30th, a new patch was released with only <a href="https://forum-en.guildwars2.com/forum/info/news/Game-Update-Notes-May-28-2013/2124609">one patch note</a>:</p>
-
-<blockquote><p>Fixed a salvaging bug introduced in the last patch that sometimes caused salvage kits to yield incorrect results.</p></blockquote>
-
-<p>And that was that, the price of Ecto almost immediately dropped. All was well.</p>
-
-<p>John left one final <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2124684">message</a>: &ldquo;Thanks to everyone for your help identifying the issue and providing great data for me to start with in my research.&rdquo;</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-11-18T07:54:25-08:00</updated>
+  <updated>2013-11-29T08:38:32-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Probabilistically Generating GitHub Projects]]></title>
+    <link href="http://minimaxir.com/2013/11/innovation-rng/"/>
+    <updated>2013-11-29T10:30:00-08:00</updated>
+    <id>http://minimaxir.com/2013/11/innovation-rng</id>
+    <content type="html"><![CDATA[<p>Grant Slatton made an amusing post on Hacker News yesterday titled &ldquo;<a href="https://news.ycombinator.com/item?id=6815282">Show HN: Probabilistically Generating HN Post Titles</a>&rdquo;. By using the statistical principle of <a href="http://en.wikipedia.org/wiki/Markov_chain">Markov chains</a>, Slatton was able to <a href="http://grantslatton.com/hngen/">generate eerily-realistic Hacker News headlines</a> such as &ldquo;Facebook detects if you are not a pilot&rdquo; and &ldquo;The No. 1 Habit of Highly Effective Mediocre Entrepreneurs.&rdquo;</p>
+
+<p>Could Markov chains be applied to any other data sets for hilarious effect? By using Slatton&rsquo;s <a href="https://gist.github.com/grantslatton/7694811">Python implementation of Markov chains</a> plus 300,000 descriptions of public GitHub repositories retrieved from their API, I discovered that statistical randomness can indeed create funny innovation.</p>
+
+<p><img src="http://minimaxir.com/img/github-wordcloud-mac.png"></p>
+
+<p>You can download a list of 1,000 Markov chain-generated projects <a href="https://dl.dropboxusercontent.com/u/2017402/github_markov.txt">here</a>. Here are a few interesting ones:</p>
+
+<ul>
+<li>MaNGOS is a free, Open Source implementation of a tag at relatively random intervals.</li>
+<li>A Warhammer 40k simulator to teach myself both OpenGL and Clojure</li>
+<li>Perl interface to Git repositories via Ruby.</li>
+<li>A windows live messenger network client written in Erlang</li>
+<li>Rails plugin which allows to talk anonymously and use tripcodes if you want.</li>
+<li>A Firebug extension for displaying the latest from Hacker News</li>
+<li>Sinatra-inspired JavaScript node.js web development framework for lua. Inspired by rspec</li>
+<li>Inverted Index on top of Tornado</li>
+<li>Android LED interface library for various wave propagation techniques.</li>
+<li>CatchAPI is a Java API to remove the need for boring project setup.</li>
+<li>Adds basic social networking capabilities to your lighting system based on the concept of the Working with Rails</li>
+<li>Brute force your OpenERP data integration with flatfiles</li>
+<li>Culerity integrates Cucumber and Celerity in order to shutdown the computer.</li>
+<li>Parses ANSI color codes and converts them to iphone compatible mp4s using HandBrake</li>
+<li>A simple OFX (Open Financial Exchange) parser built on top of WordPress. Rolopress core theme</li>
+</ul>
+
+
+<hr />
+
+<p><em>The code used to get the project descriptions from the GitHub API is available in <a href="https://github.com/minimaxir/get-github-repo-descriptions">this GitHub repository</a>, and you can download the ~300k repo descriptions <a href="https://dl.dropboxusercontent.com/u/2017402/github_repo_desc.zip">here</a>. [5MB .zip]</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Reddit is Growing Slowly, but Surely]]></title>
@@ -1273,65 +1311,6 @@ background-attachment: fixed !important;
 <p>You can find a copy of the CSS I used to emulate this wonderful layout in <a href="https://github.com/minimaxir/techcrunch-1999">this GitHub repository</a>.</p>
 
 <p>Will you let Timberlake enrich <em>your</em> life? He&rsquo;s waiting. In the lower-right corner of your screen.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)]]></title>
-    <link href="http://minimaxir.com/2013/01/if-cute-then-happiness/"/>
-    <updated>2013-01-13T21:32:00-08:00</updated>
-    <id>http://minimaxir.com/2013/01/if-cute-then-happiness</id>
-    <content type="html"><![CDATA[<p><strong><em>TL;DR: Use this <a href="https://ifttt.com/recipes/74285">IFTTT recipe</a>, and change the subreddit value in the parameter of the Feed URL as needed.</em></strong></p>
-
-<p>In <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">a previous post</a>, I joked about a hypothetical social media strategy in which an automated script does Facebook brand management by stealing the top cute images from <a href="http://www.reddit.com/">Reddit</a> &ndash; an aggregator of trending topics and images &ndash;  and reposting them on the Facebook page, additionally adding a cute message encouraging users to LIKE, SHARE, and COMMENT!  We get easy social media fame for no monetary cost.</p>
-
-<p>Out of curiosity, I wanted to see if it was feasible to create such a script. Both Reddit and Facebook indeed have APIs that make it easy. But then I have to set up a server to check Reddit periodically, ensure that no images are duplicated, etc., and that can take time to implement and ensure that it works correctly (<em>all</em> the images must be cute!). I looked into <a href="https://ifttt.com/">IFTTT</a>, a relatively new startup that talks between different popular web services to automate simple tasks, like posting to Twitter whenever you post to Facebook.</p>
-
-<p>As it turns out, yes, this is possible, and you can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too! Just use <a href="https://ifttt.com/recipes/74285">this IFTTT recipe</a>! There are a few interesting caveats, though&hellip;</p>
-
-<!-- more -->
-
-
-<h2>Really Simple Syndication is&hellip;Really Simple?</h2>
-
-<p><img src="http://minimaxir.com/img/redditrss2.png"></p>
-
-<p>IFTTT allows users to extract information from RSS feeds, which one might typically be used to read blogs and news articles. The RSS feed typically provides the title, author, date, and content of a post: the important things. However, RSS has more applications: it can distribute other data, such as weather and desktop wallpapers. IFTTT allows other apps to load image and audio files from an RSS feed, but only if the RSS feed link links to the content itself.</p>
-
-<p>Unfortunately, this won&rsquo;t work on Reddit by default, as its RSS feeds do not contain a direct link to the photo and instead link to the Reddit comments on the image. Image-based websites, such as <a href="http://www.buzzfeed.com/">BuzzFeed</a> and <a href="http://interfacelift.com/wallpaper/downloads/date/any/">InterfaceLift</a> also implement a similar system because they don&rsquo;t want their users just to use a script to download images and bypass the website and its lovely revenue-generating advertisements. Therefore, the RSS feed alone won&rsquo;t work with IFTTT.</p>
-
-<p>During my research into my social media exploitation hypothesis, I found a <a href="http://blog.stevemould.com/rss-feed-reddit-stories-score-threshold/">blog post by Steve Mould</a> that provides a way to translate data from Reddit&rsquo;s JSON API to an RSS feed using a service called <a href="http://pipes.yahoo.com/pipes/">Yahoo Pipes</a>. This modified RSS feed, when given a subreddit and a score threshold, obtains the top Reddit posts in that subreddit above that karma threshold (upvotes &ndash; downvotes), and returns a feed item which contains direct link to the referenced URL.</p>
-
-<p>Here is <a href="http://bit.ly/W1ypdf">my variation of his Reddit Pipe</a>. My script to process the API has a few changes (such as using Reddit&rsquo;s &ldquo;hot&rdquo; posts, instead of the top posts; hot posts update much more frequently). Testing it with r/aww and a threshold of 50 karma, I received 177 very cute pictures on my computer in a week.</p>
-
-<p><img src="http://minimaxir.com/img/redditcute.png"></p>
-
-<p>From that Pipe, you can get the data in a RSS feed URL. Right-click and copy that feed URL into a IFTTT recipe as the source. For the action, use the **** variable to retrieve the image URL.</p>
-
-<h2>With Great Power Comes Great Cuteness</h2>
-
-<p>Yes, you can save the Reddit images to your computer automatically using <a href="https://www.dropbox.com/">Dropbox</a>. Or <a href="https://drive.google.com">Google Drive</a>. Or <a href="https://skydrive.live.com/">SkyDrive</a>. Or even get a cute email every hour!</p>
-
-<p>Thanks to IFTTT, there are many other creative things you can do with the feed that you can include in a recipe:</p>
-
-<ul>
-<li>Auto-post the image to your Tumblr or WordPress blog. Easy cuteness, and you&rsquo;ll be the source!</li>
-<li>Auto-curate the cute photos to your Facebook or Twitter account. All your friends will love you!</li>
-<li>Get social media fame for no additional monetary cost by publishing the cute images to your Facebook Page, with an encouragement to LIKE SHARE and COMMENT! My original hypothesis was correct!</li>
-</ul>
-
-
-<p><img src="http://minimaxir.com/img/redditnega.png"></p>
-
-<h2>Caveats</h2>
-
-<p>One caveat in using Yahoo Pipes is that it is rate limited to 200 runs in a 10 minute interval, meaning that the IFTTT recipe provided will likely fail if more than 200 people use the feed. If that does happen, just clone my pipe, and use the RSS feed from the clone for your own personal recipe.</p>
-
-<p>Also, there&rsquo;s no rate limiting on when recipes are triggered and images are posted/downloaded. You can trigger multiple images simultaneously, which may be considered spammy if you are posting to social media. In that case, increase the karma threshold to reduce the frequency of the postings and to maintain a high quality of the images.</p>
-
-<p><img src="http://minimaxir.com/img/iftttrecipe.png"></p>
-
-<p>Getting socially-vetted photos on your computer without any effort is a useful timesaver. A solution to a first world problem, perhaps, but it&rsquo;s the little things that count!</p>
 ]]></content>
   </entry>
   
