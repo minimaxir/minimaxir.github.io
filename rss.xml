@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2013-11-29T08:38:32-08:00</updated>
+  <updated>2014-01-13T08:02:18-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Friends Of My Friends Are Not My Friends]]></title>
+    <link href="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"/>
+    <updated>2014-01-13T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/01/farcical-friends-of-friends-folly</id>
+    <content type="html"><![CDATA[<p><a href="http://jelly.co/">Jelly</a>, a highly-anticipated social networking app by Twitter co-founder Biz Stone, was released last week. One of Jelly&rsquo;s <a href="http://blog.jelly.co/post/72563498393/introducing-jelly">underlying principles</a>  is &ldquo;it’s not hard to imagine that the true promise of a connected society is people helping each other.&rdquo; While using Jelly over the past few days, I&rsquo;ve seen people ask whether or not to exercise, make unsubtle plugs for their product, sell a car Craigslist-style, and get amnesia.</p>
+
+<!-- more -->
+
+
+<p><img src="http://minimaxir.com/img/jellyposts2.jpg"></p>
+
+<p>Wait, what? How are these questions representative of &ldquo;a connected society,&rdquo; especially since I don&rsquo;t know any of the question authors?</p>
+
+<p>Jelly tells its users that they can &ldquo;help friends, or friends-of-friends with their questions.&rdquo; The vast  majority of the questions I&rsquo;ve seen are from Friends of Friends. I&rsquo;m Facebook Friends with people who have <strong>thousands</strong> of friends; the probability that I have something in common with those second-degree friends is low.</p>
+
+<p>Websites like Jelly and even Facebook are now utilizing the content made by second-degree &ldquo;friends.&rdquo; Why am I seeing pictures and statuses from friends of friends, who are essentially complete strangers?</p>
+
+<h1>Facebook&rsquo;s Farcical Friends of Friends Folly</h1>
+
+<p>A couple months ago, Facebook again tweaked the News Feed algorithm such that all new Posts on a friend&rsquo;s Wall are shown on your News Feed, even if the person making the Post is a complete stranger to you.</p>
+
+<p>Originally, Facebook showed posts in your News Feed that were posted on a Friend&rsquo;s wall only if they were made by another Friend. If you are friends with both people, there&rsquo;s likely a common link between all three of you, such as going to the same college or working at the same company. That can make the Wall post more relevant to your interests.</p>
+
+<p>However, people have many social circles. What happens when a stranger not in any of my social circles posts on a Friend&rsquo;s wall?</p>
+
+<p>This post recently appeared in my News Feed:</p>
+
+<p><img src="http://minimaxir.com/img/fb-stranger-wall.jpg"></p>
+
+<p>I don&rsquo;t know who the person with &ldquo;1 mutual friend&rdquo; is. (the &ldquo;1 mutual friend&rdquo; being the friend who received the post). I don&rsquo;t live in Arizona. Why am I seeing this?</p>
+
+<p>Although I may be Facebook Friends with someone, it doesn&rsquo;t necessarily mean I should be Friends with their Friends. Facebook is showing me Posts that aren&rsquo;t relevant to me at all.</p>
+
+<p>This behavior also extends to your Friends&#8217; birthday: all &ldquo;Happy Birthday!&rdquo; posts on your Friend&rsquo;s Wall also display in your News Feed.</p>
+
+<p>This entry was visible on my News Feed for an entire day:</p>
+
+<p><img src="http://minimaxir.com/img/mutual-friends-birthday.jpg"></p>
+
+<p>Facebook <strong>really</strong> wants you to wish your Friends happy birthday.</p>
+
+<p>I don&rsquo;t need to see strangers with &ldquo;1 mutual friend&rdquo; wish my friends Happy Birthday. It&rsquo;s just extra clutter on an already cluttered News Feed.</p>
+
+<p>To be fair, other websites such as <a href="https://twitter.com/">Twitter</a> and <a href="http://www.linkedin.com/">LinkedIn</a> push second-degree friends. Twitter&rsquo;s new <a href="https://twitter.com/i/discover">Discover</a> feature highlights users who the people you Follow are themselves Following. LinkedIn shows your connections&#8217; new connections so you can form connections with them too. But the difference between Twitter/LinkedIn and Facebook/Jelly is that both Facebook and Jelly push the power of <strong>intimate</strong> friendships, and imposing a sense of intimacy between strangers feels fake and intrudes on actual friendships.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Probabilistically Generating GitHub Projects]]></title>
@@ -576,46 +624,6 @@ California      -187.57         0
 <hr />
 
 <p>Will Facebook Hashtags fail due to the massive differences between Facebook and Twitter? It&rsquo;s hard to say, but I&rsquo;m skeptical that Facebook will be able to capture the hashtag magic.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[When Uninstalling A PC Game Erases the Entire Hard Drive]]></title>
-    <link href="http://minimaxir.com/2013/06/working-as-intended/"/>
-    <updated>2013-06-05T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2013/06/working-as-intended</id>
-    <content type="html"><![CDATA[<p>There are many legitimate reasons for users to uninstall programs on their computer, such as freeing hard-disk space and lowering CPU overhead. A decade ago, when excessive hard-drive space was a luxury, avid PC gamers would frequently uninstall large, multi-gigabyte games that they were no longer playing in order to make space for new games.</p>
-
-<p>Obviously, developers would prefer that their users not uninstall the software that they spent years creating.  Regardless, developers should ensure that the uninstall process works properly.</p>
-
-<p>Otherwise, a poorly coded PC game uninstaller could delete not just the game, but the <em>entire hard drive</em>. That would be a problem.</p>
-
-<!-- more -->
-
-
-<h1>Ragnarok</h1>
-
-<p><span class="pull-right" style="padding: 20px"><a href="http://www.penny-arcade.com/comic/1999/01/06"><img src="http://minimaxir.com/img/pennyarcademyth2.jpg" alt="" /></a></span></p>
-
-<p>In late 1998, Bungie (which would later create the <a href="http://www.halowaypoint.com/en-us/">Halo</a> series) released <a href="http://mythipedia.wikia.com/wiki/Myth_II:_Soulblighter">Myth II: Soulblighter</a> for Windows. Myth II, a real-time tactics game, was received with great reception and highly-positive reviews.</p>
-
-<p>But before the worldwide release, a Bungie employee <a href="http://halo.bungie.net/inside/history.aspx?link=juggernougat">uninstalled version 1.0</a> of Myth II, and afterwards, her PC refused to reboot:</p>
-
-<blockquote><p>It was discovered by a very nice young lady in a Japanese office as she worked on the Asian versions of Myth – just as she was trying out the final build. She attempted to uninstall it from the main root folder of her hard drive – not brilliant, but pretty common practice – and perfectly fine for most games. The game proceeded to eat her hard drive like a fresh Bento Box.</p></blockquote>
-
-<p>The Myth II Uninstaller worked by deleting the folder which contained the game files. However, this implementation assumed that the user installed Myth II in the default directory. (i.e. C:\Program Files\Myth II). If the user installed Myth II in a <em>different</em> directory, such as the <em>system root C:\</em>, then when the user uninstalled the game, <strong>all the files in the C drive were deleted.</strong> Boom.</p>
-
-<p>As Bungie later explained <a href="http://www.macobserver.com/news/98/december/981229/bungierecall.html">in a press release</a>:</p>
-
-<blockquote><p>In certain unusual cases, using the Uninstaller can cause problems. If a user chooses an installation directory other than the default directory, they should NOT use the Uninstaller but should manually drag the Myth II folder into the Recycle bin and delete it.</p>
-
-<p>Anyone who has the game but has not yet installed it is asked to wait for a new version of the Installer which we will release shortly. If you have already installed the game, there is no harm in playing it, but players should be careful not to use the Uninstall executable. If you have already Uninstalled and not experienced obvious problems, there is nothing to worry about.</p></blockquote>
-
-<p>Calling the potential obliteration of an operating system a &ldquo;problem&rdquo; is an understatement.</p>
-
-<p>Although the issue was not widespread, Bungie decided to do a recall of all Myth II CDs and redistribute a version 1.1, eliminating most of the game&rsquo;s profits in the process.</p>
-
-<p>You could say that the Myth II version 1.0 uninstaller worked exactly as intended: it did indeed uninstall the game. It just worked <em>too</em> well.</p>
 ]]></content>
   </entry>
   

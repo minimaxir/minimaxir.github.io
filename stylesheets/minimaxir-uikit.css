@@ -317,7 +317,7 @@ display: none !important;
 
 }
 
-@media (max-width: 480px) {
+@media (max-width: 479px) {
 .hero .title {
 font-size: 50px;
 line-height: 50px;
