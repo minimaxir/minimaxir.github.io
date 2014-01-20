@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-01-13T08:07:25-08:00</updated>
+  <updated>2014-01-20T07:58:04-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Thoughtful Analysis of the Most Poorly-Designed Chart Ever]]></title>
+    <link href="http://minimaxir.com/2014/01/more-language-more-problems/"/>
+    <updated>2014-01-20T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/01/more-language-more-problems</id>
+    <content type="html"><![CDATA[<p>Last week, I was surfing Reddit and came across an <a href="http://www.reddit.com/r/ProgrammerHumor/comments/1ur3ny/unnecessary_graph_of_most_desired_skills_in_2013/">interesting infographic</a> within the <a href="http://www.reddit.com/r/ProgrammerHumor/">ProgrammerHumor subreddit</a>. The infographic, as compiled by tech blog <a href="http://readwrite.com/">ReadWrite</a>, depicts the Top 10 Most In-Demand Developer Skills of 2013, as compiled by <a href="http://stackoverflow.com/">Stack Overflow</a> through keyword searches.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/infographic-1.jpg"></p>
+
+<p>Take a look at the chart. What’s good and bad about it?</p>
+
+<h1>The Good</h1>
+
+<p>The data is properly cited.</p>
+
+<h1>The Bad</h1>
+
+<p><strong>EVERYTHING ELSE.</strong></p>
+
+<p>What’s terrible about the graph? Let me count the ways:</p>
+
+<ul>
+<li><p>Using discrete values in the X-Axis for a continuous measurement (i.e. the percentage). And not only that, discrete values with two significant figures, which make the X-Axis unusually cluttered.</p></li>
+<li><p>The Y-Axis is Language. This implies that some programming languages are more language than others.  (<a href="https://www.facebook.com/photo.php?fbid=10152166149970450&amp;set=a.432190050449.225968.582270449&amp;type=1&amp;stream_ref=10">to be fair</a>, Java is more language than Android)</p></li>
+<li><p>Not all entries on the chart are programming languages. (Android, for example, is an operating system.)</p></li>
+<li><p>The 45-degree line in the chart implies that the relationship between language and %-of-searches is perfectly linear, where in reality the data has an upward-parabolic shape.</p></li>
+<li><p>No relative proportions between the programming languages. We can&rsquo;t accurately see the increase in language Java has relative to Android just by looking at the graph.</p></li>
+<li><p>Cannot easily associate a language with the given X-Axis value. The logos representing the programming language oscillate around the line, and it&rsquo;s hard to see at a glance which percentage corresponds to which language.</p></li>
+</ul>
+
+
+<h1>Fixing the Chart</h1>
+
+<p>This isn’t one of those blog posts that make snarky criticism without offering any constructive input. (those will be posted next week). How can we make the chart somewhat logical?</p>
+
+<p>The easiest way to improve the chart is to convert the chart from a line chart to a column chart. Here’s a column chart that keeps the intended impression of the original chart:</p>
+
+<p><img src="/img/dev-graph-1.png"></p>
+
+<p>A much bigger improvement, although unfortunately without the cool hand-drawn logos. The axes are no longer illogical and it’s easy to determine the relative impact of each language (e.g. Java is clearly, clearly at the top). However, the large amount of text can clutter the bars, and it can be difficult to correlate the raw percentage with the scale at a glance.</p>
+
+<p>Another option is to rotate the chart and use bars instead of columns:</p>
+
+<p><img src="/img/dev-graph-2.png"></p>
+
+<p>This fixes the text issue by giving more room for text with most of the factors, but the Java text clips outside the chart. The correlation issue between language and percent value persists.</p>
+
+<p>A best-of-both-worlds approach is to display the language on the Y-Axis and the raw percent value on the corresponding bar itself, allowing us to forgo the percent metric axis entirely.</p>
+
+<p><img src="/img/dev-graph-3.png"></p>
+
+<p>There we go. Minimalist, fixes both the text and correlation issues, and gets the point across effectively.</p>
+
+<p>All of these charts were created using R and ggplot2, and you can download the R code in <a href="https://github.com/minimaxir/developer-graphs">this GitHub repository</a>. I wish the <a href="http://readwrite.com/2014/01/08/in-demand-tech-skills-of-2013-java">orginal ReadWrite article</a> used a chart like the last one and…</p>
+
+<p>Wait, they changed the infographic?</p>
+
+<p><img src="/img/infographic-2.jpg"></p>
+
+<p>Hey, they fixed the chart, and it’s using a similar design as mine! What a crazy random happenstance!</p>
+
+<p>The article was appended with an update:</p>
+
+<blockquote><p>An earlier version of the infographic in this story presented the StackOverflow data in a confusing and conceptually problematic fashion. It has been updated.</p></blockquote>
+
+<p>&ldquo;Problematic&rdquo; is the world&rsquo;s biggest understatement.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Probabilistically Generating GitHub Projects]]></title>
@@ -160,49 +232,6 @@
 <hr />
 
 <p><em>Data for English words from <a href="http://wordlist.sourceforge.net/">Kevin&rsquo;s Word List Page</a>, and data for the startup names/funding from <a href="http://info.crunchbase.com/about/crunchbase-data-exports/">CrunchBase&rsquo;s September Data Export</a>.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube]]></title>
-    <link href="http://minimaxir.com/2013/09/reddit-imgur-youtube/"/>
-    <updated>2013-09-29T10:30:00-07:00</updated>
-    <id>http://minimaxir.com/2013/09/reddit-imgur-youtube</id>
-    <content type="html"><![CDATA[<p>If you&rsquo;ve been on <a href="http://www.reddit.com/">Reddit</a>, you may have noticed that many link submissions go to &ldquo;imgur.com&rdquo;. <a href="http://imgur.com/">Imgur</a>, an image hosting service that launched on Reddit a few years ago and has seen outstanding growth ever since, even <a href="http://venturebeat.com/2013/09/26/imgur-traffic-milestone-100m-uniques/">surpassing Reddit itself</a>.</p>
-
-<p>But how many of Reddit&rsquo;s many, many links are actually links to Imgur? As it turns out, Imgur, along with YouTube, account for <em>32%</em> of the links submitted to Reddit.</p>
-
-<p>Using Reddit&rsquo;s API, I have downloaded about 5 million link submissions from Reddit, accounting for nearly two months of activity from July 22nd to September 26th. I complied a list of the most-frequent link destination domains for the links submitted anywhere on Reddit. The results were interesting.</p>
-
-<!-- more -->
-
-
-<p><img src="/img/links722_926.png"></p>
-
-<p>The imgur domains (i.imgur.com and imgur.com) account for <strong>23.7%</strong> of all links submitted to Reddit, and the YouTube domains (youtube.com and youtu.be) account for <strong>8.2%</strong> of all links.</p>
-
-<p>Two websites account for <strong>32%</strong> of all links submitted to Reddit (i.e. 1 in every 3 submitted links go to Imgur or YouTube), and no other website is remotely close. Not the meme sites, not the music sites, not the news sites, not the <em>porn</em> sites: Reddit is images and video.</p>
-
-<p>But <em>where</em> on Reddit are the Imgur and YouTube links most prominent?</p>
-
-<p>Here&rsquo;s a chart of the top subreddits, by percentage of all  Imgur links submitted on Reddit:</p>
-
-<p><img src="/img/imgur722_926.png"></p>
-
-<p>It&rsquo;s interesting to note how the <em>funny</em> subreddit has more Imgur links than the <em>pics</em> subreddit.</p>
-
-<p>For YouTube, and the percentage of all YouTube links submitted on Reddit by subreddit:</p>
-
-<p><img src="/img/youtube722_926.png"></p>
-
-<p><em>Videos</em> wins as you might expect, but <em>Music</em> is in second place. Along with <em>listentothis</em>,
-<em>Metal</em>, and <em>hiphopheads</em>, YouTube is the de facto website for <em>music</em> as well as video. Gaming is also  very popular with YouTube links, with <em>gaming</em>, <em>leagueoflegends</em>, and <em>Minecraft</em>.</p>
-
-<p>Images and video are the backbone of Reddit, and both Imgur and YouTube are the primary sources. Although, there appears to be a nontrivial demand for pure music websites such as <a href="https://soundcloud.com/">SoundCloud</a> and gaming video websites such as <a href="http://www.twitch.tv/">Twitch.tv</a> &hellip;could there be another big success story in the making?</p>
-
-<hr />
-
-<p><em>The tabulated data used to create each of the three charts is located at <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGxoVGFyX19hV2paMk5lOFRvNXlkcnc&amp;usp=sharing">this Google Spreadsheet</a> for your perusal.</em></p>
 ]]></content>
   </entry>
   

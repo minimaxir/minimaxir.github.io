@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-01-13T08:07:25-08:00</updated>
+  <updated>2014-01-20T07:58:04-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Thoughtful Analysis of the Most Poorly-Designed Chart Ever]]></title>
+    <link href="http://minimaxir.com/2014/01/more-language-more-problems/"/>
+    <updated>2014-01-20T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/01/more-language-more-problems</id>
+    <content type="html"><![CDATA[<p>Last week, I was surfing Reddit and came across an <a href="http://www.reddit.com/r/ProgrammerHumor/comments/1ur3ny/unnecessary_graph_of_most_desired_skills_in_2013/">interesting infographic</a> within the <a href="http://www.reddit.com/r/ProgrammerHumor/">ProgrammerHumor subreddit</a>. The infographic, as compiled by tech blog <a href="http://readwrite.com/">ReadWrite</a>, depicts the Top 10 Most In-Demand Developer Skills of 2013, as compiled by <a href="http://stackoverflow.com/">Stack Overflow</a> through keyword searches.</p>
+
+<!-- more -->
+
+
+<p><img src="http://minimaxir.com/img/infographic-1.jpg"></p>
+
+<p>Take a look at the chart. What’s good and bad about it?</p>
+
+<h1>The Good</h1>
+
+<p>The data is properly cited.</p>
+
+<h1>The Bad</h1>
+
+<p><strong>EVERYTHING ELSE.</strong></p>
+
+<p>What’s terrible about the graph? Let me count the ways:</p>
+
+<ul>
+<li><p>Using discrete values in the X-Axis for a continuous measurement (i.e. the percentage). And not only that, discrete values with two significant figures, which make the X-Axis unusually cluttered.</p></li>
+<li><p>The Y-Axis is Language. This implies that some programming languages are more language than others.  (<a href="https://www.facebook.com/photo.php?fbid=10152166149970450&amp;set=a.432190050449.225968.582270449&amp;type=1&amp;stream_ref=10">to be fair</a>, Java is more language than Android)</p></li>
+<li><p>Not all entries on the chart are programming languages. (Android, for example, is an operating system.)</p></li>
+<li><p>The 45-degree line in the chart implies that the relationship between language and %-of-searches is perfectly linear, where in reality the data has an upward-parabolic shape.</p></li>
+<li><p>No relative proportions between the programming languages. We can&rsquo;t accurately see the increase in language Java has relative to Android just by looking at the graph.</p></li>
+<li><p>Cannot easily associate a language with the given X-Axis value. The logos representing the programming language oscillate around the line, and it&rsquo;s hard to see at a glance which percentage corresponds to which language.</p></li>
+</ul>
+
+
+<h1>Fixing the Chart</h1>
+
+<p>This isn’t one of those blog posts that make snarky criticism without offering any constructive input. (those will be posted next week). How can we make the chart somewhat logical?</p>
+
+<p>The easiest way to improve the chart is to convert the chart from a line chart to a column chart. Here’s a column chart that keeps the intended impression of the original chart:</p>
+
+<p><img src="http://minimaxir.com/img/dev-graph-1.png"></p>
+
+<p>A much bigger improvement, although unfortunately without the cool hand-drawn logos. The axes are no longer illogical and it’s easy to determine the relative impact of each language (e.g. Java is clearly, clearly at the top). However, the large amount of text can clutter the bars, and it can be difficult to correlate the raw percentage with the scale at a glance.</p>
+
+<p>Another option is to rotate the chart and use bars instead of columns:</p>
+
+<p><img src="http://minimaxir.com/img/dev-graph-2.png"></p>
+
+<p>This fixes the text issue by giving more room for text with most of the factors, but the Java text clips outside the chart. The correlation issue between language and percent value persists.</p>
+
+<p>A best-of-both-worlds approach is to display the language on the Y-Axis and the raw percent value on the corresponding bar itself, allowing us to forgo the percent metric axis entirely.</p>
+
+<p><img src="http://minimaxir.com/img/dev-graph-3.png"></p>
+
+<p>There we go. Minimalist, fixes both the text and correlation issues, and gets the point across effectively.</p>
+
+<p>All of these charts were created using R and ggplot2, and you can download the R code in <a href="https://github.com/minimaxir/developer-graphs">this GitHub repository</a>. I wish the <a href="http://readwrite.com/2014/01/08/in-demand-tech-skills-of-2013-java">orginal ReadWrite article</a> used a chart like the last one and…</p>
+
+<p>Wait, they changed the infographic?</p>
+
+<p><img src="http://minimaxir.com/img/infographic-2.jpg"></p>
+
+<p>Hey, they fixed the chart, and it’s using a similar design as mine! What a crazy random happenstance!</p>
+
+<p>The article was appended with an update:</p>
+
+<blockquote><p>An earlier version of the infographic in this story presented the StackOverflow data in a confusing and conceptually problematic fashion. It has been updated.</p></blockquote>
+
+<p>&ldquo;Problematic&rdquo; is the world&rsquo;s biggest understatement.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Friends Of My Friends Are Not My Friends]]></title>
@@ -1200,83 +1272,6 @@ The missing amount, divided by 2:   2,147,483,648 gold
 <p>To be fair, this is far from the first time where manipulated RAM has been used to complete a game. The classic Nintendo 64 title Legend of Zelda: Ocarina of Time has the infamous <a href="http://zeldaspeedruns.com/oot/ba/reverse-bottle-adventure">Reverse Bottle glitch</a> that allows players to transform items into others, and a <a href="http://youtu.be/PaUCFrW_mEE?t=13m44s">memory glitch</a> that teleports you from the first dungeon to the final cutscene, In <em>Pokemon</em> on the GameBoy, players discovered how to reprogram the game to <a href="http://tasvideos.org/forum/viewtopic.php?p=332488&amp;sid=1d8670bd80327418d202b6608e5cd2a9#332488">run arbitrary code</a>, but many gamers may remember the classic <a href="http://bulbapedia.bulbagarden.net/wiki/Missingno.">Missingno glitch</a>, which was very easy to reproduce on an actual console and provided many beneficial effects.</p>
 
 <p>Still, it&rsquo;s not every day that spawning a ton of fishes out of mid-air = victory.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How To Kill The Reader Comments Of A Popular Tech Blog]]></title>
-    <link href="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"/>
-    <updated>2013-01-23T21:38:00-08:00</updated>
-    <id>http://minimaxir.com/2013/01/its-a-metaphor-maybe</id>
-    <content type="html"><![CDATA[<p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog.</p>
-
-<p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
-
-<p>Fast forward to 2012. Other blogs on the Aol blogging network, such as Engadget, Joystiq, and TechCrunch itself, have <a href="http://www.engadget.com/2012/10/11/engadget-livefyre-commenting-system/">decided</a> to <a href="http://www.joystiq.com/2012/04/04/joystiqs-new-commenting-system-is-live/">migrate</a> to <a href="http://www.livefyre.com/">LiveFyre</a>, another blog commenting system which allows readers to comment using their social identities, in addition to a few flashy Web 2.0 features. I figured it was a matter of time until TechCrunch implemented it themselves. And in January 2013, <a href="http://techcrunch.com/2013/01/22/we-want-you-back/">they did</a>.</p>
-
-<p>At first, I thought I would like the change. Facebook Comments has their own problems that a switch to Livefyre could solve. I was wrong. The stated reasons for the change were &ldquo;we want more comments,&rdquo; but a large amount of low-value comments (and images), with no way to identify good ones, along with the increased hassle of commenting, will end up backfiring. I&rsquo;m honestly afraid that the switch from Facebook Comments could kill quality comments on TechCrunch completely.</p>
-
-<!-- more -->
-
-
-<h2>The Pros and Cons of Facebook Comments</h2>
-
-<p>As said earlier, Facebook comments excel in their ease of implementation, light aesthetic, and zero-click registration. More importantly, it lends a lot of credibility to the comments, as they have (usually) been authenticated as a real person. Whenever a <em>real</em> person likes or comments on your own comment, it is very satisfying.</p>
-
-<p><img src="http://minimaxir.com/img/alexia.png"></p>
-
-<p>That said, there are a few unobvious nuances:</p>
-
-<ul>
-<li>For most blog systems, you receive a notification whenever someone replies to your post. In the original implementation of FB Comments, you receive one whenever someone likes or replies to your comment, in the same manner you&rsquo;re notified on a typical Facebook status. This has changed recently: now, you don&rsquo;t receive notification for likes/replies on your comment, and instead you <strong><em>only receive notifications when other people comment on the same post</em></strong>. I haven&rsquo;t figured out if this is a bug or a feature.</li>
-<li><strong>There is no spam filter.</strong> As many can attest, Facebook has been terrible at combating spam both on the main website and off. All spam cleaning must be done <em>ad hoc</em>, which can be time-consuming.</li>
-<li><strong>Virtually no customization for the comments</strong>. On the administrative side, the only significant options you have for commenting are how many comments appear initially, and the default sort order. It makes sense for Facebook to limit customization to protect their own branding, but it&rsquo;s frustrating for both the admin and readers.</li>
-<li><strong>Commenters do not have access to a list of comments that they&rsquo;ve made.</strong> This one in particular upset me, which is one of the reasons I&rsquo;ve aggregated all my comments <a href="http://minimaxir.com/category/blog-comments/">here</a>.</li>
-<li><strong>Facebook&rsquo;s count of comments lies. </strong>The count provided by Facebook does <em>not</em> include replies to comments, unlike every blog comment system since the beginning of time.</li>
-</ul>
-
-
-<p>There have been zero improvements to Facebook Comments since 2011. It&rsquo;s disappointing, but there&rsquo;s not much that can be done&hellip; except considing competitors.</p>
-
-<h2>LiveFyre Makes Comments BURN!</h2>
-
-<p>LiveFyre, on a typical blog like this one, has quite a few perks that Facebook Comments does not. It allows users to comment just by linking a social identity, such as Facebook or Twitter. Or you can remain anonymous. You receive notifications by email. Images and video are embedded into posts. Posts appear in real time, increasing the interaction for live events. And, you have a profile which lists all the comments you&rsquo;ve ever made.</p>
-
-<p>LiveFyre also has comment editing and an indicator of how many users are viewing the current blog post, but for some reason, the implementation of LiveFyre on TechCrunch disabled these features. Hmm.</p>
-
-<p><img src="http://minimaxir.com/img/comments2.png"></p>
-
-<p>The core features good on paper. The problem is with the implementation. <a href="http://fyre.it/u2jnrP">This comment</a> does a good summary, but here&rsquo;s the gist when compared to Facebook Comments:</p>
-
-<ul>
-<li><strong>Anonymous comments are <em>usually</em> low-quality comments. </strong>With Facebook Comments, rational people will not make stupid comments that are tied with their real name. With anonymous comments, people can troll as much as they want without any repercussions.  Yes, with more accessible to comments leads to a higher chance of quality comments by the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">law of large numbers</a>, but that is completely irrelevant because&hellip;</li>
-<li><strong>There is no way to sort by high-quality comments</strong>. Facebook Comments, by default, sorts comments by the number of likes that they have received: more likes, the higher up they are in the comment thread. LiveFyre only allows sorting in chronological order and reverse chronological order. No exception. This strongly reduces the <em>motivation</em> for high-quality posts.</li>
-<li><strong>New comments that are loaded live forcibly scroll down all comments.</strong> Imagine: you&rsquo;re reading a good comment, and a new comment loads and <em>pushes</em> the comment away. With spam. You&rsquo;ll become frustrated very quickly. This may not be a concern for blogs with low user-bases, but for popular blogs, this can become irritating very quickly.</li>
-<li><strong>Images and video appear in-line, and are very large.</strong> This makes them more visible, which is a good thing, <em>unless</em> they&rsquo;re memes and spam. Then it&rsquo;s terrible. And since people can comment anonymously, there&rsquo;s a significant risk factor. Images/video, due to their size, cause comment scrolling even faster!</li>
-</ul>
-
-
-<h2>The impact of LiveFyre on TechCrunch</h2>
-
-<p><img class="pull-right" src="http://minimaxir.com/img/ToKillACommentsSection.png"></p>
-
-<p>LiveFyre works on a typical WordPress blog, but when applied to large sites such as Engadget and TechCrunch, whose size attracts trolls, it can be crippling. It&rsquo;s like <a href="http://en.wikipedia.org/wiki/Dunbar's_number">Dunbar&rsquo;s Number</a> on a macro scale: there&rsquo;s a mathematical limit on the number of people who visit one place on the internet until it degenerates into madness and memes.</p>
-
-<p>Even with the criticisms above, I still prefer Facebook Comments, and I implement it on my own site, as zero-click registration and real name validation is paramount. It&rsquo;s definitely the lesser of two evils.</p>
-
-<p>The main argument TechCrunch used to justify the switch from Facebook Comments to LiveFyre is that users aren&rsquo;t commenting as much. That&rsquo;s a given, since you can&rsquo;t comment anonymously. It&rsquo;s the old debate of quantity vs. quality: in the case of comments, however, it&rsquo;s <em>always</em> in favor of quality. I&rsquo;d rather read a comments section with one or two comments than a comments section consisting of 90% anonymous spammers who make me lose faith in humanity. Losing faith in humanity is not healthy.</p>
-
-<p>I&rsquo;ll probably be toning down my comments on TechCrunch even moreso. My <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">primary motivation for commenting</a> was, and still is, making people laugh and smile. But if other readers have to dig through anonymous spam just to find my comments, then there&rsquo;s not much point. I could spam my comments to my Facebook profile every time I make one, but that would cause the <em>opposite</em> issue.*<br/>
-*</p>
-
-<p>I realize that this is a first-world problem. Even more of a first world problem than <a href="http://minimaxir.com/2013/01/if-cute-then-happiness/">auto-downloading pictures of cute puppies</a>. I&rsquo;m not mad.</p>
-
-<p>I&rsquo;m just sad. :(</p>
-
-<hr>
-
-
-<p><strong>EDIT (May 2013)</strong>: When this article was published, this blog was using Facebook Comments, however I switched the comments system to Disqus just to try it out.</p>
 ]]></content>
   </entry>
   
