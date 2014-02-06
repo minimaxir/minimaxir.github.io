@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-01-20T07:58:04-08:00</updated>
+  <updated>2014-02-06T07:52:24-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Imgur is Covertly Redirecting Image Links on Facebook and Twitter]]></title>
+    <link href="http://minimaxir.com/2014/02/moved-temporarily/"/>
+    <updated>2014-02-06T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/moved-temporarily</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m a fan of <a href="http://imgur.com/">Imgur</a>. Image links without gimmicks. But recently, I noticed that whenever I clicked an Imgur link on Facebook or Twitter, it  navigated me to the main image page, with loads of blank empty space and links to other Imgur images instead of just showing me only the image. I double-check the URL, and it indeed begins with the &ldquo;i&rdquo; subdomain that indicates a direct link to the image, such as &ldquo;<a href="http://i.imgur.com/p9lG2ss.png">http://i.imgur.com/p9lG2ss.png</a>&rdquo;, so what&rsquo;s happening?</p>
+
+<p><img src="http://minimaxir.com/img/imgur_direct.png"></p>
+
+<p>As it turns out, when clicking a direct image link for the first time on Facebook, Twitter, and Google+, Imgur will <strong>redirect</strong> you to the main image page instead. Try clicking the link in <a href="https://twitter.com/search?q=i.imgur.com&amp;src=typd">any i.imgur.com URL on Twitter</a>. The main image page has a &ldquo;follow us on Facebook/Twitter!&rdquo; button on desktops, or an advertisement on mobile devices.</p>
+
+<p><img src="http://minimaxir.com/img/imgur_link.gif"></p>
+
+<p>This behavior isn&rsquo;t particularly honest and upfront.</p>
+
+<p>But is Imgur redirecting links from only these social media sites? Are these redirects an accident or are they deliberate?</p>
+
+<p>A quick and dirty way to check is to use the command line. The <em>curl</em> command loads the data from a specified website. An optional parameter is <em>referrer</em>, which &ldquo;spoofs&rdquo; the URL of the website where the user is navigating from.</p>
+
+<p>Let&rsquo;s say I wanted to &ldquo;access&rdquo; an image direct link coming from a website I know Imgur is not redirecting, such as Reddit. I run this command in the Windows Command Prompt or the Mac Terminal:</p>
+
+<p><code>curl http://i.imgur.com/p9lG2ss.png --referer http://reddit.com -I</code></p>
+
+<p>That gives me a Error Code 200, &ldquo;OK&rdquo;, meaning that the image was accessed successfully.</p>
+
+<p><code>HTTP/1.1 200 OK
+Server: cloudflare-nginx
+Date: Wed, 05 Feb 2014 01:41:40 GMT Content-Type: image/png [...]</code></p>
+
+<p>Now what happens if the user accesses the link from Facebook or Twitter?</p>
+
+<p><code>curl http://i.imgur.com/p9lG2ss.png --referer http://facebook.com -I</code></p>
+
+<p>That returns something different.</p>
+
+<p><code>HTTP/1.1 302 Moved Temporarily
+Server: cloudflare-nginx
+Date: Wed, 05 Feb 2014 01:44:03 GMT
+Content-Type: text/html
+[...]
+Set-Cookie: __cfduid=dc2e0ae5ee57ff598e079d75fa628f0321391564643058; expires=Mon, 23-Dec-2019 23:50:00 GMT; path=/; domain=.imgur.com; HttpOnly
+Location: http://imgur.com/p9lG2ss</code></p>
+
+<p><a href="http://en.wikipedia.org/wiki/HTTP_302">Error Code 302</a>, &ldquo;Moved Temporarily,&rdquo; is the error code for a redirect, and shows that Imgur implemented this behavior intentionally. It also provides the Location of the link to redirect to, in this case the default image page with Imgur&rsquo;s branding.</p>
+
+<p>After checking all popular social media sites (and their respective URL shortners) as referrers against Imgur&rsquo;s direct image links, I determined that the only referrer domains that Imgur redirects are:</p>
+
+<ul>
+<li><a href="http://facebook.com">http://facebook.com</a></li>
+<li><a href="http://twitter.com">http://twitter.com</a></li>
+<li><a href="http://t.co">http://t.co</a></li>
+<li><a href="http://plus.google.com">http://plus.google.com</a></li>
+</ul>
+
+
+<p>If you want to share your cat photos and .gifs directly to friends, I guess you can still share them on LinkedIn.</p>
+
+<p>I won&rsquo;t say that what Imgur is doing is unethical; many startups use redirects to trap users and spam them with popups saying JOIN MY WEBSITE. At the least, your friends still get to see the image you linked. It&rsquo;s understandable why Imgur would use the redirects; direct image links cause them to lose money through bandwidth expense and earn none, while links to normal image pages make it apparent that the image is from Imgur, and the company could get new users from the branding. Many, many more direct links are made than indirect links, as shown in the image at the beginning of the article, and that can account for a lot of lost revenue.</p>
+
+<p>The problem is that redirecting users without disclosure is the start of a slippery slope. When I post a direct image link by copying the &ldquo;Direct Link&rdquo; URL, I <em>expect</em> that others who use the link will also see the direct image. But that&rsquo;s not the case if the link is posted on Facebook or Twitter. Additionally, the redirects make the images take <em>much</em> longer to load on mobile, since loading the scripts and ads slow the entire page down. Making it so that the redirect is only seen the first time an image is viewed doesn&rsquo;t offer much solace.</p>
+
+<p>If the redirects are successful at converting new users for Imgur, what&rsquo;s stopping them from redirecting other sites? I strongly hope that Imgur won&rsquo;t turn into the next Photobucket or Imageshack, but whenever a startup does something weird and not transparent, it&rsquo;s <em>never</em> a good sign.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Thoughtful Analysis of the Most Poorly-Designed Chart Ever]]></title>
@@ -1231,47 +1296,6 @@ The missing amount, divided by 2:   2,147,483,648 gold
 <p>I&rsquo;m sure the lost Likes/Comments temporary, but this is an error of incredible magnitude, especially given on how many sites rely on Facebook&rsquo;s data.</p>
 
 <p>Because comments here may be broken, you can comment on the <a href="https://news.ycombinator.com/item?id=5439712">Hacker News thread</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM]]></title>
-    <link href="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"/>
-    <updated>2013-03-24T21:44:00-07:00</updated>
-    <id>http://minimaxir.com/2013/03/127-yoshis-in-slot-6</id>
-    <content type="html"><![CDATA[<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Syo5sI-iOgY "></iframe></div>
-
-
-<p>Watch the video above, you won&rsquo;t regret it. (the fun part starts at 1:12)</p>
-
-<p>This is a <a href="http://tasvideos.org/">Tool-Assisted Speed Run</a>  (TAS) of the Super Nintendo classic Super Mario World. TASes use an emulator to perform optimal game actions with frame-by-frame precision in order to complete the game in the lowest amount of time, and can use &ldquo;save states&rdquo;  to reverse any gameplay mistakes. Games on older consoles frequently have glitches that require such precision that consequently are very difficult to perform on a console consistently, making TASes more of an art form than actual gameplay advice.</p>
-
-<!-- more -->
-
-
-<p>So, what the heck is happening in this speedrun? curtmack on Reddit <a href="http://www.reddit.com/r/Games/comments/1aldvz/major_glitch_discovered_in_luigis_mansion_that/c8yk3g3">explains it succinctly</a>:</p>
-
-<blockquote><p>So, for those who are wondering just what the f- happened&hellip; there&rsquo;s a glitch that&rsquo;s been known for a while, where Yoshi can end up in the &ldquo;I have an item in my mouth&rdquo; state, but not actually have an item in his mouth. When he spits out this nothingness, the game crashes. That&rsquo;s all we knew about the glitch&hellip; until recently.</p>
-
-<p>Somebody decided to take a debugging emulator and step through the crash. He discovered that the crash occurred because the game tried to jump to a specific address in memory, and execute code there. That address did not contain code, and so the system crashed.</p>
-
-<p>But wait a second. What if, by some sheer coincidence, that address <em>did</em> contain code? The specific address dropped him in somewhere amongst various data for the game&rsquo;s internal random number generator, and the random number generator can be manipulated in a TAS. Could the game be coerced into running arbitrary code?</p>
-
-<p>Well, as it turns out, it&rsquo;s extremely limited. You have the RNG state and a few sprite positions that can be manipulated, but after that is some internal game stuff that can&rsquo;t be. So the length of the &ldquo;program&rdquo; is extremely limited, but as it turns out, it&rsquo;s just long enough to send the signal to the game to switch to the &ldquo;The End&rdquo; screen.</p>
-
-<p>There&rsquo;s a related glitch where you can spawn a bouncing fish by doing certain odd things as you spit out an item as Yoshi, and every time a fish bounces, it uses up a randomly-generated number (since it bounces in a random direction). So, putting it all together, you have to spawn a billion fish and have them all bounce a f-jillion times to get the RNG in just the right spot, leave the area, and then fiddle around with some objects to get the last few bits you need in the right place, all while setting up the original spit-nothing glitch in the first place.</p></blockquote>
-
-<p>Crazy, isn&rsquo;t it?</p>
-
-<h2>I Call Hax!</h2>
-
-<p>This <a href="http://tasvideos.org/1945M.html">SMW TAS</a>, posted in 2011, was so crazy that it inspired the creation of a new category of speed runs: &ldquo;Corrupts Memory.&rdquo; The <a href="http://tasvideos.org/forum/viewtopic.php?t=12215">discussion on the speed run</a> provides a technical explanation of of the glitch, which started a debate: &ldquo;does this <em>count</em> as a speed run?&rdquo; (96% of voters said yes.)</p>
-
-<p><img src="http://minimaxir.com/img/smw.png"></p>
-
-<p>To be fair, this is far from the first time where manipulated RAM has been used to complete a game. The classic Nintendo 64 title Legend of Zelda: Ocarina of Time has the infamous <a href="http://zeldaspeedruns.com/oot/ba/reverse-bottle-adventure">Reverse Bottle glitch</a> that allows players to transform items into others, and a <a href="http://youtu.be/PaUCFrW_mEE?t=13m44s">memory glitch</a> that teleports you from the first dungeon to the final cutscene, In <em>Pokemon</em> on the GameBoy, players discovered how to reprogram the game to <a href="http://tasvideos.org/forum/viewtopic.php?p=332488&amp;sid=1d8670bd80327418d202b6608e5cd2a9#332488">run arbitrary code</a>, but many gamers may remember the classic <a href="http://bulbapedia.bulbagarden.net/wiki/Missingno.">Missingno glitch</a>, which was very easy to reproduce on an actual console and provided many beneficial effects.</p>
-
-<p>Still, it&rsquo;s not every day that spawning a ton of fishes out of mid-air = victory.</p>
 ]]></content>
   </entry>
   

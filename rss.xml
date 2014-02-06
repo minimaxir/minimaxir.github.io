@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-01-20T07:58:04-08:00</updated>
+  <updated>2014-02-06T07:52:24-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Imgur is Covertly Redirecting Image Links on Facebook and Twitter]]></title>
+    <link href="http://minimaxir.com/2014/02/moved-temporarily/"/>
+    <updated>2014-02-06T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/moved-temporarily</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m a fan of <a href="http://imgur.com/">Imgur</a>. Image links without gimmicks. But recently, I noticed that whenever I clicked an Imgur link on Facebook or Twitter, it  navigated me to the main image page, with loads of blank empty space and links to other Imgur images instead of just showing me only the image. I double-check the URL, and it indeed begins with the &ldquo;i&rdquo; subdomain that indicates a direct link to the image, such as &ldquo;<a href="http://i.imgur.com/p9lG2ss.png">http://i.imgur.com/p9lG2ss.png</a>&rdquo;, so what&rsquo;s happening?</p>
+
+<p><img src="http://minimaxir.com/img/imgur_direct.png"></p>
+
+<p>As it turns out, when clicking a direct image link for the first time on Facebook, Twitter, and Google+, Imgur will <strong>redirect</strong> you to the main image page instead. Try clicking the link in <a href="https://twitter.com/search?q=i.imgur.com&amp;src=typd">any i.imgur.com URL on Twitter</a>. The main image page has a &ldquo;follow us on Facebook/Twitter!&rdquo; button on desktops, or an advertisement on mobile devices.</p>
+
+<p><img src="http://minimaxir.com/img/imgur_link.gif"></p>
+
+<p>This behavior isn&rsquo;t particularly honest and upfront.</p>
+
+<p>But is Imgur redirecting links from only these social media sites? Are these redirects an accident or are they deliberate?</p>
+
+<p>A quick and dirty way to check is to use the command line. The <em>curl</em> command loads the data from a specified website. An optional parameter is <em>referrer</em>, which &ldquo;spoofs&rdquo; the URL of the website where the user is navigating from.</p>
+
+<p>Let&rsquo;s say I wanted to &ldquo;access&rdquo; an image direct link coming from a website I know Imgur is not redirecting, such as Reddit. I run this command in the Windows Command Prompt or the Mac Terminal:</p>
+
+<p><code>curl http://i.imgur.com/p9lG2ss.png --referer http://reddit.com -I</code></p>
+
+<p>That gives me a Error Code 200, &ldquo;OK&rdquo;, meaning that the image was accessed successfully.</p>
+
+<p><code>HTTP/1.1 200 OK
+Server: cloudflare-nginx
+Date: Wed, 05 Feb 2014 01:41:40 GMT Content-Type: image/png [...]</code></p>
+
+<p>Now what happens if the user accesses the link from Facebook or Twitter?</p>
+
+<p><code>curl http://i.imgur.com/p9lG2ss.png --referer http://facebook.com -I</code></p>
+
+<p>That returns something different.</p>
+
+<p><code>HTTP/1.1 302 Moved Temporarily
+Server: cloudflare-nginx
+Date: Wed, 05 Feb 2014 01:44:03 GMT
+Content-Type: text/html
+[...]
+Set-Cookie: __cfduid=dc2e0ae5ee57ff598e079d75fa628f0321391564643058; expires=Mon, 23-Dec-2019 23:50:00 GMT; path=/; domain=.imgur.com; HttpOnly
+Location: http://imgur.com/p9lG2ss</code></p>
+
+<p><a href="http://en.wikipedia.org/wiki/HTTP_302">Error Code 302</a>, &ldquo;Moved Temporarily,&rdquo; is the error code for a redirect, and shows that Imgur implemented this behavior intentionally. It also provides the Location of the link to redirect to, in this case the default image page with Imgur&rsquo;s branding.</p>
+
+<p>After checking all popular social media sites (and their respective URL shortners) as referrers against Imgur&rsquo;s direct image links, I determined that the only referrer domains that Imgur redirects are:</p>
+
+<ul>
+<li><a href="http://facebook.com">http://facebook.com</a></li>
+<li><a href="http://twitter.com">http://twitter.com</a></li>
+<li><a href="http://t.co">http://t.co</a></li>
+<li><a href="http://plus.google.com">http://plus.google.com</a></li>
+</ul>
+
+
+<p>If you want to share your cat photos and .gifs directly to friends, I guess you can still share them on LinkedIn.</p>
+
+<p>I won&rsquo;t say that what Imgur is doing is unethical; many startups use redirects to trap users and spam them with popups saying JOIN MY WEBSITE. At the least, your friends still get to see the image you linked. It&rsquo;s understandable why Imgur would use the redirects; direct image links cause them to lose money through bandwidth expense and earn none, while links to normal image pages make it apparent that the image is from Imgur, and the company could get new users from the branding. Many, many more direct links are made than indirect links, as shown in the image at the beginning of the article, and that can account for a lot of lost revenue.</p>
+
+<p>The problem is that redirecting users without disclosure is the start of a slippery slope. When I post a direct image link by copying the &ldquo;Direct Link&rdquo; URL, I <em>expect</em> that others who use the link will also see the direct image. But that&rsquo;s not the case if the link is posted on Facebook or Twitter. Additionally, the redirects make the images take <em>much</em> longer to load on mobile, since loading the scripts and ads slow the entire page down. Making it so that the redirect is only seen the first time an image is viewed doesn&rsquo;t offer much solace.</p>
+
+<p>If the redirects are successful at converting new users for Imgur, what&rsquo;s stopping them from redirecting other sites? I strongly hope that Imgur won&rsquo;t turn into the next Photobucket or Imageshack, but whenever a startup does something weird and not transparent, it&rsquo;s <em>never</em> a good sign.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Thoughtful Analysis of the Most Poorly-Designed Chart Ever]]></title>
@@ -459,183 +524,6 @@
 <p>Medium is definitely growing. HN is receiving more and more submissions which appeal to the average HN user, and posts are being submitted at all hours of the day. However, having a post at medium.com is not a panacea that will make your blog post be seen by thousands of people; you still need to write something interesting.</p>
 
 <p>Time will tell. But if HN does indeed get bored of Medium, I believe the problem will correct itself.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis]]></title>
-    <link href="http://minimaxir.com/2013/06/big-social-data/"/>
-    <updated>2013-06-22T10:00:00-07:00</updated>
-    <id>http://minimaxir.com/2013/06/big-social-data</id>
-    <content type="html"><![CDATA[<p>What makes people click the Like button on Facebook Statuses? Does the status say something funny? Does it contain a cool link or a funny photo? Does the status actively engage its readers?</p>
-
-<p>Needless to say, brands on Facebook want to know the answers to these questions. The more people that Like their statuses on their Facebook Pages, the more exposure they gain, and the more money they earn. Many, many companies have been created for the sole purpose of maximizing the number of Facebook Likes.</p>
-
-<p>By 2013, most brands have realized that photo posts and statuses that ask a question <a href="http://minimaxir.com/2012/10/questions-equals-reponses/">will generate <em>much</em> higher numbers</a> of Likes. Personally, that&rsquo;s not why <em>I</em> like a given Facebook status: I Like statuses that contain new and exciting things that are relevant to my interests. The first thing I read in a status is the Message: if the message is boring and uninteresting, then there&rsquo;s no reason for me to Like the status needlessly.</p>
-
-<p>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</p>
-
-<p>Running multivariate regressions on keywords from thousands of Facebook statuses, I&rsquo;ve discovered that the language used in a status <em>does</em> help predict the number of Likes a status receives, and actually could help brands learn much more about their fans.</p>
-
-<!-- more -->
-
-
-<h1>Setup</h1>
-
-<p><img src="http://minimaxir.com/img/rdataset.png"></p>
-
-<p>In order to draw accurate conclusions from the analysis, large amounts of data are needed (and there&rsquo;s no such thing as too much data).</p>
-
-<p>I decided to analyze the Facebook Pages of 3 extremely popular News sources: <a href="https://www.facebook.com/cnn">CNN</a>, the <a href="https://www.facebook.com/nytimes">New York Times</a>, and <a href="https://www.facebook.com/bbcworldnews">BBC World News</a>. All three Pages have millions of fans, post the same types of Facebook statuses, and post statuses extremely frequently to Facebook (around 8-9 times a day). The statuses analyzed will be from June 1st 2012 to June 1st 2013, in order to both gather a large sample size (~3,000  statuses from each Page) and a ensure a consistent apples-to-apples comparison between the three sources.</p>
-
-<p>The raw data, code, and a detailed technical explanation of the statistical techniques used to process the data can be found in <a href="https://github.com/minimaxir/facebook-keyword-regression-analysis">this GitHub repository</a>. (tl;dr, it&rsquo;s an optimized <a href="http://en.wikipedia.org/wiki/Least_squares">least squares</a> regression)</p>
-
-<p><em>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</em> We&rsquo;re ready to test this hypothesis.</p>
-
-<hr />
-
-<h1>CNN</h1>
-
-<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/cnn_Wordcloud.png"></p>
-
-<pre><code>                +Likes          P-Val
-Bourdain        1962.98         0
-NEWS            1272.64         0
-Photo           1154.6          0
-Barack          1002.45         0
-City            851.82          0
-Monday          705.42          0
-Obama           632.2           0
-United          578.77          0
-Mitt            562.29          0.01
-South           508.43          0.03
-America         505.83          0.01
-Watch           470.51          0
-Boston          398.13          0.05
-New             326.74          0.03
-ET              -433.96         0
-North           -467.05         0.02
-Check           -503.5          0
-Travel          -988.99         0.02
-</code></pre>
-
-<h2>Analysis</h2>
-
-<ul>
-<li>The most impactful keywords for CNN are political keywords.</li>
-<li><strong>NEWS</strong> (&ldquo;BREAKING NEWS&rdquo;) predicts more Likes than <strong>Photo</strong> (i.e. <a href="http://www.facebook.com/5550296508/posts/10151626042186509">Travel Photo of the Day</a>).</li>
-<li><strong>Bourdain</strong> refers to Anthony Bourdain, who very recently began <a href="http://en.wikipedia.org/wiki/Anthony_Bourdain:_Parts_Unknown">a food and travel show</a> on CNN. I assume that targets CNN&rsquo;s primary demographic.</li>
-<li>The presence of <strong>Barack</strong> (Barack Obama) predicts more likes than just <strong>Obama</strong>.</li>
-<li>The presence of <strong>Monday</strong> predicts more likes most other keywords. Garfield would be disappointed.</li>
-<li>The presence of <strong>North</strong> (North Korea) predicts a <em>decrease</em> in Likes from the average. Is North Korea boring?</li>
-<li>The presence of <strong>Check</strong> (&ldquo;Check this out!&rdquo;) also predicts a decrease in Likes from the average. This is interesting because this call-to-action is usually associated with the other keywords. Perhaps it&rsquo;s not necessary?</li>
-</ul>
-
-
-<hr />
-
-<h1>NYTimes</h1>
-
-<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/nytimes_Wordcloud.png"></p>
-
-<pre><code>                +Likes          P-Val
-Mills           1022.9          0
-Democratic      496.32          0
-Krugman         456.31          0
-Senate          431.05          0
-London          373.67          0.01
-Oscar           367.64          0.01
-Sandy           364.61          0
-Olympics        339.15          0.01
-Sunday          317             0
-Clinton         314.64          0.02
-You             247.07          0
-Obama           237.98          0
-Opinion         221             0
-Michael         204.2           0.03
-Credit          191.92          0.05
-Tuesday         187.22          0.03
-Times           178.69          0
-See             160.12          0.01
-Romney          157.66          0.04
-Ed              140.86          0.01
-Read            -101.23         0.05
-Here            -182.72         0.04
-Facebook        -187.75         0.02
-Are             -216.3          0.01
-While           -293.77         0.04
-Quotation       -322.29         0.02
-House           -362.1          0.01
-Thanksgiving    -369.88         0.05
-Convention      -448.34         0.01
-Jersey          -505.98         0
-</code></pre>
-
-<h2>Analysis</h2>
-
-<ul>
-<li>The most impactful keywords for NYTimes are political keywords and current events, such as Hurricane <strong>Sandy</strong> and the <strong>London</strong> <strong>Olympics</strong>.</li>
-<li><strong>Mills</strong> refers to Doug Mills, <a href="http://www.facebook.com/5281959998/posts/10150252479219999">photographer</a> for the New York Times. The power of photos!</li>
-<li><strong>You</strong> and <strong>See</strong> are impactful call-to-action keywords, even though they don&rsquo;t ask any questions. (Interestingly, <strong>Are</strong>, which implicitly asks a question, predicts a decrease in Likes. Maybe people don&rsquo;t Like questions?)</li>
-<li><strong>Clinton</strong> has a bigger impact than <strong>Obama</strong>.</li>
-<li>No one likes <strong>Jersey</strong>.</li>
-</ul>
-
-
-<hr />
-
-<h1>BBC World News</h1>
-
-<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/bbcworldnews_Wordcloud.png"></p>
-
-<pre><code>                +Likes          P-Val
-Malala          488.1           0
-Japan           186.32          0
-Britain         167.25          0.01
-That            155.01          0.01
-AFP             154.97          0.02
-Travel          153.41          0
-Now             148.39          0.02
-Would           146.45          0.03
-Delhi           137.85          0.04
-Let             134.93          0.03
-Future          127.49          0.02
-Barack          125.79          0.02
-An              122.18          0.03
-David           111.78          0.04
-Do              111.13          0
-Israel          101.31          0.04
-Impact          87.94           0.05
-South           78.62           0.03
-It              62.7            0.01
-The             55.7            0
-US              -47.84          0.02
-On              -86.22          0.04
-BBC             -103.58         0
-Sunday          -117.01         0.03
-After           -122.38         0.05
-Thursday        -143.91         0.03
-Twitter         -144.55         0
-City            -147.16         0.02
-Hi              -149.85         0.03
-BBCNewsUS       -150.48         0.03
-House           -176.86         0.01
-California      -187.57         0
-</code></pre>
-
-<h2>Analysis</h2>
-
-<ul>
-<li>The most impactful keywords for BBC World News are keywords describing news around the world. Unlike CNN and NYTimes, there are very few impactful keywords related to domestic politics (such as Prime Minister <strong>David</strong> Cameron, and even <strong>Barack</strong> is more impactful than him.)</li>
-<li><strong>Malala</strong> refers to <a href="http://en.wikipedia.org/wiki/Malala_Yousafzai">Malala Youdsfzai</a>, a Pakistani activist who survived an assassination attempt.</li>
-<li>Implicit question keywords such as <strong>Let</strong>, <strong>Do</strong>, and <strong>Would</strong> are all very effective.</li>
-<li>The simple salutation of <strong>Hi</strong> predicts a decrease in Likes. There&rsquo;s a British joke here somewhere.</li>
-</ul>
-
-
-<hr />
-
-<p>The language used in Facebook Statuses can be very useful in identifying what words Fans like, and what words will be most useful in generating the most exposure. While my analysis can&rsquo;t predict the <em>exact</em> number of Likes a Status receives, and I likely <a href="http://xkcd.com/882/">broke a few rules of statistics</a> in the process of making this post, the impact of language and specific keywords on social media interaction is an endeavor worth pursuing.</p>
 ]]></content>
   </entry>
   
