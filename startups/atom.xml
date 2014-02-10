@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Startups | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//startups/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-02-06T07:52:24-08:00</updated>
+  <updated>2014-02-10T07:24:45-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -36,7 +36,7 @@
 
 <p><code>curl http://i.imgur.com/p9lG2ss.png --referer http://reddit.com -I</code></p>
 
-<p>That gives me a Error Code 200, &ldquo;OK&rdquo;, meaning that the image was accessed successfully.</p>
+<p>That gives me a Status Code 200, &ldquo;OK&rdquo;, meaning that the image was accessed successfully.</p>
 
 <p><code>HTTP/1.1 200 OK
 Server: cloudflare-nginx
@@ -56,7 +56,7 @@ Content-Type: text/html
 Set-Cookie: __cfduid=dc2e0ae5ee57ff598e079d75fa628f0321391564643058; expires=Mon, 23-Dec-2019 23:50:00 GMT; path=/; domain=.imgur.com; HttpOnly
 Location: http://imgur.com/p9lG2ss</code></p>
 
-<p><a href="http://en.wikipedia.org/wiki/HTTP_302">Error Code 302</a>, &ldquo;Moved Temporarily,&rdquo; is the error code for a redirect, and shows that Imgur implemented this behavior intentionally. It also provides the Location of the link to redirect to, in this case the default image page with Imgur&rsquo;s branding.</p>
+<p><a href="http://en.wikipedia.org/wiki/HTTP_302">Status Code 302</a>, &ldquo;Moved Temporarily,&rdquo; is the error code for a redirect, and shows that Imgur implemented this behavior intentionally. It also provides the Location of the link to redirect to, in this case the default image page with Imgur&rsquo;s branding.</p>
 
 <p>After checking all popular social media sites (and their respective URL shortners) as referrers against Imgur&rsquo;s direct image links, I determined that the only referrer domains that Imgur redirects are:</p>
 

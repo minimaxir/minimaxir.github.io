@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Comedy | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//comedy/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-02-06T07:52:24-08:00</updated>
+  <updated>2014-02-10T07:24:45-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How Many #nofilter Instagram Photos Actually Have No Filter?]]></title>
+    <link href="http://minimaxir.com/2014/02/the-filter-truth/"/>
+    <updated>2014-02-10T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/the-filter-truth</id>
+    <content type="html"><![CDATA[<p>Most <a href="http://instagram.com/">Instagram</a> photos have filters applied to make them look more retro/cool. Instagram users are also able to apply tags to a photo to help categorize and promote them to the Instagram community. One such tag, #nofilter, is intended to emphasize such natural beauty that no filter is necessary to enhance the image. (or the photographer is just too lazy to decide on a filter)</p>
+
+<p>But how many #nofilter images actually <em>have</em> no filter?</p>
+
+<p><img src="/img/instagram_selfie.gif"></p>
+
+<p>As it turns not, not all of them.</p>
+
+<p>After retrieving about 50,000 images through the Instagram API (code <a href="https://github.com/minimaxir/get-data-from-photos-from-instagram-tags">available on GitHub</a>), here is the breakdown of filters on #nofilter-tagged Instagram images:</p>
+
+<p><img src="/img/nofilter.png"></p>
+
+<p>Only 83% of #nofilter images have no filter?! You had one job, Instagram! :(</p>
+
+<hr />
+
+<p><em>The actual reason that this is happening is because Instagram rewards #tagspamming. More on that in a future blog post.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Thoughtful Analysis of the Most Poorly-Designed Chart Ever]]></title>

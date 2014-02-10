@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-02-06T07:52:24-08:00</updated>
+  <updated>2014-02-10T07:24:45-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How Many #nofilter Instagram Photos Actually Have No Filter?]]></title>
+    <link href="http://minimaxir.com/2014/02/the-filter-truth/"/>
+    <updated>2014-02-10T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/the-filter-truth</id>
+    <content type="html"><![CDATA[<p>Most <a href="http://instagram.com/">Instagram</a> photos have filters applied to make them look more retro/cool. Instagram users are also able to apply tags to a photo to help categorize and promote them to the Instagram community. One such tag, #nofilter, is intended to emphasize such natural beauty that no filter is necessary to enhance the image. (or the photographer is just too lazy to decide on a filter)</p>
+
+<p>But how many #nofilter images actually <em>have</em> no filter?</p>
+
+<p><img src="http://minimaxir.com/img/instagram_selfie.gif"></p>
+
+<p>As it turns not, not all of them.</p>
+
+<p>After retrieving about 50,000 images through the Instagram API (code <a href="https://github.com/minimaxir/get-data-from-photos-from-instagram-tags">available on GitHub</a>), here is the breakdown of filters on #nofilter-tagged Instagram images:</p>
+
+<p><img src="http://minimaxir.com/img/nofilter.png"></p>
+
+<p>Only 83% of #nofilter images have no filter?! You had one job, Instagram! :(</p>
+
+<hr />
+
+<p><em>The actual reason that this is happening is because Instagram rewards #tagspamming. More on that in a future blog post.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Imgur is Covertly Redirecting Image Links on Facebook and Twitter]]></title>
@@ -36,7 +61,7 @@
 
 <p><code>curl http://i.imgur.com/p9lG2ss.png --referer http://reddit.com -I</code></p>
 
-<p>That gives me a Error Code 200, &ldquo;OK&rdquo;, meaning that the image was accessed successfully.</p>
+<p>That gives me a Status Code 200, &ldquo;OK&rdquo;, meaning that the image was accessed successfully.</p>
 
 <p><code>HTTP/1.1 200 OK
 Server: cloudflare-nginx
@@ -56,7 +81,7 @@ Content-Type: text/html
 Set-Cookie: __cfduid=dc2e0ae5ee57ff598e079d75fa628f0321391564643058; expires=Mon, 23-Dec-2019 23:50:00 GMT; path=/; domain=.imgur.com; HttpOnly
 Location: http://imgur.com/p9lG2ss</code></p>
 
-<p><a href="http://en.wikipedia.org/wiki/HTTP_302">Error Code 302</a>, &ldquo;Moved Temporarily,&rdquo; is the error code for a redirect, and shows that Imgur implemented this behavior intentionally. It also provides the Location of the link to redirect to, in this case the default image page with Imgur&rsquo;s branding.</p>
+<p><a href="http://en.wikipedia.org/wiki/HTTP_302">Status Code 302</a>, &ldquo;Moved Temporarily,&rdquo; is the error code for a redirect, and shows that Imgur implemented this behavior intentionally. It also provides the Location of the link to redirect to, in this case the default image page with Imgur&rsquo;s branding.</p>
 
 <p>After checking all popular social media sites (and their respective URL shortners) as referrers against Imgur&rsquo;s direct image links, I determined that the only referrer domains that Imgur redirects are:</p>
 
@@ -1274,28 +1299,6 @@ The missing amount, divided by 2:   2,147,483,648 gold
 <li>Interestingly, SocialSync is not enabled on CNet or AllThingsD&rsquo;s implementations of LiveFyre.</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Facebook Outage: All Webpage Likes and Comments Reset]]></title>
-    <link href="http://minimaxir.com/2013/03/facebook-outage/"/>
-    <updated>2013-03-25T21:47:00-07:00</updated>
-    <id>http://minimaxir.com/2013/03/facebook-outage</id>
-    <content type="html"><![CDATA[<p><strong>UPDATE: The issue was resolved about 11 hours after the post was published. Like counts and comment counts are back. See <a href="http://techcrunch.com/2013/03/25/facebook-comments-bug/">TechCrunch&rsquo;s post</a>.</strong></p>
-
-<p>Today (3/25/13), Facebook appears to have made a change that has nuked all existing Facebook Like counts and Facebook Comments. I can verify that on this particular blog, my non-cached Like counts and my Comments are gone, even after checking Facebook&rsquo;s Graph API directly. This can be verified on older blog posts, such as <a href="http://techcrunch.com/2012/05/19/day-after-ipo-mark-zuckerberg-marries-longtime-girlfriend-priscilla-chan/">this one</a>.  It is also <a href="http://stackoverflow.com/questions/15623582/facebook-like-count-for-articles-reset-to-zero">being tracked on Stack Overflow</a>.</p>
-
-<!-- more -->
-
-
-<p><img src="http://minimaxir.com/img/Zuck.png"></p>
-
-<p>Note the lack of comments and Likes, on what was the article with the second-most pageviews on TC (and one I can testify that had hundreds of comments.) A quick glance at multiple blogs and other old posts confirms that Likes were reset. New posts have several likes, but all old posts have 0 likes.</p>
-
-<p>I&rsquo;m sure the lost Likes/Comments temporary, but this is an error of incredible magnitude, especially given on how many sites rely on Facebook&rsquo;s data.</p>
-
-<p>Because comments here may be broken, you can comment on the <a href="https://news.ycombinator.com/item?id=5439712">Hacker News thread</a>.</p>
 ]]></content>
   </entry>
   
