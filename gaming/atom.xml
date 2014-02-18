@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gaming | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//gaming/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-02-10T07:24:45-08:00</updated>
+  <updated>2014-02-18T08:10:10-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,135 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Game Theory: How 70,000 Pokemon Players Sabotage Themselves]]></title>
+    <link href="http://minimaxir.com/2014/02/glory-to-the-helix/"/>
+    <updated>2014-02-18T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/glory-to-the-helix</id>
+    <content type="html"><![CDATA[<p><a href="http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Red_and_Blue_Versions">Pokemon Red and Pokemon Blue</a> remain as two of the most iconic games in video gaming history. They have retained a lot of nostalgia value for those who grew up playing the games (such as myself), and nowadays even adult gamers revisit such classics.</p>
+
+<p>On the game live-streaming site <a href="http://www.twitch.tv/">Twitch.tv</a>, one user simply known as &ldquo;TwitchPlaysPokemon&rdquo; setup <a href="http://www.twitch.tv/twitchplayspokemon">a live-stream of Pokemon Red</a>, but with a twist: all game commands, such as &ldquo;up&rdquo;,&ldquo;down&rdquo;,&ldquo;left&rdquo;,&ldquo;right&rdquo;,&ldquo;b&rdquo;,&ldquo;a&rdquo;,&ldquo;select&rdquo;, and &ldquo;start&rdquo;, would be input by typing the appropriate command into the livestream chat. At first, this seems like a crazy idea: if thousands of people are inputting commands at the same time, could we accomplish <em>anything</em> in the game?</p>
+
+<p><img src="/img/AcXmBbM.png"></p>
+
+<p>As it turns out, it was an idea that had gone horribly right. By the time gaming forum NeoGAF <a href="http://www.neogaf.com/forum/showthread.php?t=768965">found the stream</a>, the channel had made an unexpected amount of progress; a group of 3,000 users made it past the first Gym (out of eight) and are continuing to move forward. A few days later, after the channel was covered by <a href="http://www.polygon.com/2014/2/17/5420334/twitch-plays-pokemon-captivates-with-more-than-6-5m-total-views">major news outlets</a>, the channel had completed <em>four</em> gyms, inspired the creation of a large amount of <a href="https://docs.google.com/document/d/1Luwz9wr8XkoekzU4zv3duj9D2K5AoAyqnYMcbCHZKqc">hilarious fan art</a>, and also created a <a href="http://askhelixfossil.com/">new religion</a>. You can read a summary of the stream&rsquo;s status <a href="https://docs.google.com/a/minimaxir.com/document/d/1Ka89uCBeLl9VV5GPlAKuW7yF8FGtnVmdbPnIwG8FnQ4/preview?pli=1&amp;sle=true">here</a>.</p>
+
+<p>That being said, it was neither a straight nor short path to success. In the end, the gaming community fought its greatest enemy: itself. Twitch Plays Pokemon isn&rsquo;t about winning. It&rsquo;s about trying not to fail spectacularly. And they still fail regardless. It&rsquo;s an irresistible train wreck that&rsquo;s hard to stop watching.</p>
+
+<h1>The Adventure Begins</h1>
+
+<p>The first areas of Pokemon Red are relatively linear up until <a href="http://bulbapedia.bulbagarden.net/wiki/Vermilion_City">Vermillion City</a>, where the third gym is located. Before that, Pokemon Trainer Red, the player character, had a few interesting encounters thanks to the bizarre overlords of the Twitch chat. Red chose <a href="http://bulbapedia.bulbagarden.net/wiki/Charmander">Charmander</a> (later evolved into <a href="http://bulbapedia.bulbagarden.net/wiki/Charmeleon_(Pok%C3%A9mon)">Charmeleon</a>) as his starter Pokemon, which he nicknamed <strong>ABBBBBBK (</strong> or &ldquo;Abby&rdquo; for short. He caught a few more basic Pokemon, including a <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgey">Pidgey</a> (later evolved into <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgeotto_(Pok%C3%A9mon)">Pidgeotto</a>) and <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgeot_(Pok%C3%A9mon)">Pidgeot</a>), 2 <a href="http://bulbapedia.bulbagarden.net/wiki/Rattata">Rattata</a> (one nicknamed <strong>JLVWNNOOOO</strong>, i.e. &ldquo;Jay Leno&rdquo;), a <a href="http://bulbapedia.bulbagarden.net/wiki/Drowzee">Drowzee</a>, and a <a href="http://bulbapedia.bulbagarden.net/wiki/Spearow">Spearow</a> which was traded for a <a href="http://bulbapedia.bulbagarden.net/wiki/Farfetch%27d">Farfetch&rsquo;d</a>, all of which gave him a full party of Pokemon.</p>
+
+<p><img src="/img/MwarCER.png"></p>
+
+<p>Since thousands of players are inputting commands at the same time, there is absolutely no strategy involved in Pokemon battles, which in most cases make the battles unwinnable. Thanks to the nature of RPG level-ups and a few lucky critical hits, Red can still persevere (although it will a few hours).</p>
+
+<p>The Twitch channel was a very casual experience, until Red obtained HM 01 from the <a href="http://bulbapedia.bulbagarden.net/wiki/S.S._Anne">S.S. Anne</a>, an item that requires a sequence of sequential button presses to operate.</p>
+
+<p>Then things get complicated.</p>
+
+<h1>Cutting A Thin Line</h1>
+
+<p>HM 01 is an item that grants the Cut ability to a Pokemon, which is required to cut trees blocking progress; in this case, the tree in front of the Vermillion City Gym. In order to teach a Pokemon Cut, the player must:</p>
+
+<ol>
+<li>Bring up the Start menu.</li>
+<li>Select &ldquo;Items.&rdquo;</li>
+<li>Select HM 01.</li>
+<li>Confirm that HM 01 is to be used.</li>
+<li>Select a Pokemon to learn Cut.</li>
+<li>Confirm that the selected Pokemon is to learn Cut.</li>
+<li>Choose a move for Cut to replace.</li>
+</ol>
+
+
+<p>The kicker? Pressing the B button or choosing the wrong option during <em>any</em> of these 7 steps takes the process back a step.</p>
+
+<p><img src="/img/1XSdWPY.jpg"></p>
+
+<p>At this point in the stream, the audience hit 30,000 viewers. The increased activity caused an input delay of about 20 seconds from when the Twitch user input the command in chat to when the game recognized the command. This can make navigating menus difficult when an &ldquo;up&rdquo; or a &ldquo;down&rdquo; command is applied to a menu that isn&rsquo;t even visible yet.</p>
+
+<p>Additionally, as the number of viewers in a stream increases, the number of trolls increases. And those trolls loved to spam the B button command.</p>
+
+<p>Thanks to these two factors, the channel had failed to teach any Pokemon Cut for over <em>4 hours</em>. The stream chat became a bloodbath of blame.</p>
+
+<p><img src="/img/p30F3g7.png"></p>
+
+<p>Eventually, it happened. The Farfetch&rsquo;d was taught Cut. No one knows <em>how</em>, but it happened. But <em>that</em> was only one step towards progress.</p>
+
+<p>The second step is actually Cutting the tree. In order to Cut:</p>
+
+<ol>
+<li>Face the tree.</li>
+<li>Bring up the Start menu.</li>
+<li>Select &ldquo;Pokemon&rdquo;</li>
+<li>Select the Pokemon with Cut.</li>
+<li>Select Cut.</li>
+</ol>
+
+
+<p>Same kickers as before, too. Facing the tree is even harder since the same up/down commands for navigating the menus can reorient Red away from the tree.</p>
+
+<p>It took another 4 hours to cut down that tree. Later, when Red was defeated in the Gym, the tree respawned. Yeah.</p>
+
+<p><img src="/img/NCo5N3j.png"></p>
+
+<p>HM 01 was a harsh reminder that the more people present, the higher the chance that your task will fail. Not necessarily due to incompetence and disorganization, but due to mischief.</p>
+
+<h1>Fighting The Ledge Boss</h1>
+
+<p>After the Vermillion City Gym was (eventually) completed, the Twitch stream progressed through <a href="http://bulbapedia.bulbagarden.net/wiki/Kanto_Route_9">Route 9</a> toward <a href="http://bulbapedia.bulbagarden.net/wiki/Lavender_Town">Lavender Town</a>. Sounds simple, until Red hit this obstacle.</p>
+
+<p><img src="/img/ledge.png"></p>
+
+<p>Red must walk from the left to the right through the 1-character-wide path. If Red went down, the ledge is a one-way drop, and Red must walk back to the beginning to try again.</p>
+
+<p>The Twitch chat must go &ldquo;right&rdquo; about 8 times <em>without going &ldquo;down&rdquo; at all</em>.</p>
+
+<p>HM01 had input lag as a contributing factor to its failures. In this case, the trolls had <em>all</em> the power. One &ldquo;down&rdquo; ends the entire attempt. And the stream was even more popular with an audience of 50,000 people.</p>
+
+<p><img src="/img/h2sFCtt.png"></p>
+
+<p>The result? Crossing the ledge took over <em>12 hours</em>. And then Red was defeated by the trainer at the end of the ledge and so getting back across the ledge took an equally absurd amount of time.</p>
+
+<p>Lesson learned? If trolls have absolute power, <em>they will use it</em> and they will use it without mercy.</p>
+
+<h1>Disregarding Decision Trees</h1>
+
+<p>After the ledge incident, the fanbase became paranoid. What other gameplay aspects in this playthrough could be compromised by trolls in the future? One concern is the PC system used to store Pokemon; the same system can also <em>release</em> them, removing them from the game forever. The risk of losing a top Pokemon to the PC due to trolls was too great and would make the game nearly unwinnable, and therefore the steam decided to avoid using the PC unless necessary.</p>
+
+<p>Red progressed through Lavender Town and arrived at <a href="http://bulbapedia.bulbagarden.net/wiki/Celadon_City">Celadon City</a>, where the Twitch channel defeated the Gym Leader for the fourth badge (it took awhile: there was a tree outside <em>and</em> inside the gym!)</p>
+
+<p>At this point in Pokemon Red, the game becomes more nonlinear, which started a debate on what next to do in game. Many pointed out that the party lacked a Pokemon which could learn Surf, a skill, like Cut, which was required to progress in the game much later. Red will eventually earn such a Pokemon which could learn Surf (<a href="http://bulbapedia.bulbagarden.net/wiki/Lapras">Lapras</a>) as a part of the plot, who&rsquo;s a decent combatant too.</p>
+
+<p>On the other hand, the player can also collect <a href="http://bulbapedia.bulbagarden.net/wiki/Eevee">Eevee</a> as a free Pokemon. Eevee has three evolutions: the terrible <a href="http://bulbapedia.bulbagarden.net/wiki/Flareon_(Pok%C3%A9mon)">Flareon</a>, the good <a href="http://bulbapedia.bulbagarden.net/wiki/Jolteon_(Pok%C3%A9mon)">Jolteon</a>, and the great <a href="http://bulbapedia.bulbagarden.net/wiki/Vaporeon_(Pok%C3%A9mon)">Vaporeon</a> who can also learn Surf. But in order to evolve Vaporeon Eevee into , the party must a) buy a Water Stone, and not accidentally any other elemental stone instead and b) use the Stone <em>without accidentally tossing it</em> and destroying it. Both of which are difficult due to input lag and trolls.</p>
+
+<p>The party had 5 Pokemon (after a Rattata was deposited  earlier into the PC), and so the stream only had the opportunity for get <em>one</em> Pokemon, since the steam did not want deposit any in the PC for fear of release. Which is the more rational path for getting a Pokemon with Surf: waiting to get a guaranteed Lapras, or getting the Eevee and hope the stream can evolve it into a Vaporeon? A guaranteed decent Pokemon or a chance at a great Pokemon?</p>
+
+<p>As it turns out, when 70,000 people make a decision, they aren&rsquo;t exactly rational. Instead, hilarity ensued.</p>
+
+<h1>Game Over Theory</h1>
+
+<p>The stream obtained the Eevee (even after many said it was <a href="http://i.imgur.com/9cV06Yq.png">a bad idea</a>) and went to purchase a Water Stone. Due to input manipulation, they instead bought a Fire Stone, and later the Eevee evolved into the unhelpful Flareon. Chat becomes a bloodbath once again.</p>
+
+<p><img src="/img/QGiFYYu.jpg"></p>
+
+<p>In order to make room for Lapras in the future, the stream attempted to use a PC to deposit Flareon.</p>
+
+<p><img src="/img/0ndYCF1.png"></p>
+
+<p>Instead, both Abby and Jay Leno were permanently released.</p>
+
+<p><img src="/img/tumblr_n157ldJl611rvlenbo1_1280.jpg"></p>
+
+<p>The stream became completely derailed.</p>
+
+<p>As of today, Twitch pushes on, but everyone who&rsquo;s participating in the stream has now learned a lesson: people act in their self interest and do what they think is best. Trolls have&hellip;different self-interests. And there will always be trolls. Knowing how to fail gracefully is always valuable.</p>
+
+<p>At the least, the amount of progress the steam has made is still very, very impressive and unexpected.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[When Uninstalling A PC Game Erases the Entire Hard Drive]]></title>
@@ -270,64 +399,6 @@ elemental Djinn attack that it is weak to.</p></blockquote>
 <p>Not as catchy, unfortunately.</p>
 
 <p>In fact, the Justin Bailey password is also a completely coincidental password. Sometimes, passwords can just do very unexpected things.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Diablo III Economy Broken by an Integer Overflow Bug]]></title>
-    <link href="http://minimaxir.com/2013/05/stones-of-jordan/"/>
-    <updated>2013-05-07T21:53:00-07:00</updated>
-    <id>http://minimaxir.com/2013/05/stones-of-jordan</id>
-    <content type="html"><![CDATA[<p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
-
-<p>Diablo III is also noted for its economy, with an emphasis on a region-wide auction house where players can trade one-in-a-million items for millions and billions of gold. (inflation is crazy). Additionally, Diablo III emphasized the use of a Real World Auction House, where players can sell gold or items for real world cash.</p>
-
-<p>Today was the launch of <a href="http://us.battle.net/d3/en/blog/9647272/patch-108-now-live-5-7-2013">Patch 1.0.8</a>, a patch which promised improvements to character progression. After spending a few weeks on a Public Test Realm, where players volunteered to tested the patch to ensure that there were game-breaking exploits, the patch released successfully.</p>
-
-<p>Except for one patch note that was added last minute and not tested in the PTR. And it&rsquo;s a patch note that broke the economy to tiny pieces.</p>
-
-<!-- more -->
-
-
-<p>The patch notes from the final build contained this change:</p>
-
-<blockquote><p>The stack size for gold sales on the auction house has been increased from 1 million to 10 million.</p></blockquote>
-
-<p>Normally, on the Real Money Auction House, the player can only sell money in 1 million gold increments. In 1.0.8, the player can sell it in 10 million increments. So, what happens when the player tries putting an absurd amount of money on the Auction House?</p>
-
-<p>Reddit user tyropro <a href="http://www.reddit.com/r/Diablo/comments/1dx3wv/some_speculation_on_how_the_gold_bug_made_it_to/">has a nice explanation</a>:</p>
-
-<blockquote><p>The gold &ldquo;dupe&rdquo; involved creating a RMAH auction for billions of gold while staying under the $250 limit. The example I saw in a video was 6 billion gold (600 x 10,000,000 at $0.39 per stack, for $234). When they posted this auction only ~1.7 billion appeared to be for sale, with the rest &ldquo;missing&rdquo; until they sent it to their stash and ended up with more than they started with. The exact numbers from a duping video:</p>
-
-<pre><code>Create RMAH auction for:            6,000,000,000 gold
-Auction shows up as:                1,705,032,704 gold
-This much is missing!               4,294,967,296 gold
-The missing amount, divided by 2:   2,147,483,648 gold
-</code></pre>
-
-<p>2,147,483,648 (or 231) is the maximum value you can store in an int32 in programming. I&rsquo;m no programmer, but I took one class in high school and was taught about the limits of different variable types. See:</p>
-
-<p>Simply put, their RMAH gold selling code wasn&rsquo;t written to handle numbers over 2,147,483,648 properly, and the result was duplicate gold being added to people&rsquo;s stashes.</p></blockquote>
-
-<p>4,294,967,296 is also 232, or the bound on an <a href="https://en.wikipedia.org/wiki/Integer_(computer_science)#Common_long_integer_sizes">unsigned integer</a>, which would be an interesting implementation choice on Blizzard&rsquo;s part.</p>
-
-<p>And so, the dupers created these 6-billion-gold auctions which only appears to sell as 1.7 billion (and therefore only had 1.7 billion deducted from the current balance), canceled them, and were fully refunded the 6 billion for a net profit of the difference (4.2 billion). Repeat <em>ad nauseum</em>.</p>
-
-<p>A popular game streamer showed off the exploit. Other streamers followed. It was easily reproducible and <a href="http://www.reddit.com/r/Diablo/comments/1dw9kr/there_is_a_gold_dupe_on_na_currently_this_is_the/">everyone knew how to reproduce it</a>.</p>
-
-<p>Hilarity ensued.</p>
-
-<p><img src="/img/diablo31.png" alt="diablo31" /></p>
-
-<p>Yes, that&rsquo;s 420 <em>billion</em> gold.</p>
-
-<p>After buying up all the duped items in the Auction House, the items were then sold on the Real Money Auction House. For real money. And people bought them.</p>
-
-<p>This is the definition of a worst-case scenario for Diablo III. All because of an untested patch note. What could Blizzard do? Performing a roll-back would wipe all progress obtained by players for the patch day, which would result in a lot of bad PR. But leaving the economy as-is will devalue all items in the game (and Diablo III is all about getting items).</p>
-
-<p>In the end, Blizzard <a href="http://www.reddit.com/r/Diablo/comments/1dx4a7/there_will_officially_be_no_rollback_after_the/">has not done a roll-back</a>, but instead <a href="http://www.reddit.com/r/Diablo/comments/1dwk6x/d3_inigomontoya_just_got_banned_for_real/">banned anyone who duped</a>, and <a href="http://i.imgur.com/x5S9Zcx.png">refunded</a> anyone who spent real money. The bug was temporarily fixed by reverting the patch note which caused the entire mess.</p>
-
-<p>Let this be a lesson on what happens when you include an untested change at the last minute. You could break an entire economy. Eh, no big deal.</p>
 ]]></content>
   </entry>
   

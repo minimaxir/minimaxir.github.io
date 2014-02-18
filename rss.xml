@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-02-10T07:24:45-08:00</updated>
+  <updated>2014-02-18T08:10:10-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,135 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Game Theory: How 70,000 Pokemon Players Sabotage Themselves]]></title>
+    <link href="http://minimaxir.com/2014/02/glory-to-the-helix/"/>
+    <updated>2014-02-18T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/glory-to-the-helix</id>
+    <content type="html"><![CDATA[<p><a href="http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Red_and_Blue_Versions">Pokemon Red and Pokemon Blue</a> remain as two of the most iconic games in video gaming history. They have retained a lot of nostalgia value for those who grew up playing the games (such as myself), and nowadays even adult gamers revisit such classics.</p>
+
+<p>On the game live-streaming site <a href="http://www.twitch.tv/">Twitch.tv</a>, one user simply known as &ldquo;TwitchPlaysPokemon&rdquo; setup <a href="http://www.twitch.tv/twitchplayspokemon">a live-stream of Pokemon Red</a>, but with a twist: all game commands, such as &ldquo;up&rdquo;,&ldquo;down&rdquo;,&ldquo;left&rdquo;,&ldquo;right&rdquo;,&ldquo;b&rdquo;,&ldquo;a&rdquo;,&ldquo;select&rdquo;, and &ldquo;start&rdquo;, would be input by typing the appropriate command into the livestream chat. At first, this seems like a crazy idea: if thousands of people are inputting commands at the same time, could we accomplish <em>anything</em> in the game?</p>
+
+<p><img src="http://minimaxir.com/img/AcXmBbM.png"></p>
+
+<p>As it turns out, it was an idea that had gone horribly right. By the time gaming forum NeoGAF <a href="http://www.neogaf.com/forum/showthread.php?t=768965">found the stream</a>, the channel had made an unexpected amount of progress; a group of 3,000 users made it past the first Gym (out of eight) and are continuing to move forward. A few days later, after the channel was covered by <a href="http://www.polygon.com/2014/2/17/5420334/twitch-plays-pokemon-captivates-with-more-than-6-5m-total-views">major news outlets</a>, the channel had completed <em>four</em> gyms, inspired the creation of a large amount of <a href="https://docs.google.com/document/d/1Luwz9wr8XkoekzU4zv3duj9D2K5AoAyqnYMcbCHZKqc">hilarious fan art</a>, and also created a <a href="http://askhelixfossil.com/">new religion</a>. You can read a summary of the stream&rsquo;s status <a href="https://docs.google.com/a/minimaxir.com/document/d/1Ka89uCBeLl9VV5GPlAKuW7yF8FGtnVmdbPnIwG8FnQ4/preview?pli=1&amp;sle=true">here</a>.</p>
+
+<p>That being said, it was neither a straight nor short path to success. In the end, the gaming community fought its greatest enemy: itself. Twitch Plays Pokemon isn&rsquo;t about winning. It&rsquo;s about trying not to fail spectacularly. And they still fail regardless. It&rsquo;s an irresistible train wreck that&rsquo;s hard to stop watching.</p>
+
+<h1>The Adventure Begins</h1>
+
+<p>The first areas of Pokemon Red are relatively linear up until <a href="http://bulbapedia.bulbagarden.net/wiki/Vermilion_City">Vermillion City</a>, where the third gym is located. Before that, Pokemon Trainer Red, the player character, had a few interesting encounters thanks to the bizarre overlords of the Twitch chat. Red chose <a href="http://bulbapedia.bulbagarden.net/wiki/Charmander">Charmander</a> (later evolved into <a href="http://bulbapedia.bulbagarden.net/wiki/Charmeleon_(Pok%C3%A9mon)">Charmeleon</a>) as his starter Pokemon, which he nicknamed <strong>ABBBBBBK (</strong> or &ldquo;Abby&rdquo; for short. He caught a few more basic Pokemon, including a <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgey">Pidgey</a> (later evolved into <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgeotto_(Pok%C3%A9mon)">Pidgeotto</a>) and <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgeot_(Pok%C3%A9mon)">Pidgeot</a>), 2 <a href="http://bulbapedia.bulbagarden.net/wiki/Rattata">Rattata</a> (one nicknamed <strong>JLVWNNOOOO</strong>, i.e. &ldquo;Jay Leno&rdquo;), a <a href="http://bulbapedia.bulbagarden.net/wiki/Drowzee">Drowzee</a>, and a <a href="http://bulbapedia.bulbagarden.net/wiki/Spearow">Spearow</a> which was traded for a <a href="http://bulbapedia.bulbagarden.net/wiki/Farfetch%27d">Farfetch&rsquo;d</a>, all of which gave him a full party of Pokemon.</p>
+
+<p><img src="http://minimaxir.com/img/MwarCER.png"></p>
+
+<p>Since thousands of players are inputting commands at the same time, there is absolutely no strategy involved in Pokemon battles, which in most cases make the battles unwinnable. Thanks to the nature of RPG level-ups and a few lucky critical hits, Red can still persevere (although it will a few hours).</p>
+
+<p>The Twitch channel was a very casual experience, until Red obtained HM 01 from the <a href="http://bulbapedia.bulbagarden.net/wiki/S.S._Anne">S.S. Anne</a>, an item that requires a sequence of sequential button presses to operate.</p>
+
+<p>Then things get complicated.</p>
+
+<h1>Cutting A Thin Line</h1>
+
+<p>HM 01 is an item that grants the Cut ability to a Pokemon, which is required to cut trees blocking progress; in this case, the tree in front of the Vermillion City Gym. In order to teach a Pokemon Cut, the player must:</p>
+
+<ol>
+<li>Bring up the Start menu.</li>
+<li>Select &ldquo;Items.&rdquo;</li>
+<li>Select HM 01.</li>
+<li>Confirm that HM 01 is to be used.</li>
+<li>Select a Pokemon to learn Cut.</li>
+<li>Confirm that the selected Pokemon is to learn Cut.</li>
+<li>Choose a move for Cut to replace.</li>
+</ol>
+
+
+<p>The kicker? Pressing the B button or choosing the wrong option during <em>any</em> of these 7 steps takes the process back a step.</p>
+
+<p><img src="http://minimaxir.com/img/1XSdWPY.jpg"></p>
+
+<p>At this point in the stream, the audience hit 30,000 viewers. The increased activity caused an input delay of about 20 seconds from when the Twitch user input the command in chat to when the game recognized the command. This can make navigating menus difficult when an &ldquo;up&rdquo; or a &ldquo;down&rdquo; command is applied to a menu that isn&rsquo;t even visible yet.</p>
+
+<p>Additionally, as the number of viewers in a stream increases, the number of trolls increases. And those trolls loved to spam the B button command.</p>
+
+<p>Thanks to these two factors, the channel had failed to teach any Pokemon Cut for over <em>4 hours</em>. The stream chat became a bloodbath of blame.</p>
+
+<p><img src="http://minimaxir.com/img/p30F3g7.png"></p>
+
+<p>Eventually, it happened. The Farfetch&rsquo;d was taught Cut. No one knows <em>how</em>, but it happened. But <em>that</em> was only one step towards progress.</p>
+
+<p>The second step is actually Cutting the tree. In order to Cut:</p>
+
+<ol>
+<li>Face the tree.</li>
+<li>Bring up the Start menu.</li>
+<li>Select &ldquo;Pokemon&rdquo;</li>
+<li>Select the Pokemon with Cut.</li>
+<li>Select Cut.</li>
+</ol>
+
+
+<p>Same kickers as before, too. Facing the tree is even harder since the same up/down commands for navigating the menus can reorient Red away from the tree.</p>
+
+<p>It took another 4 hours to cut down that tree. Later, when Red was defeated in the Gym, the tree respawned. Yeah.</p>
+
+<p><img src="http://minimaxir.com/img/NCo5N3j.png"></p>
+
+<p>HM 01 was a harsh reminder that the more people present, the higher the chance that your task will fail. Not necessarily due to incompetence and disorganization, but due to mischief.</p>
+
+<h1>Fighting The Ledge Boss</h1>
+
+<p>After the Vermillion City Gym was (eventually) completed, the Twitch stream progressed through <a href="http://bulbapedia.bulbagarden.net/wiki/Kanto_Route_9">Route 9</a> toward <a href="http://bulbapedia.bulbagarden.net/wiki/Lavender_Town">Lavender Town</a>. Sounds simple, until Red hit this obstacle.</p>
+
+<p><img src="http://minimaxir.com/img/ledge.png"></p>
+
+<p>Red must walk from the left to the right through the 1-character-wide path. If Red went down, the ledge is a one-way drop, and Red must walk back to the beginning to try again.</p>
+
+<p>The Twitch chat must go &ldquo;right&rdquo; about 8 times <em>without going &ldquo;down&rdquo; at all</em>.</p>
+
+<p>HM01 had input lag as a contributing factor to its failures. In this case, the trolls had <em>all</em> the power. One &ldquo;down&rdquo; ends the entire attempt. And the stream was even more popular with an audience of 50,000 people.</p>
+
+<p><img src="http://minimaxir.com/img/h2sFCtt.png"></p>
+
+<p>The result? Crossing the ledge took over <em>12 hours</em>. And then Red was defeated by the trainer at the end of the ledge and so getting back across the ledge took an equally absurd amount of time.</p>
+
+<p>Lesson learned? If trolls have absolute power, <em>they will use it</em> and they will use it without mercy.</p>
+
+<h1>Disregarding Decision Trees</h1>
+
+<p>After the ledge incident, the fanbase became paranoid. What other gameplay aspects in this playthrough could be compromised by trolls in the future? One concern is the PC system used to store Pokemon; the same system can also <em>release</em> them, removing them from the game forever. The risk of losing a top Pokemon to the PC due to trolls was too great and would make the game nearly unwinnable, and therefore the steam decided to avoid using the PC unless necessary.</p>
+
+<p>Red progressed through Lavender Town and arrived at <a href="http://bulbapedia.bulbagarden.net/wiki/Celadon_City">Celadon City</a>, where the Twitch channel defeated the Gym Leader for the fourth badge (it took awhile: there was a tree outside <em>and</em> inside the gym!)</p>
+
+<p>At this point in Pokemon Red, the game becomes more nonlinear, which started a debate on what next to do in game. Many pointed out that the party lacked a Pokemon which could learn Surf, a skill, like Cut, which was required to progress in the game much later. Red will eventually earn such a Pokemon which could learn Surf (<a href="http://bulbapedia.bulbagarden.net/wiki/Lapras">Lapras</a>) as a part of the plot, who&rsquo;s a decent combatant too.</p>
+
+<p>On the other hand, the player can also collect <a href="http://bulbapedia.bulbagarden.net/wiki/Eevee">Eevee</a> as a free Pokemon. Eevee has three evolutions: the terrible <a href="http://bulbapedia.bulbagarden.net/wiki/Flareon_(Pok%C3%A9mon)">Flareon</a>, the good <a href="http://bulbapedia.bulbagarden.net/wiki/Jolteon_(Pok%C3%A9mon)">Jolteon</a>, and the great <a href="http://bulbapedia.bulbagarden.net/wiki/Vaporeon_(Pok%C3%A9mon)">Vaporeon</a> who can also learn Surf. But in order to evolve Vaporeon Eevee into , the party must a) buy a Water Stone, and not accidentally any other elemental stone instead and b) use the Stone <em>without accidentally tossing it</em> and destroying it. Both of which are difficult due to input lag and trolls.</p>
+
+<p>The party had 5 Pokemon (after a Rattata was deposited  earlier into the PC), and so the stream only had the opportunity for get <em>one</em> Pokemon, since the steam did not want deposit any in the PC for fear of release. Which is the more rational path for getting a Pokemon with Surf: waiting to get a guaranteed Lapras, or getting the Eevee and hope the stream can evolve it into a Vaporeon? A guaranteed decent Pokemon or a chance at a great Pokemon?</p>
+
+<p>As it turns out, when 70,000 people make a decision, they aren&rsquo;t exactly rational. Instead, hilarity ensued.</p>
+
+<h1>Game Over Theory</h1>
+
+<p>The stream obtained the Eevee (even after many said it was <a href="http://i.imgur.com/9cV06Yq.png">a bad idea</a>) and went to purchase a Water Stone. Due to input manipulation, they instead bought a Fire Stone, and later the Eevee evolved into the unhelpful Flareon. Chat becomes a bloodbath once again.</p>
+
+<p><img src="http://minimaxir.com/img/QGiFYYu.jpg"></p>
+
+<p>In order to make room for Lapras in the future, the stream attempted to use a PC to deposit Flareon.</p>
+
+<p><img src="http://minimaxir.com/img/0ndYCF1.png"></p>
+
+<p>Instead, both Abby and Jay Leno were permanently released.</p>
+
+<p><img src="http://minimaxir.com/img/tumblr_n157ldJl611rvlenbo1_1280.jpg"></p>
+
+<p>The stream became completely derailed.</p>
+
+<p>As of today, Twitch pushes on, but everyone who&rsquo;s participating in the stream has now learned a lesson: people act in their self interest and do what they think is best. Trolls have&hellip;different self-interests. And there will always be trolls. Knowing how to fail gracefully is always valuable.</p>
+
+<p>At the least, the amount of progress the steam has made is still very, very impressive and unexpected.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How Many #nofilter Instagram Photos Actually Have No Filter?]]></title>
@@ -413,76 +542,6 @@ Location: http://imgur.com/p9lG2ss</code></p>
 <hr />
 
 <p><em>The tabulated data used to create each of the three charts is located at <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGxoVGFyX19hV2paMk5lOFRvNXlkcnc&amp;usp=sharing">this Google Spreadsheet</a> for your perusal.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Which Universities Produce the Most Successful Startup Founders?]]></title>
-    <link href="http://minimaxir.com/2013/07/alma-mater-data/"/>
-    <updated>2013-07-20T10:00:00-07:00</updated>
-    <id>http://minimaxir.com/2013/07/alma-mater-data</id>
-    <content type="html"><![CDATA[<p>If you read startup funding announcements on tech blogs frequently, you&rsquo;ve may have noticed that these startup founders have often attended prestigious universities. Founders who have graduated from Ivy League schools, such as Harvard, Yale and Princeton, unsurprisingly raise millions for their startups. Of course, top tier tech schools such as Stanford, MIT, and Carnegie Mellon foster a strong technical and entrepreneurial background: attributes which venture capitalists seek when investing in a startup founder. <em>(Disclosure: I&rsquo;m a Carnegie Mellon alumnus)</em></p>
-
-<p>Do the tech universities produce more funded graduates than the Ivy League universities? Do the founders from Ivy League Universities receive more funding than those from the top tier tech universities?</p>
-
-<p>Using TechCrunch&rsquo;s <a href="http://www.crunchbase.com/">CrunchBase</a> API, I obtained the data of about 2,500 startup founders in the United States who have created a startup which has received investment from venture capitalists.</p>
-
-<p>With that data, I found some rather interesting trends.</p>
-
-<!-- more -->
-
-
-<h1>Which universities produced the most amount of graduates who have received funding?</h1>
-
-<p>Thousands of university graduates attempt to make a startup, but most will not succeed. Are the graduates of some universities more frequently successful?</p>
-
-<p>Here are the Top 16 universities with the most number of successfully-funded graduates:</p>
-
-<p><img src="http://minimaxir.com/img/founder-colleges.png"></p>
-
-<p>Stanford has the most amount of funded graduates, which is unsurprising as it&rsquo;s located in the Silicon Valley heart of venture capital.</p>
-
-<p>Seven out of the eight Ivy League Universities (colored green on the chart) are present, but most of the Ivies are  in the middle of the chart. MIT and UC Berkeley each have nearly <em>double</em> the amount of successful graduates from Yale and Columbia.</p>
-
-<p>It&rsquo;s worth noting that Tel Aviv University, an Israeli university, ties Duke University at 21.</p>
-
-<h1>Which university&rsquo;s graduates have cumulatively raised the most amount of total funding?</h1>
-
-<p>Another way to measure success is through the success of the founders&#8217; subsequent startups and the amount of venture capital they have raised.</p>
-
-<p>Here are the Top 8 universities whose graduates have received the most amount of funding:</p>
-
-<p><img src="http://minimaxir.com/img/sum-funding.png"></p>
-
-<p>Harvard and Stanford graduates are very close in terms of total funding raised. However, there&rsquo;s a clear <a href="http://en.wikipedia.org/wiki/Power_law">Power Law</a> in effect, as those two along with UC Berkeley, have  produced founders who&rsquo;ve generated much, much more venture funding than those of the other universities.</p>
-
-<h1>Which university&rsquo;s graduates raise the most amount of money in their first round of funding on average?</h1>
-
-<p>Startup founders with big, world changing ideas need lots of venture capital. Only the founders with <em>good</em> ideas will actually receive it.</p>
-
-<p>Here are the average amount of first-round funding for the top 16 universities with the most number of successfully-funded graduates:</p>
-
-<p><img src="http://minimaxir.com/img/avg-first-raised.png"></p>
-
-<p>Carnegie Mellon and Princeton, which had a relatively low number of funded founders and a relatively low number of total capital raised, instead have a <em>significantly</em> higher amount of average first funding. UCLA also placed. Perhaps the students from these three universities tend to have more ambitious startup ideas?</p>
-
-<p>At first glance, Stanford and Harvard appear to be the kings of startups. They have the most amount of graduates, and the most amount of total venture capital raised. The tech blogs would surely consider that a success, but could the greater funding for CMU/Princeton lead to the creation of the next billion-dollar startup? We can only wait and see.</p>
-
-<p><em>UPDATE: As pointed out by robotcookies on the <a href="https://news.ycombinator.com/item?id=6075862">corresponding Hacker News thread</a>, I missed UCLA in the first draft, which had 29 funded graduates. The charts have been updated.</em></p>
-
-<hr />
-
-<p>You are welcome to use the founder data from CrunchBase by <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddEV1LUpaQUVsdmJYcERoM0FNU3lPcVE&amp;usp=sharing">viewing the data on Google Drive</a>, or by <a href="https://www.dropbox.com/s/3jz2wsr4d6fc4t6/founders_w_college.csv">downloading the raw CSV</a>.</p>
-
-<p><em>Notes:</em></p>
-
-<ul>
-<li><em>University data was standardized to make analysis easier (e.g. for Carnegie Mellon, the founders who listed their institution as &ldquo;Carnegie Mellon University&rdquo;, &ldquo;Carnegie Mellon,&rdquo; and &ldquo;CMU,&rdquo; all had their institution changed to be &ldquo;CMU&rdquo;.)</em></li>
-<li><em>Chart #1 measures unique founders, so it does not double-count a founder who has founded more than one  funded startup.</em></li>
-<li><em>Chart #2 assumes equal contribution of each founder to the funding: if a startup has a total funding of $100,000 with 2 founders, the amount used for the chart will be $50,000 for each founder.</em></li>
-<li><em>Chart #3 ignores startup data for the chart which has a Series B, Series C, or Series D listed as their first round on CrunchBase, or if the amount raised was not provided.</em></li>
-</ul>
-
 ]]></content>
   </entry>
   

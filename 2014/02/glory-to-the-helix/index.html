@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Game Theory: How 70,000 Pokemon Players Sabotage Themselves | minimaxir | Max Woolf's Blog</title>
+  <meta name="author" content="Max Woolf">
+
+  
+ 
+ 
+ 
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="Game Theory: How 70,000 Pokemon Players Sabotage Themselves">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2014/02/glory-to-the-helix/">
+
+
+  <meta name="twitter:description" content="Twitch Plays Pokemon isn't about winning. It's about trying not to fail spectacularly. And they still fail regardless. It's an irresistible train wreck that's hard to stop watching.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/h2sFCtt.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="Game Theory: How 70,000 Pokemon Players Sabotage Themselves" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="Twitch Plays Pokemon isn't about winning. It's about trying not to fail spectacularly. And they still fail regardless. It's an irresistible train wreck that's hard to stop watching." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2014/02/glory-to-the-helix/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/h2sFCtt.png" property="og:image">
+
+
+  
+  <meta content="Comedy" property="article:section">
+  
+
+
+  
+
+ 
+  
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  
+<!--
+  <meta name="description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
+   -->
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2014/02/glory-to-the-helix/">
+  <link href="/favicon.png" rel="icon">
+  <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"> -->
+  
+  <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
+  
+  <link href="/stylesheets/uikit.css" rel="stylesheet">
+  <link href="/stylesheets/minimaxir-uikit.css" rel="stylesheet">
+  
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <!--<script src="/javascripts/octopress.js" type="text/javascript"></script>-->
+  
+ <script>
+ $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"ion-social-twitter\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  });
+  });
+  
+ 
+  
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"ion-social-linkedin\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  });
+  });
+  
+  
+  
+});
+</script>
+ 
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+
+  
+
+</head>
+
+<body   >
+
+
+
+  
+
+ <div class="hero top">
+  
+
+
+ <nav class="uk-navbar ">
+ <div class="uk-container uk-container-center">
+<div class="uk-grid">
+	<div class="uk-width-1-1">
+
+  	      <ul class="uk-navbar-nav">
+	
+      
+   		<li class="uk-parent"><a href="/">Home</a></li>
+   	       
+    
+      
+   		<li class="uk-parent"><a href="/about">About</a></li>
+   	       
+    
+      
+   		<li class="uk-parent"><a href="/contact">Contact</a></li>
+   	       
+    
+</ul>
+
+<div class="uk-navbar-flip uk-hidden-small">
+<ul class="uk-navbar-nav">
+
+<li class="social facebook-p">
+			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
+		</li>
+		
+</ul>
+</div>
+
+  </div>
+  </div>
+  </div>
+
+  </nav>
+
+
+<style type="text/css">
+.hero.top {
+background: -moz-linear-gradient(top, rgba(44,62,80,0.9) 0%, rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/h2sFCtt.png); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(44,62,80,0.9)), color-stop(100%,rgba(44,62,80,0.9))), url(http://minimaxir.com/img/h2sFCtt.png); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/h2sFCtt.png); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/h2sFCtt.png); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/h2sFCtt.png); /* IE10+ */
+background: linear-gradient(to bottom, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/h2sFCtt.png); /* W3C */
+
+background-size: 100% auto;
+padding-bottom: 40px;
+background-position: 0px -100px;
+}
+</style>
+
+ <div class="uk-container uk-container-center">
+ 
+ 
+
+	 <div class="uk-grid">
+    
+	
+	<div class="uk-width-1-1">
+ <h1 class="title">Game Theory: How 70,000 Pokemon Players Sabotage Themselves</h1>
+	
+	
+  </div>
+  </div>
+  
+    <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/02/glory-to-the-helix/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/02/glory-to-the-helix/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=Game Theory: How 70,000 Pokemon Players Sabotage Themselves - http://minimaxir.com/2014/02/glory-to-the-helix/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/02/glory-to-the-helix/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Game Theory: How 70,000 Pokemon Players Sabotage Themselves&url=http://minimaxir.com/2014/02/glory-to-the-helix/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/02/glory-to-the-helix/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+	
+	</div>
+  </div>
+
+  </div>
+
+
+
+
+</div>
+
+
+  
+  <div class="uk-container uk-container-center" id="main post">
+    
+      <div class="uk-grid" data-uk-grid-margin>
+	  <div class="uk-width-1-1">
+        <div id="content">
+          <article class="hentry" role="article">
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
+  
+
+  <header>
+    <h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-18T08:00:00-08:00" pubdate data-updated="true">Feb 18<span>th</span>, 2014</time></h1>
+</header>
+
+  
+			
+			
+			
+			
+      <p><a href="http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Red_and_Blue_Versions">Pokemon Red and Pokemon Blue</a> remain as two of the most iconic games in video gaming history. They have retained a lot of nostalgia value for those who grew up playing the games (such as myself), and nowadays even adult gamers revisit such classics.</p>
+
+<p>On the game live-streaming site <a href="http://www.twitch.tv/">Twitch.tv</a>, one user simply known as &ldquo;TwitchPlaysPokemon&rdquo; setup <a href="http://www.twitch.tv/twitchplayspokemon">a live-stream of Pokemon Red</a>, but with a twist: all game commands, such as &ldquo;up&rdquo;,&ldquo;down&rdquo;,&ldquo;left&rdquo;,&ldquo;right&rdquo;,&ldquo;b&rdquo;,&ldquo;a&rdquo;,&ldquo;select&rdquo;, and &ldquo;start&rdquo;, would be input by typing the appropriate command into the livestream chat. At first, this seems like a crazy idea: if thousands of people are inputting commands at the same time, could we accomplish <em>anything</em> in the game?</p>
+
+<p><img src="/img/AcXmBbM.png"></p>
+
+<p>As it turns out, it was an idea that had gone horribly right. By the time gaming forum NeoGAF <a href="http://www.neogaf.com/forum/showthread.php?t=768965">found the stream</a>, the channel had made an unexpected amount of progress; a group of 3,000 users made it past the first Gym (out of eight) and are continuing to move forward. A few days later, after the channel was covered by <a href="http://www.polygon.com/2014/2/17/5420334/twitch-plays-pokemon-captivates-with-more-than-6-5m-total-views">major news outlets</a>, the channel had completed <em>four</em> gyms, inspired the creation of a large amount of <a href="https://docs.google.com/document/d/1Luwz9wr8XkoekzU4zv3duj9D2K5AoAyqnYMcbCHZKqc">hilarious fan art</a>, and also created a <a href="http://askhelixfossil.com/">new religion</a>. You can read a summary of the stream&rsquo;s status <a href="https://docs.google.com/a/minimaxir.com/document/d/1Ka89uCBeLl9VV5GPlAKuW7yF8FGtnVmdbPnIwG8FnQ4/preview?pli=1&amp;sle=true">here</a>.</p>
+
+<p>That being said, it was neither a straight nor short path to success. In the end, the gaming community fought its greatest enemy: itself. Twitch Plays Pokemon isn&rsquo;t about winning. It&rsquo;s about trying not to fail spectacularly. And they still fail regardless. It&rsquo;s an irresistible train wreck that&rsquo;s hard to stop watching.</p>
+
+<h1>The Adventure Begins</h1>
+
+<p>The first areas of Pokemon Red are relatively linear up until <a href="http://bulbapedia.bulbagarden.net/wiki/Vermilion_City">Vermillion City</a>, where the third gym is located. Before that, Pokemon Trainer Red, the player character, had a few interesting encounters thanks to the bizarre overlords of the Twitch chat. Red chose <a href="http://bulbapedia.bulbagarden.net/wiki/Charmander">Charmander</a> (later evolved into <a href="http://bulbapedia.bulbagarden.net/wiki/Charmeleon_(Pok%C3%A9mon)">Charmeleon</a>) as his starter Pokemon, which he nicknamed <strong>ABBBBBBK (</strong> or &ldquo;Abby&rdquo; for short. He caught a few more basic Pokemon, including a <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgey">Pidgey</a> (later evolved into <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgeotto_(Pok%C3%A9mon)">Pidgeotto</a>) and <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgeot_(Pok%C3%A9mon)">Pidgeot</a>), 2 <a href="http://bulbapedia.bulbagarden.net/wiki/Rattata">Rattata</a> (one nicknamed <strong>JLVWNNOOOO</strong>, i.e. &ldquo;Jay Leno&rdquo;), a <a href="http://bulbapedia.bulbagarden.net/wiki/Drowzee">Drowzee</a>, and a <a href="http://bulbapedia.bulbagarden.net/wiki/Spearow">Spearow</a> which was traded for a <a href="http://bulbapedia.bulbagarden.net/wiki/Farfetch%27d">Farfetch&rsquo;d</a>, all of which gave him a full party of Pokemon.</p>
+
+<p><img src="/img/MwarCER.png"></p>
+
+<p>Since thousands of players are inputting commands at the same time, there is absolutely no strategy involved in Pokemon battles, which in most cases make the battles unwinnable. Thanks to the nature of RPG level-ups and a few lucky critical hits, Red can still persevere (although it will a few hours).</p>
+
+<p>The Twitch channel was a very casual experience, until Red obtained HM 01 from the <a href="http://bulbapedia.bulbagarden.net/wiki/S.S._Anne">S.S. Anne</a>, an item that requires a sequence of sequential button presses to operate.</p>
+
+<p>Then things get complicated.</p>
+
+<h1>Cutting A Thin Line</h1>
+
+<p>HM 01 is an item that grants the Cut ability to a Pokemon, which is required to cut trees blocking progress; in this case, the tree in front of the Vermillion City Gym. In order to teach a Pokemon Cut, the player must:</p>
+
+<ol>
+<li>Bring up the Start menu.</li>
+<li>Select &ldquo;Items.&rdquo;</li>
+<li>Select HM 01.</li>
+<li>Confirm that HM 01 is to be used.</li>
+<li>Select a Pokemon to learn Cut.</li>
+<li>Confirm that the selected Pokemon is to learn Cut.</li>
+<li>Choose a move for Cut to replace.</li>
+</ol>
+
+
+<p>The kicker? Pressing the B button or choosing the wrong option during <em>any</em> of these 7 steps takes the process back a step.</p>
+
+<p><img src="/img/1XSdWPY.jpg"></p>
+
+<p>At this point in the stream, the audience hit 30,000 viewers. The increased activity caused an input delay of about 20 seconds from when the Twitch user input the command in chat to when the game recognized the command. This can make navigating menus difficult when an &ldquo;up&rdquo; or a &ldquo;down&rdquo; command is applied to a menu that isn&rsquo;t even visible yet.</p>
+
+<p>Additionally, as the number of viewers in a stream increases, the number of trolls increases. And those trolls loved to spam the B button command.</p>
+
+<p>Thanks to these two factors, the channel had failed to teach any Pokemon Cut for over <em>4 hours</em>. The stream chat became a bloodbath of blame.</p>
+
+<p><img src="/img/p30F3g7.png"></p>
+
+<p>Eventually, it happened. The Farfetch&rsquo;d was taught Cut. No one knows <em>how</em>, but it happened. But <em>that</em> was only one step towards progress.</p>
+
+<p>The second step is actually Cutting the tree. In order to Cut:</p>
+
+<ol>
+<li>Face the tree.</li>
+<li>Bring up the Start menu.</li>
+<li>Select &ldquo;Pokemon&rdquo;</li>
+<li>Select the Pokemon with Cut.</li>
+<li>Select Cut.</li>
+</ol>
+
+
+<p>Same kickers as before, too. Facing the tree is even harder since the same up/down commands for navigating the menus can reorient Red away from the tree.</p>
+
+<p>It took another 4 hours to cut down that tree. Later, when Red was defeated in the Gym, the tree respawned. Yeah.</p>
+
+<p><img src="/img/NCo5N3j.png"></p>
+
+<p>HM 01 was a harsh reminder that the more people present, the higher the chance that your task will fail. Not necessarily due to incompetence and disorganization, but due to mischief.</p>
+
+<h1>Fighting The Ledge Boss</h1>
+
+<p>After the Vermillion City Gym was (eventually) completed, the Twitch stream progressed through <a href="http://bulbapedia.bulbagarden.net/wiki/Kanto_Route_9">Route 9</a> toward <a href="http://bulbapedia.bulbagarden.net/wiki/Lavender_Town">Lavender Town</a>. Sounds simple, until Red hit this obstacle.</p>
+
+<p><img src="/img/ledge.png"></p>
+
+<p>Red must walk from the left to the right through the 1-character-wide path. If Red went down, the ledge is a one-way drop, and Red must walk back to the beginning to try again.</p>
+
+<p>The Twitch chat must go &ldquo;right&rdquo; about 8 times <em>without going &ldquo;down&rdquo; at all</em>.</p>
+
+<p>HM01 had input lag as a contributing factor to its failures. In this case, the trolls had <em>all</em> the power. One &ldquo;down&rdquo; ends the entire attempt. And the stream was even more popular with an audience of 50,000 people.</p>
+
+<p><img src="/img/h2sFCtt.png"></p>
+
+<p>The result? Crossing the ledge took over <em>12 hours</em>. And then Red was defeated by the trainer at the end of the ledge and so getting back across the ledge took an equally absurd amount of time.</p>
+
+<p>Lesson learned? If trolls have absolute power, <em>they will use it</em> and they will use it without mercy.</p>
+
+<h1>Disregarding Decision Trees</h1>
+
+<p>After the ledge incident, the fanbase became paranoid. What other gameplay aspects in this playthrough could be compromised by trolls in the future? One concern is the PC system used to store Pokemon; the same system can also <em>release</em> them, removing them from the game forever. The risk of losing a top Pokemon to the PC due to trolls was too great and would make the game nearly unwinnable, and therefore the steam decided to avoid using the PC unless necessary.</p>
+
+<p>Red progressed through Lavender Town and arrived at <a href="http://bulbapedia.bulbagarden.net/wiki/Celadon_City">Celadon City</a>, where the Twitch channel defeated the Gym Leader for the fourth badge (it took awhile: there was a tree outside <em>and</em> inside the gym!)</p>
+
+<p>At this point in Pokemon Red, the game becomes more nonlinear, which started a debate on what next to do in game. Many pointed out that the party lacked a Pokemon which could learn Surf, a skill, like Cut, which was required to progress in the game much later. Red will eventually earn such a Pokemon which could learn Surf (<a href="http://bulbapedia.bulbagarden.net/wiki/Lapras">Lapras</a>) as a part of the plot, who&rsquo;s a decent combatant too.</p>
+
+<p>On the other hand, the player can also collect <a href="http://bulbapedia.bulbagarden.net/wiki/Eevee">Eevee</a> as a free Pokemon. Eevee has three evolutions: the terrible <a href="http://bulbapedia.bulbagarden.net/wiki/Flareon_(Pok%C3%A9mon)">Flareon</a>, the good <a href="http://bulbapedia.bulbagarden.net/wiki/Jolteon_(Pok%C3%A9mon)">Jolteon</a>, and the great <a href="http://bulbapedia.bulbagarden.net/wiki/Vaporeon_(Pok%C3%A9mon)">Vaporeon</a> who can also learn Surf. But in order to evolve Vaporeon Eevee into , the party must a) buy a Water Stone, and not accidentally any other elemental stone instead and b) use the Stone <em>without accidentally tossing it</em> and destroying it. Both of which are difficult due to input lag and trolls.</p>
+
+<p>The party had 5 Pokemon (after a Rattata was deposited  earlier into the PC), and so the stream only had the opportunity for get <em>one</em> Pokemon, since the steam did not want deposit any in the PC for fear of release. Which is the more rational path for getting a Pokemon with Surf: waiting to get a guaranteed Lapras, or getting the Eevee and hope the stream can evolve it into a Vaporeon? A guaranteed decent Pokemon or a chance at a great Pokemon?</p>
+
+<p>As it turns out, when 70,000 people make a decision, they aren&rsquo;t exactly rational. Instead, hilarity ensued.</p>
+
+<h1>Game Over Theory</h1>
+
+<p>The stream obtained the Eevee (even after many said it was <a href="http://i.imgur.com/9cV06Yq.png">a bad idea</a>) and went to purchase a Water Stone. Due to input manipulation, they instead bought a Fire Stone, and later the Eevee evolved into the unhelpful Flareon. Chat becomes a bloodbath once again.</p>
+
+<p><img src="/img/QGiFYYu.jpg"></p>
+
+<p>In order to make room for Lapras in the future, the stream attempted to use a PC to deposit Flareon.</p>
+
+<p><img src="/img/0ndYCF1.png"></p>
+
+<p>Instead, both Abby and Jay Leno were permanently released.</p>
+
+<p><img src="/img/tumblr_n157ldJl611rvlenbo1_1280.jpg"></p>
+
+<p>The stream became completely derailed.</p>
+
+<p>As of today, Twitch pushes on, but everyone who&rsquo;s participating in the stream has now learned a lesson: people act in their self interest and do what they think is best. Trolls have&hellip;different self-interests. And there will always be trolls. Knowing how to fail gracefully is always valuable.</p>
+
+<p>At the least, the amount of progress the steam has made is still very, very impressive and unexpected.</p>
+
+	  
+	  
+
+
+	  
+
+
+
+  
+  
+      <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/02/glory-to-the-helix/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/02/glory-to-the-helix/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=Game Theory: How 70,000 Pokemon Players Sabotage Themselves - http://minimaxir.com/2014/02/glory-to-the-helix/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/02/glory-to-the-helix/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Game Theory: How 70,000 Pokemon Players Sabotage Themselves&url=http://minimaxir.com/2014/02/glory-to-the-helix/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/02/glory-to-the-helix/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+	
+	</div>
+  </div>
+
+
+
+</div>
+
+<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+
+<div class="sidebar-author">
+
+<h2>About The Author</h2>
+<div>Max Woolf is a 2012 graduate from Carnegie Mellon University in Business Administration with a concentration in Computing and Information Technology, and has been working as a Software QA Engineer in the San Francisco Bay Area for 1.5 years. Max also comments on blogs rather frequently.</div>
+
+<div>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</div>
+
+</div>
+
+  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/02/glory-to-the-helix/">  
+		   Game Theory: How 70,000 Pokemon Players Sabotage Themselves</a></h2>
+		   <div>Twitch Plays Pokemon isn't about winning. It's about trying not to fail spectacularly. And they still fail regardless. It's an irresistible train wreck that's hard to stop watching.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/02/the-filter-truth/">  
+		   How Many #nofilter Instagram Photos Actually Have No Filter?</a></h2>
+		   <div>Not all of them.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/02/moved-temporarily/">  
+		   Imgur is Covertly Redirecting Image Links on Facebook and Twitter</a></h2>
+		   <div>When clicking a direct image link for the first time on Facebook, Twitter, and Google+, Imgur will redirect you to the main image page instead.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/01/more-language-more-problems/">  
+		   A Thoughtful Analysis of the Most Poorly-Designed Chart Ever</a></h2>
+		   <div>The good thing about the chart? The data is properly cited. The bad? EVERYTHING ELSE.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/">  
+		   The Friends Of My Friends Are Not My Friends</a></h2>
+		   <div>Why am I seeing pictures and statuses from friends of friends who are essentially complete strangers?</div>
+		   </div>
+
+	 
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
+	
+	
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+	
+	</div>
+	
+	
+	<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+	
+	
+	  <footer>
+
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+	  <h2><i class="ion-arrow-left-c"></i> Previously...</h2>
+        <h2><a href="/2014/02/the-filter-truth/" title="Previous Post: How Many #nofilter Instagram Photos Actually Have No Filter?">How Many #nofilter Instagram Photos Actually Have No Filter?</a></h2>
+      
+	  
+	  
+	  
+      
+	  
+	  <hr>
+	  
+	  <h2><i class="ion-ios7-bookmarks-outline"></i> Categories:</h2>
+	      <p class="meta">
+
+      
+
+<span class="categories">
+  
+    
+          <span class="badge"><a href="/comedy">Comedy</a></span>
+     
+          <span class="badge"><a href="/gaming">Gaming</a></span>
+     
+  
+</span>
+
+
+    </p>
+	  
+    </p>
+  </footer>
+	
+	
+	</div>
+	
+	</div>
+
+  
+ 
+  
+  
+
+
+  
+</article>
+
+
+
+
+
+
+        </div>
+      </div>
+	  </div>
+	</div>
+  
+  	    
+	  <div class="hero max">
+  
+
+ <style type="text/css">
+.hero.max {
+padding-top: 4px;
+margin-bottom: 0px;
+}
+</style>
+ 
+ <div class="uk-container uk-container-center">
+	 <div class="uk-grid" data-uk-grid-match>
+    
+	
+	<div class="uk-width-large-2-3 uk-width-medium-1-1">
+  <div>
+    <h1 class="name">Max Woolf</h1>
+	<div class="tagline alias">@minimaxir</div>
+	<div class="tagline">Software QA Engineer in San Francisco, CA</div>
+    <div class="tagline">Carnegie Mellon Class of 2012 Business IT Graduate</div>
+	 
+
+	 
+	 
+	 <div class="uk-grid sharing">
+	 <div class="uk-width-1-4">
+	 <span class="social facebook-p">
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="ion-social-facebook"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social twitter-p">
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="ion-social-twitter"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social linkedin-p">
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="ion-social-linkedin"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social github-p">
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="ion-social-github"></i> </a>
+		</span>
+	 </div>
+	 </div>
+	
+	
+  </div>
+  </div>
+  
+  <div class="uk-width-large-1-3 uk-width-medium-1-1 uk-hidden-small">
+
+
+	<a href="/about"><img src="/Max388.png"></a>
+	
+	</div>
+  
+  </div>
+</div>
+</div>
+
+  
+  <div class="footer-page">
+    <div class="uk-container uk-container-center footer">
+    
+      <div class="uk-grid">
+	  <div class="uk-width-1-1">
+  
+         <footer  role="contentinfo">
+          <p>
+  Copyright &copy; 2014 - Max Woolf -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and the <a href="http://www.getuikit.com/">UIkit Framework</a></span> - Theme designed by Max Woolf
+</p>
+<p><strong>All opinions stated by Max Woolf are his own.</strong></p>
+
+        </footer>
+  
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2014/02/glory-to-the-helix/';
+        var disqus_url = 'http://minimaxir.com/2014/02/glory-to-the-helix/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
+</body>
+</html>
