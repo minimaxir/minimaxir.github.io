@@ -1,11 +1,16 @@
 @font-face {font-family:"SteelfishEb-Regular";src:url("/fonts/steelfish_eb.eot?") format("eot"),url("/fonts/steelfish_eb.woff") format("woff"),url("/fonts/steelfish_eb.ttf") format("truetype"),url("/fonts/steelfish_eb.svg#SteelfishEb-Regular") format("svg");font-weight:normal;font-style:normal;}
 @font-face {font-family:"Lato";src:url("/fonts/Lato-Regular.ttf") format("truetype");font-weight:normal;font-style:normal;}
 @font-face {font-family:"Lato Black";src:url("/fonts/Lato-Black.ttf") format("truetype");font-weight:normal;font-style:normal;}
-@font-face {font-family:"Lato Italic";src:url("/fonts/Lato-Italic.ttf") format("truetype");font-weight:normal;font-style:italic;}
+@font-face {font-family:"Lato Italic";src:url("/fonts/Lato-Italic.ttf") format("truetype");font-weight:normal;font-style:normal;}
 
 em {
-color: #34495e;
+color: #1a1a1a;
 font-family:"Lato Italic";
+}
+
+strong {
+color: #1a1a1a;
+font-family:"Lato Black";
 }
 
 code {
@@ -139,7 +144,7 @@ font-family: "SteelfishEb-Regular", "Lato";
 text-transform: uppercase;
 }
 
-a {
+a, em a, strong a {
 -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
   -o-transition: 0.25s;
@@ -150,7 +155,7 @@ text-decoration: none;
 }
 
 
-a:hover {
+a:hover, em a:hover, strong a:hover {
 background-color: #2c3e50;
 color: white;
 text-decoration: none;
@@ -276,6 +281,7 @@ float: right;
 
 blockquote p {
 margin-bottom: 10px;
+color: #bdc3c7 !important;
 }
 
                       .sharing .badge a i{
