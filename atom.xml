@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-02-19T00:28:00-08:00</updated>
+  <updated>2014-02-24T08:06:17-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,141 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Statistical Analysis of All Hacker News Submissions]]></title>
+    <link href="http://minimaxir.com/2014/02/hacking-hacker-news/"/>
+    <updated>2014-02-23T17:35:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/hacking-hacker-news</id>
+    <content type="html"><![CDATA[<p><a href="https://news.ycombinator.com/news">Hacker News</a> is a very popular link aggregator for the technology and startup community. Officially titled <a href="http://ycombinator.com/hackernews.html">by Paul Graham in 2007</a>, Hacker News began mostly as a place where the very computational-savvy could submit stories around the internet and discuss the latest computing trends.</p>
+
+<p><img src="http://minimaxir.com/img/hn-wordcloud-2007i.png"></p>
+
+<p>Back then, people were talking about networking, software users, and a little up-and-coming startup known as &ldquo;<a href="https://twitter.com/">Twitter</a>.&rdquo;</p>
+
+<p>Six years later, during the new renaissance of computing accessibility and startup entrepreneurship, not much has changed.</p>
+
+<p><img src="http://minimaxir.com/img/hn-wordcloud-2013i.png"></p>
+
+<p>Hacker News, from 2007 to 2014, always illustrates what&rsquo;s &ldquo;new&rdquo; in technology. After downloading all 1,265,114 Hacker News submissions from the official <a href="https://hn.algolia.com/api">Hacker News API</a>, I gathered a few interesting statistics which show the true impact of Hacker News.</p>
+
+<h1>How many stories are submitted to Hacker News?</h1>
+
+<p>In the past few years, Hacker News has had an interesting growth pattern.</p>
+
+<p><img src="http://minimaxir.com/img/hn-monthly-submissions.png"></p>
+
+<p>From the beginning of 2010 with 12k monthly submissions to to the end of 2011 with 31k monthly submissions, the amount of monthly submissions to Hacker News nearly tripled. It&rsquo;s a similar growth rate to that of the startups that Y Combinator typically funds.</p>
+
+<p>What&rsquo;s <em>really</em> interesting is that the end of 2011 is the peak: since then, the amount of submissions has been trending downward. Is Hacker News dying?</p>
+
+<p>I don&rsquo;t think so. Hacker News implements a proprietary anti-spam algorithm which &ldquo;kills&rdquo; submissions, and moderators can kill submissions manually if necessary. Killed articles do not appear in the submission count, so a change in policy would cause the discrepancy. At the least, it helps improve the quality of discussion.</p>
+
+<h1>How many submissions receive large amounts of points?</h1>
+
+<p>On Hacker News, users are able to upvote submissions. The more upvotes a submission has, the higher the position that it appears on the front page of the main site. A simple heuristic for calculating exposure from a Hacker News front page submission is 100 page views per point minimum, which means a submission that earns hundreds of points can go viral very quickly!</p>
+
+<p><img src="http://minimaxir.com/img/hntop.png"></p>
+
+<p>But how many submissions actually make it to the front page, and how many actually make it to the top?</p>
+
+<p><img src="http://minimaxir.com/img/hn-points-hist.png"></p>
+
+<p>On a logarithmic scale, it&rsquo;s evident that the vast majority of Hacker News submissions don&rsquo;t even hit 10 points. (the average amount of points for a submission is 9.51). Usually, hitting 10 points is the sign that you&rsquo;ve appeared on the front page atleast briefly; there, the submission either receives voting momentum or dies quickly due to other rising stars.</p>
+
+<p>But how many submissions <em>do</em> receive hundreds of points? Here&rsquo;s a chart of submissions by month which have received more than 100 points:</p>
+
+<p><img src="http://minimaxir.com/img/hn-monthly-submissions-front.png"></p>
+
+<p>The growth rate of top-scoring submissions is correlated with the growth rate of Hacker News submissions themselves, which is not surprising. The number of points a post receives is also dependent on the number of users; as Hacker News grows, the number of users grows as well. Even though the front page cycles frequently, there is still room for great content.</p>
+
+<h1>When is the best time to submit to Hacker News?</h1>
+
+<p>The age old question. What is the best time to post such that your post makes it to the front page?</p>
+
+<p>First, let&rsquo;s see when Hacker News has the most activity by observing the average number of submissions for each combination of submission hour and weekday:</p>
+
+<p><img src="http://minimaxir.com/img/hn-submissions.png"></p>
+
+<p>Hacker News activity is most active at around 12 PM EST / 9 AM PST at about 40 submissions per hour, when hackers on the East Coast submit just before eating lunch, and hackers on the West Coast submit just after getting to work. Weekends, unsurprisingly, are completely dead.</p>
+
+<p>If you submitted your link at 12 PM, you&rsquo;d have a lot competition, but it would be easier to get upvotes since there would be more people visiting the site. If you submitted your post on the weekend, there would be no competition, but would be harder to make the front page.</p>
+
+<p>What is the best weekday + hour to submit such that your submission goes viral? An easy way to estimate the best time is to analyze the times of submission of previous posts with large amounts of points; with enough data (we have enough), it&rsquo;ll provide a strong guess.</p>
+
+<p><img src="http://minimaxir.com/img/hn-front-page.png"></p>
+
+<p>As it turns out, the submission times of posts are <em>uncorrelated</em> with the number of viral posts. Your odds are <em>slightly</em> better when submitting at peak activity (weekdays at 12 PM EST / 9 AM PST), but it&rsquo;s not a necessity.</p>
+
+<p>Having good content is more important to having a post get to the top of Hacker News. Although you probably shouldn&rsquo;t submit an article when there&rsquo;s a major tech event. (e.g. Facebook&rsquo;s WhatsApp Purchase)</p>
+
+<h1>Do Y Combinator startup announcements score better on HN?</h1>
+
+<p>One of the main benefits of Hacker News is to showcase the startups which Y Combinator has funded. Links about YC Startups contain the YC class name of that startup in their title, such as &ldquo;<a href="https://news.ycombinator.com/item?id=6103506">Watsi (YC W13) raises $1.2M first-of-its-kind philanthropic seed round</a>.&rdquo; Do these links perform better than the typical links submitted to Hacker News?</p>
+
+<p><img src="http://minimaxir.com/img/hn-points-class-hist.png"></p>
+
+<p>As it turns out, yes. For normal posts, the average number of points is 9.5 points, but for YC class announcements, the average is 41.7 points (from 1,745 submissions analyzed).</p>
+
+<p>For fun, which YC classes perform the best on Hacker News?</p>
+
+<p><img src="http://minimaxir.com/img/hn-top-class.png"></p>
+
+<p>W06 placed first because of <a href="https://news.ycombinator.com/item?id=2481576">two</a> <a href="https://news.ycombinator.com/item?id=2481610">announcements</a> about Wufoo, and S11 placed second because of <a href="https://news.ycombinator.com/item?id=6585071">CryptoSeal</a> and <a href="https://news.ycombinator.com/item?id=2846725">Parse</a>.</p>
+
+<h1>Who are the best submitters on Hacker News?</h1>
+
+<p>Like all popular link aggregators, Hacker News has many spammers who submit large amounts of low quality content. Who are the users who submit quality content?</p>
+
+<p>Calculating the average points of a user&rsquo;s submitted content isn&rsquo;t an accurate measurement, since that can be heavily skewed by one viral post. Therefore, I created a Hacker News &ldquo;<a href="http://en.wikipedia.org/wiki/Batting_average">batting average</a>&rdquo; statistic: which posters have the highest proportion of posts that make it to the front page vs. the total number submitted? (for posts since 2010 and number of submitted posts >= 10)</p>
+
+<p><img src="http://minimaxir.com/img/hn-top-submitters.png"></p>
+
+<p>It should be no surprise that most of the people on the list are startup founders. It&rsquo;s also not surprising that most of those founders, such as <a href="https://news.ycombinator.com/user?id=mwseibel">mwseibel</a>, <a href="https://news.ycombinator.com/user?id=rahulvohra">rahulvohra</a> and <a href="https://news.ycombinator.com/user?id=tikhon">tikhon</a> also founded a Y Combinator startup. (although Paul Graham <a href="https://news.ycombinator.com/user?id=pg">himself</a> only has a 0.856 average).</p>
+
+<h1>What are Hacker News&#8217; favorite programming languages?</h1>
+
+<p>One of the infamous memes about Hacker News is programming language elitism, with favoritism for languages such as Lisp and Erlang.</p>
+
+<p>But what programming languages are indeed the most popular on Hacker News?</p>
+
+<p><img src="http://minimaxir.com/img/hn-lang-num-submissions.png"></p>
+
+<p>Javascript is very popular, especially with the rising popularity of node.js. Go is unexpectedly frequently submitted for being such a new language. (although it&rsquo;s possible for &ldquo;go&rdquo; to be used in a context outside of a programing language.) Lisp and Erlang are indeed obscure, which might discredit the meme.</p>
+
+<p>Which programming languages are most well-liked on HN?</p>
+
+<p><img src="http://minimaxir.com/img/hn-lang-avg-submissions.png"></p>
+
+<p>&hellip;so Lisp and Erlang <em>are</em> well-liked on HN.</p>
+
+<p>At the least, in both cases, no one on Hacker News likes PHP.</p>
+
+<h1>Snowden and Bitcoin</h1>
+
+<p>Edward Snowden&rsquo;s leaks in June 2013 about the NSA and PRISM affected the entire tech industry, including Hacker News. How did Hacker News react to the leaks?</p>
+
+<p><img src="http://minimaxir.com/img/hn-snowden.png"></p>
+
+<p>Strongly.</p>
+
+<p>But after the June spike, discussion about the NSA decreased significantly, but it&rsquo;s still a popular topic.</p>
+
+<p>Bitcoin is more interesting since it has had three distinct surges:</p>
+
+<p><img src="http://minimaxir.com/img/hn-bitcoin.png"></p>
+
+<p>The June 2011 spike was due to the theft of <a href="https://bitcointalk.org/index.php?topic=16457.0">25,000 Bitcoin</a>, the April 2013 spike happened during the first rise-and-fall from $200/BTC, and the November 2013 spike happened during the second rise-and-fall from $1,000/BTC.</p>
+
+<p>Hacker News is a great model for a link aggregator.  It emphasizes more on quality content than the quantity of content, and it has paid off over the years.</p>
+
+<hr />
+
+<p><em>Code for getting all the HN submissions is <a href="https://github.com/minimaxir/hacker-news-download-all-stories">available on GitHub</a>. Unfortunately, the Hacker News data is too large to distribute freely. <a href="http://minimaxir.com/contact/">Contact me</a> if you want the raw data or any data to reproduce the charts.</em></p>
+
+<p><em>Note: there appear to be <a href="https://docs.google.com/spreadsheets/d/1Zdex42KE-8DFIHujhVWjJ3yqilJSws2EbT8VAARPYgE/edit?usp=sharing">some gaps in the data</a> for dates before 2010. This appears to be caused by the API server: for example, compare the <a href="https://news.ycombinator.com/submitted?id=liebke">number of submissions as reported by HN for top user liebke</a> (21) and the <a href="https://hn.algolia.com/api/v1/search_by_date?tags=story,author_liebke">number of submissions as reported by the API</a> for liebke (14, with the last 7 submitted stories missing relative to the HN output). Also, number of stories (1,265,114) in the output data and the <a href="https://hn.algolia.com/">server data</a> (~1,267,000 as of publishing) are very close, making the discrepancy unlikely caused by client error. As a result, any chart that is based on a time series does not start earlier than 2010.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Game Theory: How 70,000 Pokemon Players Sabotage Themselves]]></title>
@@ -1309,64 +1444,6 @@ Most of our customers (60%) consider themselves entrepreneurs. They are bringing
 <p>In this case, we were emailing too often, and we&rsquo;ve stopped doing that. In general, most of our users do appreciate some help and encouragement along the way, and we will keep testing emails to try to make that as effective, helpful, and non-annoying as possible.</p></blockquote>
 
 <p>It&rsquo;s good to hear that Weebly is aware of the issue, and I&rsquo;m thankful for David&rsquo;s response, although I&rsquo;ll still be keeping an eye on the close eye on how much spam they&rsquo;re still sending out.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Diablo III Economy Broken by an Integer Overflow Bug]]></title>
-    <link href="http://minimaxir.com/2013/05/stones-of-jordan/"/>
-    <updated>2013-05-07T21:53:00-07:00</updated>
-    <id>http://minimaxir.com/2013/05/stones-of-jordan</id>
-    <content type="html"><![CDATA[<p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
-
-<p>Diablo III is also noted for its economy, with an emphasis on a region-wide auction house where players can trade one-in-a-million items for millions and billions of gold. (inflation is crazy). Additionally, Diablo III emphasized the use of a Real World Auction House, where players can sell gold or items for real world cash.</p>
-
-<p>Today was the launch of <a href="http://us.battle.net/d3/en/blog/9647272/patch-108-now-live-5-7-2013">Patch 1.0.8</a>, a patch which promised improvements to character progression. After spending a few weeks on a Public Test Realm, where players volunteered to tested the patch to ensure that there were game-breaking exploits, the patch released successfully.</p>
-
-<p>Except for one patch note that was added last minute and not tested in the PTR. And it&rsquo;s a patch note that broke the economy to tiny pieces.</p>
-
-<!-- more -->
-
-
-<p>The patch notes from the final build contained this change:</p>
-
-<blockquote><p>The stack size for gold sales on the auction house has been increased from 1 million to 10 million.</p></blockquote>
-
-<p>Normally, on the Real Money Auction House, the player can only sell money in 1 million gold increments. In 1.0.8, the player can sell it in 10 million increments. So, what happens when the player tries putting an absurd amount of money on the Auction House?</p>
-
-<p>Reddit user tyropro <a href="http://www.reddit.com/r/Diablo/comments/1dx3wv/some_speculation_on_how_the_gold_bug_made_it_to/">has a nice explanation</a>:</p>
-
-<blockquote><p>The gold &ldquo;dupe&rdquo; involved creating a RMAH auction for billions of gold while staying under the $250 limit. The example I saw in a video was 6 billion gold (600 x 10,000,000 at $0.39 per stack, for $234). When they posted this auction only ~1.7 billion appeared to be for sale, with the rest &ldquo;missing&rdquo; until they sent it to their stash and ended up with more than they started with. The exact numbers from a duping video:</p>
-
-<pre><code>Create RMAH auction for:            6,000,000,000 gold
-Auction shows up as:                1,705,032,704 gold
-This much is missing!               4,294,967,296 gold
-The missing amount, divided by 2:   2,147,483,648 gold
-</code></pre>
-
-<p>2,147,483,648 (or 231) is the maximum value you can store in an int32 in programming. I&rsquo;m no programmer, but I took one class in high school and was taught about the limits of different variable types. See:</p>
-
-<p>Simply put, their RMAH gold selling code wasn&rsquo;t written to handle numbers over 2,147,483,648 properly, and the result was duplicate gold being added to people&rsquo;s stashes.</p></blockquote>
-
-<p>4,294,967,296 is also 232, or the bound on an <a href="https://en.wikipedia.org/wiki/Integer_(computer_science)#Common_long_integer_sizes">unsigned integer</a>, which would be an interesting implementation choice on Blizzard&rsquo;s part.</p>
-
-<p>And so, the dupers created these 6-billion-gold auctions which only appears to sell as 1.7 billion (and therefore only had 1.7 billion deducted from the current balance), canceled them, and were fully refunded the 6 billion for a net profit of the difference (4.2 billion). Repeat <em>ad nauseum</em>.</p>
-
-<p>A popular game streamer showed off the exploit. Other streamers followed. It was easily reproducible and <a href="http://www.reddit.com/r/Diablo/comments/1dw9kr/there_is_a_gold_dupe_on_na_currently_this_is_the/">everyone knew how to reproduce it</a>.</p>
-
-<p>Hilarity ensued.</p>
-
-<p><img src="http://minimaxir.com/img/diablo31.png" alt="diablo31" /></p>
-
-<p>Yes, that&rsquo;s 420 <em>billion</em> gold.</p>
-
-<p>After buying up all the duped items in the Auction House, the items were then sold on the Real Money Auction House. For real money. And people bought them.</p>
-
-<p>This is the definition of a worst-case scenario for Diablo III. All because of an untested patch note. What could Blizzard do? Performing a roll-back would wipe all progress obtained by players for the patch day, which would result in a lot of bad PR. But leaving the economy as-is will devalue all items in the game (and Diablo III is all about getting items).</p>
-
-<p>In the end, Blizzard <a href="http://www.reddit.com/r/Diablo/comments/1dx4a7/there_will_officially_be_no_rollback_after_the/">has not done a roll-back</a>, but instead <a href="http://www.reddit.com/r/Diablo/comments/1dwk6x/d3_inigomontoya_just_got_banned_for_real/">banned anyone who duped</a>, and <a href="http://i.imgur.com/x5S9Zcx.png">refunded</a> anyone who spent real money. The bug was temporarily fixed by reverting the patch note which caused the entire mess.</p>
-
-<p>Let this be a lesson on what happens when you include an untested change at the last minute. You could break an entire economy. Eh, no big deal.</p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,703 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A Statistical Analysis of All Hacker News Submissions | minimaxir | Max Woolf's Blog</title>
+  <meta name="author" content="Max Woolf">
+
+  
+ 
+ 
+ 
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="A Statistical Analysis of All Hacker News Submissions">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2014/02/hacking-hacker-news/">
+
+
+  <meta name="twitter:description" content="After downloading all 1,265,114 Hacker News submissions from the official Hacker News API, I gathered a few interesting statistics which show the true impact of Hacker News.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/hntop.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="A Statistical Analysis of All Hacker News Submissions" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="After downloading all 1,265,114 Hacker News submissions from the official Hacker News API, I gathered a few interesting statistics which show the true impact of Hacker News." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2014/02/hacking-hacker-news/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/hntop.png" property="og:image">
+
+
+  
+  <meta content="Data" property="article:section">
+  
+
+
+  
+
+ 
+  
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  
+<!--
+  <meta name="description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
+   -->
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2014/02/hacking-hacker-news/">
+  <link href="/favicon.png" rel="icon">
+  <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"> -->
+  
+  <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
+  
+  <link href="/stylesheets/uikit.css" rel="stylesheet">
+  <link href="/stylesheets/minimaxir-uikit.css" rel="stylesheet">
+  
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <!--<script src="/javascripts/octopress.js" type="text/javascript"></script>-->
+  
+ <script>
+ $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"ion-social-twitter\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  });
+  });
+  
+ 
+  
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"ion-social-linkedin\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  });
+  });
+  
+  
+  
+});
+</script>
+ 
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+
+  
+
+</head>
+
+<body   >
+
+
+
+  
+
+ <div class="hero top">
+  
+
+
+ <nav class="uk-navbar ">
+ <div class="uk-container uk-container-center">
+<div class="uk-grid">
+	<div class="uk-width-1-1">
+
+  	      <ul class="uk-navbar-nav">
+	
+      
+   		<li class="uk-parent"><a href="/">Home</a></li>
+   	       
+    
+      
+   		<li class="uk-parent"><a href="/about">About</a></li>
+   	       
+    
+      
+   		<li class="uk-parent"><a href="/contact">Contact</a></li>
+   	       
+    
+</ul>
+
+<div class="uk-navbar-flip uk-hidden-small">
+<ul class="uk-navbar-nav">
+
+<li class="social facebook-p">
+			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
+		</li>
+		
+</ul>
+</div>
+
+  </div>
+  </div>
+  </div>
+
+  </nav>
+
+
+<style type="text/css">
+.hero.top {
+background: -moz-linear-gradient(top, rgba(44,62,80,0.9) 0%, rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/hntop.png); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(44,62,80,0.9)), color-stop(100%,rgba(44,62,80,0.9))), url(http://minimaxir.com/img/hntop.png); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/hntop.png); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/hntop.png); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/hntop.png); /* IE10+ */
+background: linear-gradient(to bottom, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/hntop.png); /* W3C */
+
+background-size: 100% auto;
+padding-bottom: 40px;
+background-position: 0px -100px;
+}
+</style>
+
+ <div class="uk-container uk-container-center">
+ 
+ 
+
+	 <div class="uk-grid">
+    
+	
+	<div class="uk-width-1-1">
+ <h1 class="title">A Statistical Analysis of All Hacker News Submissions</h1>
+	
+	
+  </div>
+  </div>
+  
+    <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/02/hacking-hacker-news/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/02/hacking-hacker-news/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=A Statistical Analysis of All Hacker News Submissions - http://minimaxir.com/2014/02/hacking-hacker-news/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/02/hacking-hacker-news/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Statistical Analysis of All Hacker News Submissions&url=http://minimaxir.com/2014/02/hacking-hacker-news/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/02/hacking-hacker-news/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+	
+	</div>
+  </div>
+
+  </div>
+
+
+
+
+</div>
+
+
+  
+  <div class="uk-container uk-container-center" id="main post">
+    
+      <div class="uk-grid" data-uk-grid-margin>
+	  <div class="uk-width-1-1">
+        <div id="content">
+          <article class="hentry" role="article">
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
+  
+
+  <header>
+    <h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-23T17:35:00-08:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2014</time></h1>
+</header>
+
+  
+			
+			
+			
+			
+      <p><a href="https://news.ycombinator.com/news">Hacker News</a> is a very popular link aggregator for the technology and startup community. Officially titled <a href="http://ycombinator.com/hackernews.html">by Paul Graham in 2007</a>, Hacker News began mostly as a place where the very computational-savvy could submit stories around the internet and discuss the latest computing trends.</p>
+
+<p><img src="/img/hn-wordcloud-2007i.png"></p>
+
+<p>Back then, people were talking about networking, software users, and a little up-and-coming startup known as &ldquo;<a href="https://twitter.com/">Twitter</a>.&rdquo;</p>
+
+<p>Six years later, during the new renaissance of computing accessibility and startup entrepreneurship, not much has changed.</p>
+
+<p><img src="/img/hn-wordcloud-2013i.png"></p>
+
+<p>Hacker News, from 2007 to 2014, always illustrates what&rsquo;s &ldquo;new&rdquo; in technology. After downloading all 1,265,114 Hacker News submissions from the official <a href="https://hn.algolia.com/api">Hacker News API</a>, I gathered a few interesting statistics which show the true impact of Hacker News.</p>
+
+<h1>How many stories are submitted to Hacker News?</h1>
+
+<p>In the past few years, Hacker News has had an interesting growth pattern.</p>
+
+<p><img src="/img/hn-monthly-submissions.png"></p>
+
+<p>From the beginning of 2010 with 12k monthly submissions to to the end of 2011 with 31k monthly submissions, the amount of monthly submissions to Hacker News nearly tripled. It&rsquo;s a similar growth rate to that of the startups that Y Combinator typically funds.</p>
+
+<p>What&rsquo;s <em>really</em> interesting is that the end of 2011 is the peak: since then, the amount of submissions has been trending downward. Is Hacker News dying?</p>
+
+<p>I don&rsquo;t think so. Hacker News implements a proprietary anti-spam algorithm which &ldquo;kills&rdquo; submissions, and moderators can kill submissions manually if necessary. Killed articles do not appear in the submission count, so a change in policy would cause the discrepancy. At the least, it helps improve the quality of discussion.</p>
+
+<h1>How many submissions receive large amounts of points?</h1>
+
+<p>On Hacker News, users are able to upvote submissions. The more upvotes a submission has, the higher the position that it appears on the front page of the main site. A simple heuristic for calculating exposure from a Hacker News front page submission is 100 page views per point minimum, which means a submission that earns hundreds of points can go viral very quickly!</p>
+
+<p><img src="/img/hntop.png"></p>
+
+<p>But how many submissions actually make it to the front page, and how many actually make it to the top?</p>
+
+<p><img src="/img/hn-points-hist.png"></p>
+
+<p>On a logarithmic scale, it&rsquo;s evident that the vast majority of Hacker News submissions don&rsquo;t even hit 10 points. (the average amount of points for a submission is 9.51). Usually, hitting 10 points is the sign that you&rsquo;ve appeared on the front page atleast briefly; there, the submission either receives voting momentum or dies quickly due to other rising stars.</p>
+
+<p>But how many submissions <em>do</em> receive hundreds of points? Here&rsquo;s a chart of submissions by month which have received more than 100 points:</p>
+
+<p><img src="/img/hn-monthly-submissions-front.png"></p>
+
+<p>The growth rate of top-scoring submissions is correlated with the growth rate of Hacker News submissions themselves, which is not surprising. The number of points a post receives is also dependent on the number of users; as Hacker News grows, the number of users grows as well. Even though the front page cycles frequently, there is still room for great content.</p>
+
+<h1>When is the best time to submit to Hacker News?</h1>
+
+<p>The age old question. What is the best time to post such that your post makes it to the front page?</p>
+
+<p>First, let&rsquo;s see when Hacker News has the most activity by observing the average number of submissions for each combination of submission hour and weekday:</p>
+
+<p><img src="/img/hn-submissions.png"></p>
+
+<p>Hacker News activity is most active at around 12 PM EST / 9 AM PST at about 40 submissions per hour, when hackers on the East Coast submit just before eating lunch, and hackers on the West Coast submit just after getting to work. Weekends, unsurprisingly, are completely dead.</p>
+
+<p>If you submitted your link at 12 PM, you&rsquo;d have a lot competition, but it would be easier to get upvotes since there would be more people visiting the site. If you submitted your post on the weekend, there would be no competition, but would be harder to make the front page.</p>
+
+<p>What is the best weekday + hour to submit such that your submission goes viral? An easy way to estimate the best time is to analyze the times of submission of previous posts with large amounts of points; with enough data (we have enough), it&rsquo;ll provide a strong guess.</p>
+
+<p><img src="/img/hn-front-page.png"></p>
+
+<p>As it turns out, the submission times of posts are <em>uncorrelated</em> with the number of viral posts. Your odds are <em>slightly</em> better when submitting at peak activity (weekdays at 12 PM EST / 9 AM PST), but it&rsquo;s not a necessity.</p>
+
+<p>Having good content is more important to having a post get to the top of Hacker News. Although you probably shouldn&rsquo;t submit an article when there&rsquo;s a major tech event. (e.g. Facebook&rsquo;s WhatsApp Purchase)</p>
+
+<h1>Do Y Combinator startup announcements score better on HN?</h1>
+
+<p>One of the main benefits of Hacker News is to showcase the startups which Y Combinator has funded. Links about YC Startups contain the YC class name of that startup in their title, such as &ldquo;<a href="https://news.ycombinator.com/item?id=6103506">Watsi (YC W13) raises $1.2M first-of-its-kind philanthropic seed round</a>.&rdquo; Do these links perform better than the typical links submitted to Hacker News?</p>
+
+<p><img src="/img/hn-points-class-hist.png"></p>
+
+<p>As it turns out, yes. For normal posts, the average number of points is 9.5 points, but for YC class announcements, the average is 41.7 points (from 1,745 submissions analyzed).</p>
+
+<p>For fun, which YC classes perform the best on Hacker News?</p>
+
+<p><img src="/img/hn-top-class.png"></p>
+
+<p>W06 placed first because of <a href="https://news.ycombinator.com/item?id=2481576">two</a> <a href="https://news.ycombinator.com/item?id=2481610">announcements</a> about Wufoo, and S11 placed second because of <a href="https://news.ycombinator.com/item?id=6585071">CryptoSeal</a> and <a href="https://news.ycombinator.com/item?id=2846725">Parse</a>.</p>
+
+<h1>Who are the best submitters on Hacker News?</h1>
+
+<p>Like all popular link aggregators, Hacker News has many spammers who submit large amounts of low quality content. Who are the users who submit quality content?</p>
+
+<p>Calculating the average points of a user&rsquo;s submitted content isn&rsquo;t an accurate measurement, since that can be heavily skewed by one viral post. Therefore, I created a Hacker News &ldquo;<a href="http://en.wikipedia.org/wiki/Batting_average">batting average</a>&rdquo; statistic: which posters have the highest proportion of posts that make it to the front page vs. the total number submitted? (for posts since 2010 and number of submitted posts >= 10)</p>
+
+<p><img src="/img/hn-top-submitters.png"></p>
+
+<p>It should be no surprise that most of the people on the list are startup founders. It&rsquo;s also not surprising that most of those founders, such as <a href="https://news.ycombinator.com/user?id=mwseibel">mwseibel</a>, <a href="https://news.ycombinator.com/user?id=rahulvohra">rahulvohra</a> and <a href="https://news.ycombinator.com/user?id=tikhon">tikhon</a> also founded a Y Combinator startup. (although Paul Graham <a href="https://news.ycombinator.com/user?id=pg">himself</a> only has a 0.856 average).</p>
+
+<h1>What are Hacker News&#8217; favorite programming languages?</h1>
+
+<p>One of the infamous memes about Hacker News is programming language elitism, with favoritism for languages such as Lisp and Erlang.</p>
+
+<p>But what programming languages are indeed the most popular on Hacker News?</p>
+
+<p><img src="/img/hn-lang-num-submissions.png"></p>
+
+<p>Javascript is very popular, especially with the rising popularity of node.js. Go is unexpectedly frequently submitted for being such a new language. (although it&rsquo;s possible for &ldquo;go&rdquo; to be used in a context outside of a programing language.) Lisp and Erlang are indeed obscure, which might discredit the meme.</p>
+
+<p>Which programming languages are most well-liked on HN?</p>
+
+<p><img src="/img/hn-lang-avg-submissions.png"></p>
+
+<p>&hellip;so Lisp and Erlang <em>are</em> well-liked on HN.</p>
+
+<p>At the least, in both cases, no one on Hacker News likes PHP.</p>
+
+<h1>Snowden and Bitcoin</h1>
+
+<p>Edward Snowden&rsquo;s leaks in June 2013 about the NSA and PRISM affected the entire tech industry, including Hacker News. How did Hacker News react to the leaks?</p>
+
+<p><img src="/img/hn-snowden.png"></p>
+
+<p>Strongly.</p>
+
+<p>But after the June spike, discussion about the NSA decreased significantly, but it&rsquo;s still a popular topic.</p>
+
+<p>Bitcoin is more interesting since it has had three distinct surges:</p>
+
+<p><img src="/img/hn-bitcoin.png"></p>
+
+<p>The June 2011 spike was due to the theft of <a href="https://bitcointalk.org/index.php?topic=16457.0">25,000 Bitcoin</a>, the April 2013 spike happened during the first rise-and-fall from $200/BTC, and the November 2013 spike happened during the second rise-and-fall from $1,000/BTC.</p>
+
+<p>Hacker News is a great model for a link aggregator.  It emphasizes more on quality content than the quantity of content, and it has paid off over the years.</p>
+
+<hr />
+
+<p><em>Code for getting all the HN submissions is <a href="https://github.com/minimaxir/hacker-news-download-all-stories">available on GitHub</a>. Unfortunately, the Hacker News data is too large to distribute freely. <a href="http://minimaxir.com/contact/">Contact me</a> if you want the raw data or any data to reproduce the charts.</em></p>
+
+<p><em>Note: there appear to be <a href="https://docs.google.com/spreadsheets/d/1Zdex42KE-8DFIHujhVWjJ3yqilJSws2EbT8VAARPYgE/edit?usp=sharing">some gaps in the data</a> for dates before 2010. This appears to be caused by the API server: for example, compare the <a href="https://news.ycombinator.com/submitted?id=liebke">number of submissions as reported by HN for top user liebke</a> (21) and the <a href="https://hn.algolia.com/api/v1/search_by_date?tags=story,author_liebke">number of submissions as reported by the API</a> for liebke (14, with the last 7 submitted stories missing relative to the HN output). Also, number of stories (1,265,114) in the output data and the <a href="https://hn.algolia.com/">server data</a> (~1,267,000 as of publishing) are very close, making the discrepancy unlikely caused by client error. As a result, any chart that is based on a time series does not start earlier than 2010.</em></p>
+
+	  
+	  
+
+
+	  
+
+
+
+  
+  
+      <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/02/hacking-hacker-news/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/02/hacking-hacker-news/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=A Statistical Analysis of All Hacker News Submissions - http://minimaxir.com/2014/02/hacking-hacker-news/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/02/hacking-hacker-news/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Statistical Analysis of All Hacker News Submissions&url=http://minimaxir.com/2014/02/hacking-hacker-news/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/02/hacking-hacker-news/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+	
+	</div>
+  </div>
+
+
+
+</div>
+
+<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+
+<div class="sidebar-author">
+
+<h2>About The Author</h2>
+<div>Max Woolf is a 2012 graduate from Carnegie Mellon University in Business Administration with a concentration in Computing and Information Technology, and has been working as a Software QA Engineer in the San Francisco Bay Area for 1.5 years. Max also comments on blogs rather frequently.</div>
+
+<div>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</div>
+
+</div>
+
+  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/02/hacking-hacker-news/">  
+		   A Statistical Analysis of All Hacker News Submissions</a></h2>
+		   <div>After downloading all 1,265,114 Hacker News submissions from the official Hacker News API, I gathered a few interesting statistics which show the true impact of Hacker News.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/02/glory-to-the-helix/">  
+		   Game Theory: How 70,000 Pokemon Players Sabotage Themselves</a></h2>
+		   <div>Twitch Plays Pokemon isn't about winning. It's about trying not to fail spectacularly. And they still fail regardless. It's an irresistible train wreck that's hard to stop watching.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/02/the-filter-truth/">  
+		   How Many #nofilter Instagram Photos Actually Have No Filter?</a></h2>
+		   <div>Not all of them.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/02/moved-temporarily/">  
+		   Imgur is Covertly Redirecting Image Links on Facebook and Twitter</a></h2>
+		   <div>When clicking a direct image link for the first time on Facebook, Twitter, and Google+, Imgur will redirect you to the main image page instead.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/01/more-language-more-problems/">  
+		   A Thoughtful Analysis of the Most Poorly-Designed Chart Ever</a></h2>
+		   <div>The good thing about the chart? The data is properly cited. The bad? EVERYTHING ELSE.</div>
+		   </div>
+
+	 
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
+	
+	
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+	
+	</div>
+	
+	
+	<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+	
+	
+	  <footer>
+
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+	  <h2><i class="ion-arrow-left-c"></i> Previously...</h2>
+        <h2><a href="/2014/02/glory-to-the-helix/" title="Previous Post: Game Theory: How 70,000 Pokemon Players Sabotage Themselves">Game Theory: How 70,000 Pokemon Players Sabotage Themselves</a></h2>
+      
+	  
+	  
+	  
+      
+	  
+	  <hr>
+	  
+	  <h2><i class="ion-ios7-bookmarks-outline"></i> Categories:</h2>
+	      <p class="meta">
+
+      
+
+<span class="categories">
+  
+    
+          <span class="badge"><a href="/data">Data</a></span>
+     
+  
+</span>
+
+
+    </p>
+	  
+    </p>
+  </footer>
+	
+	
+	</div>
+	
+	</div>
+
+  
+ 
+  
+  
+
+
+  
+</article>
+
+
+
+
+
+
+        </div>
+      </div>
+	  </div>
+	</div>
+  
+  	    
+	  <div class="hero max">
+  
+
+ <style type="text/css">
+.hero.max {
+padding-top: 4px;
+margin-bottom: 0px;
+}
+</style>
+ 
+ <div class="uk-container uk-container-center">
+	 <div class="uk-grid" data-uk-grid-match>
+    
+	
+	<div class="uk-width-large-2-3 uk-width-medium-1-1">
+  <div>
+    <h1 class="name">Max Woolf</h1>
+	<div class="tagline alias">@minimaxir</div>
+	<div class="tagline">Software QA Engineer in San Francisco, CA</div>
+    <div class="tagline">Carnegie Mellon Class of 2012 Business IT Graduate</div>
+	 
+
+	 
+	 
+	 <div class="uk-grid sharing">
+	 <div class="uk-width-1-4">
+	 <span class="social facebook-p">
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="ion-social-facebook"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social twitter-p">
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="ion-social-twitter"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social linkedin-p">
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="ion-social-linkedin"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social github-p">
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="ion-social-github"></i> </a>
+		</span>
+	 </div>
+	 </div>
+	
+	
+  </div>
+  </div>
+  
+  <div class="uk-width-large-1-3 uk-width-medium-1-1 uk-hidden-small">
+
+
+	<a href="/about"><img src="/Max388.png"></a>
+	
+	</div>
+  
+  </div>
+</div>
+</div>
+
+  
+  <div class="footer-page">
+    <div class="uk-container uk-container-center footer">
+    
+      <div class="uk-grid">
+	  <div class="uk-width-1-1">
+  
+         <footer  role="contentinfo">
+          <p>
+  Copyright &copy; 2014 - Max Woolf -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and the <a href="http://www.getuikit.com/">UIkit Framework</a></span> - Theme designed by Max Woolf
+</p>
+<p><strong>All opinions stated by Max Woolf are his own.</strong></p>
+
+        </footer>
+  
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2014/02/hacking-hacker-news/';
+        var disqus_url = 'http://minimaxir.com/2014/02/hacking-hacker-news/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
+</body>
+</html>
