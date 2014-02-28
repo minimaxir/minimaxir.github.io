@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-02-24T08:06:17-08:00</updated>
+  <updated>2014-02-28T07:50:43-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of All Hacker News Submissions]]></title>
     <link href="http://minimaxir.com/2014/02/hacking-hacker-news/"/>
-    <updated>2014-02-23T17:35:00-08:00</updated>
+    <updated>2014-02-24T08:00:00-08:00</updated>
     <id>http://minimaxir.com/2014/02/hacking-hacker-news</id>
     <content type="html"><![CDATA[<p><a href="https://news.ycombinator.com/news">Hacker News</a> is a very popular link aggregator for the technology and startup community. Officially titled <a href="http://ycombinator.com/hackernews.html">by Paul Graham in 2007</a>, Hacker News began mostly as a place where the very computational-savvy could submit stories around the internet and discuss the latest computing trends.</p>
 
@@ -41,6 +41,8 @@
 <p>What&rsquo;s <em>really</em> interesting is that the end of 2011 is the peak: since then, the amount of submissions has been trending downward. Is Hacker News dying?</p>
 
 <p>I don&rsquo;t think so. Hacker News implements a proprietary anti-spam algorithm which &ldquo;kills&rdquo; submissions, and moderators can kill submissions manually if necessary. Killed articles do not appear in the submission count, so a change in policy would cause the discrepancy. At the least, it helps improve the quality of discussion.</p>
+
+<p><em>UPDATE (2/28): Paul Graham, in the <a href="https://news.ycombinator.com/item?id=7291531">corresponding HN thread</a>,  made a <a href="https://news.ycombinator.com/item?id=7292094">comment</a> that the anti-spam algorithm did indeed increase spam detection and number of article killed at the end of 2011.</em></p>
 
 <h1>How many submissions receive large amounts of points?</h1>
 
@@ -76,9 +78,11 @@
 
 <p><img src="/img/hn-front-page.png"></p>
 
-<p>As it turns out, the submission times of posts are <em>uncorrelated</em> with the number of viral posts. Your odds are <em>slightly</em> better when submitting at peak activity (weekdays at 12 PM EST / 9 AM PST), but it&rsquo;s not a necessity.</p>
+<p>As it turns out, the submission times of posts are <em>uncorrelated</em> with the number of viral posts. There are <em>slightly</em> more when submitting at peak activity (weekdays at 12 PM EST / 9 AM PST), but it won&rsquo;t make-or-break an article&rsquo;s success on HN.</p>
 
 <p>Having good content is more important to having a post get to the top of Hacker News. Although you probably shouldn&rsquo;t submit an article when there&rsquo;s a major tech event. (e.g. Facebook&rsquo;s WhatsApp Purchase)</p>
+
+<p><em>UPDATE (2/28): It&rsquo;s been pointed out that measuring the proportion of viral posts (number of viral submissions / number of total submissions) would be a better indicator of odds of article success. Since the number of viral submissions is similar across all time zones, the proportion of viral posts would be greatest on the weekends, since there are dramatically fewer total submissions. However, this logic isn&rsquo;t perfectly correct due to how the article discovery and upvoting system works. I may cover this in a future post.</em></p>
 
 <h1>Do Y Combinator startup announcements score better on HN?</h1>
 
