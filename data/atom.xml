@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-02-28T07:50:43-08:00</updated>
+  <updated>2014-03-24T07:54:03-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?]]></title>
+    <link href="http://minimaxir.com/2014/03/hashtag-tag/"/>
+    <updated>2014-03-24T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2014/03/hashtag-tag</id>
+    <content type="html"><![CDATA[<p><a href="http://instagram.com/">Instagram</a> uses hashtags as a method of categorizing images and videos. A user can tag an image with, for example, #snowy, and all other Instagram app users can see a mosaic of photos from all users which have that tag. Many less-than-honest  Instagram users <a href="http://instagram.com/p/l5J7iXQGX6/">spam tags</a> which are not particularly relevant to their photo in order to maximize the potential exposure.</p>
+
+<p><img src="/img/instatags2.png"></p>
+
+<p>At a maximum of 30 tags per image, spamming large numbers of tags should theoretically have a huge impact on the image&rsquo;s reach. In fact, there are sketchy websites that provide premade lists of popular hashtags for you to spam. But does spamming #tags in an Instagram image <em>actually</em> lead to a increase in the number of Likes on an image?</p>
+
+<p>Using the <a href="http://instagram.com/developer/">Instagram API</a>, I&rsquo;ve retrieved about 120,000  images, split evenly between pictures tagged with #sunny, #rainy, and #snowy, to get a good range of neutral picture types. Here&rsquo;s the distribution of the number of tags on photos from that data set:</p>
+
+<p><img src="/img/instagram-tags.png"></p>
+
+<p>The majority of Instagram photos have around 5 tags, which is a reasonable amount for a user quickly classifying a photo within the photo caption. However, it&rsquo;s clear that there are many tag abusers, with a noticeable spike of  the number of Instagram photos which have the maximum of 30 Likes. (the statistical average is <strong>11.45 tags</strong>, with a standard deviation of 8.01)</p>
+
+<p>The distribution of Likes as heavily skewed as you would expect when viewed normally, but when the distribution is viewed on a logarithmic scale, the shape becomes closer to a bell curve:</p>
+
+<p><img src="/img/instagram-likes.png"></p>
+
+<p>The statistical average of Likes on Instagram photos is <strong>26.19 Likes</strong>, with a standard deviation of 154.07; the high standard deviation is caused by the few photos with thousands of Likes.</p>
+
+<p>If you analyze the distribution of Likes for each discrete number of tags, the results are more telling.</p>
+
+<p><img src="/img/instagram-likes-facet.png"></p>
+
+<p>As the number of tags increases, the distribution of Likes shifts toward right, with very, very few photos with less than 10 likes. However, due to the logarithmic scaling, it&rsquo;s hard to tell if the center of the distibution (where the average number of Likes is approximately located) is shifting significantly.</p>
+
+<h1>Regression Analysis</h1>
+
+<p>A simple linear regression of log(Likes) on tags can tell us of the if an increase in the number of tags corresponds to an increase in the number of Likes.</p>
+
+<p><img src="/img/instagram-tags-scatterplot.png"></p>
+
+<p>There is indeed a <strong>very strong positive relationship between Tags and Likes</strong>, with a p-value &lt; 2e-16 for the tag regression coefficient. But tags alone doesn&rsquo;t explain the variance of Likes particularly well (R<sup>2</sup> = 15.47%) due to the heavy variance of Likes in the raw data, even after using a logarithmic transformation. However, due to the logarithmic transformation, it&rsquo;s difficult to easily determine the relative difference in the amount of Likes between using 1 tag on an Instagram photo and using 30 tags.</p>
+
+<p>Using the raw, untransformed data, this is a chart of the average number of Likes on photos from the sample data for each discrete number of tags, with 95% confidence intervals* for each measure:</p>
+
+<p><img src="/img/instagram-tag-average.png"></p>
+
+<p>Instagram photos which have the maximum of 30 #tags receive, on average, about <strong>three times</strong> as many Likes than photos with only a few tags. Most of the averages are well-bounded, too, which indicate that the per-tag-Like-averages are well-representative of all Instagram photos.</p>
+
+<p>The strong deviations from the trend (and larger confidence intervals) at 1, 5, and 9 tags are due to large outliers which skew the average. Indeed, there are many other factors in determining the expected number of Likes for an Instagram photo (e.g. the popularity of the person who posted the photo), some of which I hope to cover in a future blog post. :)</p>
+
+<p>In the meantime, if you want more Likes on your filtered photos, spam those hashtags. You won&rsquo;t be guaranteed to gets lots of Likes, but the odds will greatly be in your favor.</p>
+
+<hr />
+
+<p><em>All charts were created using R and ggplot2.</em></p>
+
+<p><em>You can download a copy of the Instagram data set <a href="https://www.dropbox.com/s/zpyv6p6yskdy43j/instagram-data-analysis.csv.zip">here</a>. [2MB zipped CSV]</em></p>
+
+<p><em>*95% confidence intervals for each per-tag-Like-average were generated using bootstrap resampling of the raw data, and recalculating each average on the resampled data. This was repeated 5,000 times to generate upper and lower bounds.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of All Hacker News Submissions]]></title>
@@ -284,42 +341,6 @@
 <hr />
 
 <p><em>The code used to get the project descriptions from the GitHub API is available in <a href="https://github.com/minimaxir/get-github-repo-descriptions">this GitHub repository</a>, and you can download the ~300k repo descriptions <a href="https://dl.dropboxusercontent.com/u/2017402/github_repo_desc.zip">here</a>. [5MB .zip]</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Reddit is Growing Slowly, but Surely]]></title>
-    <link href="http://minimaxir.com/2013/11/daily-reddit/"/>
-    <updated>2013-11-18T07:30:00-08:00</updated>
-    <id>http://minimaxir.com/2013/11/daily-reddit</id>
-    <content type="html"><![CDATA[<p>Reddit has certainty received more attention in the mainstream media with its involvement in such events as the <a href="http://www.nytimes.com/2013/04/29/business/media/bombings-trip-up-reddit-in-its-turn-in-spotlight.html?_r=0">Boston Marathon Bombings</a> and <a href="hhttp://www.reddit.com/r/IAmA/comments/z1c9z/i_am_barack_obama_president_of_the_united_states/">President Obama&rsquo;s AMA</a>. But has this publicity led to increase in overall activity on the site?</p>
-
-<p>I analyzed the daily number of submissions from over two years, August 6th, 2011 to September 25, 2013 (41 million submissions total), to see which events, if any, have affected Reddit&rsquo;s growth rate. As it turns out, Reddit grows by itself.</p>
-
-<!-- more -->
-
-
-<p><img src="/img/reddit_daily-mac.png"></p>
-
-<p>Reddit&rsquo;s growth over the past two years has been almost entirely <strong>linear</strong>, with no notable acceleration in submission activity at any point in time.</p>
-
-<p>Running a linear regression on daily number of submissions vs. number of days since the first date (8/6/11) reveals that the expected increase in number of submissions each successive day on average is <strong>66.48 submissions</strong>  (+1,948 submissions each successive month, +24,259 submissions each successive year)</p>
-
-<p>This growth rate alone explains <strong>86.83%</strong> of the variation in number of submissions, indicating that external factors such as media publicity explain the remaining 13% of the variation.</p>
-
-<p>From a business perspective, it&rsquo;s impressive that Reddit still continues to grow for being such a mature internet business, but prospective investors for a rumored <a href="http://techcrunch.com/2013/01/06/reddit-rumored-to-be-raising-money-at-a-400-million-valuation/">fundraising at a $400 Million valuation</a> might be weary that Reddit&rsquo;s growth is only linear, in contrast to the <strong>exponential</strong> growth of other startups such as Snapchat. (In fairness, submission activity may not necessarily correlate with revenue-driving content consumption activity)</p>
-
-<p>A couple stray observations:</p>
-
-<ul>
-<li><p>On January 18th, 2012, the daily number of Reddit submissions hit the minimum among the two-year period due to Reddit&rsquo;s participation in the Internet blackout in protest of SOPA. (Reddit&rsquo;s blackout was only from 8AM to 8PM EST, which is why there are a nonzero number of submissions for that day).</p></li>
-<li><p>On April 1st, 2013, the daily number of Reddit submissions hit the maximum among the two-year period due to April Fool&rsquo;s Day, and the numerous amount of submissions for <em>X</em> brand/website&rsquo;s well-timed joke. However, I&rsquo;m not entirely sure why there&rsquo;s a spike for April Fool&rsquo;s Day in 2013, but not April Fool&rsquo;s Day in 2012.</p></li>
-</ul>
-
-
-<hr />
-
-<p><em>You can access the data used to create the time-series chart at <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGZ2Zkk1MGF3SjZxdC1sRzV5SW9zRWc&amp;usp=sharing">this Google Spreadsheet</a>.</em></p>
 ]]></content>
   </entry>
   

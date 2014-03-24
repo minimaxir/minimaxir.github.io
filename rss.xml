@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-02-28T07:50:43-08:00</updated>
+  <updated>2014-03-24T07:54:03-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?]]></title>
+    <link href="http://minimaxir.com/2014/03/hashtag-tag/"/>
+    <updated>2014-03-24T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2014/03/hashtag-tag</id>
+    <content type="html"><![CDATA[<p><a href="http://instagram.com/">Instagram</a> uses hashtags as a method of categorizing images and videos. A user can tag an image with, for example, #snowy, and all other Instagram app users can see a mosaic of photos from all users which have that tag. Many less-than-honest  Instagram users <a href="http://instagram.com/p/l5J7iXQGX6/">spam tags</a> which are not particularly relevant to their photo in order to maximize the potential exposure.</p>
+
+<p><img src="http://minimaxir.com/img/instatags2.png"></p>
+
+<p>At a maximum of 30 tags per image, spamming large numbers of tags should theoretically have a huge impact on the image&rsquo;s reach. In fact, there are sketchy websites that provide premade lists of popular hashtags for you to spam. But does spamming #tags in an Instagram image <em>actually</em> lead to a increase in the number of Likes on an image?</p>
+
+<p>Using the <a href="http://instagram.com/developer/">Instagram API</a>, I&rsquo;ve retrieved about 120,000  images, split evenly between pictures tagged with #sunny, #rainy, and #snowy, to get a good range of neutral picture types. Here&rsquo;s the distribution of the number of tags on photos from that data set:</p>
+
+<p><img src="http://minimaxir.com/img/instagram-tags.png"></p>
+
+<p>The majority of Instagram photos have around 5 tags, which is a reasonable amount for a user quickly classifying a photo within the photo caption. However, it&rsquo;s clear that there are many tag abusers, with a noticeable spike of  the number of Instagram photos which have the maximum of 30 Likes. (the statistical average is <strong>11.45 tags</strong>, with a standard deviation of 8.01)</p>
+
+<p>The distribution of Likes as heavily skewed as you would expect when viewed normally, but when the distribution is viewed on a logarithmic scale, the shape becomes closer to a bell curve:</p>
+
+<p><img src="http://minimaxir.com/img/instagram-likes.png"></p>
+
+<p>The statistical average of Likes on Instagram photos is <strong>26.19 Likes</strong>, with a standard deviation of 154.07; the high standard deviation is caused by the few photos with thousands of Likes.</p>
+
+<p>If you analyze the distribution of Likes for each discrete number of tags, the results are more telling.</p>
+
+<p><img src="http://minimaxir.com/img/instagram-likes-facet.png"></p>
+
+<p>As the number of tags increases, the distribution of Likes shifts toward right, with very, very few photos with less than 10 likes. However, due to the logarithmic scaling, it&rsquo;s hard to tell if the center of the distibution (where the average number of Likes is approximately located) is shifting significantly.</p>
+
+<h1>Regression Analysis</h1>
+
+<p>A simple linear regression of log(Likes) on tags can tell us of the if an increase in the number of tags corresponds to an increase in the number of Likes.</p>
+
+<p><img src="http://minimaxir.com/img/instagram-tags-scatterplot.png"></p>
+
+<p>There is indeed a <strong>very strong positive relationship between Tags and Likes</strong>, with a p-value &lt; 2e-16 for the tag regression coefficient. But tags alone doesn&rsquo;t explain the variance of Likes particularly well (R<sup>2</sup> = 15.47%) due to the heavy variance of Likes in the raw data, even after using a logarithmic transformation. However, due to the logarithmic transformation, it&rsquo;s difficult to easily determine the relative difference in the amount of Likes between using 1 tag on an Instagram photo and using 30 tags.</p>
+
+<p>Using the raw, untransformed data, this is a chart of the average number of Likes on photos from the sample data for each discrete number of tags, with 95% confidence intervals* for each measure:</p>
+
+<p><img src="http://minimaxir.com/img/instagram-tag-average.png"></p>
+
+<p>Instagram photos which have the maximum of 30 #tags receive, on average, about <strong>three times</strong> as many Likes than photos with only a few tags. Most of the averages are well-bounded, too, which indicate that the per-tag-Like-averages are well-representative of all Instagram photos.</p>
+
+<p>The strong deviations from the trend (and larger confidence intervals) at 1, 5, and 9 tags are due to large outliers which skew the average. Indeed, there are many other factors in determining the expected number of Likes for an Instagram photo (e.g. the popularity of the person who posted the photo), some of which I hope to cover in a future blog post. :)</p>
+
+<p>In the meantime, if you want more Likes on your filtered photos, spam those hashtags. You won&rsquo;t be guaranteed to gets lots of Likes, but the odds will greatly be in your favor.</p>
+
+<hr />
+
+<p><em>All charts were created using R and ggplot2.</em></p>
+
+<p><em>You can download a copy of the Instagram data set <a href="https://www.dropbox.com/s/zpyv6p6yskdy43j/instagram-data-analysis.csv.zip">here</a>. [2MB zipped CSV]</em></p>
+
+<p><em>*95% confidence intervals for each per-tag-Like-average were generated using bootstrap resampling of the raw data, and recalculating each average on the resampled data. This was repeated 5,000 times to generate upper and lower bounds.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of All Hacker News Submissions]]></title>
@@ -600,50 +657,6 @@ Location: http://imgur.com/p9lG2ss</code></p>
 <hr />
 
 <p><em>You can access the data for the Top 500 subreddits in  <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGQzd0dIQkk1aXRRRkxEY3g0ZmQtWGc&amp;usp=sharing">this Google Spreadsheet</a>, and you can see the code use to create the tree map in <a href="https://github.com/minimaxir/treemap-of-reddit-top-subreddits">this GitHub repository</a>.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Do startups with short names containing few vowels raise more money?]]></title>
-    <link href="http://minimaxir.com/2013/10/wrds-and-vwls/"/>
-    <updated>2013-10-14T07:00:00-07:00</updated>
-    <id>http://minimaxir.com/2013/10/wrds-and-vwls</id>
-    <content type="html"><![CDATA[<p>One reason startups use crazy and bizarre names like <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">NegaCycl</a> and <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">Filtrzzz</a> is to ensure that their name is unique, making it easier to acquire the .com domain name and Twitter handle for their startup. Another reason is to make their startup sound <em>kewl</em> and theoretically make the name more memorable in the minds of users and potential investors.</p>
-
-<p>Dakwak, Wibki, Zeef, Funifi. These aren&rsquo;t random words: these are funded startups which were featured at <a href="http://startupalley.techcrunch.com/">TechCrunch Disrupt Startup Alley 2013</a>. And then you have startups such as Lyft, SCVNGR, and Fastly, which have all raised <em>tens of millions of dollars</em> in venture capital.</p>
-
-<p>Do startups with these short, low-vowel names actually raise more money than startups with traditional names?</p>
-
-<!-- more -->
-
-
-<p>First, let&rsquo;s take a look at the association between the length of words in the English language and the number of vowels that they contain:</p>
-
-<p><img class="center" src="http://minimaxir.com/img/english-words.png" width="600" height="600"></p>
-
-<p>In the English language, the majority of the words have 8 letters, with 3 of those letters being vowels. (8,3) is also the center of the density distribution for the heat map, spreading outward.</p>
-
-<p>Let&rsquo;s compare the vowel distribution of normal English words to the distribution of the names of startups that have successfully raised venture capital, in order to identify just how many funded startups have quirky names:</p>
-
-<p><img class="center" src="http://minimaxir.com/img/count-startups.png" width="600" height="600"></p>
-
-<p>Wait, the two distributions are nearly identical! Both graphs are centered at about (8,3), radiating outward. This implies that the number of startups with uniquely-constructed names are outliers and not the typical names for startups.</p>
-
-<p>But that doesn&rsquo;t answer the core question: sure, fewer funded startups have weird names relative to the amount of total funded startups, but do they raise more money on average than startups with typical names?</p>
-
-<p><img class="center" src="http://minimaxir.com/img/mean-startups-fund.png" width="600" height="600"></p>
-
-<p>Nope.</p>
-
-<p>There is no discernible pattern for the average amount raised, unlike with the previous two charts. For the vast majority of the possible combinations of name length and $ vowels, the range of capital raised is between $5M and $25M. There are higher values at the lower-end of the graph (low length, low vowels), but that can be attributed to the relatively low amount of startup data for those combinations to smooth out the average. (e.g. the $78M spike at 3 length, 2 vowels is due to the always-lovely <a href="http://www.crunchbase.com/company/aol">AOL</a> and a <a href="http://googlepress.blogspot.com/2005/12/time-warners-aol-and-google-to-expand_20.html">$1 billion investment from Google</a>, and there are only 15 other startups in the segment.)</p>
-
-<p>In fact, the statistical correlation between name length and funding, number of vowels and funding, and ratio of length to vowels and funding, are all effectively <strong>zero</strong>.</p>
-
-<p>Sure, quirky startup names may make it easier to find a domain name, but it won&rsquo;t necessarily give an edge in the investment process.</p>
-
-<hr />
-
-<p><em>Data for English words from <a href="http://wordlist.sourceforge.net/">Kevin&rsquo;s Word List Page</a>, and data for the startup names/funding from <a href="http://info.crunchbase.com/about/crunchbase-data-exports/">CrunchBase&rsquo;s September Data Export</a>.</em></p>
 ]]></content>
   </entry>
   
