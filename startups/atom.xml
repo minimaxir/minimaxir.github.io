@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Startups | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//startups/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-03-24T07:54:03-07:00</updated>
+  <updated>2014-04-08T08:16:22-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -28,7 +28,7 @@
 
 <p><img src="/img/instagram-tags.png"></p>
 
-<p>The majority of Instagram photos have around 5 tags, which is a reasonable amount for a user quickly classifying a photo within the photo caption. However, it&rsquo;s clear that there are many tag abusers, with a noticeable spike of  the number of Instagram photos which have the maximum of 30 Likes. (the statistical average is <strong>11.45 tags</strong>, with a standard deviation of 8.01)</p>
+<p>The majority of Instagram photos have around 5 tags, which is a reasonable amount for a user quickly classifying a photo within the photo caption. However, it&rsquo;s clear that there are many tag abusers, with a noticeable spike of  the number of Instagram photos which have the maximum of 30 #tags. (the statistical average is <strong>11.45 tags</strong>, with a standard deviation of 8.01)</p>
 
 <p>The distribution of Likes as heavily skewed as you would expect when viewed normally, but when the distribution is viewed on a logarithmic scale, the shape becomes closer to a bell curve:</p>
 

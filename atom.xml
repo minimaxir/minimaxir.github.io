@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-03-24T07:54:03-07:00</updated>
+  <updated>2014-04-08T08:16:22-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mapping San Francisco Locations Using Facebook Data]]></title>
+    <link href="http://minimaxir.com/2014/04/san-francisco/"/>
+    <updated>2014-04-08T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2014/04/san-francisco</id>
+    <content type="html"><![CDATA[<p>Statisticians like to use data from the <a href="https://www.census.gov/">United States Census</a> to plot interesting trends such as unemployment and population of regions across the country. However, such data is typically historical and not very robust.</p>
+
+<p>Facebook, on the other hand, has collected a large amount of data though its <a href="https://www.facebook.com/about/location">Places product</a>. Facebook Places allows users to &ldquo;check-in&rdquo; a place such as <a href="https://www.facebook.com/pages/Dolores-Park/105687759464007">Dolores Park</a> in a manner similar to <a href="https://foursquare.com/">Foursquare</a>.</p>
+
+<p><img src="http://minimaxir.com/img/dolores.png"></p>
+
+<p>Through clever use of Facebook&rsquo;s Graph API and FQL, I was able to retrieve the data on all Facebook Places in and around San Francisco, along with the # of check-ins at each Place. With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit.</p>
+
+<!-- more -->
+
+
+<p>First, let&rsquo;s look at the distribution of check-ins among Places in San Francisco:</p>
+
+<p><img src="http://minimaxir.com/img/sf-checkin-distribution.png"></p>
+
+<p>On a logarithmic scale, the shape resembles a bell curve with a center at about 800 check-ins; however, the sample average of check-ins for the data set is <strong>3,241 check-ins</strong>, indicating that the data may be heavily skewed to the right. Some Places don&rsquo;t have many check-ins, while some Places have an incredibly large number of check-ins.</p>
+
+<p>What are the Places with hundreds of thousands of check-ins? What does the city look like with all these Places plotted on a map of San Francisco?</p>
+
+<p><img src="http://minimaxir.com/img/sf-checkin.png"></p>
+
+<p><em><a href="https://www.dropbox.com/s/cykofhlyus8atgw/sf-bubble.pdf">(PDF of Map)</a></em></p>
+
+<p>The most checked-in Places are, unsurprisingly, the famous tourist attractions of San Francisco, such as <a href="https://www.facebook.com/pages/ATT-Park/116440731717551">AT&amp;T Park</a> and <a href="https://www.facebook.com/UnionSquareSF">Union Square</a>. These Top Places are spread all over the city.</p>
+
+<p>It&rsquo;s also clear where the most dense areas are located in San Francisco. There are plainly-visible lines of Places along southern Mission Street and Outer Sunset. SOMA and Richmond have a large number of Places as well.</p>
+
+<p>And yes, 155,000 people really did check-into <a href="https://www.facebook.com/pages/The-Cheesecake-Factory/107178672654937">The Cheesecake Factory</a>.</p>
+
+<h1>What types of locations do people in San Francisco  frequently check-into?</h1>
+
+<p>Facebook also records the category of its Places, such as &ldquo;Bar&rdquo; and &ldquo;Restaurant&rdquo;. What are the most numerous types of locations in San Francisco?</p>
+
+<p><img src="http://minimaxir.com/img/sf-checkin-distribution-count.png"></p>
+
+<p>Local businesses are by far the most frequent, as it&rsquo;s a more generic classifier for a Place and can be applied to anything that does not have an explicit classifier (such as startups). I find it interesting that non-profit organizations are more numerous than shopping centers.</p>
+
+<p>However, the quantity of a specific type of business does not necessarily mean that San Franciscians will check-into that type of Place more often. Which type of Place, on average, receives the greatest number of check-ins?</p>
+
+<p><img src="http://minimaxir.com/img/sf-checkin-distribution-avg.png"></p>
+
+<p>People are more likely to check-into memorable Places and events, instead of Places they frequently visit like Bars and Restaurants (Twice as many people check-into Attractions than Clubs). Again, tourist attractions are the most popular, which is due to both the relatively low number of Places and the extremely high number of check-ins into Places such as AT&amp;T Park.</p>
+
+<p>The &ldquo;Lake&rdquo; corresponds to <a href="https://www.facebook.com/pages/Lake-Merced/113785468632283">Lake Merced</a>, if you&rsquo;re curious.</p>
+
+<h1>Which San Francisco neighborhoods are the most popular?</h1>
+
+<p>You saw earlier that the Facebook Places are concentrated in specific areas. Here&rsquo;s a map of San Francisco&rsquo;s neighborhoods, highlighted by the number of Places within:</p>
+
+<p><img src="http://minimaxir.com/img/sf-places-count.png"></p>
+
+<p><em><a href="https://www.dropbox.com/s/63fgvcucvk9n9v3/sf-sum.pdf">(PDF of Map)</a></em></p>
+
+<p>The neighborhoods with the most Places are unsurprisingly where the trendy areas are, such as the Mission and SOMA. Additionally, those types of neighborhoods are larger in square area than others, which may bias the results in their favor.</p>
+
+<p>But are these large neighborhoods also the most active neighborhoods? Which neighborhoods have the most check-ins on average per Place within the neighborhood?</p>
+
+<p><img src="http://minimaxir.com/img/sf-places-avg.png"></p>
+
+<p><em><a href="https://www.dropbox.com/s/u613oh4fskjrkny/sf-avg.pdf">(PDF of Map)</a></em></p>
+
+<p>The Embarcadero has by far the most check-ins on average, again, due to both its small size and AT&amp;T Park. Other neighborhoods, however, have more similar averages to each other. It&rsquo;s worth noting that the average number of check-ins is higher in neighborhoods adjacent to the San Francisco Bay, such as North Beach and Fisherman&rsquo;s Wharf: perhaps people check-in more frequently when they have a good view.</p>
+
+<p>Can this data and conclusions about San Francisco Facebook Places be extrapolated to other cities? I&rsquo;d argue yes: it makes logical sense that people check-in more frequently to Places that are more significant, and it also makes sense that people frequently check-into Places with large amounts of tourist attractions. Facebook data shows us cool trends that the United States Census data cannot.</p>
+
+<hr />
+
+<p><em>All charts and maps were made using R, ggplot2, and ggmaps.</em></p>
+
+<p><em>You can download a copy of the Facebook Places data set <a href="https://www.dropbox.com/s/6g6ap4poz1b2trs/sf-public.csv">here</a>. The place_id column corresponds to the San Francisco neighborhood where the Place is located.</em></p>
+
+<p><em>Maps are from <a href="https://www.google.com/maps/">Google Maps</a>. San Francisco shape files for city neighborhoods are from <a href="https://data.sfgov.org/Service-Requests-311-/Neighborhoods/ejmn-jyk6">data.sf.gov</a>. Additionally, thanks to <a href="http://www.reddit.com/r/dataisbeautiful/comments/223ubt/map_of_places_in_san_francisco_by_of_facebook/">/r/dataisbeautiful</a> for offering ideas for improvements to the maps.</em></p>
+
+<p><em>You may notice that the Check-In Counts on some of the official Facebook Place Pages strongly disagree with the Count reported in my charts. The Count reported on affected page is nearly double the value reported via the API in each instance. I believe this is a bug on Facebook&rsquo;s end: see <a href="http://i.imgur.com/I1syBhR.png">this image</a>, in which the Graph Search autocomplete reports a different value of check-ins than the Place Page itself. In this case, I trust the data from the API.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?]]></title>
@@ -28,7 +110,7 @@
 
 <p><img src="http://minimaxir.com/img/instagram-tags.png"></p>
 
-<p>The majority of Instagram photos have around 5 tags, which is a reasonable amount for a user quickly classifying a photo within the photo caption. However, it&rsquo;s clear that there are many tag abusers, with a noticeable spike of  the number of Instagram photos which have the maximum of 30 Likes. (the statistical average is <strong>11.45 tags</strong>, with a standard deviation of 8.01)</p>
+<p>The majority of Instagram photos have around 5 tags, which is a reasonable amount for a user quickly classifying a photo within the photo caption. However, it&rsquo;s clear that there are many tag abusers, with a noticeable spike of  the number of Instagram photos which have the maximum of 30 #tags. (the statistical average is <strong>11.45 tags</strong>, with a standard deviation of 8.01)</p>
 
 <p>The distribution of Likes as heavily skewed as you would expect when viewed normally, but when the distribution is viewed on a logarithmic scale, the shape becomes closer to a bell curve:</p>
 
@@ -1296,90 +1378,6 @@ elemental Djinn attack that it is weak to.</p></blockquote>
 
 
 <p>Moral of story: if you&rsquo;re making a video game, seed your RNGs with an algorithm that players can&rsquo;t manipulate 100%. Otherwise, hilarity will inevitably ensue. I forgive Camelot for implementing a simplistic RNG though; the two games&#8217; <a href="http://www.youtube.com/watch?v=DaxYYwMqiso&amp;list=PL8C84ECF55B28DC74">awesome</a> <a href="http://www.youtube.com/watch?v=M31afGXIGpQ&amp;list=PL586792F46D5A35D4&amp;index=13">soundtrack </a> more than makes up for it.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Profanity-Laced Video Game Password That Breaks Everything]]></title>
-    <link href="http://minimaxir.com/2013/05/its-a-livin/"/>
-    <updated>2013-05-16T20:50:00-07:00</updated>
-    <id>http://minimaxir.com/2013/05/its-a-livin</id>
-    <content type="html"><![CDATA[<p><img class="pull-right" src="http://minimaxir.com/img/metroidboxart.jpg"></p>
-
-<p>If you&rsquo;re a fan of video games, you&rsquo;ve likely heard of the Metroid franchise. Released for the NES in 1986 by Nintendo, Metroid set a new standard for 2-D exploration in video games with its expansive power-up system, well-hidden secrets, and polished platforming controls. Due to its popularity, Metroid has been rereleased multiple times: as an unlockable in <a href="http://en.wikipedia.org/wiki/Metroid_Prime">Metroid Prime</a>, an unlockable in the remake <a href="http://en.wikipedia.org/wiki/Metroid_Zero_Mission">Metroid: Zero Mission</a>, a <a href="http://en.wikipedia.org/wiki/Classic_NES_Series">standalone game</a> on the Game Boy Advance, the Wii Virtual Console, and the 3DS Virtual Console.</p>
-
-<p>You play as Samus Aran, an armored bounty hunter who has infiltrated the base of the dreaded Space Pirates on Planet Zebes. Samus must defeat the leaders of the Space Pirates: the dinosaur Kraid, the dragon and memetic badass of the series <a href="http://en.wikipedia.org/wiki/Ridley_(Metroid)">Ridley</a>, and the AI construct <a href="http://en.wikipedia.org/wiki/Mother_Brain_(Metroid)">Mother Brain</a>. Additionally, Samus must find a way to defeat the Metroids, which are nearly-indestructible parasites that threaten all life. Yes, this was a plot written in the 80&rsquo;s.</p>
-
-<p>Since the NES Metroid cartridge did not have the ability to save games, and the game itself took awhile to complete, Nintendo developed a password system to allow players to continue at a later time. Upon death, the player received a 24-character alphanumeric password that could be entered to restore all items the player has unlocked and remember which bosses the player has defeated. Most of these passwords were gibberish that required a pen-and-paper to write down and remember.</p>
-
-<p>One password, however, is more memorable, and much more sinister.</p>
-
-<!-- more -->
-
-
-<h1>The Password is Always Swordfish</h1>
-
-<p>Even before the days of the internet and personal computing, players <a href="http://metroid.wikia.com/wiki/List_of_Metroid_passwords">found passwords</a> with unique properties.</p>
-
-<p>The <a href="http://metroid.wikia.com/wiki/Narpas_Sword">Narpas Sword password</a>:</p>
-
-<p><img src="http://minimaxir.com/img/narpassword.png"></p>
-
-<p>is essentially the debug mode for the game, with all items unlocked, infinite health, and infinite health for Samus.</p>
-
-<p>Another, more revealing password is the <a href="http://metroid.wikia.com/wiki/Justin_Bailey">Justin Bailey password</a>:</p>
-
-<p><img src="http://minimaxir.com/img/justinbailey.png"></p>
-
-<p>This password starts the game with most unlockables obtained, but more notably, it changes Samus&rsquo;s sprite from an armored powersuit to a bikini swimsuit.</p>
-
-<p>One password, discovered over 20 years later, long after the Metroid password system had been completely reverse-engineered, does not grant you all items. <em>This</em> password just crashes and resets the game:</p>
-
-<p><img src="http://minimaxir.com/img/engageridley.png"></p>
-
-<h1>WTF?</h1>
-
-<p>On a NES and various other rereleases, inputting that code will cause the game to either simply reset or transform the game into a glitched wonderland:</p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/x3UyVylP7AI "></iframe></div>
-
-
-<p>But what happens when you enter the password on an emulated Virtual Console, where the game environment is sandboxed? In the case of the 3DS Virtual Console, the <em>3DS completely crashes</em>:</p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/pjQ7SjB_6a8 "></iframe></div>
-
-
-<h1>Rated E for Everyone?</h1>
-
-<p>You may be asking &ldquo;did someone at Nintendo actually program a consequence for profanity in the game? Is the glitching and crashing a punishment for the perverse player?&rdquo; In truth, the password is merely a coincidence.</p>
-
-<p>As mentioned earlier, the password algorithm for Metroid has been reverse-engineered, and you can actually download a program to both generate and interpret such passwords <a href="http://games.technoplaza.net/mpg/">here</a>.</p>
-
-<p><img class="center" src="http://minimaxir.com/img/metroidpassgen.png"></p>
-
-<p>The profane password is indeed a legitimate password (in which Ridley is already defeated, ironically enough). But why does it crash the game? The <a href="http://games.technoplaza.net/mpg/password.txt">Metroid Password Format Guide</a> explains the secret:</p>
-
-<blockquote><p> There are five valid start locations. They are specified using bits 64-66.
-  To start in Brinstar, all the bits should be off. Norfair, Kraid&rsquo;s Lair, and
-  Ridley&rsquo;s Lair can be specified by turning their bit on and leaving the others
-  off. Tourian is specified by turning on Norfair and Kraid&rsquo;s Lair
-  simultaneously. Any other combination of these three bits is invalid and will
-  cause Metroid to reset.</p>
-
-<p>  The reset bit is part of the start location. There are 16 possible values,
-  but only 5 valid ones. Turning on the reset bit will produce and invalid
-  start location and cause Metroid to reset. This is why it is called it is
-  called the reset bit, because it guarantees an invalid password.</p></blockquote>
-
-<p>For the profane password, the reset bit is turned on, so it will always cause a reset. And that&rsquo;s why the weird behavior happens.</p>
-
-<p>If you manually disable the reset bit using this tool in order to make the password valid, the new password becomes:</p>
-
-<p><img class="center" src="http://minimaxir.com/img/metroidpassgen2.png"></p>
-
-<p>Not as catchy, unfortunately.</p>
-
-<p>In fact, the Justin Bailey password is also a completely coincidental password. Sometimes, passwords can just do very unexpected things.</p>
 ]]></content>
   </entry>
   
