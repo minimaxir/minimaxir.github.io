@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-04-15T19:13:34-07:00</updated>
+  <updated>2014-06-17T08:20:25-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,134 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Statistical Analysis of 1.2 Million Amazon Reviews]]></title>
+    <link href="http://minimaxir.com/2014/06/reviewing-reviews/"/>
+    <updated>2014-06-17T08:20:00-07:00</updated>
+    <id>http://minimaxir.com/2014/06/reviewing-reviews</id>
+    <content type="html"><![CDATA[<p>When buying the latest products on <a href="http://www.amazon.com/">Amazon</a>, reading reviews is an important part of the purchasing process.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/ore.png"></p>
+
+<p><img src="http://minimaxir.com/img/amazon/amazon-review.png"></p>
+
+<p>Customer reviews from customers who have actually purchased and used the product in question can give you more context to the product itself. Each reviewer rates the product from 1 to 5 stars, and provides a text summary of their experiences and opinions about the product. The ratings for each product are averaged together in order to get an overall product rating.</p>
+
+<p>The number of reviews on Amazon has grown over the years.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-basic-time-count.png"></p>
+
+<p>But how do people write reviews? What types of ratings do reviewers give? How many of these reviews are considered helpful?</p>
+
+<p>Stanford researchers Julian McAuley and Jure Leskovec collected <a href="https://snap.stanford.edu/data/web-Amazon.html">all Amazon reviews </a>from the service&rsquo;s online debut in 1995 to 2013. Analyzing the dataset of 1.2 million Amazon reviews of products in the Electronics section, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon&rsquo;s review system actually works.</p>
+
+<h1>Describing the Data</h1>
+
+<p>First, let&rsquo;s see how the user ratings are distributed among the reviews.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-basic-score.png"></p>
+
+<p>More than half of the reviews give a 5-star rating. Aside from perfect reviews, most reviewers give 4-star or 1-star ratings, with <em>very</em> few giving 2-stars or 3-stars relatively.</p>
+
+<p>As as result, the statistical average for all review ratings is on the high-end of the scale at about <strong>3.90</strong>.  In fact, the average review rating for newly-written reviews has varied from 3.4 to 4.2 over time.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-basic-time-rating.png"></p>
+
+<p>Another metric used to measure reviews is review helpfulness. Other Amazon reviewers can rate a particular review as &ldquo;helpful&rdquo; or &ldquo;not helpful.&rdquo; A &ldquo;review helpfulness&rdquo; statistic can be calculated by taking the number of &ldquo;is-helpful&rdquo; indicators divided by the total number of is-helpful/is-not-helpful indicators (in the example at the beginning of the article, 639/665 people found the review helpful, so the helpfulness rating would be 96%). This gives an indication of review quality to a prospective buyer. Only 10% of the reviews had atleast 10 is-helpful/is-not-helpful data points, and of those reviews, the vast majority of the reviews had perfect helpfulness scores.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-basic-helpful.png"></p>
+
+<p>That would make sense; if you&rsquo;re writing a review (especially a 5 star review), you&rsquo;re writing with the intent to help other prospective buyers.</p>
+
+<p>Another consideration is review length. Do reviews frequently write essays, or do reviews typically write a single paragraph?</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-basic-length.png"></p>
+
+<p>Most reviews are 100-150 characters, but the average amount of characters in a review is about <strong>582</strong> (there are some outlier reviews with 30,000+ characters!). Assuming that the average amount of characters in a paragraph <a href="http://wiki.answers.com/Q/How_many_characters_does_the_average_paragraph_have">is 352</a>, reviewers typically write about half a paragraph. Interestingly, reviews are rarely less than a sentence. (the <a href="http://www.amazon.com/gp/community-help/customer-reviews-guidelines">Review Guidelines</a> suggest a minimum of 20 words in a review, so this discrepancy could be attributed to moderator removal of short, one-liner reviews)</p>
+
+<h1>Particularizing the Products</h1>
+
+<p>The 1.2 million reviews in the Electronics data set address about 82,003 distinct products. However, most of those entries represent different SKUs of the same product (e.g. different colors of headphones). Of those products, only 30,577 products have pricing information which identify them as the source product.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-product-price.png"></p>
+
+<p>Over 2/3rds of Amazon Electronics are priced between $0 and $50, which makes sense as popular electronics such as television remotes and phone cases are not extremely expensive. However, there&rsquo;s no statistical correlation between the price of a product and the number of reviews it receives.</p>
+
+<p>For the overall rating of a particular product, which is the average rating of all reviews for that product, the ratings are no longer limited to discrete numbers between 1 and 5, and can take decimal values between those numbers as well. The distribution of product ratings is similar to the distribution of review ratings.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-product-rating.png"></p>
+
+<p>Again, the perfect rating of 5 is most popular for products. This distribution resembles the distribution of scores of all reviews for the discrete rating values, but this view reveals local maxima at the midpoint between each discrete value. (i.e. 3-and-a-half stars and 4-and-a-half stars are surprisingly common ratings)</p>
+
+<p>What happens when you plot product rating and product price together?</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-product-score-price.png"></p>
+
+<p>The most expensive products have 4-star and 5-star overall ratings, but not 1-star and 2-star ratings. However, the correlation is very weak. (r = 0.04)</p>
+
+<p>In contrast, the relationship between product price and the average <em>length</em> of reviews for the product is surprising.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-product-price-length.png"></p>
+
+<p>This relationship is logarithmic with a relatively good correlation (r = 0.29), and it shows that reviewers put more time and effort into reviewing products which are worth more.</p>
+
+<h1>Reviewing the Reviewers</h1>
+
+<p>As you might expect, most people leave only 1 or 2 reviews on Amazon, but some have left <em>hundreds</em> of reviews. Out of 1.2 Million reviews, there are 510,434 distinct reviewers.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-count.png"></p>
+
+<p>Over 80% of the reviewers of Amazon electronics left only 1 review. Analyzing reviewers who have left only 1 review is not helpful statistically, so for the rest of the analysis, only reviews who have made 5 or more reviews (which have received atleast 1 is-helpful/is-not-helpful indicator) will be considered. This makes it much easier to get the overall profile of a reviewer. 11,676 reviewers fit this criteria.</p>
+
+<p>Do repeat Amazon users tend to give 5-star reviews?</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-score.png"></p>
+
+<p>Distribution of review ratings when averaged across is similar to the other distributions of review ratings. However, this distribution is less skewed toward 5-stars and is more uniform between 4-stars and 5-stars.</p>
+
+<p>What about the average helpfulness of the reviews written by a single reviewer? If a reviewer has enjoyed Amazon enough such that they make 5 or more reviews, chances are that their reviews are high quality.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-helpfulness.png"></p>
+
+<p>Again, the data is slightly skewed. 8% of the reviewers have perfect helpfulness scores on all their reviews, and the average helpfulness score for all repeat reviews is 80%. Interestingly, a few repeat reviewers have average helpfulness scores of 0.</p>
+
+<p>If you plot <em>both</em> average score and average helpfulness in a single chart, the picture becomes much more clear:</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-count-score.png"></p>
+
+<p>As the chart shows, there&rsquo;s a good positive correlation (r = 0.27) between rating and helpfulness, with a discernible cluster at the top. However, I don&rsquo;t think it&rsquo;s a causal relationship. Reviewers who give a product a 4 &ndash; 5 star rating are more passionate about the product and likely to write better reviews than someone who writes a 1 &ndash; 2 star &ldquo;this product sucks and you suck too!&rdquo; review.</p>
+
+<p>Another interesting bivariate relationship is the relationship between the helpfulness of a review and the length of a review). Stereotypically, you might think that longer reviews are more helpful reviews. And in the case of Amazon&rsquo;s Electronics reviews, you&rsquo;d be correct.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-helpful-length.png"></p>
+
+<p>Again, there&rsquo;s a good positive correlation (r = 0.26) between average helpfulness and average length, which the trend line supports. (the dip at the end is caused by the high amount of low-character reviews). All the longer reviews have high helpfulness; there are very, very few unhelpful reviews that are also long.</p>
+
+<h1>Completing the Conclusion</h1>
+
+<p>The reviews on Amazon&rsquo;s Electronics products very frequently rate the product 4 or 5 stars, and such reviews are almost always considered helpful. 1-stars are used to signify disapproval, and 2-star and 3-stars reviews have no significant impact at all. If that&rsquo;s the case, then what&rsquo;s the point of having a 5 star ranking system at all if the vast majority of reviewers favor the product? Would Amazon benefit if they made review ratings a binary like/dislike?</p>
+
+<p>Having a 5-star system can allow the prospective customer to make more informed comparisons between two products: a customer may be more likely to buy a product that&rsquo;s rated 4.2 stars than a product that is rated 3.8 stars, which is a subtlety that can&rsquo;t easily be emulated with a like/dislike system. Likewise, if products are truly bad, the propensity toward 5-star reviews can help obfuscate the low quality of the product when a like/dislike system would make the low quality more apparent.</p>
+
+<p>Unfortunately, only Amazon has the data that would answer all these questions.</p>
+
+<p>Of course, there are many other secrets to be uncovered from Amazon reviews. The Stanford professors who collected the initial data used <a href="http://i.stanford.edu/~julian/pdfs/recsys13.pdf">machine learning techniques on the review text</a> to predict the rating given by a review from just the review text itself. Other potential topics for analysis are comparisons between <em>types</em> of Electronics (e.g. MP3 players, headphones) or using natural language processing to determine the common syntax in reviews.</p>
+
+<p><img src="http://minimaxir.com/img/amazon/amzn-word-review-start.png"></p>
+
+<p>That&rsquo;s a topic for another blog post. :)</p>
+
+<hr />
+
+<ul>
+<li><em>Data analysis was performed using R, and all charts were made using ggplot2.</em></li>
+<li><em>You can download a ZIP file containing CSVs of the time series, the aggregate product data, and the anonymized aggregate reviewer data <a href="https://dl.dropboxusercontent.com/u/2017402/amazon_data.zip">here</a>.</em></li>
+<li><em>No, I have no relation to &ldquo;<a href="http://www.amazon.com/review/R1KHEP16MXXWCN/ref=cm_cr_rdp_perm?ie=UTF8&amp;ASIN=B000796XXM">M. Wolff</a>&rdquo;.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mapping San Francisco Locations Using Facebook Data]]></title>
@@ -1293,91 +1421,6 @@ California      -187.57         0
 <p>And that was that, the price of Ecto almost immediately dropped. All was well.</p>
 
 <p>John left one final <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2124684">message</a>: &ldquo;Thanks to everyone for your help identifying the issue and providing great data for me to start with in my research.&rdquo;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Role-Playing Game With an Easily Exploitable Random Number Generator]]></title>
-    <link href="http://minimaxir.com/2013/05/guaranteed-to-be-random/"/>
-    <updated>2013-05-23T20:26:00-07:00</updated>
-    <id>http://minimaxir.com/2013/05/guaranteed-to-be-random</id>
-    <content type="html"><![CDATA[<p><img class="pull-right" src="http://minimaxir.com/img/GoldenSun.png"></p>
-
-<p>When the Game Boy Advance was released in June 2001, Nintendo promised that the handheld device would be capable of delivering a home gaming console experience on-the-go. <a href="http://en.wikipedia.org/wiki/Golden_Sun">Golden Sun</a>, developed by Camelot and published by Nintendo a few months after the console&rsquo;s release, exemplified the GBA&rsquo;s full capabilities with its hand-drawn environments, flashy battle effects, and <em>very</em> difficult dungeon puzzles which undoubtedly resulted in the sale of many strategy guides.</p>
-
-<p>In Golden Sun, you play as a group of teenage mages called Adepts, who wield the power of the four elements (Earth, Fire, Wind, and Water) by casting spells with Psynergy. The antagonists of the game are a pair of jerks who are attempting to reawaken a dangerous and sealed power, and only four kids can stop them from destroying the world. Released two years later, <a href="http://en.wikipedia.org/wiki/Golden_Sun:_The_Lost_Age">Golden Sun: The Lost Age</a> takes place immediately after the conclusion of the first game with a different quartet of Adepts and a new pair of jerks. In this sequel, it is revealed that the jerks who keep trying to kill you are not the bad guys and the whole conflict is just one big misunderstanding! Yes, the plot is very reminiscent of other Japanese-developed RPGs such as <a href="http://en.wikipedia.org/wiki/Final_Fantasy_(video_game)">Final Fantasy</a> and <a href="http://en.wikipedia.org/wiki/Chrono_Trigger">Chrono Trigger</a>, but it&rsquo;s still impressive for a game I typically played in the backseat of a car.</p>
-
-<p>Like Final Fantasy and Chrono Trigger, Golden Sun has an inventory system where players earn new weapons and items by purchasing them at a store or by finding them as loot from defeating enemies in the world. The most powerful weapons, naturally, only drop from enemies at the end of the game with odds of less than 0.01% per kill. If you killed <a href="http://www.wolframalpha.com/input/?i=binomial+distribution%28100%2C1%2F256%29">such enemies 100 times</a>, for example, you would only have a 32% expected chance of seeing a rare drop among all the kills. And killing that many enemies could take hours. It depends on the almighty will of Golden Sun&rsquo;s Random Number Generator.</p>
-
-<p>As it turns out, the <a href="http://goldensun.wikia.com/wiki/Random_Number_Generator">Golden Sun RNG</a> is so poorly implemented that players have found out how to make events with 1/256 probability occur <em>one hundred percent</em> of the time.</p>
-
-<!-- more -->
-
-
-<h1>You Make Your Own Luck</h1>
-
-<p><a href="http://xkcd.com/221/"><img src="http://minimaxir.com/img/random_number.png" alt="" /></a></p>
-
-<p>Soon after the first Golden Sun was released, players discovered that the first random enemy encounter the player enters after turning the GBA on was always a First Strike, where the player&rsquo;s party gets a free turn. Was this a cute gameplay mechanic intended to give the player a quick advantage, or was it indicative of a flaw in the game&rsquo;s RNG?</p>
-
-<p>Most modern RNGs are partially seeded and randomized using a timer, i.e. the current time of the computer in microseconds. This makes it infeasable to reproduce the output of the RNG reliably.</p>
-
-<p>However, the GBA does not have an internal clock, so time-based methods of seeding aren&rsquo;t possible. By the time the sequel was released in 2003, the
-<a href="http://www.goldensunrealm.com/gs/nickpresta_rng-guide.txt">entire Golden Sun RNG</a> was reverse-engineered:</p>
-
-<blockquote><p>Golden Sun uses the ANSI-C standard rand function as its Pseudo-Random Number
-Generator.</p>
-
-<p>There is one difference: Golden Sun&rsquo;s RNG uses an unsigned 4-byte number and
-returns it with no shifting, so you&rsquo;d replace &ldquo;return ((next >>16) &amp; 32757);&rdquo;
-with &ldquo;return (next &amp; 4294967295);&rdquo;</p>
-
-<p>This, ordinarily, is a perfectly capable RNG, but there is one flaw with what
-Golden Sun does with it.</p>
-
-<p>It only makes a new random number when something random happens. What&rsquo;s more,
-it uses <em>two</em> copies of the RNG to create two random numbers, and the
-first RNG only handles battle situations.</p>
-
-<p>As such, it is easy to control when a new random number is generated.</p>
-
-<p>On top of this, the RNGs are seeded with 0 when the GBA is reset, and because
-of the way the game has been programmed, the RNG controlling battle events will
-<em>continue</em> to be 0 even when you load the game&hellip;</p></blockquote>
-
-<p>Golden Sun&rsquo;s Random Number Generator isn&rsquo;t &ldquo;random&rdquo; at all. It&rsquo;s manipulated <em>entirely</em> from player-controlled actions, from the moment the Game Boy Advance is turned on.</p>
-
-<h1>Get Lucky</h1>
-
-<p><img src="http://minimaxir.com/img/kiku.png"></p>
-
-<p>One of Golden Sun&rsquo;s contributions to the typical RPG character class customization is the <a href="http://goldensun.wikia.com/wiki/Djinn">Djinn system</a>. In the game lore, Djinn are impish creatures that grant enhanced powers to Adepts. There are four types of Djinn, one for each element, that can be found in the overworld, and each Djinni can be used to either increase a character&rsquo;s statistics, or Unleashed to provide a powerful spell effect. Also, as with many other RPGs, Golden Sun implements an elemental rock-paper-scissors combat system: enemies are weak to an element and resistant to another.</p>
-
-<p>A <a href="http://www.gamefaqs.com/">GameFAQs</a> forum user by the name of &ldquo;darkpanther&rdquo; discovered that using a Djinn Unleash with an element that is the enemy&rsquo;s weakness will not only increase the amount of Experience and Coins earned, but also <em>quadruple</em> the chance of the enemy dropping a rare item. (this fact is neither hinted anywhere in the game nor stated in any strategy guides)</p>
-
-<p>This is essential toward manipulating the RNG. Normally, the rarest items such as <a href="http://goldensun.wikia.com/wiki/Tisiphone_Edge">Tisiphone Edge</a> and <a href="http://goldensun.wikia.com/wiki/Lachesis%27_Rule">Lachesis&#8217; Rule</a> have an &ldquo;Item-Class Chance&rdquo; of 9, meaning the item has a 1/(2<sup>9-1</sup>) = 1/256 chance of dropping per enemy kill. The &ldquo;DP Method&rdquo; decreases the ICC by 2, meaning the new drop rate becomes 1/(2<sup>7-1</sup>) = 1/64. But:</p>
-
-<blockquote><p>As &lsquo;unpredictable&rsquo; as RNGs seem to be, if they are always seeded to the same
-value and do not use a timer-based response, they will become predictable by
-anyone who is good at noticing patterns. One pattern being, for example, that
-the 31st random number that is calculated &ndash; 33727075 &ndash; will drop <em>any</em> item if
-the enemy dying when this random number was called was just killed by an
-elemental Djinn attack that it is weak to.</p></blockquote>
-
-<p>Calculating the 31st random number would fail against an ICC9 item, but now works against an ICC7 item. (and all items of lower ICC too)</p>
-
-<p>Therefore, <strong>in order to guarantee that an item drops, kill the appropriate enemy with an element-advantage Djinni such that the 30th random number is generated</strong>. (the 31st random number is generated on the enemy&rsquo;s death)</p>
-
-<p>How do you ensure that you only create 31 random numbers? From the Golden Sun Wikia:</p>
-
-<blockquote><p>Save the game and do a hard reset in the area where the monster that drops the item you need appears. Run around to get in a battle. If the encounter consists of a formation of 2 monsters, with at least one of them being the monster you want, proceed. If not, do another hard reset and try again.</p>
-
-<p>During battle, have the entire party use multi-targetting Psynergy on the targets in the first turn, and since a battle right after a hard reset always involve your party attacking first where possible, the monsters will not be able to act. During the second turn, use two multi-targetting Psynergy on the enemies, and have the third party member (or fourth, if one of the three party members that act before uses Defend) unleash an attack Djinni of the element the monster is weak to on the monster. If by this point, the monster flashes in colour and dies, you will obtain the drop of that monster at the end of the battle, however rare it is. If the monster does not die then (either dies too soon or doesn&rsquo;t die by this step), adjust the power of your attacks until you get it just right.</p></blockquote>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/UCJzuSBQ1hU "></iframe></div>
-
-
-<p>Moral of story: if you&rsquo;re making a video game, seed your RNGs with an algorithm that players can&rsquo;t manipulate 100%. Otherwise, hilarity will inevitably ensue. I forgive Camelot for implementing a simplistic RNG though; the two games&#8217; <a href="http://www.youtube.com/watch?v=DaxYYwMqiso&amp;list=PL8C84ECF55B28DC74">awesome</a> <a href="http://www.youtube.com/watch?v=M31afGXIGpQ&amp;list=PL586792F46D5A35D4&amp;index=13">soundtrack </a> more than makes up for it.</p>
 ]]></content>
   </entry>
   

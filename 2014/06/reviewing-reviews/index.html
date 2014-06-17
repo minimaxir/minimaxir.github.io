@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A Statistical Analysis of 1.2 Million Amazon Reviews | minimaxir | Max Woolf's Blog</title>
+  <meta name="author" content="Max Woolf">
+
+  
+ 
+ 
+ 
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="A Statistical Analysis of 1.2 Million Amazon Reviews">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2014/06/reviewing-reviews/">
+
+
+  <meta name="twitter:description" content="Analyzing the dataset of 1.2 million Amazon reviews, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon's review system actually works.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/amazon/amzn-basic-time-count.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="A Statistical Analysis of 1.2 Million Amazon Reviews" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="Analyzing the dataset of 1.2 million Amazon reviews, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon's review system actually works." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2014/06/reviewing-reviews/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/amazon/amzn-basic-time-count.png" property="og:image">
+
+
+  
+  <meta content="Data" property="article:section">
+  
+
+
+  
+
+ 
+  
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  
+<!--
+  <meta name="description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
+   -->
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2014/06/reviewing-reviews/">
+  <link href="/favicon.png" rel="icon">
+  <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"> -->
+  
+  <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
+  
+  <link href="/stylesheets/uikit.css" rel="stylesheet">
+  <link href="/stylesheets/minimaxir-uikit.css" rel="stylesheet">
+  
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <!--<script src="/javascripts/octopress.js" type="text/javascript"></script>-->
+  
+ <script>
+ $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"ion-social-twitter\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  });
+  });
+  
+ 
+  
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"ion-social-linkedin\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  });
+  });
+  
+  
+  
+});
+</script>
+ 
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+
+  
+
+</head>
+
+<body   >
+
+
+
+  
+
+ <div class="hero top">
+  
+
+
+ <nav class="uk-navbar ">
+ <div class="uk-container uk-container-center">
+<div class="uk-grid">
+	<div class="uk-width-1-1">
+
+  	      <ul class="uk-navbar-nav">
+	
+      
+   		<li class="uk-parent"><a href="/">Home</a></li>
+   	       
+    
+      
+   		<li class="uk-parent"><a href="/about">About</a></li>
+   	       
+    
+      
+   		<li class="uk-parent"><a href="/contact">Contact</a></li>
+   	       
+    
+</ul>
+
+<div class="uk-navbar-flip uk-hidden-small">
+<ul class="uk-navbar-nav">
+
+<li class="social facebook-p">
+			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
+		</li>
+		
+</ul>
+</div>
+
+  </div>
+  </div>
+  </div>
+
+  </nav>
+
+
+<style type="text/css">
+.hero.top {
+background: -moz-linear-gradient(top, rgba(44,62,80,0.9) 0%, rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/amazon/amzn-basic-time-count.png); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(44,62,80,0.9)), color-stop(100%,rgba(44,62,80,0.9))), url(http://minimaxir.com/img/amazon/amzn-basic-time-count.png); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/amazon/amzn-basic-time-count.png); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/amazon/amzn-basic-time-count.png); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/amazon/amzn-basic-time-count.png); /* IE10+ */
+background: linear-gradient(to bottom, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/amazon/amzn-basic-time-count.png); /* W3C */
+
+background-size: 100% auto;
+padding-bottom: 40px;
+background-position: 0px -100px;
+}
+</style>
+
+ <div class="uk-container uk-container-center">
+ 
+ 
+
+	 <div class="uk-grid">
+    
+	
+	<div class="uk-width-1-1">
+ <h1 class="title">A Statistical Analysis of 1.2 Million Amazon Reviews</h1>
+	
+	
+  </div>
+  </div>
+  
+    <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/06/reviewing-reviews/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/06/reviewing-reviews/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=A Statistical Analysis of 1.2 Million Amazon Reviews - http://minimaxir.com/2014/06/reviewing-reviews/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/06/reviewing-reviews/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Statistical Analysis of 1.2 Million Amazon Reviews&url=http://minimaxir.com/2014/06/reviewing-reviews/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/06/reviewing-reviews/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+	
+	</div>
+  </div>
+
+  </div>
+
+
+
+
+</div>
+
+
+  
+  <div class="uk-container uk-container-center" id="main post">
+    
+      <div class="uk-grid" data-uk-grid-margin>
+	  <div class="uk-width-1-1">
+        <div id="content">
+          <article class="hentry" role="article">
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
+  
+
+  <header>
+    <h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-17T08:20:00-07:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time></h1>
+</header>
+
+  
+			
+			
+			
+			
+      <p>When buying the latest products on <a href="http://www.amazon.com/">Amazon</a>, reading reviews is an important part of the purchasing process.</p>
+
+<p><img src="/img/amazon/ore.png"></p>
+
+<p><img src="/img/amazon/amazon-review.png"></p>
+
+<p>Customer reviews from customers who have actually purchased and used the product in question can give you more context to the product itself. Each reviewer rates the product from 1 to 5 stars, and provides a text summary of their experiences and opinions about the product. The ratings for each product are averaged together in order to get an overall product rating.</p>
+
+<p>The number of reviews on Amazon has grown over the years.</p>
+
+<p><img src="/img/amazon/amzn-basic-time-count.png"></p>
+
+<p>But how do people write reviews? What types of ratings do reviewers give? How many of these reviews are considered helpful?</p>
+
+<p>Stanford researchers Julian McAuley and Jure Leskovec collected <a href="https://snap.stanford.edu/data/web-Amazon.html">all Amazon reviews </a>from the service&rsquo;s online debut in 1995 to 2013. Analyzing the dataset of 1.2 million Amazon reviews of products in the Electronics section, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon&rsquo;s review system actually works.</p>
+
+<h1>Describing the Data</h1>
+
+<p>First, let&rsquo;s see how the user ratings are distributed among the reviews.</p>
+
+<p><img src="/img/amazon/amzn-basic-score.png"></p>
+
+<p>More than half of the reviews give a 5-star rating. Aside from perfect reviews, most reviewers give 4-star or 1-star ratings, with <em>very</em> few giving 2-stars or 3-stars relatively.</p>
+
+<p>As as result, the statistical average for all review ratings is on the high-end of the scale at about <strong>3.90</strong>.  In fact, the average review rating for newly-written reviews has varied from 3.4 to 4.2 over time.</p>
+
+<p><img src="/img/amazon/amzn-basic-time-rating.png"></p>
+
+<p>Another metric used to measure reviews is review helpfulness. Other Amazon reviewers can rate a particular review as &ldquo;helpful&rdquo; or &ldquo;not helpful.&rdquo; A &ldquo;review helpfulness&rdquo; statistic can be calculated by taking the number of &ldquo;is-helpful&rdquo; indicators divided by the total number of is-helpful/is-not-helpful indicators (in the example at the beginning of the article, 639/665 people found the review helpful, so the helpfulness rating would be 96%). This gives an indication of review quality to a prospective buyer. Only 10% of the reviews had atleast 10 is-helpful/is-not-helpful data points, and of those reviews, the vast majority of the reviews had perfect helpfulness scores.</p>
+
+<p><img src="/img/amazon/amzn-basic-helpful.png"></p>
+
+<p>That would make sense; if you&rsquo;re writing a review (especially a 5 star review), you&rsquo;re writing with the intent to help other prospective buyers.</p>
+
+<p>Another consideration is review length. Do reviews frequently write essays, or do reviews typically write a single paragraph?</p>
+
+<p><img src="/img/amazon/amzn-basic-length.png"></p>
+
+<p>Most reviews are 100-150 characters, but the average amount of characters in a review is about <strong>582</strong> (there are some outlier reviews with 30,000+ characters!). Assuming that the average amount of characters in a paragraph <a href="http://wiki.answers.com/Q/How_many_characters_does_the_average_paragraph_have">is 352</a>, reviewers typically write about half a paragraph. Interestingly, reviews are rarely less than a sentence. (the <a href="http://www.amazon.com/gp/community-help/customer-reviews-guidelines">Review Guidelines</a> suggest a minimum of 20 words in a review, so this discrepancy could be attributed to moderator removal of short, one-liner reviews)</p>
+
+<h1>Particularizing the Products</h1>
+
+<p>The 1.2 million reviews in the Electronics data set address about 82,003 distinct products. However, most of those entries represent different SKUs of the same product (e.g. different colors of headphones). Of those products, only 30,577 products have pricing information which identify them as the source product.</p>
+
+<p><img src="/img/amazon/amzn-product-price.png"></p>
+
+<p>Over 2/3rds of Amazon Electronics are priced between $0 and $50, which makes sense as popular electronics such as television remotes and phone cases are not extremely expensive. However, there&rsquo;s no statistical correlation between the price of a product and the number of reviews it receives.</p>
+
+<p>For the overall rating of a particular product, which is the average rating of all reviews for that product, the ratings are no longer limited to discrete numbers between 1 and 5, and can take decimal values between those numbers as well. The distribution of product ratings is similar to the distribution of review ratings.</p>
+
+<p><img src="/img/amazon/amzn-product-rating.png"></p>
+
+<p>Again, the perfect rating of 5 is most popular for products. This distribution resembles the distribution of scores of all reviews for the discrete rating values, but this view reveals local maxima at the midpoint between each discrete value. (i.e. 3-and-a-half stars and 4-and-a-half stars are surprisingly common ratings)</p>
+
+<p>What happens when you plot product rating and product price together?</p>
+
+<p><img src="/img/amazon/amzn-product-score-price.png"></p>
+
+<p>The most expensive products have 4-star and 5-star overall ratings, but not 1-star and 2-star ratings. However, the correlation is very weak. (r = 0.04)</p>
+
+<p>In contrast, the relationship between product price and the average <em>length</em> of reviews for the product is surprising.</p>
+
+<p><img src="/img/amazon/amzn-product-price-length.png"></p>
+
+<p>This relationship is logarithmic with a relatively good correlation (r = 0.29), and it shows that reviewers put more time and effort into reviewing products which are worth more.</p>
+
+<h1>Reviewing the Reviewers</h1>
+
+<p>As you might expect, most people leave only 1 or 2 reviews on Amazon, but some have left <em>hundreds</em> of reviews. Out of 1.2 Million reviews, there are 510,434 distinct reviewers.</p>
+
+<p><img src="/img/amazon/amzn-reviewer-count.png"></p>
+
+<p>Over 80% of the reviewers of Amazon electronics left only 1 review. Analyzing reviewers who have left only 1 review is not helpful statistically, so for the rest of the analysis, only reviews who have made 5 or more reviews (which have received atleast 1 is-helpful/is-not-helpful indicator) will be considered. This makes it much easier to get the overall profile of a reviewer. 11,676 reviewers fit this criteria.</p>
+
+<p>Do repeat Amazon users tend to give 5-star reviews?</p>
+
+<p><img src="/img/amazon/amzn-reviewer-score.png"></p>
+
+<p>Distribution of review ratings when averaged across is similar to the other distributions of review ratings. However, this distribution is less skewed toward 5-stars and is more uniform between 4-stars and 5-stars.</p>
+
+<p>What about the average helpfulness of the reviews written by a single reviewer? If a reviewer has enjoyed Amazon enough such that they make 5 or more reviews, chances are that their reviews are high quality.</p>
+
+<p><img src="/img/amazon/amzn-reviewer-helpfulness.png"></p>
+
+<p>Again, the data is slightly skewed. 8% of the reviewers have perfect helpfulness scores on all their reviews, and the average helpfulness score for all repeat reviews is 80%. Interestingly, a few repeat reviewers have average helpfulness scores of 0.</p>
+
+<p>If you plot <em>both</em> average score and average helpfulness in a single chart, the picture becomes much more clear:</p>
+
+<p><img src="/img/amazon/amzn-reviewer-count-score.png"></p>
+
+<p>As the chart shows, there&rsquo;s a good positive correlation (r = 0.27) between rating and helpfulness, with a discernible cluster at the top. However, I don&rsquo;t think it&rsquo;s a causal relationship. Reviewers who give a product a 4 &ndash; 5 star rating are more passionate about the product and likely to write better reviews than someone who writes a 1 &ndash; 2 star &ldquo;this product sucks and you suck too!&rdquo; review.</p>
+
+<p>Another interesting bivariate relationship is the relationship between the helpfulness of a review and the length of a review). Stereotypically, you might think that longer reviews are more helpful reviews. And in the case of Amazon&rsquo;s Electronics reviews, you&rsquo;d be correct.</p>
+
+<p><img src="/img/amazon/amzn-reviewer-helpful-length.png"></p>
+
+<p>Again, there&rsquo;s a good positive correlation (r = 0.26) between average helpfulness and average length, which the trend line supports. (the dip at the end is caused by the high amount of low-character reviews). All the longer reviews have high helpfulness; there are very, very few unhelpful reviews that are also long.</p>
+
+<h1>Completing the Conclusion</h1>
+
+<p>The reviews on Amazon&rsquo;s Electronics products very frequently rate the product 4 or 5 stars, and such reviews are almost always considered helpful. 1-stars are used to signify disapproval, and 2-star and 3-stars reviews have no significant impact at all. If that&rsquo;s the case, then what&rsquo;s the point of having a 5 star ranking system at all if the vast majority of reviewers favor the product? Would Amazon benefit if they made review ratings a binary like/dislike?</p>
+
+<p>Having a 5-star system can allow the prospective customer to make more informed comparisons between two products: a customer may be more likely to buy a product that&rsquo;s rated 4.2 stars than a product that is rated 3.8 stars, which is a subtlety that can&rsquo;t easily be emulated with a like/dislike system. Likewise, if products are truly bad, the propensity toward 5-star reviews can help obfuscate the low quality of the product when a like/dislike system would make the low quality more apparent.</p>
+
+<p>Unfortunately, only Amazon has the data that would answer all these questions.</p>
+
+<p>Of course, there are many other secrets to be uncovered from Amazon reviews. The Stanford professors who collected the initial data used <a href="http://i.stanford.edu/~julian/pdfs/recsys13.pdf">machine learning techniques on the review text</a> to predict the rating given by a review from just the review text itself. Other potential topics for analysis are comparisons between <em>types</em> of Electronics (e.g. MP3 players, headphones) or using natural language processing to determine the common syntax in reviews.</p>
+
+<p><img src="/img/amazon/amzn-word-review-start.png"></p>
+
+<p>That&rsquo;s a topic for another blog post. :)</p>
+
+<hr />
+
+<ul>
+<li><em>Data analysis was performed using R, and all charts were made using ggplot2.</em></li>
+<li><em>You can download a ZIP file containing CSVs of the time series, the aggregate product data, and the anonymized aggregate reviewer data <a href="https://dl.dropboxusercontent.com/u/2017402/amazon_data.zip">here</a>.</em></li>
+<li><em>No, I have no relation to &ldquo;<a href="http://www.amazon.com/review/R1KHEP16MXXWCN/ref=cm_cr_rdp_perm?ie=UTF8&amp;ASIN=B000796XXM">M. Wolff</a>&rdquo;.</em></li>
+</ul>
+
+
+	  
+	  
+
+
+	  
+
+
+
+  
+  
+      <div class="uk-grid">
+  <div class="uk-width-1-1">
+
+
+		  <div class="uk-grid sharing">
+		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/06/reviewing-reviews/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/06/reviewing-reviews/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
+			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=A Statistical Analysis of 1.2 Million Amazon Reviews - http://minimaxir.com/2014/06/reviewing-reviews/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/06/reviewing-reviews/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+
+  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Statistical Analysis of 1.2 Million Amazon Reviews&url=http://minimaxir.com/2014/06/reviewing-reviews/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/06/reviewing-reviews/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+   
+			</div>
+	
+	</div>
+  </div>
+
+
+
+</div>
+
+<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+
+<div class="sidebar-author">
+
+<h2>About The Author</h2>
+<div>Max Woolf is a 2012 graduate from Carnegie Mellon University in Business Administration with a concentration in Computing and Information Technology, and has been working as a Software QA Engineer in the San Francisco Bay Area for 1.5 years. Max also comments on blogs rather frequently.</div>
+
+<div>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</div>
+
+</div>
+
+  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/06/reviewing-reviews/">  
+		   A Statistical Analysis of 1.2 Million Amazon Reviews</a></h2>
+		   <div>Analyzing the dataset of 1.2 million Amazon reviews, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon's review system actually works.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/04/san-francisco/">  
+		   Mapping San Francisco Locations Using Facebook Data</a></h2>
+		   <div>With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/03/hashtag-tag/">  
+		   Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?</a></h2>
+		   <div>Instagram photos which have the maximum of 30 #tags receive, on average, about three times as many Likes than photos with only a few tags.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/02/hacking-hacker-news/">  
+		   A Statistical Analysis of All Hacker News Submissions</a></h2>
+		   <div>After downloading all 1,265,114 Hacker News submissions from the official Hacker News API, I gathered a few interesting statistics which show the true impact of Hacker News.</div>
+		   </div>
+
+	  
+ 
+		   <div class="sidebar-post">
+		   <h2><a href="http://minimaxir.com/2014/02/glory-to-the-helix/">  
+		   Game Theory: How 70,000 Pokemon Players Sabotage Themselves</a></h2>
+		   <div>Twitch Plays Pokemon isn't about winning. It's about trying not to fail spectacularly. And they still fail regardless. It's an irresistible train wreck that's hard to stop watching.</div>
+		   </div>
+
+	 
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+<div class="uk-grid">
+    <div class="uk-width-large-2-3 uk-width-medium-1-1">
+	
+	
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+	
+	</div>
+	
+	
+	<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
+	
+	
+	  <footer>
+
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+	  <h2><i class="ion-arrow-left-c"></i> Previously...</h2>
+        <h2><a href="/2014/04/san-francisco/" title="Previous Post: Mapping San Francisco Locations Using Facebook Data">Mapping San Francisco Locations Using Facebook Data</a></h2>
+      
+	  
+	  
+	  
+      
+	  
+	  <hr>
+	  
+	  <h2><i class="ion-ios7-bookmarks-outline"></i> Categories:</h2>
+	      <p class="meta">
+
+      
+
+<span class="categories">
+  
+    
+          <span class="badge"><a href="/data">Data</a></span>
+     
+  
+</span>
+
+
+    </p>
+	  
+    </p>
+  </footer>
+	
+	
+	</div>
+	
+	</div>
+
+  
+ 
+  
+  
+
+
+  
+</article>
+
+
+
+
+
+
+        </div>
+      </div>
+	  </div>
+	</div>
+  
+  	    
+	  <div class="hero max">
+  
+
+ <style type="text/css">
+.hero.max {
+padding-top: 4px;
+margin-bottom: 0px;
+}
+</style>
+ 
+ <div class="uk-container uk-container-center">
+	 <div class="uk-grid" data-uk-grid-match>
+    
+	
+	<div class="uk-width-large-2-3 uk-width-medium-1-1">
+  <div>
+    <h1 class="name">Max Woolf</h1>
+	<div class="tagline alias">@minimaxir</div>
+	<div class="tagline">Software QA Engineer in San Francisco, CA</div>
+    <div class="tagline">Carnegie Mellon Class of 2012 Business IT Graduate</div>
+	 
+
+	 
+	 
+	 <div class="uk-grid sharing">
+	 <div class="uk-width-1-4">
+	 <span class="social facebook-p">
+			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="ion-social-facebook"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social twitter-p">
+			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="ion-social-twitter"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social linkedin-p">
+			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="ion-social-linkedin"></i> </a>
+		</span>
+	 </div>
+	 
+	 <div class="uk-width-1-4">
+	 <span class="social github-p">
+			<a href="http://github.com/minimaxir" target="_blank"> <i class="ion-social-github"></i> </a>
+		</span>
+	 </div>
+	 </div>
+	
+	
+  </div>
+  </div>
+  
+  <div class="uk-width-large-1-3 uk-width-medium-1-1 uk-hidden-small">
+
+
+	<a href="/about"><img src="/Max388.png"></a>
+	
+	</div>
+  
+  </div>
+</div>
+</div>
+
+  
+  <div class="footer-page">
+    <div class="uk-container uk-container-center footer">
+    
+      <div class="uk-grid">
+	  <div class="uk-width-1-1">
+  
+         <footer  role="contentinfo">
+          <p>
+  Copyright &copy; 2014 - Max Woolf -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and the <a href="http://www.getuikit.com/">UIkit Framework</a></span> - Theme designed by Max Woolf
+</p>
+<p><strong>All opinions stated by Max Woolf are his own.</strong></p>
+
+        </footer>
+  
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2014/06/reviewing-reviews/';
+        var disqus_url = 'http://minimaxir.com/2014/06/reviewing-reviews/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
+</body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-04-15T19:13:34-07:00</updated>
+  <updated>2014-06-17T08:20:25-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,134 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Statistical Analysis of 1.2 Million Amazon Reviews]]></title>
+    <link href="http://minimaxir.com/2014/06/reviewing-reviews/"/>
+    <updated>2014-06-17T08:20:00-07:00</updated>
+    <id>http://minimaxir.com/2014/06/reviewing-reviews</id>
+    <content type="html"><![CDATA[<p>When buying the latest products on <a href="http://www.amazon.com/">Amazon</a>, reading reviews is an important part of the purchasing process.</p>
+
+<p><img src="/img/amazon/ore.png"></p>
+
+<p><img src="/img/amazon/amazon-review.png"></p>
+
+<p>Customer reviews from customers who have actually purchased and used the product in question can give you more context to the product itself. Each reviewer rates the product from 1 to 5 stars, and provides a text summary of their experiences and opinions about the product. The ratings for each product are averaged together in order to get an overall product rating.</p>
+
+<p>The number of reviews on Amazon has grown over the years.</p>
+
+<p><img src="/img/amazon/amzn-basic-time-count.png"></p>
+
+<p>But how do people write reviews? What types of ratings do reviewers give? How many of these reviews are considered helpful?</p>
+
+<p>Stanford researchers Julian McAuley and Jure Leskovec collected <a href="https://snap.stanford.edu/data/web-Amazon.html">all Amazon reviews </a>from the service&rsquo;s online debut in 1995 to 2013. Analyzing the dataset of 1.2 million Amazon reviews of products in the Electronics section, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon&rsquo;s review system actually works.</p>
+
+<h1>Describing the Data</h1>
+
+<p>First, let&rsquo;s see how the user ratings are distributed among the reviews.</p>
+
+<p><img src="/img/amazon/amzn-basic-score.png"></p>
+
+<p>More than half of the reviews give a 5-star rating. Aside from perfect reviews, most reviewers give 4-star or 1-star ratings, with <em>very</em> few giving 2-stars or 3-stars relatively.</p>
+
+<p>As as result, the statistical average for all review ratings is on the high-end of the scale at about <strong>3.90</strong>.  In fact, the average review rating for newly-written reviews has varied from 3.4 to 4.2 over time.</p>
+
+<p><img src="/img/amazon/amzn-basic-time-rating.png"></p>
+
+<p>Another metric used to measure reviews is review helpfulness. Other Amazon reviewers can rate a particular review as &ldquo;helpful&rdquo; or &ldquo;not helpful.&rdquo; A &ldquo;review helpfulness&rdquo; statistic can be calculated by taking the number of &ldquo;is-helpful&rdquo; indicators divided by the total number of is-helpful/is-not-helpful indicators (in the example at the beginning of the article, 639/665 people found the review helpful, so the helpfulness rating would be 96%). This gives an indication of review quality to a prospective buyer. Only 10% of the reviews had atleast 10 is-helpful/is-not-helpful data points, and of those reviews, the vast majority of the reviews had perfect helpfulness scores.</p>
+
+<p><img src="/img/amazon/amzn-basic-helpful.png"></p>
+
+<p>That would make sense; if you&rsquo;re writing a review (especially a 5 star review), you&rsquo;re writing with the intent to help other prospective buyers.</p>
+
+<p>Another consideration is review length. Do reviews frequently write essays, or do reviews typically write a single paragraph?</p>
+
+<p><img src="/img/amazon/amzn-basic-length.png"></p>
+
+<p>Most reviews are 100-150 characters, but the average amount of characters in a review is about <strong>582</strong> (there are some outlier reviews with 30,000+ characters!). Assuming that the average amount of characters in a paragraph <a href="http://wiki.answers.com/Q/How_many_characters_does_the_average_paragraph_have">is 352</a>, reviewers typically write about half a paragraph. Interestingly, reviews are rarely less than a sentence. (the <a href="http://www.amazon.com/gp/community-help/customer-reviews-guidelines">Review Guidelines</a> suggest a minimum of 20 words in a review, so this discrepancy could be attributed to moderator removal of short, one-liner reviews)</p>
+
+<h1>Particularizing the Products</h1>
+
+<p>The 1.2 million reviews in the Electronics data set address about 82,003 distinct products. However, most of those entries represent different SKUs of the same product (e.g. different colors of headphones). Of those products, only 30,577 products have pricing information which identify them as the source product.</p>
+
+<p><img src="/img/amazon/amzn-product-price.png"></p>
+
+<p>Over 2/3rds of Amazon Electronics are priced between $0 and $50, which makes sense as popular electronics such as television remotes and phone cases are not extremely expensive. However, there&rsquo;s no statistical correlation between the price of a product and the number of reviews it receives.</p>
+
+<p>For the overall rating of a particular product, which is the average rating of all reviews for that product, the ratings are no longer limited to discrete numbers between 1 and 5, and can take decimal values between those numbers as well. The distribution of product ratings is similar to the distribution of review ratings.</p>
+
+<p><img src="/img/amazon/amzn-product-rating.png"></p>
+
+<p>Again, the perfect rating of 5 is most popular for products. This distribution resembles the distribution of scores of all reviews for the discrete rating values, but this view reveals local maxima at the midpoint between each discrete value. (i.e. 3-and-a-half stars and 4-and-a-half stars are surprisingly common ratings)</p>
+
+<p>What happens when you plot product rating and product price together?</p>
+
+<p><img src="/img/amazon/amzn-product-score-price.png"></p>
+
+<p>The most expensive products have 4-star and 5-star overall ratings, but not 1-star and 2-star ratings. However, the correlation is very weak. (r = 0.04)</p>
+
+<p>In contrast, the relationship between product price and the average <em>length</em> of reviews for the product is surprising.</p>
+
+<p><img src="/img/amazon/amzn-product-price-length.png"></p>
+
+<p>This relationship is logarithmic with a relatively good correlation (r = 0.29), and it shows that reviewers put more time and effort into reviewing products which are worth more.</p>
+
+<h1>Reviewing the Reviewers</h1>
+
+<p>As you might expect, most people leave only 1 or 2 reviews on Amazon, but some have left <em>hundreds</em> of reviews. Out of 1.2 Million reviews, there are 510,434 distinct reviewers.</p>
+
+<p><img src="/img/amazon/amzn-reviewer-count.png"></p>
+
+<p>Over 80% of the reviewers of Amazon electronics left only 1 review. Analyzing reviewers who have left only 1 review is not helpful statistically, so for the rest of the analysis, only reviews who have made 5 or more reviews (which have received atleast 1 is-helpful/is-not-helpful indicator) will be considered. This makes it much easier to get the overall profile of a reviewer. 11,676 reviewers fit this criteria.</p>
+
+<p>Do repeat Amazon users tend to give 5-star reviews?</p>
+
+<p><img src="/img/amazon/amzn-reviewer-score.png"></p>
+
+<p>Distribution of review ratings when averaged across is similar to the other distributions of review ratings. However, this distribution is less skewed toward 5-stars and is more uniform between 4-stars and 5-stars.</p>
+
+<p>What about the average helpfulness of the reviews written by a single reviewer? If a reviewer has enjoyed Amazon enough such that they make 5 or more reviews, chances are that their reviews are high quality.</p>
+
+<p><img src="/img/amazon/amzn-reviewer-helpfulness.png"></p>
+
+<p>Again, the data is slightly skewed. 8% of the reviewers have perfect helpfulness scores on all their reviews, and the average helpfulness score for all repeat reviews is 80%. Interestingly, a few repeat reviewers have average helpfulness scores of 0.</p>
+
+<p>If you plot <em>both</em> average score and average helpfulness in a single chart, the picture becomes much more clear:</p>
+
+<p><img src="/img/amazon/amzn-reviewer-count-score.png"></p>
+
+<p>As the chart shows, there&rsquo;s a good positive correlation (r = 0.27) between rating and helpfulness, with a discernible cluster at the top. However, I don&rsquo;t think it&rsquo;s a causal relationship. Reviewers who give a product a 4 &ndash; 5 star rating are more passionate about the product and likely to write better reviews than someone who writes a 1 &ndash; 2 star &ldquo;this product sucks and you suck too!&rdquo; review.</p>
+
+<p>Another interesting bivariate relationship is the relationship between the helpfulness of a review and the length of a review). Stereotypically, you might think that longer reviews are more helpful reviews. And in the case of Amazon&rsquo;s Electronics reviews, you&rsquo;d be correct.</p>
+
+<p><img src="/img/amazon/amzn-reviewer-helpful-length.png"></p>
+
+<p>Again, there&rsquo;s a good positive correlation (r = 0.26) between average helpfulness and average length, which the trend line supports. (the dip at the end is caused by the high amount of low-character reviews). All the longer reviews have high helpfulness; there are very, very few unhelpful reviews that are also long.</p>
+
+<h1>Completing the Conclusion</h1>
+
+<p>The reviews on Amazon&rsquo;s Electronics products very frequently rate the product 4 or 5 stars, and such reviews are almost always considered helpful. 1-stars are used to signify disapproval, and 2-star and 3-stars reviews have no significant impact at all. If that&rsquo;s the case, then what&rsquo;s the point of having a 5 star ranking system at all if the vast majority of reviewers favor the product? Would Amazon benefit if they made review ratings a binary like/dislike?</p>
+
+<p>Having a 5-star system can allow the prospective customer to make more informed comparisons between two products: a customer may be more likely to buy a product that&rsquo;s rated 4.2 stars than a product that is rated 3.8 stars, which is a subtlety that can&rsquo;t easily be emulated with a like/dislike system. Likewise, if products are truly bad, the propensity toward 5-star reviews can help obfuscate the low quality of the product when a like/dislike system would make the low quality more apparent.</p>
+
+<p>Unfortunately, only Amazon has the data that would answer all these questions.</p>
+
+<p>Of course, there are many other secrets to be uncovered from Amazon reviews. The Stanford professors who collected the initial data used <a href="http://i.stanford.edu/~julian/pdfs/recsys13.pdf">machine learning techniques on the review text</a> to predict the rating given by a review from just the review text itself. Other potential topics for analysis are comparisons between <em>types</em> of Electronics (e.g. MP3 players, headphones) or using natural language processing to determine the common syntax in reviews.</p>
+
+<p><img src="/img/amazon/amzn-word-review-start.png"></p>
+
+<p>That&rsquo;s a topic for another blog post. :)</p>
+
+<hr />
+
+<ul>
+<li><em>Data analysis was performed using R, and all charts were made using ggplot2.</em></li>
+<li><em>You can download a ZIP file containing CSVs of the time series, the aggregate product data, and the anonymized aggregate reviewer data <a href="https://dl.dropboxusercontent.com/u/2017402/amazon_data.zip">here</a>.</em></li>
+<li><em>No, I have no relation to &ldquo;<a href="http://www.amazon.com/review/R1KHEP16MXXWCN/ref=cm_cr_rdp_perm?ie=UTF8&amp;ASIN=B000796XXM">M. Wolff</a>&rdquo;.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mapping San Francisco Locations Using Facebook Data]]></title>
@@ -313,78 +441,6 @@
 <hr />
 
 <p><em>The actual reason that this is happening is because Instagram rewards #tagspamming. More on that in a future blog post.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Thoughtful Analysis of the Most Poorly-Designed Chart Ever]]></title>
-    <link href="http://minimaxir.com/2014/01/more-language-more-problems/"/>
-    <updated>2014-01-20T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2014/01/more-language-more-problems</id>
-    <content type="html"><![CDATA[<p>Last week, I was surfing Reddit and came across an <a href="http://www.reddit.com/r/ProgrammerHumor/comments/1ur3ny/unnecessary_graph_of_most_desired_skills_in_2013/">interesting infographic</a> within the <a href="http://www.reddit.com/r/ProgrammerHumor/">ProgrammerHumor subreddit</a>. The infographic, as compiled by tech blog <a href="http://readwrite.com/">ReadWrite</a>, depicts the Top 10 Most In-Demand Developer Skills of 2013, as compiled by <a href="http://stackoverflow.com/">Stack Overflow</a> through keyword searches.</p>
-
-<!-- more -->
-
-
-<p><img src="/img/infographic-1.jpg"></p>
-
-<p>Take a look at the chart. What’s good and bad about it?</p>
-
-<h1>The Good</h1>
-
-<p>The data is properly cited.</p>
-
-<h1>The Bad</h1>
-
-<p><strong>EVERYTHING ELSE.</strong></p>
-
-<p>What’s terrible about the graph? Let me count the ways:</p>
-
-<ul>
-<li><p>Using discrete values in the X-Axis for a continuous measurement (i.e. the percentage). And not only that, discrete values with two significant figures, which make the X-Axis unusually cluttered.</p></li>
-<li><p>The Y-Axis is Language. This implies that some programming languages are more language than others.  (<a href="https://www.facebook.com/photo.php?fbid=10152166149970450&amp;set=a.432190050449.225968.582270449&amp;type=1&amp;stream_ref=10">to be fair</a>, Java is more language than Android)</p></li>
-<li><p>Not all entries on the chart are programming languages. (Android, for example, is an operating system.)</p></li>
-<li><p>The 45-degree line in the chart implies that the relationship between language and %-of-searches is perfectly linear, where in reality the data has an upward-parabolic shape.</p></li>
-<li><p>No relative proportions between the programming languages. We can&rsquo;t accurately see the increase in language Java has relative to Android just by looking at the graph.</p></li>
-<li><p>Cannot easily associate a language with the given X-Axis value. The logos representing the programming language oscillate around the line, and it&rsquo;s hard to see at a glance which percentage corresponds to which language.</p></li>
-</ul>
-
-
-<h1>Fixing the Chart</h1>
-
-<p>This isn’t one of those blog posts that make snarky criticism without offering any constructive input. (those will be posted next week). How can we make the chart somewhat logical?</p>
-
-<p>The easiest way to improve the chart is to convert the chart from a line chart to a column chart. Here’s a column chart that keeps the intended impression of the original chart:</p>
-
-<p><img src="/img/dev-graph-1.png"></p>
-
-<p>A much bigger improvement, although unfortunately without the cool hand-drawn logos. The axes are no longer illogical and it’s easy to determine the relative impact of each language (e.g. Java is clearly, clearly at the top). However, the large amount of text can clutter the bars, and it can be difficult to correlate the raw percentage with the scale at a glance.</p>
-
-<p>Another option is to rotate the chart and use bars instead of columns:</p>
-
-<p><img src="/img/dev-graph-2.png"></p>
-
-<p>This fixes the text issue by giving more room for text with most of the factors, but the Java text clips outside the chart. The correlation issue between language and percent value persists.</p>
-
-<p>A best-of-both-worlds approach is to display the language on the Y-Axis and the raw percent value on the corresponding bar itself, allowing us to forgo the percent metric axis entirely.</p>
-
-<p><img src="/img/dev-graph-3.png"></p>
-
-<p>There we go. Minimalist, fixes both the text and correlation issues, and gets the point across effectively.</p>
-
-<p>All of these charts were created using R and ggplot2, and you can download the R code in <a href="https://github.com/minimaxir/developer-graphs">this GitHub repository</a>. I wish the <a href="http://readwrite.com/2014/01/08/in-demand-tech-skills-of-2013-java">orginal ReadWrite article</a> used a chart like the last one and…</p>
-
-<p>Wait, they changed the infographic?</p>
-
-<p><img src="/img/infographic-2.jpg"></p>
-
-<p>Hey, they fixed the chart, and it’s using a similar design as mine! What a crazy random happenstance!</p>
-
-<p>The article was appended with an update:</p>
-
-<blockquote><p>An earlier version of the infographic in this story presented the StackOverflow data in a confusing and conceptually problematic fashion. It has been updated.</p></blockquote>
-
-<p>&ldquo;Problematic&rdquo; is the world&rsquo;s biggest understatement.</p>
 ]]></content>
   </entry>
   
