@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-06-17T08:20:25-07:00</updated>
+  <updated>2014-07-04T10:32:36-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Interesting Percentages of Female Students in MIT and Harvard Online Courses]]></title>
+    <link href="http://minimaxir.com/2014/07/gender-course/"/>
+    <updated>2014-07-04T10:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/07/gender-course</id>
+    <content type="html"><![CDATA[<p>At the end of May, <a href="http://www.harvard.edu/">Harvard</a> and <a href="http://web.mit.edu/">MIT</a> jointly <a href="http://newsoffice.mit.edu/2014/mit-and-harvard-release-de-identified-learning-data-open-online-courses">released a dataset</a> containing statistics about their online courses in the Academic Year of 2013. This <a href="http://dx.doi.org/10.7910/DVN/26147">Person-Course De-Identified dataset</a> contains 476,532 students who have taken up to 13 unique courses from a variety of topics:</p>
+
+<p><img src="http://minimaxir.com/img/gender-course/mit-harvard-courses.png"></p>
+
+<p>About half of the courses involve subjects in the humanities, while the other half involve computer science and electrical engineering.</p>
+
+<p>One of the statistics I wanted to analyze was the gender ratio of students of online courses. In the data set, 425,105 students have a gender on record, with 311,534 male students (73.3%) and 113,571 female students (26.7%). This population proportion of female students is surprisingly low, especially since the male/female ratio is <a href="http://colleges.findthebest.com/q/1929/1270/What-is-the-male-to-female-ratio-at-Harvard-University">about 50:50</a> at MIT and Harvard themselves.</p>
+
+<p>Therefore, I took a looked at the gender distribution of each of the 13 unique courses. Is the gender ratio similar across all classes, or is there a huge difference between classes?</p>
+
+<p><img src="http://minimaxir.com/img/gender-course/course-female.png"></p>
+
+<p>Yeah, there&rsquo;s a huge difference.</p>
+
+<p>The proportion of female students in each of Harvard and MIT&rsquo;s online courses range from <strong>5% to 49%</strong>.</p>
+
+<p>The top half of the gender ratios are all well above the 26.7%  threshold. All six of these courses are in the humanities or in the life sciences. The bottom half of the gender ratio are all well below the 26.7% threshold. All seven are these courses are engineering or computer science courses with a strong focus on mathematics. (for clarification, the <a href="https://www.edx.org/course/mitx/mitx-2-01x-elements-structures-1759#.U7ZfKvldV8F">Elements of Structures</a> course at MIT is a physics course with linear algebra programming)</p>
+
+<p>Is there a correlation? As it turns out, the reason that the average proportion of female students is so low is that both Harvard&rsquo;s Introduction to Computer Science I  (where 169,621 students took the class; about 40% of all students) and MIT&rsquo;s Introduction to CS/Programming (124,446 students total across both semesters) are so popular that the low percentage of women in those particular classes is drastically affecting the average.</p>
+
+<p>The presence and interest of <a href="http://www.whitehouse.gov/administration/eop/ostp/women">women in STEM fields</a> (science, technology, engineering, and mathematics) has been a topic of <a href="http://www.huffingtonpost.com/stella-kasdagli/should-women-avoid-jobs-in-stem_b_5549016.html">controversy</a> for a very long time. However, the chart shows that indeed the percentage of women interested in STEM classes is measurably lower than other fields, and hopefully awareness of this issue will help cause changes in the future.</p>
+
+<hr />
+
+<ul>
+<li><em>Data was processed using R and the chart was made using ggplot2. (w/ a few annotations added using a photo editor)</em></li>
+<li><em>You can view code necessary to reproduce these results in <a href="https://github.com/minimaxir/gender-course">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of 1.2 Million Amazon Reviews]]></title>
@@ -1367,60 +1404,6 @@ California      -187.57         0
 <p>Although the issue was not widespread, Bungie decided to do a recall of all Myth II CDs and redistribute a version 1.1, eliminating most of the game&rsquo;s profits in the process.</p>
 
 <p>You could say that the Myth II version 1.0 uninstaller worked exactly as intended: it did indeed uninstall the game. It just worked <em>too</em> well.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How MMO Players Proved that the Developers Bugged an Item Drop Rate]]></title>
-    <link href="http://minimaxir.com/2013/05/deep-breaths-more/"/>
-    <updated>2013-05-30T23:23:00-07:00</updated>
-    <id>http://minimaxir.com/2013/05/deep-breaths-more</id>
-    <content type="html"><![CDATA[<p><img class="pull-right" src="http://minimaxir.com/img/globecto.png"></p>
-
-<p><a href="https://www.guildwars2.com/en/">Guild Wars 2</a> is an incredible massively-multiplayer online role-playing game. The goal of Guild Wars 2, developed by ArenaNet, is to save the world, complete quests, and get awesome loot; objectives similar to that of many other MMORPGs such as <a href="http://us.battle.net/wow/en/">World of Warcraft</a>. However, Guild Wars 2 differentiates itself from its spiritual predecessors with its dynamically-changing world, incredible graphics, and the elimination of annoying and tedious time-wasters that have plagued the MMORPG genre.</p>
-
-<p>The best items in Guild Wars 2, naturally, require a large amount of effort and money to obtain. In order to create Legendary weapons, players must obtain large amounts of an item known as Globs of Ectoplasm. Globs of Ectoplasm (abbreviated as &ldquo;Ecto&rdquo;) are obtained randomly when a player salvages a Rare item using a Salvage Kit. Due to their high demand, Ecto effectively serve as a second currency in Guild Wars 2.</p>
-
-<p>Using the best Salvage Kit (that doesn&rsquo;t require paying real-world money), players received, on average, 0.9 Ecto per Rare Item Salvage, a value that has been well-documented and well-tested. But after a patch released a couple days ago, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">players on the Official Guild Wars 2 forums</a> and <a href="http://www.reddit.com/r/Guildwars2/comments/1fc540/ecto_salvage_rate_bug_being_looked_into_keep_your/">Reddit</a> began to notice that the drop rate for Ecto was <em>much</em> lower, with no mention in the patch notes.</p>
-
-<p>How do you <em>prove</em> something that occurs at random now occurs less frequently?</p>
-
-<!-- more -->
-
-
-<h1>What is &ldquo;Random&rdquo;?</h1>
-
-<p>The first rule of any official MMO forum: never accuse the developers of making implicit changes to the game unless you have proof. Such tactics are commonly employed by forum trolls and it makes building a community more difficult.</p>
-
-<p>The second rule of any official MMO forum: never accuse the developers of manipulating probability. As with normal gambling, players can hit a streak of bad luck with loot drops, enemy critical attacks, etc. But the anecdotal data from one player is not sufficient proof of any probability change. (an <a href="http://www.wowwiki.com/Why_does_Onyxia_cast_Deep_Breath%3F">old meme</a> from the World of Warcraft era mocked the userbase&rsquo;s inability to comprehend the definition of random)</p>
-
-<p>On May 28th, a player <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">noted on the official GW2 forums</a> that out of 166 salvages, he only received about 80 Ecto, or about 0.5 Ecto/Salvage. This is approximately <em>half</em> of the original rate of 0.9 Ecto/Salvage. Since the rate of new Ecto entering the market was halved with no change in demand, the Auction House <a href="http://www.gw2spidy.com/item/19721">price for Ecto</a> began to steadily rise.</p>
-
-<p><img src="http://minimaxir.com/img/gw2ecto.png"></p>
-
-<p>The price increase in the short-term was not <a href="http://minimaxir.com/2013/05/stones-of-jordan/">economy-breaking</a>, but when you need 250 Ectos to create a Legendary weapon in the long-term, it can add up very quickly.</p>
-
-<p>Other players provided their experiences in the thread, with limited results such as &ldquo;noticed this too, yesterday i salvaged 9 rares, got 4 ectos&rdquo; and &ldquo;20 rare at the end of my day, i save them before go bed: 0 ecto. wtf?&rdquo;. Such sample sizes are much too low to satisfy the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">Law of Large Numbers</a> and draw any remotely accurate conclusions.</p>
-
-<p>Regina Buenaobra, ArenaNet Community Manager, eventually <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2115818">responded</a>:</p>
-
-<blockquote><p>Changes to important things like salvage rates would be listed in the update notes if they have changed. If it’s not in the update notes, then no changes have been made by the development team.</p></blockquote>
-
-<p>So Word of God implies that everyone is wrong. Issue over?</p>
-
-<p>Of course not!</p>
-
-<h1>No Such Thing As Too Much Data</h1>
-
-<p>Despite Regina&rsquo;s dismissal, players continued to post in the thread and began quoting even larger sample sizes, such as a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2114853">salvaging 500 Rares</a> resulting in 286 Ectos (0.57 Ecto/Salvage) and <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2116461">salvaging 775 Rares</a> resulting in 402 Ecto (0.52 Ecto/Salvage). With those sample sizes, the probability that the true salvage rate is unchanged from 0.9 Ecto/Salvage is essentially zero.</p>
-
-<p>John Smith, ArenaNet&rsquo;s resident economist, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/4#post2116752">replied</a> that he&rsquo;ll &ldquo;look into this and get back to you.&rdquo; A day later, John made a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2122262">promise</a> that &ldquo;if we change anything involving ectos, there will be public information on it.&rdquo; Sure enough, on May 30th, a new patch was released with only <a href="https://forum-en.guildwars2.com/forum/info/news/Game-Update-Notes-May-28-2013/2124609">one patch note</a>:</p>
-
-<blockquote><p>Fixed a salvaging bug introduced in the last patch that sometimes caused salvage kits to yield incorrect results.</p></blockquote>
-
-<p>And that was that, the price of Ecto almost immediately dropped. All was well.</p>
-
-<p>John left one final <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2124684">message</a>: &ldquo;Thanks to everyone for your help identifying the issue and providing great data for me to start with in my research.&rdquo;</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-06-17T08:20:25-07:00</updated>
+  <updated>2014-07-04T10:32:36-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Interesting Percentages of Female Students in MIT and Harvard Online Courses]]></title>
+    <link href="http://minimaxir.com/2014/07/gender-course/"/>
+    <updated>2014-07-04T10:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/07/gender-course</id>
+    <content type="html"><![CDATA[<p>At the end of May, <a href="http://www.harvard.edu/">Harvard</a> and <a href="http://web.mit.edu/">MIT</a> jointly <a href="http://newsoffice.mit.edu/2014/mit-and-harvard-release-de-identified-learning-data-open-online-courses">released a dataset</a> containing statistics about their online courses in the Academic Year of 2013. This <a href="http://dx.doi.org/10.7910/DVN/26147">Person-Course De-Identified dataset</a> contains 476,532 students who have taken up to 13 unique courses from a variety of topics:</p>
+
+<p><img src="/img/gender-course/mit-harvard-courses.png"></p>
+
+<p>About half of the courses involve subjects in the humanities, while the other half involve computer science and electrical engineering.</p>
+
+<p>One of the statistics I wanted to analyze was the gender ratio of students of online courses. In the data set, 425,105 students have a gender on record, with 311,534 male students (73.3%) and 113,571 female students (26.7%). This population proportion of female students is surprisingly low, especially since the male/female ratio is <a href="http://colleges.findthebest.com/q/1929/1270/What-is-the-male-to-female-ratio-at-Harvard-University">about 50:50</a> at MIT and Harvard themselves.</p>
+
+<p>Therefore, I took a looked at the gender distribution of each of the 13 unique courses. Is the gender ratio similar across all classes, or is there a huge difference between classes?</p>
+
+<p><img src="/img/gender-course/course-female.png"></p>
+
+<p>Yeah, there&rsquo;s a huge difference.</p>
+
+<p>The proportion of female students in each of Harvard and MIT&rsquo;s online courses range from <strong>5% to 49%</strong>.</p>
+
+<p>The top half of the gender ratios are all well above the 26.7%  threshold. All six of these courses are in the humanities or in the life sciences. The bottom half of the gender ratio are all well below the 26.7% threshold. All seven are these courses are engineering or computer science courses with a strong focus on mathematics. (for clarification, the <a href="https://www.edx.org/course/mitx/mitx-2-01x-elements-structures-1759#.U7ZfKvldV8F">Elements of Structures</a> course at MIT is a physics course with linear algebra programming)</p>
+
+<p>Is there a correlation? As it turns out, the reason that the average proportion of female students is so low is that both Harvard&rsquo;s Introduction to Computer Science I  (where 169,621 students took the class; about 40% of all students) and MIT&rsquo;s Introduction to CS/Programming (124,446 students total across both semesters) are so popular that the low percentage of women in those particular classes is drastically affecting the average.</p>
+
+<p>The presence and interest of <a href="http://www.whitehouse.gov/administration/eop/ostp/women">women in STEM fields</a> (science, technology, engineering, and mathematics) has been a topic of <a href="http://www.huffingtonpost.com/stella-kasdagli/should-women-avoid-jobs-in-stem_b_5549016.html">controversy</a> for a very long time. However, the chart shows that indeed the percentage of women interested in STEM classes is measurably lower than other fields, and hopefully awareness of this issue will help cause changes in the future.</p>
+
+<hr />
+
+<ul>
+<li><em>Data was processed using R and the chart was made using ggplot2. (w/ a few annotations added using a photo editor)</em></li>
+<li><em>You can view code necessary to reproduce these results in <a href="https://github.com/minimaxir/gender-course">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of 1.2 Million Amazon Reviews]]></title>
@@ -416,31 +453,6 @@
 <p><em>Code for getting all the HN submissions is <a href="https://github.com/minimaxir/hacker-news-download-all-stories">available on GitHub</a>. Unfortunately, the Hacker News data is too large to distribute freely. <a href="http://minimaxir.com/contact/">Contact me</a> if you want the raw data or any data to reproduce the charts.</em></p>
 
 <p><em>Note: there appear to be <a href="https://docs.google.com/spreadsheets/d/1Zdex42KE-8DFIHujhVWjJ3yqilJSws2EbT8VAARPYgE/edit?usp=sharing">some gaps in the data</a> for dates before 2010. This appears to be caused by the API server: for example, compare the <a href="https://news.ycombinator.com/submitted?id=liebke">number of submissions as reported by HN for top user liebke</a> (21) and the <a href="https://hn.algolia.com/api/v1/search_by_date?tags=story,author_liebke">number of submissions as reported by the API</a> for liebke (14, with the last 7 submitted stories missing relative to the HN output). Also, number of stories (1,265,114) in the output data and the <a href="https://hn.algolia.com/">server data</a> (~1,267,000 as of publishing) are very close, making the discrepancy unlikely caused by client error. As a result, any chart that is based on a time series does not start earlier than 2010.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How Many #nofilter Instagram Photos Actually Have No Filter?]]></title>
-    <link href="http://minimaxir.com/2014/02/the-filter-truth/"/>
-    <updated>2014-02-10T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2014/02/the-filter-truth</id>
-    <content type="html"><![CDATA[<p>Most <a href="http://instagram.com/">Instagram</a> photos have filters applied to make them look more retro/cool. Instagram users are also able to apply tags to a photo to help categorize and promote them to the Instagram community. One such tag, #nofilter, is intended to emphasize such natural beauty that no filter is necessary to enhance the image. (or the photographer is just too lazy to decide on a filter)</p>
-
-<p>But how many #nofilter images actually <em>have</em> no filter?</p>
-
-<p><img src="/img/instagram_selfie.gif"></p>
-
-<p>As it turns not, not all of them.</p>
-
-<p>After retrieving about 50,000 images through the Instagram API (code <a href="https://github.com/minimaxir/get-data-from-photos-from-instagram-tags">available on GitHub</a>), here is the breakdown of filters on #nofilter-tagged Instagram images:</p>
-
-<p><img src="/img/nofilter.png"></p>
-
-<p>Only 83% of #nofilter images have no filter?! You had one job, Instagram! :(</p>
-
-<hr />
-
-<p><em>The actual reason that this is happening is because Instagram rewards #tagspamming. More on that in a future blog post.</em></p>
 ]]></content>
   </entry>
   

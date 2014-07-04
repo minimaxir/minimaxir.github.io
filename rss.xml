@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-06-17T08:20:25-07:00</updated>
+  <updated>2014-07-04T10:32:36-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Interesting Percentages of Female Students in MIT and Harvard Online Courses]]></title>
+    <link href="http://minimaxir.com/2014/07/gender-course/"/>
+    <updated>2014-07-04T10:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/07/gender-course</id>
+    <content type="html"><![CDATA[<p>At the end of May, <a href="http://www.harvard.edu/">Harvard</a> and <a href="http://web.mit.edu/">MIT</a> jointly <a href="http://newsoffice.mit.edu/2014/mit-and-harvard-release-de-identified-learning-data-open-online-courses">released a dataset</a> containing statistics about their online courses in the Academic Year of 2013. This <a href="http://dx.doi.org/10.7910/DVN/26147">Person-Course De-Identified dataset</a> contains 476,532 students who have taken up to 13 unique courses from a variety of topics:</p>
+
+<p><img src="http://minimaxir.com/img/gender-course/mit-harvard-courses.png"></p>
+
+<p>About half of the courses involve subjects in the humanities, while the other half involve computer science and electrical engineering.</p>
+
+<p>One of the statistics I wanted to analyze was the gender ratio of students of online courses. In the data set, 425,105 students have a gender on record, with 311,534 male students (73.3%) and 113,571 female students (26.7%). This population proportion of female students is surprisingly low, especially since the male/female ratio is <a href="http://colleges.findthebest.com/q/1929/1270/What-is-the-male-to-female-ratio-at-Harvard-University">about 50:50</a> at MIT and Harvard themselves.</p>
+
+<p>Therefore, I took a looked at the gender distribution of each of the 13 unique courses. Is the gender ratio similar across all classes, or is there a huge difference between classes?</p>
+
+<p><img src="http://minimaxir.com/img/gender-course/course-female.png"></p>
+
+<p>Yeah, there&rsquo;s a huge difference.</p>
+
+<p>The proportion of female students in each of Harvard and MIT&rsquo;s online courses range from <strong>5% to 49%</strong>.</p>
+
+<p>The top half of the gender ratios are all well above the 26.7%  threshold. All six of these courses are in the humanities or in the life sciences. The bottom half of the gender ratio are all well below the 26.7% threshold. All seven are these courses are engineering or computer science courses with a strong focus on mathematics. (for clarification, the <a href="https://www.edx.org/course/mitx/mitx-2-01x-elements-structures-1759#.U7ZfKvldV8F">Elements of Structures</a> course at MIT is a physics course with linear algebra programming)</p>
+
+<p>Is there a correlation? As it turns out, the reason that the average proportion of female students is so low is that both Harvard&rsquo;s Introduction to Computer Science I  (where 169,621 students took the class; about 40% of all students) and MIT&rsquo;s Introduction to CS/Programming (124,446 students total across both semesters) are so popular that the low percentage of women in those particular classes is drastically affecting the average.</p>
+
+<p>The presence and interest of <a href="http://www.whitehouse.gov/administration/eop/ostp/women">women in STEM fields</a> (science, technology, engineering, and mathematics) has been a topic of <a href="http://www.huffingtonpost.com/stella-kasdagli/should-women-avoid-jobs-in-stem_b_5549016.html">controversy</a> for a very long time. However, the chart shows that indeed the percentage of women interested in STEM classes is measurably lower than other fields, and hopefully awareness of this issue will help cause changes in the future.</p>
+
+<hr />
+
+<ul>
+<li><em>Data was processed using R and the chart was made using ggplot2. (w/ a few annotations added using a photo editor)</em></li>
+<li><em>You can view code necessary to reproduce these results in <a href="https://github.com/minimaxir/gender-course">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of 1.2 Million Amazon Reviews]]></title>
@@ -761,44 +798,6 @@ Location: http://imgur.com/p9lG2ss</code></p>
 <p>I don&rsquo;t need to see strangers with &ldquo;1 mutual friend&rdquo; wish my friends Happy Birthday. It&rsquo;s just extra clutter on an already cluttered News Feed.</p>
 
 <p>To be fair, other websites such as <a href="https://twitter.com/">Twitter</a> and <a href="http://www.linkedin.com/">LinkedIn</a> push second-degree friends. Twitter&rsquo;s new <a href="https://twitter.com/i/discover">Discover</a> feature highlights users who the people you Follow are themselves Following. LinkedIn shows your connections&#8217; new connections so you can form connections with them too. But the difference between Twitter/LinkedIn and Facebook/Jelly is that both Facebook and Jelly push the power of <strong>intimate</strong> friendships, and imposing a sense of intimacy between strangers feels fake and intrudes on actual friendships.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Probabilistically Generating GitHub Projects]]></title>
-    <link href="http://minimaxir.com/2013/11/innovation-rng/"/>
-    <updated>2013-11-29T10:30:00-08:00</updated>
-    <id>http://minimaxir.com/2013/11/innovation-rng</id>
-    <content type="html"><![CDATA[<p>Grant Slatton made an amusing post on Hacker News yesterday titled &ldquo;<a href="https://news.ycombinator.com/item?id=6815282">Show HN: Probabilistically Generating HN Post Titles</a>&rdquo;. By using the statistical principle of <a href="http://en.wikipedia.org/wiki/Markov_chain">Markov chains</a>, Slatton was able to <a href="http://grantslatton.com/hngen/">generate eerily-realistic Hacker News headlines</a> such as &ldquo;Facebook detects if you are not a pilot&rdquo; and &ldquo;The No. 1 Habit of Highly Effective Mediocre Entrepreneurs.&rdquo;</p>
-
-<p>Could Markov chains be applied to any other data sets for hilarious effect? By using Slatton&rsquo;s <a href="https://gist.github.com/grantslatton/7694811">Python implementation of Markov chains</a> plus 300,000 descriptions of public GitHub repositories retrieved from their API, I discovered that statistical randomness can indeed create funny innovation.</p>
-
-<p><img src="http://minimaxir.com/img/github-wordcloud-mac.png"></p>
-
-<p>You can download a list of 1,000 Markov chain-generated projects <a href="https://dl.dropboxusercontent.com/u/2017402/github_markov.txt">here</a>. Here are a few interesting ones:</p>
-
-<ul>
-<li>MaNGOS is a free, Open Source implementation of a tag at relatively random intervals.</li>
-<li>A Warhammer 40k simulator to teach myself both OpenGL and Clojure</li>
-<li>Perl interface to Git repositories via Ruby.</li>
-<li>A windows live messenger network client written in Erlang</li>
-<li>Rails plugin which allows to talk anonymously and use tripcodes if you want.</li>
-<li>A Firebug extension for displaying the latest from Hacker News</li>
-<li>Sinatra-inspired JavaScript node.js web development framework for lua. Inspired by rspec</li>
-<li>Inverted Index on top of Tornado</li>
-<li>Android LED interface library for various wave propagation techniques.</li>
-<li>CatchAPI is a Java API to remove the need for boring project setup.</li>
-<li>Adds basic social networking capabilities to your lighting system based on the concept of the Working with Rails</li>
-<li>Brute force your OpenERP data integration with flatfiles</li>
-<li>Culerity integrates Cucumber and Celerity in order to shutdown the computer.</li>
-<li>Parses ANSI color codes and converts them to iphone compatible mp4s using HandBrake</li>
-<li>A simple OFX (Open Financial Exchange) parser built on top of WordPress. Rolopress core theme</li>
-</ul>
-
-
-<hr />
-
-<p><em>The code used to get the project descriptions from the GitHub API is available in <a href="https://github.com/minimaxir/get-github-repo-descriptions">this GitHub repository</a>, and you can download the ~300k repo descriptions <a href="https://dl.dropboxusercontent.com/u/2017402/github_repo_desc.zip">here</a>. [5MB .zip]</em></p>
 ]]></content>
   </entry>
   
