@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-07-04T10:32:36-07:00</updated>
+  <updated>2014-07-10T08:22:42-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,153 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Who Performs the Best in Online Classes?]]></title>
+    <link href="http://minimaxir.com/2014/07/online-class-charts/"/>
+    <updated>2014-07-10T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/07/online-class-charts</id>
+    <content type="html"><![CDATA[<p>At the end of May, <a href="http://www.harvard.edu/">Harvard</a> and <a href="http://web.mit.edu/">MIT</a> jointly <a href="http://newsoffice.mit.edu/2014/mit-and-harvard-release-de-identified-learning-data-open-online-courses">released a dataset</a> containing statistics about their online courses in the Academic Year of 2013. This <a href="http://dx.doi.org/10.7910/DVN/26147">Person-Course De-Identified dataset</a> contains 641,138 events, chronicling 476,532 students who have taken up to 13 unique courses from a variety of topics:</p>
+
+<p><img src="http://minimaxir.com/img/gender-course/mit-harvard-courses.png"></p>
+
+<p>However, this assortment of courses is not a substitution for a typical college education, as the vast majority of students only take one class.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/student-courses.png"></p>
+
+<p>Very, very few students take more than one class (22% of all students).</p>
+
+<p>Other interesting variables included with the data set are the level-of-education of the student, the birth date of the student, the gender of the student, and the geographical location of student.</p>
+
+<p>Which types of student characteristics lead to the best performance in these online classes? That depends on how you define &ldquo;performance.&rdquo;</p>
+
+<p>Here&rsquo;s a look at the attendance of all the classes:</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/class-attendance.png"></p>
+
+<p>Harvard&rsquo;s Introduction to Computer Science is by far the most popular class, and that&rsquo;s only accounting for one semester. (it still beat MIT&rsquo;s Intro to CS/Programming, which had 2 semesters).</p>
+
+<p>Each color bar indicates the level of student participation in the class. <strong>Registered</strong> means the student simply registered for the class; <strong>Viewed</strong> means that the student viewed some of the course material, <strong>Explored</strong> means that students viewed atleast half of the course material, and <strong>Certified</strong> means that students completed the course and received a certificate of accomplishment. For the chart, it&rsquo;s interesting to note that most classes have a high percentage of people in each class who simply register just for fun and <em>don&rsquo;t actually do anything.</em></p>
+
+<p>One metric of course success is the completion rate of each course, i.e. how many people actually complete the course after starting it. A frequent criticism of free online classes is that this number is very low, but what are the actual completion rates of these 13 classes?</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/class-perc-finished.png"></p>
+
+<p>Completion rates are low across the board, from 0.8% to 7.5%. A <a href="http://www.insidehighered.com/news/2013/05/10/new-study-low-mooc-completion-rates">2013 study</a> found that completion rate is less than 7%, which this data follows. Apparently, Challenges of Global Poverty is a very interesting course.</p>
+
+<p>After the student completes a class, he or she receives a final grade, and if the grade is above the cutoff point (usually 50% &ndash; 80%), they will complete the class and receive the certificate. Here&rsquo;s the distribution of the average grades for students in each class, given that the student has successfully completed the class:</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/class-perc-grade.png"></p>
+
+<p>The grades vary significantly between classes. This doesn&rsquo;t necessarily imply that some classes are harder than others; it&rsquo;s possible some classes had lower cutoffs and therefore the effort put in by the students is lower. However, the perfect 100% average for Harvard&rsquo;s Intro to CS course implies that the class is pass/fail and that students can&rsquo;t get a final grade less than 100%. (as a result, we&rsquo;ll need to remove that class from future grade analyses in order to prevent bias due to the lack of score variance)</p>
+
+<h1>Age</h1>
+
+<p>Online classes are marketed toward college-age students.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/student-age.png"></p>
+
+<p>The mean age is about <strong>27.7</strong>, with a standard deviation of 8.89. The shape skews right and resembles a <a href="http://en.wikipedia.org/wiki/Gamma_distribution">gamma distribution</a>. There are even plenty of teenagers taking these classes too.</p>
+
+<p>The proportion of students who take more than one class for each age group has a slightly flatter distribution, although more centralized at students in their 20&rsquo;s.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/student-num-classes.png"></p>
+
+<p>What about completion rate?</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/student-fulfillment.png"></p>
+
+<p>Completion rate is a little more evenly distributed between the ages, indicating that the two metrics are  likely uncorrelated. However, the older students have nearly double the completion rate of classes. (more on this later)</p>
+
+<h1>Education</h1>
+
+<p>One of the student-provided attributes is his or her highest level of education. These values are &ldquo;Less than Secondary,&rdquo; &ldquo;Secondary&rdquo;, &ldquo;Bachelor&rsquo;s&rdquo;, &ldquo;Master&rsquo;s&rdquo;, and &ldquo;Doctorate.&rdquo; Here&rsquo;s the distribution of the 409,601 students who provided their LoE:</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/education-count.png"></p>
+
+<p>This shows that the majority of students who are taking these online classes have already finished college and already obtained a degree, and therefore are likely taking the course as supplemental material.</p>
+
+<p>We can correlate the levels of education with the average age for each LoE as a double-check.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/education-age.png"></p>
+
+<p>Indeed, each LoE average age is above the minimum expected threshold of time needed for each degree (~18 years for Secondary, ~22 years for Bachelor&rsquo;s, etc.)</p>
+
+<p>How does the completion rate vary?</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/education-fulfillment.png"></p>
+
+<p>Interestingly, those with Less than Secondary education have a much higher completion rate than those with Secondary educations and Bachelor&rsquo;s Degrees.</p>
+
+<p>But are Doctorate smarter than those with lower education levels? Do they get higher grades on average?</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/education-grade.png"></p>
+
+<p>As it turns out, yes. The education level of a student is very relevant to a his or her academic performance in online classes.</p>
+
+<h1>Gender</h1>
+
+<p>I previously <a href="http://minimaxir.com/2014/07/gender-course/">made a blog post</a> discussing the genders of students and the proportion of students by course. As it turns out, gender is a very important part of the student body composition.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/gender-count.png"></p>
+
+<p>425,108 students have a gender on record, with 311,534 male students (73.3%) and 113,571 female students (26.7%). The fact that it&rsquo;s not even close to 50:50 is surprising.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/gender-age.png"></p>
+
+<p>Age wise, there&rsquo;s not much difference between the genders. Female students are about a year older than male students on average.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/gender-completion.png"></p>
+
+<p>Completion rate varies a bit more. Female students finish classes more frequently than male students.</p>
+
+<p>Now to answer the age-old question: who get better grades: men or women?</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/gender-grade.png"></p>
+
+<p>Ok, it&rsquo;s a tie.</p>
+
+<h1>Country</h1>
+
+<p>The home location of the students is, in my opinion, the most interesting student attribute in the data set. There are 24 different countries which were specified among 325,012 different students.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/country-count.png"></p>
+
+<p>The United States, as one of the more technologically-savvy countries, accounts for nearly 1/3rd of all online students. India has a very strong presence as well due to  the combination of population and accessibility of materials. All the other countries have significantly fewer students.</p>
+
+<p>Given such accessibility of online classes, students in some countries take more classes than others.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/country-more-than-one.png"></p>
+
+<p>India&rsquo;s students also take the most classes on average.</p>
+
+<p>The United States also has the oldest students on average among all the countries.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/country-age.png"></p>
+
+<p>Completion rate by country, however, is very, very significant.</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/country-completion.png"></p>
+
+<p>The top seven countries with the highest rate of completion are <strong>all European countries</strong>, with Spain and Poland in particular having a higher rate of completion than all the other countries, and nearly <strong>four times</strong> the completion rate of the United States.</p>
+
+<p>But which country has the students which get the best grades?</p>
+
+<p><img src="http://minimaxir.com/img/online-class-charts/country-grade.png"></p>
+
+<p>China is at the top with 86%, but otherwise the distribution is fairly flat with no outliers, and no economic or demographical pattern to the top or bottom of the ranks. It&rsquo;s possible that the more structured format of the classes make it harder to skew.</p>
+
+<p>This Person-Course dataset has helped reveal many interesting insights about online classes at Harvard and MIT. Whether you measure performance by % of classes completed or a % score received at the end of the class, it&rsquo;s clear that age, country, and level of education all have a statistically significant impact on performance. The impact of the student&rsquo;s gender on performance, however, is more ambiguous and could use further analysis.</p>
+
+<hr />
+
+<ul>
+<li><em>Data was processed using R and all charts was made using ggplot2.</em></li>
+<li><em>You can view code necessary to reproduce these results  AND reproduce all the charts in <a href="https://github.com/minimaxir/online-class-charts">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Interesting Percentages of Female Students in MIT and Harvard Online Courses]]></title>
@@ -750,54 +897,6 @@ Location: http://imgur.com/p9lG2ss</code></p>
 <blockquote><p>An earlier version of the infographic in this story presented the StackOverflow data in a confusing and conceptually problematic fashion. It has been updated.</p></blockquote>
 
 <p>&ldquo;Problematic&rdquo; is the world&rsquo;s biggest understatement.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Friends Of My Friends Are Not My Friends]]></title>
-    <link href="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"/>
-    <updated>2014-01-13T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2014/01/farcical-friends-of-friends-folly</id>
-    <content type="html"><![CDATA[<p><a href="http://jelly.co/">Jelly</a>, a highly-anticipated social networking app by Twitter co-founder Biz Stone, was released last week. One of Jelly&rsquo;s <a href="http://blog.jelly.co/post/72563498393/introducing-jelly">underlying principles</a>  is &ldquo;it’s not hard to imagine that the true promise of a connected society is people helping each other.&rdquo; While using Jelly over the past few days, I&rsquo;ve seen people ask whether or not to exercise, make unsubtle plugs for their product, sell a car Craigslist-style, and get amnesia.</p>
-
-<!-- more -->
-
-
-<p><img src="http://minimaxir.com/img/jellyposts2.jpg"></p>
-
-<p>Wait, what? How are these questions representative of &ldquo;a connected society,&rdquo; especially since I don&rsquo;t know any of the question authors?</p>
-
-<p>Jelly tells its users that they can &ldquo;help friends, or friends-of-friends with their questions.&rdquo; The vast  majority of the questions I&rsquo;ve seen are from Friends of Friends. I&rsquo;m Facebook Friends with people who have <strong>thousands</strong> of friends; the probability that I have something in common with those second-degree friends is low.</p>
-
-<p>Websites like Jelly and even Facebook are now utilizing the content made by second-degree &ldquo;friends.&rdquo; Why am I seeing pictures and statuses from friends of friends, who are essentially complete strangers?</p>
-
-<h1>Facebook&rsquo;s Farcical Friends of Friends Folly</h1>
-
-<p>A couple months ago, Facebook again tweaked the News Feed algorithm such that all new Posts on a friend&rsquo;s Wall are shown on your News Feed, even if the person making the Post is a complete stranger to you.</p>
-
-<p>Originally, Facebook showed posts in your News Feed that were posted on a Friend&rsquo;s wall only if they were made by another Friend. If you are friends with both people, there&rsquo;s likely a common link between all three of you, such as going to the same college or working at the same company. That can make the Wall post more relevant to your interests.</p>
-
-<p>However, people have many social circles. What happens when a stranger not in any of my social circles posts on a Friend&rsquo;s wall?</p>
-
-<p>This post recently appeared in my News Feed:</p>
-
-<p><img src="http://minimaxir.com/img/fb-stranger-wall.jpg"></p>
-
-<p>I don&rsquo;t know who the person with &ldquo;1 mutual friend&rdquo; is. (the &ldquo;1 mutual friend&rdquo; being the friend who received the post). I don&rsquo;t live in Arizona. Why am I seeing this?</p>
-
-<p>Although I may be Facebook Friends with someone, it doesn&rsquo;t necessarily mean I should be Friends with their Friends. Facebook is showing me Posts that aren&rsquo;t relevant to me at all.</p>
-
-<p>This behavior also extends to your Friends&#8217; birthday: all &ldquo;Happy Birthday!&rdquo; posts on your Friend&rsquo;s Wall also display in your News Feed.</p>
-
-<p>This entry was visible on my News Feed for an entire day:</p>
-
-<p><img src="http://minimaxir.com/img/mutual-friends-birthday.jpg"></p>
-
-<p>Facebook <strong>really</strong> wants you to wish your Friends happy birthday.</p>
-
-<p>I don&rsquo;t need to see strangers with &ldquo;1 mutual friend&rdquo; wish my friends Happy Birthday. It&rsquo;s just extra clutter on an already cluttered News Feed.</p>
-
-<p>To be fair, other websites such as <a href="https://twitter.com/">Twitter</a> and <a href="http://www.linkedin.com/">LinkedIn</a> push second-degree friends. Twitter&rsquo;s new <a href="https://twitter.com/i/discover">Discover</a> feature highlights users who the people you Follow are themselves Following. LinkedIn shows your connections&#8217; new connections so you can form connections with them too. But the difference between Twitter/LinkedIn and Facebook/Jelly is that both Facebook and Jelly push the power of <strong>intimate</strong> friendships, and imposing a sense of intimacy between strangers feels fake and intrudes on actual friendships.</p>
 ]]></content>
   </entry>
   
