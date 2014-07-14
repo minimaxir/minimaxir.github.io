@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-07-10T08:22:42-07:00</updated>
+  <updated>2014-07-14T08:33:10-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Impact of the New Show HN Section on Show HN Submissions]]></title>
+    <link href="http://minimaxir.com/2014/07/show-hn/"/>
+    <updated>2014-07-14T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/07/show-hn</id>
+    <content type="html"><![CDATA[<p>Hacker News, a tech-oriented link aggregator managed by Y Combinator, is a platform where software projects have launched to literally become multibillion-dollar companies. Submissions which contain the phrase &ldquo;Show HN&rdquo; usually designate a clever hack or weekend project. On <a href="http://blog.ycombinator.com/make-things-and-show-them">July 3rd 2014</a>, Hacker News <a href="https://news.ycombinator.com/show">created a section of Hacker News</a> just for these Show HN projects.</p>
+
+<p>Did this feature help or harm Show HN submissions as a whole?</p>
+
+<p>Over the past few years, the average number of Show HN submissions per day has steadily risen. (this is strongly correlated with the <a href="http://minimaxir.com/2014/02/hacking-hacker-news/">growth of Hacker News as a whole</a>)</p>
+
+<p><img src="http://minimaxir.com/img/show-hn/show-hn-submissions.png"></p>
+
+<p>More on that spike at the end later.</p>
+
+<p>On Hacker News, users can upvote link submissions, which increases the point score of the submission; this point score is used as a rough proxy of link quality. The average amount of points per submission peaked in 2012, and has trended downward since then.</p>
+
+<p>Here&rsquo;s a chart of the points of Show HN submissions averaged by date of submission, then averaged across the previous 30-days to further smooth the variation and make the trend more apparent:</p>
+
+<p><img src="http://minimaxir.com/img/show-hn/show-hn-points.png"></p>
+
+<p>Users can also comment on these Show HN posts. The average amount of comments has trended downward over time, albeit only slightly.</p>
+
+<p><img src="http://minimaxir.com/img/show-hn/show-hn-comments.png"></p>
+
+<p>The combination of increased Show HN submissions and a decrease in point quality over time may imply that Show HN submissions have a low signal-to-noise ratio, i.e. a low amount of good submissions relative high amount of bad submissions.</p>
+
+<p>Hitting the front page of Hacker News is the first step to virality. When users upvote submissions on Hacker News, those submissions can hit the front page after achieving enough points (combined with other factors, such as submission age and quantity of other submissions). At the least, if a submission has 10 points, it has most likely hit the front page sometime in its lifespan.</p>
+
+<p>What proportion of the Show HN submissions hit the front page?</p>
+
+<p><img src="http://minimaxir.com/img/show-hn/show-hn-perc-front.png"></p>
+
+<p>Over time, the amount of good Show HNs relative to the amount of bad Show HNs has been steadily decreasing.</p>
+
+<p>Has the new Show HN feature helped improve the signal-to-noise ratio?</p>
+
+<h1>Show and Tell HN</h1>
+
+<p>We can look at the immediate impact of the new Show HN section by comparing the behavior of submissions before and after the announcement. The red area in the following charts represents the daily behavior in the couple months before the release (with the red horizontal dotted line representing the statistical average for the corresponding measurement), and the blue area/blue line represents the behavior after the release.</p>
+
+<p>When the Show HN feature was first announced, everyone rushed to make a submission to test it out, and it showed. In fact, the number of submissions for every day after the feature was added was greater than the average number of submissions from before the addition.</p>
+
+<p><img src="http://minimaxir.com/img/show-hn/show-hn-end-submissions.png"></p>
+
+<p>Average number of daily submissions before Show HN section is <strong>19.13</strong> submissions/day, average after is <strong>53.44</strong> submissions/day.</p>
+
+<p>Average submission points and average submission comments (both aggregated by date of submission for smoothing) received a slight boost too.</p>
+
+<p><img src="http://minimaxir.com/img/show-hn/show-hn-end-points.png"></p>
+
+<p><img src="http://minimaxir.com/img/show-hn/show-hn-end-comments.png"></p>
+
+<p>Average number of daily points before Show HN section is <strong>11.40</strong> points/submission/day, average after is <strong>12.12</strong> points/submission/day.</p>
+
+<p>Average number of daily comments before Show HN section is <strong>6.57</strong> comments/submission/day, average after is <strong>7.16</strong> comments/submission/day.</p>
+
+<p>The percentage of Show HN submissions that hit the front page, however, moves in a different direction.</p>
+
+<p><img src="http://minimaxir.com/img/show-hn/show-hn-end-perc-front.png"></p>
+
+<p>Average daily % of Show HN submissions which hit the front page before Show HN section is <strong>19.33%</strong>, average after is <strong>16.37%</strong>.</p>
+
+<p>While the Show HN section gives more focus to Show HN submissions, the increased motivation for making Show HN submissions does not necessarily imply that the submissions will be better. It will take more time to see of the downward trend of Show HN quality continues over time.</p>
+
+<hr />
+
+<ul>
+<li><em>Data was processed using R and all charts were made using ggplot2.</em></li>
+<li><em>You can view the data of all the Show HN submissions and the derived moving averages <a href="https://docs.google.com/spreadsheets/d/1JHIlzYdsavWnw8Y5efHrOHCo3-WFGtIosJ2WqIV_Bn4/edit?usp=sharing">in this Google Sheet</a>.</em></li>
+<li><em>You can view code necessary to reproduce these results  and reproduce all the charts in <a href="https://github.com/minimaxir/show-hn">this GitHub repository</a>. This repository also includes a .csv of all ~20,000 Show HNs obtained.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Who Performs the Best in Online Classes?]]></title>
@@ -153,7 +229,7 @@
 <hr />
 
 <ul>
-<li><em>Data was processed using R and all charts was made using ggplot2.</em></li>
+<li><em>Data was processed using R and all charts were made using ggplot2.</em></li>
 <li><em>You can view code necessary to reproduce these results  AND reproduce all the charts in <a href="https://github.com/minimaxir/online-class-charts">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
 </ul>
 
@@ -1451,66 +1527,6 @@ California      -187.57         0
 <hr />
 
 <p>The language used in Facebook Statuses can be very useful in identifying what words Fans like, and what words will be most useful in generating the most exposure. While my analysis can&rsquo;t predict the <em>exact</em> number of Likes a Status receives, and I likely <a href="http://xkcd.com/882/">broke a few rules of statistics</a> in the process of making this post, the impact of language and specific keywords on social media interaction is an endeavor worth pursuing.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Facebook Hashtags Are Fundamentally Broken]]></title>
-    <link href="http://minimaxir.com/2013/06/hashtag-hashtag/"/>
-    <updated>2013-06-14T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2013/06/hashtag-hashtag</id>
-    <content type="html"><![CDATA[<p>This week, <a href="https://www.facebook.com/">Facebook</a> added <a href="http://newsroom.fb.com/News/633/Public-Conversations-on-Facebook">searchable hashtags</a> to all status updates and user comments. As with <a href="https://twitter.com/">Twitter</a>, whenever a Facebook user posts an status with a #hashtag, that hashtag becomes clickable and leads to a News Feed of all other publically-visible posts with that hashtag.</p>
-
-<p>The implementation of hashtags in Facebook is an obvious move. Advertisements and television shows display hashtags all the time to encourage users to Tweet about them: it&rsquo;s free marketing, after all. Facebook can piggy-back off those already-existing hashtags and grow user adoption <em>very</em> quickly, especially with Facebook-owned <a href="http://instagram.com/">Instagram</a> already supporting hashtags.</p>
-
-<p>However, Facebook is a fundamentally different social network than Twitter. While Twitter uses hashtags to quickly categorize a feed of 140-character thoughts, Facebook&rsquo;s content feeds  typically consist of long posts and large images. Additionally, while posts on Twitter are explicitly public or private, Facebook&rsquo;s privacy settings are more granular: if users don&rsquo;t make their posts Public, the hashtag is essentially useless. And the brands are going to <em>love</em> hashtags. Maybe too much.</p>
-
-<p>The magic of Facebook is flat-out incompatible with the magic of hashtags.</p>
-
-<!-- more -->
-
-
-<h2>Too Long; Didn&rsquo;t Read</h2>
-
-<p><img src="http://minimaxir.com/img/facebooktwitter.png"></p>
-
-<p>Since Twitter posts have a length limit, they&rsquo;re short and occupy a consistent amount of space on the webpage. Facebook posts can be near-unlimited length, utilize a large amount of a white space between posts, and also potentially contain an equally-long comment section. As a result, 5 Twitter posts can use the same amount of screen real-estate as 2 Facebook posts. Given the already incredibly low signal-to-noise quality ratio of #hashtag feeds (as evident above), this makes reading hashtag feeds on Facebook a chore.</p>
-
-<h2>A Thousand Words Takes A Lot Of Space</h2>
-
-<p><img src="http://minimaxir.com/img/bieber-twitter.png"></p>
-
-<p>Facebook displays pictures embedded in posts natively in the feed, while Twitter requires the user to click the Tweet to see the photo. In this case, the ratio of Twitter:Facebook posts can be even worse, in this case 6 Twitter posts for 1 Facebook post.</p>
-
-<h2>If A Hashtag Isn&rsquo;t Seen, Was It Posted?</h2>
-
-<p>Twitter is opt-in private posting. Facebook is opt-<em>out</em> private posting. That&rsquo;s a big usability problem.</p>
-
-<p>The Facebook hashtag feeds only show posts that are explicitly  made Public (or posts from your Friends which are set to a privacy of Friends Only). If the user is unaware that their posts are not Public by default, then their posts containing the hashtag will never be seen and the user won&rsquo;t be able to participate in social hashtag feeds.  Although Facebook has made improvements in helping users set the intended privacy level of a post, it makes the process of posting much more deliberate and much less impulsive than Twitter.</p>
-
-<h2>#brand #branding #marketing #yolo #swag</h2>
-
-<p><img src="http://minimaxir.com/img/hashtagabuse.png"></p>
-
-<p>Brands love hashtags. The more hashtags included in a Tweet, the more exposure the Tweet receives, right?</p>
-
-<p>With Twitter, there&rsquo;s a limit on the number of hashtags in a Tweet due to the delicate balance between the number of hashtags, the length of the hashtags, and the length of the Tweet itself. On Facebook, you can include <strong>25</strong> hashtags in any post!</p>
-
-<p>Since there&rsquo;s no consequence for abusing hashtags, expect to see more Facebook brands taking advantage this new free source of marketing. Expect to see Facebook get much more cluttered.</p>
-
-<h2>Explicit Image Bombing</h2>
-
-<p>A malicious user could theoretically insert shock images into popular hashtag feeds. During my testing of Facebook hashtags, there was a surprising amount of nudity in the seemingly-innocuous #many hashtag.</p>
-
-<p>On Twitter, the volume of Tweets is much higher and the images are hidden by default, so the odds of such an attack working on Facebook are much higher than on Twitter.</p>
-
-<h2>Comment Hashtags Different From Post Hashtags</h2>
-
-<p>You can hashtag comments on Facebook posts like you can hashtag Facebook posts themselves. But hashtagged comments won&rsquo;t appear in the hashtag News Feed. Whereas on Twitter, Replies are also Tweets and can be hashtagged accordingly. This behavior isn&rsquo;t surprising, but it&rsquo;s still a big inconsistency.</p>
-
-<hr />
-
-<p>Will Facebook Hashtags fail due to the massive differences between Facebook and Twitter? It&rsquo;s hard to say, but I&rsquo;m skeptical that Facebook will be able to capture the hashtag magic.</p>
 ]]></content>
   </entry>
   

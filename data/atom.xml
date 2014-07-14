@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-07-10T08:22:42-07:00</updated>
+  <updated>2014-07-14T08:33:10-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Impact of the New Show HN Section on Show HN Submissions]]></title>
+    <link href="http://minimaxir.com/2014/07/show-hn/"/>
+    <updated>2014-07-14T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/07/show-hn</id>
+    <content type="html"><![CDATA[<p>Hacker News, a tech-oriented link aggregator managed by Y Combinator, is a platform where software projects have launched to literally become multibillion-dollar companies. Submissions which contain the phrase &ldquo;Show HN&rdquo; usually designate a clever hack or weekend project. On <a href="http://blog.ycombinator.com/make-things-and-show-them">July 3rd 2014</a>, Hacker News <a href="https://news.ycombinator.com/show">created a section of Hacker News</a> just for these Show HN projects.</p>
+
+<p>Did this feature help or harm Show HN submissions as a whole?</p>
+
+<p>Over the past few years, the average number of Show HN submissions per day has steadily risen. (this is strongly correlated with the <a href="http://minimaxir.com/2014/02/hacking-hacker-news/">growth of Hacker News as a whole</a>)</p>
+
+<p><img src="/img/show-hn/show-hn-submissions.png"></p>
+
+<p>More on that spike at the end later.</p>
+
+<p>On Hacker News, users can upvote link submissions, which increases the point score of the submission; this point score is used as a rough proxy of link quality. The average amount of points per submission peaked in 2012, and has trended downward since then.</p>
+
+<p>Here&rsquo;s a chart of the points of Show HN submissions averaged by date of submission, then averaged across the previous 30-days to further smooth the variation and make the trend more apparent:</p>
+
+<p><img src="/img/show-hn/show-hn-points.png"></p>
+
+<p>Users can also comment on these Show HN posts. The average amount of comments has trended downward over time, albeit only slightly.</p>
+
+<p><img src="/img/show-hn/show-hn-comments.png"></p>
+
+<p>The combination of increased Show HN submissions and a decrease in point quality over time may imply that Show HN submissions have a low signal-to-noise ratio, i.e. a low amount of good submissions relative high amount of bad submissions.</p>
+
+<p>Hitting the front page of Hacker News is the first step to virality. When users upvote submissions on Hacker News, those submissions can hit the front page after achieving enough points (combined with other factors, such as submission age and quantity of other submissions). At the least, if a submission has 10 points, it has most likely hit the front page sometime in its lifespan.</p>
+
+<p>What proportion of the Show HN submissions hit the front page?</p>
+
+<p><img src="/img/show-hn/show-hn-perc-front.png"></p>
+
+<p>Over time, the amount of good Show HNs relative to the amount of bad Show HNs has been steadily decreasing.</p>
+
+<p>Has the new Show HN feature helped improve the signal-to-noise ratio?</p>
+
+<h1>Show and Tell HN</h1>
+
+<p>We can look at the immediate impact of the new Show HN section by comparing the behavior of submissions before and after the announcement. The red area in the following charts represents the daily behavior in the couple months before the release (with the red horizontal dotted line representing the statistical average for the corresponding measurement), and the blue area/blue line represents the behavior after the release.</p>
+
+<p>When the Show HN feature was first announced, everyone rushed to make a submission to test it out, and it showed. In fact, the number of submissions for every day after the feature was added was greater than the average number of submissions from before the addition.</p>
+
+<p><img src="/img/show-hn/show-hn-end-submissions.png"></p>
+
+<p>Average number of daily submissions before Show HN section is <strong>19.13</strong> submissions/day, average after is <strong>53.44</strong> submissions/day.</p>
+
+<p>Average submission points and average submission comments (both aggregated by date of submission for smoothing) received a slight boost too.</p>
+
+<p><img src="/img/show-hn/show-hn-end-points.png"></p>
+
+<p><img src="/img/show-hn/show-hn-end-comments.png"></p>
+
+<p>Average number of daily points before Show HN section is <strong>11.40</strong> points/submission/day, average after is <strong>12.12</strong> points/submission/day.</p>
+
+<p>Average number of daily comments before Show HN section is <strong>6.57</strong> comments/submission/day, average after is <strong>7.16</strong> comments/submission/day.</p>
+
+<p>The percentage of Show HN submissions that hit the front page, however, moves in a different direction.</p>
+
+<p><img src="/img/show-hn/show-hn-end-perc-front.png"></p>
+
+<p>Average daily % of Show HN submissions which hit the front page before Show HN section is <strong>19.33%</strong>, average after is <strong>16.37%</strong>.</p>
+
+<p>While the Show HN section gives more focus to Show HN submissions, the increased motivation for making Show HN submissions does not necessarily imply that the submissions will be better. It will take more time to see of the downward trend of Show HN quality continues over time.</p>
+
+<hr />
+
+<ul>
+<li><em>Data was processed using R and all charts were made using ggplot2.</em></li>
+<li><em>You can view the data of all the Show HN submissions and the derived moving averages <a href="https://docs.google.com/spreadsheets/d/1JHIlzYdsavWnw8Y5efHrOHCo3-WFGtIosJ2WqIV_Bn4/edit?usp=sharing">in this Google Sheet</a>.</em></li>
+<li><em>You can view code necessary to reproduce these results  and reproduce all the charts in <a href="https://github.com/minimaxir/show-hn">this GitHub repository</a>. This repository also includes a .csv of all ~20,000 Show HNs obtained.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Who Performs the Best in Online Classes?]]></title>
@@ -153,7 +229,7 @@
 <hr />
 
 <ul>
-<li><em>Data was processed using R and all charts was made using ggplot2.</em></li>
+<li><em>Data was processed using R and all charts were made using ggplot2.</em></li>
 <li><em>You can view code necessary to reproduce these results  AND reproduce all the charts in <a href="https://github.com/minimaxir/online-class-charts">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
 </ul>
 
@@ -404,63 +480,6 @@
 <p><em>Maps are from <a href="https://www.google.com/maps/">Google Maps</a>. San Francisco shape files for city neighborhoods are from <a href="https://data.sfgov.org/Service-Requests-311-/Neighborhoods/ejmn-jyk6">data.sf.gov</a>. Additionally, thanks to <a href="http://www.reddit.com/r/dataisbeautiful/comments/223ubt/map_of_places_in_san_francisco_by_of_facebook/">/r/dataisbeautiful</a> for offering ideas for improvements to the maps.</em></p>
 
 <p><em>You may notice that the Check-In Counts on some of the official Facebook Place Pages strongly disagree with the Count reported in my charts. The Count reported on affected page is nearly double the value reported via the API in each instance. I believe this is a bug on Facebook&rsquo;s end: see <a href="http://i.imgur.com/I1syBhR.png">this image</a>, in which the Graph Search autocomplete reports a different value of check-ins than the Place Page itself. In this case, I trust the data from the API.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?]]></title>
-    <link href="http://minimaxir.com/2014/03/hashtag-tag/"/>
-    <updated>2014-03-24T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2014/03/hashtag-tag</id>
-    <content type="html"><![CDATA[<p><a href="http://instagram.com/">Instagram</a> uses hashtags as a method of categorizing images and videos. A user can tag an image with, for example, #snowy, and all other Instagram app users can see a mosaic of photos from all users which have that tag. Many less-than-honest  Instagram users <a href="http://instagram.com/p/l5J7iXQGX6/">spam tags</a> which are not particularly relevant to their photo in order to maximize the potential exposure.</p>
-
-<p><img src="/img/instatags2.png"></p>
-
-<p>At a maximum of 30 tags per image, spamming large numbers of tags should theoretically have a huge impact on the image&rsquo;s reach. In fact, there are sketchy websites that provide premade lists of popular hashtags for you to spam. But does spamming #tags in an Instagram image <em>actually</em> lead to a increase in the number of Likes on an image?</p>
-
-<p>Using the <a href="http://instagram.com/developer/">Instagram API</a>, I&rsquo;ve retrieved about 120,000  images, split evenly between pictures tagged with #sunny, #rainy, and #snowy, to get a good range of neutral picture types. Here&rsquo;s the distribution of the number of tags on photos from that data set:</p>
-
-<p><img src="/img/instagram-tags.png"></p>
-
-<p>The majority of Instagram photos have around 5 tags, which is a reasonable amount for a user quickly classifying a photo within the photo caption. However, it&rsquo;s clear that there are many tag abusers, with a noticeable spike of  the number of Instagram photos which have the maximum of 30 #tags. (the statistical average is <strong>11.45 tags</strong>, with a standard deviation of 8.01)</p>
-
-<p>The distribution of Likes as heavily skewed as you would expect when viewed normally, but when the distribution is viewed on a logarithmic scale, the shape becomes closer to a bell curve:</p>
-
-<p><img src="/img/instagram-likes.png"></p>
-
-<p>The statistical average of Likes on Instagram photos is <strong>26.19 Likes</strong>, with a standard deviation of 154.07; the high standard deviation is caused by the few photos with thousands of Likes.</p>
-
-<p>If you analyze the distribution of Likes for each discrete number of tags, the results are more telling.</p>
-
-<p><img src="/img/instagram-likes-facet.png"></p>
-
-<p>As the number of tags increases, the distribution of Likes shifts toward right, with very, very few photos with less than 10 likes. However, due to the logarithmic scaling, it&rsquo;s hard to tell if the center of the distibution (where the average number of Likes is approximately located) is shifting significantly.</p>
-
-<h1>Regression Analysis</h1>
-
-<p>A simple linear regression of log(Likes) on tags can tell us of the if an increase in the number of tags corresponds to an increase in the number of Likes.</p>
-
-<p><img src="/img/instagram-tags-scatterplot.png"></p>
-
-<p>There is indeed a <strong>very strong positive relationship between Tags and Likes</strong>, with a p-value &lt; 2e-16 for the tag regression coefficient. But tags alone doesn&rsquo;t explain the variance of Likes particularly well (R<sup>2</sup> = 15.47%) due to the heavy variance of Likes in the raw data, even after using a logarithmic transformation. However, due to the logarithmic transformation, it&rsquo;s difficult to easily determine the relative difference in the amount of Likes between using 1 tag on an Instagram photo and using 30 tags.</p>
-
-<p>Using the raw, untransformed data, this is a chart of the average number of Likes on photos from the sample data for each discrete number of tags, with 95% confidence intervals* for each measure:</p>
-
-<p><img src="/img/instagram-tag-average.png"></p>
-
-<p>Instagram photos which have the maximum of 30 #tags receive, on average, about <strong>three times</strong> as many Likes than photos with only a few tags. Most of the averages are well-bounded, too, which indicate that the per-tag-Like-averages are well-representative of all Instagram photos.</p>
-
-<p>The strong deviations from the trend (and larger confidence intervals) at 1, 5, and 9 tags are due to large outliers which skew the average. Indeed, there are many other factors in determining the expected number of Likes for an Instagram photo (e.g. the popularity of the person who posted the photo), some of which I hope to cover in a future blog post. :)</p>
-
-<p>In the meantime, if you want more Likes on your filtered photos, spam those hashtags. You won&rsquo;t be guaranteed to gets lots of Likes, but the odds will greatly be in your favor.</p>
-
-<hr />
-
-<p><em>All charts were created using R and ggplot2.</em></p>
-
-<p><em>You can download a copy of the Instagram data set <a href="https://www.dropbox.com/s/zpyv6p6yskdy43j/instagram-data-analysis.csv.zip">here</a>. [2MB zipped CSV]</em></p>
-
-<p><em>*95% confidence intervals for each per-tag-Like-average were generated using bootstrap resampling of the raw data, and recalculating each average on the resampled data. This was repeated 5,000 times to generate upper and lower bounds.</em></p>
 ]]></content>
   </entry>
   
