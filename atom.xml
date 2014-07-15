@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-07-14T08:33:10-07:00</updated>
+  <updated>2014-07-15T08:31:46-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress]]></title>
+    <link href="http://minimaxir.com/2014/07/caucus-needed/"/>
+    <updated>2014-07-15T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/07/caucus-needed</id>
+    <content type="html"><![CDATA[<p>Last week, the Twitter account <a href="https://twitter.com/congressedits">@congressedits</a> launched. This account is a bot that tweets edits to Wikipedia that were made by members of the U.S. Congress, in order to help <a href="http://inkdroid.org/journal/2014/07/10/why-congressedits/">facilitate transparency</a>. The account <a href="https://github.com/edsu/anon">works</a> by automatically tweeting any Wikipedia edits made by anonymous contributors with IP addresses between the known IP address blocks of the <a href="http://whois.arin.net/rest/org/USSAA/nets">U.S. Senate</a> or the <a href="http://whois.arin.net/rest/org/ISUHR/nets">House of Representatives</a>.</p>
+
+<p>Google&rsquo;s <a href="https://developers.google.com/bigquery/">BigQuery</a> tool has a <a href="https://developers.google.com/bigquery/docs/dataset-wikipedia">sample dataset</a> of Wikipedia data, representing the data on 314 million article edits up to April 2010. Out of curiosity, I wrote a query which returns the top 100 pages with the most amount of edits by Wikipedia contributors in the U.S. Senate&rsquo;s IP block.</p>
+
+<p><img src="http://minimaxir.com/img/caucus-needed/senate-query.png"></p>
+
+<p>Using this query for the Senate&rsquo;s IP block, and a similar one for the House of Representatives IP blocks, I retrieved the most-edited entries for both entities. You can access the spreadsheet of this data by <a href="https://dl.dropboxusercontent.com/u/2017402/Congress_Wikipedia_Edits.pdf">downloading a .pdf</a> or by viewing the data online with <a href="https://www.icloud.com/iw/#numbers/BALY8siqBP4jYZq5E2OB20P-wlPpyXdycqqF/Congress_Wikipedia_Edits">Numbers for iCloud</a>, both of which contain high-resolution charts and clickable Wikipedia links. A <a href="https://docs.google.com/spreadsheets/d/1qfFEwzNzc4KL4gqe2i4IoMO0ksmoYndCK0O0m46n37I/edit?usp=sharing">Google Sheets</a> version is also available.</p>
+
+<p>Here are the Top 10 Wikipedia entries with the most amount of edits by members of the Senate:</p>
+
+<p><img src="http://minimaxir.com/img/caucus-needed/senate-wikipedia.png"></p>
+
+<p>Wait a minute. Hawk from G.I. Joe?!</p>
+
+<p>Saying that the query results were surprising would be the understatement of the century.</p>
+
+<p>Two of the top-edited entries are directly pertaining to the U.S. Senate, which helps prove that the IP block is indeed the Senate&rsquo;s IP block. Both Kappa Upsilon Chi and <a href="http://en.wikipedia.org/wiki/Beta_Upsilon_Chi">Beta Upsilon Chi</a> are Christian fraternities. (however, the Kappa Upsilon Chi Wikipedia entry no longer exists for some reason)</p>
+
+<p>The edits corresponding to actual people are ones which are the most interesting. <a href="http://en.wikipedia.org/wiki/William_Swain_Lee">William Swain Lee</a> is a Delaware politician whose entry was <a href="http://en.wikipedia.org/w/index.php?title=William_Swain_Lee&amp;diff=prev&amp;oldid=31202175">created and edited</a> by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.148.107">user in the Senate IP block</a>. OrangePie is  a user who, <a href="http://en.wikipedia.org/wiki?curid=7319910">according to his talk page</a>, was criticized for repeatedly recreating an entry for &ldquo;Michael Hardaway&rdquo; after deletion, who coincidentally worked for the Senate <a href="https://twitter.com/michaelhardaway">according to his Twitter bio</a>. In journalist <a href="http://en.wikipedia.org/wiki?curid=8593106">Paul D. Thacker&rsquo;s</a> entry, one Senate editor <a href="http://en.wikipedia.org/w/index.php?title=Paul_D._Thacker&amp;diff=311839513&amp;oldid=311689066">replaced a paragraph</a> of Thacker&rsquo;s biography with the word &ldquo;anus?&rdquo;. Jay Rockefeller is an <a href="http://en.wikipedia.org/wiki?curid=337026">actual U.S. Senator</a>, so the edits are definitely a conflict of interest. The <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.96.28">user who made the edits</a> apparently also removed <a href="http://en.wikipedia.org/w/index.php?title=Jay_Rockefeller&amp;diff=prev&amp;oldid=33857327">information about a government investigation</a> into the Senator.</p>
+
+<p>I have nothing to add for <a href="http://en.wikipedia.org/wiki?curid=2814171">Hawk from G.I. Joe</a>.</p>
+
+<p>Other interesting frequently-edited Wikipedia entries from members of the U.S. Senate are <a href="http://en.wikipedia.org/wiki?curid=3626593">Primetime Emmy Award for Outstanding Supporting Actor – Comedy Series</a> (11 edits), <a href="http://en.wikipedia.org/wiki?curid=1226609">Wikipedia:Introduction</a> (5 edits) and <a href="http://en.wikipedia.org/wiki?curid=1749535">Crash (2004 film)</a> (5 edits)</p>
+
+<p>The Wikipedia entries with the most amount of edits by members of the House of Representatives are somehow even <em>weirder</em>, and that&rsquo;s quite an accomplishment.</p>
+
+<p><img src="http://minimaxir.com/img/caucus-needed/house-wikipedia.png"></p>
+
+<p>Well, if <em>anyone</em> in the entire United States would be experts on the topics of <a href="http://en.wikipedia.org/wiki?curid=2352587">cleft chins</a> and <a href="http://en.wikipedia.org/wiki?curid=1924543">dimples</a>, it would be the members of the House of Representatives.</p>
+
+<p>Again, one of the most-edited entries corresponds to a House of Representatives topic, which helps validate the IP blocks. The <a href="http://en.wikipedia.org/wiki?curid=107610">Cerritos, California</a> location had <a href="http://en.wikipedia.org/w/index.php?title=Cerritos,_California&amp;diff=21384826&amp;oldid=21363395">neutral edits</a> made by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.141">rather dedicated Wikiuser</a>. Wynne, Arkansas and Michelle Ye&rsquo;s edits were made by the same dedicated Wikiuser. <a href="http://en.wikipedia.org/wiki?curid=1143590">Waverly, Pennsylvania</a> was edited by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/137.18.255.33">user</a> who&rsquo;s <a href="http://en.wikipedia.org/w/index.php?title=Waverly,_Pennsylvania&amp;diff=7763793&amp;oldid=7761053">really passionate about Doc&rsquo;s Deli</a>. <a href="http://en.wikipedia.org/wiki?curid=1129560">Luis Fortuno</a>, former governor of Puerto Rico, had his <a href="http://en.wikipedia.org/w/index.php?title=Luis_Fortu%C3%B1o&amp;diff=prev&amp;oldid=134653411">history excised</a> by <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.137">another user</a>. <a href="http://en.wikipedia.org/wiki?curid=6260346">Betty Sutton</a>, however, is a actual Representative from Ohio, representing another conflict of interest, as another <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.228.129.9">user</a> constructed <a href="http://en.wikipedia.org/w/index.php?title=Betty_Sutton&amp;diff=303743778&amp;oldid=296652449">most of her entry</a>.</p>
+
+<p>I have nothing to add regarding <a href="http://en.wikipedia.org/wiki?curid=862471">effeminacy</a> in the House of Representatives.</p>
+
+<p>Other interesting edits by members of the House include <a href="http://en.wikipedia.org/wiki?curid=18951054">Apocalypse Now</a> (10 edits), <a href="http://en.wikipedia.org/wiki?curid=1161298">History of Italy as a monarchy and in the World Wars</a> (9 edits), and <a href="http://en.wikipedia.org/wiki?curid=34071">Whitney Houston</a> (9 edits)</p>
+
+<p>In the end, the members of the U.S. Congress have the same peculiar interests as typical Americans. However, when these people edit entries on topics in which they are directly involved, the potential bias threatens the integrity of all Wikipedia. And this is just the tip of the iceburg.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Impact of the New Show HN Section on Show HN Submissions]]></title>
@@ -1350,183 +1395,6 @@ Location: http://imgur.com/p9lG2ss</code></p>
 <p>Medium is definitely growing. HN is receiving more and more submissions which appeal to the average HN user, and posts are being submitted at all hours of the day. However, having a post at medium.com is not a panacea that will make your blog post be seen by thousands of people; you still need to write something interesting.</p>
 
 <p>Time will tell. But if HN does indeed get bored of Medium, I believe the problem will correct itself.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis]]></title>
-    <link href="http://minimaxir.com/2013/06/big-social-data/"/>
-    <updated>2013-06-22T10:00:00-07:00</updated>
-    <id>http://minimaxir.com/2013/06/big-social-data</id>
-    <content type="html"><![CDATA[<p>What makes people click the Like button on Facebook Statuses? Does the status say something funny? Does it contain a cool link or a funny photo? Does the status actively engage its readers?</p>
-
-<p>Needless to say, brands on Facebook want to know the answers to these questions. The more people that Like their statuses on their Facebook Pages, the more exposure they gain, and the more money they earn. Many, many companies have been created for the sole purpose of maximizing the number of Facebook Likes.</p>
-
-<p>By 2013, most brands have realized that photo posts and statuses that ask a question <a href="http://minimaxir.com/2012/10/questions-equals-reponses/">will generate <em>much</em> higher numbers</a> of Likes. Personally, that&rsquo;s not why <em>I</em> like a given Facebook status: I Like statuses that contain new and exciting things that are relevant to my interests. The first thing I read in a status is the Message: if the message is boring and uninteresting, then there&rsquo;s no reason for me to Like the status needlessly.</p>
-
-<p>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</p>
-
-<p>Running multivariate regressions on keywords from thousands of Facebook statuses, I&rsquo;ve discovered that the language used in a status <em>does</em> help predict the number of Likes a status receives, and actually could help brands learn much more about their fans.</p>
-
-<!-- more -->
-
-
-<h1>Setup</h1>
-
-<p><img src="http://minimaxir.com/img/rdataset.png"></p>
-
-<p>In order to draw accurate conclusions from the analysis, large amounts of data are needed (and there&rsquo;s no such thing as too much data).</p>
-
-<p>I decided to analyze the Facebook Pages of 3 extremely popular News sources: <a href="https://www.facebook.com/cnn">CNN</a>, the <a href="https://www.facebook.com/nytimes">New York Times</a>, and <a href="https://www.facebook.com/bbcworldnews">BBC World News</a>. All three Pages have millions of fans, post the same types of Facebook statuses, and post statuses extremely frequently to Facebook (around 8-9 times a day). The statuses analyzed will be from June 1st 2012 to June 1st 2013, in order to both gather a large sample size (~3,000  statuses from each Page) and a ensure a consistent apples-to-apples comparison between the three sources.</p>
-
-<p>The raw data, code, and a detailed technical explanation of the statistical techniques used to process the data can be found in <a href="https://github.com/minimaxir/facebook-keyword-regression-analysis">this GitHub repository</a>. (tl;dr, it&rsquo;s an optimized <a href="http://en.wikipedia.org/wiki/Least_squares">least squares</a> regression)</p>
-
-<p><em>Can the keywords and language in a Facebook Status predict the number of Likes the status receives?</em> We&rsquo;re ready to test this hypothesis.</p>
-
-<hr />
-
-<h1>CNN</h1>
-
-<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/cnn_Wordcloud.png"></p>
-
-<pre><code>                +Likes          P-Val
-Bourdain        1962.98         0
-NEWS            1272.64         0
-Photo           1154.6          0
-Barack          1002.45         0
-City            851.82          0
-Monday          705.42          0
-Obama           632.2           0
-United          578.77          0
-Mitt            562.29          0.01
-South           508.43          0.03
-America         505.83          0.01
-Watch           470.51          0
-Boston          398.13          0.05
-New             326.74          0.03
-ET              -433.96         0
-North           -467.05         0.02
-Check           -503.5          0
-Travel          -988.99         0.02
-</code></pre>
-
-<h2>Analysis</h2>
-
-<ul>
-<li>The most impactful keywords for CNN are political keywords.</li>
-<li><strong>NEWS</strong> (&ldquo;BREAKING NEWS&rdquo;) predicts more Likes than <strong>Photo</strong> (i.e. <a href="http://www.facebook.com/5550296508/posts/10151626042186509">Travel Photo of the Day</a>).</li>
-<li><strong>Bourdain</strong> refers to Anthony Bourdain, who very recently began <a href="http://en.wikipedia.org/wiki/Anthony_Bourdain:_Parts_Unknown">a food and travel show</a> on CNN. I assume that targets CNN&rsquo;s primary demographic.</li>
-<li>The presence of <strong>Barack</strong> (Barack Obama) predicts more likes than just <strong>Obama</strong>.</li>
-<li>The presence of <strong>Monday</strong> predicts more likes most other keywords. Garfield would be disappointed.</li>
-<li>The presence of <strong>North</strong> (North Korea) predicts a <em>decrease</em> in Likes from the average. Is North Korea boring?</li>
-<li>The presence of <strong>Check</strong> (&ldquo;Check this out!&rdquo;) also predicts a decrease in Likes from the average. This is interesting because this call-to-action is usually associated with the other keywords. Perhaps it&rsquo;s not necessary?</li>
-</ul>
-
-
-<hr />
-
-<h1>NYTimes</h1>
-
-<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/nytimes_Wordcloud.png"></p>
-
-<pre><code>                +Likes          P-Val
-Mills           1022.9          0
-Democratic      496.32          0
-Krugman         456.31          0
-Senate          431.05          0
-London          373.67          0.01
-Oscar           367.64          0.01
-Sandy           364.61          0
-Olympics        339.15          0.01
-Sunday          317             0
-Clinton         314.64          0.02
-You             247.07          0
-Obama           237.98          0
-Opinion         221             0
-Michael         204.2           0.03
-Credit          191.92          0.05
-Tuesday         187.22          0.03
-Times           178.69          0
-See             160.12          0.01
-Romney          157.66          0.04
-Ed              140.86          0.01
-Read            -101.23         0.05
-Here            -182.72         0.04
-Facebook        -187.75         0.02
-Are             -216.3          0.01
-While           -293.77         0.04
-Quotation       -322.29         0.02
-House           -362.1          0.01
-Thanksgiving    -369.88         0.05
-Convention      -448.34         0.01
-Jersey          -505.98         0
-</code></pre>
-
-<h2>Analysis</h2>
-
-<ul>
-<li>The most impactful keywords for NYTimes are political keywords and current events, such as Hurricane <strong>Sandy</strong> and the <strong>London</strong> <strong>Olympics</strong>.</li>
-<li><strong>Mills</strong> refers to Doug Mills, <a href="http://www.facebook.com/5281959998/posts/10150252479219999">photographer</a> for the New York Times. The power of photos!</li>
-<li><strong>You</strong> and <strong>See</strong> are impactful call-to-action keywords, even though they don&rsquo;t ask any questions. (Interestingly, <strong>Are</strong>, which implicitly asks a question, predicts a decrease in Likes. Maybe people don&rsquo;t Like questions?)</li>
-<li><strong>Clinton</strong> has a bigger impact than <strong>Obama</strong>.</li>
-<li>No one likes <strong>Jersey</strong>.</li>
-</ul>
-
-
-<hr />
-
-<h1>BBC World News</h1>
-
-<p><img class="pull-right hidden-tablet" src="http://minimaxir.com/img/bbcworldnews_Wordcloud.png"></p>
-
-<pre><code>                +Likes          P-Val
-Malala          488.1           0
-Japan           186.32          0
-Britain         167.25          0.01
-That            155.01          0.01
-AFP             154.97          0.02
-Travel          153.41          0
-Now             148.39          0.02
-Would           146.45          0.03
-Delhi           137.85          0.04
-Let             134.93          0.03
-Future          127.49          0.02
-Barack          125.79          0.02
-An              122.18          0.03
-David           111.78          0.04
-Do              111.13          0
-Israel          101.31          0.04
-Impact          87.94           0.05
-South           78.62           0.03
-It              62.7            0.01
-The             55.7            0
-US              -47.84          0.02
-On              -86.22          0.04
-BBC             -103.58         0
-Sunday          -117.01         0.03
-After           -122.38         0.05
-Thursday        -143.91         0.03
-Twitter         -144.55         0
-City            -147.16         0.02
-Hi              -149.85         0.03
-BBCNewsUS       -150.48         0.03
-House           -176.86         0.01
-California      -187.57         0
-</code></pre>
-
-<h2>Analysis</h2>
-
-<ul>
-<li>The most impactful keywords for BBC World News are keywords describing news around the world. Unlike CNN and NYTimes, there are very few impactful keywords related to domestic politics (such as Prime Minister <strong>David</strong> Cameron, and even <strong>Barack</strong> is more impactful than him.)</li>
-<li><strong>Malala</strong> refers to <a href="http://en.wikipedia.org/wiki/Malala_Yousafzai">Malala Youdsfzai</a>, a Pakistani activist who survived an assassination attempt.</li>
-<li>Implicit question keywords such as <strong>Let</strong>, <strong>Do</strong>, and <strong>Would</strong> are all very effective.</li>
-<li>The simple salutation of <strong>Hi</strong> predicts a decrease in Likes. There&rsquo;s a British joke here somewhere.</li>
-</ul>
-
-
-<hr />
-
-<p>The language used in Facebook Statuses can be very useful in identifying what words Fans like, and what words will be most useful in generating the most exposure. While my analysis can&rsquo;t predict the <em>exact</em> number of Likes a Status receives, and I likely <a href="http://xkcd.com/882/">broke a few rules of statistics</a> in the process of making this post, the impact of language and specific keywords on social media interaction is an endeavor worth pursuing.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-07-14T08:33:10-07:00</updated>
+  <updated>2014-07-15T08:31:46-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress]]></title>
+    <link href="http://minimaxir.com/2014/07/caucus-needed/"/>
+    <updated>2014-07-15T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/07/caucus-needed</id>
+    <content type="html"><![CDATA[<p>Last week, the Twitter account <a href="https://twitter.com/congressedits">@congressedits</a> launched. This account is a bot that tweets edits to Wikipedia that were made by members of the U.S. Congress, in order to help <a href="http://inkdroid.org/journal/2014/07/10/why-congressedits/">facilitate transparency</a>. The account <a href="https://github.com/edsu/anon">works</a> by automatically tweeting any Wikipedia edits made by anonymous contributors with IP addresses between the known IP address blocks of the <a href="http://whois.arin.net/rest/org/USSAA/nets">U.S. Senate</a> or the <a href="http://whois.arin.net/rest/org/ISUHR/nets">House of Representatives</a>.</p>
+
+<p>Google&rsquo;s <a href="https://developers.google.com/bigquery/">BigQuery</a> tool has a <a href="https://developers.google.com/bigquery/docs/dataset-wikipedia">sample dataset</a> of Wikipedia data, representing the data on 314 million article edits up to April 2010. Out of curiosity, I wrote a query which returns the top 100 pages with the most amount of edits by Wikipedia contributors in the U.S. Senate&rsquo;s IP block.</p>
+
+<p><img src="/img/caucus-needed/senate-query.png"></p>
+
+<p>Using this query for the Senate&rsquo;s IP block, and a similar one for the House of Representatives IP blocks, I retrieved the most-edited entries for both entities. You can access the spreadsheet of this data by <a href="https://dl.dropboxusercontent.com/u/2017402/Congress_Wikipedia_Edits.pdf">downloading a .pdf</a> or by viewing the data online with <a href="https://www.icloud.com/iw/#numbers/BALY8siqBP4jYZq5E2OB20P-wlPpyXdycqqF/Congress_Wikipedia_Edits">Numbers for iCloud</a>, both of which contain high-resolution charts and clickable Wikipedia links. A <a href="https://docs.google.com/spreadsheets/d/1qfFEwzNzc4KL4gqe2i4IoMO0ksmoYndCK0O0m46n37I/edit?usp=sharing">Google Sheets</a> version is also available.</p>
+
+<p>Here are the Top 10 Wikipedia entries with the most amount of edits by members of the Senate:</p>
+
+<p><img src="/img/caucus-needed/senate-wikipedia.png"></p>
+
+<p>Wait a minute. Hawk from G.I. Joe?!</p>
+
+<p>Saying that the query results were surprising would be the understatement of the century.</p>
+
+<p>Two of the top-edited entries are directly pertaining to the U.S. Senate, which helps prove that the IP block is indeed the Senate&rsquo;s IP block. Both Kappa Upsilon Chi and <a href="http://en.wikipedia.org/wiki/Beta_Upsilon_Chi">Beta Upsilon Chi</a> are Christian fraternities. (however, the Kappa Upsilon Chi Wikipedia entry no longer exists for some reason)</p>
+
+<p>The edits corresponding to actual people are ones which are the most interesting. <a href="http://en.wikipedia.org/wiki/William_Swain_Lee">William Swain Lee</a> is a Delaware politician whose entry was <a href="http://en.wikipedia.org/w/index.php?title=William_Swain_Lee&amp;diff=prev&amp;oldid=31202175">created and edited</a> by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.148.107">user in the Senate IP block</a>. OrangePie is  a user who, <a href="http://en.wikipedia.org/wiki?curid=7319910">according to his talk page</a>, was criticized for repeatedly recreating an entry for &ldquo;Michael Hardaway&rdquo; after deletion, who coincidentally worked for the Senate <a href="https://twitter.com/michaelhardaway">according to his Twitter bio</a>. In journalist <a href="http://en.wikipedia.org/wiki?curid=8593106">Paul D. Thacker&rsquo;s</a> entry, one Senate editor <a href="http://en.wikipedia.org/w/index.php?title=Paul_D._Thacker&amp;diff=311839513&amp;oldid=311689066">replaced a paragraph</a> of Thacker&rsquo;s biography with the word &ldquo;anus?&rdquo;. Jay Rockefeller is an <a href="http://en.wikipedia.org/wiki?curid=337026">actual U.S. Senator</a>, so the edits are definitely a conflict of interest. The <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.96.28">user who made the edits</a> apparently also removed <a href="http://en.wikipedia.org/w/index.php?title=Jay_Rockefeller&amp;diff=prev&amp;oldid=33857327">information about a government investigation</a> into the Senator.</p>
+
+<p>I have nothing to add for <a href="http://en.wikipedia.org/wiki?curid=2814171">Hawk from G.I. Joe</a>.</p>
+
+<p>Other interesting frequently-edited Wikipedia entries from members of the U.S. Senate are <a href="http://en.wikipedia.org/wiki?curid=3626593">Primetime Emmy Award for Outstanding Supporting Actor – Comedy Series</a> (11 edits), <a href="http://en.wikipedia.org/wiki?curid=1226609">Wikipedia:Introduction</a> (5 edits) and <a href="http://en.wikipedia.org/wiki?curid=1749535">Crash (2004 film)</a> (5 edits)</p>
+
+<p>The Wikipedia entries with the most amount of edits by members of the House of Representatives are somehow even <em>weirder</em>, and that&rsquo;s quite an accomplishment.</p>
+
+<p><img src="/img/caucus-needed/house-wikipedia.png"></p>
+
+<p>Well, if <em>anyone</em> in the entire United States would be experts on the topics of <a href="http://en.wikipedia.org/wiki?curid=2352587">cleft chins</a> and <a href="http://en.wikipedia.org/wiki?curid=1924543">dimples</a>, it would be the members of the House of Representatives.</p>
+
+<p>Again, one of the most-edited entries corresponds to a House of Representatives topic, which helps validate the IP blocks. The <a href="http://en.wikipedia.org/wiki?curid=107610">Cerritos, California</a> location had <a href="http://en.wikipedia.org/w/index.php?title=Cerritos,_California&amp;diff=21384826&amp;oldid=21363395">neutral edits</a> made by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.141">rather dedicated Wikiuser</a>. Wynne, Arkansas and Michelle Ye&rsquo;s edits were made by the same dedicated Wikiuser. <a href="http://en.wikipedia.org/wiki?curid=1143590">Waverly, Pennsylvania</a> was edited by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/137.18.255.33">user</a> who&rsquo;s <a href="http://en.wikipedia.org/w/index.php?title=Waverly,_Pennsylvania&amp;diff=7763793&amp;oldid=7761053">really passionate about Doc&rsquo;s Deli</a>. <a href="http://en.wikipedia.org/wiki?curid=1129560">Luis Fortuno</a>, former governor of Puerto Rico, had his <a href="http://en.wikipedia.org/w/index.php?title=Luis_Fortu%C3%B1o&amp;diff=prev&amp;oldid=134653411">history excised</a> by <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.137">another user</a>. <a href="http://en.wikipedia.org/wiki?curid=6260346">Betty Sutton</a>, however, is a actual Representative from Ohio, representing another conflict of interest, as another <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.228.129.9">user</a> constructed <a href="http://en.wikipedia.org/w/index.php?title=Betty_Sutton&amp;diff=303743778&amp;oldid=296652449">most of her entry</a>.</p>
+
+<p>I have nothing to add regarding <a href="http://en.wikipedia.org/wiki?curid=862471">effeminacy</a> in the House of Representatives.</p>
+
+<p>Other interesting edits by members of the House include <a href="http://en.wikipedia.org/wiki?curid=18951054">Apocalypse Now</a> (10 edits), <a href="http://en.wikipedia.org/wiki?curid=1161298">History of Italy as a monarchy and in the World Wars</a> (9 edits), and <a href="http://en.wikipedia.org/wiki?curid=34071">Whitney Houston</a> (9 edits)</p>
+
+<p>In the end, the members of the U.S. Congress have the same peculiar interests as typical Americans. However, when these people edit entries on topics in which they are directly involved, the potential bias threatens the integrity of all Wikipedia. And this is just the tip of the iceburg.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Impact of the New Show HN Section on Show HN Submissions]]></title>
@@ -398,88 +443,6 @@
 <li><em>No, I have no relation to &ldquo;<a href="http://www.amazon.com/review/R1KHEP16MXXWCN/ref=cm_cr_rdp_perm?ie=UTF8&amp;ASIN=B000796XXM">M. Wolff</a>&rdquo;.</em></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mapping San Francisco Locations Using Facebook Data]]></title>
-    <link href="http://minimaxir.com/2014/04/san-francisco/"/>
-    <updated>2014-04-08T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2014/04/san-francisco</id>
-    <content type="html"><![CDATA[<p>Statisticians like to use data from the <a href="https://www.census.gov/">United States Census</a> to plot interesting trends such as unemployment and population of regions across the country. However, such data is typically historical and not very robust.</p>
-
-<p>Facebook, on the other hand, has collected a large amount of data though its <a href="https://www.facebook.com/about/location">Places product</a>. Facebook Places allows users to &ldquo;check-in&rdquo; a place such as <a href="https://www.facebook.com/pages/Dolores-Park/105687759464007">Dolores Park</a> in a manner similar to <a href="https://foursquare.com/">Foursquare</a>.</p>
-
-<p><img src="/img/dolores.png"></p>
-
-<p>Through clever use of Facebook&rsquo;s Graph API and FQL, I was able to retrieve the data on all Facebook Places in and around San Francisco, along with the # of check-ins at each Place. With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit.</p>
-
-<!-- more -->
-
-
-<p>First, let&rsquo;s look at the distribution of check-ins among Places in San Francisco:</p>
-
-<p><img src="/img/sf-checkin-distribution.png"></p>
-
-<p>On a logarithmic scale, the shape resembles a bell curve with a center at about 800 check-ins; however, the sample average of check-ins for the data set is <strong>3,241 check-ins</strong>, indicating that the data may be heavily skewed to the right. Some Places don&rsquo;t have many check-ins, while some Places have an incredibly large number of check-ins.</p>
-
-<p>What are the Places with hundreds of thousands of check-ins? What does the city look like with all these Places plotted on a map of San Francisco?</p>
-
-<p><img src="/img/sf-checkin.png"></p>
-
-<p><em><a href="https://www.dropbox.com/s/cykofhlyus8atgw/sf-bubble.pdf">(PDF of Map)</a></em></p>
-
-<p>The most checked-in Places are, unsurprisingly, the famous tourist attractions of San Francisco, such as <a href="https://www.facebook.com/pages/ATT-Park/116440731717551">AT&amp;T Park</a> and <a href="https://www.facebook.com/UnionSquareSF">Union Square</a>. These Top Places are spread all over the city.</p>
-
-<p>It&rsquo;s also clear where the most dense areas are located in San Francisco. There are plainly-visible lines of Places along southern Mission Street and Outer Sunset. SOMA and Richmond have a large number of Places as well.</p>
-
-<p>And yes, 155,000 people really did check-into <a href="https://www.facebook.com/pages/The-Cheesecake-Factory/107178672654937">The Cheesecake Factory</a>.</p>
-
-<h1>What types of locations do people in San Francisco  frequently check-into?</h1>
-
-<p>Facebook also records the category of its Places, such as &ldquo;Bar&rdquo; and &ldquo;Restaurant&rdquo;. What are the most numerous types of locations in San Francisco?</p>
-
-<p><img src="/img/sf-checkin-distribution-count.png"></p>
-
-<p>Local businesses are by far the most frequent, as it&rsquo;s a more generic classifier for a Place and can be applied to anything that does not have an explicit classifier (such as startups). I find it interesting that non-profit organizations are more numerous than shopping centers.</p>
-
-<p>However, the quantity of a specific type of business does not necessarily mean that San Franciscians will check-into that type of Place more often. Which type of Place, on average, receives the greatest number of check-ins?</p>
-
-<p><img src="/img/sf-checkin-distribution-avg.png"></p>
-
-<p>People are more likely to check-into memorable Places and events, instead of Places they frequently visit like Bars and Restaurants (Twice as many people check-into Attractions than Clubs). Again, tourist attractions are the most popular, which is due to both the relatively low number of Places and the extremely high number of check-ins into Places such as AT&amp;T Park.</p>
-
-<p>The &ldquo;Lake&rdquo; corresponds to <a href="https://www.facebook.com/pages/Lake-Merced/113785468632283">Lake Merced</a>, if you&rsquo;re curious.</p>
-
-<h1>Which San Francisco neighborhoods are the most popular?</h1>
-
-<p>You saw earlier that the Facebook Places are concentrated in specific areas. Here&rsquo;s a map of San Francisco&rsquo;s neighborhoods, highlighted by the number of Places within:</p>
-
-<p><img src="/img/sf-places-count.png"></p>
-
-<p><em><a href="https://www.dropbox.com/s/63fgvcucvk9n9v3/sf-sum.pdf">(PDF of Map)</a></em></p>
-
-<p>The neighborhoods with the most Places are unsurprisingly where the trendy areas are, such as the Mission and SOMA. Additionally, those types of neighborhoods are larger in square area than others, which may bias the results in their favor.</p>
-
-<p>But are these large neighborhoods also the most active neighborhoods? Which neighborhoods have the most check-ins on average per Place within the neighborhood?</p>
-
-<p><img src="/img/sf-places-avg.png"></p>
-
-<p><em><a href="https://www.dropbox.com/s/u613oh4fskjrkny/sf-avg.pdf">(PDF of Map)</a></em></p>
-
-<p>The Embarcadero has by far the most check-ins on average, again, due to both its small size and AT&amp;T Park. Other neighborhoods, however, have more similar averages to each other. It&rsquo;s worth noting that the average number of check-ins is higher in neighborhoods adjacent to the San Francisco Bay, such as North Beach and Fisherman&rsquo;s Wharf: perhaps people check-in more frequently when they have a good view.</p>
-
-<p>Can this data and conclusions about San Francisco Facebook Places be extrapolated to other cities? I&rsquo;d argue yes: it makes logical sense that people check-in more frequently to Places that are more significant, and it also makes sense that people frequently check-into Places with large amounts of tourist attractions. Facebook data shows us cool trends that the United States Census data cannot.</p>
-
-<hr />
-
-<p><em>All charts and maps were made using R, ggplot2, and ggmaps.</em></p>
-
-<p><em>You can download a copy of the Facebook Places data set <a href="https://www.dropbox.com/s/6g6ap4poz1b2trs/sf-public.csv">here</a>. The place_id column corresponds to the San Francisco neighborhood where the Place is located.</em></p>
-
-<p><em>Maps are from <a href="https://www.google.com/maps/">Google Maps</a>. San Francisco shape files for city neighborhoods are from <a href="https://data.sfgov.org/Service-Requests-311-/Neighborhoods/ejmn-jyk6">data.sf.gov</a>. Additionally, thanks to <a href="http://www.reddit.com/r/dataisbeautiful/comments/223ubt/map_of_places_in_san_francisco_by_of_facebook/">/r/dataisbeautiful</a> for offering ideas for improvements to the maps.</em></p>
-
-<p><em>You may notice that the Check-In Counts on some of the official Facebook Place Pages strongly disagree with the Count reported in my charts. The Count reported on affected page is nearly double the value reported via the API in each instance. I believe this is a bug on Facebook&rsquo;s end: see <a href="http://i.imgur.com/I1syBhR.png">this image</a>, in which the Graph Search autocomplete reports a different value of check-ins than the Place Page itself. In this case, I trust the data from the API.</em></p>
 ]]></content>
   </entry>
   
