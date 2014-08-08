@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-07-15T08:31:46-07:00</updated>
+  <updated>2014-08-08T07:59:16-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Data From Our Comments to the FCC About Net Neutrality]]></title>
+    <link href="http://minimaxir.com/2014/08/comments-about-comments/"/>
+    <updated>2014-08-08T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2014/08/comments-about-comments</id>
+    <content type="html"><![CDATA[<p>This year, the Federal Communications Commission, one of the governmental entities which polices the Internet in the United States, announced a significant rule change to the policy of &ldquo;<a href="http://www.fcc.gov/openinternet">Open Internet</a>.&rdquo; Open Internet, more commonly known as &ldquo;<a href="http://en.wikipedia.org/wiki/Net_neutrality">net neutrality</a>,&rdquo; allows internet service providers (ISPs) to discriminate between different types of internet traffic (a &ldquo;fast lane&rdquo; for video and social media, for example) in an attempt to help further competition and promote innovation. However, said pricing discrimination may end up affecting the consumers instead (e.g. paying $10/month for access to Facebook), which may ironically <em>reduce</em> innovation due to increased costs to the consumers of internet bandwidth, i.e. the average American citizen.</p>
+
+<p>The FCC recently <a href="http://www.fcc.gov/comments">opened up a comment period</a>, where the U.S. public can <a href="http://apps.fcc.gov/ecfs/upload/display?z=s6uf0">send or e-mail comments</a> on this policy. Naturally, the consumers of the internet reacted strongly. By August 2014, over <em>1.1 million comments</em> have been received by the FCC.</p>
+
+<p><img src="http://minimaxir.com/img/fcc/fcc-words-small.png"></p>
+
+<p>This week, the FCC <a href="http://www.fcc.gov/blog/fcc-makes-open-internet-comments-more-accessible-public">released a dataset</a> of about <a href="http://www.fcc.gov/files/ecfs/14-28/ecfs-files.htm">450,000 of these comments</a>. Looking at the data behind these comments, it&rsquo;s clear to see that the entire country is passionate against net neutrality.</p>
+
+<p>Here&rsquo;s a timeline of when comments about net neutrality were sent to the FCC:</p>
+
+<p><img src="http://minimaxir.com/img/fcc/fcc-timeline-annotated.png"></p>
+
+<p>There are clear spikes after important initiatives for awareness of the FCC&rsquo;s ruling. May 15th marked the <a href="http://www.savetheinternet.com/net-neutrality-resources">beginning of the Open Comment period</a> for the FCC&rsquo;s new guidelines, June 3rd marked the week after an airing of Last Week Tonight with John Oliver, which contained an <a href="https://www.youtube.com/watch?v=fpbOEoRrHyU">anti-net-neutrality rant</a> which went viral for the rest of the week. July 15th marked the close of the Open Comment period, which is why on July 14th, the internet rallied and sent in over a hundred thousand comments, which <a href="http://www.nydailynews.com/news/politics/fcc-extends-net-neutrality-open-comment-deadline-friday-article-1.1868238#kDMozMu84rJ5TPsl.97">crashed their servers</a> and forced them to extend the deadline.</p>
+
+<p>But as with many awareness campaigns over the internet, this campaign may have &ldquo;<a href="http://en.wikipedia.org/wiki/Slacktivism">slacktivists</a>&rdquo;, as evidenced by the flat lines after the events where people stopped writing comments. How much effort did the U.S. people actually put into their submissions? One way to tell is to check the length of the submissions.</p>
+
+<p><img src="http://minimaxir.com/img/fcc/fcc-comment-length.png"></p>
+
+<p>Many comments were one-liners at about 20 words each, and many comments were multiparagraph notes at about 180 words each. But why is there a giant spike at about 300 words?</p>
+
+<p>As it turns out, there were over 100,000 comments with exactly 1,477 characters (approximately 290 words). That number of characters (before cleaning) corresponds to a comment following this template:</p>
+
+<blockquote><p>Net neutrality is the First Amendment of the Internet, the principle that Internet service providers (ISPs) treat all data equally. As an Internet user, net neutrality is vitally important to me. The FCC should use its Title II authority to protect it.</p>
+
+<p>Most Americans have only one choice for truly high speed Internet: their local cable company. This is a political failure, and it is an embarrassment. America deserves competition and choice.</p>
+
+<p>Without net neutrality, a bad situation gets even worse. These ISPs will now be able to manipulate our Internet experience by speeding up some services and slowing down others. That kills choice, diversity, and quality.</p>
+
+<p>It also causes tremendous economic harm. If ISPs can speed up favored services and slow others, new businesses will no longer be able to rely on a level playing field. When ISPs can slow your site and destroy your business at will, how can any startup attract investors?</p>
+
+<p>My friends, family, and I use the Internet for conversation and fun, but also for work and business. When you let ISPs mess with our Internet experience, you are attacking our social lives, our entertainment, and our economic well being. We won&rsquo;t stand for it.</p>
+
+<p>ISPs are opposing Title II so that they can destroy the FCC&rsquo;s net neutrality rules in court. This is the same trick they pulled last time. Please, let&rsquo;s not be fooled again. Title II is the strong, legally sound way to enforce net neutrality. Use it.</p></blockquote>
+
+<p>This is the default template for a submission at the <a href="https://www.battleforthenet.com">Battle for Net Neutrality</a> website. That means over about &frac14;th of the comments in the dataset, and atleast 1/10th of all comments submitted, used this website&rsquo;s submission form.</p>
+
+<h1>Comments Across the Nation</h1>
+
+<p>Net neutrality affects some individuals more than others. Not everyone in the U.S. may be as passionate over the issue, and many may not even be aware that such a threat to the modern internet even exists.</p>
+
+<p>Which cities in the United States sent the most comments to the FCC?</p>
+
+<p><img src="http://minimaxir.com/img/fcc/fcc-city.png"></p>
+
+<p>Yes, Brooklyn, NY counts as a city according to the FCC.</p>
+
+<p>It&rsquo;s not surprising that the three most populated cities in the U.S. (New York, Los Angeles, Chicago) top this chart due to the higher potential number of commenters. What is surprising yet important is that tech hubs with much fewer populations, such as San Francisco, Seattle, and Portland, all have extremely strong showings.</p>
+
+<p>When you look at the distribution of comments by state of origin, it&rsquo;s even more apparent that California and Washington are some of the key drivers of the comments.</p>
+
+<p><img src="http://minimaxir.com/img/fcc/fcc-state-map.png"></p>
+
+<p>What are the key words mentioned in the comments to the FCC?</p>
+
+<p>The key players in who would benefit the most from the implementation of net neutrality are <a href="http://www.comcast.com/">Comcast</a> and <a href="http://www.verizon.com/">Verizon</a>, two of the biggest ISPs in the country. Which states have been speaking out the most against these institutions?</p>
+
+<p><img src="http://minimaxir.com/img/fcc/fcc-state-map-comcast.png"></p>
+
+<p><img src="http://minimaxir.com/img/fcc/fcc-state-map-verizon.png"></p>
+
+<p>Comcast is a frequent topic of discussion (5.2% of all comments about net neutrality contain atleast 1 mention of Comcast), especially on the West Coast. On the other hand, less than half as many talk about Verizon (2.0% of all comments), except on the East Coast.</p>
+
+<p>Although not on the map, Washington, DC actually had the most to comment on these two topics, with 11.7% comments having atleast one mention of Comcast and 8.8% of comments having atleast one mention of Verizon.</p>
+
+<p><a href="http://www.netflix.com/">Netflix</a>, an internet video-streaming service which would likely be negatively impacted by the FCC ruling, was also discussed.</p>
+
+<p><img src="http://minimaxir.com/img/fcc/fcc-state-map-netflix.png"></p>
+
+<p>Discussion of Netflix from all around the country is very evenly distributed (2.1% of all comments), potentially because it&rsquo;s not location-specific as the presence of an ISP. (Montana apparently does not care much about Netflix.)</p>
+
+<p>Another concern about net neutrality is the potential <a href="https://www.aclu.org/net-neutrality">fight against the First Amendment</a> and free speech itself, as ISPs could theoretically restrict traffic to unfavorable websites under the system. Which states are most passionate about free speech?</p>
+
+<p><img src="http://minimaxir.com/img/fcc/fcc-state-map-free-speech.png"></p>
+
+<p>Much more activity in the Midwest and especially the North West than the previous maps. (2.1% of all comments discuss &ldquo;free speech&rdquo;) North Dakota apparently is relatively indifferent about the freedom of speech.</p>
+
+<p>Unfortunately, at this period of time, it&rsquo;s hard to guess if the hundreds of thousands of comments sent to the FCC will actually cause them to reconsider their plans. The sheer quantity of comments, at the least, lets the FCC know that Americans feel strongly about the issue. It&rsquo;s clear that in the worst-case scenario where the ISPs win the net neutrality battle, the consumers of the internet in the United Stakes <strong>will not remain passive</strong>.</p>
+
+<hr />
+
+<ul>
+<li><em>Charts were generated using R and ggplot2.</em></li>
+<li><em>You can view the data aggregated by date, by state, and by city in <a href="https://docs.google.com/spreadsheets/d/1D2T5Lg41IWfkQPEMLWq3fjU7_kJ8lDNc4H2wsbr4BbU/edit?usp=sharing">this Google Sheet</a>. You can download a CSV of the original comment metadata <a href="https://www.dropbox.com/s/7tzsk7kv7ctgydp/fcc_comments.zip">here</a>. [7.6MB .zip]</em></li>
+<li><em>You can view a 3000px x 3000px image of the FCC comments word cloud <a href="http://i.imgur.com/I0dpEA6.png">here</a>.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress]]></title>
@@ -856,31 +950,6 @@
 <hr />
 
 <p><em>Credit for all fan art goes to their respective artists: I&rsquo;m currently working on tracking them down.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How Many #nofilter Instagram Photos Actually Have No Filter?]]></title>
-    <link href="http://minimaxir.com/2014/02/the-filter-truth/"/>
-    <updated>2014-02-10T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2014/02/the-filter-truth</id>
-    <content type="html"><![CDATA[<p>Most <a href="http://instagram.com/">Instagram</a> photos have filters applied to make them look more retro/cool. Instagram users are also able to apply tags to a photo to help categorize and promote them to the Instagram community. One such tag, #nofilter, is intended to emphasize such natural beauty that no filter is necessary to enhance the image. (or the photographer is just too lazy to decide on a filter)</p>
-
-<p>But how many #nofilter images actually <em>have</em> no filter?</p>
-
-<p><img src="http://minimaxir.com/img/instagram_selfie.gif"></p>
-
-<p>As it turns not, not all of them.</p>
-
-<p>After retrieving about 50,000 images through the Instagram API (code <a href="https://github.com/minimaxir/get-data-from-photos-from-instagram-tags">available on GitHub</a>), here is the breakdown of filters on #nofilter-tagged Instagram images:</p>
-
-<p><img src="http://minimaxir.com/img/nofilter.png"></p>
-
-<p>Only 83% of #nofilter images have no filter?! You had one job, Instagram! :(</p>
-
-<hr />
-
-<p><em>The actual reason that this is happening is because Instagram rewards #tagspamming. More on that in a future blog post.</em></p>
 ]]></content>
   </entry>
   

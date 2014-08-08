@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-07-15T08:31:46-07:00</updated>
+  <updated>2014-08-08T07:59:16-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Data From Our Comments to the FCC About Net Neutrality]]></title>
+    <link href="http://minimaxir.com/2014/08/comments-about-comments/"/>
+    <updated>2014-08-08T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2014/08/comments-about-comments</id>
+    <content type="html"><![CDATA[<p>This year, the Federal Communications Commission, one of the governmental entities which polices the Internet in the United States, announced a significant rule change to the policy of &ldquo;<a href="http://www.fcc.gov/openinternet">Open Internet</a>.&rdquo; Open Internet, more commonly known as &ldquo;<a href="http://en.wikipedia.org/wiki/Net_neutrality">net neutrality</a>,&rdquo; allows internet service providers (ISPs) to discriminate between different types of internet traffic (a &ldquo;fast lane&rdquo; for video and social media, for example) in an attempt to help further competition and promote innovation. However, said pricing discrimination may end up affecting the consumers instead (e.g. paying $10/month for access to Facebook), which may ironically <em>reduce</em> innovation due to increased costs to the consumers of internet bandwidth, i.e. the average American citizen.</p>
+
+<p>The FCC recently <a href="http://www.fcc.gov/comments">opened up a comment period</a>, where the U.S. public can <a href="http://apps.fcc.gov/ecfs/upload/display?z=s6uf0">send or e-mail comments</a> on this policy. Naturally, the consumers of the internet reacted strongly. By August 2014, over <em>1.1 million comments</em> have been received by the FCC.</p>
+
+<p><img src="/img/fcc/fcc-words-small.png"></p>
+
+<p>This week, the FCC <a href="http://www.fcc.gov/blog/fcc-makes-open-internet-comments-more-accessible-public">released a dataset</a> of about <a href="http://www.fcc.gov/files/ecfs/14-28/ecfs-files.htm">450,000 of these comments</a>. Looking at the data behind these comments, it&rsquo;s clear to see that the entire country is passionate against net neutrality.</p>
+
+<p>Here&rsquo;s a timeline of when comments about net neutrality were sent to the FCC:</p>
+
+<p><img src="/img/fcc/fcc-timeline-annotated.png"></p>
+
+<p>There are clear spikes after important initiatives for awareness of the FCC&rsquo;s ruling. May 15th marked the <a href="http://www.savetheinternet.com/net-neutrality-resources">beginning of the Open Comment period</a> for the FCC&rsquo;s new guidelines, June 3rd marked the week after an airing of Last Week Tonight with John Oliver, which contained an <a href="https://www.youtube.com/watch?v=fpbOEoRrHyU">anti-net-neutrality rant</a> which went viral for the rest of the week. July 15th marked the close of the Open Comment period, which is why on July 14th, the internet rallied and sent in over a hundred thousand comments, which <a href="http://www.nydailynews.com/news/politics/fcc-extends-net-neutrality-open-comment-deadline-friday-article-1.1868238#kDMozMu84rJ5TPsl.97">crashed their servers</a> and forced them to extend the deadline.</p>
+
+<p>But as with many awareness campaigns over the internet, this campaign may have &ldquo;<a href="http://en.wikipedia.org/wiki/Slacktivism">slacktivists</a>&rdquo;, as evidenced by the flat lines after the events where people stopped writing comments. How much effort did the U.S. people actually put into their submissions? One way to tell is to check the length of the submissions.</p>
+
+<p><img src="/img/fcc/fcc-comment-length.png"></p>
+
+<p>Many comments were one-liners at about 20 words each, and many comments were multiparagraph notes at about 180 words each. But why is there a giant spike at about 300 words?</p>
+
+<p>As it turns out, there were over 100,000 comments with exactly 1,477 characters (approximately 290 words). That number of characters (before cleaning) corresponds to a comment following this template:</p>
+
+<blockquote><p>Net neutrality is the First Amendment of the Internet, the principle that Internet service providers (ISPs) treat all data equally. As an Internet user, net neutrality is vitally important to me. The FCC should use its Title II authority to protect it.</p>
+
+<p>Most Americans have only one choice for truly high speed Internet: their local cable company. This is a political failure, and it is an embarrassment. America deserves competition and choice.</p>
+
+<p>Without net neutrality, a bad situation gets even worse. These ISPs will now be able to manipulate our Internet experience by speeding up some services and slowing down others. That kills choice, diversity, and quality.</p>
+
+<p>It also causes tremendous economic harm. If ISPs can speed up favored services and slow others, new businesses will no longer be able to rely on a level playing field. When ISPs can slow your site and destroy your business at will, how can any startup attract investors?</p>
+
+<p>My friends, family, and I use the Internet for conversation and fun, but also for work and business. When you let ISPs mess with our Internet experience, you are attacking our social lives, our entertainment, and our economic well being. We won&rsquo;t stand for it.</p>
+
+<p>ISPs are opposing Title II so that they can destroy the FCC&rsquo;s net neutrality rules in court. This is the same trick they pulled last time. Please, let&rsquo;s not be fooled again. Title II is the strong, legally sound way to enforce net neutrality. Use it.</p></blockquote>
+
+<p>This is the default template for a submission at the <a href="https://www.battleforthenet.com">Battle for Net Neutrality</a> website. That means over about &frac14;th of the comments in the dataset, and atleast 1/10th of all comments submitted, used this website&rsquo;s submission form.</p>
+
+<h1>Comments Across the Nation</h1>
+
+<p>Net neutrality affects some individuals more than others. Not everyone in the U.S. may be as passionate over the issue, and many may not even be aware that such a threat to the modern internet even exists.</p>
+
+<p>Which cities in the United States sent the most comments to the FCC?</p>
+
+<p><img src="/img/fcc/fcc-city.png"></p>
+
+<p>Yes, Brooklyn, NY counts as a city according to the FCC.</p>
+
+<p>It&rsquo;s not surprising that the three most populated cities in the U.S. (New York, Los Angeles, Chicago) top this chart due to the higher potential number of commenters. What is surprising yet important is that tech hubs with much fewer populations, such as San Francisco, Seattle, and Portland, all have extremely strong showings.</p>
+
+<p>When you look at the distribution of comments by state of origin, it&rsquo;s even more apparent that California and Washington are some of the key drivers of the comments.</p>
+
+<p><img src="/img/fcc/fcc-state-map.png"></p>
+
+<p>What are the key words mentioned in the comments to the FCC?</p>
+
+<p>The key players in who would benefit the most from the implementation of net neutrality are <a href="http://www.comcast.com/">Comcast</a> and <a href="http://www.verizon.com/">Verizon</a>, two of the biggest ISPs in the country. Which states have been speaking out the most against these institutions?</p>
+
+<p><img src="/img/fcc/fcc-state-map-comcast.png"></p>
+
+<p><img src="/img/fcc/fcc-state-map-verizon.png"></p>
+
+<p>Comcast is a frequent topic of discussion (5.2% of all comments about net neutrality contain atleast 1 mention of Comcast), especially on the West Coast. On the other hand, less than half as many talk about Verizon (2.0% of all comments), except on the East Coast.</p>
+
+<p>Although not on the map, Washington, DC actually had the most to comment on these two topics, with 11.7% comments having atleast one mention of Comcast and 8.8% of comments having atleast one mention of Verizon.</p>
+
+<p><a href="http://www.netflix.com/">Netflix</a>, an internet video-streaming service which would likely be negatively impacted by the FCC ruling, was also discussed.</p>
+
+<p><img src="/img/fcc/fcc-state-map-netflix.png"></p>
+
+<p>Discussion of Netflix from all around the country is very evenly distributed (2.1% of all comments), potentially because it&rsquo;s not location-specific as the presence of an ISP. (Montana apparently does not care much about Netflix.)</p>
+
+<p>Another concern about net neutrality is the potential <a href="https://www.aclu.org/net-neutrality">fight against the First Amendment</a> and free speech itself, as ISPs could theoretically restrict traffic to unfavorable websites under the system. Which states are most passionate about free speech?</p>
+
+<p><img src="/img/fcc/fcc-state-map-free-speech.png"></p>
+
+<p>Much more activity in the Midwest and especially the North West than the previous maps. (2.1% of all comments discuss &ldquo;free speech&rdquo;) North Dakota apparently is relatively indifferent about the freedom of speech.</p>
+
+<p>Unfortunately, at this period of time, it&rsquo;s hard to guess if the hundreds of thousands of comments sent to the FCC will actually cause them to reconsider their plans. The sheer quantity of comments, at the least, lets the FCC know that Americans feel strongly about the issue. It&rsquo;s clear that in the worst-case scenario where the ISPs win the net neutrality battle, the consumers of the internet in the United Stakes <strong>will not remain passive</strong>.</p>
+
+<hr />
+
+<ul>
+<li><em>Charts were generated using R and ggplot2.</em></li>
+<li><em>You can view the data aggregated by date, by state, and by city in <a href="https://docs.google.com/spreadsheets/d/1D2T5Lg41IWfkQPEMLWq3fjU7_kJ8lDNc4H2wsbr4BbU/edit?usp=sharing">this Google Sheet</a>. You can download a CSV of the original comment metadata <a href="https://www.dropbox.com/s/7tzsk7kv7ctgydp/fcc_comments.zip">here</a>. [7.6MB .zip]</em></li>
+<li><em>You can view a 3000px x 3000px image of the FCC comments word cloud <a href="http://i.imgur.com/I0dpEA6.png">here</a>.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress]]></title>
@@ -313,134 +407,6 @@
 <ul>
 <li><em>Data was processed using R and the chart was made using ggplot2. (w/ a few annotations added using a photo editor)</em></li>
 <li><em>You can view code necessary to reproduce these results in <a href="https://github.com/minimaxir/gender-course">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Statistical Analysis of 1.2 Million Amazon Reviews]]></title>
-    <link href="http://minimaxir.com/2014/06/reviewing-reviews/"/>
-    <updated>2014-06-17T08:20:00-07:00</updated>
-    <id>http://minimaxir.com/2014/06/reviewing-reviews</id>
-    <content type="html"><![CDATA[<p>When buying the latest products on <a href="http://www.amazon.com/">Amazon</a>, reading reviews is an important part of the purchasing process.</p>
-
-<p><img src="/img/amazon/ore.png"></p>
-
-<p><img src="/img/amazon/amazon-review.png"></p>
-
-<p>Customer reviews from customers who have actually purchased and used the product in question can give you more context to the product itself. Each reviewer rates the product from 1 to 5 stars, and provides a text summary of their experiences and opinions about the product. The ratings for each product are averaged together in order to get an overall product rating.</p>
-
-<p>The number of reviews on Amazon has grown over the years.</p>
-
-<p><img src="/img/amazon/amzn-basic-time-count.png"></p>
-
-<p>But how do people write reviews? What types of ratings do reviewers give? How many of these reviews are considered helpful?</p>
-
-<p>Stanford researchers Julian McAuley and Jure Leskovec collected <a href="https://snap.stanford.edu/data/web-Amazon.html">all Amazon reviews </a>from the service&rsquo;s online debut in 1995 to 2013. Analyzing the dataset of 1.2 million Amazon reviews of products in the Electronics section, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon&rsquo;s review system actually works.</p>
-
-<h1>Describing the Data</h1>
-
-<p>First, let&rsquo;s see how the user ratings are distributed among the reviews.</p>
-
-<p><img src="/img/amazon/amzn-basic-score.png"></p>
-
-<p>More than half of the reviews give a 5-star rating. Aside from perfect reviews, most reviewers give 4-star or 1-star ratings, with <em>very</em> few giving 2-stars or 3-stars relatively.</p>
-
-<p>As as result, the statistical average for all review ratings is on the high-end of the scale at about <strong>3.90</strong>.  In fact, the average review rating for newly-written reviews has varied from 3.4 to 4.2 over time.</p>
-
-<p><img src="/img/amazon/amzn-basic-time-rating.png"></p>
-
-<p>Another metric used to measure reviews is review helpfulness. Other Amazon reviewers can rate a particular review as &ldquo;helpful&rdquo; or &ldquo;not helpful.&rdquo; A &ldquo;review helpfulness&rdquo; statistic can be calculated by taking the number of &ldquo;is-helpful&rdquo; indicators divided by the total number of is-helpful/is-not-helpful indicators (in the example at the beginning of the article, 639/665 people found the review helpful, so the helpfulness rating would be 96%). This gives an indication of review quality to a prospective buyer. Only 10% of the reviews had atleast 10 is-helpful/is-not-helpful data points, and of those reviews, the vast majority of the reviews had perfect helpfulness scores.</p>
-
-<p><img src="/img/amazon/amzn-basic-helpful.png"></p>
-
-<p>That would make sense; if you&rsquo;re writing a review (especially a 5 star review), you&rsquo;re writing with the intent to help other prospective buyers.</p>
-
-<p>Another consideration is review length. Do reviews frequently write essays, or do reviews typically write a single paragraph?</p>
-
-<p><img src="/img/amazon/amzn-basic-length.png"></p>
-
-<p>Most reviews are 100-150 characters, but the average amount of characters in a review is about <strong>582</strong> (there are some outlier reviews with 30,000+ characters!). Assuming that the average amount of characters in a paragraph <a href="http://wiki.answers.com/Q/How_many_characters_does_the_average_paragraph_have">is 352</a>, reviewers typically write about half a paragraph. Interestingly, reviews are rarely less than a sentence. (the <a href="http://www.amazon.com/gp/community-help/customer-reviews-guidelines">Review Guidelines</a> suggest a minimum of 20 words in a review, so this discrepancy could be attributed to moderator removal of short, one-liner reviews)</p>
-
-<h1>Particularizing the Products</h1>
-
-<p>The 1.2 million reviews in the Electronics data set address about 82,003 distinct products. However, most of those entries represent different SKUs of the same product (e.g. different colors of headphones). Of those products, only 30,577 products have pricing information which identify them as the source product.</p>
-
-<p><img src="/img/amazon/amzn-product-price.png"></p>
-
-<p>Over 2/3rds of Amazon Electronics are priced between $0 and $50, which makes sense as popular electronics such as television remotes and phone cases are not extremely expensive. However, there&rsquo;s no statistical correlation between the price of a product and the number of reviews it receives.</p>
-
-<p>For the overall rating of a particular product, which is the average rating of all reviews for that product, the ratings are no longer limited to discrete numbers between 1 and 5, and can take decimal values between those numbers as well. The distribution of product ratings is similar to the distribution of review ratings.</p>
-
-<p><img src="/img/amazon/amzn-product-rating.png"></p>
-
-<p>Again, the perfect rating of 5 is most popular for products. This distribution resembles the distribution of scores of all reviews for the discrete rating values, but this view reveals local maxima at the midpoint between each discrete value. (i.e. 3-and-a-half stars and 4-and-a-half stars are surprisingly common ratings)</p>
-
-<p>What happens when you plot product rating and product price together?</p>
-
-<p><img src="/img/amazon/amzn-product-score-price.png"></p>
-
-<p>The most expensive products have 4-star and 5-star overall ratings, but not 1-star and 2-star ratings. However, the correlation is very weak. (r = 0.04)</p>
-
-<p>In contrast, the relationship between product price and the average <em>length</em> of reviews for the product is surprising.</p>
-
-<p><img src="/img/amazon/amzn-product-price-length.png"></p>
-
-<p>This relationship is logarithmic with a relatively good correlation (r = 0.29), and it shows that reviewers put more time and effort into reviewing products which are worth more.</p>
-
-<h1>Reviewing the Reviewers</h1>
-
-<p>As you might expect, most people leave only 1 or 2 reviews on Amazon, but some have left <em>hundreds</em> of reviews. Out of 1.2 Million reviews, there are 510,434 distinct reviewers.</p>
-
-<p><img src="/img/amazon/amzn-reviewer-count.png"></p>
-
-<p>Over 80% of the reviewers of Amazon electronics left only 1 review. Analyzing reviewers who have left only 1 review is not helpful statistically, so for the rest of the analysis, only reviews who have made 5 or more reviews (which have received atleast 1 is-helpful/is-not-helpful indicator) will be considered. This makes it much easier to get the overall profile of a reviewer. 11,676 reviewers fit this criteria.</p>
-
-<p>Do repeat Amazon users tend to give 5-star reviews?</p>
-
-<p><img src="/img/amazon/amzn-reviewer-score.png"></p>
-
-<p>Distribution of review ratings when averaged across is similar to the other distributions of review ratings. However, this distribution is less skewed toward 5-stars and is more uniform between 4-stars and 5-stars.</p>
-
-<p>What about the average helpfulness of the reviews written by a single reviewer? If a reviewer has enjoyed Amazon enough such that they make 5 or more reviews, chances are that their reviews are high quality.</p>
-
-<p><img src="/img/amazon/amzn-reviewer-helpfulness.png"></p>
-
-<p>Again, the data is slightly skewed. 8% of the reviewers have perfect helpfulness scores on all their reviews, and the average helpfulness score for all repeat reviews is 80%. Interestingly, a few repeat reviewers have average helpfulness scores of 0.</p>
-
-<p>If you plot <em>both</em> average score and average helpfulness in a single chart, the picture becomes much more clear:</p>
-
-<p><img src="/img/amazon/amzn-reviewer-count-score.png"></p>
-
-<p>As the chart shows, there&rsquo;s a good positive correlation (r = 0.27) between rating and helpfulness, with a discernible cluster at the top. However, I don&rsquo;t think it&rsquo;s a causal relationship. Reviewers who give a product a 4 &ndash; 5 star rating are more passionate about the product and likely to write better reviews than someone who writes a 1 &ndash; 2 star &ldquo;this product sucks and you suck too!&rdquo; review.</p>
-
-<p>Another interesting bivariate relationship is the relationship between the helpfulness of a review and the length of a review). Stereotypically, you might think that longer reviews are more helpful reviews. And in the case of Amazon&rsquo;s Electronics reviews, you&rsquo;d be correct.</p>
-
-<p><img src="/img/amazon/amzn-reviewer-helpful-length.png"></p>
-
-<p>Again, there&rsquo;s a good positive correlation (r = 0.26) between average helpfulness and average length, which the trend line supports. (the dip at the end is caused by the high amount of low-character reviews). All the longer reviews have high helpfulness; there are very, very few unhelpful reviews that are also long.</p>
-
-<h1>Completing the Conclusion</h1>
-
-<p>The reviews on Amazon&rsquo;s Electronics products very frequently rate the product 4 or 5 stars, and such reviews are almost always considered helpful. 1-stars are used to signify disapproval, and 2-star and 3-stars reviews have no significant impact at all. If that&rsquo;s the case, then what&rsquo;s the point of having a 5 star ranking system at all if the vast majority of reviewers favor the product? Would Amazon benefit if they made review ratings a binary like/dislike?</p>
-
-<p>Having a 5-star system can allow the prospective customer to make more informed comparisons between two products: a customer may be more likely to buy a product that&rsquo;s rated 4.2 stars than a product that is rated 3.8 stars, which is a subtlety that can&rsquo;t easily be emulated with a like/dislike system. Likewise, if products are truly bad, the propensity toward 5-star reviews can help obfuscate the low quality of the product when a like/dislike system would make the low quality more apparent.</p>
-
-<p>Unfortunately, only Amazon has the data that would answer all these questions.</p>
-
-<p>Of course, there are many other secrets to be uncovered from Amazon reviews. The Stanford professors who collected the initial data used <a href="http://i.stanford.edu/~julian/pdfs/recsys13.pdf">machine learning techniques on the review text</a> to predict the rating given by a review from just the review text itself. Other potential topics for analysis are comparisons between <em>types</em> of Electronics (e.g. MP3 players, headphones) or using natural language processing to determine the common syntax in reviews.</p>
-
-<p><img src="/img/amazon/amzn-word-review-start.png"></p>
-
-<p>That&rsquo;s a topic for another blog post. :)</p>
-
-<hr />
-
-<ul>
-<li><em>Data analysis was performed using R, and all charts were made using ggplot2.</em></li>
-<li><em>You can download a ZIP file containing CSVs of the time series, the aggregate product data, and the anonymized aggregate reviewer data <a href="https://dl.dropboxusercontent.com/u/2017402/amazon_data.zip">here</a>.</em></li>
-<li><em>No, I have no relation to &ldquo;<a href="http://www.amazon.com/review/R1KHEP16MXXWCN/ref=cm_cr_rdp_perm?ie=UTF8&amp;ASIN=B000796XXM">M. Wolff</a>&rdquo;.</em></li>
 </ul>
 
 ]]></content>
