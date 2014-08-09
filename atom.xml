@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-08-08T07:59:16-07:00</updated>
+  <updated>2014-08-09T13:50:07-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -18,9 +18,9 @@
     <link href="http://minimaxir.com/2014/08/comments-about-comments/"/>
     <updated>2014-08-08T08:00:00-07:00</updated>
     <id>http://minimaxir.com/2014/08/comments-about-comments</id>
-    <content type="html"><![CDATA[<p>This year, the Federal Communications Commission, one of the governmental entities which polices the Internet in the United States, announced a significant rule change to the policy of &ldquo;<a href="http://www.fcc.gov/openinternet">Open Internet</a>.&rdquo; Open Internet, more commonly known as &ldquo;<a href="http://en.wikipedia.org/wiki/Net_neutrality">net neutrality</a>,&rdquo; allows internet service providers (ISPs) to discriminate between different types of internet traffic (a &ldquo;fast lane&rdquo; for video and social media, for example) in an attempt to help further competition and promote innovation. However, said pricing discrimination may end up affecting the consumers instead (e.g. paying $10/month for access to Facebook), which may ironically <em>reduce</em> innovation due to increased costs to the consumers of internet bandwidth, i.e. the average American citizen.</p>
+    <content type="html"><![CDATA[<p>This year, the Federal Communications Commission, one of the governmental entities which polices the Internet in the United States, announced significant rule changes to the policy of &ldquo;<a href="http://www.fcc.gov/openinternet">Open Internet</a>.&rdquo; Open Internet, more commonly known as &ldquo;<a href="http://en.wikipedia.org/wiki/Net_neutrality">net neutrality</a>,&rdquo; helps businesses facilitate competition and promote innovation on the internet, which help improve the internet as a whole. However, the proposed rule changes allow internet service providers (ISPs) to discriminate between different types of internet traffic (a &ldquo;fast lane&rdquo; for video and social media, for example).  Said pricing discrimination may end up affecting the consumers instead (e.g. paying $10/month for access to Facebook), which may reduce innovation due to increased costs to the consumers of internet bandwidth, i.e. the average American citizen.</p>
 
-<p>The FCC recently <a href="http://www.fcc.gov/comments">opened up a comment period</a>, where the U.S. public can <a href="http://apps.fcc.gov/ecfs/upload/display?z=s6uf0">send or e-mail comments</a> on this policy. Naturally, the consumers of the internet reacted strongly. By August 2014, over <em>1.1 million comments</em> have been received by the FCC.</p>
+<p>The FCC recently <a href="http://www.fcc.gov/comments">opened up a comment period</a>, where the U.S. public can <a href="http://apps.fcc.gov/ecfs/upload/display?z=s6uf0">send or e-mail comments</a> on the changes to this policy. Naturally, the consumers of the internet reacted strongly. By August 2014, over <em>1.1 million comments</em> have been received by the FCC.</p>
 
 <p><img src="http://minimaxir.com/img/fcc/fcc-words-small.png"></p>
 
@@ -66,7 +66,7 @@
 
 <p>It&rsquo;s not surprising that the three most populated cities in the U.S. (New York, Los Angeles, Chicago) top this chart due to the higher potential number of commenters. What is surprising yet important is that tech hubs with much fewer populations, such as San Francisco, Seattle, and Portland, all have extremely strong showings.</p>
 
-<p>When you look at the distribution of comments by state of origin, it&rsquo;s even more apparent that California and Washington are some of the key drivers of the comments.</p>
+<p>When you look at the distribution of comments by state of origin, it&rsquo;s even more apparent that California and Washington are some of the key drivers of the comments. (admittingly, it does resemble a <a href="https://xkcd.com/1138/">population map</a>)</p>
 
 <p><img src="http://minimaxir.com/img/fcc/fcc-state-map.png"></p>
 
@@ -104,6 +104,8 @@
 <li><em>You can view a 3000px x 3000px image of the FCC comments word cloud <a href="http://i.imgur.com/I0dpEA6.png">here</a>.</em></li>
 </ul>
 
+
+<p><em><strong>EDIT: 8/9/14</strong>: Per <a href="https://news.ycombinator.com/item?id=8153091">comments on Hacker News</a>, I&rsquo;ve changed wording in a few paragraphs for clarification.</em></p>
 ]]></content>
   </entry>
   
