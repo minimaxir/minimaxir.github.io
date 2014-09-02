@@ -1,0 +1,153 @@
+/*@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400italic);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700);*/
+
+
+body {
+font-family: 'Source Sans Pro', sans-serif;
+}
+
+article img {
+max-width: 100%;
+}
+
+.hero {
+padding: 175px 0px;
+}
+
+.hero h1 {
+font-size: 10em;
+font-weight: 400;
+}
+
+
+.hero {
+background: #2c3e50; /* Old browsers */
+background: -moz-linear-gradient(top,  #2c3e50 0%, #151d26 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2c3e50), color-stop(100%,#151d26)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #2c3e50 0%,#151d26 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #2c3e50 0%,#151d26 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #2c3e50 0%,#151d26 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #2c3e50 0%,#151d26 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c3e50', endColorstr='#151d26',GradientType=0 ); /* IE6-9 */
+}
+
+.hero {
+background: url("/images/my_charts_hero_small.jpg");
+-webkit-animation:bgscroll 50s infinite linear;
+animation:bgscroll 50s infinite linear;
+text-shadow: 0px 0px 30px rgba(0,0,0,0.5)
+}
+
+@-webkit-keyframes bgscroll {
+	from {background-position:0 0;}
+	to {background-position: -1600px 0;}
+}
+	
+@keyframes bgscroll {
+	from {background-position:0 0;}
+	to {background-position: -1600px 0;}
+}
+
+.her-row  #about-me {
+margin-bottom: 10px;
+line-height: 2.0;
+}
+
+
+.embed-video-container {
+    position: relative;
+    padding-bottom: 50%; /* 16/9 ratio */
+    padding-top: 30px; /* IE6 workaround*/
+    height: 0;
+    overflow: hidden;
+	width: 100%;
+	min-height: 200px;
+}
+
+.embed-video-container iframe,
+.embed-video-container object,
+.embed-video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.social-icon-list a {
+font-size: 3em;
+margin-right: 10px;
+color: #666665;
+}
+
+.social-icon-list a:hover, .social a:hover {
+color: #333;
+text-decoration: none;
+}
+
+#footer .social-icon-list a {
+font-size: 1.5em;
+}
+
+#about-me .social-icon-list {
+margin: -20px 0px;
+}
+
+.home-field #about-me .social-icon-list {
+margin-top: 0px;
+}
+
+.count {
+margin-left: 20px;
+}
+
+.social a {
+	font-size: 2em;
+	color: #666665;
+}
+
+.full-single-article .social a{
+font-size: 3em;
+border: none;
+}
+
+.row.sharing {
+text-align: center;
+margin: 10px 0px;
+}
+
+.full-single-article .row.sharing {
+margin: 40px 0px;
+}
+
+.home-icon {
+color: white;
+font-size: 2em;
+padding-top:3px;
+}
+
+a.home-icon:hover {
+color: #efefef;
+}
+
+em {
+font-style: italic !important;
+}
+
+li:before {    
+font-family: 'FontAwesome';
+content: '\f054';
+margin:0 5px 0 -15px;
+color: #333;
+font-size: 16px;
+}
+
+ul li {
+font-size: 20px;
+margin: 10px 15px;
+}
+
+.full-single-article ul li p {
+margin: 0px 0px;
+}

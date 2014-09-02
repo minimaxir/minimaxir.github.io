@@ -1,0 +1,3243 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>All Posts | minimaxir | Max Woolf's Blog</title>
+  <meta name="author" content="Max Woolf">
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="All Posts">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/posts/index.html">
+
+
+  <meta name="twitter:description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/images/max-prof-pic-200.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="All Posts" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym." property="og:description">
+
+
+  <meta content="http://minimaxir.com/posts/index.html" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/images/max-prof-pic-200.png" property="og:image">
+
+
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/posts">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <div class="all-posts">
+  <div class="container">
+    <div class="row">
+      <div class="list-title col-md-offset-3 col-md-6">
+        <h4>All Posts</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-list">
+    <div class="container">
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/08/comments-about-comments/">The Data From Our Comments to the FCC About Net Neutrality</a></h2>
+  
+
+  
+  
+  
+  <p>
+    The FCC released a dataset of about 450,000 comments against net neutrality. Looking at the data behind these comments, it is clear to see that the entire country is passionate against the rule changes to net neutrality.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-08-08T08:00:00-07:00" pubdate data-updated="true">Aug 8<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/08/comments-about-comments/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/08/comments-about-comments/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=The Data From Our Comments to the FCC About Net Neutrality - http://minimaxir.com/2014/08/comments-about-comments/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/08/comments-about-comments/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=The Data From Our Comments to the FCC About Net Neutrality&url=http://minimaxir.com/2014/08/comments-about-comments/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/08/comments-about-comments/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/07/caucus-needed/">The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Saying that the results were surprising would be the understatement of the century.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-07-15T08:30:00-07:00" pubdate data-updated="true">Jul 15<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/comedy">Comedy</a></span>
+          
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/07/caucus-needed/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/07/caucus-needed/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress - http://minimaxir.com/2014/07/caucus-needed/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/07/caucus-needed/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress&url=http://minimaxir.com/2014/07/caucus-needed/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/07/caucus-needed/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/07/show-hn/">Impact of the New Show HN Section on Show HN Submissions</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Did this feature help or harm Show HN submissions as a whole?
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-07-14T08:30:00-07:00" pubdate data-updated="true">Jul 14<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/07/show-hn/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/07/show-hn/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Impact of the New Show HN Section on Show HN Submissions - http://minimaxir.com/2014/07/show-hn/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/07/show-hn/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Impact of the New Show HN Section on Show HN Submissions&url=http://minimaxir.com/2014/07/show-hn/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/07/show-hn/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/07/online-class-charts/">Who Performs the Best in Online Classes?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Which types of student characteristics lead to the best performance in online classes? That depends on how you define &#8220;performance.&#8221;
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-07-10T08:30:00-07:00" pubdate data-updated="true">Jul 10<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/07/online-class-charts/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/07/online-class-charts/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Who Performs the Best in Online Classes? - http://minimaxir.com/2014/07/online-class-charts/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/07/online-class-charts/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Who Performs the Best in Online Classes?&url=http://minimaxir.com/2014/07/online-class-charts/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/07/online-class-charts/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/07/gender-course/">The Interesting Percentages of Female Students in MIT and Harvard Online Courses</a></h2>
+  
+
+  
+  
+  
+  <p>
+    The proportion of female students in each of Harvard and MIT&#8217;s online courses range from 5% to 49%.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-07-04T10:30:00-07:00" pubdate data-updated="true">Jul 4<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/07/gender-course/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/07/gender-course/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=The Interesting Percentages of Female Students in MIT and Harvard Online Courses - http://minimaxir.com/2014/07/gender-course/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/07/gender-course/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=The Interesting Percentages of Female Students in MIT and Harvard Online Courses&url=http://minimaxir.com/2014/07/gender-course/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/07/gender-course/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/06/reviewing-reviews/">A Statistical Analysis of 1.2 Million Amazon Reviews</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Analyzing the dataset of 1.2 million Amazon reviews, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon&#8217;s review system actually works.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-06-17T08:20:00-07:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/06/reviewing-reviews/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/06/reviewing-reviews/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Statistical Analysis of 1.2 Million Amazon Reviews - http://minimaxir.com/2014/06/reviewing-reviews/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/06/reviewing-reviews/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Statistical Analysis of 1.2 Million Amazon Reviews&url=http://minimaxir.com/2014/06/reviewing-reviews/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/06/reviewing-reviews/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/04/san-francisco/">Mapping San Francisco Locations Using Facebook Data</a></h2>
+  
+
+  
+  
+  
+  <p>
+    With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-04-08T08:00:00-07:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/04/san-francisco/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/04/san-francisco/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Mapping San Francisco Locations Using Facebook Data - http://minimaxir.com/2014/04/san-francisco/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/04/san-francisco/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Mapping San Francisco Locations Using Facebook Data&url=http://minimaxir.com/2014/04/san-francisco/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/04/san-francisco/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/03/hashtag-tag/">Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Instagram photos which have the maximum of 30 #tags receive, on average, about three times as many Likes than photos with only a few tags.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-03-24T08:00:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/03/hashtag-tag/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/03/hashtag-tag/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes? - http://minimaxir.com/2014/03/hashtag-tag/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/03/hashtag-tag/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?&url=http://minimaxir.com/2014/03/hashtag-tag/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/03/hashtag-tag/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/02/hacking-hacker-news/">A Statistical Analysis of All Hacker News Submissions</a></h2>
+  
+
+  
+  
+  
+  <p>
+    After downloading all 1,265,114 Hacker News submissions from the official Hacker News API, I gathered a few interesting statistics which show the true impact of Hacker News.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-02-24T08:00:00-08:00" pubdate data-updated="true">Feb 24<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/02/hacking-hacker-news/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/02/hacking-hacker-news/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Statistical Analysis of All Hacker News Submissions - http://minimaxir.com/2014/02/hacking-hacker-news/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/02/hacking-hacker-news/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Statistical Analysis of All Hacker News Submissions&url=http://minimaxir.com/2014/02/hacking-hacker-news/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/02/hacking-hacker-news/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/02/glory-to-the-helix/">Game Theory: How 70,000 Pokemon Players Sabotage Themselves</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Twitch Plays Pokemon isn&#8217;t about winning. It&#8217;s about trying not to fail spectacularly. And they still fail regardless. It&#8217;s an irresistible train wreck that&#8217;s hard to stop watching.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-02-18T08:00:00-08:00" pubdate data-updated="true">Feb 18<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/comedy">Comedy</a></span>
+          
+         <a href="/gaming">Gaming</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/02/glory-to-the-helix/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/02/glory-to-the-helix/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Game Theory: How 70,000 Pokemon Players Sabotage Themselves - http://minimaxir.com/2014/02/glory-to-the-helix/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/02/glory-to-the-helix/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Game Theory: How 70,000 Pokemon Players Sabotage Themselves&url=http://minimaxir.com/2014/02/glory-to-the-helix/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/02/glory-to-the-helix/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/02/the-filter-truth/">How Many #nofilter Instagram Photos Actually Have No Filter?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Not all of them.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-02-10T08:00:00-08:00" pubdate data-updated="true">Feb 10<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/comedy">Comedy</a></span>
+          
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/02/the-filter-truth/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/02/the-filter-truth/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=How Many #nofilter Instagram Photos Actually Have No Filter? - http://minimaxir.com/2014/02/the-filter-truth/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/02/the-filter-truth/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How Many #nofilter Instagram Photos Actually Have No Filter?&url=http://minimaxir.com/2014/02/the-filter-truth/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/02/the-filter-truth/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/02/moved-temporarily/">Imgur Is Covertly Redirecting Image Links on Facebook and Twitter</a></h2>
+  
+
+  
+  
+  
+  <p>
+    When clicking a direct image link for the first time on Facebook, Twitter, and Google+, Imgur will redirect you to the main image page instead.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-02-06T08:00:00-08:00" pubdate data-updated="true">Feb 6<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/02/moved-temporarily/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/02/moved-temporarily/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Imgur is Covertly Redirecting Image Links on Facebook and Twitter - http://minimaxir.com/2014/02/moved-temporarily/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/02/moved-temporarily/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Imgur is Covertly Redirecting Image Links on Facebook and Twitter&url=http://minimaxir.com/2014/02/moved-temporarily/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/02/moved-temporarily/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/01/more-language-more-problems/">A Thoughtful Analysis of the Most Poorly-Designed Chart Ever</a></h2>
+  
+
+  
+  
+  
+  <p>
+    The good thing about the chart? The data is properly cited. The bad? EVERYTHING ELSE.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-01-20T08:00:00-08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/comedy">Comedy</a></span>
+          
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/01/more-language-more-problems/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/01/more-language-more-problems/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Thoughtful Analysis of the Most Poorly-Designed Chart Ever - http://minimaxir.com/2014/01/more-language-more-problems/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/01/more-language-more-problems/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Thoughtful Analysis of the Most Poorly-Designed Chart Ever&url=http://minimaxir.com/2014/01/more-language-more-problems/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/01/more-language-more-problems/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2014/01/farcical-friends-of-friends-folly/">The Friends of My Friends Are Not My Friends</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Why am I seeing pictures and statuses from friends of friends who are essentially complete strangers?
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-01-13T08:00:00-08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2014</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=The Friends Of My Friends Are Not My Friends - http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=The Friends Of My Friends Are Not My Friends&url=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/11/innovation-rng/">Probabilistically Generating GitHub Projects</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Perl interface to Git repositories via Ruby. Brute force your OpenERP data integration with flatfiles.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-11-29T10:30:00-08:00" pubdate data-updated="true">Nov 29<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/11/innovation-rng/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/11/innovation-rng/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Probabilistically Generating GitHub Projects - http://minimaxir.com/2013/11/innovation-rng/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/11/innovation-rng/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Probabilistically Generating GitHub Projects&url=http://minimaxir.com/2013/11/innovation-rng/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/11/innovation-rng/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/11/daily-reddit/">Reddit Is Growing Slowly, but Surely</a></h2>
+  
+
+  
+  
+  
+  <p>
+    I analyzed the daily number of submissions from over two years to see which events, if any, have affected Reddit&#8217;s growth rate. As it turns out, Reddit grows by itself.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-11-18T07:30:00-08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+         <a href="/graphs">Graphs</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/11/daily-reddit/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/11/daily-reddit/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Reddit is Growing Slowly, but Surely - http://minimaxir.com/2013/11/daily-reddit/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/11/daily-reddit/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Reddit is Growing Slowly, but Surely&url=http://minimaxir.com/2013/11/daily-reddit/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/11/daily-reddit/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/11/subreddit-size/">Which Subreddits on Reddit Are the Largest?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    By tabulating the data of 37,561,369 sitewide Link submissions, I created a tree map of the Top 100 subreddits by the number of Link submissions to that subreddit.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-11-01T07:30:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+         <a href="/graphs">Graphs</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/11/subreddit-size/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/11/subreddit-size/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Which Subreddits on Reddit are the Largest? - http://minimaxir.com/2013/11/subreddit-size/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/11/subreddit-size/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Which Subreddits on Reddit are the Largest?&url=http://minimaxir.com/2013/11/subreddit-size/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/11/subreddit-size/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/10/wrds-and-vwls/">Do Startups With Short Names Containing Few Vowels Raise More Money?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    tl;dr: No.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-10-14T07:00:00-07:00" pubdate data-updated="true">Oct 14<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/10/wrds-and-vwls/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/10/wrds-and-vwls/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Do startups with short names containing few vowels raise more money? - http://minimaxir.com/2013/10/wrds-and-vwls/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/10/wrds-and-vwls/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Do startups with short names containing few vowels raise more money?&url=http://minimaxir.com/2013/10/wrds-and-vwls/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/10/wrds-and-vwls/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/09/reddit-imgur-youtube/">1 in 3 Links Submitted to Reddit Go to Imgur or YouTube</a></h2>
+  
+
+  
+  
+  
+  <p>
+    As it turns out, Imgur, along with YouTube, account for 32% of the links submitted to Reddit.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-09-29T10:30:00-07:00" pubdate data-updated="true">Sep 29<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/09/reddit-imgur-youtube/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/09/reddit-imgur-youtube/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube - http://minimaxir.com/2013/09/reddit-imgur-youtube/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/09/reddit-imgur-youtube/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=1 in 3 Links Submitted To Reddit Go To Imgur Or YouTube&url=http://minimaxir.com/2013/09/reddit-imgur-youtube/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/09/reddit-imgur-youtube/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/07/alma-mater-data/">Which Universities Produce the Most Successful Startup Founders?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Do the tech universities produce more funded graduates than the Ivy League universities? Do the founders from Ivy League Universities receive more funding than those from the top tier tech universities?
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-07-20T10:00:00-07:00" pubdate data-updated="true">Jul 20<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/07/alma-mater-data/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/07/alma-mater-data/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Which Universities Produce the Most Successful Startup Founders? - http://minimaxir.com/2013/07/alma-mater-data/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/07/alma-mater-data/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Which Universities Produce the Most Successful Startup Founders?&url=http://minimaxir.com/2013/07/alma-mater-data/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/07/alma-mater-data/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/07/medium-normal/">A Statistical Analysis of Medium.com Submissions to Hacker News</a></h2>
+  
+
+  
+  
+  
+  <p>
+    I analyzed the submissions of links under the medium.com domain to Hacker News to see just how Medium keeps surging in popularity. The results, as always, are very revealing.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-07-02T08:00:00-07:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/blogging">Blogging</a></span>
+          
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/07/medium-normal/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/07/medium-normal/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Statistical Analysis of Medium.com Submissions to Hacker News - http://minimaxir.com/2013/07/medium-normal/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/07/medium-normal/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Statistical Analysis of Medium.com Submissions to Hacker News&url=http://minimaxir.com/2013/07/medium-normal/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/07/medium-normal/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/06/big-social-data/">Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis</a></h2>
+  
+
+  
+  
+  
+  <p>
+    The language used in a Facebook Status *does* help predict the number of Likes a status receives, and actually could help brands learn much more about their fans.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-06-22T10:00:00-07:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+         <a href="/facebook">Facebook</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/06/big-social-data/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/06/big-social-data/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis - http://minimaxir.com/2013/06/big-social-data/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/06/big-social-data/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis&url=http://minimaxir.com/2013/06/big-social-data/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/06/big-social-data/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/06/hashtag-hashtag/">Facebook Hashtags Are Fundamentally Broken</a></h2>
+  
+
+  
+  
+  
+  <p>
+    The magic of Facebook is flat-out incompatible with the magic of hashtags.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-06-14T08:00:00-07:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/facebook">Facebook</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/06/hashtag-hashtag/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/06/hashtag-hashtag/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Facebook Hashtags Are Fundamentally Broken - http://minimaxir.com/2013/06/hashtag-hashtag/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/06/hashtag-hashtag/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Facebook Hashtags Are Fundamentally Broken&url=http://minimaxir.com/2013/06/hashtag-hashtag/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/06/hashtag-hashtag/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/06/working-as-intended/">When Uninstalling a PC Game Erases the Entire Hard Drive</a></h2>
+  
+
+  
+  
+  
+  <p>
+    A poorly coded PC game uninstaller could delete not just the game, but the *entire hard drive*. That would be a problem.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-06-05T08:00:00-07:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/gaming">Gaming</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/06/working-as-intended/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/06/working-as-intended/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=When Uninstalling A PC Game Erases the Entire Hard Drive - http://minimaxir.com/2013/06/working-as-intended/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/06/working-as-intended/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=When Uninstalling A PC Game Erases the Entire Hard Drive&url=http://minimaxir.com/2013/06/working-as-intended/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/06/working-as-intended/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/05/deep-breaths-more/">How MMO Players Proved That the Developers Bugged an Item Drop Rate</a></h2>
+  
+
+  
+  
+  
+  <p>
+    How do you prove something that occurs at random now occurs less frequently?
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-30T23:23:00-07:00" pubdate data-updated="true">May 30<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/gaming">Gaming</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/deep-breaths-more/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/deep-breaths-more/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=How MMO Players Proved that the Developers Bugged an Item Drop Rate - http://minimaxir.com/2013/05/deep-breaths-more/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/deep-breaths-more/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How MMO Players Proved that the Developers Bugged an Item Drop Rate&url=http://minimaxir.com/2013/05/deep-breaths-more/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/deep-breaths-more/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/05/guaranteed-to-be-random/">A Role-Playing Game With an Easily Exploitable Random Number Generator</a></h2>
+  
+
+  
+  
+  
+  <p>
+    The Golden Sun RNG is so poorly implemented that players have found out how to make events with 1/256 probability occur one hundred percent of the time.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-23T20:26:00-07:00" pubdate data-updated="true">May 23<span>rd</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/gaming">Gaming</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/guaranteed-to-be-random/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/guaranteed-to-be-random/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Role-Playing Game With an Easily Exploitable Random Number Generator - http://minimaxir.com/2013/05/guaranteed-to-be-random/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/guaranteed-to-be-random/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Role-Playing Game With an Easily Exploitable Random Number Generator&url=http://minimaxir.com/2013/05/guaranteed-to-be-random/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/guaranteed-to-be-random/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/05/its-a-livin/">A Profanity-Laced Video Game Password That Breaks Everything</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Most of these passwords were gibberish that required a pen-and-paper to write down and remember. One password, however, is more memorable, and much more sinister.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-16T20:50:00-07:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/gaming">Gaming</a></span>
+          
+         <a href="/hacks">Hacks</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/its-a-livin/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/its-a-livin/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Profanity-Laced Video Game Password That Breaks Everything - http://minimaxir.com/2013/05/its-a-livin/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/its-a-livin/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Profanity-Laced Video Game Password That Breaks Everything&url=http://minimaxir.com/2013/05/its-a-livin/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/its-a-livin/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/05/overly-attached-startup/">When a Startup Sends a Passive-Aggressive Email Every Day</a></h2>
+  
+
+  
+  
+  
+  <p>
+    It&#8217;s just one email, I think, so I ignore it. And then I receive another e-mail, the next day, that&#8217;s much less subtle: Your website misses you! This is certainly the first time a startup&#8217;s emails have tried to guilt me into using the service.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-13T18:51:00-07:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/overly-attached-startup/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=When a Startup Sends a Passive-Aggressive Email Every Day - http://minimaxir.com/2013/05/overly-attached-startup/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/overly-attached-startup/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=When a Startup Sends a Passive-Aggressive Email Every Day&url=http://minimaxir.com/2013/05/overly-attached-startup/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/overly-attached-startup/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/05/stones-of-jordan/">Diablo III Economy Broken by an Integer Overflow Bug</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Diablo III, Blizzard&#8217;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From Error 37 to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-07T21:53:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/bugs">Bugs</a></span>
+          
+         <a href="/gaming">Gaming</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Diablo III Economy Broken by an Integer Overflow Bug - http://minimaxir.com/2013/05/stones-of-jordan/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Diablo III Economy Broken by an Integer Overflow Bug&url=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/05/comments-everywhere/">A Blog Comment System That Steals Comments From Facebook</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Those comments become LiveFyre comments. And the Facebook user has no input, nor any notification that their comments are being used this way.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-04T21:59:00-07:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/blogging">Blogging</a></span>
+          
+         <a href="/comments">Comments</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/comments-everywhere/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/comments-everywhere/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Blog Comment System That Steals Comments From Facebook - http://minimaxir.com/2013/05/comments-everywhere/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/comments-everywhere/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Blog Comment System That Steals Comments From Facebook&url=http://minimaxir.com/2013/05/comments-everywhere/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/comments-everywhere/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/03/facebook-outage/">Facebook Outage: All Webpage Likes and Comments Reset</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Today (3/25/13), Facebook appears to have made a change that has nuked all existing Facebook Like counts and Facebook Comments.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-03-25T21:47:00-07:00" pubdate data-updated="true">Mar 25<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/facebook">Facebook</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/03/facebook-outage/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/03/facebook-outage/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Facebook Outage: All Webpage Likes and Comments Reset - http://minimaxir.com/2013/03/facebook-outage/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/03/facebook-outage/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Facebook Outage: All Webpage Likes and Comments Reset&url=http://minimaxir.com/2013/03/facebook-outage/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/03/facebook-outage/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/03/127-yoshis-in-slot-6/">Super Mario World &#8220;Completed&#8221; in Under 3 Minutes by Corrupting the RAM</a></h2>
+  
+
+  
+  
+  
+  <p>
+    This SMW TAS, posted in 2011, was so crazy that it inspired the creation of a new category of speed runs: Corrupts Memory.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-03-24T21:44:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/gaming">Gaming</a></span>
+          
+         <a href="/hacks">Hacks</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM - http://minimaxir.com/2013/03/127-yoshis-in-slot-6/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM&url=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/03/127-yoshis-in-slot-6/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/01/its-a-metaphor-maybe/">How to Kill the Reader Comments of a Popular Tech Blog</a></h2>
+  
+
+  
+  
+  
+  <p>
+    I&#8217;m honestly afraid that the switch from Facebook Comments could kill quality comments on TechCrunch completely.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-01-23T21:38:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/blogging">Blogging</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=How To Kill The Reader Comments Of A Popular Tech Blog - http://minimaxir.com/2013/01/its-a-metaphor-maybe/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How To Kill The Reader Comments Of A Popular Tech Blog&url=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/01/sexy-will-haunt-your-dreams/">Let Myspace&#8217;s Justin Timberlake Bring Sexy to the Entire Internet</a></h2>
+  
+
+  
+  
+  
+  <p>
+    His moody yet charmful face adds a touch of class to any website. But why does he have to stay constrained to Myspace? Why not let Justin Timberlake dominate the world?
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-01-15T21:36:00-08:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/hacks">Hacks</a></span>
+          
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet - http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Let Myspace's Justin Timberlake Bring Sexy To The Entire Internet&url=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/sexy-will-haunt-your-dreams/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/01/if-cute-then-happiness/">Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT)</a></h2>
+  
+
+  
+  
+  
+  <p>
+    You can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too!
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-01-13T21:32:00-08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/hacks">Hacks</a></span>
+          
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT) - http://minimaxir.com/2013/01/if-cute-then-happiness/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Auto-Save Images From Reddit To Computer Without Visiting The Site (Using IFTTT)&url=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2013/01/prefixed-period/">Why Do Many Tweets Begin With a Period?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    I eventually realized that beginning your reply Tweet with a period (.) allows it to be seen by all your followers.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-01-04T21:30:00-08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/startups">Startups</a></span>
+          
+         <a href="/twitter">Twitter</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/prefixed-period/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/prefixed-period/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Why Do Many Tweets Begin With A Period? - http://minimaxir.com/2013/01/prefixed-period/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/prefixed-period/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Do Many Tweets Begin With A Period?&url=http://minimaxir.com/2013/01/prefixed-period/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/prefixed-period/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2012/12/powerpoint-promo-party/">Creating a Startup Promo Video Using&#8230; PowerPoint?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    PowerPoint video creation is feasible if you don&#8217;t have or can&#8217;	 afford dedicated video software and need a promo video in a pinch, as may be the case with an actual startup.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-12-29T21:28:00-08:00" pubdate data-updated="true">Dec 29<span>th</span>, 2012</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/hacks">Hacks</a></span>
+          
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/12/powerpoint-promo-party/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/12/powerpoint-promo-party/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Creating a Startup Promo Video Using... PowerPoint? - http://minimaxir.com/2012/12/powerpoint-promo-party/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/12/powerpoint-promo-party/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Creating a Startup Promo Video Using... PowerPoint?&url=http://minimaxir.com/2012/12/powerpoint-promo-party/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/12/powerpoint-promo-party/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2012/12/totally-real-totally-serious/">A Totally-Real Totally-Serious Startup Pitch for Venture Capital</a></h2>
+  
+
+  
+  
+  
+  <p>
+    [This isn&#8217;t real.]
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-12-26T21:26:00-08:00" pubdate data-updated="true">Dec 26<span>th</span>, 2012</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/12/totally-real-totally-serious/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/12/totally-real-totally-serious/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Totally-Real Totally-Serious Startup Pitch For Venture Capital - http://minimaxir.com/2012/12/totally-real-totally-serious/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/12/totally-real-totally-serious/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Totally-Real Totally-Serious Startup Pitch For Venture Capital&url=http://minimaxir.com/2012/12/totally-real-totally-serious/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/12/totally-real-totally-serious/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2012/10/client-side-validation-is-hard-mode/">Electronic Arts &#8220;Gives Away&#8221; Thousands of Free Games Due to No Server-Side Validation</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Gamers noted that simply inputting the code while logged-out allows them to use the promo code an *unlimited* amount of times. Needless to say, hilarity ensued.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-10-14T21:21:00-07:00" pubdate data-updated="true">Oct 14<span>th</span>, 2012</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/gaming">Gaming</a></span>
+          
+         <a href="/technology">Technology</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation - http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Electronic Arts "Gives Away" Thousands Of Free Games Due To No Server-Side Validation&url=http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2012/10/questions-equals-reponses/">Does Asking Questions to Readers Increase Response Rate? - and Other TechCrunch Analyses</a></h2>
+  
+
+  
+  
+  
+  <p>
+    After collecting about 2,500 posts - 12 months of data - I analyzed the data conditional on whether or not the post was a question, among other things. The results surprised me.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-10-07T21:19:00-07:00" pubdate data-updated="true">Oct 7<span>th</span>, 2012</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/data">Data</a></span>
+          
+         <a href="/facebook">Facebook</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/10/questions-equals-reponses/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/10/questions-equals-reponses/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses - http://minimaxir.com/2012/10/questions-equals-reponses/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/10/questions-equals-reponses/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Does Asking Questions To Readers Increase Response Rate? - And Other TechCrunch Analyses&url=http://minimaxir.com/2012/10/questions-equals-reponses/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/10/questions-equals-reponses/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2012/03/bootstrap-for-everyone/">Why Every New Website Will Use Bootstrap</a></h2>
+  
+
+  
+  
+  
+  <p>
+    I can say that within the next few years, every startup will be using Bootstrap.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-03-24T21:10:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2012</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/technology">Technology</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/bootstrap-for-everyone/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Why Every New Website Will Use Bootstrap - http://minimaxir.com/2012/03/bootstrap-for-everyone/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Every New Website Will Use Bootstrap&url=http://minimaxir.com/2012/03/bootstrap-for-everyone/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/03/bootstrap-for-everyone/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2012/03/a-wordpress-about-tumblr/">If You&#8217;re Going to Blog, Use Tumblr, Not WordPress</a></h2>
+  
+
+  
+  
+  
+  <p>
+    If Tumblr fully captures the long-tail, WordPress could be in trouble.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-03-09T21:14:00-08:00" pubdate data-updated="true">Mar 9<span>th</span>, 2012</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/startups">Startups</a></span>
+          
+         <a href="/tumblr">Tumblr</a></span>
+          
+         <a href="/wordpress">Wordpress</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/03/a-wordpress-about-tumblr/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/a-wordpress-about-tumblr/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=If You're Going to Blog, Use Tumblr, Not WordPress - http://minimaxir.com/2012/03/a-wordpress-about-tumblr/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/03/a-wordpress-about-tumblr/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=If You're Going to Blog, Use Tumblr, Not WordPress&url=http://minimaxir.com/2012/03/a-wordpress-about-tumblr/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/03/a-wordpress-about-tumblr/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2012/03/ethics-self-promotion/">The Ethics of Self-Promotion on the Internet</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Do not do it, k thx.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-03-01T21:07:00-08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2012</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/blogging">Blogging</a></span>
+          
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/03/ethics-self-promotion/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/03/ethics-self-promotion/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=The Ethics of Self-Promotion on the Internet - http://minimaxir.com/2012/03/ethics-self-promotion/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/03/ethics-self-promotion/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=The Ethics of Self-Promotion on the Internet&url=http://minimaxir.com/2012/03/ethics-self-promotion/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/03/ethics-self-promotion/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2011/12/startup-checklist/">My Startup Success Criteria Checklist</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Author note: This was written in 2011, when I was an optimist about startups.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-12-27T21:03:00-08:00" pubdate data-updated="true">Dec 27<span>th</span>, 2011</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2011/12/startup-checklist/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2011/12/startup-checklist/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=My Startup Success Criteria Checklist - http://minimaxir.com/2011/12/startup-checklist/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2011/12/startup-checklist/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=My Startup Success Criteria Checklist&url=http://minimaxir.com/2011/12/startup-checklist/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2011/12/startup-checklist/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2011/11/how-startups-make-money/">How Startups Make Money: Do They *Need* a Revenue Model?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Author note: This was written in 2011, before companies spent billions on startups with no revenue.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-11-11T20:28:00-08:00" pubdate data-updated="true">Nov 11<span>th</span>, 2011</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2011/11/how-startups-make-money/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2011/11/how-startups-make-money/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=How Startups Make Money: Do They *Need* A Revenue Model? - http://minimaxir.com/2011/11/how-startups-make-money/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2011/11/how-startups-make-money/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How Startups Make Money: Do They *Need* A Revenue Model?&url=http://minimaxir.com/2011/11/how-startups-make-money/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2011/11/how-startups-make-money/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2011/11/like-x-for-y/">Startups, Please Stop Saying You&#8217;re &#8220;Like X for Y&#8221;</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Saying you&#8217;re &#8220;Y for X&#8221; is perfectly OK, though.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-11-04T20:19:00-07:00" pubdate data-updated="true">Nov 4<span>th</span>, 2011</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/startups">Startups</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2011/11/like-x-for-y/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2011/11/like-x-for-y/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Startups, Please Stop Saying You're "Like X for Y" - http://minimaxir.com/2011/11/like-x-for-y/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2011/11/like-x-for-y/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Startups, Please Stop Saying You're "Like X for Y"&url=http://minimaxir.com/2011/11/like-x-for-y/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2011/11/like-x-for-y/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/2011/10/blog-commenting-2011/">Blog Commenting in 2011</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Hello, world!
+  </p>
+  
+  
+  
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-10-10T20:05:00-07:00" pubdate data-updated="true">Oct 10<span>th</span>, 2011</time>
+    
+
+in
+<span class="categories">
+  
+    
+         <a href="/blogging">Blogging</a></span>
+          
+         <a href="/tumblr">Tumblr</a></span>
+          
+         <a href="/wordpress">Wordpress</a></span>
+          
+  
+</span>
+
+
+  </span>
+  
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2011/10/blog-commenting-2011/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2011/10/blog-commenting-2011/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Blog Commenting in 2011 - http://minimaxir.com/2011/10/blog-commenting-2011/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2011/10/blog-commenting-2011/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Blog Commenting in 2011&url=http://minimaxir.com/2011/10/blog-commenting-2011/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2011/10/blog-commenting-2011/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

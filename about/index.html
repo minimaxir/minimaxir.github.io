@@ -3,15 +3,21 @@
 <!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>About | minimaxir | Max Woolf's Blog</title>
+ <title>About | minimaxir | Max Woolf's Blog</title>
   <meta name="author" content="Max Woolf">
 
+
   
- 
- 
- 
+  
+  
+  
+   
  <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@minimaxir">
 <meta name="twitter:creator" content="@minimaxir">
@@ -25,7 +31,7 @@
   <meta name="twitter:description" content="Max is a recent graduate from Carnegie Mellon University in Business Administration with a concentration in Computing and Information Technology, and currently works as a Software QA Engineer in the &hellip;">
 
 
-  <meta name="twitter:image:src" content="http://minimaxir.com/MaxFB.png">
+  <meta name="twitter:image:src" content="http://minimaxir.com/images/max-prof-pic-200.png">
 
  
  <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
@@ -43,20 +49,14 @@
 
 
 
-  <meta content="http://minimaxir.com/MaxFB.png" property="og:image">
+  <meta content="http://minimaxir.com/images/max-prof-pic-200.png" property="og:image">
 
 
 
  
-  
  
   <meta property="og:locale"    content="en_us" />
   
-
-  
-<!--
-  <meta name="description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
-   -->
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -64,26 +64,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://minimaxir.com/about/">
+  <link rel="canonical" href="http://minimaxir.com/about">
   <link href="/favicon.png" rel="icon">
-  <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"> -->
-  
-  <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
-  
-  <link href="/stylesheets/uikit.css" rel="stylesheet">
-  <link href="/stylesheets/minimaxir-uikit.css" rel="stylesheet">
-  
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700' rel='stylesheet' type='text/css'>
   <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
-  <script src="/js/jquery.js"></script>
   <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <!--<script src="/javascripts/octopress.js" type="text/javascript"></script>-->
-  
- <script>
- $(document).ready(function() {
+  <script>
+   $(document).ready(function() {
  
   // Facebook
 	$( ".social.facebook" ).children().each(function(index,value) {
@@ -91,9 +85,9 @@
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.shares + "</span>");
-  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.likes + "</span>");
-  else facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + " 0</span>");
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
   });
   });
  
@@ -103,12 +97,9 @@
 	var url = twitter_button.attr("data");
 
   jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
-  twitter_button.html("<i class=\"ion-social-twitter\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
   });
   });
-  
- 
-  
   
   // LinkedIn
 	$( ".social.linkedin" ).children().each(function(index,value) {
@@ -116,156 +107,35 @@
 	var url = linkedin_button.attr("data");
 
   jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
-  linkedin_button.html("<i class=\"ion-social-linkedin\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
   });
   });
-  
-  
-  
-});
-</script>
- 
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts 
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
-
-  
+  });
+  </script>
 
 </head>
 
-<body   >
-
-
-
-  
-
- <div class="hero top">
- 
-
- 
- 
-  <nav class="uk-navbar ">
- <div class="uk-container uk-container-center">
-<div class="uk-grid">
-	<div class="uk-width-1-1">
-
-  	      <ul class="uk-navbar-nav">
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
 	
-      
-   		<li class="uk-parent"><a href="/">Home</a></li>
-   	       
-    
-      
-   		<li class="uk-parent"><a href="/about">About</a></li>
-   	       
-    
-      
-   		<li class="uk-parent"><a href="/contact">Contact</a></li>
-   	       
-    
-</ul>
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
 
-<div class="uk-navbar-flip uk-hidden-small">
-<ul class="uk-navbar-nav">
-
-<li class="social facebook-p">
-			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
-		</li>
-		
-</ul>
-</div>
-
-  </div>
-  </div>
-  </div>
-
-  </nav>
-
-  
-
- <style type="text/css">
-.hero.max {
-padding-top: 4px;
-margin-bottom: 0px;
-}
-</style>
- 
- <div class="uk-container uk-container-center">
-	 <div class="uk-grid" data-uk-grid-match>
-    
-	
-	<div class="uk-width-large-2-3 uk-width-medium-1-1">
-  <div>
-    <h1 class="name">Max Woolf</h1>
-	<div class="tagline alias">@minimaxir</div>
-	<div class="tagline">Software QA Engineer in San Francisco, CA</div>
-    <div class="tagline">Carnegie Mellon Class of 2012 Business IT Graduate</div>
-	 
-
-	 
-	 
-	 <div class="uk-grid sharing">
-	 <div class="uk-width-1-4">
-	 <span class="social facebook-p">
-			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="ion-social-facebook"></i> </a>
-		</span>
-	 </div>
-	 
-	 <div class="uk-width-1-4">
-	 <span class="social twitter-p">
-			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="ion-social-twitter"></i> </a>
-		</span>
-	 </div>
-	 
-	 <div class="uk-width-1-4">
-	 <span class="social linkedin-p">
-			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="ion-social-linkedin"></i> </a>
-		</span>
-	 </div>
-	 
-	 <div class="uk-width-1-4">
-	 <span class="social github-p">
-			<a href="http://github.com/minimaxir" target="_blank"> <i class="ion-social-github"></i> </a>
-		</span>
-	 </div>
-	 </div>
-	
-	
-  </div>
-  </div>
-  
-  <div class="uk-width-large-1-3 uk-width-medium-1-1 uk-hidden-small">
-
-
-	<a href="/about"><img src="/Max388.png"></a>
-	
-	</div>
-  
-  </div>
-</div>
-
-
-
-</div>
-
-
-  
-  <div class="uk-container uk-container-center" id="main">
-    
-      <div class="uk-grid" data-uk-grid-margin>
-	  <div class="uk-width-1-1">
-        <div id="content">
-          <article role="article">
-  
-  <header>
-    
-  </header>
-  
-  <p><img class="uk-float-right" src="/img/Max200.png" width="150" height="150"></p>
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>About</h1>
+        <p><img class="img-circle pull-right" src="images/max-prof-pic-200.jpg" width="150" height="150"></p>
 
 <p>Minimaxir is a blog by Max Woolf about startups, technology, and blogging. It&rsquo;s so meta, <a href="http://xkcd.com/917/">even this acronym</a>.</p>
 
-<p>Max is a recent graduate from Carnegie Mellon University in Business Administration with a concentration in Computing and Information Technology, and currently works as a Software QA Engineer in the San Francisco Bay Area. Max also comments on blogs rather frequently.</p>
+<p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 2 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+
+<p>In his spare time, Max uses Python to gather data from public APIs and ggplot2 to make pretty charts from that data. Max also comments on technology blogs rather frequently.</p>
 
 <hr />
 
@@ -273,15 +143,15 @@ margin-bottom: 0px;
 
 <p>Max has had a fondness for both the internet and technology since 10-years old, despite 56k internet speed and <a href="http://en.wikipedia.org/wiki/Children%27s_Online_Privacy_Protection_Act">COPPA</a> limiting access to pretty much every website at the time. Throughout his teenage years, Max was a fan of online gaming, with services such as Xbox Live and MMOs such as World of Warcraft (but he made sure schoolwork came first!). Around 2006, Max began reading tech blogs such as <a href="http://engadget.com">Engadget</a>, and found that commenting on blogs was a fun sport. Unfortunately, he had neither the technical knowledge nor the money to run a blog of his own.</p>
 
-<div class="uk-grid">
+<div class="row">
 
-<div class="uk-width-1-3">
+<div class="col-md-4">
 <img src="/img/minimaxirold.png" width="300" height="300">
 </div>
-<div class="uk-width-1-3">
+<div class="col-md-4">
 <img src="/img/minimaxirnew1.png" width="300" height="300">
 </div>
-<div class="uk-width-1-3">
+<div class="col-md-4">
 <img src="/img/minimaxir3.png" width="300" height="300">
 </div>
 </div>
@@ -301,51 +171,52 @@ margin-bottom: 0px;
 
 <p>In May 2013, Dreamhost killed the blog, so he migrated to Jekyll and Github Pages. In November 2013, he did a major redesign to a style inspired by that of modern startups.</p>
 
+<hr />
+
+<p>In September 2014, Max did another redesign with a more neutral color pallete to put more emphasis on the pretty charts.</p>
+
+      </div>
+    </div>
+  </div>
 </article>
 
 
-
-
-        </div>
-      </div>
-	  </div>
-	</div>
-  
-  	    
-  
-  <div class="footer-page">
-    <div class="uk-container uk-container-center footer">
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
     
-      <div class="uk-grid">
-	  <div class="uk-width-1-1">
-  
-         <footer  role="contentinfo">
-          <p>
-  Copyright &copy; 2014 - Max Woolf -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and the <a href="http://www.getuikit.com/">UIkit Framework</a></span> - Theme designed by Max Woolf
-</p>
-<p><strong>All opinions stated by Max Woolf are his own.</strong></p>
-
-        </footer>
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-  
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
   </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+
+
+    </div>
   </div>
-  </div>
-  </div>
-  
-  
-</body>
+</footer>
+
+  </body>
 </html>

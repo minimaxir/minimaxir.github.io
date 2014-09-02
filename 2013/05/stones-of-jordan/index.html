@@ -3,15 +3,21 @@
 <!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Diablo III Economy Broken by an Integer Overflow Bug | minimaxir | Max Woolf's Blog</title>
+ <title>Diablo III Economy Broken by an Integer Overflow Bug | minimaxir | Max Woolf's Blog</title>
   <meta name="author" content="Max Woolf">
 
+
   
- 
- 
- 
+  
+  
+  
+   
  <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@minimaxir">
 <meta name="twitter:creator" content="@minimaxir">
@@ -54,15 +60,9 @@
   
 
  
-  
  
   <meta property="og:locale"    content="en_us" />
   
-
-  
-<!--
-  <meta name="description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
-   -->
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -70,26 +70,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://minimaxir.com/2013/05/stones-of-jordan/">
+  <link rel="canonical" href="http://minimaxir.com/2013/05/stones-of-jordan">
   <link href="/favicon.png" rel="icon">
-  <!--<link href="/stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"> -->
-  
-  <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
-  
-  <link href="/stylesheets/uikit.css" rel="stylesheet">
-  <link href="/stylesheets/minimaxir-uikit.css" rel="stylesheet">
-  
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700' rel='stylesheet' type='text/css'>
   <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
-  <script src="/js/jquery.js"></script>
   <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <!--<script src="/javascripts/octopress.js" type="text/javascript"></script>-->
-  
- <script>
- $(document).ready(function() {
+  <script>
+   $(document).ready(function() {
  
   // Facebook
 	$( ".social.facebook" ).children().each(function(index,value) {
@@ -97,9 +91,9 @@
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.shares + "</span>");
-  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + data.likes + "</span>");
-  else facebook_button.html("<i class=\"ion-social-facebook\"></i><span class=\"uk-hidden-small\"> " + " 0</span>");
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
   });
   });
  
@@ -109,12 +103,9 @@
 	var url = twitter_button.attr("data");
 
   jQuery.getJSON("http://urls.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
-  twitter_button.html("<i class=\"ion-social-twitter\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
   });
   });
-  
- 
-  
   
   // LinkedIn
 	$( ".social.linkedin" ).children().each(function(index,value) {
@@ -122,160 +113,73 @@
 	var url = linkedin_button.attr("data");
 
   jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
-  linkedin_button.html("<i class=\"ion-social-linkedin\"></i><span class=\"uk-hidden-small\"> " + data.count + "</span>");
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
   });
   });
-  
-  
-  
-});
-</script>
- 
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts 
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
-
-  
+  });
+  </script>
 
 </head>
 
-<body   >
-
-
-
-  
-
- <div class="hero top">
-  
-
-
- <nav class="uk-navbar ">
- <div class="uk-container uk-container-center">
-<div class="uk-grid">
-	<div class="uk-width-1-1">
-
-  	      <ul class="uk-navbar-nav">
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
 	
-      
-   		<li class="uk-parent"><a href="/">Home</a></li>
-   	       
-    
-      
-   		<li class="uk-parent"><a href="/about">About</a></li>
-   	       
-    
-      
-   		<li class="uk-parent"><a href="/contact">Contact</a></li>
-   	       
-    
-</ul>
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
 
-<div class="uk-navbar-flip uk-hidden-small">
-<ul class="uk-navbar-nav">
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Diablo III Economy Broken by an Integer Overflow Bug</h1>
+        <div class="meta">
+          written 
 
-<li class="social facebook-p">
-			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
-		</li>
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-07T21:53:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+          
+
+in
+<span class="categories">
+  
+    
+          <a href="/bugs">Bugs</a></span>
+     
+          <a href="/gaming">Gaming</a></span>
+     
+  
+</span>
+
+
+        </div>
 		
-</ul>
-</div>
-
-  </div>
-  </div>
-  </div>
-
-  </nav>
-
-
-<style type="text/css">
-.hero.top {
-background: -moz-linear-gradient(top, rgba(44,62,80,0.9) 0%, rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/diablo31.png); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(44,62,80,0.9)), color-stop(100%,rgba(44,62,80,0.9))), url(http://minimaxir.com/img/diablo31.png); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/diablo31.png); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/diablo31.png); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/diablo31.png); /* IE10+ */
-background: linear-gradient(to bottom, rgba(44,62,80,0.9) 0%,rgba(44,62,80,0.9) 100%), url(http://minimaxir.com/img/diablo31.png); /* W3C */
-
-background-size: 100% auto;
-padding-bottom: 40px;
-background-position: 0px -100px;
-}
-</style>
-
- <div class="uk-container uk-container-center">
- 
- 
-
-	 <div class="uk-grid">
-    
-	
-	<div class="uk-width-1-1">
- <h1 class="title">Diablo III Economy Broken by an Integer Overflow Bug</h1>
-	
-	
-  </div>
-  </div>
+    <div class="row sharing index">
   
-    <div class="uk-grid">
-  <div class="uk-width-1-1">
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Diablo III Economy Broken by an Integer Overflow Bug - http://minimaxir.com/2013/05/stones-of-jordan/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
 
-
-		  <div class="uk-grid sharing">
-		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
-			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=Diablo III Economy Broken by an Integer Overflow Bug - http://minimaxir.com/2013/05/stones-of-jordan/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
-
-  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Diablo III Economy Broken by an Integer Overflow Bug&url=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
    
 			</div>
-	
-	</div>
-  </div>
-
-  </div>
-
-
-
-
-</div>
-
-
-  
-  <div class="uk-container uk-container-center" id="main post">
-    
-      <div class="uk-grid" data-uk-grid-margin>
-	  <div class="uk-width-1-1">
-        <div id="content">
-          <article class="hentry" role="article">
-
-<div class="uk-grid">
-    <div class="uk-width-large-2-3 uk-width-medium-1-1">
-  
-
-  <header>
-    <h1 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-07T21:53:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time></h1>
-</header>
-
-  
-			
-			
-			
-			
-      <p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
+		
+        <p><a href="http://us.battle.net/d3/en/">Diablo III</a>, Blizzard&rsquo;s highly-awaited online-only Action RPG released almost a year ago to the day, has had its share of technical difficulties. From <a href="http://knowyourmeme.com/memes/error-37">Error 37</a> to lag spikes that can cause hundreds of hours to go to waste, Blizzard has spent the past year improving the game backend to better accommidate the millions of active players.</p>
 
 <p>Diablo III is also noted for its economy, with an emphasis on a region-wide auction house where players can trade one-in-a-million items for millions and billions of gold. (inflation is crazy). Additionally, Diablo III emphasized the use of a Real World Auction House, where players can sell gold or items for real world cash.</p>
 
@@ -326,273 +230,78 @@ The missing amount, divided by 2:   2,147,483,648 gold
 
 <p>Let this be a lesson on what happens when you include an untested change at the last minute. You could break an entire economy. Eh, no big deal.</p>
 
-	  
-	  
-
-
-	  
-
-
-
+		
+		
+    <div class="row sharing index">
   
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
   
-      <div class="uk-grid">
-  <div class="uk-width-1-1">
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Diablo III Economy Broken by an Integer Overflow Bug - http://minimaxir.com/2013/05/stones-of-jordan/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
 
-
-		  <div class="uk-grid sharing">
-		  <div class="uk-width-1-3"><span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/stones-of-jordan/"><i class="ion-social-facebook"></i><span class="uk-hidden-small"> -</span></a></span></div>
-			<div class="uk-width-1-3"><span class="social twitter"><a href="http://twitter.com/home/?status=Diablo III Economy Broken by an Integer Overflow Bug - http://minimaxir.com/2013/05/stones-of-jordan/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="ion-social-twitter"></i><span class="uk-hidden-small"> -</span></a> </span></div>
-
-  <div class="uk-width-1-3"><span class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Diablo III Economy Broken by an Integer Overflow Bug&url=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="ion-social-linkedin"></i><span class="uk-hidden-small"> -</span></a> </span></div>
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/05/stones-of-jordan/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/stones-of-jordan/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
    
 			</div>
-	
-	</div>
+		
+		</div>
+    </div>
   </div>
-
-
-
-</div>
-
-<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
-
-<div class="sidebar-author">
-
-<h2>About The Author</h2>
-<div>Max Woolf is a 2012 graduate from Carnegie Mellon University in Business Administration with a concentration in Computing and Information Technology, and has been working as a Software QA Engineer in the San Francisco Bay Area for 2 years. Max also comments on blogs rather frequently.</div>
-
-<div>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
-</div>
-
-</div>
-
-  
- 
-		   <div class="sidebar-post">
-		   <h2><a href="http://minimaxir.com/2014/08/comments-about-comments/">  
-		   The Data From Our Comments to the FCC About Net Neutrality</a></h2>
-		   <div>The FCC released a dataset of about 450,000 comments against net neutrality. Looking at the data behind these comments, it is clear to see that the entire country is passionate against the rule changes to net neutrality.</div>
-		   </div>
-
-	  
- 
-		   <div class="sidebar-post">
-		   <h2><a href="http://minimaxir.com/2014/07/caucus-needed/">  
-		   The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress</a></h2>
-		   <div>Saying that the results were surprising would be the understatement of the century.</div>
-		   </div>
-
-	  
- 
-		   <div class="sidebar-post">
-		   <h2><a href="http://minimaxir.com/2014/07/show-hn/">  
-		   Impact of the New Show HN Section on Show HN Submissions</a></h2>
-		   <div>Did this feature help or harm Show HN submissions as a whole?</div>
-		   </div>
-
-	  
- 
-		   <div class="sidebar-post">
-		   <h2><a href="http://minimaxir.com/2014/07/online-class-charts/">  
-		   Who Performs the Best in Online Classes?</a></h2>
-		   <div>Which types of student characteristics lead to the best performance in online classes? That depends on how you define "performance."</div>
-		   </div>
-
-	  
- 
-		   <div class="sidebar-post">
-		   <h2><a href="http://minimaxir.com/2014/07/gender-course/">  
-		   The Interesting Percentages of Female Students in MIT and Harvard Online Courses</a></h2>
-		   <div>The proportion of female students in each of Harvard and MIT's online courses range from 5% to 49%.</div>
-		   </div>
-
-	 
-
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-<div class="uk-grid">
-    <div class="uk-width-large-2-3 uk-width-medium-1-1">
-	
-	
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-	
-	</div>
-	
-	
-	<div class="uk-width-large-1-3 uk-width-medium-1-1 sidebar">
-	
-	
-	  <footer>
-
-    
-      <div class="sharing">
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-	  <h2><i class="ion-arrow-left-c"></i> Previously...</h2>
-        <h2><a href="/2013/05/comments-everywhere/" title="Previous Post: A Blog Comment System That Steals Comments From Facebook">A Blog Comment System That Steals Comments From Facebook</a></h2>
-      
-	  
-	  
-	  
-      
-	  <h2><i class="ion-arrow-right-c"></i> Up Next...</h2>
-        <h2><a href="/2013/05/overly-attached-startup/" title="Next Post: When a Startup Sends a Passive-Aggressive Email Every Day">When a Startup Sends a Passive-Aggressive Email Every Day</a></h2>
-      
-	  
-	  <hr>
-	  
-	  <h2><i class="ion-ios7-bookmarks-outline"></i> Categories:</h2>
-	      <p class="meta">
-
-      
-
-<span class="categories">
-  
-    
-          <span class="badge"><a href="/bugs">Bugs</a></span>
-     
-          <span class="badge"><a href="/gaming">Gaming</a></span>
-     
-  
-</span>
-
-
-    </p>
-	  
-    </p>
-  </footer>
-	
-	
-	</div>
-	
-	</div>
-
-  
- 
-  
-  
-
-
-  
 </article>
 
 
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
 
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 2 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
 
 
 
         </div>
       </div>
-	  </div>
-	</div>
-  
-  	    
-	  <div class="hero max">
-  
+    </div>
 
- <style type="text/css">
-.hero.max {
-padding-top: 4px;
-margin-bottom: 0px;
-}
-</style>
- 
- <div class="uk-container uk-container-center">
-	 <div class="uk-grid" data-uk-grid-match>
-    
-	
-	<div class="uk-width-large-2-3 uk-width-medium-1-1">
-  <div>
-    <h1 class="name">Max Woolf</h1>
-	<div class="tagline alias">@minimaxir</div>
-	<div class="tagline">Software QA Engineer in San Francisco, CA</div>
-    <div class="tagline">Carnegie Mellon Class of 2012 Business IT Graduate</div>
-	 
-
-	 
-	 
-	 <div class="uk-grid sharing">
-	 <div class="uk-width-1-4">
-	 <span class="social facebook-p">
-			<a href="http://facebook.com/max.woolf" target="_blank"> <i class="ion-social-facebook"></i> </a>
-		</span>
-	 </div>
-	 
-	 <div class="uk-width-1-4">
-	 <span class="social twitter-p">
-			<a href="http://twitter.com/minimaxir" target="_blank"> <i class="ion-social-twitter"></i> </a>
-		</span>
-	 </div>
-	 
-	 <div class="uk-width-1-4">
-	 <span class="social linkedin-p">
-			<a href="http://linkedin.com/in/minimaxir" target="_blank"> <i class="ion-social-linkedin"></i> </a>
-		</span>
-	 </div>
-	 
-	 <div class="uk-width-1-4">
-	 <span class="social github-p">
-			<a href="http://github.com/minimaxir" target="_blank"> <i class="ion-social-github"></i> </a>
-		</span>
-	 </div>
-	 </div>
-	
-	
-  </div>
-  </div>
-  
-  <div class="uk-width-large-1-3 uk-width-medium-1-1 uk-hidden-small">
-
-
-	<a href="/about"><img src="/Max388.png"></a>
-	
-	</div>
-  
-  </div>
-</div>
-</div>
-
-  
-  <div class="footer-page">
-    <div class="uk-container uk-container-center footer">
-    
-      <div class="uk-grid">
-	  <div class="uk-width-1-1">
-  
-         <footer  role="contentinfo">
-          <p>
-  Copyright &copy; 2014 - Max Woolf -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and the <a href="http://www.getuikit.com/">UIkit Framework</a></span> - Theme designed by Max Woolf
-</p>
-<p><strong>All opinions stated by Max Woolf are his own.</strong></p>
-
-        </footer>
-  
-  
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite">
 
 <script type="text/javascript">
       var disqus_shortname = 'minimaxir';
@@ -610,22 +319,68 @@ margin-bottom: 0px;
     }());
 </script>
 
+</div>
+        </section>
+        
 
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
 
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2013/05/comments-everywhere/" title="Previous Post: A Blog Comment System That Steals Comments From Facebook"><i class="fa fa-angle-double-left"></i>  A Blog Comment System That Steals Comments From Facebook</a>
+        
 
-
-
-
-
-
-
-
-  
+        
+          <a class="pull-right" href="/2013/05/overly-attached-startup/" title="Next Post: When a Startup Sends a Passive-Aggressive Email Every Day">When a Startup Sends a Passive-Aggressive Email Every Day <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
   </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
   </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+
+
+    </div>
   </div>
-  </div>
-  
-  
-</body>
+</footer>
+
+  </body>
 </html>
