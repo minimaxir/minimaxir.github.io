@@ -1,6 +1,3 @@
-/*@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400italic);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700);*/
 
 
 body {
@@ -28,21 +25,14 @@ font-weight: 400;
 
 
 .hero {
-background: #2c3e50; /* Old browsers */
-background: -moz-linear-gradient(top,  #2c3e50 0%, #151d26 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2c3e50), color-stop(100%,#151d26)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #2c3e50 0%,#151d26 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #2c3e50 0%,#151d26 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #2c3e50 0%,#151d26 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #2c3e50 0%,#151d26 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c3e50', endColorstr='#151d26',GradientType=0 ); /* IE6-9 */
+background: url("/images/my_charts_hero_small.jpg");
+/*-webkit-animation:bgscroll 50s infinite linear;
+animation:bgscroll 50s infinite linear;*/
+text-shadow: 0px 0px 30px rgba(0,0,0,0.5)
 }
 
-.hero {
-background: url("/images/my_charts_hero_small.jpg");
--webkit-animation:bgscroll 50s infinite linear;
-animation:bgscroll 50s infinite linear;
-text-shadow: 0px 0px 30px rgba(0,0,0,0.5)
+.her-row , .archive-link {
+font-weight: 400;
 }
 
 @-webkit-keyframes bgscroll {
@@ -155,5 +145,9 @@ margin: 10px 15px;
 }
 
 .full-single-article ul li p {
-margin: 0px 0px;
+margin: -30px 0px 0px 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-weight: bold;
 }
