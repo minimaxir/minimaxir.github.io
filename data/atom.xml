@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-09-02T20:12:05-07:00</updated>
+  <updated>2014-09-23T08:03:06-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,151 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Statistical Difference Between 1-Star and 5-Star Reviews on Yelp]]></title>
+    <link href="http://minimaxir.com/2014/09/one-star-five-stars/"/>
+    <updated>2014-09-23T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2014/09/one-star-five-stars</id>
+    <content type="html"><![CDATA[<p>Many business in the real world encourage their customers to &ldquo;Rate us on Yelp!&rdquo;. <a href="http://www.yelp.com/">Yelp</a>, the &ldquo;best way to find local businesses,&rdquo; relies on user reviews to help its viewers find the best places. Both positive and negative reviews are helpful in this mission: positive reviews on Yelp identify the best places, negative reviews identify places where people <em>shouldn&rsquo;t</em> go. Usually, both positive and negative reviews are not based on objective attributes of the business, but on the experience the writer has with the establishment.</p>
+
+<p><img src="/img/one-star-five-stars/yelp_review_pos.png"></p>
+
+<p><img src="/img/one-star-five-stars/yelp_review_neg.png"></p>
+
+<p>I analyzed the language present in 1,125,458 Yelp Reviews using the dataset from the <a href="http://www.yelp.com/dataset_challenge">Yelp Dataset Challenge</a> containing reviews of businesses in the cities of Phoenix, Las Vegas, Madison, Waterloo and Edinburgh. Users can rate businesses 1, 2, 3, 4, or 5 stars. When comparing the most-frequent two-word phrases between 1-star and 5-star reviews, the difference is apparent.</p>
+
+<p><img src="/img/one-star-five-stars/Yelp-2-Gram-Small.jpg"></p>
+
+<p>The 5-star Yelp reviews contain many instances of &ldquo;Great&rdquo;, &ldquo;Good&rdquo;, and &ldquo;Happy&rdquo;. In contrast, the 1-star Yelp reviews use very little positive language, and instead discuss the amount of &ldquo;minutes,&rdquo; presumably after long and unfortunate waits at the establishment. (Las Vegas is one of the cities where the reviews were collected, which is why it appears prominently in both 1-star and 5-star reviews)</p>
+
+<p>Looking at three-word phrases tells more of a story.</p>
+
+<p><img src="/img/one-star-five-stars/Yelp-3-Gram-Small.jpg"></p>
+
+<p>1-Star reviews frequently contain warnings for potential customers, which promises that the author will &ldquo;never go back&rdquo; and a strong impression that issues stem from conflicts with &ldquo;the front desk&rdquo;, such as those at hotels. 5-star reviews &ldquo;love this place&rdquo; and &ldquo;can&rsquo;t wait to&rdquo; go back.</p>
+
+<p>Can this language be used to predict reviews?</p>
+
+<h1><span><i class="fa fa-line-chart"></i></span> Regression of Language</h1>
+
+<p>To determine the causal impact on positive and negative words on the # of stars given in a review, we can perform a simple linear regression of stars on the number of positive words in the review, the number of negative words in the review, and the number of words in the review itself (since the length of the review is related to the number of positive/negative words; the longer the review, the more words)</p>
+
+<p>A quick-and-dirty way to determine the number of positive/negative words in a given Yelp review is to compare each word of the review against a lexicon of positive/negative words, and count the number of review words in the lexicon. In this case, I use the <a href="http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">lexicons compiled by UIC professor Bing Liu</a>.</p>
+
+<p>Running a regression of # stars in a Yelp review on # positive words, # negative words, and # words in review, returns these results:</p>
+
+<p><div>
+  <pre><code class='html'>Coefficients:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;           Estimate  Std. Error  t value  Pr(&amp;gt;|t|)    
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(Intercept)    3.692      1.670e-03  2210.0   &amp;lt;2e-16 &lt;strong&gt;&lt;em&gt;
+pos_words      0.122      2.976e-04   411.3   &amp;lt;2e-16 &lt;/em&gt;&lt;/strong&gt;
+neg_words     -0.154      4.887e-04  -315.9   &amp;lt;2e-16 &lt;strong&gt;&lt;em&gt;
+review_words  -0.003      1.984e-05  -169.4   &amp;lt;2e-16 &lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Residual standard error: 1.119 on 1125454 degrees of freedom
+Multiple R-squared:  0.2589,    Adjusted R-squared:  0.2589
+F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &amp;lt; 2.2e-16</code></pre>
+</div>
+</p>
+
+<p>The regression output explains these things:</p>
+
+<ul>
+<li>If a reviewer posted a blank review with no text in it, that review gave an average rating of 3.692.</li>
+<li>For every positive word, the predicted average star rating given is increased by 0.122 on average (e.g. 8 positive words indicate a 1-star increase)</li>
+<li>For every negative word, the predicted average star rating given is decreased by 0.15 on average (e.g. 6-7 negative words indicate a 1-star decrease)</li>
+<li>The amount of words in the review has a lesser, negative effect. (A review that is 333 words indicates a 1-star decrease, but the average amount of words in a Yelp review is 130 words)</li>
+<li>This model explains 25.98% of the variation in the number of stars given in a review. This sounds like a low percentage, but is impressive for such a simple model using unstructured real-world data.</li>
+</ul>
+
+
+<p>All of these conclusions are <em>extremely</em> statistically significant due to the large sample size.</p>
+
+<p>Additionally, you could rephrase the regression as a logistic classification problem, where reviews rated 1, 2, or 3 stars are classified as &ldquo;negative,&rdquo; and reviews with 4 or 5 stars are classified as &ldquo;positive.&rdquo; Then, run the regression to determine the likelihood of a given review being positive. Running this regression (not shown) results in a logistic model with up to <em>75% accuracy</em>, a noted improvement over the &ldquo;no information rate&rdquo; of 66%, which is the model accuracy if you just guessed that every review was positive. The logistic model also has similar conclusions for the predictor variables as the linear model.</p>
+
+<p>It can be proven that language has a strong statistical effect on review ratings, but that&rsquo;s intuitive enough. How have review ratings changed?</p>
+
+<h1><span><i class="fa fa-bar-chart"></i></span> 1-Star and 5-Star Reviews, Visualized</h1>
+
+<p>Since 2005, Yelp has had incredible growth in the number of new reviews.</p>
+
+<p><img src="/img/one-star-five-stars/yelp-review-time-series.png"></p>
+
+<p>For that chart, it appears that each of the five rating brackets have grown at the same rate, but that isn&rsquo;t the case. Here&rsquo;s a chart of the rating brackets showing how the proportions of new reviews of each rating have changed over time.</p>
+
+<p><img src="/img/one-star-five-stars/yelp-review-time-proportion.png"></p>
+
+<p>Early Yelp had mostly 4-star and 5-star reviews, as one might expect for an early Web 2.0 startup where the primary users who would be the only ones who would put in the effort to write a review would be those who had positive experiences. However, the behavior from 2010 onward is interesting: the relative proportions of both 1-star reviews <em>and</em> 5-star reviews increases over time.</p>
+
+<p>As a result, the proportions of ratings in reviews from Yelp&rsquo;s beginning in 2005 and Yelp&rsquo;s present 2014 are incredibly different.</p>
+
+<p><img src="/img/one-star-five-stars/Yelp-2005-2014.png"></p>
+
+<p>More negativity, more positivity. Do they cancel out?</p>
+
+<h1><span><i class="fa fa-heart"></i></span> How Positive Are Yelp Reviews?</h1>
+
+<p>We can calculate relative <strong>positivity</strong> between reviews by taking the number of positive reviews in a review and dividing it by the number of words in the review itself.</p>
+
+<p>The average positivity among all reviews is <em>5.6%</em>. Over time, the positivity has been relatively flat.</p>
+
+<p><img src="/img/one-star-five-stars/yelp-review-time-series-positivity.png"></p>
+
+<p>Flat, but still increasing, mostly likely due to the increasing proportion of 5-star reviews. But the number of 1-star reviews also increased: do the two offset each other?</p>
+
+<p><img src="/img/one-star-five-stars/yelp-review-positivity.png"></p>
+
+<p>This histogram of positivity scores shows that 1-star reviews have lower positivity with rarely high positivity, and 5-star reviews rarely have low positivity and instead have very high positivity. The distribution for each star rating is close to a <a href="http://en.wikipedia.org/wiki/Normal_distribution">Normal distribution</a>, with each successive rating category peaking at increasing positivity values.</p>
+
+<p>The relative proportion of each star rating reinforces this.</p>
+
+<p><img src="/img/one-star-five-stars/yelp-review-positivity-density.png"></p>
+
+<p>Over half of the 0% positivity reviews are 1-star reviews, while over three-quarters of the reviews at the highest positivity levels are 5-star reviews. (note that the 2-star, 3-star, and 4-star ratings are not as significant at either extreme)</p>
+
+<h1><span><i class="fa fa-meh-o"></i></span> How Negative Are Yelp Reviews?</h1>
+
+<p>When working with the negativity of reviews, calculated by taking the number of negative words and dividing them by the number of total words in the review, the chart looks much different.</p>
+
+<p><img src="/img/one-star-five-stars/yelp-review-time-series-negativity.png"></p>
+
+<p>The average negativity among all reviews is <em>2.0%</em>. Since the average positivity is 5.6%, this implies that the net sentiment among all reviews is positive, despite the increase in 1-star reviews over time.</p>
+
+<p>The histogram of negative reviews looks much different as well.</p>
+
+<p><img src="/img/one-star-five-stars/yelp-review-negativity.png"></p>
+
+<p>Even 1-star reviews aren&rsquo;t completely negative all the time.</p>
+
+<p>The chart is heavily skewed right, making it difficult to determine the proportions of each rating at first glance.</p>
+
+<p>Henceforth here&rsquo;s another proportion chart.</p>
+
+<p><img src="/img/one-star-five-stars/yelp-review-negativity-density.png"></p>
+
+<p>At low negativity, the proportions of negative review scores (1-star, 2-stars, 3-stars) and positive review scores (4-stars, 5-stars) are about equal, implying that negative reviews can be just as civil as positive reviews. But high negativity is solely present in 1-star and 2-star reviews.</p>
+
+<p>From this article, you&rsquo;ve seen that Yelp reviews with 5-star ratings are generally positive, and Yelp reviews with 1-star are generally negative. Yes, this blog post is essentially &ldquo;Pretty Charts Made By Captain Obvious,&rdquo; but what&rsquo;s important is confirmation of these assumptions. Language plays a huge role in determining the ratings of reviews, and that knowledge could be applied to many other industries and review websites.</p>
+
+<h1><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></h1>
+
+<p>I&rsquo;d give this blog post a solid 4-stars. The content was great, but the length was long, although not as long as <a href="http://minimaxir.com/2014/06/reviewing-reviews/">some others</a>. Can&rsquo;t wait to read this post again!</p>
+
+<hr />
+
+<ul>
+<li><em>Yelp reviews were preprocessed with Python, by simultaneously converting the data from JSON to a tabular structure, tokenizing the words in the review, counting the positive/negative words, and storing bigrams and trigrams in a dictionary to later be exported for creaitng word clouds.</em></li>
+<li><em>All data analysis was performed using R, and all charts were made using ggplot2. <a href="http://www.pixelmator.com/">Pixelmator</a> was used to manually add relevant annotations when necessary.</em></li>
+<li><em>You can view both the Python and R code used to process and chart the data <a href="https://github.com/minimaxir/yelp-review-analysis">in this GitHub repository</a>. Note that since Yelp prevents redistribution of the data, the code may not be reproducible.</em></li>
+<li><em>You can download full-resolution PNGs of the two word clouds [5000x2000px] in <a href="https://www.dropbox.com/s/f20gwh9jvkibi4z/Yelp_Wordclouds_5000_200.zip?dl=0">this ZIP file</a> [18 MB]</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Data From Our Comments to the FCC About Net Neutrality]]></title>
@@ -372,43 +517,6 @@
 <ul>
 <li><em>Data was processed using R and all charts were made using ggplot2.</em></li>
 <li><em>You can view code necessary to reproduce these results  AND reproduce all the charts in <a href="https://github.com/minimaxir/online-class-charts">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Interesting Percentages of Female Students in MIT and Harvard Online Courses]]></title>
-    <link href="http://minimaxir.com/2014/07/gender-course/"/>
-    <updated>2014-07-04T10:30:00-07:00</updated>
-    <id>http://minimaxir.com/2014/07/gender-course</id>
-    <content type="html"><![CDATA[<p>At the end of May, <a href="http://www.harvard.edu/">Harvard</a> and <a href="http://web.mit.edu/">MIT</a> jointly <a href="http://newsoffice.mit.edu/2014/mit-and-harvard-release-de-identified-learning-data-open-online-courses">released a dataset</a> containing statistics about their online courses in the Academic Year of 2013. This <a href="http://dx.doi.org/10.7910/DVN/26147">Person-Course De-Identified dataset</a> contains 476,532 students who have taken up to 13 unique courses from a variety of topics:</p>
-
-<p><img src="/img/gender-course/mit-harvard-courses.png"></p>
-
-<p>About half of the courses involve subjects in the humanities, while the other half involve computer science and electrical engineering.</p>
-
-<p>One of the statistics I wanted to analyze was the gender ratio of students of online courses. In the data set, 425,105 students have a gender on record, with 311,534 male students (73.3%) and 113,571 female students (26.7%). This population proportion of female students is surprisingly low, especially since the male/female ratio is <a href="http://colleges.findthebest.com/q/1929/1270/What-is-the-male-to-female-ratio-at-Harvard-University">about 50:50</a> at MIT and Harvard themselves.</p>
-
-<p>Therefore, I took a looked at the gender distribution of each of the 13 unique courses. Is the gender ratio similar across all classes, or is there a huge difference between classes?</p>
-
-<p><img src="/img/gender-course/course-female.png"></p>
-
-<p>Yeah, there&rsquo;s a huge difference.</p>
-
-<p>The proportion of female students in each of Harvard and MIT&rsquo;s online courses range from <strong>5% to 49%</strong>.</p>
-
-<p>The top half of the gender ratios are all well above the 26.7%  threshold. All six of these courses are in the humanities or in the life sciences. The bottom half of the gender ratio are all well below the 26.7% threshold. All seven are these courses are engineering or computer science courses with a strong focus on mathematics. (for clarification, the <a href="https://www.edx.org/course/mitx/mitx-2-01x-elements-structures-1759#.U7ZfKvldV8F">Elements of Structures</a> course at MIT is a physics course with linear algebra programming)</p>
-
-<p>Is there a correlation? As it turns out, the reason that the average proportion of female students is so low is that both Harvard&rsquo;s Introduction to Computer Science I  (where 169,621 students took the class; about 40% of all students) and MIT&rsquo;s Introduction to CS/Programming (124,446 students total across both semesters) are so popular that the low percentage of women in those particular classes is drastically affecting the average.</p>
-
-<p>The presence and interest of <a href="http://www.whitehouse.gov/administration/eop/ostp/women">women in STEM fields</a> (science, technology, engineering, and mathematics) has been a topic of <a href="http://www.huffingtonpost.com/stella-kasdagli/should-women-avoid-jobs-in-stem_b_5549016.html">controversy</a> for a very long time. However, the chart shows that indeed the percentage of women interested in STEM classes is measurably lower than other fields, and hopefully awareness of this issue will help cause changes in the future.</p>
-
-<hr />
-
-<ul>
-<li><em>Data was processed using R and the chart was made using ggplot2. (w/ a few annotations added using a photo editor)</em></li>
-<li><em>You can view code necessary to reproduce these results in <a href="https://github.com/minimaxir/gender-course">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
 </ul>
 
 ]]></content>
