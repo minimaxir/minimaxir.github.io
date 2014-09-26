@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-09-23T08:03:06-07:00</updated>
+  <updated>2014-09-26T10:27:55-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Least Effective Method for Blocking Web Scraping of a Website]]></title>
+    <link href="http://minimaxir.com/2014/09/buzzscrape/"/>
+    <updated>2014-09-26T10:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/09/buzzscrape</id>
+    <content type="html"><![CDATA[<p>As someone who typically plays around with data from public website APIs, I figured it would be worthwhile to learn how to get data from websites the old-fashioned way: through force, via web scraping. <a href="http://en.wikipedia.org/wiki/Web_scraping">Web scraping</a> is a technique where the user downloads the raw HTML of a webpage, and parses the inherent structure of the webpage to extract the necessary data.</p>
+
+<p>In order to understand the mechanics behind web scraping, I used a tool from new Y Combinator startup <a href="https://www.kimonolabs.com/">Kimono Labs</a>, which allows the user to click structured elements of any website and quickly create an API that can access all the collected data and convert it into an easy-to-access form. My first target was BuzzFeed, since their social interaction data might be useful in determining how it became so big so quickly, and maybe also determine just how effective those stupid listicles are.</p>
+
+<h1><span><i class="fa fa-terminal"></i></span> Live Free and Scrape Hard</h1>
+
+<p>For example, here&rsquo;s a pair of typical BuzzFeed articles:</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_example.png"></p>
+
+<p>And here&rsquo;s the corresponding output of <a href="https://www.kimonolabs.com/apis/1x3l57k0">my Kimono Labs BuzzFeed scraper</a> for those two articles:</p>
+
+<div>
+  <pre><code class='html'>{
+         &quot;title&quot;: {
+          &quot;text&quot;: &quot;Stop Tweeting Instagram Links&quot;,
+          &quot;href&quot;: &quot;http://www.buzzfeed.com/katienotopoulos/stop-tweeting-instagram-links&quot;
+        },
+        &quot;content&quot;: &quot;I CANNOT REMAIN SILENT ON THIS ISSUE ANY LONGER.&quot;,
+        &quot;author&quot;: &quot;Katie Notopoulos&quot;,
+        &quot;num_responses&quot;: &quot;123&quot;
+      },
+      {
+        &quot;title&quot;: {
+          &quot;text&quot;: &quot;28 Things Your Gchat Availability Status Really Means&quot;,
+          &quot;href&quot;: &quot;http://www.buzzfeed.com/katieheaney/28-things-your-gchat-availability-status-really-means&quot;
+        },
+        &quot;content&quot;: &quot;Let’s chat.&quot;,
+        &quot;author&quot;: &quot;Katie Heaney&quot;,
+        &quot;num_responses&quot;: &quot;13&quot;
+      }
+}</code></pre>
+</div>
+
+
+<p>This data format (<a href="http://en.wikipedia.org/wiki/JSON">JSON</a>) can be processed and manipulated by nearly any modern programming language.</p>
+
+<p>Each BuzzFeed category page has about 22 articles, but the scraper can also access successive pages to retrieve more articles. This works by finding the URL of the next page by deriving the URL from the &ldquo;Older&rdquo; button if present on that page. Then the scraper can find the Older button on the page after that, and so forth, until all pages on BuzzFeed are scraped.</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_page.png"></p>
+
+<p>My BuzzFeed scraper, for some reason, only retrieved 10 pages maximum. So I used my QA skills and traced the exact route the scraper took, navigating through all 10 pages by clicking the Older button.</p>
+
+<p>What was on Page #10 shocked me. OMG. I could not believe my eyes.</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_disable.png"></p>
+
+<h1><span><i class="fa fa-times-circle-o"></i></span> No Scrape For You</h1>
+
+<p>The Older button is <em>disabled</em> on page 10? <strong>WHY?</strong></p>
+
+<p>BuzzFeed is a website created in the 21st century that <a href="http://www.nytimes.com/2014/08/11/technology/a-move-to-go-beyond-lists-for-content-at-buzzfeed.html?_r=0">just raised $50 million</a>. This is not a peculiar technical limitation due to bad coding or bad infrastructure; this is a deliberate functional aspect of the product.</p>
+
+<p>It is my personal mantra that if a startup has a particularly unintuitive UI/UX behavior, it&rsquo;s a form of &ldquo;growth hacking&rdquo; that my feeble brain cannot comprehend.</p>
+
+<p>Could the reason that BuzzFeed disables access to pages past 10 is that they want to prevent archive browsing, thereby putting more of an emphasis on more recent and more potentially-viral articles? That wouldn&rsquo;t make sense; if a person is so hooked on BuzzFeed articles that they are at Page 10, why stop them? It&rsquo;s still free page views and ad revenue.</p>
+
+<p>It&rsquo;s likely that BuzzFeed has statistics on how many users actually visit article pages up to Page 10. Perhaps their data analysts noted &ldquo;hey, only 0.0027% of our visitors actually read up to Page 10, anyone who actually reads that far is three standard deviations away from normal therefore they must be a web scraper!&rdquo; and recommend punitive action accordingly.</p>
+
+<p>I noted earlier that it definitely was not a technical limitation that kept pages greater than 10 from being accessed. If you look at the URLs of the BuzzFeed screenshots above, you&rsquo;ll notice a &ldquo;<em>p=2</em>&rdquo; parameter for Page 2 or a &ldquo;<em>p=10</em>&rdquo; parameter for Page 10. What happens if you just change the 10 to a 11?</p>
+
+<p>You go to Page 11. And you can go all the way to page <em>200</em> in some categories.</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_200.png"></p>
+
+<p>Incidentally, this is easier and more reliable to implement programmatically than searching for the Older button and extracting the URL.</p>
+
+<p>So the disabling of the button will only stop stupid web scrapers. Yes, that makes my BuzzFeed web scraper a stupid web scraper, <em>but that&rsquo;s not the point!</em> It just makes the BuzzFeed&rsquo;s motive behind disabling the button at Page 10  even more baffling.</p>
+
+<p>What did I do now that my quick-and-dirty BuzzFeed scraper couldn&rsquo;t parse a statistically significant amount of BuzzFeed articles? I did the only logical thing.</p>
+
+<p>I spent a weekend learning how to use <a href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a> in Python and parsed BuzzFeed the hard way, while changing the page number in the URL to pagenate through the pages. And I even was able to add new features to the scraper, such as simultaneously scraping the number of Facebook Shares a given BuzzFeed article generates.</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_listicles.png"></p>
+
+<p>Hey, there <em>is</em> a relationship between listicle size and social media engagement!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Statistical Difference Between 1-Star and 5-Star Reviews on Yelp]]></title>
@@ -147,7 +231,7 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &lt; 2.2e-16</code></pre>
 
 <ul>
 <li><em>Yelp reviews were preprocessed with Python, by simultaneously converting the data from JSON to a tabular structure, tokenizing the words in the review, counting the positive/negative words, and storing bigrams and trigrams in a dictionary to later be exported for creaitng word clouds.</em></li>
-<li><em>All data analysis was performed using R, and all charts were made using ggplot2. <a href="http://www.pixelmator.com/">Pixelmator</a> was used to manually add relevant annotations when necessary.</em></li>
+<li><em>All data analysis was performed using R, and a ll charts were made using ggplot2. <a href="http://www.pixelmator.com/">Pixelmator</a> was used to manually add relevant annotations when necessary.</em></li>
 <li><em>You can view both the Python and R code used to process and chart the data <a href="https://github.com/minimaxir/yelp-review-analysis">in this GitHub repository</a>. Note that since Yelp prevents redistribution of the data, the code may not be reproducible.</em></li>
 <li><em>You can download full-resolution PNGs of the two word clouds [5000x2000px] in <a href="https://www.dropbox.com/s/f20gwh9jvkibi4z/Yelp_Wordclouds_5000_200.zip?dl=0">this ZIP file</a> [18 MB]</em></li>
 </ul>
@@ -1454,49 +1538,6 @@ Location: http://imgur.com/p9lG2ss</code></p>
 <hr />
 
 <p><em>Data for English words from <a href="http://wordlist.sourceforge.net/">Kevin&rsquo;s Word List Page</a>, and data for the startup names/funding from <a href="http://info.crunchbase.com/about/crunchbase-data-exports/">CrunchBase&rsquo;s September Data Export</a>.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[1 in 3 Links Submitted to Reddit Go to Imgur or YouTube]]></title>
-    <link href="http://minimaxir.com/2013/09/reddit-imgur-youtube/"/>
-    <updated>2013-09-29T10:30:00-07:00</updated>
-    <id>http://minimaxir.com/2013/09/reddit-imgur-youtube</id>
-    <content type="html"><![CDATA[<p>If you&rsquo;ve been on <a href="http://www.reddit.com/">Reddit</a>, you may have noticed that many link submissions go to &ldquo;imgur.com&rdquo;. <a href="http://imgur.com/">Imgur</a>, an image hosting service that launched on Reddit a few years ago and has seen outstanding growth ever since, even <a href="http://venturebeat.com/2013/09/26/imgur-traffic-milestone-100m-uniques/">surpassing Reddit itself</a>.</p>
-
-<p>But how many of Reddit&rsquo;s many, many links are actually links to Imgur? As it turns out, Imgur, along with YouTube, account for <em>32%</em> of the links submitted to Reddit.</p>
-
-<p>Using Reddit&rsquo;s API, I have downloaded about 5 million link submissions from Reddit, accounting for nearly two months of activity from July 22nd to September 26th. I complied a list of the most-frequent link destination domains for the links submitted anywhere on Reddit. The results were interesting.</p>
-
-<!-- more -->
-
-
-<p><img src="http://minimaxir.com/img/links722_926.png"></p>
-
-<p>The imgur domains (i.imgur.com and imgur.com) account for <strong>23.7%</strong> of all links submitted to Reddit, and the YouTube domains (youtube.com and youtu.be) account for <strong>8.2%</strong> of all links.</p>
-
-<p>Two websites account for <strong>32%</strong> of all links submitted to Reddit (i.e. 1 in every 3 submitted links go to Imgur or YouTube), and no other website is remotely close. Not the meme sites, not the music sites, not the news sites, not the <em>porn</em> sites: Reddit is images and video.</p>
-
-<p>But <em>where</em> on Reddit are the Imgur and YouTube links most prominent?</p>
-
-<p>Here&rsquo;s a chart of the top subreddits, by percentage of all  Imgur links submitted on Reddit:</p>
-
-<p><img src="http://minimaxir.com/img/imgur722_926.png"></p>
-
-<p>It&rsquo;s interesting to note how the <em>funny</em> subreddit has more Imgur links than the <em>pics</em> subreddit.</p>
-
-<p>For YouTube, and the percentage of all YouTube links submitted on Reddit by subreddit:</p>
-
-<p><img src="http://minimaxir.com/img/youtube722_926.png"></p>
-
-<p><em>Videos</em> wins as you might expect, but <em>Music</em> is in second place. Along with <em>listentothis</em>,
-<em>Metal</em>, and <em>hiphopheads</em>, YouTube is the de facto website for <em>music</em> as well as video. Gaming is also  very popular with YouTube links, with <em>gaming</em>, <em>leagueoflegends</em>, and <em>Minecraft</em>.</p>
-
-<p>Images and video are the backbone of Reddit, and both Imgur and YouTube are the primary sources. Although, there appears to be a nontrivial demand for pure music websites such as <a href="https://soundcloud.com/">SoundCloud</a> and gaming video websites such as <a href="http://www.twitch.tv/">Twitch.tv</a> &hellip;could there be another big success story in the making?</p>
-
-<hr />
-
-<p><em>The tabulated data used to create each of the three charts is located at <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGxoVGFyX19hV2paMk5lOFRvNXlkcnc&amp;usp=sharing">this Google Spreadsheet</a> for your perusal.</em></p>
 ]]></content>
   </entry>
   

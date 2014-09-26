@@ -191,8 +191,13 @@ background: white;
 
 html {
 -webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
 }
 
 blockquote {
 color: #999
+}
+
+h1 .fa {
+margin-right: 20px
 }

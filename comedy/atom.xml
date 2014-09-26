@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Comedy | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//comedy/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-09-23T08:03:06-07:00</updated>
+  <updated>2014-09-26T10:27:55-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,93 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Least Effective Method For Blocking Web Scraping of a Website]]></title>
+    <link href="http://minimaxir.com/2014/09/buzzscrape/"/>
+    <updated>2014-09-26T10:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/09/buzzscrape</id>
+    <content type="html"><![CDATA[<p>As someone who typically plays around with data from public website APIs, I figured it would be worthwhile to learn how to get data from websites the old-fashioned way: through force, via web scraping. <a href="http://en.wikipedia.org/wiki/Web_scraping">Web scraping</a> is a technique where the user downloads the raw HTML of a webpage, and parses the inherent structure of the webpage to extract the necessary data.</p>
+
+<p>In order to understand the mechanics behind web scraping, I used a tool from new Y Combinator startup <a href="https://www.kimonolabs.com/">Kimono Labs</a>, which allows the user to click structured elements of any website and quickly create an API that can access all the collected data and convert it into an easy-to-access form. My first target was BuzzFeed, since their social interaction data might be useful in determining how it became so big so quickly, and maybe also determine just how effective those stupid listicles are.</p>
+
+<h1><span><i class="fa fa-terminal"></i></span> Live Free and Scrape Hard</h1>
+
+<p>For example, here&rsquo;s a pair of typical BuzzFeed articles:</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_example.png"></p>
+
+<p>And here&rsquo;s the corresponding output of <a href="https://www.kimonolabs.com/apis/1x3l57k0">my Kimono Labs BuzzFeed scraper</a> for those two articles:</p>
+
+<p><div>
+  <pre><code class='html'>{&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     &quot;title&quot;: {
+      &quot;text&quot;: &quot;Stop Tweeting Instagram Links&quot;,
+      &quot;href&quot;: &quot;http://www.buzzfeed.com/katienotopoulos/stop-tweeting-instagram-links&quot;
+    },
+    &quot;content&quot;: &quot;I CANNOT REMAIN SILENT ON THIS ISSUE ANY LONGER.&quot;,
+    &quot;author&quot;: &quot;Katie Notopoulos&quot;,
+    &quot;num_responses&quot;: &quot;123&quot;
+  },
+  {
+    &quot;title&quot;: {
+      &quot;text&quot;: &quot;28 Things Your Gchat Availability Status Really Means&quot;,
+      &quot;href&quot;: &quot;http://www.buzzfeed.com/katieheaney/28-things-your-gchat-availability-status-really-means&quot;
+    },
+    &quot;content&quot;: &quot;Let’s chat.&quot;,
+    &quot;author&quot;: &quot;Katie Heaney&quot;,
+    &quot;num_responses&quot;: &quot;13&quot;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;}</code></pre>
+</div>
+</p>
+
+<p>This data format (<a href="http://en.wikipedia.org/wiki/JSON">JSON</a>) can be processed and manipulated by nearly any modern programming language.</p>
+
+<p>Each BuzzFeed category page has about 22 articles, but the scraper can also access successive pages to retrieve more articles. This works by finding the URL of the next page by deriving the URL from the &ldquo;Older&rdquo; button if present on that page. Then the scraper can find the Older button on the page after that, and so forth, until all pages on BuzzFeed are scraped.</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_page.png"></p>
+
+<p>My BuzzFeed scraper, for some reason, only retrieved 10 pages maximum. So I used my QA skills and traced the exact route the scraper took, navigating through all 10 pages by clicking the Older button.</p>
+
+<p>What was on Page #10 shocked me. OMG. I could not believe my eyes.</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_disable.png"></p>
+
+<h1><span><i class="fa fa-times-circle-o"></i></span> No Scrape For You</h1>
+
+<p>The Older button is <em>disabled</em> on page 10? <strong>WHY?</strong></p>
+
+<p>BuzzFeed is a website created in the 21st century that <a href="http://www.nytimes.com/2014/08/11/technology/a-move-to-go-beyond-lists-for-content-at-buzzfeed.html?_r=0">just raised $50 million</a>. This is not a peculiar technical limitation due to bad coding or bad infrastructure; this is a deliberate functional aspect of the product.</p>
+
+<p>It is my personal mantra that if a startup has a particularly unintuitive UI/UX behavior, it&rsquo;s a form of &ldquo;growth hacking&rdquo; that my feeble brain cannot comprehend.</p>
+
+<p>Could the reason that BuzzFeed disables access to pages past 10 is that they want to prevent archive browsing, thereby putting more of an emphasis on more recent and more potentially-viral articles? That wouldn&rsquo;t make sense; if a person is so hooked on BuzzFeed articles that they are at Page 10, why stop them? It&rsquo;s still free page views and ad revenue.</p>
+
+<p>It&rsquo;s likely that BuzzFeed has statistics on how many users actually visit article pages up to Page 10. Perhaps their data analysts noted &ldquo;hey, only 0.0027% of our visitors actually read up to Page 10, anyone who actually reads that far is three standard deviations away from normal therefore they must be a web scraper!&rdquo; and recommend punitive action accordingly.</p>
+
+<p>I noted earlier that it definitely was not a technical limitation that kept pages greater than 10 from being accessed. If you look at the URLs of the BuzzFeed screenshots above, you&rsquo;ll notice a &ldquo;<em>p=2</em>&rdquo; parameter for Page 2 or a &ldquo;<em>p=10</em>&rdquo; parameter for Page 10. What happens if you just change the 10 to a 11?</p>
+
+<p>You go to Page 11. And you can go all the way to page <em>200</em> in some categories.</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_200.png"></p>
+
+<p>Incidentally, this is easier and more reliable to implement programmatically than searching for the Older button and extracting the URL.</p>
+
+<p>So the disabling of the button will only stop stupid web scrapers. Yes, that makes my BuzzFeed web scraper a stupid web scraper, <em>but that&rsquo;s not the point!</em> It just makes the BuzzFeed&rsquo;s motive behind disabling the button at Page 10  even more baffling.</p>
+
+<p>What did I do now that my quick-and-dirty BuzzFeed scraper couldn&rsquo;t parse a statistically significant amount of BuzzFeed articles? I did the only logical thing.</p>
+
+<p>I spent a weekend learning how to use <a href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a> in Python and parsed BuzzFeed the hard way, while changing the page number in the URL to pagenate through the pages. And I even was able to add new features to the scraper, such as simultaneously scraping the number of Facebook Shares a given BuzzFeed article generates.</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_listicles.png"></p>
+
+<p>Hey, there <em>is</em> a relationship between listicle size and social media engagement!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress]]></title>
