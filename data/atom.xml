@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-09-26T10:27:55-07:00</updated>
+  <updated>2014-10-06T08:00:28-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,140 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Quality, Popularity, and Negativity of 5.6 Million Hacker News Comments]]></title>
+    <link href="http://minimaxir.com/2014/10/hn-comments-about-comments/"/>
+    <updated>2014-10-06T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2014/10/hn-comments-about-comments</id>
+    <content type="html"><![CDATA[<p>Last February, I <a href="http://minimaxir.com/2014/02/hacking-hacker-news/">published an article</a> about <a href="https://news.ycombinator.com/">Hacker News</a>, a tech-oriented link aggregator run by startup accelerator <a href="http://www.ycombinator.com/">Y Combinator</a>. In that post, I analyed all submissions to date, and noted that the site has a strong and active userbase.</p>
+
+<p>In recent months, however, Hacker News has undergone criticism. A blog post by Danilo Campos titled &ldquo;<a href="http://danilocampos.com/2014/09/y-combinator-and-the-negative-externalities-of-hacker-news/">Y Combinator and the negative externalities of Hacker News</a>&rdquo;, notes that although Hacker News is a critical resource for young male techies based in Silicon Valley (<em>Disclosure: I am a young male techie based in Silicon Valley</em>), this has the consequence of excluding female hackers. Campos has even created a <a href="https://twitter.com/search?f=realtime&amp;q=%23hnwatch&amp;src=typd">#HNwatch</a> hashtag to catalog sexist and insensitive comments made by Hacker News users. As a long-time <a href="https://news.ycombinator.com/user?id=minimaxir">user on Hacker News</a>, I unfortunately <a href="https://twitter.com/minimaxir/status/468080907925340160">agree with this assessment</a> at times.</p>
+
+<p>In fairness, such comments are in the minority on Hacker News. Or are they?</p>
+
+<p>In order to better assess the quality, positivity, and negativity of Hacker News comments over the years, I&rsquo;ve downloaded 5,592,362 comments from Hacker News, the maximum number of comments possible, from its beginnings in 2006 to October 2014. Hopefully, these comments will answer whether Hacker News is experiencing a rise in quality, or if the complaints levied against HN are valid.</p>
+
+<p>Here&rsquo;s a <a href="https://docs.google.com/spreadsheets/d/1ZwonVX_KlDYhuhPnAAnVpdVRgu4LxldP74-c_kvOd5k/edit?usp=sharing">glance at Hacker News&rsquo;s best comments</a>, determined by the number of upvotes it receives from the Hacker News community, for each month since 2006:</p>
+
+<div><iframe width="100%" height="400px" src="https://docs.google.com/spreadsheets/d/1ZwonVX_KlDYhuhPnAAnVpdVRgu4LxldP74-c_kvOd5k/pubhtml?widget=true&amp;headers=false"></iframe></div>
+
+
+<p>There are interesting trends in this sample data set. The types of comments that became popular in 2006-2008 Hacker News were one-line quips, akin to those you would see in the comments on modern Reddit (which is a topic for another blog post). Highly-voted comments often come from the same people, especially those from Paul Graham (pg), Founder and then-President of Y Combinator.</p>
+
+<p><img src="/img/hn-comments/early_reddit.png"></p>
+
+<p>This may indicate a bias or <a href="http://en.wikipedia.org/wiki/Halo_effect">halo effect</a> where the commenter is more impactful than the comment itself. Additionally, some comments received many upvotes due to context: the top comment in December 2010 was simply &ldquo;sad.&rdquo; in a thread about <a href="https://news.ycombinator.com/item?id=2013248">Yahoo Shutting Down Delicious</a>, but the comment was made by Joshua Schachter (joshu), the creator of Delicious.</p>
+
+<p>Compare those older comments to those made between 2012-2014. Those comments are very long, insightful, and made by many different people. (including a <a href="https://news.ycombinator.com/item?id=4689643">comment by Danilo Campos himself</a> in October 2012)</p>
+
+<p>However, these are the good comments. The bad comments are <em>especially</em> bad.</p>
+
+<p>Here are a <a href="https://docs.google.com/spreadsheets/d/1IfbSDYVBXiHZCuMdHXgprhmeCVc4XDtOGizF9CSGyUo/edit?usp=sharing">set of Hacker News&rsquo;s worst comments</a> from each month where the comment has received a score of -3 or -4, the lowest score before the comment is automatically killed. (<em>Warning: comments may cause you to lose faith in humanity and/or be unintentionally hilarious</em>)</p>
+
+<div><iframe width="100%" height="400px" src="https://docs.google.com/spreadsheets/d/1IfbSDYVBXiHZCuMdHXgprhmeCVc4XDtOGizF9CSGyUo/pubhtml?widget=true&amp;headers=false"></iframe></div>
+
+
+<p>The types of bad comments haven&rsquo;t changed over the years. Hostile comments are immediately downvoted. It&rsquo;s worth noting that on Hacker News, you can be downvoted for being factually wrong.</p>
+
+<p>Some users are more active commenters than others. Out of Hacker News&rsquo;s 176,692 users who have made atleast 1 comment, only 48% of those commenters end up leaving two more comments, and only 6% of HN users end up leaving 100 or more comments total.</p>
+
+<p><img src="/img/hn-comments/n-comments.png"></p>
+
+<p>However, as users comment more on Hacker News and learn the intricacies of HN&rsquo;s culture, they become more skilled at creating quality comments which receive higher scores, which serve as an indicator of quality. As Hacker News users comment more and more, the average expected comment score for each successive post increases.</p>
+
+<p><img src="/img/hn-comments/n-comments-practice.png"></p>
+
+<p><em>(The faded area for all charts in this article represents a 95% confidence interval for the average at a given point; all of the confidence intervals are very narrow due to the sheer quantity of data present. Whoo, big data!)</em></p>
+
+<p>What are the trends behind the Hacker News comments? First, we must see how Hacker News comments has changed over time.</p>
+
+<h1><span><i class="fa fa-calendar"></i></span> Hacking Through The Years</h1>
+
+<p>As one would expect, the number of new comments posted on Hacker News each month has been gradually increasing proportional to its popularity, although the number of new comments per month has decreased starting in 2014, which indicates a slowing growth rate.</p>
+
+<p><img src="/img/hn-comments/monthly_total_comments.png"></p>
+
+<p>However, has Hacker News retained quality with its increasing notoriety? One way to check is to analyze the average amount of points of the comments. Hacker News comments start out at 1 point, and other users can upvote and downvote comments.</p>
+
+<p><img src="/img/hn-comments/monthly_average_points.png"></p>
+
+<p>The minimum average points score of any given comment was about 2 points, meaning that all comments received atleast 1 upvote on average. This trend has been increasing until 2011 when it peaked at about 4.5 points. Since then, the average has trended downward, with a particularly large drop starting at 2014.</p>
+
+<p>Therefore, starting in 2014, both quantity <em>and</em> quality are on a downward trend.</p>
+
+<p>Another way to gauge quality is to look at the average comment length. Are comments trending toward short quips, or are longform comments more popular?</p>
+
+<p><img src="/img/hn-comments/monthly_average_words.png"></p>
+
+<p>The length of the average comment has increased by about 10% over the years, which shows a slight increase in the overall thoughtfulness of HN comments.</p>
+
+<p>Has the average sentiment on Hacker News changed over the years? To gauge the relative sentiment of Hacker News comments, I compared each word of the comment against a lexicon of positive/negative words, and counted the number of review words in the lexicon. In this case, I used the <a href="http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">lexicons compiled by UIC professor Bing Liu</a>. This is the same method used in my <a href="http://minimaxir.com/2014/09/one-star-five-stars/">previous analysis of Yelp reviews</a>, where the technique was very effective. However, unlike Yelp, comments on Hacker News tend to make use of sarcasm, so this method may be less effective. (there isn&rsquo;t any easy method for detecting sarcasm, because who in the entire world would want an easy method for detecting sarcasm?)</p>
+
+<p>From that, we can calculate average positivity and average negativity for a given comment by dividing the number of positive/negative words respectively by the approximate number of words in the comment. Both metrics have converged slightly over the years.</p>
+
+<p><img src="/img/hn-comments/monthly_average_positive_negative.png"></p>
+
+<p>In September 2014, the average positivity of a comment is <em>3.2%</em>, while the average negativity of a comment is <em>2.3%</em> (leading to a 0.9% net positive sentiment).</p>
+
+<p>The nature of the comments Hacker News has definiately changed since the site&rsquo;s humble beginnings in 2006, but it&rsquo;s hard to determine if it&rsquo;s for the <em>better</em>.</p>
+
+<p>Let&rsquo;s look more into the nature of the upvote system.</p>
+
+<h1><span><i class="fa fa-arrow-up"></i></span> Free Points</h1>
+
+<p>As mentioned, the number of points on a new Hacker News comment starts at 1 point. Anyone can give an upvote, which increases the points value by one. However, long-time HN users can downvote posts, decreasing the score by 1. Downvoting has another effect; comments with 0 or fewer points turn an aesthetically-displeasing gray, in an effort to both hide them from the public eye and encourage corrective upvotes if necessary from users with OCD. In all other cases, the points score of a comment is hidden from other users in order to help prevent bandwagoning and the upvoting of comments just because they have lots of upvotes.</p>
+
+<p><img src="/img/hn-comments/distribution_comment_points.png"></p>
+
+<p>Over 50% of all comments simply have 1 or 2 points, with the proportion decreasing by a third for each successive point value. What&rsquo;s surprising is how few comments have 0 or fewer points: this shows that HN users do not like downvoting.</p>
+
+<p>I mentioned earlier that comment length could be used a proxy for comment quality. Is there a relationship between the number of points a comment receives and the length of a comment?</p>
+
+<p><img src="/img/hn-comments/distribution_comment_points_words.png"></p>
+
+<p>Surprisingly, yes! The effect of comment length on the number of points a comment received is likely not solely causal, but the correlation between the two values is helpful. (it is statistically unlikely to receive a lot of upvotes if your comment is short. The inverse is also true; a short comment is much more likely get downvoted.)</p>
+
+<p>Is there a similar correlation between sentiment and the number of points a comment receives?</p>
+
+<p><img src="/img/hn-comments/distribution_comment_points_sentiment.png"></p>
+
+<p>Nope. Both positivity and negativity are relatively static regardless of point values, although it&rsquo;s worth noting that comments with 0 or fewer points (downvoted comments) have a disproportionately high negativity.</p>
+
+<h1><span><i class="fa fa-ban"></i></span> Tone and Tolerance on Hacker News</h1>
+
+<p>There&rsquo;s a big difference between the language used in a Hacker News comment on a typical submission, and the language used in Hacker News submissions about women and diversity.</p>
+
+<p><img src="/img/hn-comments/hn_2_gram_small.jpg"></p>
+
+<p>This word cloud consists of bigrams made from 109k comments from HN submissions in September 2014, and from 21k comments in threads whose submission title contains &ldquo;women&rdquo;, &ldquo;female,&rdquo; or &ldquo;diversity.&rdquo; The language in the former is more neutral and about the content of the article (apparently Hacker News users <em>really</em> like to talk about Open Source software), while the submissions about gender and diversity trend to talk about tangent topics.</p>
+
+<p>How does the tone differ between the two groups of articles? Here&rsquo;s the distribution of the average number of positive words in comments per submission in September 2014:</p>
+
+<p><img src="/img/hn-comments/density_september_2014_hn.png"></p>
+
+<p>The average amount of positive words in a comment made in September 2014 is 2.16 words, and the average amount of negative words is 1.46, with both of those values being close to the respective statistical modes.</p>
+
+<p>Let&rsquo;s compare that to the distribution of comments made on all submissions about women and diversity.</p>
+
+<p><img src="/img/hn-comments/density_women.png"></p>
+
+<p>The average amount of positive words in a comment made in thread about gender and diversity is 2.48 words, a little higher than the average, and is also the most frequently occuring value. However, The average amount of positive words in a comment made in thread about gender and diversity is 2.10 words, a much higher increase. The average is to the right of the mode, indicating that the average is skewed-right by submissions with overly-negative comments. This may be why there is a greater perception of negativity for readers of comment threads about women and diversity.</p>
+
+<p>One of the <a href="http://paulgraham.com/hackernews.html">stated goals of Hacker News</a> is to avoid an <a href="http://en.wikipedia.org/wiki/Eternal_September">Eternal September</a>, where the quality of discourse drops and everyone leaves. It&rsquo;s clear that the quality of discourse has changed over the years: comments are longer, but not necessairly better. Positivity has decreased and negativity has increased. The difference between 2006 HN and 2014 HN is stark.</p>
+
+<p>Hacker News isn&rsquo;t the perfect tech news aggregator. The issue of inclusion is real, and despite the fact that sexist comments are in the minority, they need to stop. In 2014, both quantity <em>and</em> quality are decreasing. But since that Y Combinator has <a href="http://blog.ycombinator.com/diversity-and-startups">committed to ending sexism in tech</a> and <a href="http://blog.ycombinator.com/meet-the-people-taking-over-hacker-news">appointed new moderators</a> to control content quality, I&rsquo;m confident that things will improve in the future for Hacker News.</p>
+
+<hr />
+
+<ul>
+<li><em>Data was retrieved from Hacker News using <a href="https://hn.algolia.com/api">the official API</a>. The data was then stored in a PostgreSQL database, mostly so I could take advantage of that database&rsquo;s <a href="http://www.postgresql.org/docs/9.1/static/tutorial-window.html">window functions</a> capability.</em></li>
+<li><em>Charts, word clouds, and other miscellaneous data processing was done using R and ggplot2. Gathering the data from the API and extracting the bigrams for the word clouds was done using Python.</em></li>
+<li><em>You can access the code used to process the data, chart the data, and extract bigrams from the comments in <a href="https://github.com/minimaxir/hacker-news-comment-analysis">this GitHub repository</a>. This does not include the code for retrieving the comments from the Hacker News API and storing it in PostgreSQL: that code will be in a separate repository if released.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Least Effective Method For Blocking Web Scraping of a Website]]></title>
@@ -78,7 +212,7 @@
 
 <p>Could the reason that BuzzFeed disables access to pages past 10 is that they want to prevent archive browsing, thereby putting more of an emphasis on more recent and more potentially-viral articles? That wouldn&rsquo;t make sense; if a person is so hooked on BuzzFeed articles that they are at Page 10, why stop them? It&rsquo;s still free page views and ad revenue.</p>
 
-<p>It&rsquo;s likely that BuzzFeed has statistics on how many users actually visit article pages up to Page 10. Perhaps their data analysts noted &ldquo;hey, only 0.0027% of our visitors actually read up to Page 10, anyone who actually reads that far is three standard deviations away from normal therefore they must be a web scraper!&rdquo; and recommend punitive action accordingly.</p>
+<p>It&rsquo;s likely that BuzzFeed has statistics on how many users actually visit article pages up to Page 10. Perhaps their data analysts noted &ldquo;hey, only 0.0027% of our visitors actually read up to Page 10, anyone who actually reads that far is three standard deviations away from normal, therefore they must be a web scraper!&rdquo; and recommend punitive action accordingly.</p>
 
 <p>I noted earlier that it definitely was not a technical limitation that kept pages greater than 10 from being accessed. If you look at the URLs of the BuzzFeed screenshots above, you&rsquo;ll notice a &ldquo;<em>p=2</em>&rdquo; parameter for Page 2 or a &ldquo;<em>p=10</em>&rdquo; parameter for Page 10. What happens if you just change the 10 to a 11?</p>
 
@@ -383,82 +517,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &amp;lt; 2.2e-16</code></p
 <p>Other interesting edits by members of the House include <a href="http://en.wikipedia.org/wiki?curid=18951054">Apocalypse Now</a> (10 edits), <a href="http://en.wikipedia.org/wiki?curid=1161298">History of Italy as a monarchy and in the World Wars</a> (9 edits), and <a href="http://en.wikipedia.org/wiki?curid=34071">Whitney Houston</a> (9 edits)</p>
 
 <p>In the end, the members of the U.S. Congress have the same peculiar interests as typical Americans. However, when these people edit entries on topics in which they are directly involved, the potential bias threatens the integrity of all Wikipedia. And this is just the tip of the iceburg.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Impact of the New Show HN Section on Show HN Submissions]]></title>
-    <link href="http://minimaxir.com/2014/07/show-hn/"/>
-    <updated>2014-07-14T08:30:00-07:00</updated>
-    <id>http://minimaxir.com/2014/07/show-hn</id>
-    <content type="html"><![CDATA[<p>Hacker News, a tech-oriented link aggregator managed by Y Combinator, is a platform where software projects have launched to literally become multibillion-dollar companies. Submissions which contain the phrase &ldquo;Show HN&rdquo; usually designate a clever hack or weekend project. On <a href="http://blog.ycombinator.com/make-things-and-show-them">July 3rd 2014</a>, Hacker News <a href="https://news.ycombinator.com/show">created a section of Hacker News</a> just for these Show HN projects.</p>
-
-<p>Did this feature help or harm Show HN submissions as a whole?</p>
-
-<p>Over the past few years, the average number of Show HN submissions per day has steadily risen. (this is strongly correlated with the <a href="http://minimaxir.com/2014/02/hacking-hacker-news/">growth of Hacker News as a whole</a>)</p>
-
-<p><img src="/img/show-hn/show-hn-submissions.png"></p>
-
-<p>More on that spike at the end later.</p>
-
-<p>On Hacker News, users can upvote link submissions, which increases the point score of the submission; this point score is used as a rough proxy of link quality. The average amount of points per submission peaked in 2012, and has trended downward since then.</p>
-
-<p>Here&rsquo;s a chart of the points of Show HN submissions averaged by date of submission, then averaged across the previous 30-days to further smooth the variation and make the trend more apparent:</p>
-
-<p><img src="/img/show-hn/show-hn-points.png"></p>
-
-<p>Users can also comment on these Show HN posts. The average amount of comments has trended downward over time, albeit only slightly.</p>
-
-<p><img src="/img/show-hn/show-hn-comments.png"></p>
-
-<p>The combination of increased Show HN submissions and a decrease in point quality over time may imply that Show HN submissions have a low signal-to-noise ratio, i.e. a low amount of good submissions relative high amount of bad submissions.</p>
-
-<p>Hitting the front page of Hacker News is the first step to virality. When users upvote submissions on Hacker News, those submissions can hit the front page after achieving enough points (combined with other factors, such as submission age and quantity of other submissions). At the least, if a submission has 10 points, it has most likely hit the front page sometime in its lifespan.</p>
-
-<p>What proportion of the Show HN submissions hit the front page?</p>
-
-<p><img src="/img/show-hn/show-hn-perc-front.png"></p>
-
-<p>Over time, the amount of good Show HNs relative to the amount of bad Show HNs has been steadily decreasing.</p>
-
-<p>Has the new Show HN feature helped improve the signal-to-noise ratio?</p>
-
-<h1>Show and Tell HN</h1>
-
-<p>We can look at the immediate impact of the new Show HN section by comparing the behavior of submissions before and after the announcement. The red area in the following charts represents the daily behavior in the couple months before the release (with the red horizontal dotted line representing the statistical average for the corresponding measurement), and the blue area/blue line represents the behavior after the release.</p>
-
-<p>When the Show HN feature was first announced, everyone rushed to make a submission to test it out, and it showed. In fact, the number of submissions for every day after the feature was added was greater than the average number of submissions from before the addition.</p>
-
-<p><img src="/img/show-hn/show-hn-end-submissions.png"></p>
-
-<p>Average number of daily submissions before Show HN section is <strong>19.13</strong> submissions/day, average after is <strong>53.44</strong> submissions/day.</p>
-
-<p>Average submission points and average submission comments (both aggregated by date of submission for smoothing) received a slight boost too.</p>
-
-<p><img src="/img/show-hn/show-hn-end-points.png"></p>
-
-<p><img src="/img/show-hn/show-hn-end-comments.png"></p>
-
-<p>Average number of daily points before Show HN section is <strong>11.40</strong> points/submission/day, average after is <strong>12.12</strong> points/submission/day.</p>
-
-<p>Average number of daily comments before Show HN section is <strong>6.57</strong> comments/submission/day, average after is <strong>7.16</strong> comments/submission/day.</p>
-
-<p>The percentage of Show HN submissions that hit the front page, however, moves in a different direction.</p>
-
-<p><img src="/img/show-hn/show-hn-end-perc-front.png"></p>
-
-<p>Average daily % of Show HN submissions which hit the front page before Show HN section is <strong>19.33%</strong>, average after is <strong>16.37%</strong>.</p>
-
-<p>While the Show HN section gives more focus to Show HN submissions, the increased motivation for making Show HN submissions does not necessarily imply that the submissions will be better. It will take more time to see of the downward trend of Show HN quality continues over time.</p>
-
-<hr />
-
-<ul>
-<li><em>Data was processed using R and all charts were made using ggplot2.</em></li>
-<li><em>You can view the data of all the Show HN submissions and the derived moving averages <a href="https://docs.google.com/spreadsheets/d/1JHIlzYdsavWnw8Y5efHrOHCo3-WFGtIosJ2WqIV_Bn4/edit?usp=sharing">in this Google Sheet</a>.</em></li>
-<li><em>You can view code necessary to reproduce these results  and reproduce all the charts in <a href="https://github.com/minimaxir/show-hn">this GitHub repository</a>. This repository also includes a .csv of all ~20,000 Show HNs obtained.</em></li>
-</ul>
-
 ]]></content>
   </entry>
   
