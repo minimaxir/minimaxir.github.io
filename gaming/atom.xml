@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gaming | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//gaming/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-10-06T08:00:28-07:00</updated>
+  <updated>2014-10-29T22:47:45-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -185,6 +185,22 @@
 <p>Although the issue was not widespread, Bungie decided to do a recall of all Myth II CDs and redistribute a version 1.1, eliminating most of the game&rsquo;s profits in the process.</p>
 
 <p>You could say that the Myth II version 1.0 uninstaller worked exactly as intended: it did indeed uninstall the game. It just worked <em>too</em> well.</p>
+
+<hr />
+
+<p><strong>UPDATE October 2014</strong>: A year after this article was posted, someone submitted this article to the Reddit subreddit <a href="http://www.reddit.com/r/todayilearned/">todayilearned</a>, where it <a href="http://www.reddit.com/r/todayilearned/comments/2ka43x/til_that_in_the_game_myth_ii_soulblighter_due_to/">subsequently went viral</a>. In the comments, Reddit user rdmartell, a <a href="https://www.freelancer.com/u/rdmartell.html">former developer at Bungie</a>, posted more insight into the glitch:</p>
+
+<blockquote><p>So I wrote the Myth TFL installer (not this one). The reason this happened is because you could install other maps and whatnot, and to make the uninstall clean, we had to recursively delete your data folder.
+In the sequel, somehow that code (which did sanity checks) was used to delete the applications directory, instead of just the data directory in the applications directory.
+So if you installed it on C:/, it would delete everything recursively from there.
+Nowadays, uninstall usually leaves any user installed files (like saves or downloaded content) but at the time, as the article suggests, hard drive space was more precious. Also, I wasn&rsquo;t there for this issue, so I don&rsquo;t know the above for sure, but having written the previous installer, I&rsquo;m pretty confident that&rsquo;s what happened.</p></blockquote>
+
+<p>Later in the thread:</p>
+
+<blockquote><p>I actually think the bug was only there if you installed directly to root; not even in a folder. As I recall, that was the only way it deleted your entire HDD.
+Unless it was discovered later by going into the uninstalled code that it could happen in other cases (which I never heard about), I think the issue was a bit overblown by the media. Still, the last thing you want to be responsible for is nuking a customer&rsquo;s hard drive.</p></blockquote>
+
+<p>Small world.</p>
 ]]></content>
   </entry>
   

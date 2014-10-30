@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-10-06T08:00:28-07:00</updated>
+  <updated>2014-10-29T22:47:45-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -18,13 +18,13 @@
     <link href="http://minimaxir.com/2014/10/hn-comments-about-comments/"/>
     <updated>2014-10-06T08:00:00-07:00</updated>
     <id>http://minimaxir.com/2014/10/hn-comments-about-comments</id>
-    <content type="html"><![CDATA[<p>Last February, I <a href="http://minimaxir.com/2014/02/hacking-hacker-news/">published an article</a> about <a href="https://news.ycombinator.com/">Hacker News</a>, a tech-oriented link aggregator run by startup accelerator <a href="http://www.ycombinator.com/">Y Combinator</a>. In that post, I analyed all submissions to date, and noted that the site has a strong and active userbase.</p>
+    <content type="html"><![CDATA[<p>Last February, I <a href="http://minimaxir.com/2014/02/hacking-hacker-news/">published an article</a> about <a href="https://news.ycombinator.com/">Hacker News</a>, a tech-oriented link aggregator run by startup accelerator <a href="http://www.ycombinator.com/">Y Combinator</a>. In that post, I analyzed all submissions to date, and noted that the site has a strong and active userbase.</p>
 
 <p>In recent months, however, Hacker News has undergone criticism. A blog post by Danilo Campos titled &ldquo;<a href="http://danilocampos.com/2014/09/y-combinator-and-the-negative-externalities-of-hacker-news/">Y Combinator and the negative externalities of Hacker News</a>&rdquo;, notes that although Hacker News is a critical resource for young male techies based in Silicon Valley (<em>Disclosure: I am a young male techie based in Silicon Valley</em>), this has the consequence of excluding female hackers. Campos has even created a <a href="https://twitter.com/search?f=realtime&amp;q=%23hnwatch&amp;src=typd">#HNwatch</a> hashtag to catalog sexist and insensitive comments made by Hacker News users. As a long-time <a href="https://news.ycombinator.com/user?id=minimaxir">user on Hacker News</a>, I unfortunately <a href="https://twitter.com/minimaxir/status/468080907925340160">agree with this assessment</a> at times.</p>
 
 <p>In fairness, such comments are in the minority on Hacker News. Or are they?</p>
 
-<p>In order to better assess the quality, positivity, and negativity of Hacker News comments over the years, I&rsquo;ve downloaded 5,592,362 comments from Hacker News, the maximum number of comments possible, from its beginnings in 2006 to October 2014. Hopefully, these comments will answer whether Hacker News is experiencing a rise in quality, or if the complaints levied against HN are valid.</p>
+<p>In order to better assess the quality, popularity, and negativity of Hacker News comments over the years, I&rsquo;ve downloaded 5,592,362 comments from Hacker News, the maximum number of comments possible, from its beginnings in 2006 to October 2014. Hopefully, these comments will answer whether Hacker News is experiencing a rise in quality, or if the complaints levied against HN are valid.</p>
 
 <p>Here&rsquo;s a <a href="https://docs.google.com/spreadsheets/d/1ZwonVX_KlDYhuhPnAAnVpdVRgu4LxldP74-c_kvOd5k/edit?usp=sharing">glance at Hacker News&rsquo;s best comments</a>, determined by the number of upvotes it receives from the Hacker News community, for each month since 2006:</p>
 
@@ -88,7 +88,7 @@
 
 <p>In September 2014, the average positivity of a comment is <em>3.2%</em>, while the average negativity of a comment is <em>2.3%</em> (leading to a 0.9% net positive sentiment).</p>
 
-<p>The nature of the comments Hacker News has definiately changed since the site&rsquo;s humble beginnings in 2006, but it&rsquo;s hard to determine if it&rsquo;s for the <em>better</em>.</p>
+<p>The nature of the comments Hacker News has definitely changed since the site&rsquo;s humble beginnings in 2006, but it&rsquo;s hard to determine if it&rsquo;s for the <em>better</em>.</p>
 
 <p>Let&rsquo;s look more into the nature of the upvote system.</p>
 
@@ -132,7 +132,7 @@
 
 <p>The average amount of positive words in a comment made in thread about gender and diversity is 2.48 words, a little higher than the average, and is also the most frequently occuring value. However, The average amount of positive words in a comment made in thread about gender and diversity is 2.10 words, a much higher increase. The average is to the right of the mode, indicating that the average is skewed-right by submissions with overly-negative comments. This may be why there is a greater perception of negativity for readers of comment threads about women and diversity.</p>
 
-<p>One of the <a href="http://paulgraham.com/hackernews.html">stated goals of Hacker News</a> is to avoid an <a href="http://en.wikipedia.org/wiki/Eternal_September">Eternal September</a>, where the quality of discourse drops and everyone leaves. It&rsquo;s clear that the quality of discourse has changed over the years: comments are longer, but not necessairly better. Positivity has decreased and negativity has increased. The difference between 2006 HN and 2014 HN is stark.</p>
+<p>One of the <a href="http://paulgraham.com/hackernews.html">stated goals of Hacker News</a> is to avoid an <a href="http://en.wikipedia.org/wiki/Eternal_September">Eternal September</a>, where the quality of discourse drops and everyone leaves. It&rsquo;s clear that the quality of discourse has changed over the years: comments are longer, but not necessarily better. Positivity has decreased and negativity has increased. The difference between 2006 HN and 2014 HN is stark.</p>
 
 <p>Hacker News isn&rsquo;t the perfect tech news aggregator. The issue of inclusion is real, and despite the fact that sexist comments are in the minority, they need to stop. In 2014, both quantity <em>and</em> quality are decreasing. But since that Y Combinator has <a href="http://blog.ycombinator.com/diversity-and-startups">committed to ending sexism in tech</a> and <a href="http://blog.ycombinator.com/meet-the-people-taking-over-hacker-news">appointed new moderators</a> to control content quality, I&rsquo;m confident that things will improve in the future for Hacker News.</p>
 
