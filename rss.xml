@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-10-29T22:47:45-07:00</updated>
+  <updated>2014-12-16T07:57:21-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,156 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Statistical Analysis of 142 Million Reddit Submissions]]></title>
+    <link href="http://minimaxir.com/2014/12/reddit-statistics/"/>
+    <updated>2014-12-16T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/12/reddit-statistics</id>
+    <content type="html"><![CDATA[<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_logo.jpg"></p>
+
+<p>Reddit, the &ldquo;front page of the Internet&rdquo;, is well-deserving of that title. Founded in 2005 for the more tech-savvy crowd, <a href="http://reddit.com">Reddit</a> is a news aggregator where users can submit links to interesting websites and other media, and form communities on specific interests which are known as &ldquo;subreddits.&rdquo; Since 2008, its popularity has grown exponentially.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/all_cumsub_reddit.png"></p>
+
+<p>More impressively, the number of new submissions each month to Reddit increases, with slight declines offset by large gains in the next month.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/growth_rate_reddit.png"></p>
+
+<p>Although Reddit first launched in 2005, it didn&rsquo;t hit mainstream until much later. At first, Reddit was at peace. But everything changed when the Digg Nation attacked.  <a href="http://digg.com/">Digg</a>, which was the leading news aggregator at the time, <a href="http://www.wired.com/2010/03/digg-redesign-social-web/">announced a redesign in March 2010</a> which rolled out that summer. The redesign was profit-maximizing, which massively irritated Digg&rsquo;s userbase. The majority of these users ended up flocking to Reddit, drastically changing its userbase and affecting Reddit&rsquo;s submissions as a whole. As a result, it&rsquo;s required to look at Reddit&rsquo;s entire history if possible when analyzing any statistical analysis of it. (although, as a warning, <a href="http://en.wikipedia.org/wiki/Correlation_does_not_imply_causation">correlation does not imply causation</a>).</p>
+
+<p>I, <a href="http://www.reddit.com/user/minimaxir">/u/minimaxir</a>, have personally been a redditor for 3 years. I&rsquo;ve previously done statistical analyses of Reddit data before, such as looking at which <a href="http://minimaxir.com/2013/11/subreddit-size/">subreddits are the largest</a> or determining which sites on Reddit are <a href="http://minimaxir.com/2013/09/reddit-imgur-youtube/">the most-frequently submitted</a>, but those were written with incomplete data. Thanks to <a href="http://redditanalytics.com">Reddit Analytics</a>, I have obtained a data dump and I subsequently constructed a database to store all Reddit Submissions from November 2007 to the end of October 2014: 142,159,793 submissions in total. And this data is very curious and very, <em>very</em> memetic.</p>
+
+<h1><i class="fa fa-reddit"></i> A Quick Glance At Reddit</h1>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_sample.png"></p>
+
+<p>Reddit ranks submissions through a combination of upvotes from users, downvotes, and age of submission. The average score of a submission, which is the number of upvotes minus the number of downvotes, has changed throughout the years.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/all_score_reddit.png"></p>
+
+<p>The average score of a submission was relatively constant until the Digg announcement, then it started to increase, as the number of potential upvoters for a submission also increased. Interestingly the score, has decreased in recent months; it is entirely possible that the average is decreasing due to an increase in low-scoring posts.</p>
+
+<p>Let&rsquo;s look at the average scores of Top 100 subreddits by submission volume to see which are the most well-received.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/top_score_reddit.png"></p>
+
+<p><em><strong>Note</strong>: The shaded areas in charts for this article represent 95% percent confidence intervals for the true average of a given month/subreddit. Since there is a </em>lot<em> of submission data, the confidence intervals are usually incredibly narrow.</em></p>
+
+<p>Image subreddits, such as <a href="http://reddit.com/r/gifs">/r/gifs</a>, <a href="http://reddit.com/r/cringepics">/r/cringepics</a>, and <a href="http://reddit.com/r/reactiongifs">/r/reactiongifs</a> are clearly the most well-received on Reddit. (I plan to do a more in-depth analysis of this behavior in another blog post).</p>
+
+<p>Users can also leave comments on submissions to add insight and jokes. How has the Digg announcement affected the number of comments?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/all_comments_reddit.png"></p>
+
+<p>As it turns out, there&rsquo;s a <em>very</em> significant change in the average number of comments pre and post-Digg announcement. From April 2010 to August 2010, the average number of comments increased from 4.79 to 7.91, nearly doubling the number of comments in less than half a year.</p>
+
+<p>Many top subreddits encourage more discussion than others.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/top_comments_reddit.png"></p>
+
+<p><a href="http://reddit.com/r/IAmA">/r/IAmA</a> is Reddit&rsquo;s flagship subreddit (which <a href="http://www.redditblog.com/2014/09/announcing-official-reddit-ama-app_2.html">has its own official app</a>!), where users can ask questions to noteworthy people: it&rsquo;s not surprising to see it far at the top. Sports and video games are the top topics for discussion on Reddit.</p>
+
+<h1><i class="fa fa-comments"></i> reddit.self</h1>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_self.png"></p>
+
+<p>An alternate form on Reddit is the self-post, where the user submits text instead of a link to an external website or image. These posts are used to make announcements and encourage discussion on a specific topic. Some large subreddits have even switched to &ldquo;self-post only&rdquo; mode.</p>
+
+<p>The popularity of self-posts has risen significantly over the year, and new submissions of self-posts now account for nearly half of all the new submissions on Reddit! (45.3% in October 2014)</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/self_proportion_reddit.png"></p>
+
+<p>In theory, self-posts make subreddits contain higher-quality content. How do the scores of self-posts compare to that of normal posts?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/self_score_reddit.png"></p>
+
+<p>Before the Digg announcement, self-submissions were more noteworthy than regular submissions. Afterwards, self submissions receive about &frac14;th of the score of a normal submission on average. This is likely related to the substantial increase in self posts seen above: the rise of self-posts also leads to a rise in low-quality self-posts, which will reduce the average.</p>
+
+<p>But have the self-posts succeeded in encouraging more discussion on posts?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/self_comments_reddit.png"></p>
+
+<p>Yes. They have. Despite having &frac14;th of the score, self-submissions receive about twice as many comments on average.</p>
+
+<h1><i class="fa fa-ban"></i> Not Safe For Procrastinating At Work</h1>
+
+<p><em>[Sample image omitted for obvious reasons.]</em></p>
+
+<p>Reddit has received an infamous reputation for being the internet&rsquo;s primary source of Not Safe for Work (NSFW) images and links with an age limit of 18+. Not all of the content is sexual; occasionally, shockingly violent yet important images are submitted to the primary subreddits as well.</p>
+
+<p>The proportion of new NSFW content submitted to Reddit each month has increased gradually over the years, but it&rsquo;s still in the minority of submissions. (7.5% of all submissions in October 2014)</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/nsfw_proportion_reddit.png"></p>
+
+<p>If the proportion of NSFW content is relatively low, then how has it achieved such a reputation? How well does NSFW content score relative to non-NSFW content?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/nsfw_score_reddit.png"></p>
+
+<p>NSFW content scores are nearly double that of non-NSFW content. Higher community approval of sexual content as opposed to nonsexual content isn&rsquo;t too surprising.</p>
+
+<p>Reddit&rsquo;s community operates on pseudonyms instead of tying users to a real identity. Do users comment on NSFW submissions as often as normal submissions?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/nsfw_comments_reddit.png"></p>
+
+<p>The number of comments on NSFW submissions is only slightly less than that on average, but there&rsquo;s a larger amount of uncertainty for that particular average due to the smaller proportion. Most internet users are lurkers and not contributors; it&rsquo;s likely that NSFW media is a more noninteractive experience. (<em>ahem</em>)</p>
+
+<h1><i class="fa fa-globe"></i> Reddit In The City</h1>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_sf.png"></p>
+
+<p>Reddit users visit the site from all over the world. Although we cannot determine the location from where a user makes a submission, we can look at subreddits whose primary focus is a given location to see if there are any geographic trends.</p>
+
+<p>I took a list of the <a href="http://www.reddit.com/comments/joqru/a_list_of_the_most_popular_city_reddits/">most popular city subreddits</a>, such as <a href="http://reddit.com/r/toronto">/r/toronto</a> and <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a> and compared the average score of their submissions.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/city_score_reddit.png"></p>
+
+<p><a href="http://reddit.com/r/Seattle">/r/Seattle</a> has an unusually high average score of 24.7 per submission and <a href="http://reddit.com/r/montreal">/r/montreal</a> has an unusually low average score of 10.7. There does not be any clear geographic trends in the data: <a href="http://reddit.com/r/losangeles">/r/losangeles</a> and <a href="http://reddit.com/r/bayarea">/r/bayarea</a> are at the top but <a href="http://reddit.com/r/sandiego">/r/sandiego</a> is at the bottom, plus <a href="http://reddit.com/r/Dallas">/r/Dallas</a> and <a href="http://reddit.com/r/Austin">/r/Austin</a> are on the opposite areas of the chart too. As a Pennsylvania native, I find it funny that <a href="http://reddit.com/r/pittsburgh">/r/pittsburgh</a> and <a href="http://reddit.com/r/philadelphia">/r/philadelphia</a> are next to each other.</p>
+
+<p>Are the average number of comments affected by geography?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/city_comments_reddit.png"></p>
+
+<p>There are a few more parings here than with average scores: <a href="http://reddit.com/r/montreal">/r/montreal</a>  and <a href="http://reddit.com/r/toronto">/r/toronto</a> are paired as non-US cities, <a href="http://reddit.com/r/Portland">/r/Portland</a> and <a href="http://reddit.com/r/Seattle">/r/Seattle</a> are paired as West Coast cities, <a href="http://reddit.com/r/Austin">/r/Austin</a> and <a href="http://reddit.com/r/houston">/r/houston</a> are paired as Texas cities, and all of <a href="http://reddit.com/r/bayarea">/r/bayarea</a>, <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a>, and <a href="http://reddit.com/r/sandiego">/r/sandiego</a> are paired as California cities. It&rsquo;s still not a perfect relationship, however.</p>
+
+<h1><i class="fa fa-meh-o"></i> Positivity and Negativity</h1>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_neg.png"></p>
+
+<p>Reddit also has a reputation of being both positive and negative. You have communities like <a href="http://www.reddit.com/r/aww">/r/aww</a> which share cute cat photos, and then you have communities like <a href="http://www.reddit.com/r/conspiracy">/r/conspiracy</a> which&hellip;don&rsquo;t.</p>
+
+<p>I took the top 100 subreddits by # of all-time submissions and found which ones were the most positive and negative. This was calculated by comparing each word of the submission title against a lexicon of positive/negative words, and count the number of review words in the lexicon. In this case, I use the lexicons compiled by <a href="http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">UIC professor Bing Liu</a>. A normalized positivity/negativity score is calculated by taking the average number of positive/negative words for the subreddit and dividing it by the average number of words in titles for submissions to the subreddit.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/all_sentiment_reddit.png"></p>
+
+<p>Both positivity and negativity have been pretty equal for Reddit&rsquo;s entirety, but that doesn&rsquo;t mean that Reddit is neutral.</p>
+
+<p>Let&rsquo;s look at the most positive of the top Reddit communities:</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_subreddit_positivity.png"></p>
+
+<p>The top communities are the communities which rely on community and general good feelings (this includes /r/nsfw, <em>ahem</em>). <a href="http://www.reddit.com/r/cookingrecipesstuff">/r/CookingRecipesStuff</a> has the greatest positivity because it&rsquo;s apparently run by a spammer who sent enough submissions to become one the Top 100 subreddits by trying to abuse Reddit for <a href="http://en.wikipedia.org/wiki/Backlink">SEO backlinks</a>.</p>
+
+<p>Huh, that wasn&rsquo;t expected.</p>
+
+<p>The most negative subreddits are more intuitive.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_subreddit_negativity.png"></p>
+
+<p><a href="http://www.reddit.com/r/fffffffuuuuuuuuuuuu">/r/fffffffuuuuuuuuuuuu</a> and <a href="http://www.reddit.com/r/offmychest">/r/offmychest</a> were subreddits designed for ranting so negativity is expected. Many news subreddits have a high negativity (and comparatively little positivity). The presence of <a href="http://www.reddit.com/r/Health">/r/Health</a> and <a href="http://www.reddit.com/r/techsupport">/r/techsupport</a> as negative subreddits is appropriate.</p>
+
+<p>This article is only <em>scratching the surface</em> of the information contained in Reddit&rsquo;s history, and I hope to explore more in the future. The Digg redesign announcement is only one of many events in Reddit&rsquo;s history, and there are still other aspects of self posts, NSFW submissions, and city subreddits that make me want to take a closer look. Reddit has been a primary source for images and video which go viral around the web, and unlocking that information may just help understand <em>how</em> things go viral.</p>
+
+<hr />
+
+<ul>
+<li><em>All charts were made using 100% <a href="http://www.r-project.org/">R</a> and <a href="http://docs.ggplot2.org/current/">ggplot2</a>, with extensive theme customization/hacks for the latter. No external photo-editing software used at all.</em></li>
+<li><em>You can access a copy of the data used to make most of the charts <a href="https://docs.google.com/spreadsheets/d/1qfyOdEP3NDnb6MEoUqiEK88Uv4X4tfkSfVqynylVGaE/edit?usp=sharing">in this Google Sheet</a>.</em></li>
+<li><em>Thanks to <a href="http://reddit.com/r/theoryofreddit">/r/TheoryOfReddit</a> for <a href="http://www.reddit.com/r/TheoryOfReddit/comments/2p0dc2/i_have_a_database_of_all_reddit_submissions_what/">giving me ideas</a> for interesting quantitative analyses of Reddit data.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Quality, Popularity, and Negativity of 5.6 Million Hacker News Comments]]></title>
@@ -899,88 +1049,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><em>No, I have no relation to &ldquo;<a href="http://www.amazon.com/review/R1KHEP16MXXWCN/ref=cm_cr_rdp_perm?ie=UTF8&amp;ASIN=B000796XXM">M. Wolff</a>&rdquo;.</em></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mapping San Francisco Locations Using Facebook Data]]></title>
-    <link href="http://minimaxir.com/2014/04/san-francisco/"/>
-    <updated>2014-04-08T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2014/04/san-francisco</id>
-    <content type="html"><![CDATA[<p>Statisticians like to use data from the <a href="https://www.census.gov/">United States Census</a> to plot interesting trends such as unemployment and population of regions across the country. However, such data is typically historical and not very robust.</p>
-
-<p>Facebook, on the other hand, has collected a large amount of data though its <a href="https://www.facebook.com/about/location">Places product</a>. Facebook Places allows users to &ldquo;check-in&rdquo; a place such as <a href="https://www.facebook.com/pages/Dolores-Park/105687759464007">Dolores Park</a> in a manner similar to <a href="https://foursquare.com/">Foursquare</a>.</p>
-
-<p><img src="http://minimaxir.com/img/dolores.png"></p>
-
-<p>Through clever use of Facebook&rsquo;s Graph API and FQL, I was able to retrieve the data on all Facebook Places in and around San Francisco, along with the # of check-ins at each Place. With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit.</p>
-
-<!-- more -->
-
-
-<p>First, let&rsquo;s look at the distribution of check-ins among Places in San Francisco:</p>
-
-<p><img src="http://minimaxir.com/img/sf-checkin-distribution.png"></p>
-
-<p>On a logarithmic scale, the shape resembles a bell curve with a center at about 800 check-ins; however, the sample average of check-ins for the data set is <strong>3,241 check-ins</strong>, indicating that the data may be heavily skewed to the right. Some Places don&rsquo;t have many check-ins, while some Places have an incredibly large number of check-ins.</p>
-
-<p>What are the Places with hundreds of thousands of check-ins? What does the city look like with all these Places plotted on a map of San Francisco?</p>
-
-<p><img src="http://minimaxir.com/img/sf-checkin.png"></p>
-
-<p><em><a href="https://www.dropbox.com/s/cykofhlyus8atgw/sf-bubble.pdf">(PDF of Map)</a></em></p>
-
-<p>The most checked-in Places are, unsurprisingly, the famous tourist attractions of San Francisco, such as <a href="https://www.facebook.com/pages/ATT-Park/116440731717551">AT&amp;T Park</a> and <a href="https://www.facebook.com/UnionSquareSF">Union Square</a>. These Top Places are spread all over the city.</p>
-
-<p>It&rsquo;s also clear where the most dense areas are located in San Francisco. There are plainly-visible lines of Places along southern Mission Street and Outer Sunset. SOMA and Richmond have a large number of Places as well.</p>
-
-<p>And yes, 155,000 people really did check-into <a href="https://www.facebook.com/pages/The-Cheesecake-Factory/107178672654937">The Cheesecake Factory</a>.</p>
-
-<h1>What types of locations do people in San Francisco  frequently check-into?</h1>
-
-<p>Facebook also records the category of its Places, such as &ldquo;Bar&rdquo; and &ldquo;Restaurant&rdquo;. What are the most numerous types of locations in San Francisco?</p>
-
-<p><img src="http://minimaxir.com/img/sf-checkin-distribution-count.png"></p>
-
-<p>Local businesses are by far the most frequent, as it&rsquo;s a more generic classifier for a Place and can be applied to anything that does not have an explicit classifier (such as startups). I find it interesting that non-profit organizations are more numerous than shopping centers.</p>
-
-<p>However, the quantity of a specific type of business does not necessarily mean that San Franciscians will check-into that type of Place more often. Which type of Place, on average, receives the greatest number of check-ins?</p>
-
-<p><img src="http://minimaxir.com/img/sf-checkin-distribution-avg.png"></p>
-
-<p>People are more likely to check-into memorable Places and events, instead of Places they frequently visit like Bars and Restaurants (Twice as many people check-into Attractions than Clubs). Again, tourist attractions are the most popular, which is due to both the relatively low number of Places and the extremely high number of check-ins into Places such as AT&amp;T Park.</p>
-
-<p>The &ldquo;Lake&rdquo; corresponds to <a href="https://www.facebook.com/pages/Lake-Merced/113785468632283">Lake Merced</a>, if you&rsquo;re curious.</p>
-
-<h1>Which San Francisco neighborhoods are the most popular?</h1>
-
-<p>You saw earlier that the Facebook Places are concentrated in specific areas. Here&rsquo;s a map of San Francisco&rsquo;s neighborhoods, highlighted by the number of Places within:</p>
-
-<p><img src="http://minimaxir.com/img/sf-places-count.png"></p>
-
-<p><em><a href="https://www.dropbox.com/s/63fgvcucvk9n9v3/sf-sum.pdf">(PDF of Map)</a></em></p>
-
-<p>The neighborhoods with the most Places are unsurprisingly where the trendy areas are, such as the Mission and SOMA. Additionally, those types of neighborhoods are larger in square area than others, which may bias the results in their favor.</p>
-
-<p>But are these large neighborhoods also the most active neighborhoods? Which neighborhoods have the most check-ins on average per Place within the neighborhood?</p>
-
-<p><img src="http://minimaxir.com/img/sf-places-avg.png"></p>
-
-<p><em><a href="https://www.dropbox.com/s/u613oh4fskjrkny/sf-avg.pdf">(PDF of Map)</a></em></p>
-
-<p>The Embarcadero has by far the most check-ins on average, again, due to both its small size and AT&amp;T Park. Other neighborhoods, however, have more similar averages to each other. It&rsquo;s worth noting that the average number of check-ins is higher in neighborhoods adjacent to the San Francisco Bay, such as North Beach and Fisherman&rsquo;s Wharf: perhaps people check-in more frequently when they have a good view.</p>
-
-<p>Can this data and conclusions about San Francisco Facebook Places be extrapolated to other cities? I&rsquo;d argue yes: it makes logical sense that people check-in more frequently to Places that are more significant, and it also makes sense that people frequently check-into Places with large amounts of tourist attractions. Facebook data shows us cool trends that the United States Census data cannot.</p>
-
-<hr />
-
-<p><em>All charts and maps were made using R, ggplot2, and ggmaps.</em></p>
-
-<p><em>You can download a copy of the Facebook Places data set <a href="https://www.dropbox.com/s/6g6ap4poz1b2trs/sf-public.csv">here</a>. The place_id column corresponds to the San Francisco neighborhood where the Place is located.</em></p>
-
-<p><em>Maps are from <a href="https://www.google.com/maps/">Google Maps</a>. San Francisco shape files for city neighborhoods are from <a href="https://data.sfgov.org/Service-Requests-311-/Neighborhoods/ejmn-jyk6">data.sf.gov</a>. Additionally, thanks to <a href="http://www.reddit.com/r/dataisbeautiful/comments/223ubt/map_of_places_in_san_francisco_by_of_facebook/">/r/dataisbeautiful</a> for offering ideas for improvements to the maps.</em></p>
-
-<p><em>You may notice that the Check-In Counts on some of the official Facebook Place Pages strongly disagree with the Count reported in my charts. The Count reported on affected page is nearly double the value reported via the API in each instance. I believe this is a bug on Facebook&rsquo;s end: see <a href="http://i.imgur.com/I1syBhR.png">this image</a>, in which the Graph Search autocomplete reports a different value of check-ins than the Place Page itself. In this case, I trust the data from the API.</em></p>
 ]]></content>
   </entry>
   

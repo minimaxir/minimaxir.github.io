@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-10-29T22:47:45-07:00</updated>
+  <updated>2014-12-16T07:57:21-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,156 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Statistical Analysis of 142 Million Reddit Submissions]]></title>
+    <link href="http://minimaxir.com/2014/12/reddit-statistics/"/>
+    <updated>2014-12-16T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/12/reddit-statistics</id>
+    <content type="html"><![CDATA[<p><img src="/img/reddit-statistics/reddit_logo.jpg"></p>
+
+<p>Reddit, the &ldquo;front page of the Internet&rdquo;, is well-deserving of that title. Founded in 2005 for the more tech-savvy crowd, <a href="http://reddit.com">Reddit</a> is a news aggregator where users can submit links to interesting websites and other media, and form communities on specific interests which are known as &ldquo;subreddits.&rdquo; Since 2008, its popularity has grown exponentially.</p>
+
+<p><img src="/img/reddit-statistics/all_cumsub_reddit.png"></p>
+
+<p>More impressively, the number of new submissions each month to Reddit increases, with slight declines offset by large gains in the next month.</p>
+
+<p><img src="/img/reddit-statistics/growth_rate_reddit.png"></p>
+
+<p>Although Reddit first launched in 2005, it didn&rsquo;t hit mainstream until much later. At first, Reddit was at peace. But everything changed when the Digg Nation attacked.  <a href="http://digg.com/">Digg</a>, which was the leading news aggregator at the time, <a href="http://www.wired.com/2010/03/digg-redesign-social-web/">announced a redesign in March 2010</a> which rolled out that summer. The redesign was profit-maximizing, which massively irritated Digg&rsquo;s userbase. The majority of these users ended up flocking to Reddit, drastically changing its userbase and affecting Reddit&rsquo;s submissions as a whole. As a result, it&rsquo;s required to look at Reddit&rsquo;s entire history if possible when analyzing any statistical analysis of it. (although, as a warning, <a href="http://en.wikipedia.org/wiki/Correlation_does_not_imply_causation">correlation does not imply causation</a>).</p>
+
+<p>I, <a href="http://www.reddit.com/user/minimaxir">/u/minimaxir</a>, have personally been a redditor for 3 years. I&rsquo;ve previously done statistical analyses of Reddit data before, such as looking at which <a href="http://minimaxir.com/2013/11/subreddit-size/">subreddits are the largest</a> or determining which sites on Reddit are <a href="http://minimaxir.com/2013/09/reddit-imgur-youtube/">the most-frequently submitted</a>, but those were written with incomplete data. Thanks to <a href="http://redditanalytics.com">Reddit Analytics</a>, I have obtained a data dump and I subsequently constructed a database to store all Reddit Submissions from November 2007 to the end of October 2014: 142,159,793 submissions in total. And this data is very curious and very, <em>very</em> memetic.</p>
+
+<h1><i class="fa fa-reddit"></i> A Quick Glance At Reddit</h1>
+
+<p><img src="/img/reddit-statistics/reddit_sample.png"></p>
+
+<p>Reddit ranks submissions through a combination of upvotes from users, downvotes, and age of submission. The average score of a submission, which is the number of upvotes minus the number of downvotes, has changed throughout the years.</p>
+
+<p><img src="/img/reddit-statistics/all_score_reddit.png"></p>
+
+<p>The average score of a submission was relatively constant until the Digg announcement, then it started to increase, as the number of potential upvoters for a submission also increased. Interestingly the score, has decreased in recent months; it is entirely possible that the average is decreasing due to an increase in low-scoring posts.</p>
+
+<p>Let&rsquo;s look at the average scores of Top 100 subreddits by submission volume to see which are the most well-received.</p>
+
+<p><img src="/img/reddit-statistics/top_score_reddit.png"></p>
+
+<p><em><strong>Note</strong>: The shaded areas in charts for this article represent 95% percent confidence intervals for the true average of a given month/subreddit. Since there is a </em>lot<em> of submission data, the confidence intervals are usually incredibly narrow.</em></p>
+
+<p>Image subreddits, such as <a href="http://reddit.com/r/gifs">/r/gifs</a>, <a href="http://reddit.com/r/cringepics">/r/cringepics</a>, and <a href="http://reddit.com/r/reactiongifs">/r/reactiongifs</a> are clearly the most well-received on Reddit. (I plan to do a more in-depth analysis of this behavior in another blog post).</p>
+
+<p>Users can also leave comments on submissions to add insight and jokes. How has the Digg announcement affected the number of comments?</p>
+
+<p><img src="/img/reddit-statistics/all_comments_reddit.png"></p>
+
+<p>As it turns out, there&rsquo;s a <em>very</em> significant change in the average number of comments pre and post-Digg announcement. From April 2010 to August 2010, the average number of comments increased from 4.79 to 7.91, nearly doubling the number of comments in less than half a year.</p>
+
+<p>Many top subreddits encourage more discussion than others.</p>
+
+<p><img src="/img/reddit-statistics/top_comments_reddit.png"></p>
+
+<p><a href="http://reddit.com/r/IAmA">/r/IAmA</a> is Reddit&rsquo;s flagship subreddit (which <a href="http://www.redditblog.com/2014/09/announcing-official-reddit-ama-app_2.html">has its own official app</a>!), where users can ask questions to noteworthy people: it&rsquo;s not surprising to see it far at the top. Sports and video games are the top topics for discussion on Reddit.</p>
+
+<h1><i class="fa fa-comments"></i> reddit.self</h1>
+
+<p><img src="/img/reddit-statistics/reddit_self.png"></p>
+
+<p>An alternate form on Reddit is the self-post, where the user submits text instead of a link to an external website or image. These posts are used to make announcements and encourage discussion on a specific topic. Some large subreddits have even switched to &ldquo;self-post only&rdquo; mode.</p>
+
+<p>The popularity of self-posts has risen significantly over the year, and new submissions of self-posts now account for nearly half of all the new submissions on Reddit! (45.3% in October 2014)</p>
+
+<p><img src="/img/reddit-statistics/self_proportion_reddit.png"></p>
+
+<p>In theory, self-posts make subreddits contain higher-quality content. How do the scores of self-posts compare to that of normal posts?</p>
+
+<p><img src="/img/reddit-statistics/self_score_reddit.png"></p>
+
+<p>Before the Digg announcement, self-submissions were more noteworthy than regular submissions. Afterwards, self submissions receive about &frac14;th of the score of a normal submission on average. This is likely related to the substantial increase in self posts seen above: the rise of self-posts also leads to a rise in low-quality self-posts, which will reduce the average.</p>
+
+<p>But have the self-posts succeeded in encouraging more discussion on posts?</p>
+
+<p><img src="/img/reddit-statistics/self_comments_reddit.png"></p>
+
+<p>Yes. They have. Despite having &frac14;th of the score, self-submissions receive about twice as many comments on average.</p>
+
+<h1><i class="fa fa-ban"></i> Not Safe For Procrastinating At Work</h1>
+
+<p><em>[Sample image omitted for obvious reasons.]</em></p>
+
+<p>Reddit has received an infamous reputation for being the internet&rsquo;s primary source of Not Safe for Work (NSFW) images and links with an age limit of 18+. Not all of the content is sexual; occasionally, shockingly violent yet important images are submitted to the primary subreddits as well.</p>
+
+<p>The proportion of new NSFW content submitted to Reddit each month has increased gradually over the years, but it&rsquo;s still in the minority of submissions. (7.5% of all submissions in October 2014)</p>
+
+<p><img src="/img/reddit-statistics/nsfw_proportion_reddit.png"></p>
+
+<p>If the proportion of NSFW content is relatively low, then how has it achieved such a reputation? How well does NSFW content score relative to non-NSFW content?</p>
+
+<p><img src="/img/reddit-statistics/nsfw_score_reddit.png"></p>
+
+<p>NSFW content scores are nearly double that of non-NSFW content. Higher community approval of sexual content as opposed to nonsexual content isn&rsquo;t too surprising.</p>
+
+<p>Reddit&rsquo;s community operates on pseudonyms instead of tying users to a real identity. Do users comment on NSFW submissions as often as normal submissions?</p>
+
+<p><img src="/img/reddit-statistics/nsfw_comments_reddit.png"></p>
+
+<p>The number of comments on NSFW submissions is only slightly less than that on average, but there&rsquo;s a larger amount of uncertainty for that particular average due to the smaller proportion. Most internet users are lurkers and not contributors; it&rsquo;s likely that NSFW media is a more noninteractive experience. (<em>ahem</em>)</p>
+
+<h1><i class="fa fa-globe"></i> Reddit In The City</h1>
+
+<p><img src="/img/reddit-statistics/reddit_sf.png"></p>
+
+<p>Reddit users visit the site from all over the world. Although we cannot determine the location from where a user makes a submission, we can look at subreddits whose primary focus is a given location to see if there are any geographic trends.</p>
+
+<p>I took a list of the <a href="http://www.reddit.com/comments/joqru/a_list_of_the_most_popular_city_reddits/">most popular city subreddits</a>, such as <a href="http://reddit.com/r/toronto">/r/toronto</a> and <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a> and compared the average score of their submissions.</p>
+
+<p><img src="/img/reddit-statistics/city_score_reddit.png"></p>
+
+<p><a href="http://reddit.com/r/Seattle">/r/Seattle</a> has an unusually high average score of 24.7 per submission and <a href="http://reddit.com/r/montreal">/r/montreal</a> has an unusually low average score of 10.7. There does not be any clear geographic trends in the data: <a href="http://reddit.com/r/losangeles">/r/losangeles</a> and <a href="http://reddit.com/r/bayarea">/r/bayarea</a> are at the top but <a href="http://reddit.com/r/sandiego">/r/sandiego</a> is at the bottom, plus <a href="http://reddit.com/r/Dallas">/r/Dallas</a> and <a href="http://reddit.com/r/Austin">/r/Austin</a> are on the opposite areas of the chart too. As a Pennsylvania native, I find it funny that <a href="http://reddit.com/r/pittsburgh">/r/pittsburgh</a> and <a href="http://reddit.com/r/philadelphia">/r/philadelphia</a> are next to each other.</p>
+
+<p>Are the average number of comments affected by geography?</p>
+
+<p><img src="/img/reddit-statistics/city_comments_reddit.png"></p>
+
+<p>There are a few more parings here than with average scores: <a href="http://reddit.com/r/montreal">/r/montreal</a>  and <a href="http://reddit.com/r/toronto">/r/toronto</a> are paired as non-US cities, <a href="http://reddit.com/r/Portland">/r/Portland</a> and <a href="http://reddit.com/r/Seattle">/r/Seattle</a> are paired as West Coast cities, <a href="http://reddit.com/r/Austin">/r/Austin</a> and <a href="http://reddit.com/r/houston">/r/houston</a> are paired as Texas cities, and all of <a href="http://reddit.com/r/bayarea">/r/bayarea</a>, <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a>, and <a href="http://reddit.com/r/sandiego">/r/sandiego</a> are paired as California cities. It&rsquo;s still not a perfect relationship, however.</p>
+
+<h1><i class="fa fa-meh-o"></i> Positivity and Negativity</h1>
+
+<p><img src="/img/reddit-statistics/reddit_neg.png"></p>
+
+<p>Reddit also has a reputation of being both positive and negative. You have communities like <a href="http://www.reddit.com/r/aww">/r/aww</a> which share cute cat photos, and then you have communities like <a href="http://www.reddit.com/r/conspiracy">/r/conspiracy</a> which&hellip;don&rsquo;t.</p>
+
+<p>I took the top 100 subreddits by # of all-time submissions and found which ones were the most positive and negative. This was calculated by comparing each word of the submission title against a lexicon of positive/negative words, and count the number of review words in the lexicon. In this case, I use the lexicons compiled by <a href="http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">UIC professor Bing Liu</a>. A normalized positivity/negativity score is calculated by taking the average number of positive/negative words for the subreddit and dividing it by the average number of words in titles for submissions to the subreddit.</p>
+
+<p><img src="/img/reddit-statistics/all_sentiment_reddit.png"></p>
+
+<p>Both positivity and negativity have been pretty equal for Reddit&rsquo;s entirety, but that doesn&rsquo;t mean that Reddit is neutral.</p>
+
+<p>Let&rsquo;s look at the most positive of the top Reddit communities:</p>
+
+<p><img src="/img/reddit-statistics/reddit_subreddit_positivity.png"></p>
+
+<p>The top communities are the communities which rely on community and general good feelings (this includes /r/nsfw, <em>ahem</em>). <a href="http://www.reddit.com/r/cookingrecipesstuff">/r/CookingRecipesStuff</a> has the greatest positivity because it&rsquo;s apparently run by a spammer who sent enough submissions to become one the Top 100 subreddits by trying to abuse Reddit for <a href="http://en.wikipedia.org/wiki/Backlink">SEO backlinks</a>.</p>
+
+<p>Huh, that wasn&rsquo;t expected.</p>
+
+<p>The most negative subreddits are more intuitive.</p>
+
+<p><img src="/img/reddit-statistics/reddit_subreddit_negativity.png"></p>
+
+<p><a href="http://www.reddit.com/r/fffffffuuuuuuuuuuuu">/r/fffffffuuuuuuuuuuuu</a> and <a href="http://www.reddit.com/r/offmychest">/r/offmychest</a> were subreddits designed for ranting so negativity is expected. Many news subreddits have a high negativity (and comparatively little positivity). The presence of <a href="http://www.reddit.com/r/Health">/r/Health</a> and <a href="http://www.reddit.com/r/techsupport">/r/techsupport</a> as negative subreddits is appropriate.</p>
+
+<p>This article is only <em>scratching the surface</em> of the information contained in Reddit&rsquo;s history, and I hope to explore more in the future. The Digg redesign announcement is only one of many events in Reddit&rsquo;s history, and there are still other aspects of self posts, NSFW submissions, and city subreddits that make me want to take a closer look. Reddit has been a primary source for images and video which go viral around the web, and unlocking that information may just help understand <em>how</em> things go viral.</p>
+
+<hr />
+
+<ul>
+<li><em>All charts were made using 100% <a href="http://www.r-project.org/">R</a> and <a href="http://docs.ggplot2.org/current/">ggplot2</a>, with extensive theme customization/hacks for the latter. No external photo-editing software used at all.</em></li>
+<li><em>You can access a copy of the data used to make most of the charts <a href="https://docs.google.com/spreadsheets/d/1qfyOdEP3NDnb6MEoUqiEK88Uv4X4tfkSfVqynylVGaE/edit?usp=sharing">in this Google Sheet</a>.</em></li>
+<li><em>Thanks to <a href="http://reddit.com/r/theoryofreddit">/r/TheoryOfReddit</a> for <a href="http://www.reddit.com/r/TheoryOfReddit/comments/2p0dc2/i_have_a_database_of_all_reddit_submissions_what/">giving me ideas</a> for interesting quantitative analyses of Reddit data.</em></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Quality, Popularity, and Negativity of 5.6 Million Hacker News Comments]]></title>
@@ -472,51 +622,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &amp;lt; 2.2e-16</code></p
 
 
 <p><em><strong>EDIT: 8/9/14</strong>: Per <a href="https://news.ycombinator.com/item?id=8153091">comments on Hacker News</a>, I&rsquo;ve changed wording in a few paragraphs for clarification.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress]]></title>
-    <link href="http://minimaxir.com/2014/07/caucus-needed/"/>
-    <updated>2014-07-15T08:30:00-07:00</updated>
-    <id>http://minimaxir.com/2014/07/caucus-needed</id>
-    <content type="html"><![CDATA[<p>Last week, the Twitter account <a href="https://twitter.com/congressedits">@congressedits</a> launched. This account is a bot that tweets edits to Wikipedia that were made by members of the U.S. Congress, in order to help <a href="http://inkdroid.org/journal/2014/07/10/why-congressedits/">facilitate transparency</a>. The account <a href="https://github.com/edsu/anon">works</a> by automatically tweeting any Wikipedia edits made by anonymous contributors with IP addresses between the known IP address blocks of the <a href="http://whois.arin.net/rest/org/USSAA/nets">U.S. Senate</a> or the <a href="http://whois.arin.net/rest/org/ISUHR/nets">House of Representatives</a>.</p>
-
-<p>Google&rsquo;s <a href="https://developers.google.com/bigquery/">BigQuery</a> tool has a <a href="https://developers.google.com/bigquery/docs/dataset-wikipedia">sample dataset</a> of Wikipedia data, representing the data on 314 million article edits up to April 2010. Out of curiosity, I wrote a query which returns the top 100 pages with the most amount of edits by Wikipedia contributors in the U.S. Senate&rsquo;s IP block.</p>
-
-<p><img src="/img/caucus-needed/senate-query.png"></p>
-
-<p>Using this query for the Senate&rsquo;s IP block, and a similar one for the House of Representatives IP blocks, I retrieved the most-edited entries for both entities. You can access the spreadsheet of this data by <a href="https://dl.dropboxusercontent.com/u/2017402/Congress_Wikipedia_Edits.pdf">downloading a .pdf</a> or by viewing the data online with <a href="https://www.icloud.com/iw/#numbers/BALY8siqBP4jYZq5E2OB20P-wlPpyXdycqqF/Congress_Wikipedia_Edits">Numbers for iCloud</a>, both of which contain high-resolution charts and clickable Wikipedia links. A <a href="https://docs.google.com/spreadsheets/d/1qfFEwzNzc4KL4gqe2i4IoMO0ksmoYndCK0O0m46n37I/edit?usp=sharing">Google Sheets</a> version is also available.</p>
-
-<p>Here are the Top 10 Wikipedia entries with the most amount of edits by members of the Senate:</p>
-
-<p><img src="/img/caucus-needed/senate-wikipedia.png"></p>
-
-<p>Wait a minute. Hawk from G.I. Joe?!</p>
-
-<p>Saying that the query results were surprising would be the understatement of the century.</p>
-
-<p>Two of the top-edited entries are directly pertaining to the U.S. Senate, which helps prove that the IP block is indeed the Senate&rsquo;s IP block. Both Kappa Upsilon Chi and <a href="http://en.wikipedia.org/wiki/Beta_Upsilon_Chi">Beta Upsilon Chi</a> are Christian fraternities. (however, the Kappa Upsilon Chi Wikipedia entry no longer exists for some reason)</p>
-
-<p>The edits corresponding to actual people are ones which are the most interesting. <a href="http://en.wikipedia.org/wiki/William_Swain_Lee">William Swain Lee</a> is a Delaware politician whose entry was <a href="http://en.wikipedia.org/w/index.php?title=William_Swain_Lee&amp;diff=prev&amp;oldid=31202175">created and edited</a> by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.148.107">user in the Senate IP block</a>. OrangePie is  a user who, <a href="http://en.wikipedia.org/wiki?curid=7319910">according to his talk page</a>, was criticized for repeatedly recreating an entry for &ldquo;Michael Hardaway&rdquo; after deletion, who coincidentally worked for the Senate <a href="https://twitter.com/michaelhardaway">according to his Twitter bio</a>. In journalist <a href="http://en.wikipedia.org/wiki?curid=8593106">Paul D. Thacker&rsquo;s</a> entry, one Senate editor <a href="http://en.wikipedia.org/w/index.php?title=Paul_D._Thacker&amp;diff=311839513&amp;oldid=311689066">replaced a paragraph</a> of Thacker&rsquo;s biography with the word &ldquo;anus?&rdquo;. Jay Rockefeller is an <a href="http://en.wikipedia.org/wiki?curid=337026">actual U.S. Senator</a>, so the edits are definitely a conflict of interest. The <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.96.28">user who made the edits</a> apparently also removed <a href="http://en.wikipedia.org/w/index.php?title=Jay_Rockefeller&amp;diff=prev&amp;oldid=33857327">information about a government investigation</a> into the Senator.</p>
-
-<p>I have nothing to add for <a href="http://en.wikipedia.org/wiki?curid=2814171">Hawk from G.I. Joe</a>.</p>
-
-<p>Other interesting frequently-edited Wikipedia entries from members of the U.S. Senate are <a href="http://en.wikipedia.org/wiki?curid=3626593">Primetime Emmy Award for Outstanding Supporting Actor – Comedy Series</a> (11 edits), <a href="http://en.wikipedia.org/wiki?curid=1226609">Wikipedia:Introduction</a> (5 edits) and <a href="http://en.wikipedia.org/wiki?curid=1749535">Crash (2004 film)</a> (5 edits)</p>
-
-<p>The Wikipedia entries with the most amount of edits by members of the House of Representatives are somehow even <em>weirder</em>, and that&rsquo;s quite an accomplishment.</p>
-
-<p><img src="/img/caucus-needed/house-wikipedia.png"></p>
-
-<p>Well, if <em>anyone</em> in the entire United States would be experts on the topics of <a href="http://en.wikipedia.org/wiki?curid=2352587">cleft chins</a> and <a href="http://en.wikipedia.org/wiki?curid=1924543">dimples</a>, it would be the members of the House of Representatives.</p>
-
-<p>Again, one of the most-edited entries corresponds to a House of Representatives topic, which helps validate the IP blocks. The <a href="http://en.wikipedia.org/wiki?curid=107610">Cerritos, California</a> location had <a href="http://en.wikipedia.org/w/index.php?title=Cerritos,_California&amp;diff=21384826&amp;oldid=21363395">neutral edits</a> made by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.141">rather dedicated Wikiuser</a>. Wynne, Arkansas and Michelle Ye&rsquo;s edits were made by the same dedicated Wikiuser. <a href="http://en.wikipedia.org/wiki?curid=1143590">Waverly, Pennsylvania</a> was edited by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/137.18.255.33">user</a> who&rsquo;s <a href="http://en.wikipedia.org/w/index.php?title=Waverly,_Pennsylvania&amp;diff=7763793&amp;oldid=7761053">really passionate about Doc&rsquo;s Deli</a>. <a href="http://en.wikipedia.org/wiki?curid=1129560">Luis Fortuno</a>, former governor of Puerto Rico, had his <a href="http://en.wikipedia.org/w/index.php?title=Luis_Fortu%C3%B1o&amp;diff=prev&amp;oldid=134653411">history excised</a> by <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.137">another user</a>. <a href="http://en.wikipedia.org/wiki?curid=6260346">Betty Sutton</a>, however, is a actual Representative from Ohio, representing another conflict of interest, as another <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.228.129.9">user</a> constructed <a href="http://en.wikipedia.org/w/index.php?title=Betty_Sutton&amp;diff=303743778&amp;oldid=296652449">most of her entry</a>.</p>
-
-<p>I have nothing to add regarding <a href="http://en.wikipedia.org/wiki?curid=862471">effeminacy</a> in the House of Representatives.</p>
-
-<p>Other interesting edits by members of the House include <a href="http://en.wikipedia.org/wiki?curid=18951054">Apocalypse Now</a> (10 edits), <a href="http://en.wikipedia.org/wiki?curid=1161298">History of Italy as a monarchy and in the World Wars</a> (9 edits), and <a href="http://en.wikipedia.org/wiki?curid=34071">Whitney Houston</a> (9 edits)</p>
-
-<p>In the end, the members of the U.S. Congress have the same peculiar interests as typical Americans. However, when these people edit entries on topics in which they are directly involved, the potential bias threatens the integrity of all Wikipedia. And this is just the tip of the iceburg.</p>
 ]]></content>
   </entry>
   
