@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-12-16T07:57:21-08:00</updated>
+  <updated>2015-01-01T09:12:17-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Locating All the Christmas Trees on Instagram]]></title>
+    <link href="http://minimaxir.com/2015/01/tree-time/"/>
+    <updated>2015-01-01T09:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/01/tree-time</id>
+    <content type="html"><![CDATA[<p>Everyone enjoys taking photos of their Christmas trees, usually at their own home of their relatives. <a href="http://instagram.com/">Instagram</a> allows users to quickly upload any photo and share it socially to the world. On Christmas Eve, privacy author Tommy Collison <a href="http://www.tommycollison.com/blog/2014/12/24/christmas-geotagging">published a warning about this behavior</a>, noting that if a user tags a photo with #tree to tag their Christmas tree, for example, <em>anyone</em> will be able to see it, and if the user attached their location to the photo, anyone could theoretically find where they live.</p>
+
+<p>How practical is this concern? Instagram <a href="http://instagram.com/developer/">offers an API</a> of all recent photos for a given #tag so developers can download pictures and their corresponding metadata, such as geolocation, in bulk. (Up to <em>165,000</em> Instagram images can be processed per hour!)</p>
+
+<p>I downloaded <em>hundreds of thousands</em> of #tree images and found 25,432 images which were taken on Christmas, have a #tree, and, most importantly, contain location data where the photo was taken. From that, I created an <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">interactive map</a> showing the location of all these images worldwide using <a href="https://support.google.com/fusiontables/answer/2571232?hl=en">Google Fusion Tables</a>. You can click-and-drag to move the map all over the world, and you can click on a marker on the map to see the Instagram image taken at that location! (note that if you&rsquo;re on a mobile device, the embedded map may work better on a desktop browser)</p>
+
+<iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col8+from+1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL&amp;viz=MAP&amp;h=false&amp;lat=50.13422309020635&amp;lng=-46.22345629918755&amp;t=1&amp;z=3&amp;l=col8&amp;y=2&amp;tmplt=3&amp;hml=TWO_COL_LAT_LNG"></iframe>
+
+
+<p>I found a few interesting things while playing with this map.</p>
+
+<h1><i class="fa fa-tree"></i> Christmas Trees in the USA</h1>
+
+<p>A downside of the interactive map is that quantifying the relative number of photos between dense areas (e.g. cities) can be misleading as the opaque markers overlap. Here is a static map of all of the Instagram photos in the United States, with each translucent point representing an image:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/instagram_treemap_state.png"></p>
+
+<p>The number of photos is densest near the large cities, which is what you would expect.</p>
+
+<p>A way to calculate the relative proportion of the number of #tree photos between states is to use a type of chart known as a <a href="http://en.wikipedia.org/wiki/Treemapping">treemap</a> (pun <em>very</em> much intended).</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/treemap-state.png"></p>
+
+<p>In this treemap, the relative area of each block corresponds to the number of photos taken in the state; therefore, the combination of all the blocks represents 100% of the #tree photos taken in the USA. If two blocks are the same size (e.g. New York and Florida), then they have the same number of #tree photos.</p>
+
+<p>As you may have noticed from these two charts, these data represented by these two charts is approximately the same as the <a href="http://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population">population density in the United States</a>. Although this touches on the <a href="http://xkcd.com/1138/">infamous statistical problem</a> of heat maps resembling population maps, in this case, it&rsquo;s what would be expected.</p>
+
+<p>Looking at all the #tree photos in the world may tell a different story.</p>
+
+<h1><i class="fa fa-globe"></i> Christmas Trees in the World</h1>
+
+<p>Christmas is a holiday for only one religion with a <a href="http://en.wikipedia.org/wiki/Christianity_by_country">low presence in Asia and northern Africa</a>, so it would be expected that the locations of Christmas trees worldwide do <em>not</em> correlate with population, which makes the analysis more interesting.</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/instagram_world_map.png"></p>
+
+<p>The prevalence of Christmas trees is most prominent in the United States and Europe, with relatively few in Asia, where the majority of the world&rsquo;s population is located. Italy has Christmas trees <em>uniformly</em> throughout the entire country, which is an interesting behavior.</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/treemap-world.png"></p>
+
+<p>The treemap confirms that Asian and African countries like China, India, and Nigeria do not have as many Christmas trees than <a href="http://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">what their large populations would suggest</a>. Italy, however has a <a href="http://en.wikipedia.org/wiki/Demographics_of_Italy">population of 60 million</a> (the same as the United Kingdom) which is about 1/5th of the population of United States; the fact that Italy has more than half of the number of Christmas Trees than the United States is very unusual and should be questioned.</p>
+
+<p>Italy <em>may</em> have a high number of Christmas trees since Vatican City is the seat of the papacy, but perhaps data <em>itself</em> should be questioned too.</p>
+
+<h1><i class="fa fa-thumbs-o-up"></i> &ldquo;Christmas Trees&rdquo; in the World</h1>
+
+<p>If you check the photos in Italy, you many notice that many of them have a photo caption similar to this one:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/christmas_tagsforlikes.png"></p>
+
+<p>There&rsquo;s obviously no Christmas tree in that photo. But there are a <em>lot</em> of tags.</p>
+
+<p>Many Instagram photos use a service called <a href="http://www.tagsforlikes.com/">TagsForLikes</a>, which complies a list of popular hashtags that other users are able to see. Users can then then copy/paste them into the photo caption to spam hashtags increase the photo exposure, which, as I&rsquo;ve shown <a href="http://minimaxir.com/2014/03/hashtag-tag/">in a previous blog post</a>, does in fact increase the number of Likes the photo receives from other users.</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/tags4likes.png"></p>
+
+<p>Notice a resemblance between this list and the photo caption?</p>
+
+<p>Fortunately, all the TagsForLikes hashtag lists contain #TagsForLikes as a branding trick, which makes such photos extremely easy to detect. Here&rsquo;s what the world map looks like if all the potentially spam photos were colored red:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/instagram_world_spamnonspam.png"></p>
+
+<p>Italy looks a <em>lot</em> different now! There is red in other counties, but it&rsquo;s not easily visible at a glance.</p>
+
+<p>The treemap of photos, when seperated between spam and non-spam photos, tells the full story:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/treemap-spam-nonspam.png"></p>
+
+<p>About 20% of all the #tree photos are spam photos, and about half of those were taken by people in Italy. As a result, Italy has <em>more spam #tree photos than nonspam #tree photos!</em> This is an interesting cultural phenomenon that I have no guesses as to why it occurs. All other countries have significantly smaller numbers of spam photos relatively non-spam photos.</p>
+
+<p>For non-spam photos, the number of #tree photos in Italy now matches the number of non-spam photos in the UK, which correlates with their populations, making the removal of spam photos a sane move.</p>
+
+<p>Is it possible to track people in their homes via Instagram tags? Definitely. If you do care privacy and your Instagram account is not set to Private, I recommend not geotagging your photos. If you&rsquo;re interested in looking at such photos,  ensure that the the tag is relevant for the given photo.</p>
+
+<hr />
+
+<p><em>All graphics were generated using R. The maps were created using <a href="http://ggplot2.org/">ggplot2</a> and the world map provided with the <a href="http://cran.r-project.org/web/packages/rworldxtra/index.html">rworldxtra</a> package. The treemaps were created using the <a href="http://cran.r-project.org/web/packages/treemap/index.html">treemap</a> package.</em></p>
+
+<p><em>The source data is included with a seperate tab in Google Fusion Tables <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">along with the interactive map</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of 142 Million Reddit Submissions]]></title>
@@ -1710,42 +1796,6 @@ Location: http://imgur.com/p9lG2ss</code></p>
 <hr />
 
 <p><em>The code used to get the project descriptions from the GitHub API is available in <a href="https://github.com/minimaxir/get-github-repo-descriptions">this GitHub repository</a>, and you can download the ~300k repo descriptions <a href="https://dl.dropboxusercontent.com/u/2017402/github_repo_desc.zip">here</a>. [5MB .zip]</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Reddit Is Growing Slowly, but Surely]]></title>
-    <link href="http://minimaxir.com/2013/11/daily-reddit/"/>
-    <updated>2013-11-18T07:30:00-08:00</updated>
-    <id>http://minimaxir.com/2013/11/daily-reddit</id>
-    <content type="html"><![CDATA[<p>Reddit has certainty received more attention in the mainstream media with its involvement in such events as the <a href="http://www.nytimes.com/2013/04/29/business/media/bombings-trip-up-reddit-in-its-turn-in-spotlight.html?_r=0">Boston Marathon Bombings</a> and <a href="hhttp://www.reddit.com/r/IAmA/comments/z1c9z/i_am_barack_obama_president_of_the_united_states/">President Obama&rsquo;s AMA</a>. But has this publicity led to increase in overall activity on the site?</p>
-
-<p>I analyzed the daily number of submissions from over two years, August 6th, 2011 to September 25, 2013 (41 million submissions total), to see which events, if any, have affected Reddit&rsquo;s growth rate. As it turns out, Reddit grows by itself.</p>
-
-<!-- more -->
-
-
-<p><img src="http://minimaxir.com/img/reddit_daily-mac.png"></p>
-
-<p>Reddit&rsquo;s growth over the past two years has been almost entirely <strong>linear</strong>, with no notable acceleration in submission activity at any point in time.</p>
-
-<p>Running a linear regression on daily number of submissions vs. number of days since the first date (8/6/11) reveals that the expected increase in number of submissions each successive day on average is <strong>66.48 submissions</strong>  (+1,948 submissions each successive month, +24,259 submissions each successive year)</p>
-
-<p>This growth rate alone explains <strong>86.83%</strong> of the variation in number of submissions, indicating that external factors such as media publicity explain the remaining 13% of the variation.</p>
-
-<p>From a business perspective, it&rsquo;s impressive that Reddit still continues to grow for being such a mature internet business, but prospective investors for a rumored <a href="http://techcrunch.com/2013/01/06/reddit-rumored-to-be-raising-money-at-a-400-million-valuation/">fundraising at a $400 Million valuation</a> might be weary that Reddit&rsquo;s growth is only linear, in contrast to the <strong>exponential</strong> growth of other startups such as Snapchat. (In fairness, submission activity may not necessarily correlate with revenue-driving content consumption activity)</p>
-
-<p>A couple stray observations:</p>
-
-<ul>
-<li><p>On January 18th, 2012, the daily number of Reddit submissions hit the minimum among the two-year period due to Reddit&rsquo;s participation in the Internet blackout in protest of SOPA. (Reddit&rsquo;s blackout was only from 8AM to 8PM EST, which is why there are a nonzero number of submissions for that day).</p></li>
-<li><p>On April 1st, 2013, the daily number of Reddit submissions hit the maximum among the two-year period due to April Fool&rsquo;s Day, and the numerous amount of submissions for <em>X</em> brand/website&rsquo;s well-timed joke. However, I&rsquo;m not entirely sure why there&rsquo;s a spike for April Fool&rsquo;s Day in 2013, but not April Fool&rsquo;s Day in 2012.</p></li>
-</ul>
-
-
-<hr />
-
-<p><em>You can access the data used to create the time-series chart at <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGZ2Zkk1MGF3SjZxdC1sRzV5SW9zRWc&amp;usp=sharing">this Google Spreadsheet</a>.</em></p>
 ]]></content>
   </entry>
   

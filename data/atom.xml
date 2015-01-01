@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-12-16T07:57:21-08:00</updated>
+  <updated>2015-01-01T09:12:17-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Locating All the Christmas Trees on Instagram]]></title>
+    <link href="http://minimaxir.com/2015/01/tree-time/"/>
+    <updated>2015-01-01T09:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/01/tree-time</id>
+    <content type="html"><![CDATA[<p>Everyone enjoys taking photos of their Christmas trees, usually at their own home of their relatives. <a href="http://instagram.com/">Instagram</a> allows users to quickly upload any photo and share it socially to the world. On Christmas Eve, privacy author Tommy Collison <a href="http://www.tommycollison.com/blog/2014/12/24/christmas-geotagging">published a warning about this behavior</a>, noting that if a user tags a photo with #tree to tag their Christmas tree, for example, <em>anyone</em> will be able to see it, and if the user attached their location to the photo, anyone could theoretically find where they live.</p>
+
+<p>How practical is this concern? Instagram <a href="http://instagram.com/developer/">offers an API</a> of all recent photos for a given #tag so developers can download pictures and their corresponding metadata, such as geolocation, in bulk. (Up to <em>165,000</em> Instagram images can be processed per hour!)</p>
+
+<p>I downloaded <em>hundreds of thousands</em> of #tree images and found 25,432 images which were taken on Christmas, have a #tree, and, most importantly, contain location data where the photo was taken. From that, I created an <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">interactive map</a> showing the location of all these images worldwide using <a href="https://support.google.com/fusiontables/answer/2571232?hl=en">Google Fusion Tables</a>. You can click-and-drag to move the map all over the world, and you can click on a marker on the map to see the Instagram image taken at that location! (note that if you&rsquo;re on a mobile device, the embedded map may work better on a desktop browser)</p>
+
+<iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col8+from+1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL&amp;viz=MAP&amp;h=false&amp;lat=50.13422309020635&amp;lng=-46.22345629918755&amp;t=1&amp;z=3&amp;l=col8&amp;y=2&amp;tmplt=3&amp;hml=TWO_COL_LAT_LNG"></iframe>
+
+
+<p>I found a few interesting things while playing with this map.</p>
+
+<h1><i class="fa fa-tree"></i> Christmas Trees in the USA</h1>
+
+<p>A downside of the interactive map is that quantifying the relative number of photos between dense areas (e.g. cities) can be misleading as the opaque markers overlap. Here is a static map of all of the Instagram photos in the United States, with each translucent point representing an image:</p>
+
+<p><img src="/img/tree-time/instagram_treemap_state.png"></p>
+
+<p>The number of photos is densest near the large cities, which is what you would expect.</p>
+
+<p>A way to calculate the relative proportion of the number of #tree photos between states is to use a type of chart known as a <a href="http://en.wikipedia.org/wiki/Treemapping">treemap</a> (pun <em>very</em> much intended).</p>
+
+<p><img src="/img/tree-time/treemap-state.png"></p>
+
+<p>In this treemap, the relative area of each block corresponds to the number of photos taken in the state; therefore, the combination of all the blocks represents 100% of the #tree photos taken in the USA. If two blocks are the same size (e.g. New York and Florida), then they have the same number of #tree photos.</p>
+
+<p>As you may have noticed from these two charts, these data represented by these two charts is approximately the same as the <a href="http://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population">population density in the United States</a>. Although this touches on the <a href="http://xkcd.com/1138/">infamous statistical problem</a> of heat maps resembling population maps, in this case, it&rsquo;s what would be expected.</p>
+
+<p>Looking at all the #tree photos in the world may tell a different story.</p>
+
+<h1><i class="fa fa-globe"></i> Christmas Trees in the World</h1>
+
+<p>Christmas is a holiday for only one religion with a <a href="http://en.wikipedia.org/wiki/Christianity_by_country">low presence in Asia and northern Africa</a>, so it would be expected that the locations of Christmas trees worldwide do <em>not</em> correlate with population, which makes the analysis more interesting.</p>
+
+<p><img src="/img/tree-time/instagram_world_map.png"></p>
+
+<p>The prevalence of Christmas trees is most prominent in the United States and Europe, with relatively few in Asia, where the majority of the world&rsquo;s population is located. Italy has Christmas trees <em>uniformly</em> throughout the entire country, which is an interesting behavior.</p>
+
+<p><img src="/img/tree-time/treemap-world.png"></p>
+
+<p>The treemap confirms that Asian and African countries like China, India, and Nigeria do not have as many Christmas trees than <a href="http://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">what their large populations would suggest</a>. Italy, however has a <a href="http://en.wikipedia.org/wiki/Demographics_of_Italy">population of 60 million</a> (the same as the United Kingdom) which is about 1/5th of the population of United States; the fact that Italy has more than half of the number of Christmas Trees than the United States is very unusual and should be questioned.</p>
+
+<p>Italy <em>may</em> have a high number of Christmas trees since Vatican City is the seat of the papacy, but perhaps data <em>itself</em> should be questioned too.</p>
+
+<h1><i class="fa fa-thumbs-o-up"></i> &ldquo;Christmas Trees&rdquo; in the World</h1>
+
+<p>If you check the photos in Italy, you many notice that many of them have a photo caption similar to this one:</p>
+
+<p><img src="/img/tree-time/christmas_tagsforlikes.png"></p>
+
+<p>There&rsquo;s obviously no Christmas tree in that photo. But there are a <em>lot</em> of tags.</p>
+
+<p>Many Instagram photos use a service called <a href="http://www.tagsforlikes.com/">TagsForLikes</a>, which complies a list of popular hashtags that other users are able to see. Users can then then copy/paste them into the photo caption to spam hashtags increase the photo exposure, which, as I&rsquo;ve shown <a href="http://minimaxir.com/2014/03/hashtag-tag/">in a previous blog post</a>, does in fact increase the number of Likes the photo receives from other users.</p>
+
+<p><img src="/img/tree-time/tags4likes.png"></p>
+
+<p>Notice a resemblance between this list and the photo caption?</p>
+
+<p>Fortunately, all the TagsForLikes hashtag lists contain #TagsForLikes as a branding trick, which makes such photos extremely easy to detect. Here&rsquo;s what the world map looks like if all the potentially spam photos were colored red:</p>
+
+<p><img src="/img/tree-time/instagram_world_spamnonspam.png"></p>
+
+<p>Italy looks a <em>lot</em> different now! There is red in other counties, but it&rsquo;s not easily visible at a glance.</p>
+
+<p>The treemap of photos, when seperated between spam and non-spam photos, tells the full story:</p>
+
+<p><img src="/img/tree-time/treemap-spam-nonspam.png"></p>
+
+<p>About 20% of all the #tree photos are spam photos, and about half of those were taken by people in Italy. As a result, Italy has <em>more spam #tree photos than nonspam #tree photos!</em> This is an interesting cultural phenomenon that I have no guesses as to why it occurs. All other countries have significantly smaller numbers of spam photos relatively non-spam photos.</p>
+
+<p>For non-spam photos, the number of #tree photos in Italy now matches the number of non-spam photos in the UK, which correlates with their populations, making the removal of spam photos a sane move.</p>
+
+<p>Is it possible to track people in their homes via Instagram tags? Definitely. If you do care privacy and your Instagram account is not set to Private, I recommend not geotagging your photos. If you&rsquo;re interested in looking at such photos,  ensure that the the tag is relevant for the given photo.</p>
+
+<hr />
+
+<p><em>All graphics were generated using R. The maps were created using <a href="http://ggplot2.org/">ggplot2</a> and the world map provided with the <a href="http://cran.r-project.org/web/packages/rworldxtra/index.html">rworldxtra</a> package. The treemaps were created using the <a href="http://cran.r-project.org/web/packages/treemap/index.html">treemap</a> package.</em></p>
+
+<p><em>The source data is included with a seperate tab in Google Fusion Tables <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">along with the interactive map</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of 142 Million Reddit Submissions]]></title>
@@ -526,102 +612,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &amp;lt; 2.2e-16</code></p
 <li><em>You can download full-resolution PNGs of the two word clouds [5000x2000px] in <a href="https://www.dropbox.com/s/f20gwh9jvkibi4z/Yelp_Wordclouds_5000_200.zip?dl=0">this ZIP file</a> [18 MB]</em></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Data From Our Comments to the FCC About Net Neutrality]]></title>
-    <link href="http://minimaxir.com/2014/08/comments-about-comments/"/>
-    <updated>2014-08-08T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2014/08/comments-about-comments</id>
-    <content type="html"><![CDATA[<p>This year, the Federal Communications Commission, one of the governmental entities which polices the Internet in the United States, announced significant rule changes to the policy of &ldquo;<a href="http://www.fcc.gov/openinternet">Open Internet</a>.&rdquo; Open Internet, more commonly known as &ldquo;<a href="http://en.wikipedia.org/wiki/Net_neutrality">net neutrality</a>,&rdquo; helps businesses facilitate competition and promote innovation on the internet, which help improve the internet as a whole. However, the proposed rule changes allow internet service providers (ISPs) to discriminate between different types of internet traffic (a &ldquo;fast lane&rdquo; for video and social media, for example).  Said pricing discrimination may end up affecting the consumers instead (e.g. paying $10/month for access to Facebook), which may reduce innovation due to increased costs to the consumers of internet bandwidth, i.e. the average American citizen.</p>
-
-<p>The FCC recently <a href="http://www.fcc.gov/comments">opened up a comment period</a>, where the U.S. public can <a href="http://apps.fcc.gov/ecfs/upload/display?z=s6uf0">send or e-mail comments</a> on the changes to this policy. Naturally, the consumers of the internet reacted strongly. By August 2014, over <em>1.1 million comments</em> have been received by the FCC.</p>
-
-<p><img src="/img/fcc/fcc-words-small.png"></p>
-
-<p>This week, the FCC <a href="http://www.fcc.gov/blog/fcc-makes-open-internet-comments-more-accessible-public">released a dataset</a> of about <a href="http://www.fcc.gov/files/ecfs/14-28/ecfs-files.htm">450,000 of these comments</a>. Looking at the data behind these comments, it&rsquo;s clear to see that the entire country is passionate against the rule changes to net neutrality.</p>
-
-<p>Here&rsquo;s a timeline of when comments about net neutrality were sent to the FCC:</p>
-
-<p><img src="/img/fcc/fcc-timeline-annotated.png"></p>
-
-<p>There are clear spikes after important initiatives for awareness of the FCC&rsquo;s ruling. May 15th marked the <a href="http://www.savetheinternet.com/net-neutrality-resources">beginning of the Open Comment period</a> for the FCC&rsquo;s new guidelines, June 3rd marked the week after an airing of Last Week Tonight with John Oliver, which contained an <a href="https://www.youtube.com/watch?v=fpbOEoRrHyU">anti-net-neutrality rant</a> which went viral for the rest of the week. July 15th marked the close of the Open Comment period, which is why on July 14th, the internet rallied and sent in over a hundred thousand comments, which <a href="http://www.nydailynews.com/news/politics/fcc-extends-net-neutrality-open-comment-deadline-friday-article-1.1868238#kDMozMu84rJ5TPsl.97">crashed their servers</a> and forced them to extend the deadline.</p>
-
-<p>But as with many awareness campaigns over the internet, this campaign may have &ldquo;<a href="http://en.wikipedia.org/wiki/Slacktivism">slacktivists</a>&rdquo;, as evidenced by the flat lines after the events where people stopped writing comments. How much effort did the U.S. people actually put into their submissions? One way to tell is to check the length of the submissions.</p>
-
-<p><img src="/img/fcc/fcc-comment-length.png"></p>
-
-<p>Many comments were one-liners at about 20 words each, and many comments were multiparagraph notes at about 180 words each. But why is there a giant spike at about 300 words?</p>
-
-<p>As it turns out, there were over 100,000 comments with exactly 1,477 characters (approximately 290 words). That number of characters (before cleaning) corresponds to a comment following this template:</p>
-
-<blockquote><p>Net neutrality is the First Amendment of the Internet, the principle that Internet service providers (ISPs) treat all data equally. As an Internet user, net neutrality is vitally important to me. The FCC should use its Title II authority to protect it.</p>
-
-<p>Most Americans have only one choice for truly high speed Internet: their local cable company. This is a political failure, and it is an embarrassment. America deserves competition and choice.</p>
-
-<p>Without net neutrality, a bad situation gets even worse. These ISPs will now be able to manipulate our Internet experience by speeding up some services and slowing down others. That kills choice, diversity, and quality.</p>
-
-<p>It also causes tremendous economic harm. If ISPs can speed up favored services and slow others, new businesses will no longer be able to rely on a level playing field. When ISPs can slow your site and destroy your business at will, how can any startup attract investors?</p>
-
-<p>My friends, family, and I use the Internet for conversation and fun, but also for work and business. When you let ISPs mess with our Internet experience, you are attacking our social lives, our entertainment, and our economic well being. We won&rsquo;t stand for it.</p>
-
-<p>ISPs are opposing Title II so that they can destroy the FCC&rsquo;s net neutrality rules in court. This is the same trick they pulled last time. Please, let&rsquo;s not be fooled again. Title II is the strong, legally sound way to enforce net neutrality. Use it.</p></blockquote>
-
-<p>This is the default template for a submission at the <a href="https://www.battleforthenet.com">Battle for Net Neutrality</a> website. That means over about &frac14;th of the comments in the dataset, and atleast 1/10th of all comments submitted, used this website&rsquo;s submission form.</p>
-
-<h1>Comments Across the Nation</h1>
-
-<p>Net neutrality affects some individuals more than others. Not everyone in the U.S. may be as passionate over the issue, and many may not even be aware that such a threat to the modern internet even exists.</p>
-
-<p>Which cities in the United States sent the most comments to the FCC?</p>
-
-<p><img src="/img/fcc/fcc-city.png"></p>
-
-<p>Yes, Brooklyn, NY counts as a city according to the FCC.</p>
-
-<p>It&rsquo;s not surprising that the three most populated cities in the U.S. (New York, Los Angeles, Chicago) top this chart due to the higher potential number of commenters. What is surprising yet important is that tech hubs with much fewer populations, such as San Francisco, Seattle, and Portland, all have extremely strong showings.</p>
-
-<p>When you look at the distribution of comments by state of origin, it&rsquo;s even more apparent that California and Washington are some of the key drivers of the comments. (admittingly, it does resemble a <a href="https://xkcd.com/1138/">population map</a>)</p>
-
-<p><img src="/img/fcc/fcc-state-map.png"></p>
-
-<p>What are the key words mentioned in the comments to the FCC?</p>
-
-<p>The key players in who would benefit the most from the implementation of net neutrality are <a href="http://www.comcast.com/">Comcast</a> and <a href="http://www.verizon.com/">Verizon</a>, two of the biggest ISPs in the country. Which states have been speaking out the most against these institutions?</p>
-
-<p><img src="/img/fcc/fcc-state-map-comcast.png"></p>
-
-<p><img src="/img/fcc/fcc-state-map-verizon.png"></p>
-
-<p>Comcast is a frequent topic of discussion (5.2% of all comments about net neutrality contain atleast 1 mention of Comcast), especially on the West Coast. On the other hand, less than half as many talk about Verizon (2.0% of all comments), except on the East Coast.</p>
-
-<p>Although not on the map, Washington, DC actually had the most to comment on these two topics, with 11.7% comments having atleast one mention of Comcast and 8.8% of comments having atleast one mention of Verizon.</p>
-
-<p><a href="http://www.netflix.com/">Netflix</a>, an internet video-streaming service which would likely be negatively impacted by the FCC ruling, was also discussed.</p>
-
-<p><img src="/img/fcc/fcc-state-map-netflix.png"></p>
-
-<p>Discussion of Netflix from all around the country is very evenly distributed (2.1% of all comments), potentially because it&rsquo;s not location-specific as the presence of an ISP. (Montana apparently does not care much about Netflix.)</p>
-
-<p>Another concern about net neutrality is the potential <a href="https://www.aclu.org/net-neutrality">fight against the First Amendment</a> and free speech itself, as ISPs could theoretically restrict traffic to unfavorable websites under the system. Which states are most passionate about free speech?</p>
-
-<p><img src="/img/fcc/fcc-state-map-free-speech.png"></p>
-
-<p>Much more activity in the Midwest and especially the North West than the previous maps. (2.1% of all comments discuss &ldquo;free speech&rdquo;) North Dakota apparently is relatively indifferent about the freedom of speech.</p>
-
-<p>Unfortunately, at this period of time, it&rsquo;s hard to guess if the hundreds of thousands of comments sent to the FCC will actually cause them to reconsider their plans. The sheer quantity of comments, at the least, lets the FCC know that Americans feel strongly about the issue. It&rsquo;s clear that in the worst-case scenario where the ISPs win the net neutrality battle, the consumers of the internet in the United States <strong>will not remain passive</strong>.</p>
-
-<hr />
-
-<ul>
-<li><em>Charts were generated using R and ggplot2.</em></li>
-<li><em>You can view the data aggregated by date, by state, and by city in <a href="https://docs.google.com/spreadsheets/d/1D2T5Lg41IWfkQPEMLWq3fjU7_kJ8lDNc4H2wsbr4BbU/edit?usp=sharing">this Google Sheet</a>. You can download a CSV of the original comment metadata <a href="https://www.dropbox.com/s/7tzsk7kv7ctgydp/fcc_comments.zip">here</a>. [7.6MB .zip]</em></li>
-<li><em>You can view a 3000px x 3000px image of the FCC comments word cloud <a href="http://i.imgur.com/I0dpEA6.png">here</a>.</em></li>
-</ul>
-
-
-<p><em><strong>EDIT: 8/9/14</strong>: Per <a href="https://news.ycombinator.com/item?id=8153091">comments on Hacker News</a>, I&rsquo;ve changed wording in a few paragraphs for clarification.</em></p>
 ]]></content>
   </entry>
   

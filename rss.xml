@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2014-12-16T07:57:21-08:00</updated>
+  <updated>2015-01-01T09:12:17-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Locating All the Christmas Trees on Instagram]]></title>
+    <link href="http://minimaxir.com/2015/01/tree-time/"/>
+    <updated>2015-01-01T09:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/01/tree-time</id>
+    <content type="html"><![CDATA[<p>Everyone enjoys taking photos of their Christmas trees, usually at their own home of their relatives. <a href="http://instagram.com/">Instagram</a> allows users to quickly upload any photo and share it socially to the world. On Christmas Eve, privacy author Tommy Collison <a href="http://www.tommycollison.com/blog/2014/12/24/christmas-geotagging">published a warning about this behavior</a>, noting that if a user tags a photo with #tree to tag their Christmas tree, for example, <em>anyone</em> will be able to see it, and if the user attached their location to the photo, anyone could theoretically find where they live.</p>
+
+<p>How practical is this concern? Instagram <a href="http://instagram.com/developer/">offers an API</a> of all recent photos for a given #tag so developers can download pictures and their corresponding metadata, such as geolocation, in bulk. (Up to <em>165,000</em> Instagram images can be processed per hour!)</p>
+
+<p>I downloaded <em>hundreds of thousands</em> of #tree images and found 25,432 images which were taken on Christmas, have a #tree, and, most importantly, contain location data where the photo was taken. From that, I created an <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">interactive map</a> showing the location of all these images worldwide using <a href="https://support.google.com/fusiontables/answer/2571232?hl=en">Google Fusion Tables</a>. You can click-and-drag to move the map all over the world, and you can click on a marker on the map to see the Instagram image taken at that location! (note that if you&rsquo;re on a mobile device, the embedded map may work better on a desktop browser)</p>
+
+<iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col8+from+1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL&amp;viz=MAP&amp;h=false&amp;lat=50.13422309020635&amp;lng=-46.22345629918755&amp;t=1&amp;z=3&amp;l=col8&amp;y=2&amp;tmplt=3&amp;hml=TWO_COL_LAT_LNG"></iframe>
+
+
+<p>I found a few interesting things while playing with this map.</p>
+
+<h1><i class="fa fa-tree"></i> Christmas Trees in the USA</h1>
+
+<p>A downside of the interactive map is that quantifying the relative number of photos between dense areas (e.g. cities) can be misleading as the opaque markers overlap. Here is a static map of all of the Instagram photos in the United States, with each translucent point representing an image:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/instagram_treemap_state.png"></p>
+
+<p>The number of photos is densest near the large cities, which is what you would expect.</p>
+
+<p>A way to calculate the relative proportion of the number of #tree photos between states is to use a type of chart known as a <a href="http://en.wikipedia.org/wiki/Treemapping">treemap</a> (pun <em>very</em> much intended).</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/treemap-state.png"></p>
+
+<p>In this treemap, the relative area of each block corresponds to the number of photos taken in the state; therefore, the combination of all the blocks represents 100% of the #tree photos taken in the USA. If two blocks are the same size (e.g. New York and Florida), then they have the same number of #tree photos.</p>
+
+<p>As you may have noticed from these two charts, these data represented by these two charts is approximately the same as the <a href="http://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population">population density in the United States</a>. Although this touches on the <a href="http://xkcd.com/1138/">infamous statistical problem</a> of heat maps resembling population maps, in this case, it&rsquo;s what would be expected.</p>
+
+<p>Looking at all the #tree photos in the world may tell a different story.</p>
+
+<h1><i class="fa fa-globe"></i> Christmas Trees in the World</h1>
+
+<p>Christmas is a holiday for only one religion with a <a href="http://en.wikipedia.org/wiki/Christianity_by_country">low presence in Asia and northern Africa</a>, so it would be expected that the locations of Christmas trees worldwide do <em>not</em> correlate with population, which makes the analysis more interesting.</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/instagram_world_map.png"></p>
+
+<p>The prevalence of Christmas trees is most prominent in the United States and Europe, with relatively few in Asia, where the majority of the world&rsquo;s population is located. Italy has Christmas trees <em>uniformly</em> throughout the entire country, which is an interesting behavior.</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/treemap-world.png"></p>
+
+<p>The treemap confirms that Asian and African countries like China, India, and Nigeria do not have as many Christmas trees than <a href="http://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">what their large populations would suggest</a>. Italy, however has a <a href="http://en.wikipedia.org/wiki/Demographics_of_Italy">population of 60 million</a> (the same as the United Kingdom) which is about 1/5th of the population of United States; the fact that Italy has more than half of the number of Christmas Trees than the United States is very unusual and should be questioned.</p>
+
+<p>Italy <em>may</em> have a high number of Christmas trees since Vatican City is the seat of the papacy, but perhaps data <em>itself</em> should be questioned too.</p>
+
+<h1><i class="fa fa-thumbs-o-up"></i> &ldquo;Christmas Trees&rdquo; in the World</h1>
+
+<p>If you check the photos in Italy, you many notice that many of them have a photo caption similar to this one:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/christmas_tagsforlikes.png"></p>
+
+<p>There&rsquo;s obviously no Christmas tree in that photo. But there are a <em>lot</em> of tags.</p>
+
+<p>Many Instagram photos use a service called <a href="http://www.tagsforlikes.com/">TagsForLikes</a>, which complies a list of popular hashtags that other users are able to see. Users can then then copy/paste them into the photo caption to spam hashtags increase the photo exposure, which, as I&rsquo;ve shown <a href="http://minimaxir.com/2014/03/hashtag-tag/">in a previous blog post</a>, does in fact increase the number of Likes the photo receives from other users.</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/tags4likes.png"></p>
+
+<p>Notice a resemblance between this list and the photo caption?</p>
+
+<p>Fortunately, all the TagsForLikes hashtag lists contain #TagsForLikes as a branding trick, which makes such photos extremely easy to detect. Here&rsquo;s what the world map looks like if all the potentially spam photos were colored red:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/instagram_world_spamnonspam.png"></p>
+
+<p>Italy looks a <em>lot</em> different now! There is red in other counties, but it&rsquo;s not easily visible at a glance.</p>
+
+<p>The treemap of photos, when seperated between spam and non-spam photos, tells the full story:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/treemap-spam-nonspam.png"></p>
+
+<p>About 20% of all the #tree photos are spam photos, and about half of those were taken by people in Italy. As a result, Italy has <em>more spam #tree photos than nonspam #tree photos!</em> This is an interesting cultural phenomenon that I have no guesses as to why it occurs. All other countries have significantly smaller numbers of spam photos relatively non-spam photos.</p>
+
+<p>For non-spam photos, the number of #tree photos in Italy now matches the number of non-spam photos in the UK, which correlates with their populations, making the removal of spam photos a sane move.</p>
+
+<p>Is it possible to track people in their homes via Instagram tags? Definitely. If you do care privacy and your Instagram account is not set to Private, I recommend not geotagging your photos. If you&rsquo;re interested in looking at such photos,  ensure that the the tag is relevant for the given photo.</p>
+
+<hr />
+
+<p><em>All graphics were generated using R. The maps were created using <a href="http://ggplot2.org/">ggplot2</a> and the world map provided with the <a href="http://cran.r-project.org/web/packages/rworldxtra/index.html">rworldxtra</a> package. The treemaps were created using the <a href="http://cran.r-project.org/web/packages/treemap/index.html">treemap</a> package.</em></p>
+
+<p><em>The source data is included with a seperate tab in Google Fusion Tables <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">along with the interactive map</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Statistical Analysis of 142 Million Reddit Submissions]]></title>
@@ -919,134 +1005,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &lt; 2.2e-16</code></pre>
 <ul>
 <li><em>Data was processed using R and the chart was made using ggplot2. (w/ a few annotations added using a photo editor)</em></li>
 <li><em>You can view code necessary to reproduce these results in <a href="https://github.com/minimaxir/gender-course">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Statistical Analysis of 1.2 Million Amazon Reviews]]></title>
-    <link href="http://minimaxir.com/2014/06/reviewing-reviews/"/>
-    <updated>2014-06-17T08:20:00-07:00</updated>
-    <id>http://minimaxir.com/2014/06/reviewing-reviews</id>
-    <content type="html"><![CDATA[<p>When buying the latest products on <a href="http://www.amazon.com/">Amazon</a>, reading reviews is an important part of the purchasing process.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/ore.png"></p>
-
-<p><img src="http://minimaxir.com/img/amazon/amazon-review.png"></p>
-
-<p>Customer reviews from customers who have actually purchased and used the product in question can give you more context to the product itself. Each reviewer rates the product from 1 to 5 stars, and provides a text summary of their experiences and opinions about the product. The ratings for each product are averaged together in order to get an overall product rating.</p>
-
-<p>The number of reviews on Amazon has grown over the years.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-basic-time-count.png"></p>
-
-<p>But how do people write reviews? What types of ratings do reviewers give? How many of these reviews are considered helpful?</p>
-
-<p>Stanford researchers Julian McAuley and Jure Leskovec collected <a href="https://snap.stanford.edu/data/web-Amazon.html">all Amazon reviews </a>from the service&rsquo;s online debut in 1995 to 2013. Analyzing the dataset of 1.2 million Amazon reviews of products in the Electronics section, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon&rsquo;s review system actually works.</p>
-
-<h1>Describing the Data</h1>
-
-<p>First, let&rsquo;s see how the user ratings are distributed among the reviews.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-basic-score.png"></p>
-
-<p>More than half of the reviews give a 5-star rating. Aside from perfect reviews, most reviewers give 4-star or 1-star ratings, with <em>very</em> few giving 2-stars or 3-stars relatively.</p>
-
-<p>As as result, the statistical average for all review ratings is on the high-end of the scale at about <strong>3.90</strong>.  In fact, the average review rating for newly-written reviews has varied from 3.4 to 4.2 over time.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-basic-time-rating.png"></p>
-
-<p>Another metric used to measure reviews is review helpfulness. Other Amazon reviewers can rate a particular review as &ldquo;helpful&rdquo; or &ldquo;not helpful.&rdquo; A &ldquo;review helpfulness&rdquo; statistic can be calculated by taking the number of &ldquo;is-helpful&rdquo; indicators divided by the total number of is-helpful/is-not-helpful indicators (in the example at the beginning of the article, 639/665 people found the review helpful, so the helpfulness rating would be 96%). This gives an indication of review quality to a prospective buyer. Only 10% of the reviews had atleast 10 is-helpful/is-not-helpful data points, and of those reviews, the vast majority of the reviews had perfect helpfulness scores.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-basic-helpful.png"></p>
-
-<p>That would make sense; if you&rsquo;re writing a review (especially a 5 star review), you&rsquo;re writing with the intent to help other prospective buyers.</p>
-
-<p>Another consideration is review length. Do reviews frequently write essays, or do reviews typically write a single paragraph?</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-basic-length.png"></p>
-
-<p>Most reviews are 100-150 characters, but the average amount of characters in a review is about <strong>582</strong> (there are some outlier reviews with 30,000+ characters!). Assuming that the average amount of characters in a paragraph <a href="http://wiki.answers.com/Q/How_many_characters_does_the_average_paragraph_have">is 352</a>, reviewers typically write about half a paragraph. Interestingly, reviews are rarely less than a sentence. (the <a href="http://www.amazon.com/gp/community-help/customer-reviews-guidelines">Review Guidelines</a> suggest a minimum of 20 words in a review, so this discrepancy could be attributed to moderator removal of short, one-liner reviews)</p>
-
-<h1>Particularizing the Products</h1>
-
-<p>The 1.2 million reviews in the Electronics data set address about 82,003 distinct products. However, most of those entries represent different SKUs of the same product (e.g. different colors of headphones). Of those products, only 30,577 products have pricing information which identify them as the source product.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-product-price.png"></p>
-
-<p>Over 2/3rds of Amazon Electronics are priced between $0 and $50, which makes sense as popular electronics such as television remotes and phone cases are not extremely expensive. However, there&rsquo;s no statistical correlation between the price of a product and the number of reviews it receives.</p>
-
-<p>For the overall rating of a particular product, which is the average rating of all reviews for that product, the ratings are no longer limited to discrete numbers between 1 and 5, and can take decimal values between those numbers as well. The distribution of product ratings is similar to the distribution of review ratings.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-product-rating.png"></p>
-
-<p>Again, the perfect rating of 5 is most popular for products. This distribution resembles the distribution of scores of all reviews for the discrete rating values, but this view reveals local maxima at the midpoint between each discrete value. (i.e. 3-and-a-half stars and 4-and-a-half stars are surprisingly common ratings)</p>
-
-<p>What happens when you plot product rating and product price together?</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-product-score-price.png"></p>
-
-<p>The most expensive products have 4-star and 5-star overall ratings, but not 1-star and 2-star ratings. However, the correlation is very weak. (r = 0.04)</p>
-
-<p>In contrast, the relationship between product price and the average <em>length</em> of reviews for the product is surprising.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-product-price-length.png"></p>
-
-<p>This relationship is logarithmic with a relatively good correlation (r = 0.29), and it shows that reviewers put more time and effort into reviewing products which are worth more.</p>
-
-<h1>Reviewing the Reviewers</h1>
-
-<p>As you might expect, most people leave only 1 or 2 reviews on Amazon, but some have left <em>hundreds</em> of reviews. Out of 1.2 Million reviews, there are 510,434 distinct reviewers.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-count.png"></p>
-
-<p>Over 80% of the reviewers of Amazon electronics left only 1 review. Analyzing reviewers who have left only 1 review is not helpful statistically, so for the rest of the analysis, only reviews who have made 5 or more reviews (which have received atleast 1 is-helpful/is-not-helpful indicator) will be considered. This makes it much easier to get the overall profile of a reviewer. 11,676 reviewers fit this criteria.</p>
-
-<p>Do repeat Amazon users tend to give 5-star reviews?</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-score.png"></p>
-
-<p>Distribution of review ratings when averaged across is similar to the other distributions of review ratings. However, this distribution is less skewed toward 5-stars and is more uniform between 4-stars and 5-stars.</p>
-
-<p>What about the average helpfulness of the reviews written by a single reviewer? If a reviewer has enjoyed Amazon enough such that they make 5 or more reviews, chances are that their reviews are high quality.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-helpfulness.png"></p>
-
-<p>Again, the data is slightly skewed. 8% of the reviewers have perfect helpfulness scores on all their reviews, and the average helpfulness score for all repeat reviews is 80%. Interestingly, a few repeat reviewers have average helpfulness scores of 0.</p>
-
-<p>If you plot <em>both</em> average score and average helpfulness in a single chart, the picture becomes much more clear:</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-count-score.png"></p>
-
-<p>As the chart shows, there&rsquo;s a good positive correlation (r = 0.27) between rating and helpfulness, with a discernible cluster at the top. However, I don&rsquo;t think it&rsquo;s a causal relationship. Reviewers who give a product a 4 &ndash; 5 star rating are more passionate about the product and likely to write better reviews than someone who writes a 1 &ndash; 2 star &ldquo;this product sucks and you suck too!&rdquo; review.</p>
-
-<p>Another interesting bivariate relationship is the relationship between the helpfulness of a review and the length of a review). Stereotypically, you might think that longer reviews are more helpful reviews. And in the case of Amazon&rsquo;s Electronics reviews, you&rsquo;d be correct.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-reviewer-helpful-length.png"></p>
-
-<p>Again, there&rsquo;s a good positive correlation (r = 0.26) between average helpfulness and average length, which the trend line supports. (the dip at the end is caused by the high amount of low-character reviews). All the longer reviews have high helpfulness; there are very, very few unhelpful reviews that are also long.</p>
-
-<h1>Completing the Conclusion</h1>
-
-<p>The reviews on Amazon&rsquo;s Electronics products very frequently rate the product 4 or 5 stars, and such reviews are almost always considered helpful. 1-stars are used to signify disapproval, and 2-star and 3-stars reviews have no significant impact at all. If that&rsquo;s the case, then what&rsquo;s the point of having a 5 star ranking system at all if the vast majority of reviewers favor the product? Would Amazon benefit if they made review ratings a binary like/dislike?</p>
-
-<p>Having a 5-star system can allow the prospective customer to make more informed comparisons between two products: a customer may be more likely to buy a product that&rsquo;s rated 4.2 stars than a product that is rated 3.8 stars, which is a subtlety that can&rsquo;t easily be emulated with a like/dislike system. Likewise, if products are truly bad, the propensity toward 5-star reviews can help obfuscate the low quality of the product when a like/dislike system would make the low quality more apparent.</p>
-
-<p>Unfortunately, only Amazon has the data that would answer all these questions.</p>
-
-<p>Of course, there are many other secrets to be uncovered from Amazon reviews. The Stanford professors who collected the initial data used <a href="http://i.stanford.edu/~julian/pdfs/recsys13.pdf">machine learning techniques on the review text</a> to predict the rating given by a review from just the review text itself. Other potential topics for analysis are comparisons between <em>types</em> of Electronics (e.g. MP3 players, headphones) or using natural language processing to determine the common syntax in reviews.</p>
-
-<p><img src="http://minimaxir.com/img/amazon/amzn-word-review-start.png"></p>
-
-<p>That&rsquo;s a topic for another blog post. :)</p>
-
-<hr />
-
-<ul>
-<li><em>Data analysis was performed using R, and all charts were made using ggplot2.</em></li>
-<li><em>You can download a ZIP file containing CSVs of the time series, the aggregate product data, and the anonymized aggregate reviewer data <a href="https://dl.dropboxusercontent.com/u/2017402/amazon_data.zip">here</a>.</em></li>
-<li><em>No, I have no relation to &ldquo;<a href="http://www.amazon.com/review/R1KHEP16MXXWCN/ref=cm_cr_rdp_perm?ie=UTF8&amp;ASIN=B000796XXM">M. Wolff</a>&rdquo;.</em></li>
 </ul>
 
 ]]></content>
