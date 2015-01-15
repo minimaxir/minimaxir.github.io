@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2015/01/linkbait/">
+
+
+  <meta name="twitter:description" content="You probably do not know that the 3 most interesting things I found will blow your mind.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/buzzfeed_3gram.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="You probably do not know that the 3 most interesting things I found will blow your mind." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2015/01/linkbait/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/buzzfeed_3gram.png" property="og:image">
+
+
+  
+  <meta content="Data" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2015/01/linkbait">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-15T08:30:00-08:00" pubdate data-updated="true">Jan 15<span>th</span>, 2015</time>
+          
+
+in
+<span class="categories">
+  
+    
+          <a href="/data">Data</a></span>
+     
+  
+</span>
+
+
+        </div>
+		
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/01/linkbait/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/01/linkbait/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles - http://minimaxir.com/2015/01/linkbait/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/01/linkbait/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2015/01/linkbait/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/01/linkbait/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p><a href="http://www.buzzfeed.com/">BuzzFeed</a> is one of the most significant sources of journalistic content on the entire internet. Of course, that depends on your definition of &ldquo;journalistic&rdquo;: BuzzFeed is one of the first organizations to leverage both social media and the power of language as an editorial business model.</p>
+
+<p><img src="/img/linkbait/buzzfeed_fb.png"></p>
+
+<p>BuzzFeed has popularized the use of the &ldquo;listicle&rdquo; as <a href="http://www.buzzfeed.com/lyapalater/group-projects-should-be-wiped-off-the-face-o">seen above</a>: a bulleted list of text blurbs and/or photos that fits the length and depth of a normal blog article. Additionally, BuzzFeed was one of the first news sources to use non-neutral headlines that deliberately invoke a reaction in the reader which then subsequently tempts them to click on the article in an attempt to promote virality. These &ldquo;<a href="http://en.wikipedia.org/wiki/Clickbait">clickbait</a>&rdquo; and &ldquo;<a href="http://mashable.com/2013/07/12/linkbait-content-marketing/">linkbait</a>&rdquo; techniques have been responsible for BuzzFeed receiving <a href="http://www.nytimes.com/2014/08/11/technology/a-move-to-go-beyond-lists-for-content-at-buzzfeed.html">$50 million in venture capital</a>, and has spawned entire startups and job positions designed solely to emulate BuzzFeed&rsquo;s success.</p>
+
+<p>I decided to determine which phrases in BuzzFeed headlines are the most successful in order to see if it&rsquo;s possible to reverse-engineer BuzzFeed&rsquo;s business model. Therefore, I scraped BuzzFeed&rsquo;s website (<a href="http://minimaxir.com/2014/09/buzzscrape/">after initial frustration</a>) and obtained 60,378 distinct articles and the corresponding number of Facebook Shares for each article. From there, I decomposed each headline into its <a href="http://en.wikipedia.org/wiki/N-gram">component n-grams</a>, allowing me to perform quantitative analysis for each possible permutation of words in the article titles. You probably don&rsquo;t know that the 3 most interesting things I found will blow your mind.</p>
+
+<h1>The Rise of the Listicle</h1>
+
+<p><img src="/img/linkbait/buzzfeed_listicle.png"></p>
+
+<p>Listicles almost always begin with a numeral as the first or second word. Out of the 60,378 articles I obtained, 26% of them (15,656 articles) are listicles. BuzzFeed clearly believes they are successful, as the proportion of listicles to normal articles has increased over the years.</p>
+
+<p><img src="/img/linkbait/buzzfeed-listicle-proportions.png"></p>
+
+<p>Listicles can be of any size. The distibution of listicle sizes is centered at the median of 19 entries.</p>
+
+<p><img src="/img/linkbait/buzzfeed-listicle-histogram.png"></p>
+
+<p>Surprisingly, there is a positive correlation between listicle size and the number of Facebook shares it receives: A 30-size listicle receives many-multiples of shares more than 10-size listicles. (note the logarithmic scale for FB Shares)</p>
+
+<p><img src="/img/linkbait/buzzfeed-listicle-scatterplot.png"></p>
+
+<p>BuzzFeed has many different types of listicles to appeal to a wide crowd, including <em>[X] reasons</em>, <em>[X] books</em>, <em>[X] movies</em>, etc, where <em>[X]</em> is any 1 or 2-digit numeral. However, BuzzFeed&rsquo;s go-to listicle phrase has changed over the years. Here are the most-used listicle phrases for each month since 2012:</p>
+
+<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=1424838564&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
+<p>In 2012 and 2013, BuzzFeed&rsquo;s listicles began with <em>the [X]</em>; in 2014, BuzzFeed&rsquo;s most-used listicles began with <em>[X] things</em>. The &ldquo;the&rdquo; is technically redundant; perhaps BuzzFeed decided to make the listicle schema cleaner and <em>less</em> formal. It may be possible that <em>[X] things</em> performs better on average than <em>the [X]</em>.</p>
+
+<p>Which types of listicles are the most successful on Facebook? Which types of listicles receive the most amount of Facebook shares?</p>
+
+<p>Here&rsquo;s a chart of of the Top 30 types of listicles by the number of Facebook shares those articles have received on average (with a minimum of 50 articles of that listicle type):</p>
+
+<p><img src="/img/linkbait/buzzfeed-shares-listicles.png"></p>
+
+<p>A few notes on the chart: the gray bars on each average bar represent a <strong>95% confidence interval</strong> for the true value of each average, where the confidence interval is obtained through 10,000 iterations of <a href="http://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29">bootstrap resampling</a>. The dashed vertical line represents the <strong>population average</strong> of all distinct BuzzFeed articles, at 6,657 Facebook shares, and helps visualize the relative impact of having these words in the title compared to a normal BuzzFeed article.</p>
+
+<p>The most-posted listicle types mentioned above are <em>not</em> the types of listicles are most shared, however <em>[X] things</em> does indeed perform slightly better than <em>the [X]</em> on average. Emotional words, such as <em>insanely</em>, <em>awesome</em>, and <em>probably</em>, which you would never see in a more serious journalistic publication, are some of the key drivers of shares.</p>
+
+<p>Let&rsquo;s look into these keywords more to see if there are any other trends.</p>
+
+<h1>Key Keywords</h1>
+
+<p><img src="/img/linkbait/buzzfeed_1gram.jpg"></p>
+
+<p>Specific keywords may be more informative. Here&rsquo;s the most popular keywords over time, ignoring common <a href="http://en.wikipedia.org/wiki/Stop_words">stop words</a> and listicle words:</p>
+
+<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=1106341985&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
+<p>Like most journalistic news sources, BuzzFeed tends to write more frequently toward then-current events. 2012 for example had many articles about the 2012 election, while April 2013 consisted of many articles about the Boston Marathon bombings.</p>
+
+<p>Which keywords encouraged the most Facebook shares on average?</p>
+
+<p><img src="/img/linkbait/buzzfeed-shares-1gram.png"></p>
+
+<p>There&rsquo;s a more uncertainty in the accuracy of the average on keywords, especially with the #1 word, <em>career</em>. There&rsquo;s a strong focus on nostalgia, with <em>toys</em>, <em>childhood</em>, and <em>80s</em>. Certain brands (<em>potter</em> and <em>disney</em>) fit the nostalgia too.</p>
+
+<p>High words with a relatively small confidence interval and <em>which</em> and <em>character</em>. These are likely caused by <a href="http://www.buzzfeed.com/quizzes">BuzzFeed&rsquo;s quizzes</a>, which have been incredibly popular. Analyzing full phrases is necessary to get a bigger picture.</p>
+
+<h1>3-Word Phrases</h1>
+
+<p><img src="/img/linkbait/buzzfeed_3gram.png"></p>
+
+<p>After careful analysis, I found that 3-word phrases (trigrams) provided more helpful information than phrases of other lengths. Over time, there are similarities with the popular phrases; they both relate to then-current event and occasionally contain listicles.</p>
+
+<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=249061324&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
+<p>The average shares of articles based on phrases in their titles, however, tell the full story.</p>
+
+<p><img src="/img/linkbait/buzzfeed-shares-3gram-v2.png"></p>
+
+<p>Now we can clearly see some the infamous phrases traditionally associated with clickbait.</p>
+
+<p>Indeed, <em>character are you</em>, a frequent phrase in quizzes, is what leads to the most virality. (It&rsquo;s worth nothing that these perform 3-4 times better than the best listicles on average). Likewise, you may notice a few phrases are redundant and subset of a bigger phrase (e.g. <em>things you probably</em>, <em>you probably don&rsquo;t</em>, <em>probably don&rsquo;t know</em>), but since the averages FB shares aren&rsquo;t identical, it&rsquo;s not a perfect subset, and therefore the average is relevant. There&rsquo;s also a frequent appeal to <em>you</em>, the reader, with <em>you/your/you&rsquo;re</em> appearing in about half of the top phrases.</p>
+
+<p>Does clickbait work? Of course it does. Granted, there has been a lot of disenchantment with the rise of clickbait; that&rsquo;s why the parody Twitter account <a href="https://twitter.com/SavedYouAClick">@SavedYouAClick</a> was created and hit 182K followers in months. It&rsquo;s also the reason why <a href="http://newsroom.fb.com/news/2014/08/news-feed-fyi-click-baiting/">Facebook will now be punishing clickbait</a> and making them less public in a user&rsquo;s news feed, which will definitely hurt BuzzFeed. That&rsquo;s likely one of the reasons why they are pivoting to quizzes and video content instead.</p>
+
+<p>I don&rsquo;t expect clickbait to disappear anytime soon; it&rsquo;s easy and provides a good return-on-investment, both of which are important to scrappy websites trying to market on social media. Or things could come full-circle and <a href="http://www.buzzfeed.com/tomphillips/photos-that-prove-game-of-thrones-happened-in-real-life">BuzzFeed could publish clickbait about making the best clickbait</a>.</p>
+
+<hr />
+
+<p><em>You can view and download all the BuzzFeed article data and metadata <a href="https://docs.google.com/spreadsheets/d/1WSx45rT4jZfysmZfzJtjaPO7AxW4XMaJYaCUd5HB2ns/edit?usp=sharing">in this Google Sheet</a>.</em></p>
+
+<p><em>All graphics were generated using <a href="http://www.r-project.org/">R</a>. The charts were created using <a href="http://ggplot2.org/">ggplot2</a> and the word clouds were created using the <a href="http://cran.r-project.org/web/packages/wordcloud/index.html">wordcloud</a> package.</em></p>
+
+		
+		
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/01/linkbait/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/01/linkbait/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles - http://minimaxir.com/2015/01/linkbait/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/01/linkbait/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2015/01/linkbait/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/01/linkbait/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 2 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite">
+
+<script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2015/01/linkbait/';
+        var disqus_url = 'http://minimaxir.com/2015/01/linkbait/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+</div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2015/01/tree-time/" title="Previous Post: Locating All the Christmas Trees on Instagram"><i class="fa fa-angle-double-left"></i>  Locating All the Christmas Trees on Instagram</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

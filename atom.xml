@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-01-01T09:12:17-08:00</updated>
+  <updated>2015-01-15T08:32:08-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles]]></title>
+    <link href="http://minimaxir.com/2015/01/linkbait/"/>
+    <updated>2015-01-15T08:30:00-08:00</updated>
+    <id>http://minimaxir.com/2015/01/linkbait</id>
+    <content type="html"><![CDATA[<p><a href="http://www.buzzfeed.com/">BuzzFeed</a> is one of the most significant sources of journalistic content on the entire internet. Of course, that depends on your definition of &ldquo;journalistic&rdquo;: BuzzFeed is one of the first organizations to leverage both social media and the power of language as an editorial business model.</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_fb.png"></p>
+
+<p>BuzzFeed has popularized the use of the &ldquo;listicle&rdquo; as <a href="http://www.buzzfeed.com/lyapalater/group-projects-should-be-wiped-off-the-face-o">seen above</a>: a bulleted list of text blurbs and/or photos that fits the length and depth of a normal blog article. Additionally, BuzzFeed was one of the first news sources to use non-neutral headlines that deliberately invoke a reaction in the reader which then subsequently tempts them to click on the article in an attempt to promote virality. These &ldquo;<a href="http://en.wikipedia.org/wiki/Clickbait">clickbait</a>&rdquo; and &ldquo;<a href="http://mashable.com/2013/07/12/linkbait-content-marketing/">linkbait</a>&rdquo; techniques have been responsible for BuzzFeed receiving <a href="http://www.nytimes.com/2014/08/11/technology/a-move-to-go-beyond-lists-for-content-at-buzzfeed.html">$50 million in venture capital</a>, and has spawned entire startups and job positions designed solely to emulate BuzzFeed&rsquo;s success.</p>
+
+<p>I decided to determine which phrases in BuzzFeed headlines are the most successful in order to see if it&rsquo;s possible to reverse-engineer BuzzFeed&rsquo;s business model. Therefore, I scraped BuzzFeed&rsquo;s website (<a href="http://minimaxir.com/2014/09/buzzscrape/">after initial frustration</a>) and obtained 60,378 distinct articles and the corresponding number of Facebook Shares for each article. From there, I decomposed each headline into its <a href="http://en.wikipedia.org/wiki/N-gram">component n-grams</a>, allowing me to perform quantitative analysis for each possible permutation of words in the article titles. You probably don&rsquo;t know that the 3 most interesting things I found will blow your mind.</p>
+
+<h1>The Rise of the Listicle</h1>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_listicle.png"></p>
+
+<p>Listicles almost always begin with a numeral as the first or second word. Out of the 60,378 articles I obtained, 26% of them (15,656 articles) are listicles. BuzzFeed clearly believes they are successful, as the proportion of listicles to normal articles has increased over the years.</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-listicle-proportions.png"></p>
+
+<p>Listicles can be of any size. The distibution of listicle sizes is centered at the median of 19 entries.</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-listicle-histogram.png"></p>
+
+<p>Surprisingly, there is a positive correlation between listicle size and the number of Facebook shares it receives: A 30-size listicle receives many-multiples of shares more than 10-size listicles. (note the logarithmic scale for FB Shares)</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-listicle-scatterplot.png"></p>
+
+<p>BuzzFeed has many different types of listicles to appeal to a wide crowd, including <em>[X] reasons</em>, <em>[X] books</em>, <em>[X] movies</em>, etc, where <em>[X]</em> is any 1 or 2-digit numeral. However, BuzzFeed&rsquo;s go-to listicle phrase has changed over the years. Here are the most-used listicle phrases for each month since 2012:</p>
+
+<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=1424838564&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
+<p>In 2012 and 2013, BuzzFeed&rsquo;s listicles began with <em>the [X]</em>; in 2014, BuzzFeed&rsquo;s most-used listicles began with <em>[X] things</em>. The &ldquo;the&rdquo; is technically redundant; perhaps BuzzFeed decided to make the listicle schema cleaner and <em>less</em> formal. It may be possible that <em>[X] things</em> performs better on average than <em>the [X]</em>.</p>
+
+<p>Which types of listicles are the most successful on Facebook? Which types of listicles receive the most amount of Facebook shares?</p>
+
+<p>Here&rsquo;s a chart of of the Top 30 types of listicles by the number of Facebook shares those articles have received on average (with a minimum of 50 articles of that listicle type):</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-shares-listicles.png"></p>
+
+<p>A few notes on the chart: the gray bars on each average bar represent a <strong>95% confidence interval</strong> for the true value of each average, where the confidence interval is obtained through 10,000 iterations of <a href="http://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29">bootstrap resampling</a>. The dashed vertical line represents the <strong>population average</strong> of all distinct BuzzFeed articles, at 6,657 Facebook shares, and helps visualize the relative impact of having these words in the title compared to a normal BuzzFeed article.</p>
+
+<p>The most-posted listicle types mentioned above are <em>not</em> the types of listicles are most shared, however <em>[X] things</em> does indeed perform slightly better than <em>the [X]</em> on average. Emotional words, such as <em>insanely</em>, <em>awesome</em>, and <em>probably</em>, which you would never see in a more serious journalistic publication, are some of the key drivers of shares.</p>
+
+<p>Let&rsquo;s look into these keywords more to see if there are any other trends.</p>
+
+<h1>Key Keywords</h1>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_1gram.jpg"></p>
+
+<p>Specific keywords may be more informative. Here&rsquo;s the most popular keywords over time, ignoring common <a href="http://en.wikipedia.org/wiki/Stop_words">stop words</a> and listicle words:</p>
+
+<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=1106341985&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
+<p>Like most journalistic news sources, BuzzFeed tends to write more frequently toward then-current events. 2012 for example had many articles about the 2012 election, while April 2013 consisted of many articles about the Boston Marathon bombings.</p>
+
+<p>Which keywords encouraged the most Facebook shares on average?</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-shares-1gram.png"></p>
+
+<p>There&rsquo;s a more uncertainty in the accuracy of the average on keywords, especially with the #1 word, <em>career</em>. There&rsquo;s a strong focus on nostalgia, with <em>toys</em>, <em>childhood</em>, and <em>80s</em>. Certain brands (<em>potter</em> and <em>disney</em>) fit the nostalgia too.</p>
+
+<p>High words with a relatively small confidence interval and <em>which</em> and <em>character</em>. These are likely caused by <a href="http://www.buzzfeed.com/quizzes">BuzzFeed&rsquo;s quizzes</a>, which have been incredibly popular. Analyzing full phrases is necessary to get a bigger picture.</p>
+
+<h1>3-Word Phrases</h1>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_3gram.png"></p>
+
+<p>After careful analysis, I found that 3-word phrases (trigrams) provided more helpful information than phrases of other lengths. Over time, there are similarities with the popular phrases; they both relate to then-current event and occasionally contain listicles.</p>
+
+<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=249061324&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
+<p>The average shares of articles based on phrases in their titles, however, tell the full story.</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-shares-3gram-v2.png"></p>
+
+<p>Now we can clearly see some the infamous phrases traditionally associated with clickbait.</p>
+
+<p>Indeed, <em>character are you</em>, a frequent phrase in quizzes, is what leads to the most virality. (It&rsquo;s worth nothing that these perform 3-4 times better than the best listicles on average). Likewise, you may notice a few phrases are redundant and subset of a bigger phrase (e.g. <em>things you probably</em>, <em>you probably don&rsquo;t</em>, <em>probably don&rsquo;t know</em>), but since the averages FB shares aren&rsquo;t identical, it&rsquo;s not a perfect subset, and therefore the average is relevant. There&rsquo;s also a frequent appeal to <em>you</em>, the reader, with <em>you/your/you&rsquo;re</em> appearing in about half of the top phrases.</p>
+
+<p>Does clickbait work? Of course it does. Granted, there has been a lot of disenchantment with the rise of clickbait; that&rsquo;s why the parody Twitter account <a href="https://twitter.com/SavedYouAClick">@SavedYouAClick</a> was created and hit 182K followers in months. It&rsquo;s also the reason why <a href="http://newsroom.fb.com/news/2014/08/news-feed-fyi-click-baiting/">Facebook will now be punishing clickbait</a> and making them less public in a user&rsquo;s news feed, which will definitely hurt BuzzFeed. That&rsquo;s likely one of the reasons why they are pivoting to quizzes and video content instead.</p>
+
+<p>I don&rsquo;t expect clickbait to disappear anytime soon; it&rsquo;s easy and provides a good return-on-investment, both of which are important to scrappy websites trying to market on social media. Or things could come full-circle and <a href="http://www.buzzfeed.com/tomphillips/photos-that-prove-game-of-thrones-happened-in-real-life">BuzzFeed could publish clickbait about making the best clickbait</a>.</p>
+
+<hr />
+
+<p><em>You can view and download all the BuzzFeed article data and metadata <a href="https://docs.google.com/spreadsheets/d/1WSx45rT4jZfysmZfzJtjaPO7AxW4XMaJYaCUd5HB2ns/edit?usp=sharing">in this Google Sheet</a>.</em></p>
+
+<p><em>All graphics were generated using <a href="http://www.r-project.org/">R</a>. The charts were created using <a href="http://ggplot2.org/">ggplot2</a> and the word clouds were created using the <a href="http://cran.r-project.org/web/packages/wordcloud/index.html">wordcloud</a> package.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Locating All the Christmas Trees on Instagram]]></title>
@@ -1758,44 +1854,6 @@ Location: http://imgur.com/p9lG2ss</code></p>
 <p>I don&rsquo;t need to see strangers with &ldquo;1 mutual friend&rdquo; wish my friends Happy Birthday. It&rsquo;s just extra clutter on an already cluttered News Feed.</p>
 
 <p>To be fair, other websites such as <a href="https://twitter.com/">Twitter</a> and <a href="http://www.linkedin.com/">LinkedIn</a> push second-degree friends. Twitter&rsquo;s new <a href="https://twitter.com/i/discover">Discover</a> feature highlights users who the people you Follow are themselves Following. LinkedIn shows your connections&#8217; new connections so you can form connections with them too. But the difference between Twitter/LinkedIn and Facebook/Jelly is that both Facebook and Jelly push the power of <strong>intimate</strong> friendships, and imposing a sense of intimacy between strangers feels fake and intrudes on actual friendships.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Probabilistically Generating GitHub Projects]]></title>
-    <link href="http://minimaxir.com/2013/11/innovation-rng/"/>
-    <updated>2013-11-29T10:30:00-08:00</updated>
-    <id>http://minimaxir.com/2013/11/innovation-rng</id>
-    <content type="html"><![CDATA[<p>Grant Slatton made an amusing post on Hacker News yesterday titled &ldquo;<a href="https://news.ycombinator.com/item?id=6815282">Show HN: Probabilistically Generating HN Post Titles</a>&rdquo;. By using the statistical principle of <a href="http://en.wikipedia.org/wiki/Markov_chain">Markov chains</a>, Slatton was able to <a href="http://grantslatton.com/hngen/">generate eerily-realistic Hacker News headlines</a> such as &ldquo;Facebook detects if you are not a pilot&rdquo; and &ldquo;The No. 1 Habit of Highly Effective Mediocre Entrepreneurs.&rdquo;</p>
-
-<p>Could Markov chains be applied to any other data sets for hilarious effect? By using Slatton&rsquo;s <a href="https://gist.github.com/grantslatton/7694811">Python implementation of Markov chains</a> plus 300,000 descriptions of public GitHub repositories retrieved from their API, I discovered that statistical randomness can indeed create funny innovation.</p>
-
-<p><img src="http://minimaxir.com/img/github-wordcloud-mac.png"></p>
-
-<p>You can download a list of 1,000 Markov chain-generated projects <a href="https://dl.dropboxusercontent.com/u/2017402/github_markov.txt">here</a>. Here are a few interesting ones:</p>
-
-<ul>
-<li>MaNGOS is a free, Open Source implementation of a tag at relatively random intervals.</li>
-<li>A Warhammer 40k simulator to teach myself both OpenGL and Clojure</li>
-<li>Perl interface to Git repositories via Ruby.</li>
-<li>A windows live messenger network client written in Erlang</li>
-<li>Rails plugin which allows to talk anonymously and use tripcodes if you want.</li>
-<li>A Firebug extension for displaying the latest from Hacker News</li>
-<li>Sinatra-inspired JavaScript node.js web development framework for lua. Inspired by rspec</li>
-<li>Inverted Index on top of Tornado</li>
-<li>Android LED interface library for various wave propagation techniques.</li>
-<li>CatchAPI is a Java API to remove the need for boring project setup.</li>
-<li>Adds basic social networking capabilities to your lighting system based on the concept of the Working with Rails</li>
-<li>Brute force your OpenERP data integration with flatfiles</li>
-<li>Culerity integrates Cucumber and Celerity in order to shutdown the computer.</li>
-<li>Parses ANSI color codes and converts them to iphone compatible mp4s using HandBrake</li>
-<li>A simple OFX (Open Financial Exchange) parser built on top of WordPress. Rolopress core theme</li>
-</ul>
-
-
-<hr />
-
-<p><em>The code used to get the project descriptions from the GitHub API is available in <a href="https://github.com/minimaxir/get-github-repo-descriptions">this GitHub repository</a>, and you can download the ~300k repo descriptions <a href="https://dl.dropboxusercontent.com/u/2017402/github_repo_desc.zip">here</a>. [5MB .zip]</em></p>
 ]]></content>
   </entry>
   
