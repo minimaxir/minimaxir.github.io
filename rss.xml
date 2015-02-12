@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-01-15T08:32:08-08:00</updated>
+  <updated>2015-02-12T08:30:41-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,203 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[An Introduction on How to Make Beautiful Charts With R and ggplot2]]></title>
+    <link href="http://minimaxir.com/2015/02/ggplot-tutorial/"/>
+    <updated>2015-02-12T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/02/ggplot-tutorial</id>
+    <content type="html"><![CDATA[<p>Readers of my previous blog posts have frequently asked me &ldquo;how do you make those charts?&rdquo;</p>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/buzzfeed-listicle-scatterplot.png"></p>
+
+<p>These charts were made using <a href="http://docs.ggplot2.org/current/">ggplot2</a>, an add-on package for the <a href="http://www.r-project.org/index.html">R programming language</a>, along with lots of iterative improvement over the months. R notably has chart-making capabilities built into the language by default, but it is not easy to use and often produces <em>very</em> simplistic charts. Enter ggplot2, which allows users to create full-featured and robust charts with only a few lines of code.</p>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/geom_histogram-4.png"></p>
+
+<p>You&rsquo;ve probably seen charts elsewhere on the internet similar to this one. While it implements the &ldquo;<a href="http://vita.had.co.nz/papers/layered-grammar.html">Grammar of Graphics</a>&rdquo; (which is where the &ldquo;gg&rdquo; in &ldquo;ggplot2&rdquo; comes from), it does look generic and cluttered.</p>
+
+<p>Adding a touch of color and design can help make more compelling visualizations, and it&rsquo;s pretty easy to do thanks to ggplot2&rsquo;s syntax and chaining capabilities.</p>
+
+<h1>Quick Design Notes</h1>
+
+<p>Charts with a completely-gray background have become rather popular lately, mostly in part to the charts produced by <a href="http://fivethirtyeight.com/">FiveThirtyEight</a>, which was the inspiration behind my design. An important functional aspect of a gray background is that it makes the chart area distinct from the article body.</p>
+
+<p>The charts I make are typically 1200px by 900px. On my blog, the width of the article text container is less than 1200px, so the browser shrinks the chart to make it fit. The chart still appears at a high resolution on HiDPI/Retina screens, and since the charts are simple, shrinking will not cause significant graphical distortion on normal-resolution screens. 1200x900px also keeps the file size low, which is important when putting 10 or more charts in a post.</p>
+
+<p>An important tip when making charts in ggplot2: render the chart on OS X, if possible. OS X has antialiasing for text and curves in charts, while Windows/Linux does not, and it can significantly improve the quality of the chart.</p>
+
+<h1>Making a ggplot2 Histogram</h1>
+
+<p>The first chart we&rsquo;ll be making is a histogram. This is a good example of a chart that&rsquo;s easy to make in R/ggplot2, but hard to make Excel.</p>
+
+<p>For this tutorial, we&rsquo;ll be using <code>ggplot2</code>, plus three additional R packages: <code>RColorBrewer</code>, which allows for the procedural generation of colors from a palette for the chart, <code>scales</code>, which allows for the axes to express numbers with commas/percents, and <code>grid</code>, which allows for manipulation of the chart margins and layout. We can install and load these packages at the beginning of the R file:</p>
+
+<pre><code>install.packages(c("ggplot2","RColorBrewer","scales"))
+library(ggplot2); library(scales); library(grid); library(RColorBrewer)
+</code></pre>
+
+<p>The dataset we&rsquo;ll use is my <a href="http://minimaxir.com/csv/buzzfeed_linkbait_headlines.csv">list of 15,101 BuzzFeed listicles</a> that I used <a href="http://minimaxir.com/2015/01/linkbait/">in my previous blog post</a>, including both the listicle size and number of Facebook shares the listicle received, which have been prefiltered to listicle sizes of 50 or less, and have received atleast 1 Facebook share. Download the file, and set the working directory of R to the containing folder. We load the dataset into R by reading the CSV:</p>
+
+<pre><code>df &lt;- read.csv("buzzfeed_linkbait_headlines.csv", header=T)
+</code></pre>
+
+<p>We can make a basic histogram in two lines of code.</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1)
+</code></pre>
+
+<p>The first line instantiates the charts and defines the variables used for plotting. We declare the use of the data frame <code>df</code>, and the <code>listicle_size</code> vector from that data frame as the plotting aesthetic. The second line tells ggplot to make a histogram out of the given data with <code>geom_histogram</code>, and we specify a binwidth of 1 so that each column represents one discrete value of listicle. Running that code will cause a plot to pop up.</p>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_1.png"></p>
+
+<p>Not a bad start. In order to save the created plot, we use the <code>ggsave</code> command, which saves the last-generated plot to an image in your working directory. The first parameter, the filename, determines the filetype.</p>
+
+<pre><code>ggsave("tutorial_1.png", dpi=300, width=4, height=3)
+</code></pre>
+
+<p>Now we can add a theme to make it look classy.</p>
+
+<p>A ggplot2 theme is a function that overrides the graphical parameters of the default theme. Here&rsquo;s the long code block for my FiveThirtyEight-inspired theme, with code comments for each code subblock:</p>
+
+<pre><code>fte_theme &lt;- function() {
+
+  # Generate the colors for the chart procedurally with RColorBrewer
+  palette &lt;- brewer.pal("Greys", n=9)
+  color.background = palette[2]
+  color.grid.major = palette[3]
+  color.axis.text = palette[6]
+  color.axis.title = palette[7]
+  color.title = palette[9]
+
+  # Begin construction of chart
+  theme_bw(base_size=9) +
+
+  # Set the entire chart region to a light gray color
+  theme(panel.background=element_rect(fill=color.background, color=color.background)) +
+  theme(plot.background=element_rect(fill=color.background, color=color.background)) +
+  theme(panel.border=element_rect(color=color.background)) +
+
+  # Format the grid
+  theme(panel.grid.major=element_line(color=color.grid.major,size=.25)) +
+  theme(panel.grid.minor=element_blank()) +
+  theme(axis.ticks=element_blank()) +
+
+  # Format the legend, but hide by default
+  theme(legend.position="none") +
+  theme(legend.background = element_rect(fill=color.background)) +
+  theme(legend.text = element_text(size=7,color=color.axis.title)) +
+
+  # Set title and axis labels, and format these and tick marks
+  theme(plot.title=element_text(color=color.title, size=10, vjust=1.25)) +
+  theme(axis.text.x=element_text(size=7,color=color.axis.text)) +
+  theme(axis.text.y=element_text(size=7,color=color.axis.text)) +
+  theme(axis.title.x=element_text(size=8,color=color.axis.title, vjust=0)) +
+  theme(axis.title.y=element_text(size=8,color=color.axis.title, vjust=1.25)) +
+
+  # Plot margins
+  theme(plot.margin = unit(c(0.35, 0.2, 0.3, 0.35), "cm"))
+}
+</code></pre>
+
+<p>Adding the completed theme to the chart is just one line of code:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1) +
+  fte_theme()
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_2.png"></p>
+
+<p>A little more classy. Now that the core design of the chart is present, we can make polish the chart to make it more beautiful.</p>
+
+<p>Of course, all charts need properly labled axes and a title. We can add that with the <code>labs</code> function:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1) +
+  fte_theme() +
+  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles")
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_3.png"></p>
+
+<p>Now we can add a few finishing touches. For the x-axis, we can set the breaks to 5 instead of 10 using <code>scale_x_continuous</code> since we have the room. For the y-axis, since we have an axis value with 4 digits, we can set the formatting to use a comma with <code>scale_y_continuous</code>. Lastly, we can add a line at y = 0 using <code>geom_line</code> to further seperate the data. Lastly, in <code>geom_histogram</code>, we can change the fill of the bars to a red color for more thematic branding, and also reduce the opacity to make the grid lines visible behind the chart.</p>
+
+<p>Putting it all together:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1, fill="#c0392b", alpha=0.75) +
+  fte_theme() +
+  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles") +
+  scale_x_continuous(breaks=seq(0,50, by=5)) +
+  scale_y_continuous(labels=comma) + 
+  geom_hline(yintercept=0, size=0.4, color="black")
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_4.png"></p>
+
+<p>That&rsquo;s pretty professional and is a good stopping point. Normally, I would change the text fonts as well, but that&rsquo;s a subject for another post.</p>
+
+<h1>Making a ggplot2 Scatterplot</h1>
+
+<p>Scatterplots are also efficient to do in ggplot2, which especially useful as making a plot containing 15,101 points might cause spreadsheets to freeze.</p>
+
+<p>Creating a scatterplot of the relationship between listicle size and the number of Facebook shares the listicle receives is essentially the same procedure as creating a histogram, except that the x-axis and y-axis aesthetic vectors must be declared explicitly.</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point()
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_5.png"></p>
+
+<p>Because there are a few listicles with <em>over 1 million</em> Facebook shares (welcome to 2015), the entire plot is skewed. As a result, we need to compress the plot by scaling the y-axis logarithmically using <code>scale_y_log10</code>. Additionally, there will be a large amount of overlap between points due to the large sample size, so we need to greatly reduce the opacity of the points. (I set to 5% for this chart, but the best value can be determined through trial and error)</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05) +
+  scale_y_log10(labels=comma)
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_6.png"></p>
+
+<p>That&rsquo;s a lot more intuitive, and it makes it clear that there is indeed a positive relationship between listicle size and the number of Facebook shares.</p>
+
+<p>Now we can apply the theme and labels:</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05) +
+  scale_y_log10(labels=comma) +
+  fte_theme() +
+  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_7.png"></p>
+
+<p>And then the final touches. We can include the same horizontal line, x-axis behavior, and point color as with the last plot. However, for the y-axis, we have room to include each power of 10 between 1 and 1,000,000 as breaks, which we can do through a cute R syntax trick: <code>10^(0:6)</code>. While the chart shows a positive relationship between the variables, the shape is ambiguous and it may be helpful to add a trend line. We use <code>geom_smooth</code> to add a trendline representing a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a> with a 95% confidence interval.</p>
+
+<p>Putting it all together:</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05, color="#c0392b") +
+  scale_x_continuous(breaks=seq(0,50, by=5)) +
+  scale_y_log10(labels=comma, breaks=10^(0:6)) +
+  geom_hline(yintercept=1, size=0.4, color="black") +
+  geom_smooth(alpha=0.25, color="black", fill="black") +
+  fte_theme() +
+  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_8.png"></p>
+
+<p>Now that is pretty insightful.</p>
+
+<p>Hopefully, this small overview of how ggplot2 gives you an small idea of what it can do. This is just the tip of the iceberg. However, making cooler charts such as categorical bar charts, charts with multiple factor variables, and charts with multiple facets require smart data preprocessing, which is a topic for another blog post.</p>
+
+<hr />
+
+<p><em>You can access a copy of the code used in this blog post <a href="https://github.com/minimaxir/ggplot-tutorial">at this GitHub repository</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles]]></title>
@@ -917,153 +1114,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><em>Data was processed using R and all charts were made using ggplot2.</em></li>
 <li><em>You can view the data of all the Show HN submissions and the derived moving averages <a href="https://docs.google.com/spreadsheets/d/1JHIlzYdsavWnw8Y5efHrOHCo3-WFGtIosJ2WqIV_Bn4/edit?usp=sharing">in this Google Sheet</a>.</em></li>
 <li><em>You can view code necessary to reproduce these results  and reproduce all the charts in <a href="https://github.com/minimaxir/show-hn">this GitHub repository</a>. This repository also includes a .csv of all ~20,000 Show HNs obtained.</em></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Who Performs the Best in Online Classes?]]></title>
-    <link href="http://minimaxir.com/2014/07/online-class-charts/"/>
-    <updated>2014-07-10T08:30:00-07:00</updated>
-    <id>http://minimaxir.com/2014/07/online-class-charts</id>
-    <content type="html"><![CDATA[<p>At the end of May, <a href="http://www.harvard.edu/">Harvard</a> and <a href="http://web.mit.edu/">MIT</a> jointly <a href="http://newsoffice.mit.edu/2014/mit-and-harvard-release-de-identified-learning-data-open-online-courses">released a dataset</a> containing statistics about their online courses in the Academic Year of 2013. This <a href="http://dx.doi.org/10.7910/DVN/26147">Person-Course De-Identified dataset</a> contains 641,138 events, chronicling 476,532 students who have taken up to 13 unique courses from a variety of topics:</p>
-
-<p><img src="http://minimaxir.com/img/gender-course/mit-harvard-courses.png"></p>
-
-<p>However, this assortment of courses is not a substitution for a typical college education, as the vast majority of students only take one class.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/student-courses.png"></p>
-
-<p>Very, very few students take more than one class (22% of all students).</p>
-
-<p>Other interesting variables included with the data set are the level-of-education of the student, the birth date of the student, the gender of the student, and the geographical location of student.</p>
-
-<p>Which types of student characteristics lead to the best performance in these online classes? That depends on how you define &ldquo;performance.&rdquo;</p>
-
-<p>Here&rsquo;s a look at the attendance of all the classes:</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/class-attendance.png"></p>
-
-<p>Harvard&rsquo;s Introduction to Computer Science is by far the most popular class, and that&rsquo;s only accounting for one semester. (it still beat MIT&rsquo;s Intro to CS/Programming, which had 2 semesters).</p>
-
-<p>Each color bar indicates the level of student participation in the class. <strong>Registered</strong> means the student simply registered for the class; <strong>Viewed</strong> means that the student viewed some of the course material, <strong>Explored</strong> means that students viewed atleast half of the course material, and <strong>Certified</strong> means that students completed the course and received a certificate of accomplishment. For the chart, it&rsquo;s interesting to note that most classes have a high percentage of people in each class who simply register just for fun and <em>don&rsquo;t actually do anything.</em></p>
-
-<p>One metric of course success is the completion rate of each course, i.e. how many people actually complete the course after starting it. A frequent criticism of free online classes is that this number is very low, but what are the actual completion rates of these 13 classes?</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/class-perc-finished.png"></p>
-
-<p>Completion rates are low across the board, from 0.8% to 7.5%. A <a href="http://www.insidehighered.com/news/2013/05/10/new-study-low-mooc-completion-rates">2013 study</a> found that completion rate is less than 7%, which this data follows. Apparently, Challenges of Global Poverty is a very interesting course.</p>
-
-<p>After the student completes a class, he or she receives a final grade, and if the grade is above the cutoff point (usually 50% &ndash; 80%), they will complete the class and receive the certificate. Here&rsquo;s the distribution of the average grades for students in each class, given that the student has successfully completed the class:</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/class-perc-grade.png"></p>
-
-<p>The grades vary significantly between classes. This doesn&rsquo;t necessarily imply that some classes are harder than others; it&rsquo;s possible some classes had lower cutoffs and therefore the effort put in by the students is lower. However, the perfect 100% average for Harvard&rsquo;s Intro to CS course implies that the class is pass/fail and that students can&rsquo;t get a final grade less than 100%. (as a result, we&rsquo;ll need to remove that class from future grade analyses in order to prevent bias due to the lack of score variance)</p>
-
-<h1>Age</h1>
-
-<p>Online classes are marketed toward college-age students.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/student-age.png"></p>
-
-<p>The mean age is about <strong>27.7</strong>, with a standard deviation of 8.89. The shape skews right and resembles a <a href="http://en.wikipedia.org/wiki/Gamma_distribution">gamma distribution</a>. There are even plenty of teenagers taking these classes too.</p>
-
-<p>The proportion of students who take more than one class for each age group has a slightly flatter distribution, although more centralized at students in their 20&rsquo;s.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/student-num-classes.png"></p>
-
-<p>What about completion rate?</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/student-fulfillment.png"></p>
-
-<p>Completion rate is a little more evenly distributed between the ages, indicating that the two metrics are  likely uncorrelated. However, the older students have nearly double the completion rate of classes. (more on this later)</p>
-
-<h1>Education</h1>
-
-<p>One of the student-provided attributes is his or her highest level of education. These values are &ldquo;Less than Secondary,&rdquo; &ldquo;Secondary&rdquo;, &ldquo;Bachelor&rsquo;s&rdquo;, &ldquo;Master&rsquo;s&rdquo;, and &ldquo;Doctorate.&rdquo; Here&rsquo;s the distribution of the 409,601 students who provided their LoE:</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/education-count.png"></p>
-
-<p>This shows that the majority of students who are taking these online classes have already finished college and already obtained a degree, and therefore are likely taking the course as supplemental material.</p>
-
-<p>We can correlate the levels of education with the average age for each LoE as a double-check.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/education-age.png"></p>
-
-<p>Indeed, each LoE average age is above the minimum expected threshold of time needed for each degree (~18 years for Secondary, ~22 years for Bachelor&rsquo;s, etc.)</p>
-
-<p>How does the completion rate vary?</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/education-fulfillment.png"></p>
-
-<p>Interestingly, those with Less than Secondary education have a much higher completion rate than those with Secondary educations and Bachelor&rsquo;s Degrees.</p>
-
-<p>But are Doctorate smarter than those with lower education levels? Do they get higher grades on average?</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/education-grade.png"></p>
-
-<p>As it turns out, yes. The education level of a student is very relevant to a his or her academic performance in online classes.</p>
-
-<h1>Gender</h1>
-
-<p>I previously <a href="http://minimaxir.com/2014/07/gender-course/">made a blog post</a> discussing the genders of students and the proportion of students by course. As it turns out, gender is a very important part of the student body composition.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/gender-count.png"></p>
-
-<p>425,108 students have a gender on record, with 311,534 male students (73.3%) and 113,571 female students (26.7%). The fact that it&rsquo;s not even close to 50:50 is surprising.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/gender-age.png"></p>
-
-<p>Age wise, there&rsquo;s not much difference between the genders. Female students are about a year older than male students on average.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/gender-completion.png"></p>
-
-<p>Completion rate varies a bit more. Female students finish classes more frequently than male students.</p>
-
-<p>Now to answer the age-old question: who get better grades: men or women?</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/gender-grade.png"></p>
-
-<p>Ok, it&rsquo;s a tie.</p>
-
-<h1>Country</h1>
-
-<p>The home location of the students is, in my opinion, the most interesting student attribute in the data set. There are 24 different countries which were specified among 325,012 different students.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/country-count.png"></p>
-
-<p>The United States, as one of the more technologically-savvy countries, accounts for nearly 1/3rd of all online students. India has a very strong presence as well due to  the combination of population and accessibility of materials. All the other countries have significantly fewer students.</p>
-
-<p>Given such accessibility of online classes, students in some countries take more classes than others.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/country-more-than-one.png"></p>
-
-<p>India&rsquo;s students also take the most classes on average.</p>
-
-<p>The United States also has the oldest students on average among all the countries.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/country-age.png"></p>
-
-<p>Completion rate by country, however, is very, very significant.</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/country-completion.png"></p>
-
-<p>The top seven countries with the highest rate of completion are <strong>all European countries</strong>, with Spain and Poland in particular having a higher rate of completion than all the other countries, and nearly <strong>four times</strong> the completion rate of the United States.</p>
-
-<p>But which country has the students which get the best grades?</p>
-
-<p><img src="http://minimaxir.com/img/online-class-charts/country-grade.png"></p>
-
-<p>China is at the top with 86%, but otherwise the distribution is fairly flat with no outliers, and no economic or demographical pattern to the top or bottom of the ranks. It&rsquo;s possible that the more structured format of the classes make it harder to skew.</p>
-
-<p>This Person-Course dataset has helped reveal many interesting insights about online classes at Harvard and MIT. Whether you measure performance by % of classes completed or a % score received at the end of the class, it&rsquo;s clear that age, country, and level of education all have a statistically significant impact on performance. The impact of the student&rsquo;s gender on performance, however, is more ambiguous and could use further analysis.</p>
-
-<hr />
-
-<ul>
-<li><em>Data was processed using R and all charts were made using ggplot2.</em></li>
-<li><em>You can view code necessary to reproduce these results  AND reproduce all the charts in <a href="https://github.com/minimaxir/online-class-charts">this GitHub repository</a>. Since MIT/Harvard prevent redistribution of the dataset, you&rsquo;ll have to <a href="http://dx.doi.org/10.7910/DVN/26147">download the dataset</a> yourself.</em></li>
 </ul>
 
 ]]></content>

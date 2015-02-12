@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>An Introduction on How to Make Beautiful Charts With R and ggplot2 | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="An Introduction on How to Make Beautiful Charts With R and ggplot2">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2015/02/ggplot-tutorial/">
+
+
+  <meta name="twitter:description" content="Adding a touch of color and design can help make more compelling visualizations, thanks to ggplot2 syntax and chaining capabilities.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/tutorial_8.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="An Introduction on How to Make Beautiful Charts With R and ggplot2" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="Adding a touch of color and design can help make more compelling visualizations, thanks to ggplot2 syntax and chaining capabilities." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2015/02/ggplot-tutorial/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/tutorial_8.png" property="og:image">
+
+
+  
+  <meta content="Data" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2015/02/ggplot-tutorial">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>An Introduction on How to Make Beautiful Charts With R and ggplot2</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-02-12T08:00:00-08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2015</time>
+          
+
+in
+<span class="categories">
+  
+    
+          <a href="/data">Data</a></span>
+     
+  
+</span>
+
+
+        </div>
+		
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/02/ggplot-tutorial/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/02/ggplot-tutorial/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=An Introduction on How to Make Beautiful Charts With R and ggplot2 - http://minimaxir.com/2015/02/ggplot-tutorial/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/02/ggplot-tutorial/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2015/02/ggplot-tutorial/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/02/ggplot-tutorial/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p>Readers of my previous blog posts have frequently asked me &ldquo;how do you make those charts?&rdquo;</p>
+
+<p><img src="/img/ggplot-tutorial/buzzfeed-listicle-scatterplot.png"></p>
+
+<p>These charts were made using <a href="http://docs.ggplot2.org/current/">ggplot2</a>, an add-on package for the <a href="http://www.r-project.org/index.html">R programming language</a>, along with lots of iterative improvement over the months. R notably has chart-making capabilities built into the language by default, but it is not easy to use and often produces <em>very</em> simplistic charts. Enter ggplot2, which allows users to create full-featured and robust charts with only a few lines of code.</p>
+
+<p><img src="/img/ggplot-tutorial/geom_histogram-4.png"></p>
+
+<p>You&rsquo;ve probably seen charts elsewhere on the internet similar to this one. While it implements the &ldquo;<a href="http://vita.had.co.nz/papers/layered-grammar.html">Grammar of Graphics</a>&rdquo; (which is where the &ldquo;gg&rdquo; in &ldquo;ggplot2&rdquo; comes from), it does look generic and cluttered.</p>
+
+<p>Adding a touch of color and design can help make more compelling visualizations, and it&rsquo;s pretty easy to do thanks to ggplot2&rsquo;s syntax and chaining capabilities.</p>
+
+<h1>Quick Design Notes</h1>
+
+<p>Charts with a completely-gray background have become rather popular lately, mostly in part to the charts produced by <a href="http://fivethirtyeight.com/">FiveThirtyEight</a>, which was the inspiration behind my design. An important functional aspect of a gray background is that it makes the chart area distinct from the article body.</p>
+
+<p>The charts I make are typically 1200px by 900px. On my blog, the width of the article text container is less than 1200px, so the browser shrinks the chart to make it fit. The chart still appears at a high resolution on HiDPI/Retina screens, and since the charts are simple, shrinking will not cause significant graphical distortion on normal-resolution screens. 1200x900px also keeps the file size low, which is important when putting 10 or more charts in a post.</p>
+
+<p>An important tip when making charts in ggplot2: render the chart on OS X, if possible. OS X has antialiasing for text and curves in charts, while Windows/Linux does not, and it can significantly improve the quality of the chart.</p>
+
+<h1>Making a ggplot2 Histogram</h1>
+
+<p>The first chart we&rsquo;ll be making is a histogram. This is a good example of a chart that&rsquo;s easy to make in R/ggplot2, but hard to make Excel.</p>
+
+<p>For this tutorial, we&rsquo;ll be using <code>ggplot2</code>, plus three additional R packages: <code>RColorBrewer</code>, which allows for the procedural generation of colors from a palette for the chart, <code>scales</code>, which allows for the axes to express numbers with commas/percents, and <code>grid</code>, which allows for manipulation of the chart margins and layout. We can install and load these packages at the beginning of the R file:</p>
+
+<pre><code>install.packages(c("ggplot2","RColorBrewer","scales"))
+library(ggplot2); library(scales); library(grid); library(RColorBrewer)
+</code></pre>
+
+<p>The dataset we&rsquo;ll use is my <a href="http://minimaxir.com/csv/buzzfeed_linkbait_headlines.csv">list of 15,101 BuzzFeed listicles</a> that I used <a href="http://minimaxir.com/2015/01/linkbait/">in my previous blog post</a>, including both the listicle size and number of Facebook shares the listicle received, which have been prefiltered to listicle sizes of 50 or less, and have received atleast 1 Facebook share. Download the file, and set the working directory of R to the containing folder. We load the dataset into R by reading the CSV:</p>
+
+<pre><code>df &lt;- read.csv("buzzfeed_linkbait_headlines.csv", header=T)
+</code></pre>
+
+<p>We can make a basic histogram in two lines of code.</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1)
+</code></pre>
+
+<p>The first line instantiates the charts and defines the variables used for plotting. We declare the use of the data frame <code>df</code>, and the <code>listicle_size</code> vector from that data frame as the plotting aesthetic. The second line tells ggplot to make a histogram out of the given data with <code>geom_histogram</code>, and we specify a binwidth of 1 so that each column represents one discrete value of listicle. Running that code will cause a plot to pop up.</p>
+
+<p><img src="/img/ggplot-tutorial/tutorial_1.png"></p>
+
+<p>Not a bad start. In order to save the created plot, we use the <code>ggsave</code> command, which saves the last-generated plot to an image in your working directory. The first parameter, the filename, determines the filetype.</p>
+
+<pre><code>ggsave("tutorial_1.png", dpi=300, width=4, height=3)
+</code></pre>
+
+<p>Now we can add a theme to make it look classy.</p>
+
+<p>A ggplot2 theme is a function that overrides the graphical parameters of the default theme. Here&rsquo;s the long code block for my FiveThirtyEight-inspired theme, with code comments for each code subblock:</p>
+
+<pre><code>fte_theme &lt;- function() {
+
+  # Generate the colors for the chart procedurally with RColorBrewer
+  palette &lt;- brewer.pal("Greys", n=9)
+  color.background = palette[2]
+  color.grid.major = palette[3]
+  color.axis.text = palette[6]
+  color.axis.title = palette[7]
+  color.title = palette[9]
+
+  # Begin construction of chart
+  theme_bw(base_size=9) +
+
+  # Set the entire chart region to a light gray color
+  theme(panel.background=element_rect(fill=color.background, color=color.background)) +
+  theme(plot.background=element_rect(fill=color.background, color=color.background)) +
+  theme(panel.border=element_rect(color=color.background)) +
+
+  # Format the grid
+  theme(panel.grid.major=element_line(color=color.grid.major,size=.25)) +
+  theme(panel.grid.minor=element_blank()) +
+  theme(axis.ticks=element_blank()) +
+
+  # Format the legend, but hide by default
+  theme(legend.position="none") +
+  theme(legend.background = element_rect(fill=color.background)) +
+  theme(legend.text = element_text(size=7,color=color.axis.title)) +
+
+  # Set title and axis labels, and format these and tick marks
+  theme(plot.title=element_text(color=color.title, size=10, vjust=1.25)) +
+  theme(axis.text.x=element_text(size=7,color=color.axis.text)) +
+  theme(axis.text.y=element_text(size=7,color=color.axis.text)) +
+  theme(axis.title.x=element_text(size=8,color=color.axis.title, vjust=0)) +
+  theme(axis.title.y=element_text(size=8,color=color.axis.title, vjust=1.25)) +
+
+  # Plot margins
+  theme(plot.margin = unit(c(0.35, 0.2, 0.3, 0.35), "cm"))
+}
+</code></pre>
+
+<p>Adding the completed theme to the chart is just one line of code:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1) +
+  fte_theme()
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_2.png"></p>
+
+<p>A little more classy. Now that the core design of the chart is present, we can make polish the chart to make it more beautiful.</p>
+
+<p>Of course, all charts need properly labled axes and a title. We can add that with the <code>labs</code> function:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1) +
+  fte_theme() +
+  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles")
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_3.png"></p>
+
+<p>Now we can add a few finishing touches. For the x-axis, we can set the breaks to 5 instead of 10 using <code>scale_x_continuous</code> since we have the room. For the y-axis, since we have an axis value with 4 digits, we can set the formatting to use a comma with <code>scale_y_continuous</code>. Lastly, we can add a line at y = 0 using <code>geom_line</code> to further seperate the data. Lastly, in <code>geom_histogram</code>, we can change the fill of the bars to a red color for more thematic branding, and also reduce the opacity to make the grid lines visible behind the chart.</p>
+
+<p>Putting it all together:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1, fill="#c0392b", alpha=0.75) +
+  fte_theme() +
+  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles") +
+  scale_x_continuous(breaks=seq(0,50, by=5)) +
+  scale_y_continuous(labels=comma) + 
+  geom_hline(yintercept=0, size=0.4, color="black")
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_4.png"></p>
+
+<p>That&rsquo;s pretty professional and is a good stopping point. Normally, I would change the text fonts as well, but that&rsquo;s a subject for another post.</p>
+
+<h1>Making a ggplot2 Scatterplot</h1>
+
+<p>Scatterplots are also efficient to do in ggplot2, which especially useful as making a plot containing 15,101 points might cause spreadsheets to freeze.</p>
+
+<p>Creating a scatterplot of the relationship between listicle size and the number of Facebook shares the listicle receives is essentially the same procedure as creating a histogram, except that the x-axis and y-axis aesthetic vectors must be declared explicitly.</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point()
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_5.png"></p>
+
+<p>Because there are a few listicles with <em>over 1 million</em> Facebook shares (welcome to 2015), the entire plot is skewed. As a result, we need to compress the plot by scaling the y-axis logarithmically using <code>scale_y_log10</code>. Additionally, there will be a large amount of overlap between points due to the large sample size, so we need to greatly reduce the opacity of the points. (I set to 5% for this chart, but the best value can be determined through trial and error)</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05) +
+  scale_y_log10(labels=comma)
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_6.png"></p>
+
+<p>That&rsquo;s a lot more intuitive, and it makes it clear that there is indeed a positive relationship between listicle size and the number of Facebook shares.</p>
+
+<p>Now we can apply the theme and labels:</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05) +
+  scale_y_log10(labels=comma) +
+  fte_theme() +
+  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_7.png"></p>
+
+<p>And then the final touches. We can include the same horizontal line, x-axis behavior, and point color as with the last plot. However, for the y-axis, we have room to include each power of 10 between 1 and 1,000,000 as breaks, which we can do through a cute R syntax trick: <code>10^(0:6)</code>. While the chart shows a positive relationship between the variables, the shape is ambiguous and it may be helpful to add a trend line. We use <code>geom_smooth</code> to add a trendline representing a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a> with a 95% confidence interval.</p>
+
+<p>Putting it all together:</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05, color="#c0392b") +
+  scale_x_continuous(breaks=seq(0,50, by=5)) +
+  scale_y_log10(labels=comma, breaks=10^(0:6)) +
+  geom_hline(yintercept=1, size=0.4, color="black") +
+  geom_smooth(alpha=0.25, color="black", fill="black") +
+  fte_theme() +
+  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_8.png"></p>
+
+<p>Now that is pretty insightful.</p>
+
+<p>Hopefully, this small overview of how ggplot2 gives you an small idea of what it can do. This is just the tip of the iceberg. However, making cooler charts such as categorical bar charts, charts with multiple factor variables, and charts with multiple facets require smart data preprocessing, which is a topic for another blog post.</p>
+
+<hr />
+
+<p><em>You can access a copy of the code used in this blog post <a href="https://github.com/minimaxir/ggplot-tutorial">at this GitHub repository</a>.</em></p>
+
+		
+		
+    <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/02/ggplot-tutorial/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/02/ggplot-tutorial/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=An Introduction on How to Make Beautiful Charts With R and ggplot2 - http://minimaxir.com/2015/02/ggplot-tutorial/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/02/ggplot-tutorial/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2015/02/ggplot-tutorial/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/02/ggplot-tutorial/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 2 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite">
+
+<script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2015/02/ggplot-tutorial/';
+        var disqus_url = 'http://minimaxir.com/2015/02/ggplot-tutorial/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+</div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2015/01/linkbait/" title="Previous Post: Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles"><i class="fa fa-angle-double-left"></i>  Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
