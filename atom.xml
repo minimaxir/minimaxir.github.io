@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-02-12T08:30:41-08:00</updated>
+  <updated>2015-02-24T08:08:43-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Analyzing the Patterns of Numbers in 10 Million Passwords]]></title>
+    <link href="http://minimaxir.com/2015/02/password-numbers/"/>
+    <updated>2015-02-24T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/02/password-numbers</id>
+    <content type="html"><![CDATA[<p>The primary purpose of a <a href="http://en.wikipedia.org/wiki/Password">password</a> is to serve as an unique verification identifier for a given user. Ideally, the password for a given website or service should be both random and unique; if the letters and/or numbers in the password follow any patterns, then they might be easier to guess by an intruder. For example, someone may put their birth year such as &ldquo;1987&rdquo; or &ldquo;1988&rdquo; in their password, which makes the passwords easier to remember, but consequently easier to break.</p>
+
+<p>A few weeks ago, security researcher Mark Burnett released <a href="https://xato.net/passwords/ten-million-passwords/#.VNojhPnF98E">a list of 10 million passwords</a> compiled <a href="http://www.reddit.com/r/10millionpasswords/comments/2w3ali/dataset_origin/conap8l">from various sources</a> over the years. Reddit user jalgroy <a href="http://www.reddit.com/r/dataisbeautiful/comments/2vsg7h/frequency_of_years_in_passwords_oc/">posted a histogram</a> of the years used in these passwords, which I&rsquo;ve verified using my own scripts:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/year_distribution.png"></p>
+
+<p>There is a clear maximum at 1987 which implies a current age of about 28. This makes sense, as internet users in their 20&rsquo;s are generally considered to be very attuned to internet usage. The spike at 2000 is likely not because it&rsquo;s a birth year, but because 2000 is a kewl number.</p>
+
+<p>There are actually many similar patterns for numbers in passwords, which involve surprising yet intuitive logic.</p>
+
+<h1>Digit Behavior</h1>
+
+<p>The distribution of the number of digits in passwords varies significantly.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/digit_distribution.png"></p>
+
+<p>42% of passwords have zero numerical digits, which implies that 58% of passwords have atleast one digit. However, the local maxima in number of digits in a password all occur at <em>even</em> numbers of digits, which may imply that humans have an easier time of remembering even amounts of numbers.</p>
+
+<p>If you look at a typical keyboard, you&rsquo;ll note that the default sequence of numbers is <strong>1234567890</strong>. If the user wants a number in their password that is easy to type, drawing from this sequence of numbers might be a good idea.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/seq_digit_bar.png"></p>
+
+<p>Note that the length of the sequence is uncorrelated with the number of occurrences of the sequence. Many more people use 123 in a password than just 12, even though it&rsquo;s longer. 123, as a triplet of numbers, may be easier to remember by the average person than a pair of numbers. However, that contradicts the logic above that even numbers may be easier to remember, which suggest that another factor may be involved.</p>
+
+<p>Sequences of numbers are popular, but are some sequences of numbers more popular than others? Let&rsquo;s look at the order and composition of 1-digit, 2-digit, and 3-digit numbers in these 10 million passwords.</p>
+
+<h1>More on Digit Patterns</h1>
+
+<p><em>Note: all number patterns are distinct number patterns, e.g. 2-digit numbers analyzed are not subsets of 3-digit or larger numbers.</em></p>
+
+<p>Take a look at the most used single-digit numbers:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/one_digit_bar.png"></p>
+
+<p>1 is by far the most-used single-digit number, which may be due to the fact that it is the left-most number on the keyboard and therefore an easy press for services that force the inclusion of a digit in the password. Relatedly, 9 and 0 are the least-used single-digit numbers. That&rsquo;s intuitive enough. But does that hold for more complex patterns?</p>
+
+<p>Let&rsquo;s look at the most-used 2-digit patterns, including numbers with 0 as a leading digit:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/two_digit_bar.png"></p>
+
+<p>12 and 11, a sequential pattern and a repeating pattern respectively, are by far the most-used 2-digit numbers. Many repeating patterns such as 22 and 99 are prominent. But why is 69 in third place? (besides the obvious non-family-friendly reason)</p>
+
+<p>It may be helpful to look at a heat map of all possible 2-digit numbers to see if there are any observable patterns.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/two_digit_heatmap.png"></p>
+
+<p>There are a couple distinct patterns: numbers beginning with a 1 or 2 are used the most frequently, and both repeating and sequential digits are used the most frequently.</p>
+
+<p>Almost all 2-digit numbers outside of those patterns are unused (the exception is 69, of course) The intersection of both of these patterns is at 11/12, which is the reason both have high usage.</p>
+
+<p>Do 3-digit numbers follow similar patterns? Here&rsquo;s a list of the most-used 3-digit numbers in passwords:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/three_digit_bar.png"></p>
+
+<p>Yes and no. Here, there appear to be more instances of special numbers, such as 321 and <a href="http://en.wikipedia.org/wiki/James_Bond">007</a> which deviate from the patterns above. Of note, 3-digit numbers ending in 00 appears as a new pattern.</p>
+
+<p>This can be confirmed by looking at a faceted heat map for each possible combination.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/three_digit_heatmap.png"></p>
+
+<p>By far the most popular pattern for a 3-digit number is a repetition pattern, followed by a sequential pattern (the sequential pattern is always located one tile up and two tiles right from the repetition pattern). There are very few outliers which deviate from this schema aside from the ones mentioned previously. (420 is not as significant of an outlier for 3-digit numbers as 69 is for 2-digit numbers)</p>
+
+<p>The patterns of numbers in passwords can offer some insight to human psychology. However, if possible, I recommend you avoid using such patterns in your passwords since it introduces a vulnerability. It&rsquo;s a good idea to use a password manager instead, such as <a href="https://agilebits.com/onepassword">1Password</a> or <a href="http://keepass.info/">KeePass</a>, which offer advantages including the generation of both truly random and unique passwords.</p>
+
+<hr />
+
+<p><em>All charts were made using R and ggplot2.</em></p>
+
+<p><em>You can download the aggregate data used to create the charts <a href="https://docs.google.com/spreadsheets/d/1_OHQOyLkg0d7tseHXofTBu5AWzSlmXIBjV23CojFPcY/edit?usp=sharing">in this Google Sheet</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[An Introduction on How to Make Beautiful Charts With R and ggplot2]]></title>
@@ -1931,78 +2008,6 @@ Location: http://imgur.com/p9lG2ss</code></p>
 <p>The problem is that redirecting users without disclosure is the start of a slippery slope. When I post a direct image link by copying the &ldquo;Direct Link&rdquo; URL, I <em>expect</em> that others who use the link will also see the direct image. But that&rsquo;s not the case if the link is posted on Facebook or Twitter. Additionally, the redirects make the images take <em>much</em> longer to load on mobile, since loading the scripts and ads slow the entire page down. Making it so that the redirect is only seen the first time an image is viewed doesn&rsquo;t offer much solace.</p>
 
 <p>If the redirects are successful at converting new users for Imgur, what&rsquo;s stopping them from redirecting other sites? I strongly hope that Imgur won&rsquo;t turn into the next Photobucket or Imageshack, but whenever a startup does something weird and not transparent, it&rsquo;s <em>never</em> a good sign.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Thoughtful Analysis of the Most Poorly-Designed Chart Ever]]></title>
-    <link href="http://minimaxir.com/2014/01/more-language-more-problems/"/>
-    <updated>2014-01-20T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2014/01/more-language-more-problems</id>
-    <content type="html"><![CDATA[<p>Last week, I was surfing Reddit and came across an <a href="http://www.reddit.com/r/ProgrammerHumor/comments/1ur3ny/unnecessary_graph_of_most_desired_skills_in_2013/">interesting infographic</a> within the <a href="http://www.reddit.com/r/ProgrammerHumor/">ProgrammerHumor subreddit</a>. The infographic, as compiled by tech blog <a href="http://readwrite.com/">ReadWrite</a>, depicts the Top 10 Most In-Demand Developer Skills of 2013, as compiled by <a href="http://stackoverflow.com/">Stack Overflow</a> through keyword searches.</p>
-
-<!-- more -->
-
-
-<p><img src="http://minimaxir.com/img/infographic-1.jpg"></p>
-
-<p>Take a look at the chart. What’s good and bad about it?</p>
-
-<h1>The Good</h1>
-
-<p>The data is properly cited.</p>
-
-<h1>The Bad</h1>
-
-<p><strong>EVERYTHING ELSE.</strong></p>
-
-<p>What’s terrible about the graph? Let me count the ways:</p>
-
-<ul>
-<li><p>Using discrete values in the X-Axis for a continuous measurement (i.e. the percentage). And not only that, discrete values with two significant figures, which make the X-Axis unusually cluttered.</p></li>
-<li><p>The Y-Axis is Language. This implies that some programming languages are more language than others.  (<a href="https://www.facebook.com/photo.php?fbid=10152166149970450&amp;set=a.432190050449.225968.582270449&amp;type=1&amp;stream_ref=10">to be fair</a>, Java is more language than Android)</p></li>
-<li><p>Not all entries on the chart are programming languages. (Android, for example, is an operating system.)</p></li>
-<li><p>The 45-degree line in the chart implies that the relationship between language and %-of-searches is perfectly linear, where in reality the data has an upward-parabolic shape.</p></li>
-<li><p>No relative proportions between the programming languages. We can&rsquo;t accurately see the increase in language Java has relative to Android just by looking at the graph.</p></li>
-<li><p>Cannot easily associate a language with the given X-Axis value. The logos representing the programming language oscillate around the line, and it&rsquo;s hard to see at a glance which percentage corresponds to which language.</p></li>
-</ul>
-
-
-<h1>Fixing the Chart</h1>
-
-<p>This isn’t one of those blog posts that make snarky criticism without offering any constructive input. (those will be posted next week). How can we make the chart somewhat logical?</p>
-
-<p>The easiest way to improve the chart is to convert the chart from a line chart to a column chart. Here’s a column chart that keeps the intended impression of the original chart:</p>
-
-<p><img src="http://minimaxir.com/img/dev-graph-1.png"></p>
-
-<p>A much bigger improvement, although unfortunately without the cool hand-drawn logos. The axes are no longer illogical and it’s easy to determine the relative impact of each language (e.g. Java is clearly, clearly at the top). However, the large amount of text can clutter the bars, and it can be difficult to correlate the raw percentage with the scale at a glance.</p>
-
-<p>Another option is to rotate the chart and use bars instead of columns:</p>
-
-<p><img src="http://minimaxir.com/img/dev-graph-2.png"></p>
-
-<p>This fixes the text issue by giving more room for text with most of the factors, but the Java text clips outside the chart. The correlation issue between language and percent value persists.</p>
-
-<p>A best-of-both-worlds approach is to display the language on the Y-Axis and the raw percent value on the corresponding bar itself, allowing us to forgo the percent metric axis entirely.</p>
-
-<p><img src="http://minimaxir.com/img/dev-graph-3.png"></p>
-
-<p>There we go. Minimalist, fixes both the text and correlation issues, and gets the point across effectively.</p>
-
-<p>All of these charts were created using R and ggplot2, and you can download the R code in <a href="https://github.com/minimaxir/developer-graphs">this GitHub repository</a>. I wish the <a href="http://readwrite.com/2014/01/08/in-demand-tech-skills-of-2013-java">orginal ReadWrite article</a> used a chart like the last one and…</p>
-
-<p>Wait, they changed the infographic?</p>
-
-<p><img src="http://minimaxir.com/img/infographic-2.jpg"></p>
-
-<p>Hey, they fixed the chart, and it’s using a similar design as mine! What a crazy random happenstance!</p>
-
-<p>The article was appended with an update:</p>
-
-<blockquote><p>An earlier version of the infographic in this story presented the StackOverflow data in a confusing and conceptually problematic fashion. It has been updated.</p></blockquote>
-
-<p>&ldquo;Problematic&rdquo; is the world&rsquo;s biggest understatement.</p>
 ]]></content>
   </entry>
   

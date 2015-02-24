@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-02-12T08:30:41-08:00</updated>
+  <updated>2015-02-24T08:08:43-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Analyzing the Patterns of Numbers in 10 Million Passwords]]></title>
+    <link href="http://minimaxir.com/2015/02/password-numbers/"/>
+    <updated>2015-02-24T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/02/password-numbers</id>
+    <content type="html"><![CDATA[<p>The primary purpose of a <a href="http://en.wikipedia.org/wiki/Password">password</a> is to serve as an unique verification identifier for a given user. Ideally, the password for a given website or service should be both random and unique; if the letters and/or numbers in the password follow any patterns, then they might be easier to guess by an intruder. For example, someone may put their birth year such as &ldquo;1987&rdquo; or &ldquo;1988&rdquo; in their password, which makes the passwords easier to remember, but consequently easier to break.</p>
+
+<p>A few weeks ago, security researcher Mark Burnett released <a href="https://xato.net/passwords/ten-million-passwords/#.VNojhPnF98E">a list of 10 million passwords</a> compiled <a href="http://www.reddit.com/r/10millionpasswords/comments/2w3ali/dataset_origin/conap8l">from various sources</a> over the years. Reddit user jalgroy <a href="http://www.reddit.com/r/dataisbeautiful/comments/2vsg7h/frequency_of_years_in_passwords_oc/">posted a histogram</a> of the years used in these passwords, which I&rsquo;ve verified using my own scripts:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/year_distribution.png"></p>
+
+<p>There is a clear maximum at 1987 which implies a current age of about 28. This makes sense, as internet users in their 20&rsquo;s are generally considered to be very attuned to internet usage. The spike at 2000 is likely not because it&rsquo;s a birth year, but because 2000 is a kewl number.</p>
+
+<p>There are actually many similar patterns for numbers in passwords, which involve surprising yet intuitive logic.</p>
+
+<h1>Digit Behavior</h1>
+
+<p>The distribution of the number of digits in passwords varies significantly.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/digit_distribution.png"></p>
+
+<p>42% of passwords have zero numerical digits, which implies that 58% of passwords have atleast one digit. However, the local maxima in number of digits in a password all occur at <em>even</em> numbers of digits, which may imply that humans have an easier time of remembering even amounts of numbers.</p>
+
+<p>If you look at a typical keyboard, you&rsquo;ll note that the default sequence of numbers is <strong>1234567890</strong>. If the user wants a number in their password that is easy to type, drawing from this sequence of numbers might be a good idea.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/seq_digit_bar.png"></p>
+
+<p>Note that the length of the sequence is uncorrelated with the number of occurrences of the sequence. Many more people use 123 in a password than just 12, even though it&rsquo;s longer. 123, as a triplet of numbers, may be easier to remember by the average person than a pair of numbers. However, that contradicts the logic above that even numbers may be easier to remember, which suggest that another factor may be involved.</p>
+
+<p>Sequences of numbers are popular, but are some sequences of numbers more popular than others? Let&rsquo;s look at the order and composition of 1-digit, 2-digit, and 3-digit numbers in these 10 million passwords.</p>
+
+<h1>More on Digit Patterns</h1>
+
+<p><em>Note: all number patterns are distinct number patterns, e.g. 2-digit numbers analyzed are not subsets of 3-digit or larger numbers.</em></p>
+
+<p>Take a look at the most used single-digit numbers:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/one_digit_bar.png"></p>
+
+<p>1 is by far the most-used single-digit number, which may be due to the fact that it is the left-most number on the keyboard and therefore an easy press for services that force the inclusion of a digit in the password. Relatedly, 9 and 0 are the least-used single-digit numbers. That&rsquo;s intuitive enough. But does that hold for more complex patterns?</p>
+
+<p>Let&rsquo;s look at the most-used 2-digit patterns, including numbers with 0 as a leading digit:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/two_digit_bar.png"></p>
+
+<p>12 and 11, a sequential pattern and a repeating pattern respectively, are by far the most-used 2-digit numbers. Many repeating patterns such as 22 and 99 are prominent. But why is 69 in third place? (besides the obvious non-family-friendly reason)</p>
+
+<p>It may be helpful to look at a heat map of all possible 2-digit numbers to see if there are any observable patterns.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/two_digit_heatmap.png"></p>
+
+<p>There are a couple distinct patterns: numbers beginning with a 1 or 2 are used the most frequently, and both repeating and sequential digits are used the most frequently.</p>
+
+<p>Almost all 2-digit numbers outside of those patterns are unused (the exception is 69, of course) The intersection of both of these patterns is at 11/12, which is the reason both have high usage.</p>
+
+<p>Do 3-digit numbers follow similar patterns? Here&rsquo;s a list of the most-used 3-digit numbers in passwords:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/three_digit_bar.png"></p>
+
+<p>Yes and no. Here, there appear to be more instances of special numbers, such as 321 and <a href="http://en.wikipedia.org/wiki/James_Bond">007</a> which deviate from the patterns above. Of note, 3-digit numbers ending in 00 appears as a new pattern.</p>
+
+<p>This can be confirmed by looking at a faceted heat map for each possible combination.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/three_digit_heatmap.png"></p>
+
+<p>By far the most popular pattern for a 3-digit number is a repetition pattern, followed by a sequential pattern (the sequential pattern is always located one tile up and two tiles right from the repetition pattern). There are very few outliers which deviate from this schema aside from the ones mentioned previously. (420 is not as significant of an outlier for 3-digit numbers as 69 is for 2-digit numbers)</p>
+
+<p>The patterns of numbers in passwords can offer some insight to human psychology. However, if possible, I recommend you avoid using such patterns in your passwords since it introduces a vulnerability. It&rsquo;s a good idea to use a password manager instead, such as <a href="https://agilebits.com/onepassword">1Password</a> or <a href="http://keepass.info/">KeePass</a>, which offer advantages including the generation of both truly random and unique passwords.</p>
+
+<hr />
+
+<p><em>All charts were made using R and ggplot2.</em></p>
+
+<p><em>You can download the aggregate data used to create the charts <a href="https://docs.google.com/spreadsheets/d/1_OHQOyLkg0d7tseHXofTBu5AWzSlmXIBjV23CojFPcY/edit?usp=sharing">in this Google Sheet</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[An Introduction on How to Make Beautiful Charts With R and ggplot2]]></title>
@@ -1040,82 +1117,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Other interesting edits by members of the House include <a href="http://en.wikipedia.org/wiki?curid=18951054">Apocalypse Now</a> (10 edits), <a href="http://en.wikipedia.org/wiki?curid=1161298">History of Italy as a monarchy and in the World Wars</a> (9 edits), and <a href="http://en.wikipedia.org/wiki?curid=34071">Whitney Houston</a> (9 edits)</p>
 
 <p>In the end, the members of the U.S. Congress have the same peculiar interests as typical Americans. However, when these people edit entries on topics in which they are directly involved, the potential bias threatens the integrity of all Wikipedia. And this is just the tip of the iceburg.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Impact of the New Show HN Section on Show HN Submissions]]></title>
-    <link href="http://minimaxir.com/2014/07/show-hn/"/>
-    <updated>2014-07-14T08:30:00-07:00</updated>
-    <id>http://minimaxir.com/2014/07/show-hn</id>
-    <content type="html"><![CDATA[<p>Hacker News, a tech-oriented link aggregator managed by Y Combinator, is a platform where software projects have launched to literally become multibillion-dollar companies. Submissions which contain the phrase &ldquo;Show HN&rdquo; usually designate a clever hack or weekend project. On <a href="http://blog.ycombinator.com/make-things-and-show-them">July 3rd 2014</a>, Hacker News <a href="https://news.ycombinator.com/show">created a section of Hacker News</a> just for these Show HN projects.</p>
-
-<p>Did this feature help or harm Show HN submissions as a whole?</p>
-
-<p>Over the past few years, the average number of Show HN submissions per day has steadily risen. (this is strongly correlated with the <a href="http://minimaxir.com/2014/02/hacking-hacker-news/">growth of Hacker News as a whole</a>)</p>
-
-<p><img src="http://minimaxir.com/img/show-hn/show-hn-submissions.png"></p>
-
-<p>More on that spike at the end later.</p>
-
-<p>On Hacker News, users can upvote link submissions, which increases the point score of the submission; this point score is used as a rough proxy of link quality. The average amount of points per submission peaked in 2012, and has trended downward since then.</p>
-
-<p>Here&rsquo;s a chart of the points of Show HN submissions averaged by date of submission, then averaged across the previous 30-days to further smooth the variation and make the trend more apparent:</p>
-
-<p><img src="http://minimaxir.com/img/show-hn/show-hn-points.png"></p>
-
-<p>Users can also comment on these Show HN posts. The average amount of comments has trended downward over time, albeit only slightly.</p>
-
-<p><img src="http://minimaxir.com/img/show-hn/show-hn-comments.png"></p>
-
-<p>The combination of increased Show HN submissions and a decrease in point quality over time may imply that Show HN submissions have a low signal-to-noise ratio, i.e. a low amount of good submissions relative high amount of bad submissions.</p>
-
-<p>Hitting the front page of Hacker News is the first step to virality. When users upvote submissions on Hacker News, those submissions can hit the front page after achieving enough points (combined with other factors, such as submission age and quantity of other submissions). At the least, if a submission has 10 points, it has most likely hit the front page sometime in its lifespan.</p>
-
-<p>What proportion of the Show HN submissions hit the front page?</p>
-
-<p><img src="http://minimaxir.com/img/show-hn/show-hn-perc-front.png"></p>
-
-<p>Over time, the amount of good Show HNs relative to the amount of bad Show HNs has been steadily decreasing.</p>
-
-<p>Has the new Show HN feature helped improve the signal-to-noise ratio?</p>
-
-<h1>Show and Tell HN</h1>
-
-<p>We can look at the immediate impact of the new Show HN section by comparing the behavior of submissions before and after the announcement. The red area in the following charts represents the daily behavior in the couple months before the release (with the red horizontal dotted line representing the statistical average for the corresponding measurement), and the blue area/blue line represents the behavior after the release.</p>
-
-<p>When the Show HN feature was first announced, everyone rushed to make a submission to test it out, and it showed. In fact, the number of submissions for every day after the feature was added was greater than the average number of submissions from before the addition.</p>
-
-<p><img src="http://minimaxir.com/img/show-hn/show-hn-end-submissions.png"></p>
-
-<p>Average number of daily submissions before Show HN section is <strong>19.13</strong> submissions/day, average after is <strong>53.44</strong> submissions/day.</p>
-
-<p>Average submission points and average submission comments (both aggregated by date of submission for smoothing) received a slight boost too.</p>
-
-<p><img src="http://minimaxir.com/img/show-hn/show-hn-end-points.png"></p>
-
-<p><img src="http://minimaxir.com/img/show-hn/show-hn-end-comments.png"></p>
-
-<p>Average number of daily points before Show HN section is <strong>11.40</strong> points/submission/day, average after is <strong>12.12</strong> points/submission/day.</p>
-
-<p>Average number of daily comments before Show HN section is <strong>6.57</strong> comments/submission/day, average after is <strong>7.16</strong> comments/submission/day.</p>
-
-<p>The percentage of Show HN submissions that hit the front page, however, moves in a different direction.</p>
-
-<p><img src="http://minimaxir.com/img/show-hn/show-hn-end-perc-front.png"></p>
-
-<p>Average daily % of Show HN submissions which hit the front page before Show HN section is <strong>19.33%</strong>, average after is <strong>16.37%</strong>.</p>
-
-<p>While the Show HN section gives more focus to Show HN submissions, the increased motivation for making Show HN submissions does not necessarily imply that the submissions will be better. It will take more time to see of the downward trend of Show HN quality continues over time.</p>
-
-<hr />
-
-<ul>
-<li><em>Data was processed using R and all charts were made using ggplot2.</em></li>
-<li><em>You can view the data of all the Show HN submissions and the derived moving averages <a href="https://docs.google.com/spreadsheets/d/1JHIlzYdsavWnw8Y5efHrOHCo3-WFGtIosJ2WqIV_Bn4/edit?usp=sharing">in this Google Sheet</a>.</em></li>
-<li><em>You can view code necessary to reproduce these results  and reproduce all the charts in <a href="https://github.com/minimaxir/show-hn">this GitHub repository</a>. This repository also includes a .csv of all ~20,000 Show HNs obtained.</em></li>
-</ul>
-
 ]]></content>
   </entry>
   
