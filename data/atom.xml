@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-02-24T08:08:43-08:00</updated>
+  <updated>2015-03-18T08:32:41-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Almost Every Smartphone and Tablet Browses the Web in Portrait Mode]]></title>
+    <link href="http://minimaxir.com/2015/03/portrait/"/>
+    <updated>2015-03-18T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2015/03/portrait</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m currently working on a blog post on how the rise of smartphones and tablets impacts the design of charts and other data visualizations. In the process, I took a look at the proportion of mobile devices, tablets, and desktops which have visited my blog over time, using <a href="http://www.google.com/analytics/">Google Analytics</a>, in order to quantify the importance of catering to these newer technologies.</p>
+
+<p><img src="/img/portrait/minimaxir_devices.png"></p>
+
+<p>After looking at 781,557 visitors to minimaxir.com from January 2013 to February 2015, the proportion of mobile devices + tablets has been slightly increasing, and together consist of more than &frac14;th of the views to my blog, so catering to these users is not unimportant.</p>
+
+<p>Another important concern is <em>how</em> visitors view my blog on smartphones/tablets. Do they read holding their device in <strong>portrait</strong> mode, where the device is vertically-oriented and supports one-handed use, or do they read the web using their device in <strong>landscape</strong> mode, where the device is horizontally-oriented and allows for more text per line? Almost every desktop monitor is landscape, so worrying about that is effectively a non-issue.</p>
+
+<p>Google Analytics also records the screen resolution of each browser which visits my website (for example, an iPhone 5/5S user in portrait mode will appear as a <em>mobile</em> device with a effective resolution of <em>320x568</em>. Note that the true device resolution is <em>640x1136</em>; for many modern smartphones, the web content renders at twice the DPI to fit the entire screen). From that, I can infer that the user has their device in portrait mode if the screen height is greater than the screen width, and vice versa for landscape.</p>
+
+<p>After breaking it down by device category, I found something unexpected.</p>
+
+<p><img src="/img/portrait/minimaxir_orientation.png"></p>
+
+<p>95.25% of all smartphones browse the web in portrait orientation, while 88.18% of all tablets browse the web in portrait. I was expecting the proportion of portrait mode users to be high, but not <em>that</em> high! *</p>
+
+<p>But what does this mean in terms of website design?</p>
+
+<h1>Implications</h1>
+
+<p>Modern front-end website themes and frameworks advocate <a href="http://en.wikipedia.org/wiki/Responsive_web_design">responsive design</a>, where the website resizes and adjusts elements in order to fit the screen resolution of the device (my website uses the <a href="http://getbootstrap.com/">Bootstrap framework</a>, which was one of the first to popularize responsive design) However, there is programming, design, and QA overhead necessary to support each and every possible device width, from the tiniest portrait smartphones to the wide 1080p monitors used on desktops. As a result, many older websites do not care to invest the time and money to optimize for responsive design, but as my first chart shows, the proportion of tablets and smartphones is nontrivial, and therefore there&rsquo;s a strong incentive for catering to them.</p>
+
+<p>Bootstrap has a maximum width of 1200px; any screen width less than that will be impacted by responsive design. Let&rsquo;s look at the distibution of device widths, by device category.</p>
+
+<p><img src="/img/portrait/minimaxir_devices_all.png"></p>
+
+<p>The median browser width is 1366px, corresponding to the device resolution of 1366x768, which is a common &ldquo;720p&rdquo; resolution on laptops. Half of the visitors will have a screen width greater than 1366px, and therefore they would not benefit from a responsive layout. Inversely, half of the visitors will have a device width below 1366px, and most of those are not desktops and below the 1200px limit and therefore will be impacted by responsive design.</p>
+
+<p>Here&rsquo;s the same chart, but colored by device orientation instead of category.</p>
+
+<p><img src="/img/portrait/minimaxir_orientations_all.png"></p>
+
+<p>The majority of the devices below the median are portrait devices, which isn&rsquo;t surprising, but is evident that portrait mode is a concern.</p>
+
+<p>We can further separate these groups in 6 subgroups: one for each device category and orientation combination. This tells the full story.</p>
+
+<p><img src="/img/portrait/minimaxir_widths.png"></p>
+
+<p>Mobile Portrait devices have over 75% of the widths concentrated at about 360px (the effective width of Samsung Galaxy smartphones), while Tablet Portrait devices have over 75% of the widths concentrated at about 768px (the effective width of iPads). In contrast, Landscape smartphones, tablets, and desktops encompass a wider variety of device widths.</p>
+
+<p>Not only do most smartphones view the web in portrait, the effective widths of these smartphones and tablets are centered around specific widths. This makes targeting certain device widths an effective strategy for saving time when testing mobile-optimized content, especially when working with data visualizations.</p>
+
+<hr />
+
+<p>*In fairness, the viewers on my website about technology and statistics may not necessarily represent the viewers on the internet as a whole. However, it&rsquo;s fair to assume that the way a person holds a device is uncorrelated with the person&rsquo;s topic preferences. Additionally, the very large sample size of 781,557 effectively eliminates any uncertainty about the results due to random chance.</p>
+
+<p><em>You can download a copy of the data <a href="https://docs.google.com/spreadsheets/d/14vUjq7rv5fceIe8pZRqfZrp7JGj3Uw1fFI2-3NL3Dvs/edit?usp=sharing">in this Google Sheet</a>. All charts were made using R and ggplot2.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Analyzing the Patterns of Numbers in 10 Million Passwords]]></title>
@@ -466,156 +521,6 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 <p><em>All graphics were generated using R. The maps were created using <a href="http://ggplot2.org/">ggplot2</a> and the world map provided with the <a href="http://cran.r-project.org/web/packages/rworldxtra/index.html">rworldxtra</a> package. The treemaps were created using the <a href="http://cran.r-project.org/web/packages/treemap/index.html">treemap</a> package.</em></p>
 
 <p><em>The source data is included with a seperate tab in Google Fusion Tables <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">along with the interactive map</a>.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Statistical Analysis of 142 Million Reddit Submissions]]></title>
-    <link href="http://minimaxir.com/2014/12/reddit-statistics/"/>
-    <updated>2014-12-16T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2014/12/reddit-statistics</id>
-    <content type="html"><![CDATA[<p><img src="/img/reddit-statistics/reddit_logo.jpg"></p>
-
-<p>Reddit, the &ldquo;front page of the Internet&rdquo;, is well-deserving of that title. Founded in 2005 for the more tech-savvy crowd, <a href="http://reddit.com">Reddit</a> is a news aggregator where users can submit links to interesting websites and other media, and form communities on specific interests which are known as &ldquo;subreddits.&rdquo; Since 2008, its popularity has grown exponentially.</p>
-
-<p><img src="/img/reddit-statistics/all_cumsub_reddit.png"></p>
-
-<p>More impressively, the number of new submissions each month to Reddit increases, with slight declines offset by large gains in the next month.</p>
-
-<p><img src="/img/reddit-statistics/growth_rate_reddit.png"></p>
-
-<p>Although Reddit first launched in 2005, it didn&rsquo;t hit mainstream until much later. At first, Reddit was at peace. But everything changed when the Digg Nation attacked.  <a href="http://digg.com/">Digg</a>, which was the leading news aggregator at the time, <a href="http://www.wired.com/2010/03/digg-redesign-social-web/">announced a redesign in March 2010</a> which rolled out that summer. The redesign was profit-maximizing, which massively irritated Digg&rsquo;s userbase. The majority of these users ended up flocking to Reddit, drastically changing its userbase and affecting Reddit&rsquo;s submissions as a whole. As a result, it&rsquo;s required to look at Reddit&rsquo;s entire history if possible when analyzing any statistical analysis of it. (although, as a warning, <a href="http://en.wikipedia.org/wiki/Correlation_does_not_imply_causation">correlation does not imply causation</a>).</p>
-
-<p>I, <a href="http://www.reddit.com/user/minimaxir">/u/minimaxir</a>, have personally been a redditor for 3 years. I&rsquo;ve previously done statistical analyses of Reddit data before, such as looking at which <a href="http://minimaxir.com/2013/11/subreddit-size/">subreddits are the largest</a> or determining which sites on Reddit are <a href="http://minimaxir.com/2013/09/reddit-imgur-youtube/">the most-frequently submitted</a>, but those were written with incomplete data. Thanks to <a href="http://redditanalytics.com">Reddit Analytics</a>, I have obtained a data dump and I subsequently constructed a database to store all Reddit Submissions from November 2007 to the end of October 2014: 142,159,793 submissions in total. And this data is very curious and very, <em>very</em> memetic.</p>
-
-<h1><i class="fa fa-reddit"></i> A Quick Glance At Reddit</h1>
-
-<p><img src="/img/reddit-statistics/reddit_sample.png"></p>
-
-<p>Reddit ranks submissions through a combination of upvotes from users, downvotes, and age of submission. The average score of a submission, which is the number of upvotes minus the number of downvotes, has changed throughout the years.</p>
-
-<p><img src="/img/reddit-statistics/all_score_reddit.png"></p>
-
-<p>The average score of a submission was relatively constant until the Digg announcement, then it started to increase, as the number of potential upvoters for a submission also increased. Interestingly the score, has decreased in recent months; it is entirely possible that the average is decreasing due to an increase in low-scoring posts.</p>
-
-<p>Let&rsquo;s look at the average scores of Top 100 subreddits by submission volume to see which are the most well-received.</p>
-
-<p><img src="/img/reddit-statistics/top_score_reddit.png"></p>
-
-<p><em><strong>Note</strong>: The shaded areas in charts for this article represent 95% percent confidence intervals for the true average of a given month/subreddit. Since there is a </em>lot<em> of submission data, the confidence intervals are usually incredibly narrow.</em></p>
-
-<p>Image subreddits, such as <a href="http://reddit.com/r/gifs">/r/gifs</a>, <a href="http://reddit.com/r/cringepics">/r/cringepics</a>, and <a href="http://reddit.com/r/reactiongifs">/r/reactiongifs</a> are clearly the most well-received on Reddit. (I plan to do a more in-depth analysis of this behavior in another blog post).</p>
-
-<p>Users can also leave comments on submissions to add insight and jokes. How has the Digg announcement affected the number of comments?</p>
-
-<p><img src="/img/reddit-statistics/all_comments_reddit.png"></p>
-
-<p>As it turns out, there&rsquo;s a <em>very</em> significant change in the average number of comments pre and post-Digg announcement. From April 2010 to August 2010, the average number of comments increased from 4.79 to 7.91, nearly doubling the number of comments in less than half a year.</p>
-
-<p>Many top subreddits encourage more discussion than others.</p>
-
-<p><img src="/img/reddit-statistics/top_comments_reddit.png"></p>
-
-<p><a href="http://reddit.com/r/IAmA">/r/IAmA</a> is Reddit&rsquo;s flagship subreddit (which <a href="http://www.redditblog.com/2014/09/announcing-official-reddit-ama-app_2.html">has its own official app</a>!), where users can ask questions to noteworthy people: it&rsquo;s not surprising to see it far at the top. Sports and video games are the top topics for discussion on Reddit.</p>
-
-<h1><i class="fa fa-comments"></i> reddit.self</h1>
-
-<p><img src="/img/reddit-statistics/reddit_self.png"></p>
-
-<p>An alternate form on Reddit is the self-post, where the user submits text instead of a link to an external website or image. These posts are used to make announcements and encourage discussion on a specific topic. Some large subreddits have even switched to &ldquo;self-post only&rdquo; mode.</p>
-
-<p>The popularity of self-posts has risen significantly over the year, and new submissions of self-posts now account for nearly half of all the new submissions on Reddit! (45.3% in October 2014)</p>
-
-<p><img src="/img/reddit-statistics/self_proportion_reddit.png"></p>
-
-<p>In theory, self-posts make subreddits contain higher-quality content. How do the scores of self-posts compare to that of normal posts?</p>
-
-<p><img src="/img/reddit-statistics/self_score_reddit.png"></p>
-
-<p>Before the Digg announcement, self-submissions were more noteworthy than regular submissions. Afterwards, self submissions receive about &frac14;th of the score of a normal submission on average. This is likely related to the substantial increase in self posts seen above: the rise of self-posts also leads to a rise in low-quality self-posts, which will reduce the average.</p>
-
-<p>But have the self-posts succeeded in encouraging more discussion on posts?</p>
-
-<p><img src="/img/reddit-statistics/self_comments_reddit.png"></p>
-
-<p>Yes. They have. Despite having &frac14;th of the score, self-submissions receive about twice as many comments on average.</p>
-
-<h1><i class="fa fa-ban"></i> Not Safe For Procrastinating At Work</h1>
-
-<p><em>[Sample image omitted for obvious reasons.]</em></p>
-
-<p>Reddit has received an infamous reputation for being the internet&rsquo;s primary source of Not Safe for Work (NSFW) images and links with an age limit of 18+. Not all of the content is sexual; occasionally, shockingly violent yet important images are submitted to the primary subreddits as well.</p>
-
-<p>The proportion of new NSFW content submitted to Reddit each month has increased gradually over the years, but it&rsquo;s still in the minority of submissions. (7.5% of all submissions in October 2014)</p>
-
-<p><img src="/img/reddit-statistics/nsfw_proportion_reddit.png"></p>
-
-<p>If the proportion of NSFW content is relatively low, then how has it achieved such a reputation? How well does NSFW content score relative to non-NSFW content?</p>
-
-<p><img src="/img/reddit-statistics/nsfw_score_reddit.png"></p>
-
-<p>NSFW content scores are nearly double that of non-NSFW content. Higher community approval of sexual content as opposed to nonsexual content isn&rsquo;t too surprising.</p>
-
-<p>Reddit&rsquo;s community operates on pseudonyms instead of tying users to a real identity. Do users comment on NSFW submissions as often as normal submissions?</p>
-
-<p><img src="/img/reddit-statistics/nsfw_comments_reddit.png"></p>
-
-<p>The number of comments on NSFW submissions is only slightly less than that on average, but there&rsquo;s a larger amount of uncertainty for that particular average due to the smaller proportion. Most internet users are lurkers and not contributors; it&rsquo;s likely that NSFW media is a more noninteractive experience. (<em>ahem</em>)</p>
-
-<h1><i class="fa fa-globe"></i> Reddit In The City</h1>
-
-<p><img src="/img/reddit-statistics/reddit_sf.png"></p>
-
-<p>Reddit users visit the site from all over the world. Although we cannot determine the location from where a user makes a submission, we can look at subreddits whose primary focus is a given location to see if there are any geographic trends.</p>
-
-<p>I took a list of the <a href="http://www.reddit.com/comments/joqru/a_list_of_the_most_popular_city_reddits/">most popular city subreddits</a>, such as <a href="http://reddit.com/r/toronto">/r/toronto</a> and <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a> and compared the average score of their submissions.</p>
-
-<p><img src="/img/reddit-statistics/city_score_reddit.png"></p>
-
-<p><a href="http://reddit.com/r/Seattle">/r/Seattle</a> has an unusually high average score of 24.7 per submission and <a href="http://reddit.com/r/montreal">/r/montreal</a> has an unusually low average score of 10.7. There does not be any clear geographic trends in the data: <a href="http://reddit.com/r/losangeles">/r/losangeles</a> and <a href="http://reddit.com/r/bayarea">/r/bayarea</a> are at the top but <a href="http://reddit.com/r/sandiego">/r/sandiego</a> is at the bottom, plus <a href="http://reddit.com/r/Dallas">/r/Dallas</a> and <a href="http://reddit.com/r/Austin">/r/Austin</a> are on the opposite areas of the chart too. As a Pennsylvania native, I find it funny that <a href="http://reddit.com/r/pittsburgh">/r/pittsburgh</a> and <a href="http://reddit.com/r/philadelphia">/r/philadelphia</a> are next to each other.</p>
-
-<p>Are the average number of comments affected by geography?</p>
-
-<p><img src="/img/reddit-statistics/city_comments_reddit.png"></p>
-
-<p>There are a few more parings here than with average scores: <a href="http://reddit.com/r/montreal">/r/montreal</a>  and <a href="http://reddit.com/r/toronto">/r/toronto</a> are paired as non-US cities, <a href="http://reddit.com/r/Portland">/r/Portland</a> and <a href="http://reddit.com/r/Seattle">/r/Seattle</a> are paired as West Coast cities, <a href="http://reddit.com/r/Austin">/r/Austin</a> and <a href="http://reddit.com/r/houston">/r/houston</a> are paired as Texas cities, and all of <a href="http://reddit.com/r/bayarea">/r/bayarea</a>, <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a>, and <a href="http://reddit.com/r/sandiego">/r/sandiego</a> are paired as California cities. It&rsquo;s still not a perfect relationship, however.</p>
-
-<h1><i class="fa fa-meh-o"></i> Positivity and Negativity</h1>
-
-<p><img src="/img/reddit-statistics/reddit_neg.png"></p>
-
-<p>Reddit also has a reputation of being both positive and negative. You have communities like <a href="http://www.reddit.com/r/aww">/r/aww</a> which share cute cat photos, and then you have communities like <a href="http://www.reddit.com/r/conspiracy">/r/conspiracy</a> which&hellip;don&rsquo;t.</p>
-
-<p>I took the top 100 subreddits by # of all-time submissions and found which ones were the most positive and negative. This was calculated by comparing each word of the submission title against a lexicon of positive/negative words, and count the number of review words in the lexicon. In this case, I use the lexicons compiled by <a href="http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">UIC professor Bing Liu</a>. A normalized positivity/negativity score is calculated by taking the average number of positive/negative words for the subreddit and dividing it by the average number of words in titles for submissions to the subreddit.</p>
-
-<p><img src="/img/reddit-statistics/all_sentiment_reddit.png"></p>
-
-<p>Both positivity and negativity have been pretty equal for Reddit&rsquo;s entirety, but that doesn&rsquo;t mean that Reddit is neutral.</p>
-
-<p>Let&rsquo;s look at the most positive of the top Reddit communities:</p>
-
-<p><img src="/img/reddit-statistics/reddit_subreddit_positivity.png"></p>
-
-<p>The top communities are the communities which rely on community and general good feelings (this includes /r/nsfw, <em>ahem</em>). <a href="http://www.reddit.com/r/cookingrecipesstuff">/r/CookingRecipesStuff</a> has the greatest positivity because it&rsquo;s apparently run by a spammer who sent enough submissions to become one the Top 100 subreddits by trying to abuse Reddit for <a href="http://en.wikipedia.org/wiki/Backlink">SEO backlinks</a>.</p>
-
-<p>Huh, that wasn&rsquo;t expected.</p>
-
-<p>The most negative subreddits are more intuitive.</p>
-
-<p><img src="/img/reddit-statistics/reddit_subreddit_negativity.png"></p>
-
-<p><a href="http://www.reddit.com/r/fffffffuuuuuuuuuuuu">/r/fffffffuuuuuuuuuuuu</a> and <a href="http://www.reddit.com/r/offmychest">/r/offmychest</a> were subreddits designed for ranting so negativity is expected. Many news subreddits have a high negativity (and comparatively little positivity). The presence of <a href="http://www.reddit.com/r/Health">/r/Health</a> and <a href="http://www.reddit.com/r/techsupport">/r/techsupport</a> as negative subreddits is appropriate.</p>
-
-<p>This article is only <em>scratching the surface</em> of the information contained in Reddit&rsquo;s history, and I hope to explore more in the future. The Digg redesign announcement is only one of many events in Reddit&rsquo;s history, and there are still other aspects of self posts, NSFW submissions, and city subreddits that make me want to take a closer look. Reddit has been a primary source for images and video which go viral around the web, and unlocking that information may just help understand <em>how</em> things go viral.</p>
-
-<hr />
-
-<ul>
-<li><em>All charts were made using 100% <a href="http://www.r-project.org/">R</a> and <a href="http://docs.ggplot2.org/current/">ggplot2</a>, with extensive theme customization/hacks for the latter. No external photo-editing software used at all.</em></li>
-<li><em>You can access a copy of the data used to make most of the charts <a href="https://docs.google.com/spreadsheets/d/1qfyOdEP3NDnb6MEoUqiEK88Uv4X4tfkSfVqynylVGaE/edit?usp=sharing">in this Google Sheet</a>.</em></li>
-<li><em>Thanks to <a href="http://reddit.com/r/theoryofreddit">/r/TheoryOfReddit</a> for <a href="http://www.reddit.com/r/TheoryOfReddit/comments/2p0dc2/i_have_a_database_of_all_reddit_submissions_what/">giving me ideas</a> for interesting quantitative analyses of Reddit data.</em></li>
-</ul>
-
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-02-24T08:08:43-08:00</updated>
+  <updated>2015-03-18T08:32:41-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Almost Every Smartphone and Tablet Browses the Web in Portrait Mode]]></title>
+    <link href="http://minimaxir.com/2015/03/portrait/"/>
+    <updated>2015-03-18T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2015/03/portrait</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m currently working on a blog post on how the rise of smartphones and tablets impacts the design of charts and other data visualizations. In the process, I took a look at the proportion of mobile devices, tablets, and desktops which have visited my blog over time, using <a href="http://www.google.com/analytics/">Google Analytics</a>, in order to quantify the importance of catering to these newer technologies.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_devices.png"></p>
+
+<p>After looking at 781,557 visitors to minimaxir.com from January 2013 to February 2015, the proportion of mobile devices + tablets has been slightly increasing, and together consist of more than &frac14;th of the views to my blog, so catering to these users is not unimportant.</p>
+
+<p>Another important concern is <em>how</em> visitors view my blog on smartphones/tablets. Do they read holding their device in <strong>portrait</strong> mode, where the device is vertically-oriented and supports one-handed use, or do they read the web using their device in <strong>landscape</strong> mode, where the device is horizontally-oriented and allows for more text per line? Almost every desktop monitor is landscape, so worrying about that is effectively a non-issue.</p>
+
+<p>Google Analytics also records the screen resolution of each browser which visits my website (for example, an iPhone 5/5S user in portrait mode will appear as a <em>mobile</em> device with a effective resolution of <em>320x568</em>. Note that the true device resolution is <em>640x1136</em>; for many modern smartphones, the web content renders at twice the DPI to fit the entire screen). From that, I can infer that the user has their device in portrait mode if the screen height is greater than the screen width, and vice versa for landscape.</p>
+
+<p>After breaking it down by device category, I found something unexpected.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_orientation.png"></p>
+
+<p>95.25% of all smartphones browse the web in portrait orientation, while 88.18% of all tablets browse the web in portrait. I was expecting the proportion of portrait mode users to be high, but not <em>that</em> high! *</p>
+
+<p>But what does this mean in terms of website design?</p>
+
+<h1>Implications</h1>
+
+<p>Modern front-end website themes and frameworks advocate <a href="http://en.wikipedia.org/wiki/Responsive_web_design">responsive design</a>, where the website resizes and adjusts elements in order to fit the screen resolution of the device (my website uses the <a href="http://getbootstrap.com/">Bootstrap framework</a>, which was one of the first to popularize responsive design) However, there is programming, design, and QA overhead necessary to support each and every possible device width, from the tiniest portrait smartphones to the wide 1080p monitors used on desktops. As a result, many older websites do not care to invest the time and money to optimize for responsive design, but as my first chart shows, the proportion of tablets and smartphones is nontrivial, and therefore there&rsquo;s a strong incentive for catering to them.</p>
+
+<p>Bootstrap has a maximum width of 1200px; any screen width less than that will be impacted by responsive design. Let&rsquo;s look at the distibution of device widths, by device category.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_devices_all.png"></p>
+
+<p>The median browser width is 1366px, corresponding to the device resolution of 1366x768, which is a common &ldquo;720p&rdquo; resolution on laptops. Half of the visitors will have a screen width greater than 1366px, and therefore they would not benefit from a responsive layout. Inversely, half of the visitors will have a device width below 1366px, and most of those are not desktops and below the 1200px limit and therefore will be impacted by responsive design.</p>
+
+<p>Here&rsquo;s the same chart, but colored by device orientation instead of category.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_orientations_all.png"></p>
+
+<p>The majority of the devices below the median are portrait devices, which isn&rsquo;t surprising, but is evident that portrait mode is a concern.</p>
+
+<p>We can further separate these groups in 6 subgroups: one for each device category and orientation combination. This tells the full story.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_widths.png"></p>
+
+<p>Mobile Portrait devices have over 75% of the widths concentrated at about 360px (the effective width of Samsung Galaxy smartphones), while Tablet Portrait devices have over 75% of the widths concentrated at about 768px (the effective width of iPads). In contrast, Landscape smartphones, tablets, and desktops encompass a wider variety of device widths.</p>
+
+<p>Not only do most smartphones view the web in portrait, the effective widths of these smartphones and tablets are centered around specific widths. This makes targeting certain device widths an effective strategy for saving time when testing mobile-optimized content, especially when working with data visualizations.</p>
+
+<hr />
+
+<p>*In fairness, the viewers on my website about technology and statistics may not necessarily represent the viewers on the internet as a whole. However, it&rsquo;s fair to assume that the way a person holds a device is uncorrelated with the person&rsquo;s topic preferences. Additionally, the very large sample size of 781,557 effectively eliminates any uncertainty about the results due to random chance.</p>
+
+<p><em>You can download a copy of the data <a href="https://docs.google.com/spreadsheets/d/14vUjq7rv5fceIe8pZRqfZrp7JGj3Uw1fFI2-3NL3Dvs/edit?usp=sharing">in this Google Sheet</a>. All charts were made using R and ggplot2.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Analyzing the Patterns of Numbers in 10 Million Passwords]]></title>
@@ -1072,51 +1127,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &lt; 2.2e-16</code></pre>
 
 
 <p><em><strong>EDIT: 8/9/14</strong>: Per <a href="https://news.ycombinator.com/item?id=8153091">comments on Hacker News</a>, I&rsquo;ve changed wording in a few paragraphs for clarification.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress]]></title>
-    <link href="http://minimaxir.com/2014/07/caucus-needed/"/>
-    <updated>2014-07-15T08:30:00-07:00</updated>
-    <id>http://minimaxir.com/2014/07/caucus-needed</id>
-    <content type="html"><![CDATA[<p>Last week, the Twitter account <a href="https://twitter.com/congressedits">@congressedits</a> launched. This account is a bot that tweets edits to Wikipedia that were made by members of the U.S. Congress, in order to help <a href="http://inkdroid.org/journal/2014/07/10/why-congressedits/">facilitate transparency</a>. The account <a href="https://github.com/edsu/anon">works</a> by automatically tweeting any Wikipedia edits made by anonymous contributors with IP addresses between the known IP address blocks of the <a href="http://whois.arin.net/rest/org/USSAA/nets">U.S. Senate</a> or the <a href="http://whois.arin.net/rest/org/ISUHR/nets">House of Representatives</a>.</p>
-
-<p>Google&rsquo;s <a href="https://developers.google.com/bigquery/">BigQuery</a> tool has a <a href="https://developers.google.com/bigquery/docs/dataset-wikipedia">sample dataset</a> of Wikipedia data, representing the data on 314 million article edits up to April 2010. Out of curiosity, I wrote a query which returns the top 100 pages with the most amount of edits by Wikipedia contributors in the U.S. Senate&rsquo;s IP block.</p>
-
-<p><img src="http://minimaxir.com/img/caucus-needed/senate-query.png"></p>
-
-<p>Using this query for the Senate&rsquo;s IP block, and a similar one for the House of Representatives IP blocks, I retrieved the most-edited entries for both entities. You can access the spreadsheet of this data by <a href="https://dl.dropboxusercontent.com/u/2017402/Congress_Wikipedia_Edits.pdf">downloading a .pdf</a> or by viewing the data online with <a href="https://www.icloud.com/iw/#numbers/BALY8siqBP4jYZq5E2OB20P-wlPpyXdycqqF/Congress_Wikipedia_Edits">Numbers for iCloud</a>, both of which contain high-resolution charts and clickable Wikipedia links. A <a href="https://docs.google.com/spreadsheets/d/1qfFEwzNzc4KL4gqe2i4IoMO0ksmoYndCK0O0m46n37I/edit?usp=sharing">Google Sheets</a> version is also available.</p>
-
-<p>Here are the Top 10 Wikipedia entries with the most amount of edits by members of the Senate:</p>
-
-<p><img src="http://minimaxir.com/img/caucus-needed/senate-wikipedia.png"></p>
-
-<p>Wait a minute. Hawk from G.I. Joe?!</p>
-
-<p>Saying that the query results were surprising would be the understatement of the century.</p>
-
-<p>Two of the top-edited entries are directly pertaining to the U.S. Senate, which helps prove that the IP block is indeed the Senate&rsquo;s IP block. Both Kappa Upsilon Chi and <a href="http://en.wikipedia.org/wiki/Beta_Upsilon_Chi">Beta Upsilon Chi</a> are Christian fraternities. (however, the Kappa Upsilon Chi Wikipedia entry no longer exists for some reason)</p>
-
-<p>The edits corresponding to actual people are ones which are the most interesting. <a href="http://en.wikipedia.org/wiki/William_Swain_Lee">William Swain Lee</a> is a Delaware politician whose entry was <a href="http://en.wikipedia.org/w/index.php?title=William_Swain_Lee&amp;diff=prev&amp;oldid=31202175">created and edited</a> by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.148.107">user in the Senate IP block</a>. OrangePie is  a user who, <a href="http://en.wikipedia.org/wiki?curid=7319910">according to his talk page</a>, was criticized for repeatedly recreating an entry for &ldquo;Michael Hardaway&rdquo; after deletion, who coincidentally worked for the Senate <a href="https://twitter.com/michaelhardaway">according to his Twitter bio</a>. In journalist <a href="http://en.wikipedia.org/wiki?curid=8593106">Paul D. Thacker&rsquo;s</a> entry, one Senate editor <a href="http://en.wikipedia.org/w/index.php?title=Paul_D._Thacker&amp;diff=311839513&amp;oldid=311689066">replaced a paragraph</a> of Thacker&rsquo;s biography with the word &ldquo;anus?&rdquo;. Jay Rockefeller is an <a href="http://en.wikipedia.org/wiki?curid=337026">actual U.S. Senator</a>, so the edits are definitely a conflict of interest. The <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.96.28">user who made the edits</a> apparently also removed <a href="http://en.wikipedia.org/w/index.php?title=Jay_Rockefeller&amp;diff=prev&amp;oldid=33857327">information about a government investigation</a> into the Senator.</p>
-
-<p>I have nothing to add for <a href="http://en.wikipedia.org/wiki?curid=2814171">Hawk from G.I. Joe</a>.</p>
-
-<p>Other interesting frequently-edited Wikipedia entries from members of the U.S. Senate are <a href="http://en.wikipedia.org/wiki?curid=3626593">Primetime Emmy Award for Outstanding Supporting Actor – Comedy Series</a> (11 edits), <a href="http://en.wikipedia.org/wiki?curid=1226609">Wikipedia:Introduction</a> (5 edits) and <a href="http://en.wikipedia.org/wiki?curid=1749535">Crash (2004 film)</a> (5 edits)</p>
-
-<p>The Wikipedia entries with the most amount of edits by members of the House of Representatives are somehow even <em>weirder</em>, and that&rsquo;s quite an accomplishment.</p>
-
-<p><img src="http://minimaxir.com/img/caucus-needed/house-wikipedia.png"></p>
-
-<p>Well, if <em>anyone</em> in the entire United States would be experts on the topics of <a href="http://en.wikipedia.org/wiki?curid=2352587">cleft chins</a> and <a href="http://en.wikipedia.org/wiki?curid=1924543">dimples</a>, it would be the members of the House of Representatives.</p>
-
-<p>Again, one of the most-edited entries corresponds to a House of Representatives topic, which helps validate the IP blocks. The <a href="http://en.wikipedia.org/wiki?curid=107610">Cerritos, California</a> location had <a href="http://en.wikipedia.org/w/index.php?title=Cerritos,_California&amp;diff=21384826&amp;oldid=21363395">neutral edits</a> made by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.141">rather dedicated Wikiuser</a>. Wynne, Arkansas and Michelle Ye&rsquo;s edits were made by the same dedicated Wikiuser. <a href="http://en.wikipedia.org/wiki?curid=1143590">Waverly, Pennsylvania</a> was edited by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/137.18.255.33">user</a> who&rsquo;s <a href="http://en.wikipedia.org/w/index.php?title=Waverly,_Pennsylvania&amp;diff=7763793&amp;oldid=7761053">really passionate about Doc&rsquo;s Deli</a>. <a href="http://en.wikipedia.org/wiki?curid=1129560">Luis Fortuno</a>, former governor of Puerto Rico, had his <a href="http://en.wikipedia.org/w/index.php?title=Luis_Fortu%C3%B1o&amp;diff=prev&amp;oldid=134653411">history excised</a> by <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.137">another user</a>. <a href="http://en.wikipedia.org/wiki?curid=6260346">Betty Sutton</a>, however, is a actual Representative from Ohio, representing another conflict of interest, as another <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.228.129.9">user</a> constructed <a href="http://en.wikipedia.org/w/index.php?title=Betty_Sutton&amp;diff=303743778&amp;oldid=296652449">most of her entry</a>.</p>
-
-<p>I have nothing to add regarding <a href="http://en.wikipedia.org/wiki?curid=862471">effeminacy</a> in the House of Representatives.</p>
-
-<p>Other interesting edits by members of the House include <a href="http://en.wikipedia.org/wiki?curid=18951054">Apocalypse Now</a> (10 edits), <a href="http://en.wikipedia.org/wiki?curid=1161298">History of Italy as a monarchy and in the World Wars</a> (9 edits), and <a href="http://en.wikipedia.org/wiki?curid=34071">Whitney Houston</a> (9 edits)</p>
-
-<p>In the end, the members of the U.S. Congress have the same peculiar interests as typical Americans. However, when these people edit entries on topics in which they are directly involved, the potential bias threatens the integrity of all Wikipedia. And this is just the tip of the iceburg.</p>
 ]]></content>
   </entry>
   
