@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-03-18T08:32:41-07:00</updated>
+  <updated>2015-06-03T21:52:58-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -18,7 +18,9 @@
     <link href="http://minimaxir.com/2015/03/portrait/"/>
     <updated>2015-03-18T08:30:00-07:00</updated>
     <id>http://minimaxir.com/2015/03/portrait</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m currently working on a blog post on how the rise of smartphones and tablets impacts the design of charts and other data visualizations. In the process, I took a look at the proportion of mobile devices, tablets, and desktops which have visited my blog over time, using <a href="http://www.google.com/analytics/">Google Analytics</a>, in order to quantify the importance of catering to these newer technologies.</p>
+    <content type="html"><![CDATA[<p><strong>UPDATE</strong>: <em>After others questioned the data in this blog post, I rechecked the derivation of the data and ran more tests. It turns out that JavaScript may not consistently differentiate, for example, between the browser resolutions of 1280x720 and 720x1280 on mobile devices. Since this is how Google Analytics determines the device resolution, this may affect the final results. The post and charts remain unchanged for posterity.</em></p>
+
+<p>I&rsquo;m currently working on a blog post on how the rise of smartphones and tablets impacts the design of charts and other data visualizations. In the process, I took a look at the proportion of mobile devices, tablets, and desktops which have visited my blog over time, using <a href="http://www.google.com/analytics/">Google Analytics</a>, in order to quantify the importance of catering to these newer technologies.</p>
 
 <p><img src="/img/portrait/minimaxir_devices.png"></p>
 
