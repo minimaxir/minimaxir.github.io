@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-06-03T21:52:58-07:00</updated>
+  <updated>2015-06-15T08:05:09-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why is the Most-Viewed Gaming Video on YouTube About Cars 2?]]></title>
+    <link href="http://minimaxir.com/2015/06/cars-2/"/>
+    <updated>2015-06-15T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/06/cars-2</id>
+    <content type="html"><![CDATA[<p>Last month, <a href="https://www.youtube.com/">YouTube</a>, in celebration of its 10-year anniversary, <a href="http://kotaku.com/the-10-most-popular-games-on-youtube-1704234763">released a report</a> of the Top 10 most-watched video game franchises on YouTube:</p>
+
+<pre><code>1. Minecraft
+2. Grand Theft Auto (series)
+3. League of Legends
+4. Call of Duty (series)
+5. FIFA (series)
+6. Garry’s Mod
+7. The Sims (series)
+8. Five Nights at Freddy’s (series)
+9. Puzzles &amp; Dragons
+10. Dota 2
+</code></pre>
+
+<p>There aren&rsquo;t many surprises on the list. <a href="https://minecraft.net/">Minecraft</a> and <a href="http://na.leagueoflegends.com/">League of Legends</a> have become incredibly huge in such a short time, although <a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy%27s">Five Nights as Freddy&rsquo;s</a> position is impressive given that it started <em>a year ago</em>.</p>
+
+<p>After <a href="http://www.reddit.com/r/dataisbeautiful/comments/38rghg/the_30_mostviewed_youtube_videos_oc/">renewed public interest</a> in YouTube data, I decided to take a poke at the <a href="https://developers.google.com/youtube/">YouTube API</a> to see if I can determine which Gaming videos are the most-viewed. It turns out that the API makes it simple, by allowing you to query on a specific category and sort by the number of views the video has received.</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_all.png"></p>
+
+<p>There&rsquo;s lots of Minecraft, and even lots of Angry Birds in the top-viewed videos.</p>
+
+<p>&hellip;but why is a mundane Cars 2 video from an unknown video channel the most-viewed video of all time?!</p>
+
+<p>No, this is not an error. <a href="https://www.youtube.com/watch?v=urHuO7Zbhhw">You can watch the video yourself on YouTube</a> and verify the view count.</p>
+
+<h1>Vroom Vroom</h1>
+
+<p><img src="http://minimaxir.com/img/cars-2/Cars_2_Poster.jpg"></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Cars_2">Cars 2</a> is a CGI movie about talking cars by Pixar which premiered in June 2011. It is, of course, the sequel to <a href="https://en.wikipedia.org/wiki/Cars_%28film%29">Cars</a>, and received more critical reviews compared to its predecessor.</p>
+
+<p>As with many movies, Cars 2 received a tie-in game, <a href="http://tvtropes.org/pmwiki/pmwiki.php/Main/TheProblemWithLicensedGames">most of which are mediocre</a> due to mandatory deadlines and lower budgets. However, <a href="http://www.gamespot.com/reviews/cars-2-review/1900-6321632/">Gamespot gave the game a 7.5</a> out of 10, which is pretty good for a licensed game. The fact that it&rsquo;s a cart racer like Mario Kart helps too.</p>
+
+<p>It&rsquo;s not Minecraft or League of Legends though. Why would a video about it be the most-viewed gaming video of all time?</p>
+
+<h1>Statistical Shenanigans</h1>
+
+<p>Popular YouTube videos are often suspected of having their viewcounts manipulated, since making videos appear more popular than they actually are can help lead to genuine virality. Could this be the case with the Cars 2 video?</p>
+
+<p>I did a few simple diagnostics of the top 1,000 Gaming videos to determine if the Cars 2 video had an statistically unusual view count.</p>
+
+<p>Modern YouTube videos have a Like/Dislike bar, which counts the number of Likes and Dislikes given by viewers of the video. If someone is rigging the view count, the ratio of Likes+Dislikes to the given viewcount should be much lower than for a genuine video with genuine user reactions.</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_interaction.png"></p>
+
+<p>However, for all videos with incredibly large view counts, the ratio of Likes+Dislikes to Views is incredibly low. The line represents the predicted mean for a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a>, with the shaded area representing a 95% confidence interval for the mean. The Cars 2 data point falls directly on the line, so we cannot safely say that Cars 2 is an outlier from this diagnostic.</p>
+
+<p>Another aspect to check is the ratio of Likes to Dislikes. If a bad video has a manipulated view count, we would expect much fewer Likes and many more Dislikes because viewers may become mislead by the content, especilaly those with misleading titles/thumbnails. In general, the % of people who Liked a video should be high for all videos.</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_like_ratio.png"></p>
+
+<p>Almost all of the Top 1,000 gaming videos have Like Ratio greater than 50% (i.e. more Likes than Dislikes). However, the Cars 2 video data point falls outside the 95% confidence interval for the regression model. Therefore, it&rsquo;s worth looking into as a possible outlier.</p>
+
+<h1>Plan B</h1>
+
+<p>On the Statistics tab of all public YouTube videos, you can see the number of views a video has received over time. Here is the daily number of views for the Cars 2 video:</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/cars_daily_views.png"></p>
+
+<p>The video was released in August 2011 (about a month after the release of the movie), but the video didn&rsquo;t become viral and spike in views until sometime early 2012, many months later.</p>
+
+<p>I <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/">made a submission</a> to the <a href="http://www.reddit.com/r/Games/">games subreddit on Reddit</a> to see if there was any ideas as to why Cars 2 is at the top. /u/ Sureiyaa <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crypxn5">had a good theory</a>:</p>
+
+<blockquote><p>Remember, this video was posted in August 2011, two months after the movie was released. It&rsquo;s also titled &ldquo;Cars 2 HD xxx xxx&rdquo; and is rather lengthy. It would make sense if people searched for &ldquo;Cars 2&rdquo; or even all of &ldquo;Cars 2 HD&rdquo; and stumbled on this video thinking that someone had uploaded the movie for them to watch, especially when you consider that it was a movie aimed at kids who may not pay attention to everything in the title.</p>
+
+<p>With those initial views, it probably became one of the top results if you searched for Cars 2. With that, it grew from there and is probably getting views from being a high-ranking result when searching for games videos in general.</p></blockquote>
+
+<p>Accidental SEO could explain it. Indeed, the first result on Google for &ldquo;Cars 2 HD&rdquo; is the video in question. Although, in that case, why would the spike happen in 2012? (the DVD/Blu-Ray came out October 2011, so a 2012 spike is late even by lazy movie pirate standards)</p>
+
+<p>Another factor is the fact that that Cars franchise appeals to young children, which are <em>very</em> plentiful. This does bring up a <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/cryreaw">valid counterargument</a> though: why Cars 2, and not more popular franchises like <a href="https://en.wikipedia.org/wiki/Frozen_%282013_film%29">Frozen</a> or any other Disney franchise that&rsquo;s more kid-oriented? (for the record, there <em>is</em> a <a href="https://www.youtube.com/watch?v=VQ7GLnRaeHM">Frozen video</a> at #163 in Gaming, although it&rsquo;s blatantly miscategorized)</p>
+
+<p>The Cars 2 video uploader eventually <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crzrbdd">replied to the Reddit thread</a> suggesting the children-theory as well:</p>
+
+<blockquote><p>You&rsquo;re indeed right about it blowing up, mainly from mobile device views, which I&rsquo;m guessing was kids watching it. I remember seeing comments from users saying their kids love to watch the video.</p></blockquote>
+
+<p>There&rsquo;s also the factor of YouTube/Google&rsquo;s recommendation algorithms working in mysterious ways and providing video recommendations based on user interests/age/location/etc. Unfortunately, the impact of those can&rsquo;t easily be quantified.</p>
+
+<p>Looking into the view count of the Cars 2 video in Gaming YouTube videos only raises more questions than answers.</p>
+
+<hr />
+
+<p><em>You can view the metadata for the Top 500 Gaming videos on YouTube at <a href="https://docs.google.com/spreadsheets/d/1fy2-9c5HORwvhvAljEG6LvyrM3zG5YnWnalvepX3eV8/edit?usp=sharing">this Google Sheet</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Almost Every Smartphone and Tablet Browses the Web in Portrait Mode]]></title>
@@ -1975,31 +2066,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &lt; 2.2e-16</code></pre>
 <hr />
 
 <p><em>Credit for all fan art goes to their respective artists: I&rsquo;m currently working on tracking them down.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How Many #nofilter Instagram Photos Actually Have No Filter?]]></title>
-    <link href="http://minimaxir.com/2014/02/the-filter-truth/"/>
-    <updated>2014-02-10T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2014/02/the-filter-truth</id>
-    <content type="html"><![CDATA[<p>Most <a href="http://instagram.com/">Instagram</a> photos have filters applied to make them look more retro/cool. Instagram users are also able to apply tags to a photo to help categorize and promote them to the Instagram community. One such tag, #nofilter, is intended to emphasize such natural beauty that no filter is necessary to enhance the image. (or the photographer is just too lazy to decide on a filter)</p>
-
-<p>But how many #nofilter images actually <em>have</em> no filter?</p>
-
-<p><img src="http://minimaxir.com/img/instagram_selfie.gif"></p>
-
-<p>As it turns not, not all of them.</p>
-
-<p>After retrieving about 50,000 images through the Instagram API (code <a href="https://github.com/minimaxir/get-data-from-photos-from-instagram-tags">available on GitHub</a>), here is the breakdown of filters on #nofilter-tagged Instagram images:</p>
-
-<p><img src="http://minimaxir.com/img/nofilter.png"></p>
-
-<p>Only 83% of #nofilter images have no filter?! You had one job, Instagram! :(</p>
-
-<hr />
-
-<p><em>The actual reason that this is happening is because Instagram rewards #tagspamming. More on that in a future blog post.</em></p>
 ]]></content>
   </entry>
   

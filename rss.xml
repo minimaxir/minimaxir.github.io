@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-06-03T21:52:58-07:00</updated>
+  <updated>2015-06-15T08:05:09-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why is the Most-Viewed Gaming Video on YouTube About Cars 2?]]></title>
+    <link href="http://minimaxir.com/2015/06/cars-2/"/>
+    <updated>2015-06-15T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/06/cars-2</id>
+    <content type="html"><![CDATA[<p>Last month, <a href="https://www.youtube.com/">YouTube</a>, in celebration of its 10-year anniversary, <a href="http://kotaku.com/the-10-most-popular-games-on-youtube-1704234763">released a report</a> of the Top 10 most-watched video game franchises on YouTube:</p>
+
+<pre><code>1. Minecraft
+2. Grand Theft Auto (series)
+3. League of Legends
+4. Call of Duty (series)
+5. FIFA (series)
+6. Garry’s Mod
+7. The Sims (series)
+8. Five Nights at Freddy’s (series)
+9. Puzzles &amp; Dragons
+10. Dota 2
+</code></pre>
+
+<p>There aren&rsquo;t many surprises on the list. <a href="https://minecraft.net/">Minecraft</a> and <a href="http://na.leagueoflegends.com/">League of Legends</a> have become incredibly huge in such a short time, although <a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy%27s">Five Nights as Freddy&rsquo;s</a> position is impressive given that it started <em>a year ago</em>.</p>
+
+<p>After <a href="http://www.reddit.com/r/dataisbeautiful/comments/38rghg/the_30_mostviewed_youtube_videos_oc/">renewed public interest</a> in YouTube data, I decided to take a poke at the <a href="https://developers.google.com/youtube/">YouTube API</a> to see if I can determine which Gaming videos are the most-viewed. It turns out that the API makes it simple, by allowing you to query on a specific category and sort by the number of views the video has received.</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_all.png"></p>
+
+<p>There&rsquo;s lots of Minecraft, and even lots of Angry Birds in the top-viewed videos.</p>
+
+<p>&hellip;but why is a mundane Cars 2 video from an unknown video channel the most-viewed video of all time?!</p>
+
+<p>No, this is not an error. <a href="https://www.youtube.com/watch?v=urHuO7Zbhhw">You can watch the video yourself on YouTube</a> and verify the view count.</p>
+
+<h1>Vroom Vroom</h1>
+
+<p><img src="http://minimaxir.com/img/cars-2/Cars_2_Poster.jpg"></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Cars_2">Cars 2</a> is a CGI movie about talking cars by Pixar which premiered in June 2011. It is, of course, the sequel to <a href="https://en.wikipedia.org/wiki/Cars_%28film%29">Cars</a>, and received more critical reviews compared to its predecessor.</p>
+
+<p>As with many movies, Cars 2 received a tie-in game, <a href="http://tvtropes.org/pmwiki/pmwiki.php/Main/TheProblemWithLicensedGames">most of which are mediocre</a> due to mandatory deadlines and lower budgets. However, <a href="http://www.gamespot.com/reviews/cars-2-review/1900-6321632/">Gamespot gave the game a 7.5</a> out of 10, which is pretty good for a licensed game. The fact that it&rsquo;s a cart racer like Mario Kart helps too.</p>
+
+<p>It&rsquo;s not Minecraft or League of Legends though. Why would a video about it be the most-viewed gaming video of all time?</p>
+
+<h1>Statistical Shenanigans</h1>
+
+<p>Popular YouTube videos are often suspected of having their viewcounts manipulated, since making videos appear more popular than they actually are can help lead to genuine virality. Could this be the case with the Cars 2 video?</p>
+
+<p>I did a few simple diagnostics of the top 1,000 Gaming videos to determine if the Cars 2 video had an statistically unusual view count.</p>
+
+<p>Modern YouTube videos have a Like/Dislike bar, which counts the number of Likes and Dislikes given by viewers of the video. If someone is rigging the view count, the ratio of Likes+Dislikes to the given viewcount should be much lower than for a genuine video with genuine user reactions.</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_interaction.png"></p>
+
+<p>However, for all videos with incredibly large view counts, the ratio of Likes+Dislikes to Views is incredibly low. The line represents the predicted mean for a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a>, with the shaded area representing a 95% confidence interval for the mean. The Cars 2 data point falls directly on the line, so we cannot safely say that Cars 2 is an outlier from this diagnostic.</p>
+
+<p>Another aspect to check is the ratio of Likes to Dislikes. If a bad video has a manipulated view count, we would expect much fewer Likes and many more Dislikes because viewers may become mislead by the content, especilaly those with misleading titles/thumbnails. In general, the % of people who Liked a video should be high for all videos.</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_like_ratio.png"></p>
+
+<p>Almost all of the Top 1,000 gaming videos have Like Ratio greater than 50% (i.e. more Likes than Dislikes). However, the Cars 2 video data point falls outside the 95% confidence interval for the regression model. Therefore, it&rsquo;s worth looking into as a possible outlier.</p>
+
+<h1>Plan B</h1>
+
+<p>On the Statistics tab of all public YouTube videos, you can see the number of views a video has received over time. Here is the daily number of views for the Cars 2 video:</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/cars_daily_views.png"></p>
+
+<p>The video was released in August 2011 (about a month after the release of the movie), but the video didn&rsquo;t become viral and spike in views until sometime early 2012, many months later.</p>
+
+<p>I <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/">made a submission</a> to the <a href="http://www.reddit.com/r/Games/">games subreddit on Reddit</a> to see if there was any ideas as to why Cars 2 is at the top. /u/ Sureiyaa <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crypxn5">had a good theory</a>:</p>
+
+<blockquote><p>Remember, this video was posted in August 2011, two months after the movie was released. It&rsquo;s also titled &ldquo;Cars 2 HD xxx xxx&rdquo; and is rather lengthy. It would make sense if people searched for &ldquo;Cars 2&rdquo; or even all of &ldquo;Cars 2 HD&rdquo; and stumbled on this video thinking that someone had uploaded the movie for them to watch, especially when you consider that it was a movie aimed at kids who may not pay attention to everything in the title.</p>
+
+<p>With those initial views, it probably became one of the top results if you searched for Cars 2. With that, it grew from there and is probably getting views from being a high-ranking result when searching for games videos in general.</p></blockquote>
+
+<p>Accidental SEO could explain it. Indeed, the first result on Google for &ldquo;Cars 2 HD&rdquo; is the video in question. Although, in that case, why would the spike happen in 2012? (the DVD/Blu-Ray came out October 2011, so a 2012 spike is late even by lazy movie pirate standards)</p>
+
+<p>Another factor is the fact that that Cars franchise appeals to young children, which are <em>very</em> plentiful. This does bring up a <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/cryreaw">valid counterargument</a> though: why Cars 2, and not more popular franchises like <a href="https://en.wikipedia.org/wiki/Frozen_%282013_film%29">Frozen</a> or any other Disney franchise that&rsquo;s more kid-oriented? (for the record, there <em>is</em> a <a href="https://www.youtube.com/watch?v=VQ7GLnRaeHM">Frozen video</a> at #163 in Gaming, although it&rsquo;s blatantly miscategorized)</p>
+
+<p>The Cars 2 video uploader eventually <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crzrbdd">replied to the Reddit thread</a> suggesting the children-theory as well:</p>
+
+<blockquote><p>You&rsquo;re indeed right about it blowing up, mainly from mobile device views, which I&rsquo;m guessing was kids watching it. I remember seeing comments from users saying their kids love to watch the video.</p></blockquote>
+
+<p>There&rsquo;s also the factor of YouTube/Google&rsquo;s recommendation algorithms working in mysterious ways and providing video recommendations based on user interests/age/location/etc. Unfortunately, the impact of those can&rsquo;t easily be quantified.</p>
+
+<p>Looking into the view count of the Cars 2 video in Gaming YouTube videos only raises more questions than answers.</p>
+
+<hr />
+
+<p><em>You can view the metadata for the Top 500 Gaming videos on YouTube at <a href="https://docs.google.com/spreadsheets/d/1fy2-9c5HORwvhvAljEG6LvyrM3zG5YnWnalvepX3eV8/edit?usp=sharing">this Google Sheet</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Almost Every Smartphone and Tablet Browses the Web in Portrait Mode]]></title>
@@ -1033,102 +1124,6 @@ F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><em>You can download full-resolution PNGs of the two word clouds [5000x2000px] in <a href="https://www.dropbox.com/s/f20gwh9jvkibi4z/Yelp_Wordclouds_5000_200.zip?dl=0">this ZIP file</a> [18 MB]</em></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Data From Our Comments to the FCC About Net Neutrality]]></title>
-    <link href="http://minimaxir.com/2014/08/comments-about-comments/"/>
-    <updated>2014-08-08T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2014/08/comments-about-comments</id>
-    <content type="html"><![CDATA[<p>This year, the Federal Communications Commission, one of the governmental entities which polices the Internet in the United States, announced significant rule changes to the policy of &ldquo;<a href="http://www.fcc.gov/openinternet">Open Internet</a>.&rdquo; Open Internet, more commonly known as &ldquo;<a href="http://en.wikipedia.org/wiki/Net_neutrality">net neutrality</a>,&rdquo; helps businesses facilitate competition and promote innovation on the internet, which help improve the internet as a whole. However, the proposed rule changes allow internet service providers (ISPs) to discriminate between different types of internet traffic (a &ldquo;fast lane&rdquo; for video and social media, for example).  Said pricing discrimination may end up affecting the consumers instead (e.g. paying $10/month for access to Facebook), which may reduce innovation due to increased costs to the consumers of internet bandwidth, i.e. the average American citizen.</p>
-
-<p>The FCC recently <a href="http://www.fcc.gov/comments">opened up a comment period</a>, where the U.S. public can <a href="http://apps.fcc.gov/ecfs/upload/display?z=s6uf0">send or e-mail comments</a> on the changes to this policy. Naturally, the consumers of the internet reacted strongly. By August 2014, over <em>1.1 million comments</em> have been received by the FCC.</p>
-
-<p><img src="http://minimaxir.com/img/fcc/fcc-words-small.png"></p>
-
-<p>This week, the FCC <a href="http://www.fcc.gov/blog/fcc-makes-open-internet-comments-more-accessible-public">released a dataset</a> of about <a href="http://www.fcc.gov/files/ecfs/14-28/ecfs-files.htm">450,000 of these comments</a>. Looking at the data behind these comments, it&rsquo;s clear to see that the entire country is passionate against the rule changes to net neutrality.</p>
-
-<p>Here&rsquo;s a timeline of when comments about net neutrality were sent to the FCC:</p>
-
-<p><img src="http://minimaxir.com/img/fcc/fcc-timeline-annotated.png"></p>
-
-<p>There are clear spikes after important initiatives for awareness of the FCC&rsquo;s ruling. May 15th marked the <a href="http://www.savetheinternet.com/net-neutrality-resources">beginning of the Open Comment period</a> for the FCC&rsquo;s new guidelines, June 3rd marked the week after an airing of Last Week Tonight with John Oliver, which contained an <a href="https://www.youtube.com/watch?v=fpbOEoRrHyU">anti-net-neutrality rant</a> which went viral for the rest of the week. July 15th marked the close of the Open Comment period, which is why on July 14th, the internet rallied and sent in over a hundred thousand comments, which <a href="http://www.nydailynews.com/news/politics/fcc-extends-net-neutrality-open-comment-deadline-friday-article-1.1868238#kDMozMu84rJ5TPsl.97">crashed their servers</a> and forced them to extend the deadline.</p>
-
-<p>But as with many awareness campaigns over the internet, this campaign may have &ldquo;<a href="http://en.wikipedia.org/wiki/Slacktivism">slacktivists</a>&rdquo;, as evidenced by the flat lines after the events where people stopped writing comments. How much effort did the U.S. people actually put into their submissions? One way to tell is to check the length of the submissions.</p>
-
-<p><img src="http://minimaxir.com/img/fcc/fcc-comment-length.png"></p>
-
-<p>Many comments were one-liners at about 20 words each, and many comments were multiparagraph notes at about 180 words each. But why is there a giant spike at about 300 words?</p>
-
-<p>As it turns out, there were over 100,000 comments with exactly 1,477 characters (approximately 290 words). That number of characters (before cleaning) corresponds to a comment following this template:</p>
-
-<blockquote><p>Net neutrality is the First Amendment of the Internet, the principle that Internet service providers (ISPs) treat all data equally. As an Internet user, net neutrality is vitally important to me. The FCC should use its Title II authority to protect it.</p>
-
-<p>Most Americans have only one choice for truly high speed Internet: their local cable company. This is a political failure, and it is an embarrassment. America deserves competition and choice.</p>
-
-<p>Without net neutrality, a bad situation gets even worse. These ISPs will now be able to manipulate our Internet experience by speeding up some services and slowing down others. That kills choice, diversity, and quality.</p>
-
-<p>It also causes tremendous economic harm. If ISPs can speed up favored services and slow others, new businesses will no longer be able to rely on a level playing field. When ISPs can slow your site and destroy your business at will, how can any startup attract investors?</p>
-
-<p>My friends, family, and I use the Internet for conversation and fun, but also for work and business. When you let ISPs mess with our Internet experience, you are attacking our social lives, our entertainment, and our economic well being. We won&rsquo;t stand for it.</p>
-
-<p>ISPs are opposing Title II so that they can destroy the FCC&rsquo;s net neutrality rules in court. This is the same trick they pulled last time. Please, let&rsquo;s not be fooled again. Title II is the strong, legally sound way to enforce net neutrality. Use it.</p></blockquote>
-
-<p>This is the default template for a submission at the <a href="https://www.battleforthenet.com">Battle for Net Neutrality</a> website. That means over about &frac14;th of the comments in the dataset, and atleast 1/10th of all comments submitted, used this website&rsquo;s submission form.</p>
-
-<h1>Comments Across the Nation</h1>
-
-<p>Net neutrality affects some individuals more than others. Not everyone in the U.S. may be as passionate over the issue, and many may not even be aware that such a threat to the modern internet even exists.</p>
-
-<p>Which cities in the United States sent the most comments to the FCC?</p>
-
-<p><img src="http://minimaxir.com/img/fcc/fcc-city.png"></p>
-
-<p>Yes, Brooklyn, NY counts as a city according to the FCC.</p>
-
-<p>It&rsquo;s not surprising that the three most populated cities in the U.S. (New York, Los Angeles, Chicago) top this chart due to the higher potential number of commenters. What is surprising yet important is that tech hubs with much fewer populations, such as San Francisco, Seattle, and Portland, all have extremely strong showings.</p>
-
-<p>When you look at the distribution of comments by state of origin, it&rsquo;s even more apparent that California and Washington are some of the key drivers of the comments. (admittingly, it does resemble a <a href="https://xkcd.com/1138/">population map</a>)</p>
-
-<p><img src="http://minimaxir.com/img/fcc/fcc-state-map.png"></p>
-
-<p>What are the key words mentioned in the comments to the FCC?</p>
-
-<p>The key players in who would benefit the most from the implementation of net neutrality are <a href="http://www.comcast.com/">Comcast</a> and <a href="http://www.verizon.com/">Verizon</a>, two of the biggest ISPs in the country. Which states have been speaking out the most against these institutions?</p>
-
-<p><img src="http://minimaxir.com/img/fcc/fcc-state-map-comcast.png"></p>
-
-<p><img src="http://minimaxir.com/img/fcc/fcc-state-map-verizon.png"></p>
-
-<p>Comcast is a frequent topic of discussion (5.2% of all comments about net neutrality contain atleast 1 mention of Comcast), especially on the West Coast. On the other hand, less than half as many talk about Verizon (2.0% of all comments), except on the East Coast.</p>
-
-<p>Although not on the map, Washington, DC actually had the most to comment on these two topics, with 11.7% comments having atleast one mention of Comcast and 8.8% of comments having atleast one mention of Verizon.</p>
-
-<p><a href="http://www.netflix.com/">Netflix</a>, an internet video-streaming service which would likely be negatively impacted by the FCC ruling, was also discussed.</p>
-
-<p><img src="http://minimaxir.com/img/fcc/fcc-state-map-netflix.png"></p>
-
-<p>Discussion of Netflix from all around the country is very evenly distributed (2.1% of all comments), potentially because it&rsquo;s not location-specific as the presence of an ISP. (Montana apparently does not care much about Netflix.)</p>
-
-<p>Another concern about net neutrality is the potential <a href="https://www.aclu.org/net-neutrality">fight against the First Amendment</a> and free speech itself, as ISPs could theoretically restrict traffic to unfavorable websites under the system. Which states are most passionate about free speech?</p>
-
-<p><img src="http://minimaxir.com/img/fcc/fcc-state-map-free-speech.png"></p>
-
-<p>Much more activity in the Midwest and especially the North West than the previous maps. (2.1% of all comments discuss &ldquo;free speech&rdquo;) North Dakota apparently is relatively indifferent about the freedom of speech.</p>
-
-<p>Unfortunately, at this period of time, it&rsquo;s hard to guess if the hundreds of thousands of comments sent to the FCC will actually cause them to reconsider their plans. The sheer quantity of comments, at the least, lets the FCC know that Americans feel strongly about the issue. It&rsquo;s clear that in the worst-case scenario where the ISPs win the net neutrality battle, the consumers of the internet in the United States <strong>will not remain passive</strong>.</p>
-
-<hr />
-
-<ul>
-<li><em>Charts were generated using R and ggplot2.</em></li>
-<li><em>You can view the data aggregated by date, by state, and by city in <a href="https://docs.google.com/spreadsheets/d/1D2T5Lg41IWfkQPEMLWq3fjU7_kJ8lDNc4H2wsbr4BbU/edit?usp=sharing">this Google Sheet</a>. You can download a CSV of the original comment metadata <a href="https://www.dropbox.com/s/7tzsk7kv7ctgydp/fcc_comments.zip">here</a>. [7.6MB .zip]</em></li>
-<li><em>You can view a 3000px x 3000px image of the FCC comments word cloud <a href="http://i.imgur.com/I0dpEA6.png">here</a>.</em></li>
-</ul>
-
-
-<p><em><strong>EDIT: 8/9/14</strong>: Per <a href="https://news.ycombinator.com/item?id=8153091">comments on Hacker News</a>, I&rsquo;ve changed wording in a few paragraphs for clarification.</em></p>
 ]]></content>
   </entry>
   
