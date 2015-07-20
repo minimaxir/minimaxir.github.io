@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-06-15T08:05:09-07:00</updated>
+  <updated>2015-07-20T07:57:02-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,139 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Scrape Data From Facebook Page Posts for Statistical Analysis]]></title>
+    <link href="http://minimaxir.com/2015/07/facebook-scraper/"/>
+    <updated>2015-07-20T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/07/facebook-scraper</id>
+    <content type="html"><![CDATA[<p>One of the first data scrapers I wrote for the purpose of statistical analysis was a Facebook Graph API scraper, in order to determine <a href="http://minimaxir.com/2013/06/big-social-data/">which words are the most important</a> in a Facebook Page status update. However, the v2.0 update to the Facebook API unsurprisingly broke the scraper.</p>
+
+<p>Now that <a href="https://developers.facebook.com/blog/post/2015/07/08/graph-api-v2.4/">v2.4 of the Graph API is released</a>, I gave the Facebook Graph API another look. Turns out, it&rsquo;s pretty easy to scrape and make into a spreadsheet for easy analysis, although like with any other scrapers, there are a large number of gotchas.</p>
+
+<h1>Feasibility</h1>
+
+<p><img src="http://minimaxir.com/img/facebook-scraper/nyt_sample.png"></p>
+
+<p>In order to determine if I can sanely scrape a website, I have to do a bit of research. How much data from a Facebook status update can we actually scrape?</p>
+
+<p>Fortunately, Facebook&rsquo;s <a href="https://developers.facebook.com/docs/graph-api/reference">Graph API documentation</a> is pretty good. We need data from the <a href="https://developers.facebook.com/docs/graph-api/reference/page">/page</a> node, and from there, we can access data from the <a href="https://developers.facebook.com/docs/graph-api/reference/v2.4/page/feed">/feed</a> edge.</p>
+
+<p>Between the two nodes, we have access to <code>id</code>, which is a unique identifer that can be used to create a link back to the update itself (e.g. <a href="https://www.facebook.com/5281959998_10150628170209999">https://www.facebook.com/5281959998_10150628170209999</a>) <code>message</code>, the text of the update; <code>link</code>, the URL which the update is linking; <code>name</code>, the title of the webpage of the link, <code>type</code>, an identifier if the update is text, a photo, or a video; and <code>created_time</code>, when the update is published.</p>
+
+<p>Accessing the numerical counts of <code>likes</code>, <code>comments</code>, and <code>shares</code> is less explicit in the documentation. Fortunately, <a href="http://stackoverflow.com/questions/6984526/facebook-graph-api-get-like-count-on-page-group-photos">StackOverflow</a> has the answer: you need to request <code>likes.limit(1).summary(true)</code> instead of normal <code>likes</code>.</p>
+
+<p>There&rsquo;s no indication that there&rsquo;s a Rate Limit, oddly. Since we can query 100 updates at a time, the scraper will be efficient enough that it&rsquo;s unlikely to hit any extreme API limits.</p>
+
+<p>Now that we know we can get all the relevant data from the sample status update, we can build a Facebook post scraper.</p>
+
+<h1>Data Scrappy</h1>
+
+<p><img src="http://minimaxir.com/img/facebook-scraper/def_test.png"></p>
+
+<p><em>I have created an <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/how_to_build_facebook_scraper.ipynb">IPython notebook hosted on GitHub</a> with detailed code, code comments, and sample output for each step of the scraper development. I strongly recommend giving it a look.</em></p>
+
+<p>First, we need to see how to actually access the API. It&rsquo;s no longer a public API, and it requires user authentication via <a href="https://developers.facebook.com/docs/facebook-login/access-tokens">access tokens</a>. Users can get Short-Term tokens, but as their name suggests, they expire quickly, so they are not recommended. The Graph API allows a neat trick; by concatenating the App ID from a user-created App and the App Secret, you create an access token which never expires. Of course, this is a major security risk, so create a separate app for the sole purpose of scraping, and reset your API Secret if it becomes known.</p>
+
+<p>Let&rsquo;s say we want to scrape the New York Times&#8217; Facebook page. We would send a request to <a href="https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX">https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX</a> and we would get:</p>
+
+<pre><code>{
+    "id": "5281959998", 
+    "name": "The New York Times"
+}
+</code></pre>
+
+<p>i.e., the page metadata. Sending a request to /nytimes/feed results in what we want:</p>
+
+<pre><code>{
+    "data": [
+        {
+            "created_time": "2015-07-20T01:25:01+0000", 
+            "id": "5281959998_10150628157724999", 
+            "message": "The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth."
+        }, 
+        {
+            "created_time": "2015-07-19T22:55:01+0000", 
+            "id": "5281959998_10150628161129999", 
+            "message": "\"It\u2019s safe to say that federal agencies are not where we want them to be across the board,\" said President Barack Obama's top cybersecurity adviser. \"We clearly need to be moving faster.\""
+        }
+
+        [...]
+}
+</code></pre>
+
+<p>Now we get the post data. But not much of it. In Graph API v2.4, the default behavior is to return very, very little metadata for statuses in order to reduce bandwidth, with the expectation that the user will request the necessary fields.</p>
+
+<p>So let&rsquo;s request <em>all</em> the fields we want. This results in a very long URL not shown here which causes the posts feed to have all the data we need:</p>
+
+<pre><code>{
+    "comments": {
+        [...]
+        }, 
+        "summary": {
+            "order": "ranked", 
+            "total_count": 31
+        }
+    }, 
+    "created_time": "2015-07-20T01:25:01+0000", 
+    "id": "5281959998_10150628157724999", 
+    "likes": {
+        "data": [
+            [...]
+        }, 
+        "summary": {
+            "total_count": 278
+        }
+    }, 
+    "link": "http://nyti.ms/1Jr6LhU", 
+    "message": "The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth.", 
+    "name": "China Molds a Supercity Around Beijing, Promising to Change Lives", 
+    "shares": {
+        "count": 50
+    }, 
+    "type": "link"
+}
+</code></pre>
+
+<h1>Post Processing</h1>
+
+<p>Great! Now we just have to process each post. Which is easier said than done.</p>
+
+<p>If you&rsquo;re an avid Facebook user, you know that not all of these attributes are not guaranteed to exist. Status updates may not have text or links. Since we&rsquo;re making a spreadsheet with an enforced schema, we need to validate that a field exists before attempting to process it.</p>
+
+<p>The &ldquo;\u2019&#8221;s in the message correspond to a <a href="http://smartquotesforsmartpeople.com/">smart quote</a> apostrophe. Since this a possibility, along with other unicode characters, the message and link names must be encoded <a href="https://en.wikipedia.org/wiki/UTF-8">in UTF-8</a> to prevent errors.</p>
+
+<p>The time format is another issue. The date follows the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> standard for UTC times. However, most spreadsheet programs will not able to parse it as a Date value. Also, since the NYT is based in the USA (specifically, New York), it may be helpful for time-based statistical analysis to convert the time to Eastern Standard Time while fixing the date format.</p>
+
+<p>There&rsquo;s also an unexpected precaution that must be taken whenever scraping data sets. These APIs do not expect users to be accessing very, very old data. As a result, there&rsquo;s a high probability of the API server actually hitting an error sometime during the scrape, such as a <a href="http://www.checkupdown.com/status/E500.html">HTTP Status 500</a> or <a href="http://www.checkupdown.com/status/E502.html">HTTP Status 502</a>. These server errors are temporary, so a helper function must be used to attempt to retrieve data until it is actually successful.</p>
+
+<h1>Putting it All Together</h1>
+
+<p>Now we have a full plan for scraping, we query each page of Facebook Page Statuses (100 statuses maximum per page), process all statuses on that page and writing the output to a CSV file, and navigate to the next page, and repeat until no more statuses left.</p>
+
+<p>This can be done with a for-loop within a while loop. In addition, I also recommend counting the number of posts processed and taking a timestamp every-so-often to ensure that the program has not stalled.</p>
+
+<p><img src="http://minimaxir.com/img/facebook-scraper/cnnwoo.png"></p>
+
+<p>And that&rsquo;s it! You can access the complete scraper in this GitHub repository, along with all other scripts mentioned in this article. Once you have the CSV file, you can import it into nearly every statistical program and have fun with it. <em>(You can download a .zip of the NYTimes data <a href="https://dl.dropboxusercontent.com/u/2017402/nytimes_facebook_statuses.zip">here</a> [4.6MB])</em></p>
+
+<p>Say, for example, what would happen if we compared the Median Likes of the New York Times with a certain other  journalistic website that&rsquo;s the master of social media?</p>
+
+<p><img src="http://minimaxir.com/img/facebook-scraper/nytimes_buzz_fb.png"></p>
+
+<p>There may be more practical reasons for analyzing data on Facebook Posts, such as quantifying the growth and success of your own page, or that of your competitors. But the data is easy to get and is very useful.</p>
+
+<p>Although, in fairness, the scraper is not perfect and still has room for improvement. With CNN&rsquo;s Facebook Page post data, for example, somehow the scraper skips all posts from 2013. Although in that case, I blame Facebook.</p>
+
+<hr />
+
+<p><em>You can access all resources used in this blog post at this <a href="https://github.com/minimaxir/facebook-page-post-scraper">GitHub repository</a></em>.</p>
+
+<p><em>If you haven&rsquo;t, I strongly recommend looking at the <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/how_to_build_facebook_scraper.ipynb">IPython Notebook</a> for more detailed coding methodology.</em></p>
+
+<p><em>And, as an experiment, I&rsquo;ve made an <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/fb_page_data_analysis.ipynb">IPython notebook with the R kernel</a> showing how I made the NYT-BuzzFeed chart!</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why is the Most-Viewed Gaming Video on YouTube About Cars 2?]]></title>
@@ -982,148 +1115,6 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 <p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_listicles.png"></p>
 
 <p>Hey, there <em>is</em> a relationship between listicle size and social media engagement!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Statistical Difference Between 1-Star and 5-Star Reviews on Yelp]]></title>
-    <link href="http://minimaxir.com/2014/09/one-star-five-stars/"/>
-    <updated>2014-09-23T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2014/09/one-star-five-stars</id>
-    <content type="html"><![CDATA[<p>Many business in the real world encourage their customers to &ldquo;Rate us on Yelp!&rdquo;. <a href="http://www.yelp.com/">Yelp</a>, the &ldquo;best way to find local businesses,&rdquo; relies on user reviews to help its viewers find the best places. Both positive and negative reviews are helpful in this mission: positive reviews on Yelp identify the best places, negative reviews identify places where people <em>shouldn&rsquo;t</em> go. Usually, both positive and negative reviews are not based on objective attributes of the business, but on the experience the writer has with the establishment.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp_review_pos.png"></p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp_review_neg.png"></p>
-
-<p>I analyzed the language present in 1,125,458 Yelp Reviews using the dataset from the <a href="http://www.yelp.com/dataset_challenge">Yelp Dataset Challenge</a> containing reviews of businesses in the cities of Phoenix, Las Vegas, Madison, Waterloo and Edinburgh. Users can rate businesses 1, 2, 3, 4, or 5 stars. When comparing the most-frequent two-word phrases between 1-star and 5-star reviews, the difference is apparent.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/Yelp-2-Gram-Small.jpg"></p>
-
-<p>The 5-star Yelp reviews contain many instances of &ldquo;Great&rdquo;, &ldquo;Good&rdquo;, and &ldquo;Happy&rdquo;. In contrast, the 1-star Yelp reviews use very little positive language, and instead discuss the amount of &ldquo;minutes,&rdquo; presumably after long and unfortunate waits at the establishment. (Las Vegas is one of the cities where the reviews were collected, which is why it appears prominently in both 1-star and 5-star reviews)</p>
-
-<p>Looking at three-word phrases tells more of a story.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/Yelp-3-Gram-Small.jpg"></p>
-
-<p>1-Star reviews frequently contain warnings for potential customers, which promises that the author will &ldquo;never go back&rdquo; and a strong impression that issues stem from conflicts with &ldquo;the front desk&rdquo;, such as those at hotels. 5-star reviews &ldquo;love this place&rdquo; and &ldquo;can&rsquo;t wait to&rdquo; go back.</p>
-
-<p>Can this language be used to predict reviews?</p>
-
-<h1><span><i class="fa fa-line-chart"></i></span> Regression of Language</h1>
-
-<p>To determine the causal impact on positive and negative words on the # of stars given in a review, we can perform a simple linear regression of stars on the number of positive words in the review, the number of negative words in the review, and the number of words in the review itself (since the length of the review is related to the number of positive/negative words; the longer the review, the more words)</p>
-
-<p>A quick-and-dirty way to determine the number of positive/negative words in a given Yelp review is to compare each word of the review against a lexicon of positive/negative words, and count the number of review words in the lexicon. In this case, I use the <a href="http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">lexicons compiled by UIC professor Bing Liu</a>.</p>
-
-<p>Running a regression of # stars in a Yelp review on # positive words, # negative words, and # words in review, returns these results:</p>
-
-<div>
-  <pre><code class='html'>Coefficients:
-               Estimate  Std. Error  t value  Pr(&gt;|t|)    
-(Intercept)    3.692      1.670e-03  2210.0   &lt;2e-16 ***
-pos_words      0.122      2.976e-04   411.3   &lt;2e-16 ***
-neg_words     -0.154      4.887e-04  -315.9   &lt;2e-16 ***
-review_words  -0.003      1.984e-05  -169.4   &lt;2e-16 ***
-
-Residual standard error: 1.119 on 1125454 degrees of freedom
-Multiple R-squared:  0.2589,    Adjusted R-squared:  0.2589 
-F-statistic: 1.311e+05 on 3 and 1125454 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-
-
-<p>The regression output explains these things:</p>
-
-<ul>
-<li>If a reviewer posted a blank review with no text in it, that review gave an average rating of 3.692.</li>
-<li>For every positive word, the predicted average star rating given is increased by 0.122 on average (e.g. 8 positive words indicate a 1-star increase)</li>
-<li>For every negative word, the predicted average star rating given is decreased by 0.15 on average (e.g. 6-7 negative words indicate a 1-star decrease)</li>
-<li>The amount of words in the review has a lesser, negative effect. (A review that is 333 words indicates a 1-star decrease, but the average amount of words in a Yelp review is 130 words)</li>
-<li>This model explains 25.98% of the variation in the number of stars given in a review. This sounds like a low percentage, but is impressive for such a simple model using unstructured real-world data.</li>
-</ul>
-
-
-<p>All of these conclusions are <em>extremely</em> statistically significant due to the large sample size.</p>
-
-<p>Additionally, you could rephrase the regression as a logistic classification problem, where reviews rated 1, 2, or 3 stars are classified as &ldquo;negative,&rdquo; and reviews with 4 or 5 stars are classified as &ldquo;positive.&rdquo; Then, run the regression to determine the likelihood of a given review being positive. Running this regression (not shown) results in a logistic model with up to <em>75% accuracy</em>, a noted improvement over the &ldquo;no information rate&rdquo; of 66%, which is the model accuracy if you just guessed that every review was positive. The logistic model also has similar conclusions for the predictor variables as the linear model.</p>
-
-<p>It can be proven that language has a strong statistical effect on review ratings, but that&rsquo;s intuitive enough. How have review ratings changed?</p>
-
-<h1><span><i class="fa fa-bar-chart"></i></span> 1-Star and 5-Star Reviews, Visualized</h1>
-
-<p>Since 2005, Yelp has had incredible growth in the number of new reviews.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp-review-time-series.png"></p>
-
-<p>For that chart, it appears that each of the five rating brackets have grown at the same rate, but that isn&rsquo;t the case. Here&rsquo;s a chart of the rating brackets showing how the proportions of new reviews of each rating have changed over time.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp-review-time-proportion.png"></p>
-
-<p>Early Yelp had mostly 4-star and 5-star reviews, as one might expect for an early Web 2.0 startup where the primary users who would be the only ones who would put in the effort to write a review would be those who had positive experiences. However, the behavior from 2010 onward is interesting: the relative proportions of both 1-star reviews <em>and</em> 5-star reviews increases over time.</p>
-
-<p>As a result, the proportions of ratings in reviews from Yelp&rsquo;s beginning in 2005 and Yelp&rsquo;s present 2014 are incredibly different.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/Yelp-2005-2014.png"></p>
-
-<p>More negativity, more positivity. Do they cancel out?</p>
-
-<h1><span><i class="fa fa-heart"></i></span> How Positive Are Yelp Reviews?</h1>
-
-<p>We can calculate relative <strong>positivity</strong> between reviews by taking the number of positive reviews in a review and dividing it by the number of words in the review itself.</p>
-
-<p>The average positivity among all reviews is <em>5.6%</em>. Over time, the positivity has been relatively flat.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp-review-time-series-positivity.png"></p>
-
-<p>Flat, but still increasing, mostly likely due to the increasing proportion of 5-star reviews. But the number of 1-star reviews also increased: do the two offset each other?</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp-review-positivity.png"></p>
-
-<p>This histogram of positivity scores shows that 1-star reviews have lower positivity with rarely high positivity, and 5-star reviews rarely have low positivity and instead have very high positivity. The distribution for each star rating is close to a <a href="http://en.wikipedia.org/wiki/Normal_distribution">Normal distribution</a>, with each successive rating category peaking at increasing positivity values.</p>
-
-<p>The relative proportion of each star rating reinforces this.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp-review-positivity-density.png"></p>
-
-<p>Over half of the 0% positivity reviews are 1-star reviews, while over three-quarters of the reviews at the highest positivity levels are 5-star reviews. (note that the 2-star, 3-star, and 4-star ratings are not as significant at either extreme)</p>
-
-<h1><span><i class="fa fa-meh-o"></i></span> How Negative Are Yelp Reviews?</h1>
-
-<p>When working with the negativity of reviews, calculated by taking the number of negative words and dividing them by the number of total words in the review, the chart looks much different.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp-review-time-series-negativity.png"></p>
-
-<p>The average negativity among all reviews is <em>2.0%</em>. Since the average positivity is 5.6%, this implies that the net sentiment among all reviews is positive, despite the increase in 1-star reviews over time.</p>
-
-<p>The histogram of negative reviews looks much different as well.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp-review-negativity.png"></p>
-
-<p>Even 1-star reviews aren&rsquo;t completely negative all the time.</p>
-
-<p>The chart is heavily skewed right, making it difficult to determine the proportions of each rating at first glance.</p>
-
-<p>Henceforth here&rsquo;s another proportion chart.</p>
-
-<p><img src="http://minimaxir.com/img/one-star-five-stars/yelp-review-negativity-density.png"></p>
-
-<p>At low negativity, the proportions of negative review scores (1-star, 2-stars, 3-stars) and positive review scores (4-stars, 5-stars) are about equal, implying that negative reviews can be just as civil as positive reviews. But high negativity is solely present in 1-star and 2-star reviews.</p>
-
-<p>From this article, you&rsquo;ve seen that Yelp reviews with 5-star ratings are generally positive, and Yelp reviews with 1-star are generally negative. Yes, this blog post is essentially &ldquo;Pretty Charts Made By Captain Obvious,&rdquo; but what&rsquo;s important is confirmation of these assumptions. Language plays a huge role in determining the ratings of reviews, and that knowledge could be applied to many other industries and review websites.</p>
-
-<h1><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></h1>
-
-<p>I&rsquo;d give this blog post a solid 4-stars. The content was great, but the length was long, although not as long as <a href="http://minimaxir.com/2014/06/reviewing-reviews/">some others</a>. Can&rsquo;t wait to read this post again!</p>
-
-<hr />
-
-<ul>
-<li><em>Yelp reviews were preprocessed with Python, by simultaneously converting the data from JSON to a tabular structure, tokenizing the words in the review, counting the positive/negative words, and storing bigrams and trigrams in a dictionary to later be exported for creaitng word clouds.</em></li>
-<li><em>All data analysis was performed using R, and a ll charts were made using ggplot2. <a href="http://www.pixelmator.com/">Pixelmator</a> was used to manually add relevant annotations when necessary.</em></li>
-<li><em>You can view both the Python and R code used to process and chart the data <a href="https://github.com/minimaxir/yelp-review-analysis">in this GitHub repository</a>. Note that since Yelp prevents redistribution of the data, the code may not be reproducible.</em></li>
-<li><em>You can download full-resolution PNGs of the two word clouds [5000x2000px] in <a href="https://www.dropbox.com/s/f20gwh9jvkibi4z/Yelp_Wordclouds_5000_200.zip?dl=0">this ZIP file</a> [18 MB]</em></li>
-</ul>
-
 ]]></content>
   </entry>
   
