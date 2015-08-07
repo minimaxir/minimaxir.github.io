@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-08-06T22:50:59-07:00</updated>
+  <updated>2015-08-07T07:57:00-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Plotting a Map of New York City Using Only Taxi Location Data]]></title>
+    <link href="http://minimaxir.com/2015/08/nyc-map/"/>
+    <updated>2015-08-07T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/08/nyc-map</id>
+    <content type="html"><![CDATA[<p>Recently, the New York City Taxi and Limousine Commission <a href="http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml">released a dataset</a> of all Yellow Taxi and Green Taxi trips in 2014, and year-to-date in 2015, which follows the <a href="http://chriswhong.com/open-data/foil_nyc_taxi/">2013 data set</a> which was obtained to a FOIL request for the data last year. The dataset contains fun statistics, such as the location where the taxi picked up and dropped off its fare, the speed the taxi is moving, and the total fare at the end of the ride.</p>
+
+<p>In the <a href="https://news.ycombinator.com/item?id=10003118">Hacker News thread</a> announcing the data set release, user eck posted an interesting, minimalistic visualization of the taxi location data:</p>
+
+<p><img src="http://minimaxir.com/img/nyc-map/ov6K6mt.jpg"  ></p>
+
+<p>eck made the visualization using a &ldquo;few hundred lines of C++&rdquo;. That seemed overkill to me. So I tried to reverse-engineer his visualization using my favorite plotting tool, <a href="http://ggplot2.org/">ggplot2</a>. In theory, plotting a million little points in close proximity should simulate the lines of the streets of New York City.</p>
+
+<p>The dataset is large (2 GB per month of data), although not &ldquo;big data&rdquo; large. It would take an afternoon to set up a local database, and I wanted to make pretty visualizations <em>immediately</em>.</p>
+
+<p>Google BigQuery Developer Advocate Felipe Hoffa <a href="https://www.reddit.com/r/bigquery/comments/3fo9ao/nyc_taxi_trips_now_officially_shared_by_the_nyc/">created a BigQuery interface</a> for the data. BigQuery allows easy and fast access to the entire dataset for rapid processing. In my case, I need to compress the data set by truncating the latitude and longitude of the GPS coordinates to 4 digits; this allows <a href="http://gis.stackexchange.com/a/8674">precision to 11 meters</a> on the coordinates, which is sufficient for estimating. Running this BigQuery query:</p>
+
+<pre><code>SELECT ROUND(pickup_latitude, 4) as lat,
+ROUND(pickup_longitude, 4) as long,
+COUNT(*) as num_pickups
+FROM [nyc-tlc:yellow.trips_2014]
+GROUP BY lat, long
+</code></pre>
+
+<p>Gives me data for about 1 Million GPS coordinates; more than enough to make a full map. This also has the benefit of fitting into memory, which is necessary for use with ggplot2.</p>
+
+<p>My first attempt, where I plot 1 million very small white points on a black map bounded to the latitude/longitude coordinates of NYC, turned out pretty well, and with less than 10 lines of code.</p>
+
+<p><img src="http://minimaxir.com/img/nyc-map/nyc_old.png"  ></p>
+
+<p>On Reddit, my submission of the <a href="https://www.reddit.com/r/dataisbeautiful/comments/3fvg8i/map_of_new_york_city_plotted_using_locations_of/">data visualization</a> received about 3,500 points, and a large amount of social media buzz on Facebook and Twitter. There were a few comments however; why were there random points in the Hudson River? Why are highways indicated as taxi pickup spots? Why does the map say &ldquo;2015&rdquo; when your query says &ldquo;2014&rdquo;? (guilty on the last one; the map was made using the 2014 dataset by accident!)</p>
+
+<p>At the least, the streets of <a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a> were not discernable at all, unlike eck&rsquo;s diagram. As a result, I made a few refinements to remove some logical outliers with impossible vehicle speeds, removed noisy points which were completely isolated, <em>used the correct 2015 data set</em>, and also added a color weighting to the data, where the most-taxi-dense areas will appear colored (scaling logarithmically) to differentate those areas from less taxi-prone areas.</p>
+
+<p><img src="http://minimaxir.com/img/nyc-map/nyc_yellow_pickup.png"  ></p>
+
+<p>The map, while less bright, became more precise. The streets in Manhattan are now visible, and the purple color shows how <a href="https://en.wikipedia.org/wiki/Times_Square">Times Square</a> and the <a href="https://en.wikipedia.org/wiki/Financial_District,_Manhattan">Financial District</a> in particular are popular taxi pickup spots in Manhattan. <a href="https://en.wikipedia.org/wiki/LaGuardia_Airport">LaGuardia Airport</a> and <a href="https://en.wikipedia.org/wiki/John_F._Kennedy_International_Airport">John F. Kennedy International Airport</a> appear purple as well.</p>
+
+<p>However, this map only looks at places where people picked up Taxis. Could there be a difference when plotting Taxi dropoffs instead?</p>
+
+<p>I reran the query and visualization scripts on the dropoff location data instead, and as it turns out, there is a significant difference!</p>
+
+<p><img src="http://minimaxir.com/img/nyc-map/nyc_yellow_dropoff.png"  ></p>
+
+<p>While Taxi pickups were isolated more in residential areas, taxi dropoffs can happen anywhere in the Tristate area. Additionally, the map more closely matches eck&rsquo;s original visualization.</p>
+
+<p>Setting up ggplot2 in this way will also allow me to perform other fun analyses in the future. For example, since we know where taxis drop off, we can determine the average speed for the trip for each significant location in NYC geography. Would the average trip speed be higher for trips that drop off at an airport due to the highway? Conversely, would the average speed be lower in Manhattan? How would fares be affected? Those are questions for another blog post. :)</p>
+
+<p>Although, I still have no guesses why the highways are highlighted in <em>both</em> maps.</p>
+
+<hr />
+
+<p><em>You can download a <a href="https://dl.dropboxusercontent.com/u/2017402/nyc_yellow_pickup.pdf">PDF of my purple pickup map</a> (4.14 MB) and a <a href="https://dl.dropboxusercontent.com/u/2017402/nyc_yellow_dropoff.pdf">PDF of my blue dropoff map</a> (7.68 MB) sans text, both of which are resolution-independent and sutable for making physical prints.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Scrape Data From Facebook Page Posts for Statistical Analysis]]></title>
@@ -1031,88 +1087,6 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 <li><em>You can access the code used to process the data, chart the data, and extract bigrams from the comments in <a href="https://github.com/minimaxir/hacker-news-comment-analysis">this GitHub repository</a>. This does not include the code for retrieving the comments from the Hacker News API and storing it in PostgreSQL: that code will be in a separate repository if released.</em></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Least Effective Method for Blocking Web Scraping of a Website]]></title>
-    <link href="http://minimaxir.com/2014/09/buzzscrape/"/>
-    <updated>2014-09-26T10:30:00-07:00</updated>
-    <id>http://minimaxir.com/2014/09/buzzscrape</id>
-    <content type="html"><![CDATA[<p>As someone who typically plays around with data from public website APIs, I figured it would be worthwhile to learn how to get data from websites the old-fashioned way: through force, via web scraping. <a href="http://en.wikipedia.org/wiki/Web_scraping">Web scraping</a> is a technique where the user downloads the raw HTML of a webpage, and parses the inherent structure of the webpage to extract the necessary data.</p>
-
-<p>In order to understand the mechanics behind web scraping, I used a tool from new Y Combinator startup <a href="https://www.kimonolabs.com/">Kimono Labs</a>, which allows the user to click structured elements of any website and quickly create an API that can access all the collected data and convert it into an easy-to-access form. My first target was BuzzFeed, since their social interaction data might be useful in determining how it became so big so quickly, and maybe also determine just how effective those stupid listicles are.</p>
-
-<h1><span><i class="fa fa-terminal"></i></span> Live Free and Scrape Hard</h1>
-
-<p>For example, here&rsquo;s a pair of typical BuzzFeed articles:</p>
-
-<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_example.png"  ></p>
-
-<p>And here&rsquo;s the corresponding output of <a href="https://www.kimonolabs.com/apis/1x3l57k0">my Kimono Labs BuzzFeed scraper</a> for those two articles:</p>
-
-<div class="highlight"><pre><code class="language-html" data-lang="html">{
-         &quot;title&quot;: {
-          &quot;text&quot;: &quot;Stop Tweeting Instagram Links&quot;,
-          &quot;href&quot;: &quot;http://www.buzzfeed.com/katienotopoulos/stop-tweeting-instagram-links&quot;
-        },
-        &quot;content&quot;: &quot;I CANNOT REMAIN SILENT ON THIS ISSUE ANY LONGER.&quot;,
-        &quot;author&quot;: &quot;Katie Notopoulos&quot;,
-        &quot;num_responses&quot;: &quot;123&quot;
-      },
-      {
-        &quot;title&quot;: {
-          &quot;text&quot;: &quot;28 Things Your Gchat Availability Status Really Means&quot;,
-          &quot;href&quot;: &quot;http://www.buzzfeed.com/katieheaney/28-things-your-gchat-availability-status-really-means&quot;
-        },
-        &quot;content&quot;: &quot;Let’s chat.&quot;,
-        &quot;author&quot;: &quot;Katie Heaney&quot;,
-        &quot;num_responses&quot;: &quot;13&quot;
-      }
-}</code></pre></div>
-
-
-<p>This data format (<a href="http://en.wikipedia.org/wiki/JSON">JSON</a>) can be processed and manipulated by nearly any modern programming language.</p>
-
-<p>Each BuzzFeed category page has about 22 articles, but the scraper can also access successive pages to retrieve more articles. This works by finding the URL of the next page by deriving the URL from the &ldquo;Older&rdquo; button if present on that page. Then the scraper can find the Older button on the page after that, and so forth, until all pages on BuzzFeed are scraped.</p>
-
-<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_page.png"  ></p>
-
-<p>My BuzzFeed scraper, for some reason, only retrieved 10 pages maximum. So I used my QA skills and traced the exact route the scraper took, navigating through all 10 pages by clicking the Older button.</p>
-
-<p>What was on Page #10 shocked me. OMG. I could not believe my eyes.</p>
-
-<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_disable.png"  ></p>
-
-<h1><span><i class="fa fa-times-circle-o"></i></span> No Scrape For You</h1>
-
-<p>The Older button is <em>disabled</em> on page 10? <strong>WHY?</strong></p>
-
-<p>BuzzFeed is a website created in the 21st century that <a href="http://www.nytimes.com/2014/08/11/technology/a-move-to-go-beyond-lists-for-content-at-buzzfeed.html?_r=0">just raised $50 million</a>. This is not a peculiar technical limitation due to bad coding or bad infrastructure; this is a deliberate functional aspect of the product.</p>
-
-<p>It is my personal mantra that if a startup has a particularly unintuitive UI/UX behavior, it&rsquo;s a form of &ldquo;growth hacking&rdquo; that my feeble brain cannot comprehend.</p>
-
-<p>Could the reason that BuzzFeed disables access to pages past 10 is that they want to prevent archive browsing, thereby putting more of an emphasis on more recent and more potentially-viral articles? That wouldn&rsquo;t make sense; if a person is so hooked on BuzzFeed articles that they are at Page 10, why stop them? It&rsquo;s still free page views and ad revenue.</p>
-
-<p>It&rsquo;s likely that BuzzFeed has statistics on how many users actually visit article pages up to Page 10. Perhaps their data analysts noted &ldquo;hey, only 0.0027% of our visitors actually read up to Page 10, anyone who actually reads that far is three standard deviations away from normal, therefore they must be a web scraper!&rdquo; and recommend punitive action accordingly.</p>
-
-<p>I noted earlier that it definitely was not a technical limitation that kept pages greater than 10 from being accessed. If you look at the URLs of the BuzzFeed screenshots above, you&rsquo;ll notice a &ldquo;<em>p=2</em>&rdquo; parameter for Page 2 or a &ldquo;<em>p=10</em>&rdquo; parameter for Page 10. What happens if you just change the 10 to a 11?</p>
-
-<p>You go to Page 11. And you can go all the way to page <em>200</em> in some categories.</p>
-
-<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_200.png"  ></p>
-
-<p>Incidentally, this is easier and more reliable to implement programmatically than searching for the Older button and extracting the URL.</p>
-
-<p>So the disabling of the button will only stop stupid web scrapers. Yes, that makes my BuzzFeed web scraper a stupid web scraper, <em>but that&rsquo;s not the point!</em> It just makes the BuzzFeed&rsquo;s motive behind disabling the button at Page 10  even more baffling.</p>
-
-<p>What did I do now that my quick-and-dirty BuzzFeed scraper couldn&rsquo;t parse a statistically significant amount of BuzzFeed articles? I did the only logical thing.</p>
-
-<p>I spent a weekend learning how to use <a href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a> in Python and parsed BuzzFeed the hard way, while changing the page number in the URL to pagenate through the pages. And I even was able to add new features to the scraper, such as simultaneously scraping the number of Facebook Shares a given BuzzFeed article generates.</p>
-
-<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_listicles.png"  ></p>
-
-<p>Hey, there <em>is</em> a relationship between listicle size and social media engagement!</p>
 ]]></content>
   </entry>
   

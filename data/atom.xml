@@ -4,7 +4,7 @@
   <title><![CDATA[Category: data | minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-08-06T22:50:59-07:00</updated>
+  <updated>2015-08-07T07:57:00-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Plotting a Map of New York City Using Only Taxi Location Data]]></title>
+    <link href="http://minimaxir.com/2015/08/nyc-map/"/>
+    <updated>2015-08-07T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/08/nyc-map</id>
+    <content type="html"><![CDATA[<p>Recently, the New York City Taxi and Limousine Commission <a href="http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml">released a dataset</a> of all Yellow Taxi and Green Taxi trips in 2014, and year-to-date in 2015, which follows the <a href="http://chriswhong.com/open-data/foil_nyc_taxi/">2013 data set</a> which was obtained to a FOIL request for the data last year. The dataset contains fun statistics, such as the location where the taxi picked up and dropped off its fare, the speed the taxi is moving, and the total fare at the end of the ride.</p>
+
+<p>In the <a href="https://news.ycombinator.com/item?id=10003118">Hacker News thread</a> announcing the data set release, user eck posted an interesting, minimalistic visualization of the taxi location data:</p>
+
+<p><img src="/img/nyc-map/ov6K6mt.jpg"  ></p>
+
+<p>eck made the visualization using a &ldquo;few hundred lines of C++&rdquo;. That seemed overkill to me. So I tried to reverse-engineer his visualization using my favorite plotting tool, <a href="http://ggplot2.org/">ggplot2</a>. In theory, plotting a million little points in close proximity should simulate the lines of the streets of New York City.</p>
+
+<p>The dataset is large (2 GB per month of data), although not &ldquo;big data&rdquo; large. It would take an afternoon to set up a local database, and I wanted to make pretty visualizations <em>immediately</em>.</p>
+
+<p>Google BigQuery Developer Advocate Felipe Hoffa <a href="https://www.reddit.com/r/bigquery/comments/3fo9ao/nyc_taxi_trips_now_officially_shared_by_the_nyc/">created a BigQuery interface</a> for the data. BigQuery allows easy and fast access to the entire dataset for rapid processing. In my case, I need to compress the data set by truncating the latitude and longitude of the GPS coordinates to 4 digits; this allows <a href="http://gis.stackexchange.com/a/8674">precision to 11 meters</a> on the coordinates, which is sufficient for estimating. Running this BigQuery query:</p>
+
+<pre><code>SELECT ROUND(pickup_latitude, 4) as lat,
+ROUND(pickup_longitude, 4) as long,
+COUNT(*) as num_pickups
+FROM [nyc-tlc:yellow.trips_2014]
+GROUP BY lat, long
+</code></pre>
+
+<p>Gives me data for about 1 Million GPS coordinates; more than enough to make a full map. This also has the benefit of fitting into memory, which is necessary for use with ggplot2.</p>
+
+<p>My first attempt, where I plot 1 million very small white points on a black map bounded to the latitude/longitude coordinates of NYC, turned out pretty well, and with less than 10 lines of code.</p>
+
+<p><img src="/img/nyc-map/nyc_old.png"  ></p>
+
+<p>On Reddit, my submission of the <a href="https://www.reddit.com/r/dataisbeautiful/comments/3fvg8i/map_of_new_york_city_plotted_using_locations_of/">data visualization</a> received about 3,500 points, and a large amount of social media buzz on Facebook and Twitter. There were a few comments however; why were there random points in the Hudson River? Why are highways indicated as taxi pickup spots? Why does the map say &ldquo;2015&rdquo; when your query says &ldquo;2014&rdquo;? (guilty on the last one; the map was made using the 2014 dataset by accident!)</p>
+
+<p>At the least, the streets of <a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a> were not discernable at all, unlike eck&rsquo;s diagram. As a result, I made a few refinements to remove some logical outliers with impossible vehicle speeds, removed noisy points which were completely isolated, <em>used the correct 2015 data set</em>, and also added a color weighting to the data, where the most-taxi-dense areas will appear colored (scaling logarithmically) to differentate those areas from less taxi-prone areas.</p>
+
+<p><img src="/img/nyc-map/nyc_yellow_pickup.png"  ></p>
+
+<p>The map, while less bright, became more precise. The streets in Manhattan are now visible, and the purple color shows how <a href="https://en.wikipedia.org/wiki/Times_Square">Times Square</a> and the <a href="https://en.wikipedia.org/wiki/Financial_District,_Manhattan">Financial District</a> in particular are popular taxi pickup spots in Manhattan. <a href="https://en.wikipedia.org/wiki/LaGuardia_Airport">LaGuardia Airport</a> and <a href="https://en.wikipedia.org/wiki/John_F._Kennedy_International_Airport">John F. Kennedy International Airport</a> appear purple as well.</p>
+
+<p>However, this map only looks at places where people picked up Taxis. Could there be a difference when plotting Taxi dropoffs instead?</p>
+
+<p>I reran the query and visualization scripts on the dropoff location data instead, and as it turns out, there is a significant difference!</p>
+
+<p><img src="/img/nyc-map/nyc_yellow_dropoff.png"  ></p>
+
+<p>While Taxi pickups were isolated more in residential areas, taxi dropoffs can happen anywhere in the Tristate area. Additionally, the map more closely matches eck&rsquo;s original visualization.</p>
+
+<p>Setting up ggplot2 in this way will also allow me to perform other fun analyses in the future. For example, since we know where taxis drop off, we can determine the average speed for the trip for each significant location in NYC geography. Would the average trip speed be higher for trips that drop off at an airport due to the highway? Conversely, would the average speed be lower in Manhattan? How would fares be affected? Those are questions for another blog post. :)</p>
+
+<p>Although, I still have no guesses why the highways are highlighted in <em>both</em> maps.</p>
+
+<hr />
+
+<p><em>You can download a <a href="https://dl.dropboxusercontent.com/u/2017402/nyc_yellow_pickup.pdf">PDF of my purple pickup map</a> (4.14 MB) and a <a href="https://dl.dropboxusercontent.com/u/2017402/nyc_yellow_dropoff.pdf">PDF of my blue dropoff map</a> (7.68 MB) sans text, both of which are resolution-independent and sutable for making physical prints.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Scrape Data From Facebook Page Posts for Statistical Analysis]]></title>
@@ -368,203 +424,6 @@
 <p><em>All charts were made using R and ggplot2.</em></p>
 
 <p><em>You can download the aggregate data used to create the charts <a href="https://docs.google.com/spreadsheets/d/1_OHQOyLkg0d7tseHXofTBu5AWzSlmXIBjV23CojFPcY/edit?usp=sharing">in this Google Sheet</a>.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[An Introduction on How to Make Beautiful Charts With R and Ggplot2]]></title>
-    <link href="http://minimaxir.com/2015/02/ggplot-tutorial/"/>
-    <updated>2015-02-12T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2015/02/ggplot-tutorial</id>
-    <content type="html"><![CDATA[<p>Readers of my previous blog posts have frequently asked me &ldquo;how do you make those charts?&rdquo;</p>
-
-<p><img src="/img/ggplot-tutorial/buzzfeed-listicle-scatterplot.png"  ></p>
-
-<p>These charts were made using <a href="http://docs.ggplot2.org/current/">ggplot2</a>, an add-on package for the <a href="http://www.r-project.org/index.html">R programming language</a>, along with lots of iterative improvement over the months. R notably has chart-making capabilities built into the language by default, but it is not easy to use and often produces <em>very</em> simplistic charts. Enter ggplot2, which allows users to create full-featured and robust charts with only a few lines of code.</p>
-
-<p><img src="/img/ggplot-tutorial/geom_histogram-4.png"  ></p>
-
-<p>You&rsquo;ve probably seen charts elsewhere on the internet similar to this one. While it implements the &ldquo;<a href="http://vita.had.co.nz/papers/layered-grammar.html">Grammar of Graphics</a>&rdquo; (which is where the &ldquo;gg&rdquo; in &ldquo;ggplot2&rdquo; comes from), it does look generic and cluttered.</p>
-
-<p>Adding a touch of color and design can help make more compelling visualizations, and it&rsquo;s pretty easy to do thanks to ggplot2&rsquo;s syntax and chaining capabilities.</p>
-
-<h1>Quick Design Notes</h1>
-
-<p>Charts with a completely-gray background have become rather popular lately, mostly in part to the charts produced by <a href="http://fivethirtyeight.com/">FiveThirtyEight</a>, which was the inspiration behind my design. An important functional aspect of a gray background is that it makes the chart area distinct from the article body.</p>
-
-<p>The charts I make are typically 1200px by 900px. On my blog, the width of the article text container is less than 1200px, so the browser shrinks the chart to make it fit. The chart still appears at a high resolution on HiDPI/Retina screens, and since the charts are simple, shrinking will not cause significant graphical distortion on normal-resolution screens. 1200x900px also keeps the file size low, which is important when putting 10 or more charts in a post.</p>
-
-<p>An important tip when making charts in ggplot2: render the chart on OS X, if possible. OS X has antialiasing for text and curves in charts, while Windows/Linux does not, and it can significantly improve the quality of the chart.</p>
-
-<h1>Making a ggplot2 Histogram</h1>
-
-<p>The first chart we&rsquo;ll be making is a histogram. This is a good example of a chart that&rsquo;s easy to make in R/ggplot2, but hard to make Excel.</p>
-
-<p>For this tutorial, we&rsquo;ll be using <code>ggplot2</code>, plus three additional R packages: <code>RColorBrewer</code>, which allows for the procedural generation of colors from a palette for the chart, <code>scales</code>, which allows for the axes to express numbers with commas/percents, and <code>grid</code>, which allows for manipulation of the chart margins and layout. We can install and load these packages at the beginning of the R file:</p>
-
-<pre><code>install.packages(c("ggplot2","RColorBrewer","scales"))
-library(ggplot2); library(scales); library(grid); library(RColorBrewer)
-</code></pre>
-
-<p>The dataset we&rsquo;ll use is my <a href="http://minimaxir.com/csv/buzzfeed_linkbait_headlines.csv">list of 15,101 BuzzFeed listicles</a> that I used <a href="http://minimaxir.com/2015/01/linkbait/">in my previous blog post</a>, including both the listicle size and number of Facebook shares the listicle received, which have been prefiltered to listicle sizes of 50 or less, and have received atleast 1 Facebook share. Download the file, and set the working directory of R to the containing folder. We load the dataset into R by reading the CSV:</p>
-
-<pre><code>df &lt;- read.csv("buzzfeed_linkbait_headlines.csv", header=T)
-</code></pre>
-
-<p>We can make a basic histogram in two lines of code.</p>
-
-<pre><code>ggplot(df, aes(listicle_size)) +
-  geom_histogram(binwidth=1)
-</code></pre>
-
-<p>The first line instantiates the charts and defines the variables used for plotting. We declare the use of the data frame <code>df</code>, and the <code>listicle_size</code> vector from that data frame as the plotting aesthetic. The second line tells ggplot to make a histogram out of the given data with <code>geom_histogram</code>, and we specify a binwidth of 1 so that each column represents one discrete value of listicle. Running that code will cause a plot to pop up.</p>
-
-<p><img src="/img/ggplot-tutorial/tutorial_1.png"  ></p>
-
-<p>Not a bad start. In order to save the created plot, we use the <code>ggsave</code> command, which saves the last-generated plot to an image in your working directory. The first parameter, the filename, determines the filetype.</p>
-
-<pre><code>ggsave("tutorial_1.png", dpi=300, width=4, height=3)
-</code></pre>
-
-<p>Now we can add a theme to make it look classy.</p>
-
-<p>A ggplot2 theme is a function that overrides the graphical parameters of the default theme. Here&rsquo;s the long code block for my FiveThirtyEight-inspired theme, with code comments for each code subblock:</p>
-
-<pre><code>fte_theme &lt;- function() {
-
-  # Generate the colors for the chart procedurally with RColorBrewer
-  palette &lt;- brewer.pal("Greys", n=9)
-  color.background = palette[2]
-  color.grid.major = palette[3]
-  color.axis.text = palette[6]
-  color.axis.title = palette[7]
-  color.title = palette[9]
-
-  # Begin construction of chart
-  theme_bw(base_size=9) +
-
-  # Set the entire chart region to a light gray color
-  theme(panel.background=element_rect(fill=color.background, color=color.background)) +
-  theme(plot.background=element_rect(fill=color.background, color=color.background)) +
-  theme(panel.border=element_rect(color=color.background)) +
-
-  # Format the grid
-  theme(panel.grid.major=element_line(color=color.grid.major,size=.25)) +
-  theme(panel.grid.minor=element_blank()) +
-  theme(axis.ticks=element_blank()) +
-
-  # Format the legend, but hide by default
-  theme(legend.position="none") +
-  theme(legend.background = element_rect(fill=color.background)) +
-  theme(legend.text = element_text(size=7,color=color.axis.title)) +
-
-  # Set title and axis labels, and format these and tick marks
-  theme(plot.title=element_text(color=color.title, size=10, vjust=1.25)) +
-  theme(axis.text.x=element_text(size=7,color=color.axis.text)) +
-  theme(axis.text.y=element_text(size=7,color=color.axis.text)) +
-  theme(axis.title.x=element_text(size=8,color=color.axis.title, vjust=0)) +
-  theme(axis.title.y=element_text(size=8,color=color.axis.title, vjust=1.25)) +
-
-  # Plot margins
-  theme(plot.margin = unit(c(0.35, 0.2, 0.3, 0.35), "cm"))
-}
-</code></pre>
-
-<p>Adding the completed theme to the chart is just one line of code:</p>
-
-<pre><code>ggplot(df, aes(listicle_size)) +
-  geom_histogram(binwidth=1) +
-  fte_theme()
-</code></pre>
-
-<p><img src="/img/ggplot-tutorial/tutorial_2.png"  ></p>
-
-<p>A little more classy. Now that the core design of the chart is present, we can make polish the chart to make it more beautiful.</p>
-
-<p>Of course, all charts need properly labled axes and a title. We can add that with the <code>labs</code> function:</p>
-
-<pre><code>ggplot(df, aes(listicle_size)) +
-  geom_histogram(binwidth=1) +
-  fte_theme() +
-  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles")
-</code></pre>
-
-<p><img src="/img/ggplot-tutorial/tutorial_3.png"  ></p>
-
-<p>Now we can add a few finishing touches. For the x-axis, we can set the breaks to 5 instead of 10 using <code>scale_x_continuous</code> since we have the room. For the y-axis, since we have an axis value with 4 digits, we can set the formatting to use a comma with <code>scale_y_continuous</code>. Lastly, we can add a line at y = 0 using <code>geom_line</code> to further seperate the data. Lastly, in <code>geom_histogram</code>, we can change the fill of the bars to a red color for more thematic branding, and also reduce the opacity to make the grid lines visible behind the chart.</p>
-
-<p>Putting it all together:</p>
-
-<pre><code>ggplot(df, aes(listicle_size)) +
-  geom_histogram(binwidth=1, fill="#c0392b", alpha=0.75) +
-  fte_theme() +
-  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles") +
-  scale_x_continuous(breaks=seq(0,50, by=5)) +
-  scale_y_continuous(labels=comma) + 
-  geom_hline(yintercept=0, size=0.4, color="black")
-</code></pre>
-
-<p><img src="/img/ggplot-tutorial/tutorial_4.png"  ></p>
-
-<p>That&rsquo;s pretty professional and is a good stopping point. Normally, I would change the text fonts as well, but that&rsquo;s a subject for another post.</p>
-
-<h1>Making a ggplot2 Scatterplot</h1>
-
-<p>Scatterplots are also efficient to do in ggplot2, which especially useful as making a plot containing 15,101 points might cause spreadsheets to freeze.</p>
-
-<p>Creating a scatterplot of the relationship between listicle size and the number of Facebook shares the listicle receives is essentially the same procedure as creating a histogram, except that the x-axis and y-axis aesthetic vectors must be declared explicitly.</p>
-
-<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
-  geom_point()
-</code></pre>
-
-<p><img src="/img/ggplot-tutorial/tutorial_5.png"  ></p>
-
-<p>Because there are a few listicles with <em>over 1 million</em> Facebook shares (welcome to 2015), the entire plot is skewed. As a result, we need to compress the plot by scaling the y-axis logarithmically using <code>scale_y_log10</code>. Additionally, there will be a large amount of overlap between points due to the large sample size, so we need to greatly reduce the opacity of the points. (I set to 5% for this chart, but the best value can be determined through trial and error)</p>
-
-<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
-  geom_point(alpha=0.05) +
-  scale_y_log10(labels=comma)
-</code></pre>
-
-<p><img src="/img/ggplot-tutorial/tutorial_6.png"  ></p>
-
-<p>That&rsquo;s a lot more intuitive, and it makes it clear that there is indeed a positive relationship between listicle size and the number of Facebook shares.</p>
-
-<p>Now we can apply the theme and labels:</p>
-
-<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
-  geom_point(alpha=0.05) +
-  scale_y_log10(labels=comma) +
-  fte_theme() +
-  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
-</code></pre>
-
-<p><img src="/img/ggplot-tutorial/tutorial_7.png"  ></p>
-
-<p>And then the final touches. We can include the same horizontal line, x-axis behavior, and point color as with the last plot. However, for the y-axis, we have room to include each power of 10 between 1 and 1,000,000 as breaks, which we can do through a cute R syntax trick: <code>10^(0:6)</code>. While the chart shows a positive relationship between the variables, the shape is ambiguous and it may be helpful to add a trend line. We use <code>geom_smooth</code> to add a trendline representing a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a> with a 95% confidence interval.</p>
-
-<p>Putting it all together:</p>
-
-<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
-  geom_point(alpha=0.05, color="#c0392b") +
-  scale_x_continuous(breaks=seq(0,50, by=5)) +
-  scale_y_log10(labels=comma, breaks=10^(0:6)) +
-  geom_hline(yintercept=1, size=0.4, color="black") +
-  geom_smooth(alpha=0.25, color="black", fill="black") +
-  fte_theme() +
-  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
-</code></pre>
-
-<p><img src="/img/ggplot-tutorial/tutorial_8.png"  ></p>
-
-<p>Now that is pretty insightful.</p>
-
-<p>Hopefully, this small overview of how ggplot2 gives you an small idea of what it can do. This is just the tip of the iceberg. However, making cooler charts such as categorical bar charts, charts with multiple factor variables, and charts with multiple facets require smart data preprocessing, which is a topic for another blog post.</p>
-
-<hr />
-
-<p><em>You can access a copy of the code used in this blog post <a href="https://github.com/minimaxir/ggplot-tutorial">at this GitHub repository</a>.</em></p>
 ]]></content>
   </entry>
   
