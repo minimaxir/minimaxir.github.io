@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: startups | minimaxir | Max Woolf's Blog]]></title>
+  <link href="http://minimaxir.com//startups/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2015-08-06T19:47:11-07:00</updated>
+  <id>http://minimaxir.com/</id>
+  <author>
+    <name><![CDATA[Max Woolf]]></name>
+    <email><![CDATA[max@minimaxir.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?]]></title>
+    <link href="http://minimaxir.com/2014/03/hashtag-tag/"/>
+    <updated>2014-03-24T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2014/03/hashtag-tag</id>
+    <content type="html"><![CDATA[<p><a href="http://instagram.com/">Instagram</a> uses hashtags as a method of categorizing images and videos. A user can tag an image with, for example, #snowy, and all other Instagram app users can see a mosaic of photos from all users which have that tag. Many less-than-honest  Instagram users <a href="http://instagram.com/p/l5J7iXQGX6/">spam tags</a> which are not particularly relevant to their photo in order to maximize the potential exposure.</p>
+
+<p><img src="/img/instatags2.png"  ></p>
+
+<p>At a maximum of 30 tags per image, spamming large numbers of tags should theoretically have a huge impact on the image&rsquo;s reach. In fact, there are sketchy websites that provide premade lists of popular hashtags for you to spam. But does spamming #tags in an Instagram image <em>actually</em> lead to a increase in the number of Likes on an image?</p>
+
+<p>Using the <a href="http://instagram.com/developer/">Instagram API</a>, I&rsquo;ve retrieved about 120,000  images, split evenly between pictures tagged with #sunny, #rainy, and #snowy, to get a good range of neutral picture types. Here&rsquo;s the distribution of the number of tags on photos from that data set:</p>
+
+<p><img src="/img/instagram-tags.png"  ></p>
+
+<p>The majority of Instagram photos have around 5 tags, which is a reasonable amount for a user quickly classifying a photo within the photo caption. However, it&rsquo;s clear that there are many tag abusers, with a noticeable spike of  the number of Instagram photos which have the maximum of 30 #tags. (the statistical average is <strong>11.45 tags</strong>, with a standard deviation of 8.01)</p>
+
+<p>The distribution of Likes as heavily skewed as you would expect when viewed normally, but when the distribution is viewed on a logarithmic scale, the shape becomes closer to a bell curve:</p>
+
+<p><img src="/img/instagram-likes.png"  ></p>
+
+<p>The statistical average of Likes on Instagram photos is <strong>26.19 Likes</strong>, with a standard deviation of 154.07; the high standard deviation is caused by the few photos with thousands of Likes.</p>
+
+<p>If you analyze the distribution of Likes for each discrete number of tags, the results are more telling.</p>
+
+<p><img src="/img/instagram-likes-facet.png"  ></p>
+
+<p>As the number of tags increases, the distribution of Likes shifts toward right, with very, very few photos with less than 10 likes. However, due to the logarithmic scaling, it&rsquo;s hard to tell if the center of the distibution (where the average number of Likes is approximately located) is shifting significantly.</p>
+
+<h1>Regression Analysis</h1>
+
+<p>A simple linear regression of log(Likes) on tags can tell us of the if an increase in the number of tags corresponds to an increase in the number of Likes.</p>
+
+<p><img src="/img/instagram-tags-scatterplot.png"  ></p>
+
+<p>There is indeed a <strong>very strong positive relationship between Tags and Likes</strong>, with a p-value &lt; 2e-16 for the tag regression coefficient. But tags alone doesn&rsquo;t explain the variance of Likes particularly well (R<sup>2</sup> = 15.47%) due to the heavy variance of Likes in the raw data, even after using a logarithmic transformation. However, due to the logarithmic transformation, it&rsquo;s difficult to easily determine the relative difference in the amount of Likes between using 1 tag on an Instagram photo and using 30 tags.</p>
+
+<p>Using the raw, untransformed data, this is a chart of the average number of Likes on photos from the sample data for each discrete number of tags, with 95% confidence intervals* for each measure:</p>
+
+<p><img src="/img/instagram-tag-average.png"  ></p>
+
+<p>Instagram photos which have the maximum of 30 #tags receive, on average, about <strong>three times</strong> as many Likes than photos with only a few tags. Most of the averages are well-bounded, too, which indicate that the per-tag-Like-averages are well-representative of all Instagram photos.</p>
+
+<p>The strong deviations from the trend (and larger confidence intervals) at 1, 5, and 9 tags are due to large outliers which skew the average. Indeed, there are many other factors in determining the expected number of Likes for an Instagram photo (e.g. the popularity of the person who posted the photo), some of which I hope to cover in a future blog post. :)</p>
+
+<p>In the meantime, if you want more Likes on your filtered photos, spam those hashtags. You won&rsquo;t be guaranteed to gets lots of Likes, but the odds will greatly be in your favor.</p>
+
+<hr />
+
+<p><em>All charts were created using R and ggplot2.</em></p>
+
+<p><em>You can download a copy of the Instagram data set <a href="https://www.dropbox.com/s/zpyv6p6yskdy43j/instagram-data-analysis.csv.zip">here</a>. [2MB zipped CSV]</em></p>
+
+<p><em>*95% confidence intervals for each per-tag-Like-average were generated using bootstrap resampling of the raw data, and recalculating each average on the resampled data. This was repeated 5,000 times to generate upper and lower bounds.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Imgur Is Covertly Redirecting Image Links on Facebook and Twitter]]></title>
+    <link href="http://minimaxir.com/2014/02/moved-temporarily/"/>
+    <updated>2014-02-06T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/moved-temporarily</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m a fan of <a href="http://imgur.com/">Imgur</a>. Image links without gimmicks. But recently, I noticed that whenever I clicked an Imgur link on Facebook or Twitter, it  navigated me to the main image page, with loads of blank empty space and links to other Imgur images instead of just showing me only the image. I double-check the URL, and it indeed begins with the &ldquo;i&rdquo; subdomain that indicates a direct link to the image, such as &ldquo;<a href="http://i.imgur.com/p9lG2ss.png">http://i.imgur.com/p9lG2ss.png</a>&rdquo;, so what&rsquo;s happening?</p>
+
+<p><img src="/img/imgur_direct.png"  ></p>
+
+<p>As it turns out, when clicking a direct image link for the first time on Facebook, Twitter, and Google+, Imgur will <strong>redirect</strong> you to the main image page instead. Try clicking the link in <a href="https://twitter.com/search?q=i.imgur.com&amp;src=typd">any i.imgur.com URL on Twitter</a>. The main image page has a &ldquo;follow us on Facebook/Twitter!&rdquo; button on desktops, or an advertisement on mobile devices.</p>
+
+<p><img src="/img/imgur_link.gif"  ></p>
+
+<p>This behavior isn&rsquo;t particularly honest and upfront.</p>
+
+<p>But is Imgur redirecting links from only these social media sites? Are these redirects an accident or are they deliberate?</p>
+
+<p>A quick and dirty way to check is to use the command line. The <em>curl</em> command loads the data from a specified website. An optional parameter is <em>referrer</em>, which &ldquo;spoofs&rdquo; the URL of the website where the user is navigating from.</p>
+
+<p>Let&rsquo;s say I wanted to &ldquo;access&rdquo; an image direct link coming from a website I know Imgur is not redirecting, such as Reddit. I run this command in the Windows Command Prompt or the Mac Terminal:</p>
+
+<p><code>curl http://i.imgur.com/p9lG2ss.png --referer http://reddit.com -I</code></p>
+
+<p>That gives me a Status Code 200, &ldquo;OK&rdquo;, meaning that the image was accessed successfully.</p>
+
+<p><code>HTTP/1.1 200 OK
+Server: cloudflare-nginx
+Date: Wed, 05 Feb 2014 01:41:40 GMT Content-Type: image/png [...]</code></p>
+
+<p>Now what happens if the user accesses the link from Facebook or Twitter?</p>
+
+<p><code>curl http://i.imgur.com/p9lG2ss.png --referer http://facebook.com -I</code></p>
+
+<p>That returns something different.</p>
+
+<p><code>HTTP/1.1 302 Moved Temporarily
+Server: cloudflare-nginx
+Date: Wed, 05 Feb 2014 01:44:03 GMT
+Content-Type: text/html
+[...]
+Set-Cookie: __cfduid=dc2e0ae5ee57ff598e079d75fa628f0321391564643058; expires=Mon, 23-Dec-2019 23:50:00 GMT; path=/; domain=.imgur.com; HttpOnly
+Location: http://imgur.com/p9lG2ss</code></p>
+
+<p><a href="http://en.wikipedia.org/wiki/HTTP_302">Status Code 302</a>, &ldquo;Moved Temporarily,&rdquo; is the error code for a redirect, and shows that Imgur implemented this behavior intentionally. It also provides the Location of the link to redirect to, in this case the default image page with Imgur&rsquo;s branding.</p>
+
+<p>After checking all popular social media sites (and their respective URL shortners) as referrers against Imgur&rsquo;s direct image links, I determined that the only referrer domains that Imgur redirects are:</p>
+
+<ul>
+<li><a href="http://facebook.com">http://facebook.com</a></li>
+<li><a href="http://twitter.com">http://twitter.com</a></li>
+<li><a href="http://t.co">http://t.co</a></li>
+<li><a href="http://plus.google.com">http://plus.google.com</a></li>
+</ul>
+
+
+<p>If you want to share your cat photos and .gifs directly to friends, I guess you can still share them on LinkedIn.</p>
+
+<p>I won&rsquo;t say that what Imgur is doing is unethical; many startups use redirects to trap users and spam them with popups saying JOIN MY WEBSITE. At the least, your friends still get to see the image you linked. It&rsquo;s understandable why Imgur would use the redirects; direct image links cause them to lose money through bandwidth expense and earn none, while links to normal image pages make it apparent that the image is from Imgur, and the company could get new users from the branding. Many, many more direct links are made than indirect links, as shown in the image at the beginning of the article, and that can account for a lot of lost revenue.</p>
+
+<p>The problem is that redirecting users without disclosure is the start of a slippery slope. When I post a direct image link by copying the &ldquo;Direct Link&rdquo; URL, I <em>expect</em> that others who use the link will also see the direct image. But that&rsquo;s not the case if the link is posted on Facebook or Twitter. Additionally, the redirects make the images take <em>much</em> longer to load on mobile, since loading the scripts and ads slow the entire page down. Making it so that the redirect is only seen the first time an image is viewed doesn&rsquo;t offer much solace.</p>
+
+<p>If the redirects are successful at converting new users for Imgur, what&rsquo;s stopping them from redirecting other sites? I strongly hope that Imgur won&rsquo;t turn into the next Photobucket or Imageshack, but whenever a startup does something weird and not transparent, it&rsquo;s <em>never</em> a good sign.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Friends of My Friends Are Not My Friends]]></title>
+    <link href="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"/>
+    <updated>2014-01-13T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/01/farcical-friends-of-friends-folly</id>
+    <content type="html"><![CDATA[<p><a href="http://jelly.co/">Jelly</a>, a highly-anticipated social networking app by Twitter co-founder Biz Stone, was released last week. One of Jelly&rsquo;s <a href="http://blog.jelly.co/post/72563498393/introducing-jelly">underlying principles</a>  is &ldquo;it’s not hard to imagine that the true promise of a connected society is people helping each other.&rdquo; While using Jelly over the past few days, I&rsquo;ve seen people ask whether or not to exercise, make unsubtle plugs for their product, sell a car Craigslist-style, and get amnesia.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/jellyposts2.jpg"  ></p>
+
+<p>Wait, what? How are these questions representative of &ldquo;a connected society,&rdquo; especially since I don&rsquo;t know any of the question authors?</p>
+
+<p>Jelly tells its users that they can &ldquo;help friends, or friends-of-friends with their questions.&rdquo; The vast  majority of the questions I&rsquo;ve seen are from Friends of Friends. I&rsquo;m Facebook Friends with people who have <strong>thousands</strong> of friends; the probability that I have something in common with those second-degree friends is low.</p>
+
+<p>Websites like Jelly and even Facebook are now utilizing the content made by second-degree &ldquo;friends.&rdquo; Why am I seeing pictures and statuses from friends of friends, who are essentially complete strangers?</p>
+
+<h1>Facebook&rsquo;s Farcical Friends of Friends Folly</h1>
+
+<p>A couple months ago, Facebook again tweaked the News Feed algorithm such that all new Posts on a friend&rsquo;s Wall are shown on your News Feed, even if the person making the Post is a complete stranger to you.</p>
+
+<p>Originally, Facebook showed posts in your News Feed that were posted on a Friend&rsquo;s wall only if they were made by another Friend. If you are friends with both people, there&rsquo;s likely a common link between all three of you, such as going to the same college or working at the same company. That can make the Wall post more relevant to your interests.</p>
+
+<p>However, people have many social circles. What happens when a stranger not in any of my social circles posts on a Friend&rsquo;s wall?</p>
+
+<p>This post recently appeared in my News Feed:</p>
+
+<p><img src="/img/fb-stranger-wall.jpg"  ></p>
+
+<p>I don&rsquo;t know who the person with &ldquo;1 mutual friend&rdquo; is. (the &ldquo;1 mutual friend&rdquo; being the friend who received the post). I don&rsquo;t live in Arizona. Why am I seeing this?</p>
+
+<p>Although I may be Facebook Friends with someone, it doesn&rsquo;t necessarily mean I should be Friends with their Friends. Facebook is showing me Posts that aren&rsquo;t relevant to me at all.</p>
+
+<p>This behavior also extends to your Friends' birthday: all &ldquo;Happy Birthday!&rdquo; posts on your Friend&rsquo;s Wall also display in your News Feed.</p>
+
+<p>This entry was visible on my News Feed for an entire day:</p>
+
+<p><img src="/img/mutual-friends-birthday.jpg"  ></p>
+
+<p>Facebook <strong>really</strong> wants you to wish your Friends happy birthday.</p>
+
+<p>I don&rsquo;t need to see strangers with &ldquo;1 mutual friend&rdquo; wish my friends Happy Birthday. It&rsquo;s just extra clutter on an already cluttered News Feed.</p>
+
+<p>To be fair, other websites such as <a href="https://twitter.com/">Twitter</a> and <a href="http://www.linkedin.com/">LinkedIn</a> push second-degree friends. Twitter&rsquo;s new <a href="https://twitter.com/i/discover">Discover</a> feature highlights users who the people you Follow are themselves Following. LinkedIn shows your connections' new connections so you can form connections with them too. But the difference between Twitter/LinkedIn and Facebook/Jelly is that both Facebook and Jelly push the power of <strong>intimate</strong> friendships, and imposing a sense of intimacy between strangers feels fake and intrudes on actual friendships.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Do Startups With Short Names Containing Few Vowels Raise More Money?]]></title>
+    <link href="http://minimaxir.com/2013/10/wrds-and-vwls/"/>
+    <updated>2013-10-14T07:00:00-07:00</updated>
+    <id>http://minimaxir.com/2013/10/wrds-and-vwls</id>
+    <content type="html"><![CDATA[<p>One reason startups use crazy and bizarre names like <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">NegaCycl</a> and <a href="http://minimaxir.com/2012/12/powerpoint-promo-party/">Filtrzzz</a> is to ensure that their name is unique, making it easier to acquire the .com domain name and Twitter handle for their startup. Another reason is to make their startup sound <em>kewl</em> and theoretically make the name more memorable in the minds of users and potential investors.</p>
+
+<p>Dakwak, Wibki, Zeef, Funifi. These aren&rsquo;t random words: these are funded startups which were featured at <a href="http://startupalley.techcrunch.com/">TechCrunch Disrupt Startup Alley 2013</a>. And then you have startups such as Lyft, SCVNGR, and Fastly, which have all raised <em>tens of millions of dollars</em> in venture capital.</p>
+
+<p>Do startups with these short, low-vowel names actually raise more money than startups with traditional names?</p>
+
+<!-- more -->
+
+
+<p>First, let&rsquo;s take a look at the association between the length of words in the English language and the number of vowels that they contain:</p>
+
+<p><img class="center" src="/img/english-words.png" width="600" height="600"  ></p>
+
+<p>In the English language, the majority of the words have 8 letters, with 3 of those letters being vowels. (8,3) is also the center of the density distribution for the heat map, spreading outward.</p>
+
+<p>Let&rsquo;s compare the vowel distribution of normal English words to the distribution of the names of startups that have successfully raised venture capital, in order to identify just how many funded startups have quirky names:</p>
+
+<p><img class="center" src="/img/count-startups.png" width="600" height="600"  ></p>
+
+<p>Wait, the two distributions are nearly identical! Both graphs are centered at about (8,3), radiating outward. This implies that the number of startups with uniquely-constructed names are outliers and not the typical names for startups.</p>
+
+<p>But that doesn&rsquo;t answer the core question: sure, fewer funded startups have weird names relative to the amount of total funded startups, but do they raise more money on average than startups with typical names?</p>
+
+<p><img class="center" src="/img/mean-startups-fund.png" width="600" height="600"  ></p>
+
+<p>Nope.</p>
+
+<p>There is no discernible pattern for the average amount raised, unlike with the previous two charts. For the vast majority of the possible combinations of name length and $ vowels, the range of capital raised is between $5M and $25M. There are higher values at the lower-end of the graph (low length, low vowels), but that can be attributed to the relatively low amount of startup data for those combinations to smooth out the average. (e.g. the $78M spike at 3 length, 2 vowels is due to the always-lovely <a href="http://www.crunchbase.com/company/aol">AOL</a> and a <a href="http://googlepress.blogspot.com/2005/12/time-warners-aol-and-google-to-expand_20.html">$1 billion investment from Google</a>, and there are only 15 other startups in the segment.)</p>
+
+<p>In fact, the statistical correlation between name length and funding, number of vowels and funding, and ratio of length to vowels and funding, are all effectively <strong>zero</strong>.</p>
+
+<p>Sure, quirky startup names may make it easier to find a domain name, but it won&rsquo;t necessarily give an edge in the investment process.</p>
+
+<hr />
+
+<p><em>Data for English words from <a href="http://wordlist.sourceforge.net/">Kevin&rsquo;s Word List Page</a>, and data for the startup names/funding from <a href="http://info.crunchbase.com/about/crunchbase-data-exports/">CrunchBase&rsquo;s September Data Export</a>.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[1 in 3 Links Submitted to Reddit Go to Imgur or YouTube]]></title>
+    <link href="http://minimaxir.com/2013/09/reddit-imgur-youtube/"/>
+    <updated>2013-09-29T10:30:00-07:00</updated>
+    <id>http://minimaxir.com/2013/09/reddit-imgur-youtube</id>
+    <content type="html"><![CDATA[<p>If you&rsquo;ve been on <a href="http://www.reddit.com/">Reddit</a>, you may have noticed that many link submissions go to &ldquo;imgur.com&rdquo;. <a href="http://imgur.com/">Imgur</a>, an image hosting service that launched on Reddit a few years ago and has seen outstanding growth ever since, even <a href="http://venturebeat.com/2013/09/26/imgur-traffic-milestone-100m-uniques/">surpassing Reddit itself</a>.</p>
+
+<p>But how many of Reddit&rsquo;s many, many links are actually links to Imgur? As it turns out, Imgur, along with YouTube, account for <em>32%</em> of the links submitted to Reddit.</p>
+
+<p>Using Reddit&rsquo;s API, I have downloaded about 5 million link submissions from Reddit, accounting for nearly two months of activity from July 22nd to September 26th. I complied a list of the most-frequent link destination domains for the links submitted anywhere on Reddit. The results were interesting.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/links722_926.png"  ></p>
+
+<p>The imgur domains (i.imgur.com and imgur.com) account for <strong>23.7%</strong> of all links submitted to Reddit, and the YouTube domains (youtube.com and youtu.be) account for <strong>8.2%</strong> of all links.</p>
+
+<p>Two websites account for <strong>32%</strong> of all links submitted to Reddit (i.e. 1 in every 3 submitted links go to Imgur or YouTube), and no other website is remotely close. Not the meme sites, not the music sites, not the news sites, not the <em>porn</em> sites: Reddit is images and video.</p>
+
+<p>But <em>where</em> on Reddit are the Imgur and YouTube links most prominent?</p>
+
+<p>Here&rsquo;s a chart of the top subreddits, by percentage of all  Imgur links submitted on Reddit:</p>
+
+<p><img src="/img/imgur722_926.png"  ></p>
+
+<p>It&rsquo;s interesting to note how the <em>funny</em> subreddit has more Imgur links than the <em>pics</em> subreddit.</p>
+
+<p>For YouTube, and the percentage of all YouTube links submitted on Reddit by subreddit:</p>
+
+<p><img src="/img/youtube722_926.png"  ></p>
+
+<p><em>Videos</em> wins as you might expect, but <em>Music</em> is in second place. Along with <em>listentothis</em>,
+<em>Metal</em>, and <em>hiphopheads</em>, YouTube is the de facto website for <em>music</em> as well as video. Gaming is also  very popular with YouTube links, with <em>gaming</em>, <em>leagueoflegends</em>, and <em>Minecraft</em>.</p>
+
+<p>Images and video are the backbone of Reddit, and both Imgur and YouTube are the primary sources. Although, there appears to be a nontrivial demand for pure music websites such as <a href="https://soundcloud.com/">SoundCloud</a> and gaming video websites such as <a href="http://www.twitch.tv/">Twitch.tv</a> &hellip;could there be another big success story in the making?</p>
+
+<hr />
+
+<p><em>The tabulated data used to create each of the three charts is located at <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGxoVGFyX19hV2paMk5lOFRvNXlkcnc&amp;usp=sharing">this Google Spreadsheet</a> for your perusal.</em></p>
+]]></content>
+  </entry>
+  
+</feed>

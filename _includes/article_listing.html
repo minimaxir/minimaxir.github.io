@@ -1,0 +1,24 @@
+<article>
+  <h2><a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a></h2>
+  
+
+  
+  
+  
+  <p>
+    {{ post.summary }}
+  </p>
+  
+  
+  
+  <span class="meta">
+    written {% include post/date.html %}{% if updated %}{{ updated }}{% else %}{{ time }}{% endif %}
+    {% include post/categories.html %}
+  </span>
+  
+  {% include custom/row_sharing_index.html %}
+
+  {% if excerpted == 'true' %}
+    <a class="full-article-link pull-right" rel="full-article" href="{{ root_url }}{{ post.url }}">{{ site.excerpt_link }}</a>
+  {% endif %}
+</article>

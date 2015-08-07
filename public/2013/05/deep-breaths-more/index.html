@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>How MMO Players Proved That the Developers Bugged an Item Drop Rate | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="How MMO Players Proved That the Developers Bugged an Item Drop Rate">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2013/05/deep-breaths-more/">
+
+
+  <meta name="twitter:description" content="How do you prove something that occurs at random now occurs less frequently?">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/globecto.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="How MMO Players Proved That the Developers Bugged an Item Drop Rate" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="How do you prove something that occurs at random now occurs less frequently?" property="og:description">
+
+
+  <meta content="http://minimaxir.com/2013/05/deep-breaths-more/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/globecto.png" property="og:image">
+
+
+  
+  <meta content="gaming" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2013/05/deep-breaths-more/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>How MMO Players Proved That the Developers Bugged an Item Drop Rate</h1>
+        <div class="meta">
+          written <time datetime="2013-05-30T23:23:00-07:00" pubdate data-updated="true"></time>
+          in
+<span class="categories">
+  
+    
+          <a href="/gaming/">gaming</a></span>
+     
+  
+</span>
+        </div>
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/deep-breaths-more/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/deep-breaths-more/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=How MMO Players Proved That the Developers Bugged an Item Drop Rate - http://minimaxir.com/2013/05/deep-breaths-more/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/deep-breaths-more/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/05/deep-breaths-more/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/deep-breaths-more/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p><img class="pull-right" src="/img/globecto.png"  ></p>
+
+<p><a href="https://www.guildwars2.com/en/">Guild Wars 2</a> is an incredible massively-multiplayer online role-playing game. The goal of Guild Wars 2, developed by ArenaNet, is to save the world, complete quests, and get awesome loot; objectives similar to that of many other MMORPGs such as <a href="http://us.battle.net/wow/en/">World of Warcraft</a>. However, Guild Wars 2 differentiates itself from its spiritual predecessors with its dynamically-changing world, incredible graphics, and the elimination of annoying and tedious time-wasters that have plagued the MMORPG genre.</p>
+
+<p>The best items in Guild Wars 2, naturally, require a large amount of effort and money to obtain. In order to create Legendary weapons, players must obtain large amounts of an item known as Globs of Ectoplasm. Globs of Ectoplasm (abbreviated as &ldquo;Ecto&rdquo;) are obtained randomly when a player salvages a Rare item using a Salvage Kit. Due to their high demand, Ecto effectively serve as a second currency in Guild Wars 2.</p>
+
+<p>Using the best Salvage Kit (that doesn&rsquo;t require paying real-world money), players received, on average, 0.9 Ecto per Rare Item Salvage, a value that has been well-documented and well-tested. But after a patch released a couple days ago, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">players on the Official Guild Wars 2 forums</a> and <a href="http://www.reddit.com/r/Guildwars2/comments/1fc540/ecto_salvage_rate_bug_being_looked_into_keep_your/">Reddit</a> began to notice that the drop rate for Ecto was <em>much</em> lower, with no mention in the patch notes.</p>
+
+<p>How do you <em>prove</em> something that occurs at random now occurs less frequently?</p>
+
+<!-- more -->
+
+
+<h1>What is &ldquo;Random&rdquo;?</h1>
+
+<p>The first rule of any official MMO forum: never accuse the developers of making implicit changes to the game unless you have proof. Such tactics are commonly employed by forum trolls and it makes building a community more difficult.</p>
+
+<p>The second rule of any official MMO forum: never accuse the developers of manipulating probability. As with normal gambling, players can hit a streak of bad luck with loot drops, enemy critical attacks, etc. But the anecdotal data from one player is not sufficient proof of any probability change. (an <a href="http://www.wowwiki.com/Why_does_Onyxia_cast_Deep_Breath%3F">old meme</a> from the World of Warcraft era mocked the userbase&rsquo;s inability to comprehend the definition of random)</p>
+
+<p>On May 28th, a player <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/first">noted on the official GW2 forums</a> that out of 166 salvages, he only received about 80 Ecto, or about 0.5 Ecto/Salvage. This is approximately <em>half</em> of the original rate of 0.9 Ecto/Salvage. Since the rate of new Ecto entering the market was halved with no change in demand, the Auction House <a href="http://www.gw2spidy.com/item/19721">price for Ecto</a> began to steadily rise.</p>
+
+<p><img src="/img/gw2ecto.png"  ></p>
+
+<p>The price increase in the short-term was not <a href="http://minimaxir.com/2013/05/stones-of-jordan/">economy-breaking</a>, but when you need 250 Ectos to create a Legendary weapon in the long-term, it can add up very quickly.</p>
+
+<p>Other players provided their experiences in the thread, with limited results such as &ldquo;noticed this too, yesterday i salvaged 9 rares, got 4 ectos&rdquo; and &ldquo;20 rare at the end of my day, i save them before go bed: 0 ecto. wtf?&rdquo;. Such sample sizes are much too low to satisfy the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">Law of Large Numbers</a> and draw any remotely accurate conclusions.</p>
+
+<p>Regina Buenaobra, ArenaNet Community Manager, eventually <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2115818">responded</a>:</p>
+
+<blockquote><p>Changes to important things like salvage rates would be listed in the update notes if they have changed. If it’s not in the update notes, then no changes have been made by the development team.</p></blockquote>
+
+<p>So Word of God implies that everyone is wrong. Issue over?</p>
+
+<p>Of course not!</p>
+
+<h1>No Such Thing As Too Much Data</h1>
+
+<p>Despite Regina&rsquo;s dismissal, players continued to post in the thread and began quoting even larger sample sizes, such as a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2114853">salvaging 500 Rares</a> resulting in 286 Ectos (0.57 Ecto/Salvage) and <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/3#post2116461">salvaging 775 Rares</a> resulting in 402 Ecto (0.52 Ecto/Salvage). With those sample sizes, the probability that the true salvage rate is unchanged from 0.9 Ecto/Salvage is essentially zero.</p>
+
+<p>John Smith, ArenaNet&rsquo;s resident economist, <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/page/4#post2116752">replied</a> that he&rsquo;ll &ldquo;look into this and get back to you.&rdquo; A day later, John made a <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2122262">promise</a> that &ldquo;if we change anything involving ectos, there will be public information on it.&rdquo; Sure enough, on May 30th, a new patch was released with only <a href="https://forum-en.guildwars2.com/forum/info/news/Game-Update-Notes-May-28-2013/2124609">one patch note</a>:</p>
+
+<blockquote><p>Fixed a salvaging bug introduced in the last patch that sometimes caused salvage kits to yield incorrect results.</p></blockquote>
+
+<p>And that was that, the price of Ecto almost immediately dropped. All was well.</p>
+
+<p>John left one final <a href="https://forum-en.guildwars2.com/forum/game/gw2/Changes-to-ecto-salvage-from-rares/2124684">message</a>: &ldquo;Thanks to everyone for your help identifying the issue and providing great data for me to start with in my research.&rdquo;</p>
+
+		
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/05/deep-breaths-more/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/05/deep-breaths-more/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=How MMO Players Proved That the Developers Bugged an Item Drop Rate - http://minimaxir.com/2013/05/deep-breaths-more/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/05/deep-breaths-more/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/05/deep-breaths-more/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/05/deep-breaths-more/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2013/05/deep-breaths-more/';
+        var disqus_url = 'http://minimaxir.com/2013/05/deep-breaths-more/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2013/05/guaranteed-to-be-random/" title="Previous Post: A Role-Playing Game With an Easily Exploitable Random Number Generator"><i class="fa fa-angle-double-left"></i>  A Role-Playing Game With an Easily Exploitable Random Number Generator</a>
+        
+
+        
+          <a class="pull-right" href="/2013/06/working-as-intended/" title="Next Post: When Uninstalling a PC Game Erases the Entire Hard Drive">When Uninstalling a PC Game Erases the Entire Hard Drive <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

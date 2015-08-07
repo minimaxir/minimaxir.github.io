@@ -1,0 +1,293 @@
+body {
+background: white;
+color: #34495e
+}
+
+h1, h2 {
+color: #2980B9
+}
+
+hr {
+border-top: 1px solid #3498DB;
+}
+
+.jumbotron {
+color: #2980B9;
+}
+
+h3, h4, h5, h6,.date-time {
+color: #95A5A6
+}
+
+
+p {
+margin: 20px 0;
+}
+
+.badge {
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden; }
+  .badge:hover {
+    background-color: #2980B9;
+    text-decoration: none; }
+	
+.badge a, .badge a:hover {
+color: white;
+}
+
+.badge.facebook {
+background-color: #2980B9;
+}
+
+.facebook a:hover{
+color: #2980B9 !important;
+}
+
+.badge.twitter {
+background-color: #3498DB;
+}
+
+.twitter a:hover{
+color: #3498DB !important;
+}
+
+.badge.googleplus {
+background-color: #C0392B;
+}
+
+.googleplus a:hover {
+color: #C0392B !important;
+}
+
+.badge.linkedin {
+background-color: #34495E;
+}
+
+.linkedin a:hover{
+color: #34495E !important;
+}
+
+.github a:hover {
+color: #7F8C8D !important;
+}
+
+.rss a:hover {
+color: #FF6600 !important;
+}
+
+.nav .rss {
+border-right: 1px dotted white;
+padding-right: 5px;
+margin-right: 5px;
+}
+
+.sharing .badge:hover {
+background-color: #ECF0F1;
+}
+
+.badge.max-header {
+background-color: #2980B9;
+}
+
+.badge.max-header:hover {
+background-color: #1ABC9C;
+}
+
+.max-header img {
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+
+.jumbotron:after  {
+content: none;
+}
+
+img.pull-right {
+padding: 20px;
+}
+
+.embed-video-container {
+    position: relative;
+    padding-bottom: 30%; /* 16/9 ratio */
+    padding-top: 30px; /* IE6 workaround*/
+    height: 0;
+    overflow: hidden;
+	width: 50%;
+}
+
+.embed-video-container iframe,
+.embed-video-container object,
+.embed-video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.nav, .sharing {
+font-size: 150%;
+}
+
+.nav.social {
+float: right;
+}
+
+.categories {
+
+border-top: 1px solid #ededed;
+margin-top: 30px;
+padding-top: 10px;
+
+}
+
+.sharing {
+margin-bottom: 20px;
+}
+
+.sharing  .badge{
+font-size:105%;
+display: block;
+width: 75%
+}
+
+.sharing .badge a {
+	text-align: center;
+	display: block;
+}
+
+.sharing .badge a i{
+	float:left;
+}
+
+.hentry .sharing .badge {
+font-size: 200%;
+margin: 0 auto;
+}
+
+blockquote p {
+margin-bottom: 10px;
+}
+
+                      .sharing .badge a i{
+					margin-top: -4px;
+					}
+
+@-moz-document url-prefix() {
+
+                    }
+
+.hentry .sharing .badge a i{
+float: none;
+}
+
+li {
+margin-bottom: 10px;
+}
+
+.nav li {
+margin-bottom: 0px;
+}
+
+.nav.social a {
+height: 20px;
+}
+
+#global-nav, #thread-votes {
+display: none !important;
+}
+
+
+@media (max-width: 979px) {
+	.nav.social {
+float: left;
+}
+
+
+.embed-video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16/9 ratio */
+    padding-top: 30px; /* IE6 workaround*/
+    height: 0;
+    overflow: hidden;
+	width: 100%;
+}
+
+.embed-video-container iframe,
+.embed-video-container object,
+.embed-video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+}
+
+@media (max-width: 767px) {
+.categories {
+display: none;
+}
+
+.jumbotron {
+padding: 70px 10px 70px 0px;
+}
+
+.sharing .badge {
+margin: 0 auto;
+}
+
+#main {
+padding: 0 10px;
+}
+
+.jumbotron {
+	font-size: 48px;
+}
+
+
+.blog-http://minimaxir.com/2013/06/big-social-data/index img, .hentry img {
+padding: 5px;
+}
+
+
+}
+
+@media (min-width: 767px) {
+#content {
+margin-right: 30px !important;
+}
+}
+
+
+@media (max-width: 479px) {
+	.date-time{
+	text-align: center;
+	}
+	
+	h1.link {
+	font-size: 34px;
+	}
+	
+	.span2 {
+	border-bottom: 2px solid #ededed;
+	}
+	
+	.jumbotron {
+	font-size: 40px;
+	line-height: 50px;
+}
+
+.span4 {
+margin: 10px 0;
+}
+	
+}

@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
+  <link href="http://minimaxir.com/rss.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2015-08-06T19:47:11-07:00</updated>
+  <id>http://minimaxir.com/</id>
+  <author>
+    <name><![CDATA[Max Woolf]]></name>
+    <email><![CDATA[max@minimaxir.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Scrape Data From Facebook Page Posts for Statistical Analysis]]></title>
+    <link href="http://minimaxir.com/2015/07/facebook-scraper/"/>
+    <updated>2015-07-20T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/07/facebook-scraper</id>
+    <content type="html"><![CDATA[<p>One of the first data scrapers I wrote for the purpose of statistical analysis was a Facebook Graph API scraper, in order to determine <a href="http://minimaxir.com/2013/06/big-social-data/">which words are the most important</a> in a Facebook Page status update. However, the v2.0 update to the Facebook API unsurprisingly broke the scraper.</p>
+
+<p>Now that <a href="https://developers.facebook.com/blog/post/2015/07/08/graph-api-v2.4/">v2.4 of the Graph API is released</a>, I gave the Facebook Graph API another look. Turns out, it&rsquo;s pretty easy to scrape and make into a spreadsheet for easy analysis, although like with any other scrapers, there are a large number of gotchas.</p>
+
+<h1>Feasibility</h1>
+
+<p><img src="http://minimaxir.com/img/facebook-scraper/nyt_sample.png"  ></p>
+
+<p>In order to determine if I can sanely scrape a website, I have to do a bit of research. How much data from a Facebook status update can we actually scrape?</p>
+
+<p>Fortunately, Facebook&rsquo;s <a href="https://developers.facebook.com/docs/graph-api/reference">Graph API documentation</a> is pretty good. We need data from the <a href="https://developers.facebook.com/docs/graph-api/reference/page">/page</a> node, and from there, we can access data from the <a href="https://developers.facebook.com/docs/graph-api/reference/v2.4/page/feed">/feed</a> edge.</p>
+
+<p>Between the two nodes, we have access to <code>id</code>, which is a unique identifer that can be used to create a link back to the update itself (e.g. <a href="https://www.facebook.com/5281959998_10150628170209999">https://www.facebook.com/5281959998_10150628170209999</a>) <code>message</code>, the text of the update; <code>link</code>, the URL which the update is linking; <code>name</code>, the title of the webpage of the link, <code>type</code>, an identifier if the update is text, a photo, or a video; and <code>created_time</code>, when the update is published.</p>
+
+<p>Accessing the numerical counts of <code>likes</code>, <code>comments</code>, and <code>shares</code> is less explicit in the documentation. Fortunately, <a href="http://stackoverflow.com/questions/6984526/facebook-graph-api-get-like-count-on-page-group-photos">StackOverflow</a> has the answer: you need to request <code>likes.limit(1).summary(true)</code> instead of normal <code>likes</code>.</p>
+
+<p>There&rsquo;s no indication that there&rsquo;s a Rate Limit, oddly. Since we can query 100 updates at a time, the scraper will be efficient enough that it&rsquo;s unlikely to hit any extreme API limits.</p>
+
+<p>Now that we know we can get all the relevant data from the sample status update, we can build a Facebook post scraper.</p>
+
+<h1>Data Scrappy</h1>
+
+<p><img src="http://minimaxir.com/img/facebook-scraper/def_test.png"  ></p>
+
+<p><em>I have created an <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/how_to_build_facebook_scraper.ipynb">IPython notebook hosted on GitHub</a> with detailed code, code comments, and sample output for each step of the scraper development. I strongly recommend giving it a look.</em></p>
+
+<p>First, we need to see how to actually access the API. It&rsquo;s no longer a public API, and it requires user authentication via <a href="https://developers.facebook.com/docs/facebook-login/access-tokens">access tokens</a>. Users can get Short-Term tokens, but as their name suggests, they expire quickly, so they are not recommended. The Graph API allows a neat trick; by concatenating the App ID from a user-created App and the App Secret, you create an access token which never expires. Of course, this is a major security risk, so create a separate app for the sole purpose of scraping, and reset your API Secret if it becomes known.</p>
+
+<p>Let&rsquo;s say we want to scrape the New York Times' Facebook page. We would send a request to <a href="https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX">https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX</a> and we would get:</p>
+
+<pre><code>{
+    "id": "5281959998", 
+    "name": "The New York Times"
+}
+</code></pre>
+
+<p>i.e., the page metadata. Sending a request to /nytimes/feed results in what we want:</p>
+
+<pre><code>{
+    "data": [
+        {
+            "created_time": "2015-07-20T01:25:01+0000", 
+            "id": "5281959998_10150628157724999", 
+            "message": "The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth."
+        }, 
+        {
+            "created_time": "2015-07-19T22:55:01+0000", 
+            "id": "5281959998_10150628161129999", 
+            "message": "\"It\u2019s safe to say that federal agencies are not where we want them to be across the board,\" said President Barack Obama's top cybersecurity adviser. \"We clearly need to be moving faster.\""
+        }
+
+        [...]
+}
+</code></pre>
+
+<p>Now we get the post data. But not much of it. In Graph API v2.4, the default behavior is to return very, very little metadata for statuses in order to reduce bandwidth, with the expectation that the user will request the necessary fields.</p>
+
+<p>So let&rsquo;s request <em>all</em> the fields we want. This results in a very long URL not shown here which causes the posts feed to have all the data we need:</p>
+
+<pre><code>{
+    "comments": {
+        [...]
+        }, 
+        "summary": {
+            "order": "ranked", 
+            "total_count": 31
+        }
+    }, 
+    "created_time": "2015-07-20T01:25:01+0000", 
+    "id": "5281959998_10150628157724999", 
+    "likes": {
+        "data": [
+            [...]
+        }, 
+        "summary": {
+            "total_count": 278
+        }
+    }, 
+    "link": "http://nyti.ms/1Jr6LhU", 
+    "message": "The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth.", 
+    "name": "China Molds a Supercity Around Beijing, Promising to Change Lives", 
+    "shares": {
+        "count": 50
+    }, 
+    "type": "link"
+}
+</code></pre>
+
+<h1>Post Processing</h1>
+
+<p>Great! Now we just have to process each post. Which is easier said than done.</p>
+
+<p>If you&rsquo;re an avid Facebook user, you know that not all of these attributes are not guaranteed to exist. Status updates may not have text or links. Since we&rsquo;re making a spreadsheet with an enforced schema, we need to validate that a field exists before attempting to process it.</p>
+
+<p>The &ldquo;\u2019"s in the message correspond to a <a href="http://smartquotesforsmartpeople.com/">smart quote</a> apostrophe. Since this a possibility, along with other unicode characters, the message and link names must be encoded <a href="https://en.wikipedia.org/wiki/UTF-8">in UTF-8</a> to prevent errors.</p>
+
+<p>The time format is another issue. The date follows the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> standard for UTC times. However, most spreadsheet programs will not able to parse it as a Date value. Also, since the NYT is based in the USA (specifically, New York), it may be helpful for time-based statistical analysis to convert the time to Eastern Standard Time while fixing the date format.</p>
+
+<p>There&rsquo;s also an unexpected precaution that must be taken whenever scraping data sets. These APIs do not expect users to be accessing very, very old data. As a result, there&rsquo;s a high probability of the API server actually hitting an error sometime during the scrape, such as a <a href="http://www.checkupdown.com/status/E500.html">HTTP Status 500</a> or <a href="http://www.checkupdown.com/status/E502.html">HTTP Status 502</a>. These server errors are temporary, so a helper function must be used to attempt to retrieve data until it is actually successful.</p>
+
+<h1>Putting it All Together</h1>
+
+<p>Now we have a full plan for scraping, we query each page of Facebook Page Statuses (100 statuses maximum per page), process all statuses on that page and writing the output to a CSV file, and navigate to the next page, and repeat until no more statuses left.</p>
+
+<p>This can be done with a for-loop within a while loop. In addition, I also recommend counting the number of posts processed and taking a timestamp every-so-often to ensure that the program has not stalled.</p>
+
+<p><img src="http://minimaxir.com/img/facebook-scraper/cnnwoo.png"  ></p>
+
+<p>And that&rsquo;s it! You can access the complete scraper in this GitHub repository, along with all other scripts mentioned in this article. Once you have the CSV file, you can import it into nearly every statistical program and have fun with it. <em>(You can download a .zip of the NYTimes data <a href="https://dl.dropboxusercontent.com/u/2017402/nytimes_facebook_statuses.zip">here</a> [4.6MB])</em></p>
+
+<p>Say, for example, what would happen if we compared the Median Likes of the New York Times with a certain other  journalistic website that&rsquo;s the master of social media?</p>
+
+<p><img src="http://minimaxir.com/img/facebook-scraper/nytimes_buzz_fb.png"  ></p>
+
+<p>There may be more practical reasons for analyzing data on Facebook Posts, such as quantifying the growth and success of your own page, or that of your competitors. But the data is easy to get and is very useful.</p>
+
+<p>Although, in fairness, the scraper is not perfect and still has room for improvement. With CNN&rsquo;s Facebook Page post data, for example, somehow the scraper skips all posts from 2013. Although in that case, I blame Facebook.</p>
+
+<hr />
+
+<p><em>You can access all resources used in this blog post at this <a href="https://github.com/minimaxir/facebook-page-post-scraper">GitHub repository</a></em>.</p>
+
+<p><em>If you haven&rsquo;t, I strongly recommend looking at the <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/how_to_build_facebook_scraper.ipynb">IPython Notebook</a> for more detailed coding methodology.</em></p>
+
+<p><em>And, as an experiment, I&rsquo;ve made an <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/fb_page_data_analysis.ipynb">IPython notebook with the R kernel</a> showing how I made the NYT-BuzzFeed chart!</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why Is the Most-Viewed Gaming Video on YouTube About Cars 2?]]></title>
+    <link href="http://minimaxir.com/2015/06/cars-2/"/>
+    <updated>2015-06-15T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/06/cars-2</id>
+    <content type="html"><![CDATA[<p>Last month, <a href="https://www.youtube.com/">YouTube</a>, in celebration of its 10-year anniversary, <a href="http://kotaku.com/the-10-most-popular-games-on-youtube-1704234763">released a report</a> of the Top 10 most-watched video game franchises on YouTube:</p>
+
+<pre><code>1. Minecraft
+2. Grand Theft Auto (series)
+3. League of Legends
+4. Call of Duty (series)
+5. FIFA (series)
+6. Garry’s Mod
+7. The Sims (series)
+8. Five Nights at Freddy’s (series)
+9. Puzzles &amp; Dragons
+10. Dota 2
+</code></pre>
+
+<p>There aren&rsquo;t many surprises on the list. <a href="https://minecraft.net/">Minecraft</a> and <a href="http://na.leagueoflegends.com/">League of Legends</a> have become incredibly huge in such a short time, although <a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy%27s">Five Nights as Freddy&rsquo;s</a> position is impressive given that it started <em>a year ago</em>.</p>
+
+<p>After <a href="http://www.reddit.com/r/dataisbeautiful/comments/38rghg/the_30_mostviewed_youtube_videos_oc/">renewed public interest</a> in YouTube data, I decided to take a poke at the <a href="https://developers.google.com/youtube/">YouTube API</a> to see if I can determine which Gaming videos are the most-viewed. It turns out that the API makes it simple, by allowing you to query on a specific category and sort by the number of views the video has received.</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_all.png"  ></p>
+
+<p>There&rsquo;s lots of Minecraft, and even lots of Angry Birds in the top-viewed videos.</p>
+
+<p>&hellip;but why is a mundane Cars 2 video from an unknown video channel the most-viewed video of all time?!</p>
+
+<p>No, this is not an error. <a href="https://www.youtube.com/watch?v=urHuO7Zbhhw">You can watch the video yourself on YouTube</a> and verify the view count.</p>
+
+<h1>Vroom Vroom</h1>
+
+<p><img src="http://minimaxir.com/img/cars-2/Cars_2_Poster.jpg"  ></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Cars_2">Cars 2</a> is a CGI movie about talking cars by Pixar which premiered in June 2011. It is, of course, the sequel to <a href="https://en.wikipedia.org/wiki/Cars_%28film%29">Cars</a>, and received more critical reviews compared to its predecessor.</p>
+
+<p>As with many movies, Cars 2 received a tie-in game, <a href="http://tvtropes.org/pmwiki/pmwiki.php/Main/TheProblemWithLicensedGames">most of which are mediocre</a> due to mandatory deadlines and lower budgets. However, <a href="http://www.gamespot.com/reviews/cars-2-review/1900-6321632/">Gamespot gave the game a 7.5</a> out of 10, which is pretty good for a licensed game. The fact that it&rsquo;s a cart racer like Mario Kart helps too.</p>
+
+<p>It&rsquo;s not Minecraft or League of Legends though. Why would a video about it be the most-viewed gaming video of all time?</p>
+
+<h1>Statistical Shenanigans</h1>
+
+<p>Popular YouTube videos are often suspected of having their viewcounts manipulated, since making videos appear more popular than they actually are can help lead to genuine virality. Could this be the case with the Cars 2 video?</p>
+
+<p>I did a few simple diagnostics of the top 1,000 Gaming videos to determine if the Cars 2 video had an statistically unusual view count.</p>
+
+<p>Modern YouTube videos have a Like/Dislike bar, which counts the number of Likes and Dislikes given by viewers of the video. If someone is rigging the view count, the ratio of Likes+Dislikes to the given viewcount should be much lower than for a genuine video with genuine user reactions.</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_interaction.png"  ></p>
+
+<p>However, for all videos with incredibly large view counts, the ratio of Likes+Dislikes to Views is incredibly low. The line represents the predicted mean for a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a>, with the shaded area representing a 95% confidence interval for the mean. The Cars 2 data point falls directly on the line, so we cannot safely say that Cars 2 is an outlier from this diagnostic.</p>
+
+<p>Another aspect to check is the ratio of Likes to Dislikes. If a bad video has a manipulated view count, we would expect much fewer Likes and many more Dislikes because viewers may become mislead by the content, especilaly those with misleading titles/thumbnails. In general, the % of people who Liked a video should be high for all videos.</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_like_ratio.png"  ></p>
+
+<p>Almost all of the Top 1,000 gaming videos have Like Ratio greater than 50% (i.e. more Likes than Dislikes). However, the Cars 2 video data point falls outside the 95% confidence interval for the regression model. Therefore, it&rsquo;s worth looking into as a possible outlier.</p>
+
+<h1>Plan B</h1>
+
+<p>On the Statistics tab of all public YouTube videos, you can see the number of views a video has received over time. Here is the daily number of views for the Cars 2 video:</p>
+
+<p><img src="http://minimaxir.com/img/cars-2/cars_daily_views.png"  ></p>
+
+<p>The video was released in August 2011 (about a month after the release of the movie), but the video didn&rsquo;t become viral and spike in views until sometime early 2012, many months later.</p>
+
+<p>I <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/">made a submission</a> to the <a href="http://www.reddit.com/r/Games/">games subreddit on Reddit</a> to see if there was any ideas as to why Cars 2 is at the top. /u/ Sureiyaa <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crypxn5">had a good theory</a>:</p>
+
+<blockquote><p>Remember, this video was posted in August 2011, two months after the movie was released. It&rsquo;s also titled &ldquo;Cars 2 HD xxx xxx&rdquo; and is rather lengthy. It would make sense if people searched for &ldquo;Cars 2&rdquo; or even all of &ldquo;Cars 2 HD&rdquo; and stumbled on this video thinking that someone had uploaded the movie for them to watch, especially when you consider that it was a movie aimed at kids who may not pay attention to everything in the title.</p>
+
+<p>With those initial views, it probably became one of the top results if you searched for Cars 2. With that, it grew from there and is probably getting views from being a high-ranking result when searching for games videos in general.</p></blockquote>
+
+<p>Accidental SEO could explain it. Indeed, the first result on Google for &ldquo;Cars 2 HD&rdquo; is the video in question. Although, in that case, why would the spike happen in 2012? (the DVD/Blu-Ray came out October 2011, so a 2012 spike is late even by lazy movie pirate standards)</p>
+
+<p>Another factor is the fact that that Cars franchise appeals to young children, which are <em>very</em> plentiful. This does bring up a <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/cryreaw">valid counterargument</a> though: why Cars 2, and not more popular franchises like <a href="https://en.wikipedia.org/wiki/Frozen_%282013_film%29">Frozen</a> or any other Disney franchise that&rsquo;s more kid-oriented? (for the record, there <em>is</em> a <a href="https://www.youtube.com/watch?v=VQ7GLnRaeHM">Frozen video</a> at #163 in Gaming, although it&rsquo;s blatantly miscategorized)</p>
+
+<p>The Cars 2 video uploader eventually <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crzrbdd">replied to the Reddit thread</a> suggesting the children-theory as well:</p>
+
+<blockquote><p>You&rsquo;re indeed right about it blowing up, mainly from mobile device views, which I&rsquo;m guessing was kids watching it. I remember seeing comments from users saying their kids love to watch the video.</p></blockquote>
+
+<p>There&rsquo;s also the factor of YouTube/Google&rsquo;s recommendation algorithms working in mysterious ways and providing video recommendations based on user interests/age/location/etc. Unfortunately, the impact of those can&rsquo;t easily be quantified.</p>
+
+<p>Looking into the view count of the Cars 2 video in Gaming YouTube videos only raises more questions than answers.</p>
+
+<hr />
+
+<p><em>You can view the metadata for the Top 500 Gaming videos on YouTube at <a href="https://docs.google.com/spreadsheets/d/1fy2-9c5HORwvhvAljEG6LvyrM3zG5YnWnalvepX3eV8/edit?usp=sharing">this Google Sheet</a>.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Almost Every Smartphone and Tablet Browses the Web in Portrait Mode]]></title>
+    <link href="http://minimaxir.com/2015/03/portrait/"/>
+    <updated>2015-03-18T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2015/03/portrait</id>
+    <content type="html"><![CDATA[<p><strong>UPDATE</strong>: <em>After others questioned the data in this blog post, I rechecked the derivation of the data and ran more tests. It turns out that JavaScript may not consistently differentiate, for example, between the browser resolutions of 1280x720 and 720x1280 on mobile devices. Since this is how Google Analytics determines the device resolution, this may affect the final results. The post and charts remain unchanged for posterity.</em></p>
+
+<p>I&rsquo;m currently working on a blog post on how the rise of smartphones and tablets impacts the design of charts and other data visualizations. In the process, I took a look at the proportion of mobile devices, tablets, and desktops which have visited my blog over time, using <a href="http://www.google.com/analytics/">Google Analytics</a>, in order to quantify the importance of catering to these newer technologies.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_devices.png"  ></p>
+
+<p>After looking at 781,557 visitors to minimaxir.com from January 2013 to February 2015, the proportion of mobile devices + tablets has been slightly increasing, and together consist of more than &frac14;th of the views to my blog, so catering to these users is not unimportant.</p>
+
+<p>Another important concern is <em>how</em> visitors view my blog on smartphones/tablets. Do they read holding their device in <strong>portrait</strong> mode, where the device is vertically-oriented and supports one-handed use, or do they read the web using their device in <strong>landscape</strong> mode, where the device is horizontally-oriented and allows for more text per line? Almost every desktop monitor is landscape, so worrying about that is effectively a non-issue.</p>
+
+<p>Google Analytics also records the screen resolution of each browser which visits my website (for example, an iPhone 5/5S user in portrait mode will appear as a <em>mobile</em> device with a effective resolution of <em>320x568</em>. Note that the true device resolution is <em>640x1136</em>; for many modern smartphones, the web content renders at twice the DPI to fit the entire screen). From that, I can infer that the user has their device in portrait mode if the screen height is greater than the screen width, and vice versa for landscape.</p>
+
+<p>After breaking it down by device category, I found something unexpected.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_orientation.png"  ></p>
+
+<p>95.25% of all smartphones browse the web in portrait orientation, while 88.18% of all tablets browse the web in portrait. I was expecting the proportion of portrait mode users to be high, but not <em>that</em> high! *</p>
+
+<p>But what does this mean in terms of website design?</p>
+
+<h1>Implications</h1>
+
+<p>Modern front-end website themes and frameworks advocate <a href="http://en.wikipedia.org/wiki/Responsive_web_design">responsive design</a>, where the website resizes and adjusts elements in order to fit the screen resolution of the device (my website uses the <a href="http://getbootstrap.com/">Bootstrap framework</a>, which was one of the first to popularize responsive design) However, there is programming, design, and QA overhead necessary to support each and every possible device width, from the tiniest portrait smartphones to the wide 1080p monitors used on desktops. As a result, many older websites do not care to invest the time and money to optimize for responsive design, but as my first chart shows, the proportion of tablets and smartphones is nontrivial, and therefore there&rsquo;s a strong incentive for catering to them.</p>
+
+<p>Bootstrap has a maximum width of 1200px; any screen width less than that will be impacted by responsive design. Let&rsquo;s look at the distibution of device widths, by device category.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_devices_all.png"  ></p>
+
+<p>The median browser width is 1366px, corresponding to the device resolution of 1366x768, which is a common &ldquo;720p&rdquo; resolution on laptops. Half of the visitors will have a screen width greater than 1366px, and therefore they would not benefit from a responsive layout. Inversely, half of the visitors will have a device width below 1366px, and most of those are not desktops and below the 1200px limit and therefore will be impacted by responsive design.</p>
+
+<p>Here&rsquo;s the same chart, but colored by device orientation instead of category.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_orientations_all.png"  ></p>
+
+<p>The majority of the devices below the median are portrait devices, which isn&rsquo;t surprising, but is evident that portrait mode is a concern.</p>
+
+<p>We can further separate these groups in 6 subgroups: one for each device category and orientation combination. This tells the full story.</p>
+
+<p><img src="http://minimaxir.com/img/portrait/minimaxir_widths.png"  ></p>
+
+<p>Mobile Portrait devices have over 75% of the widths concentrated at about 360px (the effective width of Samsung Galaxy smartphones), while Tablet Portrait devices have over 75% of the widths concentrated at about 768px (the effective width of iPads). In contrast, Landscape smartphones, tablets, and desktops encompass a wider variety of device widths.</p>
+
+<p>Not only do most smartphones view the web in portrait, the effective widths of these smartphones and tablets are centered around specific widths. This makes targeting certain device widths an effective strategy for saving time when testing mobile-optimized content, especially when working with data visualizations.</p>
+
+<hr />
+
+<p>*In fairness, the viewers on my website about technology and statistics may not necessarily represent the viewers on the internet as a whole. However, it&rsquo;s fair to assume that the way a person holds a device is uncorrelated with the person&rsquo;s topic preferences. Additionally, the very large sample size of 781,557 effectively eliminates any uncertainty about the results due to random chance.</p>
+
+<p><em>You can download a copy of the data <a href="https://docs.google.com/spreadsheets/d/14vUjq7rv5fceIe8pZRqfZrp7JGj3Uw1fFI2-3NL3Dvs/edit?usp=sharing">in this Google Sheet</a>. All charts were made using R and ggplot2.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Analyzing the Patterns of Numbers in 10 Million Passwords]]></title>
+    <link href="http://minimaxir.com/2015/02/password-numbers/"/>
+    <updated>2015-02-24T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/02/password-numbers</id>
+    <content type="html"><![CDATA[<p>The primary purpose of a <a href="http://en.wikipedia.org/wiki/Password">password</a> is to serve as an unique verification identifier for a given user. Ideally, the password for a given website or service should be both random and unique; if the letters and/or numbers in the password follow any patterns, then they might be easier to guess by an intruder. For example, someone may put their birth year such as &ldquo;1987&rdquo; or &ldquo;1988&rdquo; in their password, which makes the passwords easier to remember, but consequently easier to break.</p>
+
+<p>A few weeks ago, security researcher Mark Burnett released <a href="https://xato.net/passwords/ten-million-passwords/#.VNojhPnF98E">a list of 10 million passwords</a> compiled <a href="http://www.reddit.com/r/10millionpasswords/comments/2w3ali/dataset_origin/conap8l">from various sources</a> over the years. Reddit user jalgroy <a href="http://www.reddit.com/r/dataisbeautiful/comments/2vsg7h/frequency_of_years_in_passwords_oc/">posted a histogram</a> of the years used in these passwords, which I&rsquo;ve verified using my own scripts:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/year_distribution.png"  ></p>
+
+<p>There is a clear maximum at 1987 which implies a current age of about 28. This makes sense, as internet users in their 20&rsquo;s are generally considered to be very attuned to internet usage. The spike at 2000 is likely not because it&rsquo;s a birth year, but because 2000 is a kewl number.</p>
+
+<p>There are actually many similar patterns for numbers in passwords, which involve surprising yet intuitive logic.</p>
+
+<h1>Digit Behavior</h1>
+
+<p>The distribution of the number of digits in passwords varies significantly.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/digit_distribution.png"  ></p>
+
+<p>42% of passwords have zero numerical digits, which implies that 58% of passwords have atleast one digit. However, the local maxima in number of digits in a password all occur at <em>even</em> numbers of digits, which may imply that humans have an easier time of remembering even amounts of numbers.</p>
+
+<p>If you look at a typical keyboard, you&rsquo;ll note that the default sequence of numbers is <strong>1234567890</strong>. If the user wants a number in their password that is easy to type, drawing from this sequence of numbers might be a good idea.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/seq_digit_bar.png"  ></p>
+
+<p>Note that the length of the sequence is uncorrelated with the number of occurrences of the sequence. Many more people use 123 in a password than just 12, even though it&rsquo;s longer. 123, as a triplet of numbers, may be easier to remember by the average person than a pair of numbers. However, that contradicts the logic above that even numbers may be easier to remember, which suggest that another factor may be involved.</p>
+
+<p>Sequences of numbers are popular, but are some sequences of numbers more popular than others? Let&rsquo;s look at the order and composition of 1-digit, 2-digit, and 3-digit numbers in these 10 million passwords.</p>
+
+<h1>More on Digit Patterns</h1>
+
+<p><em>Note: all number patterns are distinct number patterns, e.g. 2-digit numbers analyzed are not subsets of 3-digit or larger numbers.</em></p>
+
+<p>Take a look at the most used single-digit numbers:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/one_digit_bar.png"  ></p>
+
+<p>1 is by far the most-used single-digit number, which may be due to the fact that it is the left-most number on the keyboard and therefore an easy press for services that force the inclusion of a digit in the password. Relatedly, 9 and 0 are the least-used single-digit numbers. That&rsquo;s intuitive enough. But does that hold for more complex patterns?</p>
+
+<p>Let&rsquo;s look at the most-used 2-digit patterns, including numbers with 0 as a leading digit:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/two_digit_bar.png"  ></p>
+
+<p>12 and 11, a sequential pattern and a repeating pattern respectively, are by far the most-used 2-digit numbers. Many repeating patterns such as 22 and 99 are prominent. But why is 69 in third place? (besides the obvious non-family-friendly reason)</p>
+
+<p>It may be helpful to look at a heat map of all possible 2-digit numbers to see if there are any observable patterns.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/two_digit_heatmap.png"  ></p>
+
+<p>There are a couple distinct patterns: numbers beginning with a 1 or 2 are used the most frequently, and both repeating and sequential digits are used the most frequently.</p>
+
+<p>Almost all 2-digit numbers outside of those patterns are unused (the exception is 69, of course) The intersection of both of these patterns is at 11/12, which is the reason both have high usage.</p>
+
+<p>Do 3-digit numbers follow similar patterns? Here&rsquo;s a list of the most-used 3-digit numbers in passwords:</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/three_digit_bar.png"  ></p>
+
+<p>Yes and no. Here, there appear to be more instances of special numbers, such as 321 and <a href="http://en.wikipedia.org/wiki/James_Bond">007</a> which deviate from the patterns above. Of note, 3-digit numbers ending in 00 appears as a new pattern.</p>
+
+<p>This can be confirmed by looking at a faceted heat map for each possible combination.</p>
+
+<p><img src="http://minimaxir.com/img/password-numbers/three_digit_heatmap.png"  ></p>
+
+<p>By far the most popular pattern for a 3-digit number is a repetition pattern, followed by a sequential pattern (the sequential pattern is always located one tile up and two tiles right from the repetition pattern). There are very few outliers which deviate from this schema aside from the ones mentioned previously. (420 is not as significant of an outlier for 3-digit numbers as 69 is for 2-digit numbers)</p>
+
+<p>The patterns of numbers in passwords can offer some insight to human psychology. However, if possible, I recommend you avoid using such patterns in your passwords since it introduces a vulnerability. It&rsquo;s a good idea to use a password manager instead, such as <a href="https://agilebits.com/onepassword">1Password</a> or <a href="http://keepass.info/">KeePass</a>, which offer advantages including the generation of both truly random and unique passwords.</p>
+
+<hr />
+
+<p><em>All charts were made using R and ggplot2.</em></p>
+
+<p><em>You can download the aggregate data used to create the charts <a href="https://docs.google.com/spreadsheets/d/1_OHQOyLkg0d7tseHXofTBu5AWzSlmXIBjV23CojFPcY/edit?usp=sharing">in this Google Sheet</a>.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[An Introduction on How to Make Beautiful Charts With R and Ggplot2]]></title>
+    <link href="http://minimaxir.com/2015/02/ggplot-tutorial/"/>
+    <updated>2015-02-12T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/02/ggplot-tutorial</id>
+    <content type="html"><![CDATA[<p>Readers of my previous blog posts have frequently asked me &ldquo;how do you make those charts?&rdquo;</p>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/buzzfeed-listicle-scatterplot.png"  ></p>
+
+<p>These charts were made using <a href="http://docs.ggplot2.org/current/">ggplot2</a>, an add-on package for the <a href="http://www.r-project.org/index.html">R programming language</a>, along with lots of iterative improvement over the months. R notably has chart-making capabilities built into the language by default, but it is not easy to use and often produces <em>very</em> simplistic charts. Enter ggplot2, which allows users to create full-featured and robust charts with only a few lines of code.</p>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/geom_histogram-4.png"  ></p>
+
+<p>You&rsquo;ve probably seen charts elsewhere on the internet similar to this one. While it implements the &ldquo;<a href="http://vita.had.co.nz/papers/layered-grammar.html">Grammar of Graphics</a>&rdquo; (which is where the &ldquo;gg&rdquo; in &ldquo;ggplot2&rdquo; comes from), it does look generic and cluttered.</p>
+
+<p>Adding a touch of color and design can help make more compelling visualizations, and it&rsquo;s pretty easy to do thanks to ggplot2&rsquo;s syntax and chaining capabilities.</p>
+
+<h1>Quick Design Notes</h1>
+
+<p>Charts with a completely-gray background have become rather popular lately, mostly in part to the charts produced by <a href="http://fivethirtyeight.com/">FiveThirtyEight</a>, which was the inspiration behind my design. An important functional aspect of a gray background is that it makes the chart area distinct from the article body.</p>
+
+<p>The charts I make are typically 1200px by 900px. On my blog, the width of the article text container is less than 1200px, so the browser shrinks the chart to make it fit. The chart still appears at a high resolution on HiDPI/Retina screens, and since the charts are simple, shrinking will not cause significant graphical distortion on normal-resolution screens. 1200x900px also keeps the file size low, which is important when putting 10 or more charts in a post.</p>
+
+<p>An important tip when making charts in ggplot2: render the chart on OS X, if possible. OS X has antialiasing for text and curves in charts, while Windows/Linux does not, and it can significantly improve the quality of the chart.</p>
+
+<h1>Making a ggplot2 Histogram</h1>
+
+<p>The first chart we&rsquo;ll be making is a histogram. This is a good example of a chart that&rsquo;s easy to make in R/ggplot2, but hard to make Excel.</p>
+
+<p>For this tutorial, we&rsquo;ll be using <code>ggplot2</code>, plus three additional R packages: <code>RColorBrewer</code>, which allows for the procedural generation of colors from a palette for the chart, <code>scales</code>, which allows for the axes to express numbers with commas/percents, and <code>grid</code>, which allows for manipulation of the chart margins and layout. We can install and load these packages at the beginning of the R file:</p>
+
+<pre><code>install.packages(c("ggplot2","RColorBrewer","scales"))
+library(ggplot2); library(scales); library(grid); library(RColorBrewer)
+</code></pre>
+
+<p>The dataset we&rsquo;ll use is my <a href="http://minimaxir.com/csv/buzzfeed_linkbait_headlines.csv">list of 15,101 BuzzFeed listicles</a> that I used <a href="http://minimaxir.com/2015/01/linkbait/">in my previous blog post</a>, including both the listicle size and number of Facebook shares the listicle received, which have been prefiltered to listicle sizes of 50 or less, and have received atleast 1 Facebook share. Download the file, and set the working directory of R to the containing folder. We load the dataset into R by reading the CSV:</p>
+
+<pre><code>df &lt;- read.csv("buzzfeed_linkbait_headlines.csv", header=T)
+</code></pre>
+
+<p>We can make a basic histogram in two lines of code.</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1)
+</code></pre>
+
+<p>The first line instantiates the charts and defines the variables used for plotting. We declare the use of the data frame <code>df</code>, and the <code>listicle_size</code> vector from that data frame as the plotting aesthetic. The second line tells ggplot to make a histogram out of the given data with <code>geom_histogram</code>, and we specify a binwidth of 1 so that each column represents one discrete value of listicle. Running that code will cause a plot to pop up.</p>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_1.png"  ></p>
+
+<p>Not a bad start. In order to save the created plot, we use the <code>ggsave</code> command, which saves the last-generated plot to an image in your working directory. The first parameter, the filename, determines the filetype.</p>
+
+<pre><code>ggsave("tutorial_1.png", dpi=300, width=4, height=3)
+</code></pre>
+
+<p>Now we can add a theme to make it look classy.</p>
+
+<p>A ggplot2 theme is a function that overrides the graphical parameters of the default theme. Here&rsquo;s the long code block for my FiveThirtyEight-inspired theme, with code comments for each code subblock:</p>
+
+<pre><code>fte_theme &lt;- function() {
+
+  # Generate the colors for the chart procedurally with RColorBrewer
+  palette &lt;- brewer.pal("Greys", n=9)
+  color.background = palette[2]
+  color.grid.major = palette[3]
+  color.axis.text = palette[6]
+  color.axis.title = palette[7]
+  color.title = palette[9]
+
+  # Begin construction of chart
+  theme_bw(base_size=9) +
+
+  # Set the entire chart region to a light gray color
+  theme(panel.background=element_rect(fill=color.background, color=color.background)) +
+  theme(plot.background=element_rect(fill=color.background, color=color.background)) +
+  theme(panel.border=element_rect(color=color.background)) +
+
+  # Format the grid
+  theme(panel.grid.major=element_line(color=color.grid.major,size=.25)) +
+  theme(panel.grid.minor=element_blank()) +
+  theme(axis.ticks=element_blank()) +
+
+  # Format the legend, but hide by default
+  theme(legend.position="none") +
+  theme(legend.background = element_rect(fill=color.background)) +
+  theme(legend.text = element_text(size=7,color=color.axis.title)) +
+
+  # Set title and axis labels, and format these and tick marks
+  theme(plot.title=element_text(color=color.title, size=10, vjust=1.25)) +
+  theme(axis.text.x=element_text(size=7,color=color.axis.text)) +
+  theme(axis.text.y=element_text(size=7,color=color.axis.text)) +
+  theme(axis.title.x=element_text(size=8,color=color.axis.title, vjust=0)) +
+  theme(axis.title.y=element_text(size=8,color=color.axis.title, vjust=1.25)) +
+
+  # Plot margins
+  theme(plot.margin = unit(c(0.35, 0.2, 0.3, 0.35), "cm"))
+}
+</code></pre>
+
+<p>Adding the completed theme to the chart is just one line of code:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1) +
+  fte_theme()
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_2.png"  ></p>
+
+<p>A little more classy. Now that the core design of the chart is present, we can make polish the chart to make it more beautiful.</p>
+
+<p>Of course, all charts need properly labled axes and a title. We can add that with the <code>labs</code> function:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1) +
+  fte_theme() +
+  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles")
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_3.png"  ></p>
+
+<p>Now we can add a few finishing touches. For the x-axis, we can set the breaks to 5 instead of 10 using <code>scale_x_continuous</code> since we have the room. For the y-axis, since we have an axis value with 4 digits, we can set the formatting to use a comma with <code>scale_y_continuous</code>. Lastly, we can add a line at y = 0 using <code>geom_line</code> to further seperate the data. Lastly, in <code>geom_histogram</code>, we can change the fill of the bars to a red color for more thematic branding, and also reduce the opacity to make the grid lines visible behind the chart.</p>
+
+<p>Putting it all together:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1, fill="#c0392b", alpha=0.75) +
+  fte_theme() +
+  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles") +
+  scale_x_continuous(breaks=seq(0,50, by=5)) +
+  scale_y_continuous(labels=comma) + 
+  geom_hline(yintercept=0, size=0.4, color="black")
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_4.png"  ></p>
+
+<p>That&rsquo;s pretty professional and is a good stopping point. Normally, I would change the text fonts as well, but that&rsquo;s a subject for another post.</p>
+
+<h1>Making a ggplot2 Scatterplot</h1>
+
+<p>Scatterplots are also efficient to do in ggplot2, which especially useful as making a plot containing 15,101 points might cause spreadsheets to freeze.</p>
+
+<p>Creating a scatterplot of the relationship between listicle size and the number of Facebook shares the listicle receives is essentially the same procedure as creating a histogram, except that the x-axis and y-axis aesthetic vectors must be declared explicitly.</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point()
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_5.png"  ></p>
+
+<p>Because there are a few listicles with <em>over 1 million</em> Facebook shares (welcome to 2015), the entire plot is skewed. As a result, we need to compress the plot by scaling the y-axis logarithmically using <code>scale_y_log10</code>. Additionally, there will be a large amount of overlap between points due to the large sample size, so we need to greatly reduce the opacity of the points. (I set to 5% for this chart, but the best value can be determined through trial and error)</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05) +
+  scale_y_log10(labels=comma)
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_6.png"  ></p>
+
+<p>That&rsquo;s a lot more intuitive, and it makes it clear that there is indeed a positive relationship between listicle size and the number of Facebook shares.</p>
+
+<p>Now we can apply the theme and labels:</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05) +
+  scale_y_log10(labels=comma) +
+  fte_theme() +
+  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_7.png"  ></p>
+
+<p>And then the final touches. We can include the same horizontal line, x-axis behavior, and point color as with the last plot. However, for the y-axis, we have room to include each power of 10 between 1 and 1,000,000 as breaks, which we can do through a cute R syntax trick: <code>10^(0:6)</code>. While the chart shows a positive relationship between the variables, the shape is ambiguous and it may be helpful to add a trend line. We use <code>geom_smooth</code> to add a trendline representing a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a> with a 95% confidence interval.</p>
+
+<p>Putting it all together:</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05, color="#c0392b") +
+  scale_x_continuous(breaks=seq(0,50, by=5)) +
+  scale_y_log10(labels=comma, breaks=10^(0:6)) +
+  geom_hline(yintercept=1, size=0.4, color="black") +
+  geom_smooth(alpha=0.25, color="black", fill="black") +
+  fte_theme() +
+  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
+</code></pre>
+
+<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_8.png"  ></p>
+
+<p>Now that is pretty insightful.</p>
+
+<p>Hopefully, this small overview of how ggplot2 gives you an small idea of what it can do. This is just the tip of the iceberg. However, making cooler charts such as categorical bar charts, charts with multiple factor variables, and charts with multiple facets require smart data preprocessing, which is a topic for another blog post.</p>
+
+<hr />
+
+<p><em>You can access a copy of the code used in this blog post <a href="https://github.com/minimaxir/ggplot-tutorial">at this GitHub repository</a>.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles]]></title>
+    <link href="http://minimaxir.com/2015/01/linkbait/"/>
+    <updated>2015-01-15T08:30:00-08:00</updated>
+    <id>http://minimaxir.com/2015/01/linkbait</id>
+    <content type="html"><![CDATA[<p><a href="http://www.buzzfeed.com/">BuzzFeed</a> is one of the most significant sources of journalistic content on the entire internet. Of course, that depends on your definition of &ldquo;journalistic&rdquo;: BuzzFeed is one of the first organizations to leverage both social media and the power of language as an editorial business model.</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_fb.png"  ></p>
+
+<p>BuzzFeed has popularized the use of the &ldquo;listicle&rdquo; as <a href="http://www.buzzfeed.com/lyapalater/group-projects-should-be-wiped-off-the-face-o">seen above</a>: a bulleted list of text blurbs and/or photos that fits the length and depth of a normal blog article. Additionally, BuzzFeed was one of the first news sources to use non-neutral headlines that deliberately invoke a reaction in the reader which then subsequently tempts them to click on the article in an attempt to promote virality. These &ldquo;<a href="http://en.wikipedia.org/wiki/Clickbait">clickbait</a>&rdquo; and &ldquo;<a href="http://mashable.com/2013/07/12/linkbait-content-marketing/">linkbait</a>&rdquo; techniques have been responsible for BuzzFeed receiving <a href="http://www.nytimes.com/2014/08/11/technology/a-move-to-go-beyond-lists-for-content-at-buzzfeed.html">$50 million in venture capital</a>, and has spawned entire startups and job positions designed solely to emulate BuzzFeed&rsquo;s success.</p>
+
+<p>I decided to determine which phrases in BuzzFeed headlines are the most successful in order to see if it&rsquo;s possible to reverse-engineer BuzzFeed&rsquo;s business model. Therefore, I scraped BuzzFeed&rsquo;s website (<a href="http://minimaxir.com/2014/09/buzzscrape/">after initial frustration</a>) and obtained 60,378 distinct articles and the corresponding number of Facebook Shares for each article. From there, I decomposed each headline into its <a href="http://en.wikipedia.org/wiki/N-gram">component n-grams</a>, allowing me to perform quantitative analysis for each possible permutation of words in the article titles. You probably don&rsquo;t know that the 3 most interesting things I found will blow your mind.</p>
+
+<h1>The Rise of the Listicle</h1>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_listicle.png"  ></p>
+
+<p>Listicles almost always begin with a numeral as the first or second word. Out of the 60,378 articles I obtained, 26% of them (15,656 articles) are listicles. BuzzFeed clearly believes they are successful, as the proportion of listicles to normal articles has increased over the years.</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-listicle-proportions.png"  ></p>
+
+<p>Listicles can be of any size. The distibution of listicle sizes is centered at the median of 19 entries.</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-listicle-histogram.png"  ></p>
+
+<p>Surprisingly, there is a positive correlation between listicle size and the number of Facebook shares it receives: A 30-size listicle receives many-multiples of shares more than 10-size listicles. (note the logarithmic scale for FB Shares)</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-listicle-scatterplot.png"  ></p>
+
+<p>BuzzFeed has many different types of listicles to appeal to a wide crowd, including <em>[X] reasons</em>, <em>[X] books</em>, <em>[X] movies</em>, etc, where <em>[X]</em> is any 1 or 2-digit numeral. However, BuzzFeed&rsquo;s go-to listicle phrase has changed over the years. Here are the most-used listicle phrases for each month since 2012:</p>
+
+<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=1424838564&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
+<p>In 2012 and 2013, BuzzFeed&rsquo;s listicles began with <em>the [X]</em>; in 2014, BuzzFeed&rsquo;s most-used listicles began with <em>[X] things</em>. The &ldquo;the&rdquo; is technically redundant; perhaps BuzzFeed decided to make the listicle schema cleaner and <em>less</em> formal. It may be possible that <em>[X] things</em> performs better on average than <em>the [X]</em>.</p>
+
+<p>Which types of listicles are the most successful on Facebook? Which types of listicles receive the most amount of Facebook shares?</p>
+
+<p>Here&rsquo;s a chart of of the Top 30 types of listicles by the number of Facebook shares those articles have received on average (with a minimum of 50 articles of that listicle type):</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-shares-listicles.png"  ></p>
+
+<p>A few notes on the chart: the gray bars on each average bar represent a <strong>95% confidence interval</strong> for the true value of each average, where the confidence interval is obtained through 10,000 iterations of <a href="http://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29">bootstrap resampling</a>. The dashed vertical line represents the <strong>population average</strong> of all distinct BuzzFeed articles, at 6,657 Facebook shares, and helps visualize the relative impact of having these words in the title compared to a normal BuzzFeed article.</p>
+
+<p>The most-posted listicle types mentioned above are <em>not</em> the types of listicles are most shared, however <em>[X] things</em> does indeed perform slightly better than <em>the [X]</em> on average. Emotional words, such as <em>insanely</em>, <em>awesome</em>, and <em>probably</em>, which you would never see in a more serious journalistic publication, are some of the key drivers of shares.</p>
+
+<p>Let&rsquo;s look into these keywords more to see if there are any other trends.</p>
+
+<h1>Key Keywords</h1>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_1gram.jpg"  ></p>
+
+<p>Specific keywords may be more informative. Here&rsquo;s the most popular keywords over time, ignoring common <a href="http://en.wikipedia.org/wiki/Stop_words">stop words</a> and listicle words:</p>
+
+<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=1106341985&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
+<p>Like most journalistic news sources, BuzzFeed tends to write more frequently toward then-current events. 2012 for example had many articles about the 2012 election, while April 2013 consisted of many articles about the Boston Marathon bombings.</p>
+
+<p>Which keywords encouraged the most Facebook shares on average?</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-shares-1gram.png"  ></p>
+
+<p>There&rsquo;s a more uncertainty in the accuracy of the average on keywords, especially with the #1 word, <em>career</em>. There&rsquo;s a strong focus on nostalgia, with <em>toys</em>, <em>childhood</em>, and <em>80s</em>. Certain brands (<em>potter</em> and <em>disney</em>) fit the nostalgia too.</p>
+
+<p>High words with a relatively small confidence interval and <em>which</em> and <em>character</em>. These are likely caused by <a href="http://www.buzzfeed.com/quizzes">BuzzFeed&rsquo;s quizzes</a>, which have been incredibly popular. Analyzing full phrases is necessary to get a bigger picture.</p>
+
+<h1>3-Word Phrases</h1>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_3gram.png"  ></p>
+
+<p>After careful analysis, I found that 3-word phrases (trigrams) provided more helpful information than phrases of other lengths. Over time, there are similarities with the popular phrases; they both relate to then-current event and occasionally contain listicles.</p>
+
+<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=249061324&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+
+<p>The average shares of articles based on phrases in their titles, however, tell the full story.</p>
+
+<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-shares-3gram-v2.png"  ></p>
+
+<p>Now we can clearly see some the infamous phrases traditionally associated with clickbait.</p>
+
+<p>Indeed, <em>character are you</em>, a frequent phrase in quizzes, is what leads to the most virality. (It&rsquo;s worth nothing that these perform 3-4 times better than the best listicles on average). Likewise, you may notice a few phrases are redundant and subset of a bigger phrase (e.g. <em>things you probably</em>, <em>you probably don&rsquo;t</em>, <em>probably don&rsquo;t know</em>), but since the averages FB shares aren&rsquo;t identical, it&rsquo;s not a perfect subset, and therefore the average is relevant. There&rsquo;s also a frequent appeal to <em>you</em>, the reader, with <em>you/your/you&rsquo;re</em> appearing in about half of the top phrases.</p>
+
+<p>Does clickbait work? Of course it does. Granted, there has been a lot of disenchantment with the rise of clickbait; that&rsquo;s why the parody Twitter account <a href="https://twitter.com/SavedYouAClick">@SavedYouAClick</a> was created and hit 182K followers in months. It&rsquo;s also the reason why <a href="http://newsroom.fb.com/news/2014/08/news-feed-fyi-click-baiting/">Facebook will now be punishing clickbait</a> and making them less public in a user&rsquo;s news feed, which will definitely hurt BuzzFeed. That&rsquo;s likely one of the reasons why they are pivoting to quizzes and video content instead.</p>
+
+<p>I don&rsquo;t expect clickbait to disappear anytime soon; it&rsquo;s easy and provides a good return-on-investment, both of which are important to scrappy websites trying to market on social media. Or things could come full-circle and <a href="http://www.buzzfeed.com/tomphillips/photos-that-prove-game-of-thrones-happened-in-real-life">BuzzFeed could publish clickbait about making the best clickbait</a>.</p>
+
+<hr />
+
+<p><em>You can view and download all the BuzzFeed article data and metadata <a href="https://docs.google.com/spreadsheets/d/1WSx45rT4jZfysmZfzJtjaPO7AxW4XMaJYaCUd5HB2ns/edit?usp=sharing">in this Google Sheet</a>.</em></p>
+
+<p><em>All graphics were generated using <a href="http://www.r-project.org/">R</a>. The charts were created using <a href="http://ggplot2.org/">ggplot2</a> and the word clouds were created using the <a href="http://cran.r-project.org/web/packages/wordcloud/index.html">wordcloud</a> package.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Locating All the Christmas Trees on Instagram]]></title>
+    <link href="http://minimaxir.com/2015/01/tree-time/"/>
+    <updated>2015-01-01T09:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/01/tree-time</id>
+    <content type="html"><![CDATA[<p>Everyone enjoys taking photos of their Christmas trees, usually at their own home of their relatives. <a href="http://instagram.com/">Instagram</a> allows users to quickly upload any photo and share it socially to the world. On Christmas Eve, privacy author Tommy Collison <a href="http://www.tommycollison.com/blog/2014/12/24/christmas-geotagging">published a warning about this behavior</a>, noting that if a user tags a photo with #tree to tag their Christmas tree, for example, <em>anyone</em> will be able to see it, and if the user attached their location to the photo, anyone could theoretically find where they live.</p>
+
+<p>How practical is this concern? Instagram <a href="http://instagram.com/developer/">offers an API</a> of all recent photos for a given #tag so developers can download pictures and their corresponding metadata, such as geolocation, in bulk. (Up to <em>165,000</em> Instagram images can be processed per hour!)</p>
+
+<p>I downloaded <em>hundreds of thousands</em> of #tree images and found 25,432 images which were taken on Christmas, have a #tree, and, most importantly, contain location data where the photo was taken. From that, I created an <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">interactive map</a> showing the location of all these images worldwide using <a href="https://support.google.com/fusiontables/answer/2571232?hl=en">Google Fusion Tables</a>. You can click-and-drag to move the map all over the world, and you can click on a marker on the map to see the Instagram image taken at that location! (note that if you&rsquo;re on a mobile device, the embedded map may work better on a desktop browser)</p>
+
+<iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col8+from+1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL&amp;viz=MAP&amp;h=false&amp;lat=50.13422309020635&amp;lng=-46.22345629918755&amp;t=1&amp;z=3&amp;l=col8&amp;y=2&amp;tmplt=3&amp;hml=TWO_COL_LAT_LNG"></iframe>
+
+
+<p>I found a few interesting things while playing with this map.</p>
+
+<h1><i class="fa fa-tree"></i> Christmas Trees in the USA</h1>
+
+<p>A downside of the interactive map is that quantifying the relative number of photos between dense areas (e.g. cities) can be misleading as the opaque markers overlap. Here is a static map of all of the Instagram photos in the United States, with each translucent point representing an image:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/instagram_treemap_state.png"  ></p>
+
+<p>The number of photos is densest near the large cities, which is what you would expect.</p>
+
+<p>A way to calculate the relative proportion of the number of #tree photos between states is to use a type of chart known as a <a href="http://en.wikipedia.org/wiki/Treemapping">treemap</a> (pun <em>very</em> much intended).</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/treemap-state.png"  ></p>
+
+<p>In this treemap, the relative area of each block corresponds to the number of photos taken in the state; therefore, the combination of all the blocks represents 100% of the #tree photos taken in the USA. If two blocks are the same size (e.g. New York and Florida), then they have the same number of #tree photos.</p>
+
+<p>As you may have noticed from these two charts, these data represented by these two charts is approximately the same as the <a href="http://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population">population density in the United States</a>. Although this touches on the <a href="http://xkcd.com/1138/">infamous statistical problem</a> of heat maps resembling population maps, in this case, it&rsquo;s what would be expected.</p>
+
+<p>Looking at all the #tree photos in the world may tell a different story.</p>
+
+<h1><i class="fa fa-globe"></i> Christmas Trees in the World</h1>
+
+<p>Christmas is a holiday for only one religion with a <a href="http://en.wikipedia.org/wiki/Christianity_by_country">low presence in Asia and northern Africa</a>, so it would be expected that the locations of Christmas trees worldwide do <em>not</em> correlate with population, which makes the analysis more interesting.</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/instagram_world_map.png"  ></p>
+
+<p>The prevalence of Christmas trees is most prominent in the United States and Europe, with relatively few in Asia, where the majority of the world&rsquo;s population is located. Italy has Christmas trees <em>uniformly</em> throughout the entire country, which is an interesting behavior.</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/treemap-world.png"  ></p>
+
+<p>The treemap confirms that Asian and African countries like China, India, and Nigeria do not have as many Christmas trees than <a href="http://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">what their large populations would suggest</a>. Italy, however has a <a href="http://en.wikipedia.org/wiki/Demographics_of_Italy">population of 60 million</a> (the same as the United Kingdom) which is about 1/5th of the population of United States; the fact that Italy has more than half of the number of Christmas Trees than the United States is very unusual and should be questioned.</p>
+
+<p>Italy <em>may</em> have a high number of Christmas trees since Vatican City is the seat of the papacy, but perhaps data <em>itself</em> should be questioned too.</p>
+
+<h1><i class="fa fa-thumbs-o-up"></i> &ldquo;Christmas Trees&rdquo; in the World</h1>
+
+<p>If you check the photos in Italy, you many notice that many of them have a photo caption similar to this one:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/christmas_tagsforlikes.png"  ></p>
+
+<p>There&rsquo;s obviously no Christmas tree in that photo. But there are a <em>lot</em> of tags.</p>
+
+<p>Many Instagram photos use a service called <a href="http://www.tagsforlikes.com/">TagsForLikes</a>, which complies a list of popular hashtags that other users are able to see. Users can then then copy/paste them into the photo caption to spam hashtags increase the photo exposure, which, as I&rsquo;ve shown <a href="http://minimaxir.com/2014/03/hashtag-tag/">in a previous blog post</a>, does in fact increase the number of Likes the photo receives from other users.</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/tags4likes.png"  ></p>
+
+<p>Notice a resemblance between this list and the photo caption?</p>
+
+<p>Fortunately, all the TagsForLikes hashtag lists contain #TagsForLikes as a branding trick, which makes such photos extremely easy to detect. Here&rsquo;s what the world map looks like if all the potentially spam photos were colored red:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/instagram_world_spamnonspam.png"  ></p>
+
+<p>Italy looks a <em>lot</em> different now! There is red in other counties, but it&rsquo;s not easily visible at a glance.</p>
+
+<p>The treemap of photos, when seperated between spam and non-spam photos, tells the full story:</p>
+
+<p><img src="http://minimaxir.com/img/tree-time/treemap-spam-nonspam.png"  ></p>
+
+<p>About 20% of all the #tree photos are spam photos, and about half of those were taken by people in Italy. As a result, Italy has <em>more spam #tree photos than nonspam #tree photos!</em> This is an interesting cultural phenomenon that I have no guesses as to why it occurs. All other countries have significantly smaller numbers of spam photos relatively non-spam photos.</p>
+
+<p>For non-spam photos, the number of #tree photos in Italy now matches the number of non-spam photos in the UK, which correlates with their populations, making the removal of spam photos a sane move.</p>
+
+<p>Is it possible to track people in their homes via Instagram tags? Definitely. If you do care privacy and your Instagram account is not set to Private, I recommend not geotagging your photos. If you&rsquo;re interested in looking at such photos,  ensure that the the tag is relevant for the given photo.</p>
+
+<hr />
+
+<p><em>All graphics were generated using R. The maps were created using <a href="http://ggplot2.org/">ggplot2</a> and the world map provided with the <a href="http://cran.r-project.org/web/packages/rworldxtra/index.html">rworldxtra</a> package. The treemaps were created using the <a href="http://cran.r-project.org/web/packages/treemap/index.html">treemap</a> package.</em></p>
+
+<p><em>The source data is included with a seperate tab in Google Fusion Tables <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">along with the interactive map</a>.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Statistical Analysis of 142 Million Reddit Submissions]]></title>
+    <link href="http://minimaxir.com/2014/12/reddit-statistics/"/>
+    <updated>2014-12-16T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/12/reddit-statistics</id>
+    <content type="html"><![CDATA[<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_logo.jpg"  ></p>
+
+<p>Reddit, the &ldquo;front page of the Internet&rdquo;, is well-deserving of that title. Founded in 2005 for the more tech-savvy crowd, <a href="http://reddit.com">Reddit</a> is a news aggregator where users can submit links to interesting websites and other media, and form communities on specific interests which are known as &ldquo;subreddits.&rdquo; Since 2008, its popularity has grown exponentially.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/all_cumsub_reddit.png"  ></p>
+
+<p>More impressively, the number of new submissions each month to Reddit increases, with slight declines offset by large gains in the next month.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/growth_rate_reddit.png"  ></p>
+
+<p>Although Reddit first launched in 2005, it didn&rsquo;t hit mainstream until much later. At first, Reddit was at peace. But everything changed when the Digg Nation attacked.  <a href="http://digg.com/">Digg</a>, which was the leading news aggregator at the time, <a href="http://www.wired.com/2010/03/digg-redesign-social-web/">announced a redesign in March 2010</a> which rolled out that summer. The redesign was profit-maximizing, which massively irritated Digg&rsquo;s userbase. The majority of these users ended up flocking to Reddit, drastically changing its userbase and affecting Reddit&rsquo;s submissions as a whole. As a result, it&rsquo;s required to look at Reddit&rsquo;s entire history if possible when analyzing any statistical analysis of it. (although, as a warning, <a href="http://en.wikipedia.org/wiki/Correlation_does_not_imply_causation">correlation does not imply causation</a>).</p>
+
+<p>I, <a href="http://www.reddit.com/user/minimaxir">/u/minimaxir</a>, have personally been a redditor for 3 years. I&rsquo;ve previously done statistical analyses of Reddit data before, such as looking at which <a href="http://minimaxir.com/2013/11/subreddit-size/">subreddits are the largest</a> or determining which sites on Reddit are <a href="http://minimaxir.com/2013/09/reddit-imgur-youtube/">the most-frequently submitted</a>, but those were written with incomplete data. Thanks to <a href="http://redditanalytics.com">Reddit Analytics</a>, I have obtained a data dump and I subsequently constructed a database to store all Reddit Submissions from November 2007 to the end of October 2014: 142,159,793 submissions in total. And this data is very curious and very, <em>very</em> memetic.</p>
+
+<h1><i class="fa fa-reddit"></i> A Quick Glance At Reddit</h1>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_sample.png"  ></p>
+
+<p>Reddit ranks submissions through a combination of upvotes from users, downvotes, and age of submission. The average score of a submission, which is the number of upvotes minus the number of downvotes, has changed throughout the years.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/all_score_reddit.png"  ></p>
+
+<p>The average score of a submission was relatively constant until the Digg announcement, then it started to increase, as the number of potential upvoters for a submission also increased. Interestingly the score, has decreased in recent months; it is entirely possible that the average is decreasing due to an increase in low-scoring posts.</p>
+
+<p>Let&rsquo;s look at the average scores of Top 100 subreddits by submission volume to see which are the most well-received.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/top_score_reddit.png"  ></p>
+
+<p><em><strong>Note</strong>: The shaded areas in charts for this article represent 95% percent confidence intervals for the true average of a given month/subreddit. Since there is a </em>lot<em> of submission data, the confidence intervals are usually incredibly narrow.</em></p>
+
+<p>Image subreddits, such as <a href="http://reddit.com/r/gifs">/r/gifs</a>, <a href="http://reddit.com/r/cringepics">/r/cringepics</a>, and <a href="http://reddit.com/r/reactiongifs">/r/reactiongifs</a> are clearly the most well-received on Reddit. (I plan to do a more in-depth analysis of this behavior in another blog post).</p>
+
+<p>Users can also leave comments on submissions to add insight and jokes. How has the Digg announcement affected the number of comments?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/all_comments_reddit.png"  ></p>
+
+<p>As it turns out, there&rsquo;s a <em>very</em> significant change in the average number of comments pre and post-Digg announcement. From April 2010 to August 2010, the average number of comments increased from 4.79 to 7.91, nearly doubling the number of comments in less than half a year.</p>
+
+<p>Many top subreddits encourage more discussion than others.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/top_comments_reddit.png"  ></p>
+
+<p><a href="http://reddit.com/r/IAmA">/r/IAmA</a> is Reddit&rsquo;s flagship subreddit (which <a href="http://www.redditblog.com/2014/09/announcing-official-reddit-ama-app_2.html">has its own official app</a>!), where users can ask questions to noteworthy people: it&rsquo;s not surprising to see it far at the top. Sports and video games are the top topics for discussion on Reddit.</p>
+
+<h1><i class="fa fa-comments"></i> reddit.self</h1>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_self.png"  ></p>
+
+<p>An alternate form on Reddit is the self-post, where the user submits text instead of a link to an external website or image. These posts are used to make announcements and encourage discussion on a specific topic. Some large subreddits have even switched to &ldquo;self-post only&rdquo; mode.</p>
+
+<p>The popularity of self-posts has risen significantly over the year, and new submissions of self-posts now account for nearly half of all the new submissions on Reddit! (45.3% in October 2014)</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/self_proportion_reddit.png"  ></p>
+
+<p>In theory, self-posts make subreddits contain higher-quality content. How do the scores of self-posts compare to that of normal posts?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/self_score_reddit.png"  ></p>
+
+<p>Before the Digg announcement, self-submissions were more noteworthy than regular submissions. Afterwards, self submissions receive about &frac14;th of the score of a normal submission on average. This is likely related to the substantial increase in self posts seen above: the rise of self-posts also leads to a rise in low-quality self-posts, which will reduce the average.</p>
+
+<p>But have the self-posts succeeded in encouraging more discussion on posts?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/self_comments_reddit.png"  ></p>
+
+<p>Yes. They have. Despite having &frac14;th of the score, self-submissions receive about twice as many comments on average.</p>
+
+<h1><i class="fa fa-ban"></i> Not Safe For Procrastinating At Work</h1>
+
+<p><em>[Sample image omitted for obvious reasons.]</em></p>
+
+<p>Reddit has received an infamous reputation for being the internet&rsquo;s primary source of Not Safe for Work (NSFW) images and links with an age limit of 18+. Not all of the content is sexual; occasionally, shockingly violent yet important images are submitted to the primary subreddits as well.</p>
+
+<p>The proportion of new NSFW content submitted to Reddit each month has increased gradually over the years, but it&rsquo;s still in the minority of submissions. (7.5% of all submissions in October 2014)</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/nsfw_proportion_reddit.png"  ></p>
+
+<p>If the proportion of NSFW content is relatively low, then how has it achieved such a reputation? How well does NSFW content score relative to non-NSFW content?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/nsfw_score_reddit.png"  ></p>
+
+<p>NSFW content scores are nearly double that of non-NSFW content. Higher community approval of sexual content as opposed to nonsexual content isn&rsquo;t too surprising.</p>
+
+<p>Reddit&rsquo;s community operates on pseudonyms instead of tying users to a real identity. Do users comment on NSFW submissions as often as normal submissions?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/nsfw_comments_reddit.png"  ></p>
+
+<p>The number of comments on NSFW submissions is only slightly less than that on average, but there&rsquo;s a larger amount of uncertainty for that particular average due to the smaller proportion. Most internet users are lurkers and not contributors; it&rsquo;s likely that NSFW media is a more noninteractive experience. (<em>ahem</em>)</p>
+
+<h1><i class="fa fa-globe"></i> Reddit In The City</h1>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_sf.png"  ></p>
+
+<p>Reddit users visit the site from all over the world. Although we cannot determine the location from where a user makes a submission, we can look at subreddits whose primary focus is a given location to see if there are any geographic trends.</p>
+
+<p>I took a list of the <a href="http://www.reddit.com/comments/joqru/a_list_of_the_most_popular_city_reddits/">most popular city subreddits</a>, such as <a href="http://reddit.com/r/toronto">/r/toronto</a> and <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a> and compared the average score of their submissions.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/city_score_reddit.png"  ></p>
+
+<p><a href="http://reddit.com/r/Seattle">/r/Seattle</a> has an unusually high average score of 24.7 per submission and <a href="http://reddit.com/r/montreal">/r/montreal</a> has an unusually low average score of 10.7. There does not be any clear geographic trends in the data: <a href="http://reddit.com/r/losangeles">/r/losangeles</a> and <a href="http://reddit.com/r/bayarea">/r/bayarea</a> are at the top but <a href="http://reddit.com/r/sandiego">/r/sandiego</a> is at the bottom, plus <a href="http://reddit.com/r/Dallas">/r/Dallas</a> and <a href="http://reddit.com/r/Austin">/r/Austin</a> are on the opposite areas of the chart too. As a Pennsylvania native, I find it funny that <a href="http://reddit.com/r/pittsburgh">/r/pittsburgh</a> and <a href="http://reddit.com/r/philadelphia">/r/philadelphia</a> are next to each other.</p>
+
+<p>Are the average number of comments affected by geography?</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/city_comments_reddit.png"  ></p>
+
+<p>There are a few more parings here than with average scores: <a href="http://reddit.com/r/montreal">/r/montreal</a>  and <a href="http://reddit.com/r/toronto">/r/toronto</a> are paired as non-US cities, <a href="http://reddit.com/r/Portland">/r/Portland</a> and <a href="http://reddit.com/r/Seattle">/r/Seattle</a> are paired as West Coast cities, <a href="http://reddit.com/r/Austin">/r/Austin</a> and <a href="http://reddit.com/r/houston">/r/houston</a> are paired as Texas cities, and all of <a href="http://reddit.com/r/bayarea">/r/bayarea</a>, <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a>, and <a href="http://reddit.com/r/sandiego">/r/sandiego</a> are paired as California cities. It&rsquo;s still not a perfect relationship, however.</p>
+
+<h1><i class="fa fa-meh-o"></i> Positivity and Negativity</h1>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_neg.png"  ></p>
+
+<p>Reddit also has a reputation of being both positive and negative. You have communities like <a href="http://www.reddit.com/r/aww">/r/aww</a> which share cute cat photos, and then you have communities like <a href="http://www.reddit.com/r/conspiracy">/r/conspiracy</a> which&hellip;don&rsquo;t.</p>
+
+<p>I took the top 100 subreddits by # of all-time submissions and found which ones were the most positive and negative. This was calculated by comparing each word of the submission title against a lexicon of positive/negative words, and count the number of review words in the lexicon. In this case, I use the lexicons compiled by <a href="http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">UIC professor Bing Liu</a>. A normalized positivity/negativity score is calculated by taking the average number of positive/negative words for the subreddit and dividing it by the average number of words in titles for submissions to the subreddit.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/all_sentiment_reddit.png"  ></p>
+
+<p>Both positivity and negativity have been pretty equal for Reddit&rsquo;s entirety, but that doesn&rsquo;t mean that Reddit is neutral.</p>
+
+<p>Let&rsquo;s look at the most positive of the top Reddit communities:</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_subreddit_positivity.png"  ></p>
+
+<p>The top communities are the communities which rely on community and general good feelings (this includes /r/nsfw, <em>ahem</em>). <a href="http://www.reddit.com/r/cookingrecipesstuff">/r/CookingRecipesStuff</a> has the greatest positivity because it&rsquo;s apparently run by a spammer who sent enough submissions to become one the Top 100 subreddits by trying to abuse Reddit for <a href="http://en.wikipedia.org/wiki/Backlink">SEO backlinks</a>.</p>
+
+<p>Huh, that wasn&rsquo;t expected.</p>
+
+<p>The most negative subreddits are more intuitive.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-statistics/reddit_subreddit_negativity.png"  ></p>
+
+<p><a href="http://www.reddit.com/r/fffffffuuuuuuuuuuuu">/r/fffffffuuuuuuuuuuuu</a> and <a href="http://www.reddit.com/r/offmychest">/r/offmychest</a> were subreddits designed for ranting so negativity is expected. Many news subreddits have a high negativity (and comparatively little positivity). The presence of <a href="http://www.reddit.com/r/Health">/r/Health</a> and <a href="http://www.reddit.com/r/techsupport">/r/techsupport</a> as negative subreddits is appropriate.</p>
+
+<p>This article is only <em>scratching the surface</em> of the information contained in Reddit&rsquo;s history, and I hope to explore more in the future. The Digg redesign announcement is only one of many events in Reddit&rsquo;s history, and there are still other aspects of self posts, NSFW submissions, and city subreddits that make me want to take a closer look. Reddit has been a primary source for images and video which go viral around the web, and unlocking that information may just help understand <em>how</em> things go viral.</p>
+
+<hr />
+
+<ul>
+<li><em>All charts were made using 100% <a href="http://www.r-project.org/">R</a> and <a href="http://docs.ggplot2.org/current/">ggplot2</a>, with extensive theme customization/hacks for the latter. No external photo-editing software used at all.</em></li>
+<li><em>You can access a copy of the data used to make most of the charts <a href="https://docs.google.com/spreadsheets/d/1qfyOdEP3NDnb6MEoUqiEK88Uv4X4tfkSfVqynylVGaE/edit?usp=sharing">in this Google Sheet</a>.</em></li>
+<li><em>Thanks to <a href="http://reddit.com/r/theoryofreddit">/r/TheoryOfReddit</a> for <a href="http://www.reddit.com/r/TheoryOfReddit/comments/2p0dc2/i_have_a_database_of_all_reddit_submissions_what/">giving me ideas</a> for interesting quantitative analyses of Reddit data.</em></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Quality, Popularity, and Negativity of 5.6 Million Hacker News Comments]]></title>
+    <link href="http://minimaxir.com/2014/10/hn-comments-about-comments/"/>
+    <updated>2014-10-06T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2014/10/hn-comments-about-comments</id>
+    <content type="html"><![CDATA[<p>Last February, I <a href="http://minimaxir.com/2014/02/hacking-hacker-news/">published an article</a> about <a href="https://news.ycombinator.com/">Hacker News</a>, a tech-oriented link aggregator run by startup accelerator <a href="http://www.ycombinator.com/">Y Combinator</a>. In that post, I analyzed all submissions to date, and noted that the site has a strong and active userbase.</p>
+
+<p>In recent months, however, Hacker News has undergone criticism. A blog post by Danilo Campos titled &ldquo;<a href="http://danilocampos.com/2014/09/y-combinator-and-the-negative-externalities-of-hacker-news/">Y Combinator and the negative externalities of Hacker News</a>&rdquo;, notes that although Hacker News is a critical resource for young male techies based in Silicon Valley (<em>Disclosure: I am a young male techie based in Silicon Valley</em>), this has the consequence of excluding female hackers. Campos has even created a <a href="https://twitter.com/search?f=realtime&amp;q=%23hnwatch&amp;src=typd">#HNwatch</a> hashtag to catalog sexist and insensitive comments made by Hacker News users. As a long-time <a href="https://news.ycombinator.com/user?id=minimaxir">user on Hacker News</a>, I unfortunately <a href="https://twitter.com/minimaxir/status/468080907925340160">agree with this assessment</a> at times.</p>
+
+<p>In fairness, such comments are in the minority on Hacker News. Or are they?</p>
+
+<p>In order to better assess the quality, popularity, and negativity of Hacker News comments over the years, I&rsquo;ve downloaded 5,592,362 comments from Hacker News, the maximum number of comments possible, from its beginnings in 2006 to October 2014. Hopefully, these comments will answer whether Hacker News is experiencing a rise in quality, or if the complaints levied against HN are valid.</p>
+
+<p>Here&rsquo;s a <a href="https://docs.google.com/spreadsheets/d/1ZwonVX_KlDYhuhPnAAnVpdVRgu4LxldP74-c_kvOd5k/edit?usp=sharing">glance at Hacker News&rsquo;s best comments</a>, determined by the number of upvotes it receives from the Hacker News community, for each month since 2006:</p>
+
+<div><iframe width="100%" height="400px" src="https://docs.google.com/spreadsheets/d/1ZwonVX_KlDYhuhPnAAnVpdVRgu4LxldP74-c_kvOd5k/pubhtml?widget=true&amp;headers=false"></iframe></div>
+
+
+<p>There are interesting trends in this sample data set. The types of comments that became popular in 2006-2008 Hacker News were one-line quips, akin to those you would see in the comments on modern Reddit (which is a topic for another blog post). Highly-voted comments often come from the same people, especially those from Paul Graham (pg), Founder and then-President of Y Combinator.</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/early_reddit.png"  ></p>
+
+<p>This may indicate a bias or <a href="http://en.wikipedia.org/wiki/Halo_effect">halo effect</a> where the commenter is more impactful than the comment itself. Additionally, some comments received many upvotes due to context: the top comment in December 2010 was simply &ldquo;sad.&rdquo; in a thread about <a href="https://news.ycombinator.com/item?id=2013248">Yahoo Shutting Down Delicious</a>, but the comment was made by Joshua Schachter (joshu), the creator of Delicious.</p>
+
+<p>Compare those older comments to those made between 2012-2014. Those comments are very long, insightful, and made by many different people. (including a <a href="https://news.ycombinator.com/item?id=4689643">comment by Danilo Campos himself</a> in October 2012)</p>
+
+<p>However, these are the good comments. The bad comments are <em>especially</em> bad.</p>
+
+<p>Here are a <a href="https://docs.google.com/spreadsheets/d/1IfbSDYVBXiHZCuMdHXgprhmeCVc4XDtOGizF9CSGyUo/edit?usp=sharing">set of Hacker News&rsquo;s worst comments</a> from each month where the comment has received a score of -3 or -4, the lowest score before the comment is automatically killed. (<em>Warning: comments may cause you to lose faith in humanity and/or be unintentionally hilarious</em>)</p>
+
+<div><iframe width="100%" height="400px" src="https://docs.google.com/spreadsheets/d/1IfbSDYVBXiHZCuMdHXgprhmeCVc4XDtOGizF9CSGyUo/pubhtml?widget=true&amp;headers=false"></iframe></div>
+
+
+<p>The types of bad comments haven&rsquo;t changed over the years. Hostile comments are immediately downvoted. It&rsquo;s worth noting that on Hacker News, you can be downvoted for being factually wrong.</p>
+
+<p>Some users are more active commenters than others. Out of Hacker News&rsquo;s 176,692 users who have made atleast 1 comment, only 48% of those commenters end up leaving two more comments, and only 6% of HN users end up leaving 100 or more comments total.</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/n-comments.png"  ></p>
+
+<p>However, as users comment more on Hacker News and learn the intricacies of HN&rsquo;s culture, they become more skilled at creating quality comments which receive higher scores, which serve as an indicator of quality. As Hacker News users comment more and more, the average expected comment score for each successive post increases.</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/n-comments-practice.png"  ></p>
+
+<p><em>(The faded area for all charts in this article represents a 95% confidence interval for the average at a given point; all of the confidence intervals are very narrow due to the sheer quantity of data present. Whoo, big data!)</em></p>
+
+<p>What are the trends behind the Hacker News comments? First, we must see how Hacker News comments has changed over time.</p>
+
+<h1><span><i class="fa fa-calendar"></i></span> Hacking Through The Years</h1>
+
+<p>As one would expect, the number of new comments posted on Hacker News each month has been gradually increasing proportional to its popularity, although the number of new comments per month has decreased starting in 2014, which indicates a slowing growth rate.</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/monthly_total_comments.png"  ></p>
+
+<p>However, has Hacker News retained quality with its increasing notoriety? One way to check is to analyze the average amount of points of the comments. Hacker News comments start out at 1 point, and other users can upvote and downvote comments.</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/monthly_average_points.png"  ></p>
+
+<p>The minimum average points score of any given comment was about 2 points, meaning that all comments received atleast 1 upvote on average. This trend has been increasing until 2011 when it peaked at about 4.5 points. Since then, the average has trended downward, with a particularly large drop starting at 2014.</p>
+
+<p>Therefore, starting in 2014, both quantity <em>and</em> quality are on a downward trend.</p>
+
+<p>Another way to gauge quality is to look at the average comment length. Are comments trending toward short quips, or are longform comments more popular?</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/monthly_average_words.png"  ></p>
+
+<p>The length of the average comment has increased by about 10% over the years, which shows a slight increase in the overall thoughtfulness of HN comments.</p>
+
+<p>Has the average sentiment on Hacker News changed over the years? To gauge the relative sentiment of Hacker News comments, I compared each word of the comment against a lexicon of positive/negative words, and counted the number of review words in the lexicon. In this case, I used the <a href="http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">lexicons compiled by UIC professor Bing Liu</a>. This is the same method used in my <a href="http://minimaxir.com/2014/09/one-star-five-stars/">previous analysis of Yelp reviews</a>, where the technique was very effective. However, unlike Yelp, comments on Hacker News tend to make use of sarcasm, so this method may be less effective. (there isn&rsquo;t any easy method for detecting sarcasm, because who in the entire world would want an easy method for detecting sarcasm?)</p>
+
+<p>From that, we can calculate average positivity and average negativity for a given comment by dividing the number of positive/negative words respectively by the approximate number of words in the comment. Both metrics have converged slightly over the years.</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/monthly_average_positive_negative.png"  ></p>
+
+<p>In September 2014, the average positivity of a comment is <em>3.2%</em>, while the average negativity of a comment is <em>2.3%</em> (leading to a 0.9% net positive sentiment).</p>
+
+<p>The nature of the comments Hacker News has definitely changed since the site&rsquo;s humble beginnings in 2006, but it&rsquo;s hard to determine if it&rsquo;s for the <em>better</em>.</p>
+
+<p>Let&rsquo;s look more into the nature of the upvote system.</p>
+
+<h1><span><i class="fa fa-arrow-up"></i></span> Free Points</h1>
+
+<p>As mentioned, the number of points on a new Hacker News comment starts at 1 point. Anyone can give an upvote, which increases the points value by one. However, long-time HN users can downvote posts, decreasing the score by 1. Downvoting has another effect; comments with 0 or fewer points turn an aesthetically-displeasing gray, in an effort to both hide them from the public eye and encourage corrective upvotes if necessary from users with OCD. In all other cases, the points score of a comment is hidden from other users in order to help prevent bandwagoning and the upvoting of comments just because they have lots of upvotes.</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/distribution_comment_points.png"  ></p>
+
+<p>Over 50% of all comments simply have 1 or 2 points, with the proportion decreasing by a third for each successive point value. What&rsquo;s surprising is how few comments have 0 or fewer points: this shows that HN users do not like downvoting.</p>
+
+<p>I mentioned earlier that comment length could be used a proxy for comment quality. Is there a relationship between the number of points a comment receives and the length of a comment?</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/distribution_comment_points_words.png"  ></p>
+
+<p>Surprisingly, yes! The effect of comment length on the number of points a comment received is likely not solely causal, but the correlation between the two values is helpful. (it is statistically unlikely to receive a lot of upvotes if your comment is short. The inverse is also true; a short comment is much more likely get downvoted.)</p>
+
+<p>Is there a similar correlation between sentiment and the number of points a comment receives?</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/distribution_comment_points_sentiment.png"  ></p>
+
+<p>Nope. Both positivity and negativity are relatively static regardless of point values, although it&rsquo;s worth noting that comments with 0 or fewer points (downvoted comments) have a disproportionately high negativity.</p>
+
+<h1><span><i class="fa fa-ban"></i></span> Tone and Tolerance on Hacker News</h1>
+
+<p>There&rsquo;s a big difference between the language used in a Hacker News comment on a typical submission, and the language used in Hacker News submissions about women and diversity.</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/hn_2_gram_small.jpg"  ></p>
+
+<p>This word cloud consists of bigrams made from 109k comments from HN submissions in September 2014, and from 21k comments in threads whose submission title contains &ldquo;women&rdquo;, &ldquo;female,&rdquo; or &ldquo;diversity.&rdquo; The language in the former is more neutral and about the content of the article (apparently Hacker News users <em>really</em> like to talk about Open Source software), while the submissions about gender and diversity trend to talk about tangent topics.</p>
+
+<p>How does the tone differ between the two groups of articles? Here&rsquo;s the distribution of the average number of positive words in comments per submission in September 2014:</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/density_september_2014_hn.png"  ></p>
+
+<p>The average amount of positive words in a comment made in September 2014 is 2.16 words, and the average amount of negative words is 1.46, with both of those values being close to the respective statistical modes.</p>
+
+<p>Let&rsquo;s compare that to the distribution of comments made on all submissions about women and diversity.</p>
+
+<p><img src="http://minimaxir.com/img/hn-comments/density_women.png"  ></p>
+
+<p>The average amount of positive words in a comment made in thread about gender and diversity is 2.48 words, a little higher than the average, and is also the most frequently occuring value. However, The average amount of positive words in a comment made in thread about gender and diversity is 2.10 words, a much higher increase. The average is to the right of the mode, indicating that the average is skewed-right by submissions with overly-negative comments. This may be why there is a greater perception of negativity for readers of comment threads about women and diversity.</p>
+
+<p>One of the <a href="http://paulgraham.com/hackernews.html">stated goals of Hacker News</a> is to avoid an <a href="http://en.wikipedia.org/wiki/Eternal_September">Eternal September</a>, where the quality of discourse drops and everyone leaves. It&rsquo;s clear that the quality of discourse has changed over the years: comments are longer, but not necessarily better. Positivity has decreased and negativity has increased. The difference between 2006 HN and 2014 HN is stark.</p>
+
+<p>Hacker News isn&rsquo;t the perfect tech news aggregator. The issue of inclusion is real, and despite the fact that sexist comments are in the minority, they need to stop. In 2014, both quantity <em>and</em> quality are decreasing. But since that Y Combinator has <a href="http://blog.ycombinator.com/diversity-and-startups">committed to ending sexism in tech</a> and <a href="http://blog.ycombinator.com/meet-the-people-taking-over-hacker-news">appointed new moderators</a> to control content quality, I&rsquo;m confident that things will improve in the future for Hacker News.</p>
+
+<hr />
+
+<ul>
+<li><em>Data was retrieved from Hacker News using <a href="https://hn.algolia.com/api">the official API</a>. The data was then stored in a PostgreSQL database, mostly so I could take advantage of that database&rsquo;s <a href="http://www.postgresql.org/docs/9.1/static/tutorial-window.html">window functions</a> capability.</em></li>
+<li><em>Charts, word clouds, and other miscellaneous data processing was done using R and ggplot2. Gathering the data from the API and extracting the bigrams for the word clouds was done using Python.</em></li>
+<li><em>You can access the code used to process the data, chart the data, and extract bigrams from the comments in <a href="https://github.com/minimaxir/hacker-news-comment-analysis">this GitHub repository</a>. This does not include the code for retrieving the comments from the Hacker News API and storing it in PostgreSQL: that code will be in a separate repository if released.</em></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Least Effective Method for Blocking Web Scraping of a Website]]></title>
+    <link href="http://minimaxir.com/2014/09/buzzscrape/"/>
+    <updated>2014-09-26T10:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/09/buzzscrape</id>
+    <content type="html"><![CDATA[<p>As someone who typically plays around with data from public website APIs, I figured it would be worthwhile to learn how to get data from websites the old-fashioned way: through force, via web scraping. <a href="http://en.wikipedia.org/wiki/Web_scraping">Web scraping</a> is a technique where the user downloads the raw HTML of a webpage, and parses the inherent structure of the webpage to extract the necessary data.</p>
+
+<p>In order to understand the mechanics behind web scraping, I used a tool from new Y Combinator startup <a href="https://www.kimonolabs.com/">Kimono Labs</a>, which allows the user to click structured elements of any website and quickly create an API that can access all the collected data and convert it into an easy-to-access form. My first target was BuzzFeed, since their social interaction data might be useful in determining how it became so big so quickly, and maybe also determine just how effective those stupid listicles are.</p>
+
+<h1><span><i class="fa fa-terminal"></i></span> Live Free and Scrape Hard</h1>
+
+<p>For example, here&rsquo;s a pair of typical BuzzFeed articles:</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_example.png"  ></p>
+
+<p>And here&rsquo;s the corresponding output of <a href="https://www.kimonolabs.com/apis/1x3l57k0">my Kimono Labs BuzzFeed scraper</a> for those two articles:</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">{
+         &quot;title&quot;: {
+          &quot;text&quot;: &quot;Stop Tweeting Instagram Links&quot;,
+          &quot;href&quot;: &quot;http://www.buzzfeed.com/katienotopoulos/stop-tweeting-instagram-links&quot;
+        },
+        &quot;content&quot;: &quot;I CANNOT REMAIN SILENT ON THIS ISSUE ANY LONGER.&quot;,
+        &quot;author&quot;: &quot;Katie Notopoulos&quot;,
+        &quot;num_responses&quot;: &quot;123&quot;
+      },
+      {
+        &quot;title&quot;: {
+          &quot;text&quot;: &quot;28 Things Your Gchat Availability Status Really Means&quot;,
+          &quot;href&quot;: &quot;http://www.buzzfeed.com/katieheaney/28-things-your-gchat-availability-status-really-means&quot;
+        },
+        &quot;content&quot;: &quot;Let’s chat.&quot;,
+        &quot;author&quot;: &quot;Katie Heaney&quot;,
+        &quot;num_responses&quot;: &quot;13&quot;
+      }
+}</code></pre></div>
+
+
+<p>This data format (<a href="http://en.wikipedia.org/wiki/JSON">JSON</a>) can be processed and manipulated by nearly any modern programming language.</p>
+
+<p>Each BuzzFeed category page has about 22 articles, but the scraper can also access successive pages to retrieve more articles. This works by finding the URL of the next page by deriving the URL from the &ldquo;Older&rdquo; button if present on that page. Then the scraper can find the Older button on the page after that, and so forth, until all pages on BuzzFeed are scraped.</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_page.png"  ></p>
+
+<p>My BuzzFeed scraper, for some reason, only retrieved 10 pages maximum. So I used my QA skills and traced the exact route the scraper took, navigating through all 10 pages by clicking the Older button.</p>
+
+<p>What was on Page #10 shocked me. OMG. I could not believe my eyes.</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_disable.png"  ></p>
+
+<h1><span><i class="fa fa-times-circle-o"></i></span> No Scrape For You</h1>
+
+<p>The Older button is <em>disabled</em> on page 10? <strong>WHY?</strong></p>
+
+<p>BuzzFeed is a website created in the 21st century that <a href="http://www.nytimes.com/2014/08/11/technology/a-move-to-go-beyond-lists-for-content-at-buzzfeed.html?_r=0">just raised $50 million</a>. This is not a peculiar technical limitation due to bad coding or bad infrastructure; this is a deliberate functional aspect of the product.</p>
+
+<p>It is my personal mantra that if a startup has a particularly unintuitive UI/UX behavior, it&rsquo;s a form of &ldquo;growth hacking&rdquo; that my feeble brain cannot comprehend.</p>
+
+<p>Could the reason that BuzzFeed disables access to pages past 10 is that they want to prevent archive browsing, thereby putting more of an emphasis on more recent and more potentially-viral articles? That wouldn&rsquo;t make sense; if a person is so hooked on BuzzFeed articles that they are at Page 10, why stop them? It&rsquo;s still free page views and ad revenue.</p>
+
+<p>It&rsquo;s likely that BuzzFeed has statistics on how many users actually visit article pages up to Page 10. Perhaps their data analysts noted &ldquo;hey, only 0.0027% of our visitors actually read up to Page 10, anyone who actually reads that far is three standard deviations away from normal, therefore they must be a web scraper!&rdquo; and recommend punitive action accordingly.</p>
+
+<p>I noted earlier that it definitely was not a technical limitation that kept pages greater than 10 from being accessed. If you look at the URLs of the BuzzFeed screenshots above, you&rsquo;ll notice a &ldquo;<em>p=2</em>&rdquo; parameter for Page 2 or a &ldquo;<em>p=10</em>&rdquo; parameter for Page 10. What happens if you just change the 10 to a 11?</p>
+
+<p>You go to Page 11. And you can go all the way to page <em>200</em> in some categories.</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_200.png"  ></p>
+
+<p>Incidentally, this is easier and more reliable to implement programmatically than searching for the Older button and extracting the URL.</p>
+
+<p>So the disabling of the button will only stop stupid web scrapers. Yes, that makes my BuzzFeed web scraper a stupid web scraper, <em>but that&rsquo;s not the point!</em> It just makes the BuzzFeed&rsquo;s motive behind disabling the button at Page 10  even more baffling.</p>
+
+<p>What did I do now that my quick-and-dirty BuzzFeed scraper couldn&rsquo;t parse a statistically significant amount of BuzzFeed articles? I did the only logical thing.</p>
+
+<p>I spent a weekend learning how to use <a href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a> in Python and parsed BuzzFeed the hard way, while changing the page number in the URL to pagenate through the pages. And I even was able to add new features to the scraper, such as simultaneously scraping the number of Facebook Shares a given BuzzFeed article generates.</p>
+
+<p><img src="http://minimaxir.com/img/buzzscrape/buzzfeed_listicles.png"  ></p>
+
+<p>Hey, there <em>is</em> a relationship between listicle size and social media engagement!</p>
+]]></content>
+  </entry>
+  
+</feed>

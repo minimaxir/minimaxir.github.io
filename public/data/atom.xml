@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: data | minimaxir | Max Woolf's Blog]]></title>
+  <link href="http://minimaxir.com//data/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2015-08-06T19:47:11-07:00</updated>
+  <id>http://minimaxir.com/</id>
+  <author>
+    <name><![CDATA[Max Woolf]]></name>
+    <email><![CDATA[max@minimaxir.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Scrape Data From Facebook Page Posts for Statistical Analysis]]></title>
+    <link href="http://minimaxir.com/2015/07/facebook-scraper/"/>
+    <updated>2015-07-20T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/07/facebook-scraper</id>
+    <content type="html"><![CDATA[<p>One of the first data scrapers I wrote for the purpose of statistical analysis was a Facebook Graph API scraper, in order to determine <a href="http://minimaxir.com/2013/06/big-social-data/">which words are the most important</a> in a Facebook Page status update. However, the v2.0 update to the Facebook API unsurprisingly broke the scraper.</p>
+
+<p>Now that <a href="https://developers.facebook.com/blog/post/2015/07/08/graph-api-v2.4/">v2.4 of the Graph API is released</a>, I gave the Facebook Graph API another look. Turns out, it&rsquo;s pretty easy to scrape and make into a spreadsheet for easy analysis, although like with any other scrapers, there are a large number of gotchas.</p>
+
+<h1>Feasibility</h1>
+
+<p><img src="/img/facebook-scraper/nyt_sample.png"  ></p>
+
+<p>In order to determine if I can sanely scrape a website, I have to do a bit of research. How much data from a Facebook status update can we actually scrape?</p>
+
+<p>Fortunately, Facebook&rsquo;s <a href="https://developers.facebook.com/docs/graph-api/reference">Graph API documentation</a> is pretty good. We need data from the <a href="https://developers.facebook.com/docs/graph-api/reference/page">/page</a> node, and from there, we can access data from the <a href="https://developers.facebook.com/docs/graph-api/reference/v2.4/page/feed">/feed</a> edge.</p>
+
+<p>Between the two nodes, we have access to <code>id</code>, which is a unique identifer that can be used to create a link back to the update itself (e.g. <a href="https://www.facebook.com/5281959998_10150628170209999">https://www.facebook.com/5281959998_10150628170209999</a>) <code>message</code>, the text of the update; <code>link</code>, the URL which the update is linking; <code>name</code>, the title of the webpage of the link, <code>type</code>, an identifier if the update is text, a photo, or a video; and <code>created_time</code>, when the update is published.</p>
+
+<p>Accessing the numerical counts of <code>likes</code>, <code>comments</code>, and <code>shares</code> is less explicit in the documentation. Fortunately, <a href="http://stackoverflow.com/questions/6984526/facebook-graph-api-get-like-count-on-page-group-photos">StackOverflow</a> has the answer: you need to request <code>likes.limit(1).summary(true)</code> instead of normal <code>likes</code>.</p>
+
+<p>There&rsquo;s no indication that there&rsquo;s a Rate Limit, oddly. Since we can query 100 updates at a time, the scraper will be efficient enough that it&rsquo;s unlikely to hit any extreme API limits.</p>
+
+<p>Now that we know we can get all the relevant data from the sample status update, we can build a Facebook post scraper.</p>
+
+<h1>Data Scrappy</h1>
+
+<p><img src="/img/facebook-scraper/def_test.png"  ></p>
+
+<p><em>I have created an <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/how_to_build_facebook_scraper.ipynb">IPython notebook hosted on GitHub</a> with detailed code, code comments, and sample output for each step of the scraper development. I strongly recommend giving it a look.</em></p>
+
+<p>First, we need to see how to actually access the API. It&rsquo;s no longer a public API, and it requires user authentication via <a href="https://developers.facebook.com/docs/facebook-login/access-tokens">access tokens</a>. Users can get Short-Term tokens, but as their name suggests, they expire quickly, so they are not recommended. The Graph API allows a neat trick; by concatenating the App ID from a user-created App and the App Secret, you create an access token which never expires. Of course, this is a major security risk, so create a separate app for the sole purpose of scraping, and reset your API Secret if it becomes known.</p>
+
+<p>Let&rsquo;s say we want to scrape the New York Times' Facebook page. We would send a request to <a href="https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX">https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX</a> and we would get:</p>
+
+<pre><code>{
+    "id": "5281959998", 
+    "name": "The New York Times"
+}
+</code></pre>
+
+<p>i.e., the page metadata. Sending a request to /nytimes/feed results in what we want:</p>
+
+<pre><code>{
+    "data": [
+        {
+            "created_time": "2015-07-20T01:25:01+0000", 
+            "id": "5281959998_10150628157724999", 
+            "message": "The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth."
+        }, 
+        {
+            "created_time": "2015-07-19T22:55:01+0000", 
+            "id": "5281959998_10150628161129999", 
+            "message": "\"It\u2019s safe to say that federal agencies are not where we want them to be across the board,\" said President Barack Obama's top cybersecurity adviser. \"We clearly need to be moving faster.\""
+        }
+
+        [...]
+}
+</code></pre>
+
+<p>Now we get the post data. But not much of it. In Graph API v2.4, the default behavior is to return very, very little metadata for statuses in order to reduce bandwidth, with the expectation that the user will request the necessary fields.</p>
+
+<p>So let&rsquo;s request <em>all</em> the fields we want. This results in a very long URL not shown here which causes the posts feed to have all the data we need:</p>
+
+<pre><code>{
+    "comments": {
+        [...]
+        }, 
+        "summary": {
+            "order": "ranked", 
+            "total_count": 31
+        }
+    }, 
+    "created_time": "2015-07-20T01:25:01+0000", 
+    "id": "5281959998_10150628157724999", 
+    "likes": {
+        "data": [
+            [...]
+        }, 
+        "summary": {
+            "total_count": 278
+        }
+    }, 
+    "link": "http://nyti.ms/1Jr6LhU", 
+    "message": "The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth.", 
+    "name": "China Molds a Supercity Around Beijing, Promising to Change Lives", 
+    "shares": {
+        "count": 50
+    }, 
+    "type": "link"
+}
+</code></pre>
+
+<h1>Post Processing</h1>
+
+<p>Great! Now we just have to process each post. Which is easier said than done.</p>
+
+<p>If you&rsquo;re an avid Facebook user, you know that not all of these attributes are not guaranteed to exist. Status updates may not have text or links. Since we&rsquo;re making a spreadsheet with an enforced schema, we need to validate that a field exists before attempting to process it.</p>
+
+<p>The &ldquo;\u2019"s in the message correspond to a <a href="http://smartquotesforsmartpeople.com/">smart quote</a> apostrophe. Since this a possibility, along with other unicode characters, the message and link names must be encoded <a href="https://en.wikipedia.org/wiki/UTF-8">in UTF-8</a> to prevent errors.</p>
+
+<p>The time format is another issue. The date follows the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> standard for UTC times. However, most spreadsheet programs will not able to parse it as a Date value. Also, since the NYT is based in the USA (specifically, New York), it may be helpful for time-based statistical analysis to convert the time to Eastern Standard Time while fixing the date format.</p>
+
+<p>There&rsquo;s also an unexpected precaution that must be taken whenever scraping data sets. These APIs do not expect users to be accessing very, very old data. As a result, there&rsquo;s a high probability of the API server actually hitting an error sometime during the scrape, such as a <a href="http://www.checkupdown.com/status/E500.html">HTTP Status 500</a> or <a href="http://www.checkupdown.com/status/E502.html">HTTP Status 502</a>. These server errors are temporary, so a helper function must be used to attempt to retrieve data until it is actually successful.</p>
+
+<h1>Putting it All Together</h1>
+
+<p>Now we have a full plan for scraping, we query each page of Facebook Page Statuses (100 statuses maximum per page), process all statuses on that page and writing the output to a CSV file, and navigate to the next page, and repeat until no more statuses left.</p>
+
+<p>This can be done with a for-loop within a while loop. In addition, I also recommend counting the number of posts processed and taking a timestamp every-so-often to ensure that the program has not stalled.</p>
+
+<p><img src="/img/facebook-scraper/cnnwoo.png"  ></p>
+
+<p>And that&rsquo;s it! You can access the complete scraper in this GitHub repository, along with all other scripts mentioned in this article. Once you have the CSV file, you can import it into nearly every statistical program and have fun with it. <em>(You can download a .zip of the NYTimes data <a href="https://dl.dropboxusercontent.com/u/2017402/nytimes_facebook_statuses.zip">here</a> [4.6MB])</em></p>
+
+<p>Say, for example, what would happen if we compared the Median Likes of the New York Times with a certain other  journalistic website that&rsquo;s the master of social media?</p>
+
+<p><img src="/img/facebook-scraper/nytimes_buzz_fb.png"  ></p>
+
+<p>There may be more practical reasons for analyzing data on Facebook Posts, such as quantifying the growth and success of your own page, or that of your competitors. But the data is easy to get and is very useful.</p>
+
+<p>Although, in fairness, the scraper is not perfect and still has room for improvement. With CNN&rsquo;s Facebook Page post data, for example, somehow the scraper skips all posts from 2013. Although in that case, I blame Facebook.</p>
+
+<hr />
+
+<p><em>You can access all resources used in this blog post at this <a href="https://github.com/minimaxir/facebook-page-post-scraper">GitHub repository</a></em>.</p>
+
+<p><em>If you haven&rsquo;t, I strongly recommend looking at the <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/how_to_build_facebook_scraper.ipynb">IPython Notebook</a> for more detailed coding methodology.</em></p>
+
+<p><em>And, as an experiment, I&rsquo;ve made an <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/fb_page_data_analysis.ipynb">IPython notebook with the R kernel</a> showing how I made the NYT-BuzzFeed chart!</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why Is the Most-Viewed Gaming Video on YouTube About Cars 2?]]></title>
+    <link href="http://minimaxir.com/2015/06/cars-2/"/>
+    <updated>2015-06-15T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/06/cars-2</id>
+    <content type="html"><![CDATA[<p>Last month, <a href="https://www.youtube.com/">YouTube</a>, in celebration of its 10-year anniversary, <a href="http://kotaku.com/the-10-most-popular-games-on-youtube-1704234763">released a report</a> of the Top 10 most-watched video game franchises on YouTube:</p>
+
+<pre><code>1. Minecraft
+2. Grand Theft Auto (series)
+3. League of Legends
+4. Call of Duty (series)
+5. FIFA (series)
+6. Garry’s Mod
+7. The Sims (series)
+8. Five Nights at Freddy’s (series)
+9. Puzzles &amp; Dragons
+10. Dota 2
+</code></pre>
+
+<p>There aren&rsquo;t many surprises on the list. <a href="https://minecraft.net/">Minecraft</a> and <a href="http://na.leagueoflegends.com/">League of Legends</a> have become incredibly huge in such a short time, although <a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy%27s">Five Nights as Freddy&rsquo;s</a> position is impressive given that it started <em>a year ago</em>.</p>
+
+<p>After <a href="http://www.reddit.com/r/dataisbeautiful/comments/38rghg/the_30_mostviewed_youtube_videos_oc/">renewed public interest</a> in YouTube data, I decided to take a poke at the <a href="https://developers.google.com/youtube/">YouTube API</a> to see if I can determine which Gaming videos are the most-viewed. It turns out that the API makes it simple, by allowing you to query on a specific category and sort by the number of views the video has received.</p>
+
+<p><img src="/img/cars-2/youtube_gaming_all.png"  ></p>
+
+<p>There&rsquo;s lots of Minecraft, and even lots of Angry Birds in the top-viewed videos.</p>
+
+<p>&hellip;but why is a mundane Cars 2 video from an unknown video channel the most-viewed video of all time?!</p>
+
+<p>No, this is not an error. <a href="https://www.youtube.com/watch?v=urHuO7Zbhhw">You can watch the video yourself on YouTube</a> and verify the view count.</p>
+
+<h1>Vroom Vroom</h1>
+
+<p><img src="/img/cars-2/Cars_2_Poster.jpg"  ></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Cars_2">Cars 2</a> is a CGI movie about talking cars by Pixar which premiered in June 2011. It is, of course, the sequel to <a href="https://en.wikipedia.org/wiki/Cars_%28film%29">Cars</a>, and received more critical reviews compared to its predecessor.</p>
+
+<p>As with many movies, Cars 2 received a tie-in game, <a href="http://tvtropes.org/pmwiki/pmwiki.php/Main/TheProblemWithLicensedGames">most of which are mediocre</a> due to mandatory deadlines and lower budgets. However, <a href="http://www.gamespot.com/reviews/cars-2-review/1900-6321632/">Gamespot gave the game a 7.5</a> out of 10, which is pretty good for a licensed game. The fact that it&rsquo;s a cart racer like Mario Kart helps too.</p>
+
+<p>It&rsquo;s not Minecraft or League of Legends though. Why would a video about it be the most-viewed gaming video of all time?</p>
+
+<h1>Statistical Shenanigans</h1>
+
+<p>Popular YouTube videos are often suspected of having their viewcounts manipulated, since making videos appear more popular than they actually are can help lead to genuine virality. Could this be the case with the Cars 2 video?</p>
+
+<p>I did a few simple diagnostics of the top 1,000 Gaming videos to determine if the Cars 2 video had an statistically unusual view count.</p>
+
+<p>Modern YouTube videos have a Like/Dislike bar, which counts the number of Likes and Dislikes given by viewers of the video. If someone is rigging the view count, the ratio of Likes+Dislikes to the given viewcount should be much lower than for a genuine video with genuine user reactions.</p>
+
+<p><img src="/img/cars-2/youtube_gaming_interaction.png"  ></p>
+
+<p>However, for all videos with incredibly large view counts, the ratio of Likes+Dislikes to Views is incredibly low. The line represents the predicted mean for a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a>, with the shaded area representing a 95% confidence interval for the mean. The Cars 2 data point falls directly on the line, so we cannot safely say that Cars 2 is an outlier from this diagnostic.</p>
+
+<p>Another aspect to check is the ratio of Likes to Dislikes. If a bad video has a manipulated view count, we would expect much fewer Likes and many more Dislikes because viewers may become mislead by the content, especilaly those with misleading titles/thumbnails. In general, the % of people who Liked a video should be high for all videos.</p>
+
+<p><img src="/img/cars-2/youtube_gaming_like_ratio.png"  ></p>
+
+<p>Almost all of the Top 1,000 gaming videos have Like Ratio greater than 50% (i.e. more Likes than Dislikes). However, the Cars 2 video data point falls outside the 95% confidence interval for the regression model. Therefore, it&rsquo;s worth looking into as a possible outlier.</p>
+
+<h1>Plan B</h1>
+
+<p>On the Statistics tab of all public YouTube videos, you can see the number of views a video has received over time. Here is the daily number of views for the Cars 2 video:</p>
+
+<p><img src="/img/cars-2/cars_daily_views.png"  ></p>
+
+<p>The video was released in August 2011 (about a month after the release of the movie), but the video didn&rsquo;t become viral and spike in views until sometime early 2012, many months later.</p>
+
+<p>I <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/">made a submission</a> to the <a href="http://www.reddit.com/r/Games/">games subreddit on Reddit</a> to see if there was any ideas as to why Cars 2 is at the top. /u/ Sureiyaa <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crypxn5">had a good theory</a>:</p>
+
+<blockquote><p>Remember, this video was posted in August 2011, two months after the movie was released. It&rsquo;s also titled &ldquo;Cars 2 HD xxx xxx&rdquo; and is rather lengthy. It would make sense if people searched for &ldquo;Cars 2&rdquo; or even all of &ldquo;Cars 2 HD&rdquo; and stumbled on this video thinking that someone had uploaded the movie for them to watch, especially when you consider that it was a movie aimed at kids who may not pay attention to everything in the title.</p>
+
+<p>With those initial views, it probably became one of the top results if you searched for Cars 2. With that, it grew from there and is probably getting views from being a high-ranking result when searching for games videos in general.</p></blockquote>
+
+<p>Accidental SEO could explain it. Indeed, the first result on Google for &ldquo;Cars 2 HD&rdquo; is the video in question. Although, in that case, why would the spike happen in 2012? (the DVD/Blu-Ray came out October 2011, so a 2012 spike is late even by lazy movie pirate standards)</p>
+
+<p>Another factor is the fact that that Cars franchise appeals to young children, which are <em>very</em> plentiful. This does bring up a <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/cryreaw">valid counterargument</a> though: why Cars 2, and not more popular franchises like <a href="https://en.wikipedia.org/wiki/Frozen_%282013_film%29">Frozen</a> or any other Disney franchise that&rsquo;s more kid-oriented? (for the record, there <em>is</em> a <a href="https://www.youtube.com/watch?v=VQ7GLnRaeHM">Frozen video</a> at #163 in Gaming, although it&rsquo;s blatantly miscategorized)</p>
+
+<p>The Cars 2 video uploader eventually <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crzrbdd">replied to the Reddit thread</a> suggesting the children-theory as well:</p>
+
+<blockquote><p>You&rsquo;re indeed right about it blowing up, mainly from mobile device views, which I&rsquo;m guessing was kids watching it. I remember seeing comments from users saying their kids love to watch the video.</p></blockquote>
+
+<p>There&rsquo;s also the factor of YouTube/Google&rsquo;s recommendation algorithms working in mysterious ways and providing video recommendations based on user interests/age/location/etc. Unfortunately, the impact of those can&rsquo;t easily be quantified.</p>
+
+<p>Looking into the view count of the Cars 2 video in Gaming YouTube videos only raises more questions than answers.</p>
+
+<hr />
+
+<p><em>You can view the metadata for the Top 500 Gaming videos on YouTube at <a href="https://docs.google.com/spreadsheets/d/1fy2-9c5HORwvhvAljEG6LvyrM3zG5YnWnalvepX3eV8/edit?usp=sharing">this Google Sheet</a>.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Almost Every Smartphone and Tablet Browses the Web in Portrait Mode]]></title>
+    <link href="http://minimaxir.com/2015/03/portrait/"/>
+    <updated>2015-03-18T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2015/03/portrait</id>
+    <content type="html"><![CDATA[<p><strong>UPDATE</strong>: <em>After others questioned the data in this blog post, I rechecked the derivation of the data and ran more tests. It turns out that JavaScript may not consistently differentiate, for example, between the browser resolutions of 1280x720 and 720x1280 on mobile devices. Since this is how Google Analytics determines the device resolution, this may affect the final results. The post and charts remain unchanged for posterity.</em></p>
+
+<p>I&rsquo;m currently working on a blog post on how the rise of smartphones and tablets impacts the design of charts and other data visualizations. In the process, I took a look at the proportion of mobile devices, tablets, and desktops which have visited my blog over time, using <a href="http://www.google.com/analytics/">Google Analytics</a>, in order to quantify the importance of catering to these newer technologies.</p>
+
+<p><img src="/img/portrait/minimaxir_devices.png"  ></p>
+
+<p>After looking at 781,557 visitors to minimaxir.com from January 2013 to February 2015, the proportion of mobile devices + tablets has been slightly increasing, and together consist of more than &frac14;th of the views to my blog, so catering to these users is not unimportant.</p>
+
+<p>Another important concern is <em>how</em> visitors view my blog on smartphones/tablets. Do they read holding their device in <strong>portrait</strong> mode, where the device is vertically-oriented and supports one-handed use, or do they read the web using their device in <strong>landscape</strong> mode, where the device is horizontally-oriented and allows for more text per line? Almost every desktop monitor is landscape, so worrying about that is effectively a non-issue.</p>
+
+<p>Google Analytics also records the screen resolution of each browser which visits my website (for example, an iPhone 5/5S user in portrait mode will appear as a <em>mobile</em> device with a effective resolution of <em>320x568</em>. Note that the true device resolution is <em>640x1136</em>; for many modern smartphones, the web content renders at twice the DPI to fit the entire screen). From that, I can infer that the user has their device in portrait mode if the screen height is greater than the screen width, and vice versa for landscape.</p>
+
+<p>After breaking it down by device category, I found something unexpected.</p>
+
+<p><img src="/img/portrait/minimaxir_orientation.png"  ></p>
+
+<p>95.25% of all smartphones browse the web in portrait orientation, while 88.18% of all tablets browse the web in portrait. I was expecting the proportion of portrait mode users to be high, but not <em>that</em> high! *</p>
+
+<p>But what does this mean in terms of website design?</p>
+
+<h1>Implications</h1>
+
+<p>Modern front-end website themes and frameworks advocate <a href="http://en.wikipedia.org/wiki/Responsive_web_design">responsive design</a>, where the website resizes and adjusts elements in order to fit the screen resolution of the device (my website uses the <a href="http://getbootstrap.com/">Bootstrap framework</a>, which was one of the first to popularize responsive design) However, there is programming, design, and QA overhead necessary to support each and every possible device width, from the tiniest portrait smartphones to the wide 1080p monitors used on desktops. As a result, many older websites do not care to invest the time and money to optimize for responsive design, but as my first chart shows, the proportion of tablets and smartphones is nontrivial, and therefore there&rsquo;s a strong incentive for catering to them.</p>
+
+<p>Bootstrap has a maximum width of 1200px; any screen width less than that will be impacted by responsive design. Let&rsquo;s look at the distibution of device widths, by device category.</p>
+
+<p><img src="/img/portrait/minimaxir_devices_all.png"  ></p>
+
+<p>The median browser width is 1366px, corresponding to the device resolution of 1366x768, which is a common &ldquo;720p&rdquo; resolution on laptops. Half of the visitors will have a screen width greater than 1366px, and therefore they would not benefit from a responsive layout. Inversely, half of the visitors will have a device width below 1366px, and most of those are not desktops and below the 1200px limit and therefore will be impacted by responsive design.</p>
+
+<p>Here&rsquo;s the same chart, but colored by device orientation instead of category.</p>
+
+<p><img src="/img/portrait/minimaxir_orientations_all.png"  ></p>
+
+<p>The majority of the devices below the median are portrait devices, which isn&rsquo;t surprising, but is evident that portrait mode is a concern.</p>
+
+<p>We can further separate these groups in 6 subgroups: one for each device category and orientation combination. This tells the full story.</p>
+
+<p><img src="/img/portrait/minimaxir_widths.png"  ></p>
+
+<p>Mobile Portrait devices have over 75% of the widths concentrated at about 360px (the effective width of Samsung Galaxy smartphones), while Tablet Portrait devices have over 75% of the widths concentrated at about 768px (the effective width of iPads). In contrast, Landscape smartphones, tablets, and desktops encompass a wider variety of device widths.</p>
+
+<p>Not only do most smartphones view the web in portrait, the effective widths of these smartphones and tablets are centered around specific widths. This makes targeting certain device widths an effective strategy for saving time when testing mobile-optimized content, especially when working with data visualizations.</p>
+
+<hr />
+
+<p>*In fairness, the viewers on my website about technology and statistics may not necessarily represent the viewers on the internet as a whole. However, it&rsquo;s fair to assume that the way a person holds a device is uncorrelated with the person&rsquo;s topic preferences. Additionally, the very large sample size of 781,557 effectively eliminates any uncertainty about the results due to random chance.</p>
+
+<p><em>You can download a copy of the data <a href="https://docs.google.com/spreadsheets/d/14vUjq7rv5fceIe8pZRqfZrp7JGj3Uw1fFI2-3NL3Dvs/edit?usp=sharing">in this Google Sheet</a>. All charts were made using R and ggplot2.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Analyzing the Patterns of Numbers in 10 Million Passwords]]></title>
+    <link href="http://minimaxir.com/2015/02/password-numbers/"/>
+    <updated>2015-02-24T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/02/password-numbers</id>
+    <content type="html"><![CDATA[<p>The primary purpose of a <a href="http://en.wikipedia.org/wiki/Password">password</a> is to serve as an unique verification identifier for a given user. Ideally, the password for a given website or service should be both random and unique; if the letters and/or numbers in the password follow any patterns, then they might be easier to guess by an intruder. For example, someone may put their birth year such as &ldquo;1987&rdquo; or &ldquo;1988&rdquo; in their password, which makes the passwords easier to remember, but consequently easier to break.</p>
+
+<p>A few weeks ago, security researcher Mark Burnett released <a href="https://xato.net/passwords/ten-million-passwords/#.VNojhPnF98E">a list of 10 million passwords</a> compiled <a href="http://www.reddit.com/r/10millionpasswords/comments/2w3ali/dataset_origin/conap8l">from various sources</a> over the years. Reddit user jalgroy <a href="http://www.reddit.com/r/dataisbeautiful/comments/2vsg7h/frequency_of_years_in_passwords_oc/">posted a histogram</a> of the years used in these passwords, which I&rsquo;ve verified using my own scripts:</p>
+
+<p><img src="/img/password-numbers/year_distribution.png"  ></p>
+
+<p>There is a clear maximum at 1987 which implies a current age of about 28. This makes sense, as internet users in their 20&rsquo;s are generally considered to be very attuned to internet usage. The spike at 2000 is likely not because it&rsquo;s a birth year, but because 2000 is a kewl number.</p>
+
+<p>There are actually many similar patterns for numbers in passwords, which involve surprising yet intuitive logic.</p>
+
+<h1>Digit Behavior</h1>
+
+<p>The distribution of the number of digits in passwords varies significantly.</p>
+
+<p><img src="/img/password-numbers/digit_distribution.png"  ></p>
+
+<p>42% of passwords have zero numerical digits, which implies that 58% of passwords have atleast one digit. However, the local maxima in number of digits in a password all occur at <em>even</em> numbers of digits, which may imply that humans have an easier time of remembering even amounts of numbers.</p>
+
+<p>If you look at a typical keyboard, you&rsquo;ll note that the default sequence of numbers is <strong>1234567890</strong>. If the user wants a number in their password that is easy to type, drawing from this sequence of numbers might be a good idea.</p>
+
+<p><img src="/img/password-numbers/seq_digit_bar.png"  ></p>
+
+<p>Note that the length of the sequence is uncorrelated with the number of occurrences of the sequence. Many more people use 123 in a password than just 12, even though it&rsquo;s longer. 123, as a triplet of numbers, may be easier to remember by the average person than a pair of numbers. However, that contradicts the logic above that even numbers may be easier to remember, which suggest that another factor may be involved.</p>
+
+<p>Sequences of numbers are popular, but are some sequences of numbers more popular than others? Let&rsquo;s look at the order and composition of 1-digit, 2-digit, and 3-digit numbers in these 10 million passwords.</p>
+
+<h1>More on Digit Patterns</h1>
+
+<p><em>Note: all number patterns are distinct number patterns, e.g. 2-digit numbers analyzed are not subsets of 3-digit or larger numbers.</em></p>
+
+<p>Take a look at the most used single-digit numbers:</p>
+
+<p><img src="/img/password-numbers/one_digit_bar.png"  ></p>
+
+<p>1 is by far the most-used single-digit number, which may be due to the fact that it is the left-most number on the keyboard and therefore an easy press for services that force the inclusion of a digit in the password. Relatedly, 9 and 0 are the least-used single-digit numbers. That&rsquo;s intuitive enough. But does that hold for more complex patterns?</p>
+
+<p>Let&rsquo;s look at the most-used 2-digit patterns, including numbers with 0 as a leading digit:</p>
+
+<p><img src="/img/password-numbers/two_digit_bar.png"  ></p>
+
+<p>12 and 11, a sequential pattern and a repeating pattern respectively, are by far the most-used 2-digit numbers. Many repeating patterns such as 22 and 99 are prominent. But why is 69 in third place? (besides the obvious non-family-friendly reason)</p>
+
+<p>It may be helpful to look at a heat map of all possible 2-digit numbers to see if there are any observable patterns.</p>
+
+<p><img src="/img/password-numbers/two_digit_heatmap.png"  ></p>
+
+<p>There are a couple distinct patterns: numbers beginning with a 1 or 2 are used the most frequently, and both repeating and sequential digits are used the most frequently.</p>
+
+<p>Almost all 2-digit numbers outside of those patterns are unused (the exception is 69, of course) The intersection of both of these patterns is at 11/12, which is the reason both have high usage.</p>
+
+<p>Do 3-digit numbers follow similar patterns? Here&rsquo;s a list of the most-used 3-digit numbers in passwords:</p>
+
+<p><img src="/img/password-numbers/three_digit_bar.png"  ></p>
+
+<p>Yes and no. Here, there appear to be more instances of special numbers, such as 321 and <a href="http://en.wikipedia.org/wiki/James_Bond">007</a> which deviate from the patterns above. Of note, 3-digit numbers ending in 00 appears as a new pattern.</p>
+
+<p>This can be confirmed by looking at a faceted heat map for each possible combination.</p>
+
+<p><img src="/img/password-numbers/three_digit_heatmap.png"  ></p>
+
+<p>By far the most popular pattern for a 3-digit number is a repetition pattern, followed by a sequential pattern (the sequential pattern is always located one tile up and two tiles right from the repetition pattern). There are very few outliers which deviate from this schema aside from the ones mentioned previously. (420 is not as significant of an outlier for 3-digit numbers as 69 is for 2-digit numbers)</p>
+
+<p>The patterns of numbers in passwords can offer some insight to human psychology. However, if possible, I recommend you avoid using such patterns in your passwords since it introduces a vulnerability. It&rsquo;s a good idea to use a password manager instead, such as <a href="https://agilebits.com/onepassword">1Password</a> or <a href="http://keepass.info/">KeePass</a>, which offer advantages including the generation of both truly random and unique passwords.</p>
+
+<hr />
+
+<p><em>All charts were made using R and ggplot2.</em></p>
+
+<p><em>You can download the aggregate data used to create the charts <a href="https://docs.google.com/spreadsheets/d/1_OHQOyLkg0d7tseHXofTBu5AWzSlmXIBjV23CojFPcY/edit?usp=sharing">in this Google Sheet</a>.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[An Introduction on How to Make Beautiful Charts With R and Ggplot2]]></title>
+    <link href="http://minimaxir.com/2015/02/ggplot-tutorial/"/>
+    <updated>2015-02-12T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/02/ggplot-tutorial</id>
+    <content type="html"><![CDATA[<p>Readers of my previous blog posts have frequently asked me &ldquo;how do you make those charts?&rdquo;</p>
+
+<p><img src="/img/ggplot-tutorial/buzzfeed-listicle-scatterplot.png"  ></p>
+
+<p>These charts were made using <a href="http://docs.ggplot2.org/current/">ggplot2</a>, an add-on package for the <a href="http://www.r-project.org/index.html">R programming language</a>, along with lots of iterative improvement over the months. R notably has chart-making capabilities built into the language by default, but it is not easy to use and often produces <em>very</em> simplistic charts. Enter ggplot2, which allows users to create full-featured and robust charts with only a few lines of code.</p>
+
+<p><img src="/img/ggplot-tutorial/geom_histogram-4.png"  ></p>
+
+<p>You&rsquo;ve probably seen charts elsewhere on the internet similar to this one. While it implements the &ldquo;<a href="http://vita.had.co.nz/papers/layered-grammar.html">Grammar of Graphics</a>&rdquo; (which is where the &ldquo;gg&rdquo; in &ldquo;ggplot2&rdquo; comes from), it does look generic and cluttered.</p>
+
+<p>Adding a touch of color and design can help make more compelling visualizations, and it&rsquo;s pretty easy to do thanks to ggplot2&rsquo;s syntax and chaining capabilities.</p>
+
+<h1>Quick Design Notes</h1>
+
+<p>Charts with a completely-gray background have become rather popular lately, mostly in part to the charts produced by <a href="http://fivethirtyeight.com/">FiveThirtyEight</a>, which was the inspiration behind my design. An important functional aspect of a gray background is that it makes the chart area distinct from the article body.</p>
+
+<p>The charts I make are typically 1200px by 900px. On my blog, the width of the article text container is less than 1200px, so the browser shrinks the chart to make it fit. The chart still appears at a high resolution on HiDPI/Retina screens, and since the charts are simple, shrinking will not cause significant graphical distortion on normal-resolution screens. 1200x900px also keeps the file size low, which is important when putting 10 or more charts in a post.</p>
+
+<p>An important tip when making charts in ggplot2: render the chart on OS X, if possible. OS X has antialiasing for text and curves in charts, while Windows/Linux does not, and it can significantly improve the quality of the chart.</p>
+
+<h1>Making a ggplot2 Histogram</h1>
+
+<p>The first chart we&rsquo;ll be making is a histogram. This is a good example of a chart that&rsquo;s easy to make in R/ggplot2, but hard to make Excel.</p>
+
+<p>For this tutorial, we&rsquo;ll be using <code>ggplot2</code>, plus three additional R packages: <code>RColorBrewer</code>, which allows for the procedural generation of colors from a palette for the chart, <code>scales</code>, which allows for the axes to express numbers with commas/percents, and <code>grid</code>, which allows for manipulation of the chart margins and layout. We can install and load these packages at the beginning of the R file:</p>
+
+<pre><code>install.packages(c("ggplot2","RColorBrewer","scales"))
+library(ggplot2); library(scales); library(grid); library(RColorBrewer)
+</code></pre>
+
+<p>The dataset we&rsquo;ll use is my <a href="http://minimaxir.com/csv/buzzfeed_linkbait_headlines.csv">list of 15,101 BuzzFeed listicles</a> that I used <a href="http://minimaxir.com/2015/01/linkbait/">in my previous blog post</a>, including both the listicle size and number of Facebook shares the listicle received, which have been prefiltered to listicle sizes of 50 or less, and have received atleast 1 Facebook share. Download the file, and set the working directory of R to the containing folder. We load the dataset into R by reading the CSV:</p>
+
+<pre><code>df &lt;- read.csv("buzzfeed_linkbait_headlines.csv", header=T)
+</code></pre>
+
+<p>We can make a basic histogram in two lines of code.</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1)
+</code></pre>
+
+<p>The first line instantiates the charts and defines the variables used for plotting. We declare the use of the data frame <code>df</code>, and the <code>listicle_size</code> vector from that data frame as the plotting aesthetic. The second line tells ggplot to make a histogram out of the given data with <code>geom_histogram</code>, and we specify a binwidth of 1 so that each column represents one discrete value of listicle. Running that code will cause a plot to pop up.</p>
+
+<p><img src="/img/ggplot-tutorial/tutorial_1.png"  ></p>
+
+<p>Not a bad start. In order to save the created plot, we use the <code>ggsave</code> command, which saves the last-generated plot to an image in your working directory. The first parameter, the filename, determines the filetype.</p>
+
+<pre><code>ggsave("tutorial_1.png", dpi=300, width=4, height=3)
+</code></pre>
+
+<p>Now we can add a theme to make it look classy.</p>
+
+<p>A ggplot2 theme is a function that overrides the graphical parameters of the default theme. Here&rsquo;s the long code block for my FiveThirtyEight-inspired theme, with code comments for each code subblock:</p>
+
+<pre><code>fte_theme &lt;- function() {
+
+  # Generate the colors for the chart procedurally with RColorBrewer
+  palette &lt;- brewer.pal("Greys", n=9)
+  color.background = palette[2]
+  color.grid.major = palette[3]
+  color.axis.text = palette[6]
+  color.axis.title = palette[7]
+  color.title = palette[9]
+
+  # Begin construction of chart
+  theme_bw(base_size=9) +
+
+  # Set the entire chart region to a light gray color
+  theme(panel.background=element_rect(fill=color.background, color=color.background)) +
+  theme(plot.background=element_rect(fill=color.background, color=color.background)) +
+  theme(panel.border=element_rect(color=color.background)) +
+
+  # Format the grid
+  theme(panel.grid.major=element_line(color=color.grid.major,size=.25)) +
+  theme(panel.grid.minor=element_blank()) +
+  theme(axis.ticks=element_blank()) +
+
+  # Format the legend, but hide by default
+  theme(legend.position="none") +
+  theme(legend.background = element_rect(fill=color.background)) +
+  theme(legend.text = element_text(size=7,color=color.axis.title)) +
+
+  # Set title and axis labels, and format these and tick marks
+  theme(plot.title=element_text(color=color.title, size=10, vjust=1.25)) +
+  theme(axis.text.x=element_text(size=7,color=color.axis.text)) +
+  theme(axis.text.y=element_text(size=7,color=color.axis.text)) +
+  theme(axis.title.x=element_text(size=8,color=color.axis.title, vjust=0)) +
+  theme(axis.title.y=element_text(size=8,color=color.axis.title, vjust=1.25)) +
+
+  # Plot margins
+  theme(plot.margin = unit(c(0.35, 0.2, 0.3, 0.35), "cm"))
+}
+</code></pre>
+
+<p>Adding the completed theme to the chart is just one line of code:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1) +
+  fte_theme()
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_2.png"  ></p>
+
+<p>A little more classy. Now that the core design of the chart is present, we can make polish the chart to make it more beautiful.</p>
+
+<p>Of course, all charts need properly labled axes and a title. We can add that with the <code>labs</code> function:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1) +
+  fte_theme() +
+  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles")
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_3.png"  ></p>
+
+<p>Now we can add a few finishing touches. For the x-axis, we can set the breaks to 5 instead of 10 using <code>scale_x_continuous</code> since we have the room. For the y-axis, since we have an axis value with 4 digits, we can set the formatting to use a comma with <code>scale_y_continuous</code>. Lastly, we can add a line at y = 0 using <code>geom_line</code> to further seperate the data. Lastly, in <code>geom_histogram</code>, we can change the fill of the bars to a red color for more thematic branding, and also reduce the opacity to make the grid lines visible behind the chart.</p>
+
+<p>Putting it all together:</p>
+
+<pre><code>ggplot(df, aes(listicle_size)) +
+  geom_histogram(binwidth=1, fill="#c0392b", alpha=0.75) +
+  fte_theme() +
+  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles") +
+  scale_x_continuous(breaks=seq(0,50, by=5)) +
+  scale_y_continuous(labels=comma) + 
+  geom_hline(yintercept=0, size=0.4, color="black")
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_4.png"  ></p>
+
+<p>That&rsquo;s pretty professional and is a good stopping point. Normally, I would change the text fonts as well, but that&rsquo;s a subject for another post.</p>
+
+<h1>Making a ggplot2 Scatterplot</h1>
+
+<p>Scatterplots are also efficient to do in ggplot2, which especially useful as making a plot containing 15,101 points might cause spreadsheets to freeze.</p>
+
+<p>Creating a scatterplot of the relationship between listicle size and the number of Facebook shares the listicle receives is essentially the same procedure as creating a histogram, except that the x-axis and y-axis aesthetic vectors must be declared explicitly.</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point()
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_5.png"  ></p>
+
+<p>Because there are a few listicles with <em>over 1 million</em> Facebook shares (welcome to 2015), the entire plot is skewed. As a result, we need to compress the plot by scaling the y-axis logarithmically using <code>scale_y_log10</code>. Additionally, there will be a large amount of overlap between points due to the large sample size, so we need to greatly reduce the opacity of the points. (I set to 5% for this chart, but the best value can be determined through trial and error)</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05) +
+  scale_y_log10(labels=comma)
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_6.png"  ></p>
+
+<p>That&rsquo;s a lot more intuitive, and it makes it clear that there is indeed a positive relationship between listicle size and the number of Facebook shares.</p>
+
+<p>Now we can apply the theme and labels:</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05) +
+  scale_y_log10(labels=comma) +
+  fte_theme() +
+  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_7.png"  ></p>
+
+<p>And then the final touches. We can include the same horizontal line, x-axis behavior, and point color as with the last plot. However, for the y-axis, we have room to include each power of 10 between 1 and 1,000,000 as breaks, which we can do through a cute R syntax trick: <code>10^(0:6)</code>. While the chart shows a positive relationship between the variables, the shape is ambiguous and it may be helpful to add a trend line. We use <code>geom_smooth</code> to add a trendline representing a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a> with a 95% confidence interval.</p>
+
+<p>Putting it all together:</p>
+
+<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
+  geom_point(alpha=0.05, color="#c0392b") +
+  scale_x_continuous(breaks=seq(0,50, by=5)) +
+  scale_y_log10(labels=comma, breaks=10^(0:6)) +
+  geom_hline(yintercept=1, size=0.4, color="black") +
+  geom_smooth(alpha=0.25, color="black", fill="black") +
+  fte_theme() +
+  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
+</code></pre>
+
+<p><img src="/img/ggplot-tutorial/tutorial_8.png"  ></p>
+
+<p>Now that is pretty insightful.</p>
+
+<p>Hopefully, this small overview of how ggplot2 gives you an small idea of what it can do. This is just the tip of the iceberg. However, making cooler charts such as categorical bar charts, charts with multiple factor variables, and charts with multiple facets require smart data preprocessing, which is a topic for another blog post.</p>
+
+<hr />
+
+<p><em>You can access a copy of the code used in this blog post <a href="https://github.com/minimaxir/ggplot-tutorial">at this GitHub repository</a>.</em></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,19 @@
+<ul class="uk-navbar-nav">
+	{% for link in site.navigation %}
+      {% if page.url == link.url or index %}
+        <li class="uk-active uk-parent"><a href="{{ link.url }}">{{ link.text }}</a></li>
+      {% else %}
+   		<li class="uk-parent"><a href="{{ link.url }}">{{ link.text }}</a></li>
+   	  {% endif %}     
+    {% endfor %}
+</ul>
+
+<div class="uk-navbar-flip uk-hidden-small">
+<ul class="uk-navbar-nav">
+
+<li class="social facebook-p">
+			<a href="http://minimaxir.com/rss.xml" target="_blank"> <i class="ion-social-rss"></i> </a>
+		</li>
+		
+</ul>
+</div>

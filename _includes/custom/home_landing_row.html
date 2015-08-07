@@ -1,0 +1,35 @@
+<div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	{% if site.facebook_user %}
+    <a title="Facebook" href="https://facebook.com/{{ site.facebook_user }}" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    {% endif %}
+  	{% if site.twitter_user %}
+    <a title="Twitter" href="https://twitter.com/{{ site.twitter_user }}" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    {% endif %}
+	{% if site.linkedin_user %}
+    <a title="LinkedIn" href="https://linkedin.com/in/{{site.linkedin_user}}" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    {% endif %}
+    {% if site.github_user %}
+    <a title="GitHub" href="https://github.com/{{ site.github_user }}" target="_blank"><i class="fa fa-github-square"></i></a>
+    {% endif %}
+    {% if site.email %}
+    <a title="E-Mail" href="mailto:{{ site.email }}"><i class="fa fa-envelope-square"></i></a>
+    {% endif %}
+  </div>
+</div>
+
+

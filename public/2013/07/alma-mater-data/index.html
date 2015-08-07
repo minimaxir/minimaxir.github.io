@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>Which Universities Produce the Most Successful Startup Founders? | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="Which Universities Produce the Most Successful Startup Founders?">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2013/07/alma-mater-data/">
+
+
+  <meta name="twitter:description" content="Do the tech universities produce more funded graduates than the Ivy League universities? Do the founders from Ivy League Universities receive more funding than those from the top tier tech...">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/sum-funding.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="Which Universities Produce the Most Successful Startup Founders?" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="Do the tech universities produce more funded graduates than the Ivy League universities? Do the founders from Ivy League Universities receive more funding than those from the top tier tech..." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2013/07/alma-mater-data/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/sum-funding.png" property="og:image">
+
+
+  
+  <meta content="startups" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2013/07/alma-mater-data/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Which Universities Produce the Most Successful Startup Founders?</h1>
+        <div class="meta">
+          written <time datetime="2013-07-20T10:00:00-07:00" pubdate data-updated="true"></time>
+          in
+<span class="categories">
+  
+    
+          <a href="/startups/">startups</a></span>
+     
+          <a href="/data/">data</a></span>
+     
+  
+</span>
+        </div>
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/07/alma-mater-data/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/07/alma-mater-data/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Which Universities Produce the Most Successful Startup Founders? - http://minimaxir.com/2013/07/alma-mater-data/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/07/alma-mater-data/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/07/alma-mater-data/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/07/alma-mater-data/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p>If you read startup funding announcements on tech blogs frequently, you&rsquo;ve may have noticed that these startup founders have often attended prestigious universities. Founders who have graduated from Ivy League schools, such as Harvard, Yale and Princeton, unsurprisingly raise millions for their startups. Of course, top tier tech schools such as Stanford, MIT, and Carnegie Mellon foster a strong technical and entrepreneurial background: attributes which venture capitalists seek when investing in a startup founder. <em>(Disclosure: I&rsquo;m a Carnegie Mellon alumnus)</em></p>
+
+<p>Do the tech universities produce more funded graduates than the Ivy League universities? Do the founders from Ivy League Universities receive more funding than those from the top tier tech universities?</p>
+
+<p>Using TechCrunch&rsquo;s <a href="http://www.crunchbase.com/">CrunchBase</a> API, I obtained the data of about 2,500 startup founders in the United States who have created a startup which has received investment from venture capitalists.</p>
+
+<p>With that data, I found some rather interesting trends.</p>
+
+<!-- more -->
+
+
+<h1>Which universities produced the most amount of graduates who have received funding?</h1>
+
+<p>Thousands of university graduates attempt to make a startup, but most will not succeed. Are the graduates of some universities more frequently successful?</p>
+
+<p>Here are the Top 16 universities with the most number of successfully-funded graduates:</p>
+
+<p><img src="/img/founder-colleges.png"  ></p>
+
+<p>Stanford has the most amount of funded graduates, which is unsurprising as it&rsquo;s located in the Silicon Valley heart of venture capital.</p>
+
+<p>Seven out of the eight Ivy League Universities (colored green on the chart) are present, but most of the Ivies are  in the middle of the chart. MIT and UC Berkeley each have nearly <em>double</em> the amount of successful graduates from Yale and Columbia.</p>
+
+<p>It&rsquo;s worth noting that Tel Aviv University, an Israeli university, ties Duke University at 21.</p>
+
+<h1>Which university&rsquo;s graduates have cumulatively raised the most amount of total funding?</h1>
+
+<p>Another way to measure success is through the success of the founders' subsequent startups and the amount of venture capital they have raised.</p>
+
+<p>Here are the Top 8 universities whose graduates have received the most amount of funding:</p>
+
+<p><img src="/img/sum-funding.png"  ></p>
+
+<p>Harvard and Stanford graduates are very close in terms of total funding raised. However, there&rsquo;s a clear <a href="http://en.wikipedia.org/wiki/Power_law">Power Law</a> in effect, as those two along with UC Berkeley, have  produced founders who&rsquo;ve generated much, much more venture funding than those of the other universities.</p>
+
+<h1>Which university&rsquo;s graduates raise the most amount of money in their first round of funding on average?</h1>
+
+<p>Startup founders with big, world changing ideas need lots of venture capital. Only the founders with <em>good</em> ideas will actually receive it.</p>
+
+<p>Here are the average amount of first-round funding for the top 16 universities with the most number of successfully-funded graduates:</p>
+
+<p><img src="/img/avg-first-raised.png"  ></p>
+
+<p>Carnegie Mellon and Princeton, which had a relatively low number of funded founders and a relatively low number of total capital raised, instead have a <em>significantly</em> higher amount of average first funding. UCLA also placed. Perhaps the students from these three universities tend to have more ambitious startup ideas?</p>
+
+<p>At first glance, Stanford and Harvard appear to be the kings of startups. They have the most amount of graduates, and the most amount of total venture capital raised. The tech blogs would surely consider that a success, but could the greater funding for CMU/Princeton lead to the creation of the next billion-dollar startup? We can only wait and see.</p>
+
+<p><em>UPDATE: As pointed out by robotcookies on the <a href="https://news.ycombinator.com/item?id=6075862">corresponding Hacker News thread</a>, I missed UCLA in the first draft, which had 29 funded graduates. The charts have been updated.</em></p>
+
+<hr />
+
+<p>You are welcome to use the founder data from CrunchBase by <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddEV1LUpaQUVsdmJYcERoM0FNU3lPcVE&amp;usp=sharing">viewing the data on Google Drive</a>, or by <a href="https://www.dropbox.com/s/3jz2wsr4d6fc4t6/founders_w_college.csv">downloading the raw CSV</a>.</p>
+
+<p><em>Notes:</em></p>
+
+<ul>
+<li><em>University data was standardized to make analysis easier (e.g. for Carnegie Mellon, the founders who listed their institution as &ldquo;Carnegie Mellon University&rdquo;, &ldquo;Carnegie Mellon,&rdquo; and &ldquo;CMU,&rdquo; all had their institution changed to be &ldquo;CMU&rdquo;.)</em></li>
+<li><em>Chart #1 measures unique founders, so it does not double-count a founder who has founded more than one  funded startup.</em></li>
+<li><em>Chart #2 assumes equal contribution of each founder to the funding: if a startup has a total funding of $100,000 with 2 founders, the amount used for the chart will be $50,000 for each founder.</em></li>
+<li><em>Chart #3 ignores startup data for the chart which has a Series B, Series C, or Series D listed as their first round on CrunchBase, or if the amount raised was not provided.</em></li>
+</ul>
+
+
+		
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/07/alma-mater-data/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/07/alma-mater-data/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Which Universities Produce the Most Successful Startup Founders? - http://minimaxir.com/2013/07/alma-mater-data/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/07/alma-mater-data/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/07/alma-mater-data/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/07/alma-mater-data/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2013/07/alma-mater-data/';
+        var disqus_url = 'http://minimaxir.com/2013/07/alma-mater-data/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2013/07/medium-normal/" title="Previous Post: A Statistical Analysis of Medium.com Submissions to Hacker News"><i class="fa fa-angle-double-left"></i>  A Statistical Analysis of Medium.com Submissions to Hacker News</a>
+        
+
+        
+          <a class="pull-right" href="/2013/09/reddit-imgur-youtube/" title="Next Post: 1 in 3 Links Submitted to Reddit Go to Imgur or YouTube">1 in 3 Links Submitted to Reddit Go to Imgur or YouTube <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

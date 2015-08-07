@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>The Friends of My Friends Are Not My Friends | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="The Friends of My Friends Are Not My Friends">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/">
+
+
+  <meta name="twitter:description" content="Why am I seeing pictures and statuses from friends of friends who are essentially complete strangers?">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/jellyposts2.jpg">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="The Friends of My Friends Are Not My Friends" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="Why am I seeing pictures and statuses from friends of friends who are essentially complete strangers?" property="og:description">
+
+
+  <meta content="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/jellyposts2.jpg" property="og:image">
+
+
+  
+  <meta content="startups" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>The Friends of My Friends Are Not My Friends</h1>
+        <div class="meta">
+          written <time datetime="2014-01-13T08:00:00-08:00" pubdate data-updated="true"></time>
+          in
+<span class="categories">
+  
+    
+          <a href="/startups/">startups</a></span>
+     
+  
+</span>
+        </div>
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=The Friends of My Friends Are Not My Friends - http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p><a href="http://jelly.co/">Jelly</a>, a highly-anticipated social networking app by Twitter co-founder Biz Stone, was released last week. One of Jelly&rsquo;s <a href="http://blog.jelly.co/post/72563498393/introducing-jelly">underlying principles</a>  is &ldquo;it’s not hard to imagine that the true promise of a connected society is people helping each other.&rdquo; While using Jelly over the past few days, I&rsquo;ve seen people ask whether or not to exercise, make unsubtle plugs for their product, sell a car Craigslist-style, and get amnesia.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/jellyposts2.jpg"  ></p>
+
+<p>Wait, what? How are these questions representative of &ldquo;a connected society,&rdquo; especially since I don&rsquo;t know any of the question authors?</p>
+
+<p>Jelly tells its users that they can &ldquo;help friends, or friends-of-friends with their questions.&rdquo; The vast  majority of the questions I&rsquo;ve seen are from Friends of Friends. I&rsquo;m Facebook Friends with people who have <strong>thousands</strong> of friends; the probability that I have something in common with those second-degree friends is low.</p>
+
+<p>Websites like Jelly and even Facebook are now utilizing the content made by second-degree &ldquo;friends.&rdquo; Why am I seeing pictures and statuses from friends of friends, who are essentially complete strangers?</p>
+
+<h1>Facebook&rsquo;s Farcical Friends of Friends Folly</h1>
+
+<p>A couple months ago, Facebook again tweaked the News Feed algorithm such that all new Posts on a friend&rsquo;s Wall are shown on your News Feed, even if the person making the Post is a complete stranger to you.</p>
+
+<p>Originally, Facebook showed posts in your News Feed that were posted on a Friend&rsquo;s wall only if they were made by another Friend. If you are friends with both people, there&rsquo;s likely a common link between all three of you, such as going to the same college or working at the same company. That can make the Wall post more relevant to your interests.</p>
+
+<p>However, people have many social circles. What happens when a stranger not in any of my social circles posts on a Friend&rsquo;s wall?</p>
+
+<p>This post recently appeared in my News Feed:</p>
+
+<p><img src="/img/fb-stranger-wall.jpg"  ></p>
+
+<p>I don&rsquo;t know who the person with &ldquo;1 mutual friend&rdquo; is. (the &ldquo;1 mutual friend&rdquo; being the friend who received the post). I don&rsquo;t live in Arizona. Why am I seeing this?</p>
+
+<p>Although I may be Facebook Friends with someone, it doesn&rsquo;t necessarily mean I should be Friends with their Friends. Facebook is showing me Posts that aren&rsquo;t relevant to me at all.</p>
+
+<p>This behavior also extends to your Friends' birthday: all &ldquo;Happy Birthday!&rdquo; posts on your Friend&rsquo;s Wall also display in your News Feed.</p>
+
+<p>This entry was visible on my News Feed for an entire day:</p>
+
+<p><img src="/img/mutual-friends-birthday.jpg"  ></p>
+
+<p>Facebook <strong>really</strong> wants you to wish your Friends happy birthday.</p>
+
+<p>I don&rsquo;t need to see strangers with &ldquo;1 mutual friend&rdquo; wish my friends Happy Birthday. It&rsquo;s just extra clutter on an already cluttered News Feed.</p>
+
+<p>To be fair, other websites such as <a href="https://twitter.com/">Twitter</a> and <a href="http://www.linkedin.com/">LinkedIn</a> push second-degree friends. Twitter&rsquo;s new <a href="https://twitter.com/i/discover">Discover</a> feature highlights users who the people you Follow are themselves Following. LinkedIn shows your connections' new connections so you can form connections with them too. But the difference between Twitter/LinkedIn and Facebook/Jelly is that both Facebook and Jelly push the power of <strong>intimate</strong> friendships, and imposing a sense of intimacy between strangers feels fake and intrudes on actual friendships.</p>
+
+		
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=The Friends of My Friends Are Not My Friends - http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/';
+        var disqus_url = 'http://minimaxir.com/2014/01/farcical-friends-of-friends-folly/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2013/11/innovation-rng/" title="Previous Post: Probabilistically Generating GitHub Projects"><i class="fa fa-angle-double-left"></i>  Probabilistically Generating GitHub Projects</a>
+        
+
+        
+          <a class="pull-right" href="/2014/01/more-language-more-problems/" title="Next Post: A Thoughtful Analysis of the Most Poorly-Designed Chart Ever">A Thoughtful Analysis of the Most Poorly-Designed Chart Ever <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

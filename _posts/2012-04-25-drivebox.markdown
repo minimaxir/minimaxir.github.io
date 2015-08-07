@@ -1,0 +1,72 @@
+---
+layout: post
+title: "Google Drive, And Why Dropbox Really Is In Trouble"
+date: 2012-04-25 21:16
+comments: true
+categories: [Startups]
+published: false
+---
+
+Despite spending a lot of time talking about startups (and commenting about them on [TechCrunch][1]), there are very few which I actually use on a daily basis. I don't use a service because it's popular or the **NEXT BIG THING**, but because it's worthwhile use of my time and energy. (the correlation between startup popularity and worthwhileness is, unfortunately, not always strong). As a business major, I'm prone toward productivity applications which help save time that would otherwise be wasted, allowing me to spend my time elsewhere doing much more important tasks, such as the aforementioned commenting on TechCrunch.
+
+The one app I've used throughout my college years has been Dropbox. As an early adopter way back in 2008, I thought that Dropbox was a clever scam, because it was too good to be true. "2 gigabytes of data, that I can access on any computer without needing a $30 flash drive or e-mailing myself constantly? I won't have to fumble around with hardware that I'll probably lose or fill up valuable inbox space! **And** I can access my files remotely with my iPhone 3G?! Awesome!" And thus I began to love Dropbox, and have used it extremely frequently for the past four years. I have never tried any alternatives: [Box.net ][2]and [Sugarsync][3] were nowhere as seamless. And throughout those four years, no real competitors arose...
+
+...until Tuesday, when Microsoft released Windows Skydrive, and Wednesday, when Google released Google Drive, both of which [offer very similar functionality to Dropbox][4]. Both of them offer "a folder that sync everywhere", a considerable amount of free storage by default (more than Dropbox), and, more importantly, both are services which are typically used by people who may not necessarily be technical. Microsoft will [tightly integrate SkyDrive into Windows 8][5], which will introduce the magic of one-folder-sync to every customer who buys a new computer in the next few years, and Google [automatically converted][6] the popular Google Documents feature into Google Drive, which *automatically* established an equally-large customer base, and Google will likely leverage their extensive marketing budget to further captivate potential users. The average person has heard of Microsoft and Google and trust them: conversely, they likely have never heard of Dropbox. Why would a typical internet user ever use Dropbox now?
+
+<!-- more -->
+
+![A t-shirt I obtained from Dropbox during an on-campus visit. But now...?][7]
+
+There's [a lot of speculation][8] that Google Drive, at the least, will kill Dropbox. Although "kill" may be overdramatic, the rise of new competitors will stunt Dropbox's growth, which is a death sentence in the startup industry.
+
+## Will Existing Dropbox Users Switch?
+
+We've already established that non-Dropbox users will be more inclined to use the more "mainstream" Google Drive. But what about existing users of Dropbox? Would they be inclined to switch? The answer, which should greatly concern Dropbox, is *possibly.*
+
+I have [talked before][9] about network effects, and how they can drive the growth of a startup by encouraging users to invite their friends to the service, which adds more users and increases potential revenue. Dropbox actually pioneered an innovative way to utilize network effects by using a referral system with a very *substantial reward*: a 250MB increase in storage space for free can contain a surprising amount of files, and has encouraged *organic* promotion of referral links relentlessly in blog comments. Another aspect of network effects, if done properly, is that it builds switching cost: if a user switches to another service, they lose the social graph created in the original service.
+
+Dropbox has no such switching cost. You want to move from Dropbox to Google Drive? Just *copy and paste all your files from your Dropbox folder to your Google Drive folder*.
+
+The aforementioned storage space increase is not tied to the number of the users on the service. The only interaction that the user might lose from switching are his or her Shared Folders with other users, which synchronizes files between users automatically. While an impressive feature (I use it to share 100%2BMB files that would normally break e-mail clients), it's a narrow, less popular use-case than "a folder that syncs everywhere".
+
+I'm a free user on Dropbox; if I moved all my files to Google Drive, they wouldn't care. But Dropbox does offer a payment plan of 100GB for $200/year, which is useful for those who wish to store music and movies in their Dropbox. However, Google Drive also offers 100GB of storage for $60/year. That's less than a third of the Dropbox price!
+
+At the moment, Dropbox doesn't have any features that truly differentiate it. On Monday, Dropbox announced that you can now [share files anywhere in your Dropbox][10] with a link! But unfortunately for Dropbox since Google Drive is derived from Google Docs, all files on Google Drive have the same functionality, with even more permission control. Not to mention that Google Docs has two-factor authentication, comments on files, OCR, and image recognition. Dropbox has strong third-party support with their API since they were first...but Google Drive's API is [indeed strong][11], and with App Integration in Chrome, Google could have exclusive features that not even Dropbox would replicate.
+
+In a simple cost-benefit analysis, the switching cost of losing your shared folders will never outweigh spending an extra $140/year. And so, paid Dropbox users will likely migrate to Google Drive, which is a serious, serious problem for a for-profit business.
+
+## But Wait, Google%2B Didn't Kill Facebook, LOL!
+
+...which is irrelevant.
+
+![28 upvotes?!][12]
+
+A frequent counterpoint in the linked Quora thread against Google Drive impacting Dropbox is that Google%2B, Google's attempt at a social network to beat Facebook, indisputably did not succeed at achieving its goal. Since Google couldn't defeat Facebook, therefore Google can't defeat Dropbox. That conclusion fails every test of causal logic ever.
+
+Actually, the main reason that Google%2B failed was due to the aforementioned switching costs via network effect! Users (including me) felt no reason to lose their social graphs on Facebook to spend the time rebuilding the social graph on Google%2B. As shown earlier, Dropbox does not have that issue; switching from Dropbox to Google Drive is one CTRL%2BC, CTRL%2BV away, and at most you lose a few shared folders. The two situations aren't comparable.
+
+## What Will Dropbox Do?
+
+Proving that history is indeed hilarious in hindsight (or Dropbox founder Drew Houston is psychic), on Dropbox's [Y-Combinator application][13], in response to the question "What might go wrong?", he answers "*Google might finally unleash GDrive and steal a lot of Dropbox's thunder*"
+
+In the short term, Dropbox will definitely a) they'll have to ramp up development of new functionality to compete with Google Drive's unique functionality and b) lower prices of their paid plan. The former will be difficult, especially since both Google and Microsoft can likely replicate any new features that Dropbox implements, and the latter sends a signal to potential investors that the company's strategic position is weakening. It's a lose-lose situation.
+
+Meanwhile, with Google Drive, there are a ton of potential use-cases since the sharing/collaboration and preview tools from Google Docs are now integrated with all your documents on your computer as well. This is a **huge** productivity win. Get a file in your Gmail: Export it to Google Drive, and it's automatically downloaded to your computer (apparently this will be implemented soon). Have a custom made spreadsheet: upload it to Google Drive and it converts it automatically, and you can collaborate on it with peers and changes sync automatically to your computer. Once Google Drive incorporates Shared Folders, the sky's the limit, and even I might use Google Drive full-time.
+
+I'm a huge fan of Dropbox, so I'm sad to see it turn out this way, especially since it's not the company's direct fault. Everyone I know has a Google account, and it's relatively hard to get friends to switch to Dropbox: the potential install base is huge. Between that and the future integration with Windows SkyDrive and Windows 8, Dropbox will be seeing a huge hit in growth.
+
+ 
+
+ [1]: http://techcrunch.com/
+ [2]: http://box.com/
+ [3]: https://www.sugarsync.com/
+ [4]: http://www.engadget.com/2012/04/24/google-drive-vs-the-competition-dropbox-skydrive-icloud/
+ [5]: http://techcrunch.com/2012/02/29/windows-8-the-road-ahead/
+ [6]: http://thenextweb.com/google/2012/04/24/google-drive-is-live-and-available-right-now-but-its-no-dropbox-killer/
+ [7]: http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/04/Photo-Apr-25-11-28-57-AM.png?resize=300%2C300 "Dropbox"
+ [8]: http://www.quora.com/Google-Drive/Will-Google-Drive-kill-Dropbox
+ [9]: http://minimaxir.com/2011/12/startup-checklist/
+ [10]: http://blog.dropbox.com/?p=1138
+ [11]: https://developers.google.com/drive/
+ [12]: http://i0.wp.com/minimaxir.com/wp-content/uploads/2012/04/quora.png?resize=575%2C186 "The Third Most Popular Response on Quora"
+ [13]: http://dl.dropbox.com/u/27532820/app.html  

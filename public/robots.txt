@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://minimaxir.com/sitemap.xml 

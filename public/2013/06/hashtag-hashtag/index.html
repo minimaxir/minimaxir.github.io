@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>Facebook Hashtags Are Fundamentally Broken | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="Facebook Hashtags Are Fundamentally Broken">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2013/06/hashtag-hashtag/">
+
+
+  <meta name="twitter:description" content="The magic of Facebook is flat-out incompatible with the magic of hashtags.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/hashtagabuse.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="Facebook Hashtags Are Fundamentally Broken" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="The magic of Facebook is flat-out incompatible with the magic of hashtags." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2013/06/hashtag-hashtag/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/hashtagabuse.png" property="og:image">
+
+
+  
+  <meta content="facebook" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2013/06/hashtag-hashtag/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Facebook Hashtags Are Fundamentally Broken</h1>
+        <div class="meta">
+          written <time datetime="2013-06-14T08:00:00-07:00" pubdate data-updated="true"></time>
+          in
+<span class="categories">
+  
+    
+          <a href="/facebook/">facebook</a></span>
+     
+  
+</span>
+        </div>
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/06/hashtag-hashtag/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/06/hashtag-hashtag/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Facebook Hashtags Are Fundamentally Broken - http://minimaxir.com/2013/06/hashtag-hashtag/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/06/hashtag-hashtag/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/06/hashtag-hashtag/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/06/hashtag-hashtag/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p>This week, <a href="https://www.facebook.com/">Facebook</a> added <a href="http://newsroom.fb.com/News/633/Public-Conversations-on-Facebook">searchable hashtags</a> to all status updates and user comments. As with <a href="https://twitter.com/">Twitter</a>, whenever a Facebook user posts an status with a #hashtag, that hashtag becomes clickable and leads to a News Feed of all other publically-visible posts with that hashtag.</p>
+
+<p>The implementation of hashtags in Facebook is an obvious move. Advertisements and television shows display hashtags all the time to encourage users to Tweet about them: it&rsquo;s free marketing, after all. Facebook can piggy-back off those already-existing hashtags and grow user adoption <em>very</em> quickly, especially with Facebook-owned <a href="http://instagram.com/">Instagram</a> already supporting hashtags.</p>
+
+<p>However, Facebook is a fundamentally different social network than Twitter. While Twitter uses hashtags to quickly categorize a feed of 140-character thoughts, Facebook&rsquo;s content feeds  typically consist of long posts and large images. Additionally, while posts on Twitter are explicitly public or private, Facebook&rsquo;s privacy settings are more granular: if users don&rsquo;t make their posts Public, the hashtag is essentially useless. And the brands are going to <em>love</em> hashtags. Maybe too much.</p>
+
+<p>The magic of Facebook is flat-out incompatible with the magic of hashtags.</p>
+
+<!-- more -->
+
+
+<h2>Too Long; Didn&rsquo;t Read</h2>
+
+<p><img src="/img/facebooktwitter.png"  ></p>
+
+<p>Since Twitter posts have a length limit, they&rsquo;re short and occupy a consistent amount of space on the webpage. Facebook posts can be near-unlimited length, utilize a large amount of a white space between posts, and also potentially contain an equally-long comment section. As a result, 5 Twitter posts can use the same amount of screen real-estate as 2 Facebook posts. Given the already incredibly low signal-to-noise quality ratio of #hashtag feeds (as evident above), this makes reading hashtag feeds on Facebook a chore.</p>
+
+<h2>A Thousand Words Takes A Lot Of Space</h2>
+
+<p><img src="/img/bieber-twitter.png"  ></p>
+
+<p>Facebook displays pictures embedded in posts natively in the feed, while Twitter requires the user to click the Tweet to see the photo. In this case, the ratio of Twitter:Facebook posts can be even worse, in this case 6 Twitter posts for 1 Facebook post.</p>
+
+<h2>If A Hashtag Isn&rsquo;t Seen, Was It Posted?</h2>
+
+<p>Twitter is opt-in private posting. Facebook is opt-<em>out</em> private posting. That&rsquo;s a big usability problem.</p>
+
+<p>The Facebook hashtag feeds only show posts that are explicitly  made Public (or posts from your Friends which are set to a privacy of Friends Only). If the user is unaware that their posts are not Public by default, then their posts containing the hashtag will never be seen and the user won&rsquo;t be able to participate in social hashtag feeds.  Although Facebook has made improvements in helping users set the intended privacy level of a post, it makes the process of posting much more deliberate and much less impulsive than Twitter.</p>
+
+<h2>#brand #branding #marketing #yolo #swag</h2>
+
+<p><img src="/img/hashtagabuse.png"  ></p>
+
+<p>Brands love hashtags. The more hashtags included in a Tweet, the more exposure the Tweet receives, right?</p>
+
+<p>With Twitter, there&rsquo;s a limit on the number of hashtags in a Tweet due to the delicate balance between the number of hashtags, the length of the hashtags, and the length of the Tweet itself. On Facebook, you can include <strong>25</strong> hashtags in any post!</p>
+
+<p>Since there&rsquo;s no consequence for abusing hashtags, expect to see more Facebook brands taking advantage this new free source of marketing. Expect to see Facebook get much more cluttered.</p>
+
+<h2>Explicit Image Bombing</h2>
+
+<p>A malicious user could theoretically insert shock images into popular hashtag feeds. During my testing of Facebook hashtags, there was a surprising amount of nudity in the seemingly-innocuous #many hashtag.</p>
+
+<p>On Twitter, the volume of Tweets is much higher and the images are hidden by default, so the odds of such an attack working on Facebook are much higher than on Twitter.</p>
+
+<h2>Comment Hashtags Different From Post Hashtags</h2>
+
+<p>You can hashtag comments on Facebook posts like you can hashtag Facebook posts themselves. But hashtagged comments won&rsquo;t appear in the hashtag News Feed. Whereas on Twitter, Replies are also Tweets and can be hashtagged accordingly. This behavior isn&rsquo;t surprising, but it&rsquo;s still a big inconsistency.</p>
+
+<hr />
+
+<p>Will Facebook Hashtags fail due to the massive differences between Facebook and Twitter? It&rsquo;s hard to say, but I&rsquo;m skeptical that Facebook will be able to capture the hashtag magic.</p>
+
+		
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/06/hashtag-hashtag/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/06/hashtag-hashtag/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Facebook Hashtags Are Fundamentally Broken - http://minimaxir.com/2013/06/hashtag-hashtag/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/06/hashtag-hashtag/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/06/hashtag-hashtag/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/06/hashtag-hashtag/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2013/06/hashtag-hashtag/';
+        var disqus_url = 'http://minimaxir.com/2013/06/hashtag-hashtag/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2013/06/working-as-intended/" title="Previous Post: When Uninstalling a PC Game Erases the Entire Hard Drive"><i class="fa fa-angle-double-left"></i>  When Uninstalling a PC Game Erases the Entire Hard Drive</a>
+        
+
+        
+          <a class="pull-right" href="/2013/06/big-social-data/" title="Next Post: Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis">Predicting the Number of Likes on a Facebook Status With Statistical Keyword Analysis <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>
