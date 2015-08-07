@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="minimaxir | Max Woolf's Blog">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/">
+
+
+  <meta name="twitter:description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/images/max-prof-pic-200.jpg">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="minimaxir | Max Woolf's Blog" property="og:title">
+
+
+  <meta content="website" property="og:type">
+
+
+  <meta content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym." property="og:description">
+
+
+  <meta content="http://minimaxir.com/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/images/max-prof-pic-200.jpg" property="og:image">
+
+
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <div class="home-page">
+  <div class="hero">
+    <h1>Max Woolf</h1>
+<p>@minimaxir</p>
+  </div>
+
+  <div class="home-field">
+    <div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-list">
+      <div class="container">
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2015/07/facebook-scraper/">How to Scrape Data From Facebook Page Posts for Statistical Analysis</a></h2>
+  
+
+  
+  
+  
+  <p>
+    It is pretty easy to scrape Facebook Posts data and make into a spreadsheet for easy analysis, although  there are a large number of gotchas.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2015-07-20T08:00:00-07:00" pubdate data-updated="true">Jul 20th, 2015</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/data/">data</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/07/facebook-scraper/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/07/facebook-scraper/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=How to Scrape Data From Facebook Page Posts for Statistical Analysis - http://minimaxir.com/2015/07/facebook-scraper/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/07/facebook-scraper/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How to Scrape Data From Facebook Page Posts for Statistical Analysis&url=http://minimaxir.com/2015/07/facebook-scraper/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/07/facebook-scraper/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2015/06/cars-2/">Why Is the Most-Viewed Gaming Video on YouTube About Cars 2?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    No, this is not an error. You can watch the video yourself on YouTube and verify the view count.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2015-06-15T08:00:00-07:00" pubdate data-updated="true">Jun 15th, 2015</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/data/">data</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/06/cars-2/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/06/cars-2/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Why Is the Most-Viewed Gaming Video on YouTube About Cars 2? - http://minimaxir.com/2015/06/cars-2/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/06/cars-2/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Is the Most-Viewed Gaming Video on YouTube About Cars 2?&url=http://minimaxir.com/2015/06/cars-2/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/06/cars-2/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2015/03/portrait/">Almost Every Smartphone and Tablet Browses the Web in Portrait Mode</a></h2>
+  
+
+  
+  
+  
+  <p>
+    95.25% of all smartphones browse the web in portrait orientation, while 88.18% of all tablets browse the web in portrait.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2015-03-18T08:30:00-07:00" pubdate data-updated="true">Mar 18th, 2015</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/data/">data</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/03/portrait/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/03/portrait/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Almost Every Smartphone and Tablet Browses the Web in Portrait Mode - http://minimaxir.com/2015/03/portrait/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/03/portrait/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Almost Every Smartphone and Tablet Browses the Web in Portrait Mode&url=http://minimaxir.com/2015/03/portrait/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/03/portrait/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2015/02/password-numbers/">Analyzing the Patterns of Numbers in 10 Million Passwords</a></h2>
+  
+
+  
+  
+  
+  <p>
+    There are many patterns for numbers in passwords, which involve surprising yet intuitive logic.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2015-02-24T08:00:00-08:00" pubdate data-updated="true">Feb 24th, 2015</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/data/">data</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/02/password-numbers/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/02/password-numbers/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Analyzing the Patterns of Numbers in 10 Million Passwords - http://minimaxir.com/2015/02/password-numbers/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/02/password-numbers/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Analyzing the Patterns of Numbers in 10 Million Passwords&url=http://minimaxir.com/2015/02/password-numbers/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/02/password-numbers/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2015/02/ggplot-tutorial/">An Introduction on How to Make Beautiful Charts With R and Ggplot2</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Adding a touch of color and design can help make more compelling visualizations, thanks to ggplot2 syntax and chaining capabilities.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2015-02-12T08:00:00-08:00" pubdate data-updated="true">Feb 12th, 2015</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/data/">data</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/02/ggplot-tutorial/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/02/ggplot-tutorial/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=An Introduction on How to Make Beautiful Charts With R and Ggplot2 - http://minimaxir.com/2015/02/ggplot-tutorial/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/02/ggplot-tutorial/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=An Introduction on How to Make Beautiful Charts With R and Ggplot2&url=http://minimaxir.com/2015/02/ggplot-tutorial/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/02/ggplot-tutorial/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+
+  <hr class="divider-short"/>
+	
+  <div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        
+          <h3><a class="pull-left" href="/2/"><i class="fa fa-angle-double-left"></i>  Older</a></h3>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="archive-link">
+      <h3><a href="/posts/">All Posts</a></h3>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>
