@@ -1,2 +1,18 @@
+<<<<<<< HEAD
 _site
 .sass-cache
+=======
+.bundle
+.DS_Store
+.sass-cache
+.gist-cache
+.pygments-cache
+_deploy
+public
+sass.old
+source.old
+source/_stash
+source/stylesheets/screen.css
+vendor
+node_modules
+>>>>>>> 744b160b0bdfc3f6abbd6a72e27fb22f30024c6a

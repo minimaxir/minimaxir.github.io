@@ -1,59 +1,3 @@
-<<<<<<< HEAD
----
-layout: default
----
-
-<div class="home-page">
-  <div class="hero">
-    {% include custom/hero.html %}
-  </div>
-
-  <div class="home-field">
-    <div class="home-landing her-row">
-      <div class="container">
-        <div class="row">
-          {% include custom/home_landing_row.html %}
-        </div>
-      </div>
-    </div>
-
-    <div class="article-list">
-      <div class="container">
-        {% for post in paginator.posts %}
-          {% assign content = post.content %}
-          <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-              {% include article_listing.html %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-
-  <hr class="divider-short"/>
-	
-  <div class="archive-link">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-offset-3 col-md-6">
-        {% if paginator.next_page %}
-          <h3><a class="pull-left" href="{{paginator.next_page_path}}"><i class="fa fa-angle-double-left"></i>  Older</a></h3>
-        {% endif %}
-
-        {% if paginator.previous_page %}
-          <h3><a class="pull-right" href="{{paginator.previous_page_path}}">Newer <i class="fa fa-angle-double-right"></i></a></h3>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-</div>
-
-    <div class="archive-link">
-      <h3><a href="/posts/">All Posts</a></h3>
-    </div>
-  </div>
-</div>
-=======
 <!DOCTYPE html>
 <html>
 
@@ -62,12 +6,12 @@ layout: default
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Your awesome title</title>
+  <title>About</title>
   <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/">
+  <link rel="canonical" href="http://yourdomain.com/about/">
   <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="http://yourdomain.com/feed.xml" />
 </head>
 
@@ -111,23 +55,20 @@ layout: default
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title">About</h1>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Jul 27, 2015</span>
+  <article class="post-content">
+    <p>This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at <a href="http://jekyllrb.com/">jekyllrb.com</a></p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2015/07/27/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-        </h2>
-      </li>
-    
-  </ul>
+<p>You can find the source code for the Jekyll new theme at: <a href="https://github.com/jglovier/jekyll-new">github.com/jglovier/jekyll-new</a></p>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<p>You can find the source code for Jekyll at <a href="https://github.com/jekyll/jekyll">github.com/jekyll/jekyll</a></p>
+
+  </article>
 
 </div>
 
@@ -195,4 +136,3 @@ layout: default
   </body>
 
 </html>
->>>>>>> 744b160b0bdfc3f6abbd6a72e27fb22f30024c6a
