@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>Mapping San Francisco Locations Using Facebook Data | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="Mapping San Francisco Locations Using Facebook Data">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2014/04/san-francisco/">
+
+
+  <meta name="twitter:description" content="With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/sf-checkin-header.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="Mapping San Francisco Locations Using Facebook Data" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2014/04/san-francisco/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/sf-checkin-header.png" property="og:image">
+
+
+  
+  <meta content="data" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2014/04/san-francisco/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Mapping San Francisco Locations Using Facebook Data</h1>
+        <div class="meta">
+          written <time datetime="2014-04-08T08:00:00-07:00" pubdate data-updated="true"></time>
+          in
+<span class="categories">
+  
+    
+          <a href="/data/">data</a></span>
+     
+  
+</span>
+        </div>
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/04/san-francisco/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/04/san-francisco/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Mapping San Francisco Locations Using Facebook Data - http://minimaxir.com/2014/04/san-francisco/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/04/san-francisco/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2014/04/san-francisco/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/04/san-francisco/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p>Statisticians like to use data from the <a href="https://www.census.gov/">United States Census</a> to plot interesting trends such as unemployment and population of regions across the country. However, such data is typically historical and not very robust.</p>
+
+<p>Facebook, on the other hand, has collected a large amount of data though its <a href="https://www.facebook.com/about/location">Places product</a>. Facebook Places allows users to &ldquo;check-in&rdquo; a place such as <a href="https://www.facebook.com/pages/Dolores-Park/105687759464007">Dolores Park</a> in a manner similar to <a href="https://foursquare.com/">Foursquare</a>.</p>
+
+<p><img src="/img/dolores.png"  ></p>
+
+<p>Through clever use of Facebook&rsquo;s Graph API and FQL, I was able to retrieve the data on all Facebook Places in and around San Francisco, along with the # of check-ins at each Place. With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit.</p>
+
+<!-- more -->
+
+
+<p>First, let&rsquo;s look at the distribution of check-ins among Places in San Francisco:</p>
+
+<p><img src="/img/sf-checkin-distribution.png"  ></p>
+
+<p>On a logarithmic scale, the shape resembles a bell curve with a center at about 800 check-ins; however, the sample average of check-ins for the data set is <strong>3,241 check-ins</strong>, indicating that the data may be heavily skewed to the right. Some Places don&rsquo;t have many check-ins, while some Places have an incredibly large number of check-ins.</p>
+
+<p>What are the Places with hundreds of thousands of check-ins? What does the city look like with all these Places plotted on a map of San Francisco?</p>
+
+<p><img src="/img/sf-checkin.png"  ></p>
+
+<p><em><a href="https://www.dropbox.com/s/cykofhlyus8atgw/sf-bubble.pdf">(PDF of Map)</a></em></p>
+
+<p>The most checked-in Places are, unsurprisingly, the famous tourist attractions of San Francisco, such as <a href="https://www.facebook.com/pages/ATT-Park/116440731717551">AT&amp;T Park</a> and <a href="https://www.facebook.com/UnionSquareSF">Union Square</a>. These Top Places are spread all over the city.</p>
+
+<p>It&rsquo;s also clear where the most dense areas are located in San Francisco. There are plainly-visible lines of Places along southern Mission Street and Outer Sunset. SOMA and Richmond have a large number of Places as well.</p>
+
+<p>And yes, 155,000 people really did check-into <a href="https://www.facebook.com/pages/The-Cheesecake-Factory/107178672654937">The Cheesecake Factory</a>.</p>
+
+<h1>What types of locations do people in San Francisco  frequently check-into?</h1>
+
+<p>Facebook also records the category of its Places, such as &ldquo;Bar&rdquo; and &ldquo;Restaurant&rdquo;. What are the most numerous types of locations in San Francisco?</p>
+
+<p><img src="/img/sf-checkin-distribution-count.png"  ></p>
+
+<p>Local businesses are by far the most frequent, as it&rsquo;s a more generic classifier for a Place and can be applied to anything that does not have an explicit classifier (such as startups). I find it interesting that non-profit organizations are more numerous than shopping centers.</p>
+
+<p>However, the quantity of a specific type of business does not necessarily mean that San Franciscians will check-into that type of Place more often. Which type of Place, on average, receives the greatest number of check-ins?</p>
+
+<p><img src="/img/sf-checkin-distribution-avg.png"  ></p>
+
+<p>People are more likely to check-into memorable Places and events, instead of Places they frequently visit like Bars and Restaurants (Twice as many people check-into Attractions than Clubs). Again, tourist attractions are the most popular, which is due to both the relatively low number of Places and the extremely high number of check-ins into Places such as AT&amp;T Park.</p>
+
+<p>The &ldquo;Lake&rdquo; corresponds to <a href="https://www.facebook.com/pages/Lake-Merced/113785468632283">Lake Merced</a>, if you&rsquo;re curious.</p>
+
+<h1>Which San Francisco neighborhoods are the most popular?</h1>
+
+<p>You saw earlier that the Facebook Places are concentrated in specific areas. Here&rsquo;s a map of San Francisco&rsquo;s neighborhoods, highlighted by the number of Places within:</p>
+
+<p><img src="/img/sf-places-count.png"  ></p>
+
+<p><em><a href="https://www.dropbox.com/s/63fgvcucvk9n9v3/sf-sum.pdf">(PDF of Map)</a></em></p>
+
+<p>The neighborhoods with the most Places are unsurprisingly where the trendy areas are, such as the Mission and SOMA. Additionally, those types of neighborhoods are larger in square area than others, which may bias the results in their favor.</p>
+
+<p>But are these large neighborhoods also the most active neighborhoods? Which neighborhoods have the most check-ins on average per Place within the neighborhood?</p>
+
+<p><img src="/img/sf-places-avg.png"  ></p>
+
+<p><em><a href="https://www.dropbox.com/s/u613oh4fskjrkny/sf-avg.pdf">(PDF of Map)</a></em></p>
+
+<p>The Embarcadero has by far the most check-ins on average, again, due to both its small size and AT&amp;T Park. Other neighborhoods, however, have more similar averages to each other. It&rsquo;s worth noting that the average number of check-ins is higher in neighborhoods adjacent to the San Francisco Bay, such as North Beach and Fisherman&rsquo;s Wharf: perhaps people check-in more frequently when they have a good view.</p>
+
+<p>Can this data and conclusions about San Francisco Facebook Places be extrapolated to other cities? I&rsquo;d argue yes: it makes logical sense that people check-in more frequently to Places that are more significant, and it also makes sense that people frequently check-into Places with large amounts of tourist attractions. Facebook data shows us cool trends that the United States Census data cannot.</p>
+
+<hr />
+
+<p><em>All charts and maps were made using R, ggplot2, and ggmaps.</em></p>
+
+<p><em>You can download a copy of the Facebook Places data set <a href="https://www.dropbox.com/s/6g6ap4poz1b2trs/sf-public.csv">here</a>. The place_id column corresponds to the San Francisco neighborhood where the Place is located.</em></p>
+
+<p><em>Maps are from <a href="https://www.google.com/maps/">Google Maps</a>. San Francisco shape files for city neighborhoods are from <a href="https://data.sfgov.org/Service-Requests-311-/Neighborhoods/ejmn-jyk6">data.sf.gov</a>. Additionally, thanks to <a href="http://www.reddit.com/r/dataisbeautiful/comments/223ubt/map_of_places_in_san_francisco_by_of_facebook/">/r/dataisbeautiful</a> for offering ideas for improvements to the maps.</em></p>
+
+<p><em>You may notice that the Check-In Counts on some of the official Facebook Place Pages strongly disagree with the Count reported in my charts. The Count reported on affected page is nearly double the value reported via the API in each instance. I believe this is a bug on Facebook&rsquo;s end: see <a href="http://i.imgur.com/I1syBhR.png">this image</a>, in which the Graph Search autocomplete reports a different value of check-ins than the Place Page itself. In this case, I trust the data from the API.</em></p>
+
+		
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/04/san-francisco/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/04/san-francisco/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Mapping San Francisco Locations Using Facebook Data - http://minimaxir.com/2014/04/san-francisco/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/04/san-francisco/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2014/04/san-francisco/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/04/san-francisco/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2014/04/san-francisco/';
+        var disqus_url = 'http://minimaxir.com/2014/04/san-francisco/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2014/03/hashtag-tag/" title="Previous Post: Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?"><i class="fa fa-angle-double-left"></i>  Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?</a>
+        
+
+        
+          <a class="pull-right" href="/2014/06/reviewing-reviews/" title="Next Post: A Statistical Analysis of 1.2 Million Amazon Reviews">A Statistical Analysis of 1.2 Million Amazon Reviews <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT) | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT)">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2013/01/if-cute-then-happiness/">
+
+
+  <meta name="twitter:description" content="You can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too!">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/iftttrecipe.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT)" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="You can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too!" property="og:description">
+
+
+  <meta content="http://minimaxir.com/2013/01/if-cute-then-happiness/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/iftttrecipe.png" property="og:image">
+
+
+  
+  <meta content="startups" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2013/01/if-cute-then-happiness/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT)</h1>
+        <div class="meta">
+          written <time datetime="2013-01-13T21:32:00-08:00" pubdate data-updated="true"></time>
+          in
+<span class="categories">
+  
+    
+          <a href="/startups/">startups</a></span>
+     
+          <a href="/hacks/">hacks</a></span>
+     
+  
+</span>
+        </div>
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT) - http://minimaxir.com/2013/01/if-cute-then-happiness/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p><strong><em>TL;DR: Use this <a href="https://ifttt.com/recipes/74285">IFTTT recipe</a>, and change the subreddit value in the parameter of the Feed URL as needed.</em></strong></p>
+
+<p>In <a href="http://minimaxir.com/2012/12/totally-real-totally-serious/">a previous post</a>, I joked about a hypothetical social media strategy in which an automated script does Facebook brand management by stealing the top cute images from <a href="http://www.reddit.com/">Reddit</a> - an aggregator of trending topics and images -  and reposting them on the Facebook page, additionally adding a cute message encouraging users to LIKE, SHARE, and COMMENT!  We get easy social media fame for no monetary cost.</p>
+
+<p>Out of curiosity, I wanted to see if it was feasible to create such a script. Both Reddit and Facebook indeed have APIs that make it easy. But then I have to set up a server to check Reddit periodically, ensure that no images are duplicated, etc., and that can take time to implement and ensure that it works correctly (<em>all</em> the images must be cute!). I looked into <a href="https://ifttt.com/">IFTTT</a>, a relatively new startup that talks between different popular web services to automate simple tasks, like posting to Twitter whenever you post to Facebook.</p>
+
+<p>As it turns out, yes, this is possible, and you can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too! Just use <a href="https://ifttt.com/recipes/74285">this IFTTT recipe</a>! There are a few interesting caveats, though&hellip;</p>
+
+<!-- more -->
+
+
+<h2>Really Simple Syndication is&hellip;Really Simple?</h2>
+
+<p><img src="/img/redditrss2.png"  ></p>
+
+<p>IFTTT allows users to extract information from RSS feeds, which one might typically be used to read blogs and news articles. The RSS feed typically provides the title, author, date, and content of a post: the important things. However, RSS has more applications: it can distribute other data, such as weather and desktop wallpapers. IFTTT allows other apps to load image and audio files from an RSS feed, but only if the RSS feed link links to the content itself.</p>
+
+<p>Unfortunately, this won&rsquo;t work on Reddit by default, as its RSS feeds do not contain a direct link to the photo and instead link to the Reddit comments on the image. Image-based websites, such as <a href="http://www.buzzfeed.com/">BuzzFeed</a> and <a href="http://interfacelift.com/wallpaper/downloads/date/any/">InterfaceLift</a> also implement a similar system because they don&rsquo;t want their users just to use a script to download images and bypass the website and its lovely revenue-generating advertisements. Therefore, the RSS feed alone won&rsquo;t work with IFTTT.</p>
+
+<p>During my research into my social media exploitation hypothesis, I found a <a href="http://blog.stevemould.com/rss-feed-reddit-stories-score-threshold/">blog post by Steve Mould</a> that provides a way to translate data from Reddit&rsquo;s JSON API to an RSS feed using a service called <a href="http://pipes.yahoo.com/pipes/">Yahoo Pipes</a>. This modified RSS feed, when given a subreddit and a score threshold, obtains the top Reddit posts in that subreddit above that karma threshold (upvotes - downvotes), and returns a feed item which contains direct link to the referenced URL.</p>
+
+<p>Here is <a href="http://bit.ly/W1ypdf">my variation of his Reddit Pipe</a>. My script to process the API has a few changes (such as using Reddit&rsquo;s &ldquo;hot&rdquo; posts, instead of the top posts; hot posts update much more frequently). Testing it with r/aww and a threshold of 50 karma, I received 177 very cute pictures on my computer in a week.</p>
+
+<p><img src="/img/redditcute.png"  ></p>
+
+<p>From that Pipe, you can get the data in a RSS feed URL. Right-click and copy that feed URL into a IFTTT recipe as the source. For the action, use the **** variable to retrieve the image URL.</p>
+
+<h2>With Great Power Comes Great Cuteness</h2>
+
+<p>Yes, you can save the Reddit images to your computer automatically using <a href="https://www.dropbox.com/">Dropbox</a>. Or <a href="https://drive.google.com">Google Drive</a>. Or <a href="https://skydrive.live.com/">SkyDrive</a>. Or even get a cute email every hour!</p>
+
+<p>Thanks to IFTTT, there are many other creative things you can do with the feed that you can include in a recipe:</p>
+
+<ul>
+<li>Auto-post the image to your Tumblr or WordPress blog. Easy cuteness, and you&rsquo;ll be the source!</li>
+<li>Auto-curate the cute photos to your Facebook or Twitter account. All your friends will love you!</li>
+<li>Get social media fame for no additional monetary cost by publishing the cute images to your Facebook Page, with an encouragement to LIKE SHARE and COMMENT! My original hypothesis was correct!</li>
+</ul>
+
+
+<p><img src="/img/redditnega.png"  ></p>
+
+<h2>Caveats</h2>
+
+<p>One caveat in using Yahoo Pipes is that it is rate limited to 200 runs in a 10 minute interval, meaning that the IFTTT recipe provided will likely fail if more than 200 people use the feed. If that does happen, just clone my pipe, and use the RSS feed from the clone for your own personal recipe.</p>
+
+<p>Also, there&rsquo;s no rate limiting on when recipes are triggered and images are posted/downloaded. You can trigger multiple images simultaneously, which may be considered spammy if you are posting to social media. In that case, increase the karma threshold to reduce the frequency of the postings and to maintain a high quality of the images.</p>
+
+<p><img src="/img/iftttrecipe.png"  ></p>
+
+<p>Getting socially-vetted photos on your computer without any effort is a useful timesaver. A solution to a first world problem, perhaps, but it&rsquo;s the little things that count!</p>
+
+		
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT) - http://minimaxir.com/2013/01/if-cute-then-happiness/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2013/01/if-cute-then-happiness/';
+        var disqus_url = 'http://minimaxir.com/2013/01/if-cute-then-happiness/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2013/01/prefixed-period/" title="Previous Post: Why Do Many Tweets Begin With a Period?"><i class="fa fa-angle-double-left"></i>  Why Do Many Tweets Begin With a Period?</a>
+        
+
+        
+          <a class="pull-right" href="/2013/01/sexy-will-haunt-your-dreams/" title="Next Post: Let Myspace's Justin Timberlake Bring Sexy to the Entire Internet">Let Myspace's Justin Timberlake Bring Sexy to the Entire Internet <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

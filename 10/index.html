@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="minimaxir | Max Woolf's Blog">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/10/">
+
+
+  <meta name="twitter:description" content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/images/max-prof-pic-200.jpg">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="minimaxir | Max Woolf's Blog" property="og:title">
+
+
+  <meta content="website" property="og:type">
+
+
+  <meta content="A blog by Max Woolf about startups, technology, and blogging. It's so meta, even this acronym." property="og:description">
+
+
+  <meta content="http://minimaxir.com/10/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/images/max-prof-pic-200.jpg" property="og:image">
+
+
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/10/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <div class="home-page">
+  <div class="hero">
+    <h1>Max Woolf</h1>
+<p>@minimaxir</p>
+  </div>
+
+  <div class="home-field">
+    <div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-list">
+      <div class="container">
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2013/01/if-cute-then-happiness/">Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT)</a></h2>
+  
+
+  
+  
+  
+  <p>
+    You can also save the top images on Reddit to your computer via any cloud storage service without ever visiting the website too!
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2013-01-13T21:32:00-08:00" pubdate data-updated="true">Jan 13th, 2013</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/startups/">startups</a></span>
+          
+         <a href="/hacks/">hacks</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/if-cute-then-happiness/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT) - http://minimaxir.com/2013/01/if-cute-then-happiness/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Auto-Save Images From Reddit to Computer Without Visiting the Site (Using IFTTT)&url=http://minimaxir.com/2013/01/if-cute-then-happiness/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/if-cute-then-happiness/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2013/01/prefixed-period/">Why Do Many Tweets Begin With a Period?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    I eventually realized that beginning your reply Tweet with a period (.) allows it to be seen by all your followers.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2013-01-04T21:30:00-08:00" pubdate data-updated="true">Jan 4th, 2013</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/startups/">startups</a></span>
+          
+         <a href="/twitter/">twitter</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/prefixed-period/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/prefixed-period/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Why Do Many Tweets Begin With a Period? - http://minimaxir.com/2013/01/prefixed-period/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/prefixed-period/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Why Do Many Tweets Begin With a Period?&url=http://minimaxir.com/2013/01/prefixed-period/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/prefixed-period/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2012/12/powerpoint-promo-party/">Creating a Startup Promo Video Using... PowerPoint?</a></h2>
+  
+
+  
+  
+  
+  <p>
+    PowerPoint video creation is feasible if you don't have or can'	 afford dedicated video software and need a promo video in a pinch, as may be the case with an actual startup.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2012-12-29T21:28:00-08:00" pubdate data-updated="true">Dec 29th, 2012</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/startups/">startups</a></span>
+          
+         <a href="/hacks/">hacks</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/12/powerpoint-promo-party/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/12/powerpoint-promo-party/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Creating a Startup Promo Video Using... PowerPoint? - http://minimaxir.com/2012/12/powerpoint-promo-party/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/12/powerpoint-promo-party/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Creating a Startup Promo Video Using... PowerPoint?&url=http://minimaxir.com/2012/12/powerpoint-promo-party/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/12/powerpoint-promo-party/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2012/12/totally-real-totally-serious/">A Totally-Real Totally-Serious Startup Pitch for Venture Capital</a></h2>
+  
+
+  
+  
+  
+  <p>
+    [This isn't real.]
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2012-12-26T21:26:00-08:00" pubdate data-updated="true">Dec 26th, 2012</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/startups/">startups</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/12/totally-real-totally-serious/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/12/totally-real-totally-serious/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Totally-Real Totally-Serious Startup Pitch for Venture Capital - http://minimaxir.com/2012/12/totally-real-totally-serious/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/12/totally-real-totally-serious/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Totally-Real Totally-Serious Startup Pitch for Venture Capital&url=http://minimaxir.com/2012/12/totally-real-totally-serious/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/12/totally-real-totally-serious/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/2012/10/client-side-validation-is-hard-mode/">Electronic Arts "Gives Away" Thousands of Free Games Due to No Server-Side Validation</a></h2>
+  
+
+  
+  
+  
+  <p>
+    Gamers noted that simply inputting the code while logged-out allows them to use the promo code an *unlimited* amount of times. Needless to say, hilarity ensued.
+  </p>
+  
+  
+  
+  <span class="meta">
+    written <time datetime="2012-10-14T21:21:00-07:00" pubdate data-updated="true">Oct 14th, 2012</time>
+    in
+<span class="categories">
+  
+    
+         <a href="/gaming/">gaming</a></span>
+          
+         <a href="/technology/">technology</a></span>
+          
+  
+</span>
+  </span>
+  
+  <div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Electronic Arts "Gives Away" Thousands of Free Games Due to No Server-Side Validation - http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Electronic Arts "Gives Away" Thousands of Free Games Due to No Server-Side Validation&url=http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2012/10/client-side-validation-is-hard-mode/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+
+  
+</article>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+
+  <hr class="divider-short"/>
+	
+  <div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        
+          <h3><a class="pull-left" href="/11/"><i class="fa fa-angle-double-left"></i>  Older</a></h3>
+        
+
+        
+          <h3><a class="pull-right" href="/9/">Newer <i class="fa fa-angle-double-right"></i></a></h3>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="archive-link">
+      <h3><a href="/posts/">All Posts</a></h3>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

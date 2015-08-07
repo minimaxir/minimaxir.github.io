@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>Reddit Is Growing Slowly, but Surely | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="Reddit Is Growing Slowly, but Surely">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2013/11/daily-reddit/">
+
+
+  <meta name="twitter:description" content="I analyzed the daily number of submissions from over two years to see which events, if any, have affected Reddit's growth rate. As it turns out, Reddit grows by itself....">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/reddit_daily-mac.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="Reddit Is Growing Slowly, but Surely" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="I analyzed the daily number of submissions from over two years to see which events, if any, have affected Reddit's growth rate. As it turns out, Reddit grows by itself...." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2013/11/daily-reddit/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/reddit_daily-mac.png" property="og:image">
+
+
+  
+  <meta content="data" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2013/11/daily-reddit/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Reddit Is Growing Slowly, but Surely</h1>
+        <div class="meta">
+          written <time datetime="2013-11-18T07:30:00-08:00" pubdate data-updated="true"></time>
+          in
+<span class="categories">
+  
+    
+          <a href="/data/">data</a></span>
+     
+          <a href="/graphs/">graphs</a></span>
+     
+  
+</span>
+        </div>
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/11/daily-reddit/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/11/daily-reddit/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Reddit Is Growing Slowly, but Surely - http://minimaxir.com/2013/11/daily-reddit/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/11/daily-reddit/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/11/daily-reddit/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/11/daily-reddit/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p>Reddit has certainty received more attention in the mainstream media with its involvement in such events as the <a href="http://www.nytimes.com/2013/04/29/business/media/bombings-trip-up-reddit-in-its-turn-in-spotlight.html?_r=0">Boston Marathon Bombings</a> and <a href="hhttp://www.reddit.com/r/IAmA/comments/z1c9z/i_am_barack_obama_president_of_the_united_states/">President Obama&rsquo;s AMA</a>. But has this publicity led to increase in overall activity on the site?</p>
+
+<p>I analyzed the daily number of submissions from over two years, August 6th, 2011 to September 25, 2013 (41 million submissions total), to see which events, if any, have affected Reddit&rsquo;s growth rate. As it turns out, Reddit grows by itself.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/reddit_daily-mac.png"  ></p>
+
+<p>Reddit&rsquo;s growth over the past two years has been almost entirely <strong>linear</strong>, with no notable acceleration in submission activity at any point in time.</p>
+
+<p>Running a linear regression on daily number of submissions vs. number of days since the first date (8/6/11) reveals that the expected increase in number of submissions each successive day on average is <strong>66.48 submissions</strong>  (+1,948 submissions each successive month, +24,259 submissions each successive year)</p>
+
+<p>This growth rate alone explains <strong>86.83%</strong> of the variation in number of submissions, indicating that external factors such as media publicity explain the remaining 13% of the variation.</p>
+
+<p>From a business perspective, it&rsquo;s impressive that Reddit still continues to grow for being such a mature internet business, but prospective investors for a rumored <a href="http://techcrunch.com/2013/01/06/reddit-rumored-to-be-raising-money-at-a-400-million-valuation/">fundraising at a $400 Million valuation</a> might be weary that Reddit&rsquo;s growth is only linear, in contrast to the <strong>exponential</strong> growth of other startups such as Snapchat. (In fairness, submission activity may not necessarily correlate with revenue-driving content consumption activity)</p>
+
+<p>A couple stray observations:</p>
+
+<ul>
+<li><p>On January 18th, 2012, the daily number of Reddit submissions hit the minimum among the two-year period due to Reddit&rsquo;s participation in the Internet blackout in protest of SOPA. (Reddit&rsquo;s blackout was only from 8AM to 8PM EST, which is why there are a nonzero number of submissions for that day).</p></li>
+<li><p>On April 1st, 2013, the daily number of Reddit submissions hit the maximum among the two-year period due to April Fool&rsquo;s Day, and the numerous amount of submissions for <em>X</em> brand/website&rsquo;s well-timed joke. However, I&rsquo;m not entirely sure why there&rsquo;s a spike for April Fool&rsquo;s Day in 2013, but not April Fool&rsquo;s Day in 2012.</p></li>
+</ul>
+
+
+<hr />
+
+<p><em>You can access the data used to create the time-series chart at <a href="https://docs.google.com/spreadsheet/ccc?key=0AjPFdCURhZvddGZ2Zkk1MGF3SjZxdC1sRzV5SW9zRWc&amp;usp=sharing">this Google Spreadsheet</a>.</em></p>
+
+		
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/11/daily-reddit/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/11/daily-reddit/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=Reddit Is Growing Slowly, but Surely - http://minimaxir.com/2013/11/daily-reddit/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/11/daily-reddit/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/11/daily-reddit/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/11/daily-reddit/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2013/11/daily-reddit/';
+        var disqus_url = 'http://minimaxir.com/2013/11/daily-reddit/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2013/11/subreddit-size/" title="Previous Post: Which Subreddits on Reddit Are the Largest?"><i class="fa fa-angle-double-left"></i>  Which Subreddits on Reddit Are the Largest?</a>
+        
+
+        
+          <a class="pull-right" href="/2013/11/innovation-rng/" title="Next Post: Probabilistically Generating GitHub Projects">Probabilistically Generating GitHub Projects <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

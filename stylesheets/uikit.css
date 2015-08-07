@@ -109,7 +109,6 @@ textarea {
   font-size: 100%;
   margin: 0;
   -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 button,
@@ -369,7 +368,8 @@ pre {
   font-size: 12px;
   line-height: 18px;
   -moz-tab-size: 4;
-  tab-size: 4;
+  -o-tab-size: 4;
+     tab-size: 4;
 }
 button,
 input:not([type="radio"]):not([type="checkbox"]),
@@ -3428,6 +3428,7 @@ a.uk-thumbnail:focus {
 }
 .uk-progress-striped .uk-progress-bar {
   background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-size: 30px 30px;
 }
@@ -3603,11 +3604,13 @@ input.uk-search-field {
 @keyframes uk-scale-up {
   0% {
     opacity: 0;
-    transform: scale(0.2);
+    -webkit-transform: scale(0.2);
+            transform: scale(0.2);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 @-webkit-keyframes uk-scale-down {
@@ -3623,11 +3626,13 @@ input.uk-search-field {
 @keyframes uk-scale-down {
   0% {
     opacity: 0;
-    transform: scale(1.8);
+    -webkit-transform: scale(1.8);
+            transform: scale(1.8);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 @-webkit-keyframes uk-slide-top {
@@ -3643,11 +3648,13 @@ input.uk-search-field {
 @keyframes uk-slide-top {
   0% {
     opacity: 0;
-    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
   }
 }
 @-webkit-keyframes uk-slide-bottom {
@@ -3663,11 +3670,13 @@ input.uk-search-field {
 @keyframes uk-slide-bottom {
   0% {
     opacity: 0;
-    transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
   }
 }
 @-webkit-keyframes uk-slide-left {
@@ -3683,11 +3692,13 @@ input.uk-search-field {
 @keyframes uk-slide-left {
   0% {
     opacity: 0;
-    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
 }
 @-webkit-keyframes uk-slide-right {
@@ -3703,11 +3714,13 @@ input.uk-search-field {
 @keyframes uk-slide-right {
   0% {
     opacity: 0;
-    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
 }
 @-webkit-keyframes uk-slide-top-fixed {
@@ -3723,11 +3736,13 @@ input.uk-search-field {
 @keyframes uk-slide-top-fixed {
   0% {
     opacity: 0;
-    transform: translateY(-10px);
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
   }
 }
 @-webkit-keyframes uk-slide-bottom-fixed {
@@ -3743,11 +3758,13 @@ input.uk-search-field {
 @keyframes uk-slide-bottom-fixed {
   0% {
     opacity: 0;
-    transform: translateY(10px);
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
   }
 }
 @-webkit-keyframes uk-spin {
@@ -3760,10 +3777,12 @@ input.uk-search-field {
 }
 @keyframes uk-spin {
   0% {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   100% {
-    transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
   }
 }
 .uk-dropdown {
@@ -3786,7 +3805,8 @@ input.uk-search-field {
   -webkit-animation: uk-fade 0.2s ease-in-out;
   animation: uk-fade 0.2s ease-in-out;
   -webkit-transform-origin: 0 0;
-  transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+      transform-origin: 0 0;
 }
 .uk-dropdown-flip {
   left: auto;
@@ -3926,14 +3946,16 @@ input.uk-search-field {
 .uk-modal-dialog-slide {
   opacity: 0;
   -webkit-transform: translateY(-25%);
-  transform: translateY(-25%);
+  -ms-transform: translateY(-25%);
+      transform: translateY(-25%);
   -webkit-transition: opacity 0.3s linear, -webkit-transform 0.3s ease-out;
   transition: opacity 0.3s linear, transform 0.3s ease-out;
 }
 .uk-open .uk-modal-dialog-slide {
   opacity: 1;
   -webkit-transform: translateY(0);
-  transform: translateY(0);
+  -ms-transform: translateY(0);
+      transform: translateY(0);
 }
 .uk-modal-dialog > .uk-close:first-child {
   margin: -10px -10px 0 0;
@@ -3982,7 +4004,8 @@ input.uk-search-field {
   bottom: 0;
   left: 0;
   -webkit-transform: translateX(-100%);
-  transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+      transform: translateX(-100%);
   z-index: 1011;
   width: 270px;
   max-width: 100%;
@@ -3994,13 +4017,15 @@ input.uk-search-field {
 }
 .uk-offcanvas.uk-active .uk-offcanvas-bar.uk-offcanvas-bar-show {
   -webkit-transform: translateX(0%);
-  transform: translateX(0%);
+  -ms-transform: translateX(0%);
+      transform: translateX(0%);
 }
 .uk-offcanvas-bar-flip {
   left: auto;
   right: 0;
   -webkit-transform: translateX(100%);
-  transform: translateX(100%);
+  -ms-transform: translateX(100%);
+      transform: translateX(100%);
 }
 .uk-offcanvas .uk-panel {
   margin: 20px 15px;

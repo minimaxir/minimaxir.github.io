@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>A Thoughtful Analysis of the Most Poorly-Designed Chart Ever | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="A Thoughtful Analysis of the Most Poorly-Designed Chart Ever">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2014/01/more-language-more-problems/">
+
+
+  <meta name="twitter:description" content="The good thing about the chart? The data is properly cited. The bad? EVERYTHING ELSE.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/dev-graph-3.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="A Thoughtful Analysis of the Most Poorly-Designed Chart Ever" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="The good thing about the chart? The data is properly cited. The bad? EVERYTHING ELSE." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2014/01/more-language-more-problems/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/dev-graph-3.png" property="og:image">
+
+
+  
+  <meta content="data" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2014/01/more-language-more-problems/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>A Thoughtful Analysis of the Most Poorly-Designed Chart Ever</h1>
+        <div class="meta">
+          written <time datetime="2014-01-20T08:00:00-08:00" pubdate data-updated="true"></time>
+          in
+<span class="categories">
+  
+    
+          <a href="/data/">data</a></span>
+     
+          <a href="/comedy/">comedy</a></span>
+     
+  
+</span>
+        </div>
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/01/more-language-more-problems/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/01/more-language-more-problems/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Thoughtful Analysis of the Most Poorly-Designed Chart Ever - http://minimaxir.com/2014/01/more-language-more-problems/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/01/more-language-more-problems/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2014/01/more-language-more-problems/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/01/more-language-more-problems/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p>Last week, I was surfing Reddit and came across an <a href="http://www.reddit.com/r/ProgrammerHumor/comments/1ur3ny/unnecessary_graph_of_most_desired_skills_in_2013/">interesting infographic</a> within the <a href="http://www.reddit.com/r/ProgrammerHumor/">ProgrammerHumor subreddit</a>. The infographic, as compiled by tech blog <a href="http://readwrite.com/">ReadWrite</a>, depicts the Top 10 Most In-Demand Developer Skills of 2013, as compiled by <a href="http://stackoverflow.com/">Stack Overflow</a> through keyword searches.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/infographic-1.jpg"  ></p>
+
+<p>Take a look at the chart. What’s good and bad about it?</p>
+
+<h1>The Good</h1>
+
+<p>The data is properly cited.</p>
+
+<h1>The Bad</h1>
+
+<p><strong>EVERYTHING ELSE.</strong></p>
+
+<p>What’s terrible about the graph? Let me count the ways:</p>
+
+<ul>
+<li><p>Using discrete values in the X-Axis for a continuous measurement (i.e. the percentage). And not only that, discrete values with two significant figures, which make the X-Axis unusually cluttered.</p></li>
+<li><p>The Y-Axis is Language. This implies that some programming languages are more language than others.  (<a href="https://www.facebook.com/photo.php?fbid=10152166149970450&amp;set=a.432190050449.225968.582270449&amp;type=1&amp;stream_ref=10">to be fair</a>, Java is more language than Android)</p></li>
+<li><p>Not all entries on the chart are programming languages. (Android, for example, is an operating system.)</p></li>
+<li><p>The 45-degree line in the chart implies that the relationship between language and %-of-searches is perfectly linear, where in reality the data has an upward-parabolic shape.</p></li>
+<li><p>No relative proportions between the programming languages. We can&rsquo;t accurately see the increase in language Java has relative to Android just by looking at the graph.</p></li>
+<li><p>Cannot easily associate a language with the given X-Axis value. The logos representing the programming language oscillate around the line, and it&rsquo;s hard to see at a glance which percentage corresponds to which language.</p></li>
+</ul>
+
+
+<h1>Fixing the Chart</h1>
+
+<p>This isn’t one of those blog posts that make snarky criticism without offering any constructive input. (those will be posted next week). How can we make the chart somewhat logical?</p>
+
+<p>The easiest way to improve the chart is to convert the chart from a line chart to a column chart. Here’s a column chart that keeps the intended impression of the original chart:</p>
+
+<p><img src="/img/dev-graph-1.png"  ></p>
+
+<p>A much bigger improvement, although unfortunately without the cool hand-drawn logos. The axes are no longer illogical and it’s easy to determine the relative impact of each language (e.g. Java is clearly, clearly at the top). However, the large amount of text can clutter the bars, and it can be difficult to correlate the raw percentage with the scale at a glance.</p>
+
+<p>Another option is to rotate the chart and use bars instead of columns:</p>
+
+<p><img src="/img/dev-graph-2.png"  ></p>
+
+<p>This fixes the text issue by giving more room for text with most of the factors, but the Java text clips outside the chart. The correlation issue between language and percent value persists.</p>
+
+<p>A best-of-both-worlds approach is to display the language on the Y-Axis and the raw percent value on the corresponding bar itself, allowing us to forgo the percent metric axis entirely.</p>
+
+<p><img src="/img/dev-graph-3.png"  ></p>
+
+<p>There we go. Minimalist, fixes both the text and correlation issues, and gets the point across effectively.</p>
+
+<p>All of these charts were created using R and ggplot2, and you can download the R code in <a href="https://github.com/minimaxir/developer-graphs">this GitHub repository</a>. I wish the <a href="http://readwrite.com/2014/01/08/in-demand-tech-skills-of-2013-java">orginal ReadWrite article</a> used a chart like the last one and…</p>
+
+<p>Wait, they changed the infographic?</p>
+
+<p><img src="/img/infographic-2.jpg"  ></p>
+
+<p>Hey, they fixed the chart, and it’s using a similar design as mine! What a crazy random happenstance!</p>
+
+<p>The article was appended with an update:</p>
+
+<blockquote><p>An earlier version of the infographic in this story presented the StackOverflow data in a confusing and conceptually problematic fashion. It has been updated.</p></blockquote>
+
+<p>&ldquo;Problematic&rdquo; is the world&rsquo;s biggest understatement.</p>
+
+		
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/01/more-language-more-problems/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/01/more-language-more-problems/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Thoughtful Analysis of the Most Poorly-Designed Chart Ever - http://minimaxir.com/2014/01/more-language-more-problems/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/01/more-language-more-problems/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2014/01/more-language-more-problems/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/01/more-language-more-problems/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2014/01/more-language-more-problems/';
+        var disqus_url = 'http://minimaxir.com/2014/01/more-language-more-problems/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2014/01/farcical-friends-of-friends-folly/" title="Previous Post: The Friends of My Friends Are Not My Friends"><i class="fa fa-angle-double-left"></i>  The Friends of My Friends Are Not My Friends</a>
+        
+
+        
+          <a class="pull-right" href="/2014/02/moved-temporarily/" title="Next Post: Imgur Is Covertly Redirecting Image Links on Facebook and Twitter">Imgur Is Covertly Redirecting Image Links on Facebook and Twitter <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

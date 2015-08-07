@@ -26,8 +26,6 @@ margin: 20px 0;
 
 .badge {
   -webkit-transition: 0.25s;
-  -moz-transition: 0.25s;
-  -o-transition: 0.25s;
   transition: 0.25s;
   -webkit-backface-visibility: hidden; }
   .badge:hover {
@@ -97,7 +95,6 @@ background-color: #1ABC9C;
 }
 
 .max-header img {
--moz-border-radius: 5px;
 border-radius: 5px;
 }
 

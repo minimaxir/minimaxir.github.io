@@ -146,8 +146,6 @@ text-transform: uppercase;
 
 a, em a, strong a {
 -webkit-transition: 0.25s;
-  -moz-transition: 0.25s;
-  -o-transition: 0.25s;
   transition: 0.25s;
   -webkit-backface-visibility: hidden; 
 color: #2980b9;
@@ -209,8 +207,6 @@ font-size: 25px;
 
 .hero .uk-grid.sharing a  {
   -webkit-transition: 0.25s;
-  -moz-transition: 0.25s;
-  -o-transition: 0.25s;
   transition: 0.25s;
   -webkit-backface-visibility: hidden; 
   color: white !important}
@@ -224,8 +220,6 @@ border-radius: 10px;
 		
 .hentry .uk-grid.sharing a, .uk-grid.sharing.index a, .pagination a  {
   -webkit-transition: 0.25s;
-  -moz-transition: 0.25s;
-  -o-transition: 0.25s;
   transition: 0.25s;
   -webkit-backface-visibility: hidden; 
   color: #2c3e50 !important}
@@ -243,6 +237,10 @@ font-family: "Lato","Arial";
 margin: 20px 0;
 font-size: 30px;
 line-height: 30px;
+}
+
+::-moz-selection {
+background-color: #2c3e50;
 }
 
 ::selection {

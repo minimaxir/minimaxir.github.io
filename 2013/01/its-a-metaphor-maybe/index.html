@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <title>How to Kill the Reader Comments of a Popular Tech Blog | minimaxir | Max Woolf's Blog</title>
+
+
+
+  
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="How to Kill the Reader Comments of a Popular Tech Blog">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2013/01/its-a-metaphor-maybe/">
+
+
+  <meta name="twitter:description" content="I'm honestly afraid that the switch from Facebook Comments could kill quality comments on TechCrunch completely.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/ToKillACommentsSection.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="How to Kill the Reader Comments of a Popular Tech Blog" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="I'm honestly afraid that the switch from Facebook Comments could kill quality comments on TechCrunch completely." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2013/01/its-a-metaphor-maybe/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/ToKillACommentsSection.png" property="og:image">
+
+
+  
+  <meta content="blogging" property="article:section">
+  
+
+
+  
+
+ 
+ 
+  <meta property="og:locale"    content="en_us" />
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://minimaxir.com/2013/01/its-a-metaphor-maybe/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script>
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  });
+  });
+  });
+  </script>
+
+</head>
+  <body>
+    <!--<a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>-->
+	
+	<a href="/" class="home-icon">
+		<i class="fa fa-home"></i>
+	</a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>How to Kill the Reader Comments of a Popular Tech Blog</h1>
+        <div class="meta">
+          written <time datetime="2013-01-23T21:38:00-08:00" pubdate data-updated="true"></time>
+          in
+<span class="categories">
+  
+    
+          <a href="/blogging/">blogging</a></span>
+     
+  
+</span>
+        </div>
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=How to Kill the Reader Comments of a Popular Tech Blog - http://minimaxir.com/2013/01/its-a-metaphor-maybe/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+        <p>In March of 2011, <a href="http://techcrunch.com/2011/03/01/facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/">TechCrunch implemented</a> the just-announced Facebook Comments functionality on their blog. The <a href="http://developers.facebook.com/docs/reference/plugins/comments/">Facebook Comments Box</a> is an official plugin from Facebook which allows users who are logged into Facebook to instantly comment on a blog post or article; no registration needed. Adding a Facebook Comments Box to a website is simple, it provides a visual style that can work with any blog design, and it can have users share their posts on Facebook, which leverages the commenter&rsquo;s friends to drive more traffic to the blog.</p>
+
+<p>I first began commenting on TechCrunch in July of the same year, mostly to test out the full functionality of Facebook Comments, after having spent a lot of time experimenting with <a href="http://disqus.com/">Disqus</a> and Gawker&rsquo;s custom comment system (I talk about it <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">here</a>). During that time, my comments began to make me rather infamous, both in good ways, and surprisingly bad. (once, a well-respected entrepreneur messaged me saying &ldquo;I&rsquo;ve talked to VCs and they&rsquo;ve said they will never invest in you because of your comments. FYI.&rdquo;)</p>
+
+<p>Fast forward to 2012. Other blogs on the Aol blogging network, such as Engadget, Joystiq, and TechCrunch itself, have <a href="http://www.engadget.com/2012/10/11/engadget-livefyre-commenting-system/">decided</a> to <a href="http://www.joystiq.com/2012/04/04/joystiqs-new-commenting-system-is-live/">migrate</a> to <a href="http://www.livefyre.com/">LiveFyre</a>, another blog commenting system which allows readers to comment using their social identities, in addition to a few flashy Web 2.0 features. I figured it was a matter of time until TechCrunch implemented it themselves. And in January 2013, <a href="http://techcrunch.com/2013/01/22/we-want-you-back/">they did</a>.</p>
+
+<p>At first, I thought I would like the change. Facebook Comments has their own problems that a switch to Livefyre could solve. I was wrong. The stated reasons for the change were &ldquo;we want more comments,&rdquo; but a large amount of low-value comments (and images), with no way to identify good ones, along with the increased hassle of commenting, will end up backfiring. I&rsquo;m honestly afraid that the switch from Facebook Comments could kill quality comments on TechCrunch completely.</p>
+
+<!-- more -->
+
+
+<h2>The Pros and Cons of Facebook Comments</h2>
+
+<p>As said earlier, Facebook comments excel in their ease of implementation, light aesthetic, and zero-click registration. More importantly, it lends a lot of credibility to the comments, as they have (usually) been authenticated as a real person. Whenever a <em>real</em> person likes or comments on your own comment, it is very satisfying.</p>
+
+<p><img src="/img/alexia.png"  ></p>
+
+<p>That said, there are a few unobvious nuances:</p>
+
+<ul>
+<li>For most blog systems, you receive a notification whenever someone replies to your post. In the original implementation of FB Comments, you receive one whenever someone likes or replies to your comment, in the same manner you&rsquo;re notified on a typical Facebook status. This has changed recently: now, you don&rsquo;t receive notification for likes/replies on your comment, and instead you <strong><em>only receive notifications when other people comment on the same post</em></strong>. I haven&rsquo;t figured out if this is a bug or a feature.</li>
+<li><strong>There is no spam filter.</strong> As many can attest, Facebook has been terrible at combating spam both on the main website and off. All spam cleaning must be done <em>ad hoc</em>, which can be time-consuming.</li>
+<li><strong>Virtually no customization for the comments</strong>. On the administrative side, the only significant options you have for commenting are how many comments appear initially, and the default sort order. It makes sense for Facebook to limit customization to protect their own branding, but it&rsquo;s frustrating for both the admin and readers.</li>
+<li><strong>Commenters do not have access to a list of comments that they&rsquo;ve made.</strong> This one in particular upset me, which is one of the reasons I&rsquo;ve aggregated all my comments <a href="http://minimaxir.com/category/blog-comments/">here</a>.</li>
+<li><strong>Facebook&rsquo;s count of comments lies. </strong>The count provided by Facebook does <em>not</em> include replies to comments, unlike every blog comment system since the beginning of time.</li>
+</ul>
+
+
+<p>There have been zero improvements to Facebook Comments since 2011. It&rsquo;s disappointing, but there&rsquo;s not much that can be done&hellip; except considing competitors.</p>
+
+<h2>LiveFyre Makes Comments BURN!</h2>
+
+<p>LiveFyre, on a typical blog like this one, has quite a few perks that Facebook Comments does not. It allows users to comment just by linking a social identity, such as Facebook or Twitter. Or you can remain anonymous. You receive notifications by email. Images and video are embedded into posts. Posts appear in real time, increasing the interaction for live events. And, you have a profile which lists all the comments you&rsquo;ve ever made.</p>
+
+<p>LiveFyre also has comment editing and an indicator of how many users are viewing the current blog post, but for some reason, the implementation of LiveFyre on TechCrunch disabled these features. Hmm.</p>
+
+<p><img src="/img/comments2.png"  ></p>
+
+<p>The core features good on paper. The problem is with the implementation. <a href="http://fyre.it/u2jnrP">This comment</a> does a good summary, but here&rsquo;s the gist when compared to Facebook Comments:</p>
+
+<ul>
+<li><strong>Anonymous comments are <em>usually</em> low-quality comments. </strong>With Facebook Comments, rational people will not make stupid comments that are tied with their real name. With anonymous comments, people can troll as much as they want without any repercussions.  Yes, with more accessible to comments leads to a higher chance of quality comments by the <a href="http://en.wikipedia.org/wiki/Law_of_large_numbers">law of large numbers</a>, but that is completely irrelevant because&hellip;</li>
+<li><strong>There is no way to sort by high-quality comments</strong>. Facebook Comments, by default, sorts comments by the number of likes that they have received: more likes, the higher up they are in the comment thread. LiveFyre only allows sorting in chronological order and reverse chronological order. No exception. This strongly reduces the <em>motivation</em> for high-quality posts.</li>
+<li><strong>New comments that are loaded live forcibly scroll down all comments.</strong> Imagine: you&rsquo;re reading a good comment, and a new comment loads and <em>pushes</em> the comment away. With spam. You&rsquo;ll become frustrated very quickly. This may not be a concern for blogs with low user-bases, but for popular blogs, this can become irritating very quickly.</li>
+<li><strong>Images and video appear in-line, and are very large.</strong> This makes them more visible, which is a good thing, <em>unless</em> they&rsquo;re memes and spam. Then it&rsquo;s terrible. And since people can comment anonymously, there&rsquo;s a significant risk factor. Images/video, due to their size, cause comment scrolling even faster!</li>
+</ul>
+
+
+<h2>The impact of LiveFyre on TechCrunch</h2>
+
+<p><img class="pull-right" src="/img/ToKillACommentsSection.png"  ></p>
+
+<p>LiveFyre works on a typical WordPress blog, but when applied to large sites such as Engadget and TechCrunch, whose size attracts trolls, it can be crippling. It&rsquo;s like <a href="http://en.wikipedia.org/wiki/Dunbar's_number">Dunbar&rsquo;s Number</a> on a macro scale: there&rsquo;s a mathematical limit on the number of people who visit one place on the internet until it degenerates into madness and memes.</p>
+
+<p>Even with the criticisms above, I still prefer Facebook Comments, and I implement it on my own site, as zero-click registration and real name validation is paramount. It&rsquo;s definitely the lesser of two evils.</p>
+
+<p>The main argument TechCrunch used to justify the switch from Facebook Comments to LiveFyre is that users aren&rsquo;t commenting as much. That&rsquo;s a given, since you can&rsquo;t comment anonymously. It&rsquo;s the old debate of quantity vs. quality: in the case of comments, however, it&rsquo;s <em>always</em> in favor of quality. I&rsquo;d rather read a comments section with one or two comments than a comments section consisting of 90% anonymous spammers who make me lose faith in humanity. Losing faith in humanity is not healthy.</p>
+
+<p>I&rsquo;ll probably be toning down my comments on TechCrunch even moreso. My <a href="http://www.quora.com/Online-Commenting/Whats-the-deal-with-Max-Woolf-on-TechCrunch-AOL-comments">primary motivation for commenting</a> was, and still is, making people laugh and smile. But if other readers have to dig through anonymous spam just to find my comments, then there&rsquo;s not much point. I could spam my comments to my Facebook profile every time I make one, but that would cause the <em>opposite</em> issue.*<br/>
+*</p>
+
+<p>I realize that this is a first-world problem. Even more of a first world problem than <a href="http://minimaxir.com/2013/01/if-cute-then-happiness/">auto-downloading pictures of cute puppies</a>. I&rsquo;m not mad.</p>
+
+<p>I&rsquo;m just sad. :(</p>
+
+<hr>
+
+
+<p><strong>EDIT (May 2013)</strong>: When this article was published, this blog was using Facebook Comments, however I switched the comments system to Disqus just to try it out.</p>
+
+		
+		<div class="row sharing index">
+  
+		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2013/01/its-a-metaphor-maybe/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+  
+		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=How to Kill the Reader Comments of a Popular Tech Blog - http://minimaxir.com/2013/01/its-a-metaphor-maybe/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+
+  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2013/01/its-a-metaphor-maybe/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2013/01/its-a-metaphor-maybe/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+   
+			</div>
+		
+		</div>
+    </div>
+  </div>
+</article>
+
+
+<div class="home-landing her-row">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-2">
+<h4>about me</h4>
+<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
+</div>
+
+
+<div id="about-me" class="col-md-4">
+  
+  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  
+  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
+</p>
+  
+  <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr class="divider-short"/>
+        
+        
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2013/01/its-a-metaphor-maybe/';
+        var disqus_url = 'http://minimaxir.com/2013/01/its-a-metaphor-maybe/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+
+		</div>
+		</div>
+		</div>
+      
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/2013/01/sexy-will-haunt-your-dreams/" title="Previous Post: Let Myspace's Justin Timberlake Bring Sexy to the Entire Internet"><i class="fa fa-angle-double-left"></i>  Let Myspace's Justin Timberlake Bring Sexy to the Entire Internet</a>
+        
+
+        
+          <a class="pull-right" href="/2013/03/127-yoshis-in-slot-6/" title="Next Post: Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM">Super Mario World "Completed" in Under 3 Minutes by Corrupting the RAM <i class="fa fa-angle-double-right"></i></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+<!--
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+</div>
+-->
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
+</div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

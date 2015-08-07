@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: comments | minimaxir | Max Woolf's Blog]]></title>
+  <link href="http://minimaxir.com//comments/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2015-08-06T22:50:59-07:00</updated>
+  <id>http://minimaxir.com/</id>
+  <author>
+    <name><![CDATA[Max Woolf]]></name>
+    <email><![CDATA[max@minimaxir.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Blog Comment System That Steals Comments From Facebook]]></title>
+    <link href="http://minimaxir.com/2013/05/comments-everywhere/"/>
+    <updated>2013-05-04T21:59:00-07:00</updated>
+    <id>http://minimaxir.com/2013/05/comments-everywhere</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m not a fan of the LiveFyre comments system for blogs. As I&rsquo;ve talked about before, LiveFyre is difficult to use, and actually hurts blogs more than it helps. But more and more blogs, such as CNet and AllThingsD, have switched to LiveFyre.</p>
+
+<p>AllThingsD&rsquo;s <a href="http://allthingsd.com/20130330/introducing-livefyre-commenting-at-allthingsd/?mod=atd-desktop">reasons</a> for switching to LiveFyre from the widely-used Disqus are interesting. Under LiveFyre, users can &ldquo;more readily share comments to Facebook and Twitter&rdquo; which Disqus already did; &ldquo;tag friends and draw them into the stream&rdquo; which increases clutter; and &ldquo;accurately flag other comments as spam or offensive&rdquo; which flat-out doesn&rsquo;t work, if the spam on TechCrunch is any indication. Additionally, they can &ldquo;follow conversations across multiple platforms,&rdquo; which the post doesn&rsquo;t elaborate upon. Does it aggregate social media which links to the parent post, a la Disqus?</p>
+
+<p>No, it&rsquo;s something much more important.</p>
+
+<!-- more -->
+
+
+<h2>Comments From Everywhere!</h2>
+
+<p><img src="/img/liveFyreSync.png"  ></p>
+
+<p>Recently, LiveFyre implemented a <a href="http://www.livefyre.com/comments/">comment feature</a> called SocialSync:</p>
+
+<p>With Livefyre SocialSync, the conversation happening on Facebook and Twitter automatically syncs directly to your content, where it belongs. SocialSync comments can be replied to and interacted with just like any other comment, including being automatically posted back to Twitter or Facebook.</p>
+
+<p>Currently, this feature is enabled for TechCrunch and Mashable.* Let&rsquo;s say a Facebook user comments on one of TechCrunch&rsquo;s <a href="https://www.facebook.com/photo.php?fbid=10151659746677952&amp;set=a.114456157951.118433.8062627951&amp;type=1">Facebook posts</a>. Those comments are synchronized to the LiveFyre comments for the <a href="http://techcrunch.com/2013/05/02/smartphonetographers/">linked post</a>.</p>
+
+<p>Those comments become LiveFyre comments. And the Facebook user has no input, nor any notification that their comments are being used this way.</p>
+
+<h2>SocialSync&rsquo;s Flat-Out Lie</h2>
+
+<p>In LiveFyre&rsquo;s own words, the conversations &ldquo;sync&rdquo; across platforms. <a href="http://en.wikipedia.org/wiki/Synchronization">Synchronization</a> implies a two-way interation, i.e. actions on one platform affect the other. In this example, there are four use cases for the interaction to be called &ldquo;sync&rdquo;:</p>
+
+<ol>
+<li>Comments on Facebook should appear on LiveFyre.</li>
+<li>Comments on LiveFyre should appear on Facebook.</li>
+<li>Replies and Likes on comments on Facebook should appear on the corresponding comment in LiveFyre.</li>
+<li>Replies and Likes on comments on LiveFyre should appear on the corresponding comment in Facebook.</li>
+</ol>
+
+
+<p>Out of those four scenarios, only #1 is true, and even more importantly, #2, #3, and #4 are impossible to implement.</p>
+
+<p>LiveFyre doesn&rsquo;t know what your Facebook account is and cannot perform actions on your behalf on Facebook unless you register solely with that account. Therefore, your comments won&rsquo;t sync to the Facebook comment thread if you use any other login type. (the ability to use multiple types of logins being another touted feature of LiveFyre, of course). Likewise, Likes on Facebook Comments can&rsquo;t translate to LiveFyre Likes if the users don&rsquo;t have a LiveFyre account.</p>
+
+<p>The lack of connection also breaks notifications of replies. Since there&rsquo;s no way to ensure the two accounts are linked, there&rsquo;s no way to notify a Facebook user when their synced comment on LiveFyre has a reply. This has two effects: a) the Facebook user won&rsquo;t continue the discussion and b) the replier is wasting his time making a comment to a person who likely won&rsquo;t ever read it. Both result in less fruitful discussions.</p>
+
+<p>SocialSync is broken and impossible to fix. Also, the lag from when comments are synced from Facebook to LiveFyre takes about 10-20 minutes, making sync worthless on highly-discussed event blogs posts anyways..</p>
+
+<h2>Who Owns Your Facebook Comments?</h2>
+
+<p>When I said that LiveFyre &ldquo;steals&rdquo; Facebook comments in the headline, I wasn&rsquo;t being facetious. It&rsquo;s not obvious that this feature even exists in the first place, especially if you&rsquo;re not a comment addict (I sent a <a href="https://twitter.com/minimaxir/status/311959448694435840">tweet</a> to the TechCrunch head editor to confirm that this was intended behavior). How is the typical person supposed to know what their comments are being used for?</p>
+
+<p>Yes, your comments on TechCrunch&rsquo;s Facebook wall post that are synced to LiveFyre are Public to everyone, and there is no expectation of privacy. But who owns those comments?</p>
+
+<p>The comments appear in LiveFyre matching the style and functionality of any other LiveFyre comment, except with a &ldquo;from Facebook&rdquo; designation. For all intents and purposes, it&rsquo;s a LiveFyre comment that you have no controll over. It&rsquo;s worth noting that since LiveFyre doesn&rsquo;t know your Facebook account, you can&rsquo;t even delete the syndicated comment in LiveFyre . LiveFyre comments on the post have greater SEO than Facebook comments, so hopefully you don&rsquo;t say anything embarrassing on the Facebook page. LiveFyre is in control of your destiny.</p>
+
+<p>What are the benefits to SocialSync anyways, when it barely works? Bigger numbers for the comment count of a post? That&rsquo;s irrelevant when the comments on the Facebook posts are made spur-of-the-moment, and are usually very low quality.</p>
+
+<p>The idea of sync between isn&rsquo;t terrible in itself. Facebook Comments and the recently announced Google%2B Comment System essentially does sync by blurring the lines between a Google%2B post and a comment, but unlike LiveFyre, the user still retains control over the comment, receives reply notifications, and can delete their comment when necessary.</p>
+
+<p>At the least, I&rsquo;ve stopped posting on TechCrunch&rsquo;s Facebook page. That&rsquo;s not a good thing for either TechCrunch or LiveFyre.</p>
+
+<ul>
+<li>Interestingly, SocialSync is not enabled on CNet or AllThingsD&rsquo;s implementations of LiveFyre.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

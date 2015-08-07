@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: comedy | minimaxir | Max Woolf's Blog]]></title>
+  <link href="http://minimaxir.com//comedy/atom.xml" rel="self"/>
+  <link href="http://minimaxir.com/"/>
+  <updated>2015-08-06T22:50:59-07:00</updated>
+  <id>http://minimaxir.com/</id>
+  <author>
+    <name><![CDATA[Max Woolf]]></name>
+    <email><![CDATA[max@minimaxir.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Least Effective Method for Blocking Web Scraping of a Website]]></title>
+    <link href="http://minimaxir.com/2014/09/buzzscrape/"/>
+    <updated>2014-09-26T10:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/09/buzzscrape</id>
+    <content type="html"><![CDATA[<p>As someone who typically plays around with data from public website APIs, I figured it would be worthwhile to learn how to get data from websites the old-fashioned way: through force, via web scraping. <a href="http://en.wikipedia.org/wiki/Web_scraping">Web scraping</a> is a technique where the user downloads the raw HTML of a webpage, and parses the inherent structure of the webpage to extract the necessary data.</p>
+
+<p>In order to understand the mechanics behind web scraping, I used a tool from new Y Combinator startup <a href="https://www.kimonolabs.com/">Kimono Labs</a>, which allows the user to click structured elements of any website and quickly create an API that can access all the collected data and convert it into an easy-to-access form. My first target was BuzzFeed, since their social interaction data might be useful in determining how it became so big so quickly, and maybe also determine just how effective those stupid listicles are.</p>
+
+<h1><span><i class="fa fa-terminal"></i></span> Live Free and Scrape Hard</h1>
+
+<p>For example, here&rsquo;s a pair of typical BuzzFeed articles:</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_example.png"  ></p>
+
+<p>And here&rsquo;s the corresponding output of <a href="https://www.kimonolabs.com/apis/1x3l57k0">my Kimono Labs BuzzFeed scraper</a> for those two articles:</p>
+
+<p><div class="highlight"><pre><code class="language-html" data-lang="html">{
+         <span class="ni">&amp;ldquo;</span>title<span class="ni">&amp;rdquo;</span>: {
+          <span class="ni">&amp;ldquo;</span>text<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span>Stop Tweeting Instagram Links<span class="ni">&amp;rdquo;</span>,
+          <span class="ni">&amp;ldquo;</span>href<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.buzzfeed.com/katienotopoulos/stop-tweeting-instagram-links&quot;</span><span class="nt">&gt;</span>http://www.buzzfeed.com/katienotopoulos/stop-tweeting-instagram-links<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;rdquo;</span>
+        },
+        <span class="ni">&amp;ldquo;</span>content<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span>I CANNOT REMAIN SILENT ON THIS ISSUE ANY LONGER.<span class="ni">&amp;rdquo;</span>,
+        <span class="ni">&amp;ldquo;</span>author<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span>Katie Notopoulos<span class="ni">&amp;rdquo;</span>,
+        <span class="ni">&amp;ldquo;</span>num_responses<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span>123<span class="ni">&amp;rdquo;</span>
+      },
+      {
+        <span class="ni">&amp;ldquo;</span>title<span class="ni">&amp;rdquo;</span>: {
+          <span class="ni">&amp;ldquo;</span>text<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span>28 Things Your Gchat Availability Status Really Means<span class="ni">&amp;rdquo;</span>,
+          <span class="ni">&amp;ldquo;</span>href<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.buzzfeed.com/katieheaney/28-things-your-gchat-availability-status-really-means&quot;</span><span class="nt">&gt;</span>http://www.buzzfeed.com/katieheaney/28-things-your-gchat-availability-status-really-means<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;rdquo;</span>
+        },
+        <span class="ni">&amp;ldquo;</span>content<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span>Let’s chat.<span class="ni">&amp;rdquo;</span>,
+        <span class="ni">&amp;ldquo;</span>author<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span>Katie Heaney<span class="ni">&amp;rdquo;</span>,
+        <span class="ni">&amp;ldquo;</span>num_responses<span class="ni">&amp;rdquo;</span>: <span class="ni">&amp;ldquo;</span>13<span class="ni">&amp;rdquo;</span>
+      }
+}</code></pre></div></p>
+
+<p>This data format (<a href="http://en.wikipedia.org/wiki/JSON">JSON</a>) can be processed and manipulated by nearly any modern programming language.</p>
+
+<p>Each BuzzFeed category page has about 22 articles, but the scraper can also access successive pages to retrieve more articles. This works by finding the URL of the next page by deriving the URL from the &ldquo;Older&rdquo; button if present on that page. Then the scraper can find the Older button on the page after that, and so forth, until all pages on BuzzFeed are scraped.</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_page.png"  ></p>
+
+<p>My BuzzFeed scraper, for some reason, only retrieved 10 pages maximum. So I used my QA skills and traced the exact route the scraper took, navigating through all 10 pages by clicking the Older button.</p>
+
+<p>What was on Page #10 shocked me. OMG. I could not believe my eyes.</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_disable.png"  ></p>
+
+<h1><span><i class="fa fa-times-circle-o"></i></span> No Scrape For You</h1>
+
+<p>The Older button is <em>disabled</em> on page 10? <strong>WHY?</strong></p>
+
+<p>BuzzFeed is a website created in the 21st century that <a href="http://www.nytimes.com/2014/08/11/technology/a-move-to-go-beyond-lists-for-content-at-buzzfeed.html?_r=0">just raised $50 million</a>. This is not a peculiar technical limitation due to bad coding or bad infrastructure; this is a deliberate functional aspect of the product.</p>
+
+<p>It is my personal mantra that if a startup has a particularly unintuitive UI/UX behavior, it&rsquo;s a form of &ldquo;growth hacking&rdquo; that my feeble brain cannot comprehend.</p>
+
+<p>Could the reason that BuzzFeed disables access to pages past 10 is that they want to prevent archive browsing, thereby putting more of an emphasis on more recent and more potentially-viral articles? That wouldn&rsquo;t make sense; if a person is so hooked on BuzzFeed articles that they are at Page 10, why stop them? It&rsquo;s still free page views and ad revenue.</p>
+
+<p>It&rsquo;s likely that BuzzFeed has statistics on how many users actually visit article pages up to Page 10. Perhaps their data analysts noted &ldquo;hey, only 0.0027% of our visitors actually read up to Page 10, anyone who actually reads that far is three standard deviations away from normal, therefore they must be a web scraper!&rdquo; and recommend punitive action accordingly.</p>
+
+<p>I noted earlier that it definitely was not a technical limitation that kept pages greater than 10 from being accessed. If you look at the URLs of the BuzzFeed screenshots above, you&rsquo;ll notice a &ldquo;<em>p=2</em>&rdquo; parameter for Page 2 or a &ldquo;<em>p=10</em>&rdquo; parameter for Page 10. What happens if you just change the 10 to a 11?</p>
+
+<p>You go to Page 11. And you can go all the way to page <em>200</em> in some categories.</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_200.png"  ></p>
+
+<p>Incidentally, this is easier and more reliable to implement programmatically than searching for the Older button and extracting the URL.</p>
+
+<p>So the disabling of the button will only stop stupid web scrapers. Yes, that makes my BuzzFeed web scraper a stupid web scraper, <em>but that&rsquo;s not the point!</em> It just makes the BuzzFeed&rsquo;s motive behind disabling the button at Page 10  even more baffling.</p>
+
+<p>What did I do now that my quick-and-dirty BuzzFeed scraper couldn&rsquo;t parse a statistically significant amount of BuzzFeed articles? I did the only logical thing.</p>
+
+<p>I spent a weekend learning how to use <a href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a> in Python and parsed BuzzFeed the hard way, while changing the page number in the URL to pagenate through the pages. And I even was able to add new features to the scraper, such as simultaneously scraping the number of Facebook Shares a given BuzzFeed article generates.</p>
+
+<p><img src="/img/buzzscrape/buzzfeed_listicles.png"  ></p>
+
+<p>Hey, there <em>is</em> a relationship between listicle size and social media engagement!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress]]></title>
+    <link href="http://minimaxir.com/2014/07/caucus-needed/"/>
+    <updated>2014-07-15T08:30:00-07:00</updated>
+    <id>http://minimaxir.com/2014/07/caucus-needed</id>
+    <content type="html"><![CDATA[<p>Last week, the Twitter account <a href="https://twitter.com/congressedits">@congressedits</a> launched. This account is a bot that tweets edits to Wikipedia that were made by members of the U.S. Congress, in order to help <a href="http://inkdroid.org/journal/2014/07/10/why-congressedits/">facilitate transparency</a>. The account <a href="https://github.com/edsu/anon">works</a> by automatically tweeting any Wikipedia edits made by anonymous contributors with IP addresses between the known IP address blocks of the <a href="http://whois.arin.net/rest/org/USSAA/nets">U.S. Senate</a> or the <a href="http://whois.arin.net/rest/org/ISUHR/nets">House of Representatives</a>.</p>
+
+<p>Google&rsquo;s <a href="https://developers.google.com/bigquery/">BigQuery</a> tool has a <a href="https://developers.google.com/bigquery/docs/dataset-wikipedia">sample dataset</a> of Wikipedia data, representing the data on 314 million article edits up to April 2010. Out of curiosity, I wrote a query which returns the top 100 pages with the most amount of edits by Wikipedia contributors in the U.S. Senate&rsquo;s IP block.</p>
+
+<p><img src="/img/caucus-needed/senate-query.png"  ></p>
+
+<p>Using this query for the Senate&rsquo;s IP block, and a similar one for the House of Representatives IP blocks, I retrieved the most-edited entries for both entities. You can access the spreadsheet of this data by <a href="https://dl.dropboxusercontent.com/u/2017402/Congress_Wikipedia_Edits.pdf">downloading a .pdf</a> or by viewing the data online with <a href="https://www.icloud.com/iw/#numbers/BALY8siqBP4jYZq5E2OB20P-wlPpyXdycqqF/Congress_Wikipedia_Edits">Numbers for iCloud</a>, both of which contain high-resolution charts and clickable Wikipedia links. A <a href="https://docs.google.com/spreadsheets/d/1qfFEwzNzc4KL4gqe2i4IoMO0ksmoYndCK0O0m46n37I/edit?usp=sharing">Google Sheets</a> version is also available.</p>
+
+<p>Here are the Top 10 Wikipedia entries with the most amount of edits by members of the Senate:</p>
+
+<p><img src="/img/caucus-needed/senate-wikipedia.png"  ></p>
+
+<p>Wait a minute. Hawk from G.I. Joe?!</p>
+
+<p>Saying that the query results were surprising would be the understatement of the century.</p>
+
+<p>Two of the top-edited entries are directly pertaining to the U.S. Senate, which helps prove that the IP block is indeed the Senate&rsquo;s IP block. Both Kappa Upsilon Chi and <a href="http://en.wikipedia.org/wiki/Beta_Upsilon_Chi">Beta Upsilon Chi</a> are Christian fraternities. (however, the Kappa Upsilon Chi Wikipedia entry no longer exists for some reason)</p>
+
+<p>The edits corresponding to actual people are ones which are the most interesting. <a href="http://en.wikipedia.org/wiki/William_Swain_Lee">William Swain Lee</a> is a Delaware politician whose entry was <a href="http://en.wikipedia.org/w/index.php?title=William_Swain_Lee&amp;diff=prev&amp;oldid=31202175">created and edited</a> by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.148.107">user in the Senate IP block</a>. OrangePie is  a user who, <a href="http://en.wikipedia.org/wiki?curid=7319910">according to his talk page</a>, was criticized for repeatedly recreating an entry for &ldquo;Michael Hardaway&rdquo; after deletion, who coincidentally worked for the Senate <a href="https://twitter.com/michaelhardaway">according to his Twitter bio</a>. In journalist <a href="http://en.wikipedia.org/wiki?curid=8593106">Paul D. Thacker&rsquo;s</a> entry, one Senate editor <a href="http://en.wikipedia.org/w/index.php?title=Paul_D._Thacker&amp;diff=311839513&amp;oldid=311689066">replaced a paragraph</a> of Thacker&rsquo;s biography with the word &ldquo;anus?&rdquo;. Jay Rockefeller is an <a href="http://en.wikipedia.org/wiki?curid=337026">actual U.S. Senator</a>, so the edits are definitely a conflict of interest. The <a href="http://en.wikipedia.org/wiki/Special:Contributions/156.33.96.28">user who made the edits</a> apparently also removed <a href="http://en.wikipedia.org/w/index.php?title=Jay_Rockefeller&amp;diff=prev&amp;oldid=33857327">information about a government investigation</a> into the Senator.</p>
+
+<p>I have nothing to add for <a href="http://en.wikipedia.org/wiki?curid=2814171">Hawk from G.I. Joe</a>.</p>
+
+<p>Other interesting frequently-edited Wikipedia entries from members of the U.S. Senate are <a href="http://en.wikipedia.org/wiki?curid=3626593">Primetime Emmy Award for Outstanding Supporting Actor – Comedy Series</a> (11 edits), <a href="http://en.wikipedia.org/wiki?curid=1226609">Wikipedia:Introduction</a> (5 edits) and <a href="http://en.wikipedia.org/wiki?curid=1749535">Crash (2004 film)</a> (5 edits)</p>
+
+<p>The Wikipedia entries with the most amount of edits by members of the House of Representatives are somehow even <em>weirder</em>, and that&rsquo;s quite an accomplishment.</p>
+
+<p><img src="/img/caucus-needed/house-wikipedia.png"  ></p>
+
+<p>Well, if <em>anyone</em> in the entire United States would be experts on the topics of <a href="http://en.wikipedia.org/wiki?curid=2352587">cleft chins</a> and <a href="http://en.wikipedia.org/wiki?curid=1924543">dimples</a>, it would be the members of the House of Representatives.</p>
+
+<p>Again, one of the most-edited entries corresponds to a House of Representatives topic, which helps validate the IP blocks. The <a href="http://en.wikipedia.org/wiki?curid=107610">Cerritos, California</a> location had <a href="http://en.wikipedia.org/w/index.php?title=Cerritos,_California&amp;diff=21384826&amp;oldid=21363395">neutral edits</a> made by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.141">rather dedicated Wikiuser</a>. Wynne, Arkansas and Michelle Ye&rsquo;s edits were made by the same dedicated Wikiuser. <a href="http://en.wikipedia.org/wiki?curid=1143590">Waverly, Pennsylvania</a> was edited by a <a href="http://en.wikipedia.org/wiki/Special:Contributions/137.18.255.33">user</a> who&rsquo;s <a href="http://en.wikipedia.org/w/index.php?title=Waverly,_Pennsylvania&amp;diff=7763793&amp;oldid=7761053">really passionate about Doc&rsquo;s Deli</a>. <a href="http://en.wikipedia.org/wiki?curid=1129560">Luis Fortuno</a>, former governor of Puerto Rico, had his <a href="http://en.wikipedia.org/w/index.php?title=Luis_Fortu%C3%B1o&amp;diff=prev&amp;oldid=134653411">history excised</a> by <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.231.249.137">another user</a>. <a href="http://en.wikipedia.org/wiki?curid=6260346">Betty Sutton</a>, however, is a actual Representative from Ohio, representing another conflict of interest, as another <a href="http://en.wikipedia.org/wiki/Special:Contributions/143.228.129.9">user</a> constructed <a href="http://en.wikipedia.org/w/index.php?title=Betty_Sutton&amp;diff=303743778&amp;oldid=296652449">most of her entry</a>.</p>
+
+<p>I have nothing to add regarding <a href="http://en.wikipedia.org/wiki?curid=862471">effeminacy</a> in the House of Representatives.</p>
+
+<p>Other interesting edits by members of the House include <a href="http://en.wikipedia.org/wiki?curid=18951054">Apocalypse Now</a> (10 edits), <a href="http://en.wikipedia.org/wiki?curid=1161298">History of Italy as a monarchy and in the World Wars</a> (9 edits), and <a href="http://en.wikipedia.org/wiki?curid=34071">Whitney Houston</a> (9 edits)</p>
+
+<p>In the end, the members of the U.S. Congress have the same peculiar interests as typical Americans. However, when these people edit entries on topics in which they are directly involved, the potential bias threatens the integrity of all Wikipedia. And this is just the tip of the iceburg.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Game Theory: How 70,000 Pokemon Players Sabotage Themselves]]></title>
+    <link href="http://minimaxir.com/2014/02/glory-to-the-helix/"/>
+    <updated>2014-02-18T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/glory-to-the-helix</id>
+    <content type="html"><![CDATA[<p><a href="http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Red_and_Blue_Versions">Pokemon Red and Pokemon Blue</a> remain as two of the most iconic games in video gaming history. They have retained a lot of nostalgia value for those who grew up playing the games (such as myself), and nowadays even adult gamers revisit such classics.</p>
+
+<p>On the game live-streaming site <a href="http://www.twitch.tv/">Twitch.tv</a>, one user simply known as &ldquo;TwitchPlaysPokemon&rdquo; setup <a href="http://www.twitch.tv/twitchplayspokemon">a live-stream of Pokemon Red</a>, but with a twist: all game commands, such as &ldquo;up&rdquo;,&ldquo;down&rdquo;,&ldquo;left&rdquo;,&ldquo;right&rdquo;,&ldquo;b&rdquo;,&ldquo;a&rdquo;,&ldquo;select&rdquo;, and &ldquo;start&rdquo;, would be input by typing the appropriate command into the livestream chat. At first, this seems like a crazy idea: if thousands of people are inputting commands at the same time, could we accomplish <em>anything</em> in the game?</p>
+
+<p><img src="/img/AcXmBbM.png"  ></p>
+
+<p>As it turns out, it was an idea that had gone horribly right. By the time gaming forum NeoGAF <a href="http://www.neogaf.com/forum/showthread.php?t=768965">found the stream</a>, the channel had made an unexpected amount of progress; a group of 3,000 viewes made it past the first Gym (out of eight) and continued to move forward. A few days later, after the channel was covered by <a href="http://www.polygon.com/2014/2/17/5420334/twitch-plays-pokemon-captivates-with-more-than-6-5m-total-views">major news outlets</a>, the channel had completed <em>four</em> gyms, inspired the creation of a large amount of <a href="https://docs.google.com/document/d/1Luwz9wr8XkoekzU4zv3duj9D2K5AoAyqnYMcbCHZKqc">hilarious fan art</a>, and also created a <a href="http://askhelixfossil.com/">new religion</a>. You can read a summary of the stream&rsquo;s status <a href="https://docs.google.com/a/minimaxir.com/document/d/1Ka89uCBeLl9VV5GPlAKuW7yF8FGtnVmdbPnIwG8FnQ4/preview?pli=1&amp;sle=true">here</a>.</p>
+
+<p>That being said, it was neither a straight nor short path to success. In the end, the gaming community fought its greatest enemy: itself. Twitch Plays Pokemon isn&rsquo;t about winning. It&rsquo;s about trying not to fail spectacularly. And they still fail regardless. It&rsquo;s an irresistible train wreck that&rsquo;s hard to stop watching.</p>
+
+<h1>The Adventure Begins</h1>
+
+<p>The first areas of Pokemon Red are relatively linear up until <a href="http://bulbapedia.bulbagarden.net/wiki/Vermilion_City">Vermilion City</a>, where the third gym is located. Before that, Pokemon Trainer Red, the player character, had a few interesting encounters thanks to the bizarre overlords of the Twitch chat. Red chose <a href="http://bulbapedia.bulbagarden.net/wiki/Charmander">Charmander</a> (later evolved into <a href="http://bulbapedia.bulbagarden.net/wiki/Charmeleon_(Pok%C3%A9mon)">Charmeleon</a>) as his starter Pokemon, which he nicknamed <strong>ABBBBBBK (</strong> or &ldquo;Abby&rdquo; for short. He caught a few more basic Pokemon, including a <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgey">Pidgey</a> (later evolved into <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgeotto_(Pok%C3%A9mon)">Pidgeotto</a>) and <a href="http://bulbapedia.bulbagarden.net/wiki/Pidgeot_(Pok%C3%A9mon)">Pidgeot</a>), 2 <a href="http://bulbapedia.bulbagarden.net/wiki/Rattata">Rattata</a> (one nicknamed <strong>JLVWNNOOOO</strong>, i.e. &ldquo;Jay Leno&rdquo;), a <a href="http://bulbapedia.bulbagarden.net/wiki/Drowzee">Drowzee</a>, and a <a href="http://bulbapedia.bulbagarden.net/wiki/Spearow">Spearow</a> which was traded for a <a href="http://bulbapedia.bulbagarden.net/wiki/Farfetch%27d">Farfetch&rsquo;d</a>, all of which gave him a full party of Pokemon.</p>
+
+<p><img src="/img/MwarCER.png"  ></p>
+
+<p>Since thousands of players are inputting commands at the same time, there is absolutely no strategy involved in Pokemon battles, which in most cases make the battles unwinnable. Thanks to the nature of RPG level-ups and a few lucky critical hits, Red can still persevere (although it will a few hours).</p>
+
+<p>The Twitch channel was a very casual experience, until Red obtained HM 01 from the <a href="http://bulbapedia.bulbagarden.net/wiki/S.S._Anne">S.S. Anne</a>, an item that requires a sequence of sequential button presses to operate.</p>
+
+<p>Then things get complicated.</p>
+
+<h1>Cutting A Thin Line</h1>
+
+<p>HM 01 is an item that grants the Cut ability to a Pokemon, which is required to cut trees blocking progress; in this case, the tree in front of the Vermilion City Gym. In order to teach a Pokemon Cut, the player must:</p>
+
+<ol>
+<li>Bring up the Start menu.</li>
+<li>Select &ldquo;Items.&rdquo;</li>
+<li>Select HM 01.</li>
+<li>Confirm that HM 01 is to be used.</li>
+<li>Select a Pokemon to learn Cut.</li>
+<li>Confirm that the selected Pokemon is to learn Cut.</li>
+<li>Choose a move for Cut to replace.</li>
+</ol>
+
+
+<p>The kicker? Pressing the B button or choosing the wrong option during <em>any</em> of these 7 steps takes the process back a step.</p>
+
+<p><img src="/img/1XSdWPY.jpg"  ></p>
+
+<p>At this point in the stream, the audience hit 30,000 viewers. The increased activity caused an input delay of about 20 seconds from when the Twitch user input the command in chat to when the game recognized the command. This can make navigating menus difficult when an &ldquo;up&rdquo; or a &ldquo;down&rdquo; command is applied to a menu that isn&rsquo;t even visible yet.</p>
+
+<p>Additionally, as the number of viewers in a stream increases, the number of trolls increases. And those trolls loved to spam the B button command.</p>
+
+<p>Thanks to these two factors, the channel had failed to teach any Pokemon Cut for over <em>4 hours</em>. The stream chat became a bloodbath of blame.</p>
+
+<p><img src="/img/p30F3g7.png"  ></p>
+
+<p>Eventually, it happened. The Farfetch&rsquo;d was taught Cut. No one knows <em>how</em>, but it happened. But <em>that</em> was only one step towards progress.</p>
+
+<p>The second step is actually Cutting the tree. In order to Cut:</p>
+
+<ol>
+<li>Face the tree.</li>
+<li>Bring up the Start menu.</li>
+<li>Select &ldquo;Pokemon&rdquo;</li>
+<li>Select the Pokemon with Cut.</li>
+<li>Select Cut.</li>
+</ol>
+
+
+<p>Same kickers as before, too. Facing the tree is even harder since the same up/down commands for navigating the menus can reorient Red away from the tree.</p>
+
+<p>It took another 4 hours to cut down that tree. Later, when Red was defeated in the Gym, the tree respawned. Yeah.</p>
+
+<p><img src="/img/NCo5N3j.png"  ></p>
+
+<p>HM 01 was a harsh reminder that the more people present, the higher the chance that your task will fail. Not necessarily due to incompetence and disorganization, but due to mischief.</p>
+
+<h1>Fighting The Ledge Boss</h1>
+
+<p>After the Vermilion City Gym was (eventually) completed, the Twitch stream progressed through <a href="http://bulbapedia.bulbagarden.net/wiki/Kanto_Route_9">Route 9</a> toward <a href="http://bulbapedia.bulbagarden.net/wiki/Lavender_Town">Lavender Town</a>. Sounds simple, until Red hit this obstacle.</p>
+
+<p><img src="/img/ledge.png"  ></p>
+
+<p>Red must walk from the left to the right through the 1-character-wide path. If Red went down, the ledge is a one-way drop, and Red must walk back to the beginning to try again.</p>
+
+<p>The Twitch chat must go &ldquo;right&rdquo; about 8 times <em>without going &ldquo;down&rdquo; at all</em>.</p>
+
+<p>HM01 had input lag as a contributing factor to its failures. In this case, the trolls had <em>all</em> the power. One &ldquo;down&rdquo; ends the entire attempt. And the stream was even more popular with an audience of 50,000 people.</p>
+
+<p><img src="/img/h2sFCtt.png"  ></p>
+
+<p>The result? Crossing the ledge took over <em>12 hours</em>. And then Red was defeated by the trainer at the end of the ledge and so getting back across the ledge took an equally absurd amount of time.</p>
+
+<p>Lesson learned? If trolls have absolute power, <em>they will use it</em> and they will use it without mercy.</p>
+
+<p><em>EDIT 2/19: The defeat of the ledge boss was due to the intervention of another Twitch channel which <a href="http://www.reddit.com/r/twitchplayspokemon/comments/1y1ee8/the_meta_strat_or_how_we_beat_the_ledge/">executed a meta-strategy</a>: press &ldquo;right&rdquo; in sync with the input delay: with enough people, Red would move right enough times.</em></p>
+
+<h1>Disregarding Decision Trees</h1>
+
+<p>After the ledge incident, the fanbase became paranoid. What other gameplay aspects in this playthrough could be compromised by trolls in the future? One concern is the PC system used to store Pokemon; the same system can also <em>release</em> them, removing them from the game forever. The risk of losing a top Pokemon to the PC due to trolls was too great and would make the game nearly unwinnable, and therefore the stream decided to avoid using the PC unless necessary.</p>
+
+<p>Red progressed through Lavender Town and arrived at <a href="http://bulbapedia.bulbagarden.net/wiki/Celadon_City">Celadon City</a>, where the Twitch channel defeated the Gym Leader for the fourth badge (it took awhile: there was a tree outside <em>and</em> inside the gym!)</p>
+
+<p>At this point in Pokemon Red, the game becomes more nonlinear, which started a debate on what next to do in game. Many pointed out that the party lacked a Pokemon which could learn Surf, a skill, like Cut, which was required to progress in the game much later. Red will eventually earn such a Pokemon which could learn Surf (<a href="http://bulbapedia.bulbagarden.net/wiki/Lapras">Lapras</a>) as a part of the plot, who&rsquo;s a decent combatant too.</p>
+
+<p>On the other hand, the player can also collect <a href="http://bulbapedia.bulbagarden.net/wiki/Eevee">Eevee</a> as a free Pokemon. Eevee has three evolutions: the terrible <a href="http://bulbapedia.bulbagarden.net/wiki/Flareon_(Pok%C3%A9mon)">Flareon</a>, the good <a href="http://bulbapedia.bulbagarden.net/wiki/Jolteon_(Pok%C3%A9mon)">Jolteon</a>, and the great <a href="http://bulbapedia.bulbagarden.net/wiki/Vaporeon_(Pok%C3%A9mon)">Vaporeon</a> who can also learn Surf. But in order to evolve Vaporeon Eevee into , the party must a) buy a Water Stone, and not accidentally any other elemental stone instead and b) use the Stone <em>without accidentally tossing it</em> and destroying it. Both of which are difficult due to input lag and trolls.</p>
+
+<p>The party had 5 Pokemon (after a Rattata was deposited  earlier into the PC), and so the stream only had the opportunity for get <em>one</em> Pokemon, since the stream did not want deposit any in the PC for fear of release. Which is the more rational path for getting a Pokemon with Surf: waiting to get a guaranteed Lapras, or getting the Eevee and hope the stream can evolve it into a Vaporeon? A guaranteed decent Pokemon or a chance at a great Pokemon?</p>
+
+<p>As it turns out, when 70,000 people make a decision, they aren&rsquo;t exactly rational. Instead, hilarity ensued.</p>
+
+<h1>Game Over Theory</h1>
+
+<p>The stream obtained the Eevee (even after many said it was <a href="http://i.imgur.com/9cV06Yq.png">a bad idea</a>) and went to purchase a Water Stone. Due to input manipulation, they instead bought a Fire Stone, and later the Eevee evolved into the unhelpful Flareon. Chat becomes a bloodbath once again.</p>
+
+<p><img src="/img/QGiFYYu.jpg"  ></p>
+
+<p>In order to make room for Lapras in the future, the stream attempted to use a PC to deposit Flareon.</p>
+
+<p><img src="/img/0ndYCF1.png"  ></p>
+
+<p>Instead, both Abby and Jay Leno were permanently released.</p>
+
+<p><img src="/img/tumblr_n157ldJl611rvlenbo1_1280.jpg"  ></p>
+
+<p>The stream became completely derailed.</p>
+
+<p>As of today, Twitch pushes on, but everyone who&rsquo;s participating in the stream has now learned a lesson: people act in their self interest and do what they think is best. Trolls have&hellip;different self-interests. And there will always be trolls. Knowing how to fail gracefully is always valuable.</p>
+
+<p>At the least, the amount of progress the stream has made is still very, very impressive and unexpected.</p>
+
+<hr />
+
+<p><em>Credit for all fan art goes to their respective artists: I&rsquo;m currently working on tracking them down.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How Many #nofilter Instagram Photos Actually Have No Filter?]]></title>
+    <link href="http://minimaxir.com/2014/02/the-filter-truth/"/>
+    <updated>2014-02-10T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/02/the-filter-truth</id>
+    <content type="html"><![CDATA[<p>Most <a href="http://instagram.com/">Instagram</a> photos have filters applied to make them look more retro/cool. Instagram users are also able to apply tags to a photo to help categorize and promote them to the Instagram community. One such tag, #nofilter, is intended to emphasize such natural beauty that no filter is necessary to enhance the image. (or the photographer is just too lazy to decide on a filter)</p>
+
+<p>But how many #nofilter images actually <em>have</em> no filter?</p>
+
+<p><img src="/img/instagram_selfie.gif"  ></p>
+
+<p>As it turns not, not all of them.</p>
+
+<p>After retrieving about 50,000 images through the Instagram API (code <a href="https://github.com/minimaxir/get-data-from-photos-from-instagram-tags">available on GitHub</a>), here is the breakdown of filters on #nofilter-tagged Instagram images:</p>
+
+<p><img src="/img/nofilter.png"  ></p>
+
+<p>Only 83% of #nofilter images have no filter?! You had one job, Instagram! :(</p>
+
+<hr />
+
+<p><em>The actual reason that this is happening is because Instagram rewards #tagspamming. More on that in a future blog post.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Thoughtful Analysis of the Most Poorly-Designed Chart Ever]]></title>
+    <link href="http://minimaxir.com/2014/01/more-language-more-problems/"/>
+    <updated>2014-01-20T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2014/01/more-language-more-problems</id>
+    <content type="html"><![CDATA[<p>Last week, I was surfing Reddit and came across an <a href="http://www.reddit.com/r/ProgrammerHumor/comments/1ur3ny/unnecessary_graph_of_most_desired_skills_in_2013/">interesting infographic</a> within the <a href="http://www.reddit.com/r/ProgrammerHumor/">ProgrammerHumor subreddit</a>. The infographic, as compiled by tech blog <a href="http://readwrite.com/">ReadWrite</a>, depicts the Top 10 Most In-Demand Developer Skills of 2013, as compiled by <a href="http://stackoverflow.com/">Stack Overflow</a> through keyword searches.</p>
+
+<!-- more -->
+
+
+<p><img src="/img/infographic-1.jpg"  ></p>
+
+<p>Take a look at the chart. What’s good and bad about it?</p>
+
+<h1>The Good</h1>
+
+<p>The data is properly cited.</p>
+
+<h1>The Bad</h1>
+
+<p><strong>EVERYTHING ELSE.</strong></p>
+
+<p>What’s terrible about the graph? Let me count the ways:</p>
+
+<ul>
+<li><p>Using discrete values in the X-Axis for a continuous measurement (i.e. the percentage). And not only that, discrete values with two significant figures, which make the X-Axis unusually cluttered.</p></li>
+<li><p>The Y-Axis is Language. This implies that some programming languages are more language than others.  (<a href="https://www.facebook.com/photo.php?fbid=10152166149970450&amp;set=a.432190050449.225968.582270449&amp;type=1&amp;stream_ref=10">to be fair</a>, Java is more language than Android)</p></li>
+<li><p>Not all entries on the chart are programming languages. (Android, for example, is an operating system.)</p></li>
+<li><p>The 45-degree line in the chart implies that the relationship between language and %-of-searches is perfectly linear, where in reality the data has an upward-parabolic shape.</p></li>
+<li><p>No relative proportions between the programming languages. We can&rsquo;t accurately see the increase in language Java has relative to Android just by looking at the graph.</p></li>
+<li><p>Cannot easily associate a language with the given X-Axis value. The logos representing the programming language oscillate around the line, and it&rsquo;s hard to see at a glance which percentage corresponds to which language.</p></li>
+</ul>
+
+
+<h1>Fixing the Chart</h1>
+
+<p>This isn’t one of those blog posts that make snarky criticism without offering any constructive input. (those will be posted next week). How can we make the chart somewhat logical?</p>
+
+<p>The easiest way to improve the chart is to convert the chart from a line chart to a column chart. Here’s a column chart that keeps the intended impression of the original chart:</p>
+
+<p><img src="/img/dev-graph-1.png"  ></p>
+
+<p>A much bigger improvement, although unfortunately without the cool hand-drawn logos. The axes are no longer illogical and it’s easy to determine the relative impact of each language (e.g. Java is clearly, clearly at the top). However, the large amount of text can clutter the bars, and it can be difficult to correlate the raw percentage with the scale at a glance.</p>
+
+<p>Another option is to rotate the chart and use bars instead of columns:</p>
+
+<p><img src="/img/dev-graph-2.png"  ></p>
+
+<p>This fixes the text issue by giving more room for text with most of the factors, but the Java text clips outside the chart. The correlation issue between language and percent value persists.</p>
+
+<p>A best-of-both-worlds approach is to display the language on the Y-Axis and the raw percent value on the corresponding bar itself, allowing us to forgo the percent metric axis entirely.</p>
+
+<p><img src="/img/dev-graph-3.png"  ></p>
+
+<p>There we go. Minimalist, fixes both the text and correlation issues, and gets the point across effectively.</p>
+
+<p>All of these charts were created using R and ggplot2, and you can download the R code in <a href="https://github.com/minimaxir/developer-graphs">this GitHub repository</a>. I wish the <a href="http://readwrite.com/2014/01/08/in-demand-tech-skills-of-2013-java">orginal ReadWrite article</a> used a chart like the last one and…</p>
+
+<p>Wait, they changed the infographic?</p>
+
+<p><img src="/img/infographic-2.jpg"  ></p>
+
+<p>Hey, they fixed the chart, and it’s using a similar design as mine! What a crazy random happenstance!</p>
+
+<p>The article was appended with an update:</p>
+
+<blockquote><p>An earlier version of the infographic in this story presented the StackOverflow data in a confusing and conceptually problematic fashion. It has been updated.</p></blockquote>
+
+<p>&ldquo;Problematic&rdquo; is the world&rsquo;s biggest understatement.</p>
+]]></content>
+  </entry>
+  
+</feed>
