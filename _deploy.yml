@@ -1,5 +1,5 @@
 method: git                               # How do you want to deploy? git, rsync or s3.
-site_dir: public                           # Location of your static site files.
+site_dir: public                          # Location of your static site files.
 
 git_url: git@github.com:minimaxir/minimaxir.github.io  # remote repository url, e.g. git@github.com:username/repo_name
 
