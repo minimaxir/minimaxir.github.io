@@ -61,3 +61,9 @@
 .demo-footer .mdl-mini-footer--link-list a {
   font-size: 13px;
 }
+
+@media (max-width: 479px) {
+.demo-content {
+    padding: 20px 28px;
+}
+}

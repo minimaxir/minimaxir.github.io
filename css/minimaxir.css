@@ -281,6 +281,7 @@ color: #7f8c8d !important;
 
 .about {
 	padding-bottom: 0px;
+	max-height: 400px;
 }
 
 .about p {
@@ -368,6 +369,7 @@ margin-bottom: 0px;
 .mdl-card__supporting-text {
 padding-bottom: 0px;
 min-height: 75px;
+font-size: 15px;
 }
 
 .embed-video-container {
@@ -412,4 +414,8 @@ color: #424242 !important
 
 .hero.portfolio {
 padding-bottom: 0px;
+}
+
+.mdl-mini-footer--link-list li {
+font-size: 13px;
 }
