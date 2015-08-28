@@ -1,19 +1,30 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
   <meta charset="utf-8">
- <title>A Statistical Analysis of 142 Million Reddit Submissions | minimaxir | Max Woolf's Blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
+  <title>A Statistical Analysis of 142 Million Reddit Submissions</title>
   
+  
+    
   
   
   
@@ -59,30 +70,60 @@
 
   
 
- 
- 
-  <meta property="og:locale"    content="en_us" />
-  
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta property="og:locale"    content="en_us" />
   
-  <link rel="canonical" href="http://minimaxir.com/2014/12/reddit-statistics/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/css/minimaxir.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  
+  <meta name="description" content="Reddit, the &ldquo;front page of the Internet&rdquo;, is well-deserving of that title. Founded in 2005 for the more tech-savvy crowd, Reddit is a news aggreg...">
   <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+
+  <link rel="canonical" href="http://minimaxir.com/2014/12/reddit-statistics/">
   
-  <script>
+      <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+	<link rel="apple-touch-icon" sizes="57x57" href="http://minimaxir.com/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="http://minimaxir.com/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="http://minimaxir.com/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="http://minimaxir.com/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="http://minimaxir.com/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="http://minimaxir.com/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="http://minimaxir.com/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="http://minimaxir.com/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://minimaxir.com/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="http://minimaxir.com/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://minimaxir.com/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="http://minimaxir.com/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://minimaxir.com/favicon/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="http://minimaxir.com/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <!--<link href='//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'> -->
+
+  
+  
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js" type="text/javascript"></script>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro:400,700|Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/minimaxir.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
    $(document).ready(function() {
  
   // Facebook
@@ -91,9 +132,9 @@
 	var url = facebook_button.attr("data");
 
   jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
-  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.shares + "</span>");
-  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + data.likes + "</span>");
-  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count hidden-xs\"> " + " 0</span>");
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + " 0</span>");
   });
   });
  
@@ -103,7 +144,7 @@
 	var url = twitter_button.attr("data");
 
   jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
-  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.count + "</span>");
   });
   });
   
@@ -113,52 +154,95 @@
 	var url = linkedin_button.attr("data");
 
   jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
-  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count hidden-xs\"> " + data.count + "</span>");
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.count + "</span>");
   });
   });
-  });
-  </script>
+  });  
 
-</head>
+//$('.mdl-layout__drawer-button').html('<i class=\"fa fa-navicon\"></i>');
+</script>
+	</head>
   <body>
-    <!--<a href="/" class="home-icon">
-      <img src="/images/home.png"/>
-    </a>-->
-	
-	<a href="/" class="home-icon">
-		<i class="fa fa-home"></i>
-	</a>
+  
+  	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-100">
+  <header class="mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-800">
+    <!-- Top row, always visible -->
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Max Woolf (@minimaxir)</span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+      	<a class="mdl-navigation__link" href="/">Home</a>
+        <a class="mdl-navigation__link" href="/about/">About</a>
+        <a class="mdl-navigation__link" href="/contact">Contact</a>
+        <a class="mdl-navigation__link" href="/portfolio/">Portfolio</a>
+      </nav>
+      <div class="mdl-layout-spacer"></div>
+      <div class="social-icon-list mdl-layout--large-screen-only">
+    <a title="RSS" href="/rss.xml"><i class="fa fa-rss-square"></i></a>
+  </div>
 
-    <article role="article" class="full-single-article">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <h1>A Statistical Analysis of 142 Million Reddit Submissions</h1>
-        <div class="meta">
-          written <time datetime="2014-12-16T08:00:00-08:00" pubdate data-updated="true">Dec 16th, 2014</time>
-          in
-<span class="categories">
-  
-    
-          <a href="/data/">data</a></span>
-     
-  
-</span>
-        </div>
-		<div class="row sharing index">
-  
-		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/12/reddit-statistics/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/12/reddit-statistics/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
-  
-		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Statistical Analysis of 142 Million Reddit Submissions - http://minimaxir.com/2014/12/reddit-statistics/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/12/reddit-statistics/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+    </div>
 
-  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2014/12/reddit-statistics/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/12/reddit-statistics/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Max Woolf</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="/"><i class="material-icons">home</i> Home</a>
+    	<a class="mdl-navigation__link" href="/about/"><i class="material-icons">person</i> About</a>
+        <a class="mdl-navigation__link" href="/contact"><i class="material-icons">contacts</i> Contact</a>
+        <a class="mdl-navigation__link" href="/portfolio/"><i class="material-icons">work</i> Portfolio</a>
+    </nav>
+    </div>
+  	
+		  	<div class="demo-ribbon hero" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/img/growth_rate_reddit.png') no-repeat center center; background-size: cover;" >
+  	<div class="demo-container mdl-grid">
+  	<!--<h1 class="post-title">A Statistical Analysis of 142 Million Reddit Submissions</h1>-->
+  	
+  	<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  	<div class="mdl-cell mdl-cell--8-col">
+  	<div class="post-title">
+  	<h1>A Statistical Analysis of 142 Million Reddit Submissions</h1>
+  	</div>
+  	
+  	<div class="post-meta">
+  	Dec 16, 2014
+  	
+  	
+  	<div class="sharing">
+  
+		  <span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/12/reddit-statistics/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/12/reddit-statistics/"><i class="fa fa-facebook"></i><span class="count mdl-cell--hide-phone"> -</span></a></span>
+  
+		<span class="social twitter"><a href="http://twitter.com/home/?status=A Statistical Analysis of 142 Million Reddit Submissions - http://minimaxir.com/2014/12/reddit-statistics/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/12/reddit-statistics/><i class="fa fa-twitter"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+
+  <span  class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Statistical Analysis of 142 Million Reddit Submissions&url=http://minimaxir.com/2014/12/reddit-statistics/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/12/reddit-statistics/><i class="fa fa-linkedin"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
    
-			</div>
-		
-        <p><img src="/img/reddit-statistics/reddit_logo.jpg"  ></p>
+	</div>
+	
+  	</div>
+  	
+  	
+  	</div>
+  	
+
+	</div>
+  	</div>
+  	
+ <main class="demo-main mdl-layout__content">
+<div class="demo-container mdl-grid">
+ <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+ <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+
+<div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+
+  <article class="post-content">
+    <p><img src="/img/reddit-statistics/reddit_logo.jpg"  ></p>
 
 <p>Reddit, the &ldquo;front page of the Internet&rdquo;, is well-deserving of that title. Founded in 2005 for the more tech-savvy crowd, <a href="http://reddit.com">Reddit</a> is a news aggregator where users can submit links to interesting websites and other media, and form communities on specific interests which are known as &ldquo;subreddits.&rdquo; Since 2008, its popularity has grown exponentially.</p>
 
@@ -172,7 +256,7 @@
 
 <p>I, <a href="http://www.reddit.com/user/minimaxir">/u/minimaxir</a>, have personally been a redditor for 3 years. I&rsquo;ve previously done statistical analyses of Reddit data before, such as looking at which <a href="http://minimaxir.com/2013/11/subreddit-size/">subreddits are the largest</a> or determining which sites on Reddit are <a href="http://minimaxir.com/2013/09/reddit-imgur-youtube/">the most-frequently submitted</a>, but those were written with incomplete data. Thanks to <a href="http://redditanalytics.com">Reddit Analytics</a>, I have obtained a data dump and I subsequently constructed a database to store all Reddit Submissions from November 2007 to the end of October 2014: 142,159,793 submissions in total. And this data is very curious and very, <em>very</em> memetic.</p>
 
-<h1><i class="fa fa-reddit"></i> A Quick Glance At Reddit</h1>
+<h1>A Quick Glance At Reddit</h1>
 
 <p><img src="/img/reddit-statistics/reddit_sample.png"  ></p>
 
@@ -202,7 +286,7 @@
 
 <p><a href="http://reddit.com/r/IAmA">/r/IAmA</a> is Reddit&rsquo;s flagship subreddit (which <a href="http://www.redditblog.com/2014/09/announcing-official-reddit-ama-app_2.html">has its own official app</a>!), where users can ask questions to noteworthy people: it&rsquo;s not surprising to see it far at the top. Sports and video games are the top topics for discussion on Reddit.</p>
 
-<h1><i class="fa fa-comments"></i> reddit.self</h1>
+<h1>reddit.self</h1>
 
 <p><img src="/img/reddit-statistics/reddit_self.png"  ></p>
 
@@ -224,7 +308,7 @@
 
 <p>Yes. They have. Despite having &frac14;th of the score, self-submissions receive about twice as many comments on average.</p>
 
-<h1><i class="fa fa-ban"></i> Not Safe For Procrastinating At Work</h1>
+<h1>Not Safe For Procrastinating At Work</h1>
 
 <p><em>[Sample image omitted for obvious reasons.]</em></p>
 
@@ -246,7 +330,7 @@
 
 <p>The number of comments on NSFW submissions is only slightly less than that on average, but there&rsquo;s a larger amount of uncertainty for that particular average due to the smaller proportion. Most internet users are lurkers and not contributors; it&rsquo;s likely that NSFW media is a more noninteractive experience. (<em>ahem</em>)</p>
 
-<h1><i class="fa fa-globe"></i> Reddit In The City</h1>
+<h1>Reddit In The City</h1>
 
 <p><img src="/img/reddit-statistics/reddit_sf.png"  ></p>
 
@@ -264,7 +348,7 @@
 
 <p>There are a few more parings here than with average scores: <a href="http://reddit.com/r/montreal">/r/montreal</a>  and <a href="http://reddit.com/r/toronto">/r/toronto</a> are paired as non-US cities, <a href="http://reddit.com/r/Portland">/r/Portland</a> and <a href="http://reddit.com/r/Seattle">/r/Seattle</a> are paired as West Coast cities, <a href="http://reddit.com/r/Austin">/r/Austin</a> and <a href="http://reddit.com/r/houston">/r/houston</a> are paired as Texas cities, and all of <a href="http://reddit.com/r/bayarea">/r/bayarea</a>, <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a>, and <a href="http://reddit.com/r/sandiego">/r/sandiego</a> are paired as California cities. It&rsquo;s still not a perfect relationship, however.</p>
 
-<h1><i class="fa fa-meh-o"></i> Positivity and Negativity</h1>
+<h1>Positivity and Negativity</h1>
 
 <p><img src="/img/reddit-statistics/reddit_neg.png"  ></p>
 
@@ -301,45 +385,60 @@
 </ul>
 
 
-		
-		<div class="row sharing index">
+    
+    <div class="post-meta">
+  	Dec 16, 2014
+  	
+  	
+  	<div class="sharing">
   
-		  <span class="social facebook col-xs-4"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/12/reddit-statistics/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/12/reddit-statistics/"><i class="fa fa-facebook"></i><span class="count hidden-xs"> -</span></a></span>
+		  <span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2014/12/reddit-statistics/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2014/12/reddit-statistics/"><i class="fa fa-facebook"></i><span class="count mdl-cell--hide-phone"> -</span></a></span>
   
-		<span class="social twitter col-xs-4"><a href="http://twitter.com/home/?status=A Statistical Analysis of 142 Million Reddit Submissions - http://minimaxir.com/2014/12/reddit-statistics/ - via @minimaxir"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/12/reddit-statistics/><i class="fa fa-twitter"></i><span class="count hidden-xs"> -</span></a> </span>
+		<span class="social twitter"><a href="http://twitter.com/home/?status=A Statistical Analysis of 142 Million Reddit Submissions - http://minimaxir.com/2014/12/reddit-statistics/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2014/12/reddit-statistics/><i class="fa fa-twitter"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
 
-  <span  class="social linkedin col-xs-4"><a href="http://www.linkedin.com/shareArticle?mini=true&title=&url=http://minimaxir.com/2014/12/reddit-statistics/"  onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/12/reddit-statistics/><i class="fa fa-linkedin"></i><span class="count hidden-xs"> -</span></a> </span>
+  <span  class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=A Statistical Analysis of 142 Million Reddit Submissions&url=http://minimaxir.com/2014/12/reddit-statistics/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2014/12/reddit-statistics/><i class="fa fa-linkedin"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
    
-			</div>
-		
-		</div>
-    </div>
-  </div>
-</article>
+	</div>
+	
+  	</div>
+  </article>
+  
+  
+  
+  
 
+  
 
-<div class="home-landing her-row">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-offset-3 col-md-2">
-<h4>about me</h4>
-<img src="/images/max-prof-pic-200.jpg" alt="Stop mousing over me! :(" class="img-circle img-responsive hidden-xs hidden-sm">
 </div>
+      </div>
+    </div>
+          </div>
+        </div>
 
 
-<div id="about-me" class="col-md-4">
+
+  <div class="demo-ribbon hero about">
+  	<div class="demo-container mdl-grid">
+  	
+  	<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  	<div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--hide-phone">  	
+  	<img src="/MaxFBInvert.png" title="Stop mousing over me! I'm not a XKCD comic!">
+  	</div>
+  	
+  	<div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
+  	
+  	<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">  	
+  	<p>Max Woolf (@minimaxir) is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years and a 2012 Carnegie Mellon University graduate.</p>
   
-  <p>Max Woolf is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years. He graduated from Carnegie Mellon University in 2012 with a degree in Business Administration, concentrating in Computing and Information Technology.</p>
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.</p>
   
-  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.  Max also comments on technology blogs rather frequently.</p>
+  <p>You can learn more about Max <a href="/about">here</a>, or view his portfolio <a href="/portfolio">here</a>.
   
-  <p>You can learn more about Max <a href="http://minimaxir.com/about">here</a>.
-</p>
   
-  <div class="social-icon-list">
+    <div class="social-icon-list">
 	
     <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
     
@@ -356,17 +455,17 @@
     <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
     
   </div>
-</div>
-        </div>
-      </div>
-    </div>
+  	</div>
+  	
 
-<div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <hr class="divider-short"/>
-        
-        
+	</div>
+  	</div>
+  
+  <div class="demo-container mdl-grid">
+ <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+ <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+  
+  
         <section>
           <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
       var disqus_shortname = 'minimaxir';
@@ -385,62 +484,51 @@
 </script></div>
         </section>
         
+        
+  <div class="demo-container mdl-grid archive-nav">
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        
+          <h3><a href="/2014/10/hn-comments-about-comments/" style="float: left;"><i class="material-icons">arrow_back</i>  Prev</a></h3>
+        
+    	</div>
 
-		</div>
-		</div>
-		</div>
-      
-<hr class="divider-short"/>
-
-<div class="archive-link">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+		<div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+		
+		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         
-          <a class="pull-left" href="/2014/10/hn-comments-about-comments/" title="Previous Post: The Quality, Popularity, and Negativity of 5.6 Million Hacker News Comments"><i class="fa fa-angle-double-left"></i>  The Quality, Popularity, and Negativity of 5.6 Million Hacker News Comments</a>
+          <h3><a href="/2015/01/tree-time/" style="float: right;">Next <i class="material-icons">arrow_forward</i></a></h3>
         
-
-        
-          <a class="pull-right" href="/2015/01/tree-time/" title="Next Post: Locating All the Christmas Trees on Instagram">Locating All the Christmas Trees on Instagram <i class="fa fa-angle-double-right"></i></a>
-        
+        </div>
       </div>
-    </div>
-  </div>
+        
 </div>
+</div>
+  
+  
 
-    <footer id="footer" class="her-row">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-1">
-  <a href="/"><h4>Home</h4></a>
-</div>
-<!--
-<div class="col-md-2">
-  <div class="social-icon-list">
-    
-    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
-    
-  	
-    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
-    
-	
-    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
-    
-    
-    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
-    
-    
-    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
-    
-  </div>
-</div>
--->
 
-<div class="pull-right">
-  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Original theme by <a href="http://AdrianArtiles.com">Adrian Artiles</a>, heavily <a href="https://github.com/minimaxir/MediumFox">modified</a> by Max Woolf</h4>
-</div>
+		
+		
+		
+		
+        <footer class="demo-footer mdl-mini-footer">
+          <div class="mdl-mini-footer--left-section">
+            <ul class="mdl-mini-footer--link-list">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/portfolio/">Portfolio</a></li>
+            </ul>
+          </div>
+          
+          <div class="mdl-mini-footer--right-section">
+          <ul class="mdl-mini-footer--link-list">
+          <li>Theme made by Max Woolf using <a href="http://www.getmdl.io/">Material Design Lite</a>.</li>
+          </ul>
+          </div>
+        </footer>
+ </main>
     </div>
-  </div>
-</footer>
+    
   </body>
 </html>

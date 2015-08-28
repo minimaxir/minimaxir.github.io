@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-08-13T07:52:00-07:00</updated>
+  <updated>2015-08-27T21:05:12-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -40,8 +40,8 @@
 
 <p>The first command uses the <code>mencoder</code> functionality of <a href="http://www.mplayerhq.hu/design7/news.html">mplayer</a> to render each frame of the video to PNGs:</p>
 
-<pre><code>mplayer -ao null -vo png:z=1:outdir=gif -vf scale=608:454 zerowidthedit.mov
-</code></pre>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mplayer -ao null -vo png:z<span class="o">=</span>1:outdir<span class="o">=</span>gif -vf <span class="nv">scale</span><span class="o">=</span>608:454 zerowidthedit.mov</code></pre></div>
+
 
 <p>I set the size to a width of 608px since it was exactly 50% of the width of the raw video, but I could set it to whatever I want, although it would be ideal to keep the aspect ratio the same.</p>
 
@@ -174,63 +174,59 @@ GROUP BY lat, long
 
 <p>Let&rsquo;s say we want to scrape the New York Times' Facebook page. We would send a request to <a href="https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX">https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX</a> and we would get:</p>
 
-<pre><code>{
-    "id": "5281959998", 
-    "name": "The New York Times"
-}
-</code></pre>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="lineno">1</span> <span class="p">{</span>
+<span class="lineno">2</span>       <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998&quot;</span><span class="p">,</span> 
+<span class="lineno">3</span>       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;The New York Times&quot;</span>
+<span class="lineno">4</span>   <span class="p">}</span></code></pre></div>
+
 
 <p>i.e., the page metadata. Sending a request to /nytimes/feed results in what we want:</p>
 
-<pre><code>{
-    "data": [
-        {
-            "created_time": "2015-07-20T01:25:01+0000", 
-            "id": "5281959998_10150628157724999", 
-            "message": "The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth."
-        }, 
-        {
-            "created_time": "2015-07-19T22:55:01+0000", 
-            "id": "5281959998_10150628161129999", 
-            "message": "\"It\u2019s safe to say that federal agencies are not where we want them to be across the board,\" said President Barack Obama's top cybersecurity adviser. \"We clearly need to be moving faster.\""
-        }
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="lineno"> 1</span> <span class="p">{</span>
+<span class="lineno"> 2</span>      <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="lineno"> 3</span>          <span class="p">{</span>
+<span class="lineno"> 4</span>              <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-20T01:25:01+0000&quot;</span><span class="p">,</span> 
+<span class="lineno"> 5</span>              <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628157724999&quot;</span><span class="p">,</span> 
+<span class="lineno"> 6</span>              <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth.&quot;</span>
+<span class="lineno"> 7</span>          <span class="p">},</span> 
+<span class="lineno"> 8</span>          <span class="p">{</span>
+<span class="lineno"> 9</span>              <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-19T22:55:01+0000&quot;</span><span class="p">,</span> 
+<span class="lineno">10</span>              <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628161129999&quot;</span><span class="p">,</span> 
+<span class="lineno">11</span>              <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;\&quot;It\u2019s safe to say that federal agencies are not where we want them to be across the board,\&quot; said President Barack Obama&#39;s top cybersecurity adviser. \&quot;We clearly need to be moving faster.\&quot;&quot;</span>
+<span class="lineno">12</span>          <span class="p">}</span>
+<span class="lineno">13</span>       <span class="p">]</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>          
+<span class="lineno">16</span> <span class="p">}</span></code></pre></div>
 
-        [...]
-}
-</code></pre>
 
 <p>Now we get the post data. But not much of it. In Graph API v2.4, the default behavior is to return very, very little metadata for statuses in order to reduce bandwidth, with the expectation that the user will request the necessary fields.</p>
 
 <p>So let&rsquo;s request <em>all</em> the fields we want. This results in a very long URL not shown here which causes the posts feed to have all the data we need:</p>
 
-<pre><code>{
-    "comments": {
-        [...]
-        }, 
-        "summary": {
-            "order": "ranked", 
-            "total_count": 31
-        }
-    }, 
-    "created_time": "2015-07-20T01:25:01+0000", 
-    "id": "5281959998_10150628157724999", 
-    "likes": {
-        "data": [
-            [...]
-        }, 
-        "summary": {
-            "total_count": 278
-        }
-    }, 
-    "link": "http://nyti.ms/1Jr6LhU", 
-    "message": "The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth.", 
-    "name": "China Molds a Supercity Around Beijing, Promising to Change Lives", 
-    "shares": {
-        "count": 50
-    }, 
-    "type": "link"
-}
-</code></pre>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="lineno"> 1</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="p">{},</span>
+<span class="lineno"> 3</span>     <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno"> 4</span>         <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="s2">&quot;ranked&quot;</span><span class="p">,</span>
+<span class="lineno"> 5</span>         <span class="nt">&quot;total_count&quot;</span><span class="p">:</span> <span class="mi">31</span>
+<span class="lineno"> 6</span>     <span class="p">},</span>
+<span class="lineno"> 7</span>     <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-20T01:25:01+0000&quot;</span><span class="p">,</span>
+<span class="lineno"> 8</span>     <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628157724999&quot;</span><span class="p">,</span>
+<span class="lineno"> 9</span>     <span class="nt">&quot;likes&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno">10</span>         <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
+<span class="lineno">11</span>         <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno">12</span>             <span class="nt">&quot;total_count&quot;</span><span class="p">:</span> <span class="mi">278</span>
+<span class="lineno">13</span>         <span class="p">}</span>
+<span class="lineno">14</span>     <span class="p">},</span>
+<span class="lineno">15</span>     <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://nyti.ms/1Jr6LhU&quot;</span><span class="p">,</span>
+<span class="lineno">16</span>     <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The planned megalopolis, a metropolitan area that would be about 6 times the size of New York’s, is meant to revamp northern China’s economy and become a laboratory for modern urban growth.&quot;</span><span class="p">,</span>
+<span class="lineno">17</span>     <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;China Molds a Supercity Around Beijing, Promising to Change Lives&quot;</span><span class="p">,</span>
+<span class="lineno">18</span>     <span class="nt">&quot;shares&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno">19</span>         <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">50</span>
+<span class="lineno">20</span>     <span class="p">},</span>
+<span class="lineno">21</span>     <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;link&quot;</span>
+<span class="lineno">22</span> <span class="p">}</span></code></pre></div>
+
 
 <h1>Post Processing</h1>
 
@@ -528,9 +524,9 @@ GROUP BY lat, long
 
 <p>For this tutorial, we&rsquo;ll be using <code>ggplot2</code>, plus three additional R packages: <code>RColorBrewer</code>, which allows for the procedural generation of colors from a palette for the chart, <code>scales</code>, which allows for the axes to express numbers with commas/percents, and <code>grid</code>, which allows for manipulation of the chart margins and layout. We can install and load these packages at the beginning of the R file:</p>
 
-<pre><code>install.packages(c("ggplot2","RColorBrewer","scales"))
-library(ggplot2); library(scales); library(grid); library(RColorBrewer)
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;ggplot2&quot;</span><span class="p">,</span><span class="s">&quot;RColorBrewer&quot;</span><span class="p">,</span><span class="s">&quot;scales&quot;</span><span class="p">))</span>
+<span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">);</span> <span class="kn">library</span><span class="p">(</span>scales<span class="p">);</span> <span class="kn">library</span><span class="p">(</span>grid<span class="p">);</span> <span class="kn">library</span><span class="p">(</span>RColorBrewer<span class="p">)</span></code></pre></div>
+
 
 <p>The dataset we&rsquo;ll use is my <a href="http://minimaxir.com/csv/buzzfeed_linkbait_headlines.csv">list of 15,101 BuzzFeed listicles</a> that I used <a href="http://minimaxir.com/2015/01/linkbait/">in my previous blog post</a>, including both the listicle size and number of Facebook shares the listicle received, which have been prefiltered to listicle sizes of 50 or less, and have received atleast 1 Facebook share. Download the file, and set the working directory of R to the containing folder. We load the dataset into R by reading the CSV:</p>
 
@@ -539,9 +535,9 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>We can make a basic histogram in two lines of code.</p>
 
-<pre><code>ggplot(df, aes(listicle_size)) +
-  geom_histogram(binwidth=1)
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>listicle_size<span class="p">))</span> <span class="o">+</span>
+      geom_histogram<span class="p">(</span>binwidth<span class="o">=</span><span class="m">1</span><span class="p">)</span></code></pre></div>
+
 
 <p>The first line instantiates the charts and defines the variables used for plotting. We declare the use of the data frame <code>df</code>, and the <code>listicle_size</code> vector from that data frame as the plotting aesthetic. The second line tells ggplot to make a histogram out of the given data with <code>geom_histogram</code>, and we specify a binwidth of 1 so that each column represents one discrete value of listicle. Running that code will cause a plot to pop up.</p>
 
@@ -549,59 +545,59 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>Not a bad start. In order to save the created plot, we use the <code>ggsave</code> command, which saves the last-generated plot to an image in your working directory. The first parameter, the filename, determines the filetype.</p>
 
-<pre><code>ggsave("tutorial_1.png", dpi=300, width=4, height=3)
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggsave<span class="p">(</span><span class="s">&quot;tutorial_1.png&quot;</span><span class="p">,</span> dpi<span class="o">=</span><span class="m">300</span><span class="p">,</span> width<span class="o">=</span><span class="m">4</span><span class="p">,</span> height<span class="o">=</span><span class="m">3</span><span class="p">)</span></code></pre></div>
+
 
 <p>Now we can add a theme to make it look classy.</p>
 
 <p>A ggplot2 theme is a function that overrides the graphical parameters of the default theme. Here&rsquo;s the long code block for my FiveThirtyEight-inspired theme, with code comments for each code subblock:</p>
 
-<pre><code>fte_theme &lt;- function() {
+<div class="highlight"><pre><code class="language-r" data-lang="r">fte_theme <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+      
+      <span class="c1"># Generate the colors for the chart procedurally with RColorBrewer</span>
+      palette <span class="o">&lt;-</span> brewer.pal<span class="p">(</span><span class="s">&quot;Greys&quot;</span><span class="p">,</span> n<span class="o">=</span><span class="m">9</span><span class="p">)</span>
+      color.background <span class="o">=</span> palette<span class="p">[</span><span class="m">2</span><span class="p">]</span>
+      color.grid.major <span class="o">=</span> palette<span class="p">[</span><span class="m">3</span><span class="p">]</span>
+      color.axis.text <span class="o">=</span> palette<span class="p">[</span><span class="m">6</span><span class="p">]</span>
+      color.axis.title <span class="o">=</span> palette<span class="p">[</span><span class="m">7</span><span class="p">]</span>
+      color.title <span class="o">=</span> palette<span class="p">[</span><span class="m">9</span><span class="p">]</span>
+      
+      <span class="c1"># Begin construction of chart</span>
+      theme_bw<span class="p">(</span>base_size<span class="o">=</span><span class="m">9</span><span class="p">)</span> <span class="o">+</span>
+        
+      <span class="c1"># Set the entire chart region to a light gray color</span>
+      theme<span class="p">(</span>panel.background<span class="o">=</span>element_rect<span class="p">(</span>fill<span class="o">=</span>color.background<span class="p">,</span> color<span class="o">=</span>color.background<span class="p">))</span> <span class="o">+</span>
+      theme<span class="p">(</span>plot.background<span class="o">=</span>element_rect<span class="p">(</span>fill<span class="o">=</span>color.background<span class="p">,</span> color<span class="o">=</span>color.background<span class="p">))</span> <span class="o">+</span>
+      theme<span class="p">(</span>panel.border<span class="o">=</span>element_rect<span class="p">(</span>color<span class="o">=</span>color.background<span class="p">))</span> <span class="o">+</span>
+      
+      <span class="c1"># Format the grid</span>
+      theme<span class="p">(</span>panel.grid.major<span class="o">=</span>element_line<span class="p">(</span>color<span class="o">=</span>color.grid.major<span class="p">,</span>size<span class="o">=</span><span class="m">.25</span><span class="p">))</span> <span class="o">+</span>
+      theme<span class="p">(</span>panel.grid.minor<span class="o">=</span>element_blank<span class="p">())</span> <span class="o">+</span>
+      theme<span class="p">(</span>axis.ticks<span class="o">=</span>element_blank<span class="p">())</span> <span class="o">+</span>
+      
+      <span class="c1"># Format the legend, but hide by default</span>
+      theme<span class="p">(</span>legend.position<span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">)</span> <span class="o">+</span>
+      theme<span class="p">(</span>legend.background <span class="o">=</span> element_rect<span class="p">(</span>fill<span class="o">=</span>color.background<span class="p">))</span> <span class="o">+</span>
+      theme<span class="p">(</span>legend.text <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">7</span><span class="p">,</span>color<span class="o">=</span>color.axis.title<span class="p">))</span> <span class="o">+</span>
+      
+      <span class="c1"># Set title and axis labels, and format these and tick marks</span>
+      theme<span class="p">(</span>plot.title<span class="o">=</span>element_text<span class="p">(</span>color<span class="o">=</span>color.title<span class="p">,</span> size<span class="o">=</span><span class="m">10</span><span class="p">,</span> vjust<span class="o">=</span><span class="m">1.25</span><span class="p">))</span> <span class="o">+</span>
+      theme<span class="p">(</span>axis.text.x<span class="o">=</span>element_text<span class="p">(</span>size<span class="o">=</span><span class="m">7</span><span class="p">,</span>color<span class="o">=</span>color.axis.text<span class="p">))</span> <span class="o">+</span>
+      theme<span class="p">(</span>axis.text.y<span class="o">=</span>element_text<span class="p">(</span>size<span class="o">=</span><span class="m">7</span><span class="p">,</span>color<span class="o">=</span>color.axis.text<span class="p">))</span> <span class="o">+</span>
+      theme<span class="p">(</span>axis.title.x<span class="o">=</span>element_text<span class="p">(</span>size<span class="o">=</span><span class="m">8</span><span class="p">,</span>color<span class="o">=</span>color.axis.title<span class="p">,</span> vjust<span class="o">=</span><span class="m">0</span><span class="p">))</span> <span class="o">+</span>
+      theme<span class="p">(</span>axis.title.y<span class="o">=</span>element_text<span class="p">(</span>size<span class="o">=</span><span class="m">8</span><span class="p">,</span>color<span class="o">=</span>color.axis.title<span class="p">,</span> vjust<span class="o">=</span><span class="m">1.25</span><span class="p">))</span> <span class="o">+</span>
+      
+      <span class="c1"># Plot margins</span>
+      theme<span class="p">(</span>plot.margin <span class="o">=</span> unit<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">0.35</span><span class="p">,</span> <span class="m">0.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0.35</span><span class="p">),</span> <span class="s">&quot;cm&quot;</span><span class="p">))</span>
+    <span class="p">}</span></code></pre></div>
 
-  # Generate the colors for the chart procedurally with RColorBrewer
-  palette &lt;- brewer.pal("Greys", n=9)
-  color.background = palette[2]
-  color.grid.major = palette[3]
-  color.axis.text = palette[6]
-  color.axis.title = palette[7]
-  color.title = palette[9]
-
-  # Begin construction of chart
-  theme_bw(base_size=9) +
-
-  # Set the entire chart region to a light gray color
-  theme(panel.background=element_rect(fill=color.background, color=color.background)) +
-  theme(plot.background=element_rect(fill=color.background, color=color.background)) +
-  theme(panel.border=element_rect(color=color.background)) +
-
-  # Format the grid
-  theme(panel.grid.major=element_line(color=color.grid.major,size=.25)) +
-  theme(panel.grid.minor=element_blank()) +
-  theme(axis.ticks=element_blank()) +
-
-  # Format the legend, but hide by default
-  theme(legend.position="none") +
-  theme(legend.background = element_rect(fill=color.background)) +
-  theme(legend.text = element_text(size=7,color=color.axis.title)) +
-
-  # Set title and axis labels, and format these and tick marks
-  theme(plot.title=element_text(color=color.title, size=10, vjust=1.25)) +
-  theme(axis.text.x=element_text(size=7,color=color.axis.text)) +
-  theme(axis.text.y=element_text(size=7,color=color.axis.text)) +
-  theme(axis.title.x=element_text(size=8,color=color.axis.title, vjust=0)) +
-  theme(axis.title.y=element_text(size=8,color=color.axis.title, vjust=1.25)) +
-
-  # Plot margins
-  theme(plot.margin = unit(c(0.35, 0.2, 0.3, 0.35), "cm"))
-}
-</code></pre>
 
 <p>Adding the completed theme to the chart is just one line of code:</p>
 
-<pre><code>ggplot(df, aes(listicle_size)) +
-  geom_histogram(binwidth=1) +
-  fte_theme()
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>listicle_size<span class="p">))</span> <span class="o">+</span>
+      geom_histogram<span class="p">(</span>binwidth<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
+      fte_theme<span class="p">()</span></code></pre></div>
+
 
 <p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_2.png"  ></p>
 
@@ -609,11 +605,11 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>Of course, all charts need properly labled axes and a title. We can add that with the <code>labs</code> function:</p>
 
-<pre><code>ggplot(df, aes(listicle_size)) +
-  geom_histogram(binwidth=1) +
-  fte_theme() +
-  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles")
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>listicle_size<span class="p">))</span> <span class="o">+</span>
+      geom_histogram<span class="p">(</span>binwidth<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
+      fte_theme<span class="p">()</span> <span class="o">+</span>
+      labs<span class="p">(</span>title<span class="o">=</span><span class="s">&quot;Distribution of Listicle Sizes for BuzzFeed Listicles&quot;</span><span class="p">,</span> x<span class="o">=</span><span class="s">&quot;# of Entries in Listicle&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;# of Listicles&quot;</span><span class="p">)</span></code></pre></div>
+
 
 <p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_3.png"  ></p>
 
@@ -621,14 +617,14 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>Putting it all together:</p>
 
-<pre><code>ggplot(df, aes(listicle_size)) +
-  geom_histogram(binwidth=1, fill="#c0392b", alpha=0.75) +
-  fte_theme() +
-  labs(title="Distribution of Listicle Sizes for BuzzFeed Listicles", x="# of Entries in Listicle", y="# of Listicles") +
-  scale_x_continuous(breaks=seq(0,50, by=5)) +
-  scale_y_continuous(labels=comma) + 
-  geom_hline(yintercept=0, size=0.4, color="black")
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>listicle_size<span class="p">))</span> <span class="o">+</span>
+      geom_histogram<span class="p">(</span>binwidth<span class="o">=</span><span class="m">1</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;#c0392b&quot;</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">0.75</span><span class="p">)</span> <span class="o">+</span>
+      fte_theme<span class="p">()</span> <span class="o">+</span>
+      labs<span class="p">(</span>title<span class="o">=</span><span class="s">&quot;Distribution of Listicle Sizes for BuzzFeed Listicles&quot;</span><span class="p">,</span> x<span class="o">=</span><span class="s">&quot;# of Entries in Listicle&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;# of Listicles&quot;</span><span class="p">)</span> <span class="o">+</span>
+      scale_x_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">50</span><span class="p">,</span> by<span class="o">=</span><span class="m">5</span><span class="p">))</span> <span class="o">+</span>
+      scale_y_continuous<span class="p">(</span>labels<span class="o">=</span>comma<span class="p">)</span> <span class="o">+</span> 
+      geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">,</span> size<span class="o">=</span><span class="m">0.4</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span></code></pre></div>
+
 
 <p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_4.png"  ></p>
 
@@ -640,18 +636,18 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>Creating a scatterplot of the relationship between listicle size and the number of Facebook shares the listicle receives is essentially the same procedure as creating a histogram, except that the x-axis and y-axis aesthetic vectors must be declared explicitly.</p>
 
-<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
-  geom_point()
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>listicle_size<span class="p">,</span> y<span class="o">=</span>num_fb_shares<span class="p">))</span> <span class="o">+</span>
+      geom_point<span class="p">()</span></code></pre></div>
+
 
 <p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_5.png"  ></p>
 
 <p>Because there are a few listicles with <em>over 1 million</em> Facebook shares (welcome to 2015), the entire plot is skewed. As a result, we need to compress the plot by scaling the y-axis logarithmically using <code>scale_y_log10</code>. Additionally, there will be a large amount of overlap between points due to the large sample size, so we need to greatly reduce the opacity of the points. (I set to 5% for this chart, but the best value can be determined through trial and error)</p>
 
-<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
-  geom_point(alpha=0.05) +
-  scale_y_log10(labels=comma)
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>listicle_size<span class="p">,</span> y<span class="o">=</span>num_fb_shares<span class="p">))</span> <span class="o">+</span>
+      geom_point<span class="p">(</span>alpha<span class="o">=</span><span class="m">0.05</span><span class="p">)</span> <span class="o">+</span>
+      scale_y_log10<span class="p">(</span>labels<span class="o">=</span>comma<span class="p">)</span></code></pre></div>
+
 
 <p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_6.png"  ></p>
 
@@ -659,12 +655,12 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>Now we can apply the theme and labels:</p>
 
-<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
-  geom_point(alpha=0.05) +
-  scale_y_log10(labels=comma) +
-  fte_theme() +
-  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>listicle_size<span class="p">,</span> y<span class="o">=</span>num_fb_shares<span class="p">))</span> <span class="o">+</span>
+      geom_point<span class="p">(</span>alpha<span class="o">=</span><span class="m">0.05</span><span class="p">)</span> <span class="o">+</span>
+      scale_y_log10<span class="p">(</span>labels<span class="o">=</span>comma<span class="p">)</span> <span class="o">+</span>
+      fte_theme<span class="p">()</span> <span class="o">+</span>
+      labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot;# of Entries in Listicle&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;# of Facebook Shares&quot;</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;FB Shares vs. Listicle Size for BuzzFeed Listicles&quot;</span><span class="p">)</span></code></pre></div>
+
 
 <p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_7.png"  ></p>
 
@@ -672,15 +668,15 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>Putting it all together:</p>
 
-<pre><code>ggplot(df, aes(x=listicle_size, y=num_fb_shares)) +
-  geom_point(alpha=0.05, color="#c0392b") +
-  scale_x_continuous(breaks=seq(0,50, by=5)) +
-  scale_y_log10(labels=comma, breaks=10^(0:6)) +
-  geom_hline(yintercept=1, size=0.4, color="black") +
-  geom_smooth(alpha=0.25, color="black", fill="black") +
-  fte_theme() +
-  labs(x="# of Entries in Listicle", y="# of Facebook Shares", title="FB Shares vs. Listicle Size for BuzzFeed Listicles")
-</code></pre>
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>listicle_size<span class="p">,</span> y<span class="o">=</span>num_fb_shares<span class="p">))</span> <span class="o">+</span>
+      geom_point<span class="p">(</span>alpha<span class="o">=</span><span class="m">0.05</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;#c0392b&quot;</span><span class="p">)</span> <span class="o">+</span>
+      scale_x_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">50</span><span class="p">,</span> by<span class="o">=</span><span class="m">5</span><span class="p">))</span> <span class="o">+</span>
+      scale_y_log10<span class="p">(</span>labels<span class="o">=</span>comma<span class="p">,</span> breaks<span class="o">=</span><span class="m">10</span><span class="o">^</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">6</span><span class="p">))</span> <span class="o">+</span>
+      geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">1</span><span class="p">,</span> size<span class="o">=</span><span class="m">0.4</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span>
+      geom_smooth<span class="p">(</span>alpha<span class="o">=</span><span class="m">0.25</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span>
+      fte_theme<span class="p">()</span> <span class="o">+</span>
+      labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot;# of Entries in Listicle&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;# of Facebook Shares&quot;</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;FB Shares vs. Listicle Size for BuzzFeed Listicles&quot;</span><span class="p">)</span></code></pre></div>
+
 
 <p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_8.png"  ></p>
 
@@ -806,7 +802,7 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>I found a few interesting things while playing with this map.</p>
 
-<h1><i class="fa fa-tree"></i> Christmas Trees in the USA</h1>
+<h1>Christmas Trees in the USA</h1>
 
 <p>A downside of the interactive map is that quantifying the relative number of photos between dense areas (e.g. cities) can be misleading as the opaque markers overlap. Here is a static map of all of the Instagram photos in the United States, with each translucent point representing an image:</p>
 
@@ -824,7 +820,7 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>Looking at all the #tree photos in the world may tell a different story.</p>
 
-<h1><i class="fa fa-globe"></i> Christmas Trees in the World</h1>
+<h1>Christmas Trees in the World</h1>
 
 <p>Christmas is a holiday for only one religion with a <a href="http://en.wikipedia.org/wiki/Christianity_by_country">low presence in Asia and northern Africa</a>, so it would be expected that the locations of Christmas trees worldwide do <em>not</em> correlate with population, which makes the analysis more interesting.</p>
 
@@ -838,7 +834,7 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>Italy <em>may</em> have a high number of Christmas trees since Vatican City is the seat of the papacy, but perhaps data <em>itself</em> should be questioned too.</p>
 
-<h1><i class="fa fa-thumbs-o-up"></i> &ldquo;Christmas Trees&rdquo; in the World</h1>
+<h1>&ldquo;Christmas Trees&rdquo; in the World</h1>
 
 <p>If you check the photos in Italy, you many notice that many of them have a photo caption similar to this one:</p>
 
@@ -895,7 +891,7 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>I, <a href="http://www.reddit.com/user/minimaxir">/u/minimaxir</a>, have personally been a redditor for 3 years. I&rsquo;ve previously done statistical analyses of Reddit data before, such as looking at which <a href="http://minimaxir.com/2013/11/subreddit-size/">subreddits are the largest</a> or determining which sites on Reddit are <a href="http://minimaxir.com/2013/09/reddit-imgur-youtube/">the most-frequently submitted</a>, but those were written with incomplete data. Thanks to <a href="http://redditanalytics.com">Reddit Analytics</a>, I have obtained a data dump and I subsequently constructed a database to store all Reddit Submissions from November 2007 to the end of October 2014: 142,159,793 submissions in total. And this data is very curious and very, <em>very</em> memetic.</p>
 
-<h1><i class="fa fa-reddit"></i> A Quick Glance At Reddit</h1>
+<h1>A Quick Glance At Reddit</h1>
 
 <p><img src="http://minimaxir.com/img/reddit-statistics/reddit_sample.png"  ></p>
 
@@ -925,7 +921,7 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p><a href="http://reddit.com/r/IAmA">/r/IAmA</a> is Reddit&rsquo;s flagship subreddit (which <a href="http://www.redditblog.com/2014/09/announcing-official-reddit-ama-app_2.html">has its own official app</a>!), where users can ask questions to noteworthy people: it&rsquo;s not surprising to see it far at the top. Sports and video games are the top topics for discussion on Reddit.</p>
 
-<h1><i class="fa fa-comments"></i> reddit.self</h1>
+<h1>reddit.self</h1>
 
 <p><img src="http://minimaxir.com/img/reddit-statistics/reddit_self.png"  ></p>
 
@@ -947,7 +943,7 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>Yes. They have. Despite having &frac14;th of the score, self-submissions receive about twice as many comments on average.</p>
 
-<h1><i class="fa fa-ban"></i> Not Safe For Procrastinating At Work</h1>
+<h1>Not Safe For Procrastinating At Work</h1>
 
 <p><em>[Sample image omitted for obvious reasons.]</em></p>
 
@@ -969,7 +965,7 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>The number of comments on NSFW submissions is only slightly less than that on average, but there&rsquo;s a larger amount of uncertainty for that particular average due to the smaller proportion. Most internet users are lurkers and not contributors; it&rsquo;s likely that NSFW media is a more noninteractive experience. (<em>ahem</em>)</p>
 
-<h1><i class="fa fa-globe"></i> Reddit In The City</h1>
+<h1>Reddit In The City</h1>
 
 <p><img src="http://minimaxir.com/img/reddit-statistics/reddit_sf.png"  ></p>
 
@@ -987,7 +983,7 @@ library(ggplot2); library(scales); library(grid); library(RColorBrewer)
 
 <p>There are a few more parings here than with average scores: <a href="http://reddit.com/r/montreal">/r/montreal</a>  and <a href="http://reddit.com/r/toronto">/r/toronto</a> are paired as non-US cities, <a href="http://reddit.com/r/Portland">/r/Portland</a> and <a href="http://reddit.com/r/Seattle">/r/Seattle</a> are paired as West Coast cities, <a href="http://reddit.com/r/Austin">/r/Austin</a> and <a href="http://reddit.com/r/houston">/r/houston</a> are paired as Texas cities, and all of <a href="http://reddit.com/r/bayarea">/r/bayarea</a>, <a href="http://reddit.com/r/sanfrancisco">/r/sanfrancisco</a>, and <a href="http://reddit.com/r/sandiego">/r/sandiego</a> are paired as California cities. It&rsquo;s still not a perfect relationship, however.</p>
 
-<h1><i class="fa fa-meh-o"></i> Positivity and Negativity</h1>
+<h1>Positivity and Negativity</h1>
 
 <p><img src="http://minimaxir.com/img/reddit-statistics/reddit_neg.png"  ></p>
 
