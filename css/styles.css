@@ -35,7 +35,7 @@
 }
 
 .demo-container {
-  max-width: 1600px;
+  max-width: 1200px;
   width: calc(100% - 16px);
   margin: 0 auto;
 }

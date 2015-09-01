@@ -189,7 +189,25 @@
     </nav>
     </div>
   	
-		  	<div class="demo-ribbon hero portfolio" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/img/') no-repeat center center; background-size: cover;" >
+		<script type="text/javascript">
+ $(document).ready(function() {
+ 
+ 	$( ".post-meta" ).each(function(index,value) {
+	var github_button = $(this);
+	var url = github_button.attr("data");
+
+  jQuery.getJSON("https://api.github.com/repos/"+url, function(data) {
+  github_button.html(String(new Date(Date.parse(data.pushed_at))).substring(4,15) + "<div class=\"sharing github\"> <i class=\"material-icons\">star</i>" + data.stargazers_count + "</div>");
+  });
+  });
+  });  
+
+
+</script>
+
+
+
+  	<div class="demo-ribbon hero portfolio" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/img/') no-repeat center center; background-size: cover;" >
   	<div class="demo-container mdl-grid">
   	
   	<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
@@ -221,7 +239,7 @@
 <div class="demo-card-square mdl-card mdl-shadow--2dp">
 
 	
-  <a class="post-link" href="http://github.com/minimaxir/big-list-of-naughty-strings" target="_blank"><div class="mdl-card__title" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)); background-size: cover;  ">
+  <a class="post-link" href="http://github.com/minimaxir/big-list-of-naughty-strings" target="_blank"><div class="mdl-card__title" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/portfolio_img/zalgo.png') no-repeat center center; background-size: cover;  ">
   	
     <h2 class="mdl-card__title-text"> Big List of Naughty Strings</h2>
   </div>
@@ -232,6 +250,20 @@
     <p>The Big List of Naughty Strings is an evolving list of strings which have a high probability of causing issues when used as user-input data. This is intended for use in helping both automated and manual QA testing; useful for whenever your QA engineer <a href="http://www.sempf.net/post/On-Testing1.aspx">walks into a bar</a>.</p>
 
   </div>
+  
+  
+  <div class="post-meta portfolio" data="minimaxir/big-list-of-naughty-strings">
+  	
+  	
+  	
+  	<div class="sharing github">
+  
+	<i class="material-icons">star</i> -
+   
+	</div>
+	
+  	</div>
+  
 
 </div>
 </div>
@@ -242,7 +274,7 @@
 <div class="demo-card-square mdl-card mdl-shadow--2dp">
 
 	
-  <a class="post-link" href="http://github.com/minimaxir/video-to-gif-osx" target="_blank"><div class="mdl-card__title" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)); background-size: cover;  ">
+  <a class="post-link" href="http://github.com/minimaxir/video-to-gif-osx" target="_blank"><div class="mdl-card__title" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/portfolio_img/max_face_service.gif') no-repeat center center; background-size: cover;  ">
   	
     <h2 class="mdl-card__title-text"> Convert Video to GIF on OSX</h2>
   </div>
@@ -253,6 +285,20 @@
     <p>This repository contains a set of utilities that allow the user to easily convert video files to high-quality, low file size GIFs on OS X. This post is a complement to my blog post <a href="http://minimaxir.com/2015/08/gif-to-video-osx/">Making a Video-to-GIF Right-Click Menu Item in OS X</a></p>
 
   </div>
+  
+  
+  <div class="post-meta portfolio" data="minimaxir/video-to-gif-osx">
+  	
+  	
+  	
+  	<div class="sharing github">
+  
+	<i class="material-icons">star</i> -
+   
+	</div>
+	
+  	</div>
+  
 
 </div>
 </div>
@@ -263,7 +309,7 @@
 <div class="demo-card-square mdl-card mdl-shadow--2dp">
 
 	
-  <a class="post-link" href="http://github.com/minimaxir/facebook-page-post-scraper" target="_blank"><div class="mdl-card__title" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)); background-size: cover;  ">
+  <a class="post-link" href="http://github.com/minimaxir/facebook-page-post-scraper" target="_blank"><div class="mdl-card__title" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/portfolio_img/cnnwoo.png') no-repeat center center; background-size: cover;  ">
   	
     <h2 class="mdl-card__title-text"> Facebook Page Post Scraper</h2>
   </div>
@@ -274,6 +320,20 @@
     <p>Data scraper for Facebook Pages, and also code accompanying the blog post <a href="http://minimaxir.com/2015/07/facebook-scraper/">How to Scrape Data From Facebook Page Posts for Statistical Analysis</a>.</p>
 
   </div>
+  
+  
+  <div class="post-meta portfolio" data="minimaxir/facebook-page-post-scraper">
+  	
+  	
+  	
+  	<div class="sharing github">
+  
+	<i class="material-icons">star</i> -
+   
+	</div>
+	
+  	</div>
+  
 
 </div>
 </div>
@@ -292,6 +352,8 @@
     <p>A theme for Jekyll using Google’s <a href="http://www.getmdl.io">Material Design Lite</a> framework. (it’s what you’re looking at now!)</p>
 
   </div>
+  
+  
 
 </div>
 </div>
@@ -302,7 +364,7 @@
 <div class="demo-card-square mdl-card mdl-shadow--2dp">
 
 	
-  <a class="post-link" href="http://github.com/minimaxir/get-all-hacker-news-submissions-comments" target="_blank"><div class="mdl-card__title" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)); background-size: cover;  ">
+  <a class="post-link" href="http://github.com/minimaxir/get-all-hacker-news-submissions-comments" target="_blank"><div class="mdl-card__title" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/portfolio_img/hn_karma.png') no-repeat center center; background-size: cover;  ">
   	
     <h2 class="mdl-card__title-text"> Get All Hacker News Submissions & Comments</h2>
   </div>
@@ -313,6 +375,20 @@
     <p>Simple Python scripts to download all Hacker News submissions and comments and store them in a PostgreSQL database, for use in ad-hoc data analysis, e.g. my October 2014 blog post <a href="http://minimaxir.com/2014/10/hn-comments-about-comments/">The Quality, Popularity, and Negativity of 5.6 Million Hacker News Comments</a>.</p>
 
   </div>
+  
+  
+  <div class="post-meta portfolio" data="minimaxir/get-all-hacker-news-submissions-comments">
+  	
+  	
+  	
+  	<div class="sharing github">
+  
+	<i class="material-icons">star</i> -
+   
+	</div>
+	
+  	</div>
+  
 
 </div>
 </div>

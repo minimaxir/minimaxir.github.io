@@ -13,7 +13,7 @@ code {
 
 pre {
   padding: 8px 12px;
-  overflow-x: scroll; }
+  /*overflow-x: scroll;*/ }
   pre > code {
     border: 0;
     padding-right: 0;
@@ -232,6 +232,11 @@ padding: 0px 10px;
 text-decoration: none;
 }
 
+.sharing.github {
+padding-right: 30px;
+font-size: 16px !important
+}
+
 .post-meta .sharing a:hover {
 color: #7f8c8d !important;
 }
@@ -370,6 +375,7 @@ margin-bottom: 0px;
 padding-bottom: 0px;
 min-height: 75px;
 font-size: 15px;
+color: #424242
 }
 
 .embed-video-container {
@@ -414,6 +420,10 @@ color: #424242 !important
 
 .hero.portfolio {
 padding-bottom: 0px;
+}
+
+.post-meta.portfolio {
+font-size: 16px
 }
 
 .mdl-mini-footer--link-list li {
