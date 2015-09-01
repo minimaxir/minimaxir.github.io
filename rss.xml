@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-08-31T22:09:42-07:00</updated>
+  <updated>2015-08-31T23:10:53-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -174,58 +174,58 @@ GROUP BY lat, long
 
 <p>Let&rsquo;s say we want to scrape the New York Times' Facebook page. We would send a request to <a href="https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX">https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX</a> and we would get:</p>
 
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="lineno">1</span> <span class="p">{</span>
-<span class="lineno">2</span>       <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998&quot;</span><span class="p">,</span> 
-<span class="lineno">3</span>       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;The New York Times&quot;</span>
-<span class="lineno">4</span>   <span class="p">}</span></code></pre></div>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998&quot;</span><span class="p">,</span> 
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;The New York Times&quot;</span>
+<span class="p">}</span></code></pre></div>
 
 
 <p>i.e., the page metadata. Sending a request to /nytimes/feed results in what we want:</p>
 
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="lineno"> 1</span> <span class="p">{</span>
-<span class="lineno"> 2</span>      <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
-<span class="lineno"> 3</span>          <span class="p">{</span>
-<span class="lineno"> 4</span>              <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-20T01:25:01+0000&quot;</span><span class="p">,</span> 
-<span class="lineno"> 5</span>              <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628157724999&quot;</span><span class="p">,</span> 
-<span class="lineno"> 6</span>              <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth.&quot;</span>
-<span class="lineno"> 7</span>          <span class="p">},</span> 
-<span class="lineno"> 8</span>          <span class="p">{</span>
-<span class="lineno"> 9</span>              <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-19T22:55:01+0000&quot;</span><span class="p">,</span> 
-<span class="lineno">10</span>              <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628161129999&quot;</span><span class="p">,</span> 
-<span class="lineno">11</span>              <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;\&quot;It\u2019s safe to say that federal agencies are not where we want them to be across the board,\&quot; said President Barack Obama&#39;s top cybersecurity adviser. \&quot;We clearly need to be moving faster.\&quot;&quot;</span>
-<span class="lineno">12</span>          <span class="p">}</span>
-<span class="lineno">13</span>       <span class="p">]</span>
-<span class="lineno">14</span> 
-<span class="lineno">15</span>          
-<span class="lineno">16</span> <span class="p">}</span></code></pre></div>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
+        <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-20T01:25:01+0000&quot;</span><span class="p">,</span> 
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628157724999&quot;</span><span class="p">,</span> 
+                <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth.&quot;</span>
+            <span class="p">},</span> 
+            <span class="p">{</span>
+                <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-19T22:55:01+0000&quot;</span><span class="p">,</span> 
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628161129999&quot;</span><span class="p">,</span> 
+                <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;\&quot;It\u2019s safe to say that federal agencies are not where we want them to be across the board,\&quot; said President Barack Obama&#39;s top cybersecurity adviser. \&quot;We clearly need to be moving faster.\&quot;&quot;</span>
+            <span class="p">}</span>
+         <span class="p">]</span>
+
+            
+<span class="p">}</span></code></pre></div>
 
 
 <p>Now we get the post data. But not much of it. In Graph API v2.4, the default behavior is to return very, very little metadata for statuses in order to reduce bandwidth, with the expectation that the user will request the necessary fields.</p>
 
 <p>So let&rsquo;s request <em>all</em> the fields we want. This results in a very long URL not shown here which causes the posts feed to have all the data we need:</p>
 
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="lineno"> 1</span> <span class="p">{</span>
-<span class="lineno"> 2</span>     <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="p">{},</span>
-<span class="lineno"> 3</span>     <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="lineno"> 4</span>         <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="s2">&quot;ranked&quot;</span><span class="p">,</span>
-<span class="lineno"> 5</span>         <span class="nt">&quot;total_count&quot;</span><span class="p">:</span> <span class="mi">31</span>
-<span class="lineno"> 6</span>     <span class="p">},</span>
-<span class="lineno"> 7</span>     <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-20T01:25:01+0000&quot;</span><span class="p">,</span>
-<span class="lineno"> 8</span>     <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628157724999&quot;</span><span class="p">,</span>
-<span class="lineno"> 9</span>     <span class="nt">&quot;likes&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="lineno">10</span>         <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-<span class="lineno">11</span>         <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="lineno">12</span>             <span class="nt">&quot;total_count&quot;</span><span class="p">:</span> <span class="mi">278</span>
-<span class="lineno">13</span>         <span class="p">}</span>
-<span class="lineno">14</span>     <span class="p">},</span>
-<span class="lineno">15</span>     <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://nyti.ms/1Jr6LhU&quot;</span><span class="p">,</span>
-<span class="lineno">16</span>     <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The planned megalopolis, a metropolitan area that would be about 6 times the size of New York’s, is meant to revamp northern China’s economy and become a laboratory for modern urban growth.&quot;</span><span class="p">,</span>
-<span class="lineno">17</span>     <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;China Molds a Supercity Around Beijing, Promising to Change Lives&quot;</span><span class="p">,</span>
-<span class="lineno">18</span>     <span class="nt">&quot;shares&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="lineno">19</span>         <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">50</span>
-<span class="lineno">20</span>     <span class="p">},</span>
-<span class="lineno">21</span>     <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;link&quot;</span>
-<span class="lineno">22</span> <span class="p">}</span></code></pre></div>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="s2">&quot;ranked&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;total_count&quot;</span><span class="p">:</span> <span class="mi">31</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-20T01:25:01+0000&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628157724999&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;likes&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;total_count&quot;</span><span class="p">:</span> <span class="mi">278</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://nyti.ms/1Jr6LhU&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The planned megalopolis, a metropolitan area that would be about 6 times the size of New York’s, is meant to revamp northern China’s economy and become a laboratory for modern urban growth.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;China Molds a Supercity Around Beijing, Promising to Change Lives&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;shares&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">50</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;link&quot;</span>
+<span class="p">}</span></code></pre></div>
 
 
 <h1>Post Processing</h1>

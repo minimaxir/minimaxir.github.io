@@ -6,7 +6,8 @@ code {
   font-size: 15px;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
-  background-color: #eef; }
+  background-color: #eef;
+  white-space: pre-wrap;}
 
 code {
   padding: 1px 5px; }
@@ -274,7 +275,7 @@ color: #7f8c8d !important;
   user-select: none;
 }
 
-.highlight pre code { display: block; white-space: pre; overflow-x: auto; word-wrap: normal; }
+.highlight pre code { display: block; white-space: pre; overflow-x: auto; word-wrap: normal; white-space: pre-wrap;}
 
 a {
 color: #2c3e50;
