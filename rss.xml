@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-09-13T09:28:56-07:00</updated>
+  <updated>2015-09-22T07:49:52-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Coding, Visualizing, and Animating Bootstrap Resampling]]></title>
+    <link href="http://minimaxir.com/2015/09/bootstrap-resample/"/>
+    <updated>2015-09-22T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/09/bootstrap-resample</id>
+    <content type="html"><![CDATA[<p>A few days ago on Hacker News, I saw a <a href="https://news.ycombinator.com/item?id=10244950">nice submission</a> titled &ldquo;<a href="https://speakerdeck.com/jakevdp/statistics-for-hackers">Statistics for Hackers</a>,&rdquo; which was a slide deck written and presented by <a href="https://twitter.com/jakevdp">Jake Vanderplas</a>. The talk is very explicitly a tutorial for a few good statistical methods for those without a statistical background, using simple tools &ldquo;hackers&rdquo; are familiar with and are occasionally very necessary (it&rsquo;s not hacking in the sense of &ldquo;growth hacking,&rdquo; thankfully).</p>
+
+<p>One important statistical tool discussed in the presentation is <a href="https://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29">bootstrap resampling</a>, a good example for a programming-oriented presentation as it can be easily done with code. Bootstrapping is when a data set is randomized many, many times (usually thousands of times) to simulate similar data sets, and use those simulated datasets to obtain a more accurate range for a particular statistic about the data set, such as the statistical average.</p>
+
+<p><img src="http://minimaxir.com/img/bootstrap-resample/talk0.png" alt="" /></p>
+
+<p>I have reverse-engineered the data and code from the talk with R and ggplot2 in order to create more detailed implementations of bootstrapping, and also to add a few visual improvements.</p>
+
+<h1>Preparing the Data</h1>
+
+<p><em>If you want to view the code with more detailed output and extensive code for the ggplot2 charts, read this <a href="https://github.com/minimaxir/bootstrap-resample-notebook/blob/master/bootstrap_resample_notebook.ipynb">Jupyter notebook</a>, hosted and open-sourced on GitHub.</em></p>
+
+<p>The first thing to do is recreate the test data.</p>
+
+<p><img src="http://minimaxir.com/img/bootstrap-resample/talk1.png" alt="" /></p>
+
+<p>Data is manually transcribed from the linked talk (to the best of my ability), and converted to a <code>tbl_df</code> for ease of use.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">x <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">8.1</span><span class="p">,</span> <span class="m">8.4</span><span class="p">,</span> <span class="m">8.8</span><span class="p">,</span> <span class="m">8.7</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="m">9.1</span><span class="p">,</span> <span class="m">9.2</span><span class="p">,</span> <span class="m">9.3</span><span class="p">,</span> <span class="m">9.4</span><span class="p">,</span> <span class="m">9.6</span><span class="p">,</span> <span class="m">9.9</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">10.5</span><span class="p">,</span> <span class="m">10.6</span><span class="p">,</span> <span class="m">10.6</span><span class="p">,</span> <span class="m">11.2</span><span class="p">,</span> <span class="m">11.8</span><span class="p">,</span> <span class="m">12.6</span><span class="p">)</span>
+y <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">21</span><span class="p">,</span> <span class="m">19</span><span class="p">,</span> <span class="m">18</span><span class="p">,</span> <span class="m">16</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">17</span><span class="p">,</span> <span class="m">17</span><span class="p">,</span> <span class="m">17</span><span class="p">,</span> <span class="m">19</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">13</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">9</span><span class="p">)</span>
+
+df <span class="o">&lt;-</span> tbl_df<span class="p">(</span><span class="kt">data.frame</span><span class="p">(</span>x<span class="p">,</span>y<span class="p">))</span></code></pre></div>
+
+
+<p>Let&rsquo;s create a quick plot in ggplot2 to compare it to the source image:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">qplot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> df<span class="p">)</span> <span class="o">+</span> geom_smooth<span class="p">(</span>method<span class="o">=</span><span class="s">&quot;lm&quot;</span><span class="p">)</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/bootstrap-resample/qplot.png" alt="" /></p>
+
+<p>Pretty good copy, and it comes with a linear regression line for one line of code!</p>
+
+<p>Performing the linear regression within R itself (via <code>lm()</code>) results in a model containing an X-intercept of 42.3 and a slope of -2.81. (<em>y = 42.3 - 2.81x</em>)</p>
+
+<ul>
+<li><strong>42.3</strong>, the coefficient for the (Intercept), represents the value of the stack if Wind Speed is 0.</li>
+<li>For every 1 unit increase in Wind Speed, the estimated Height <strong>decreases by 2.81</strong>, the coefficient for the <code>x</code> variable.</li>
+</ul>
+
+
+<p>Both coefficients are extremely statistically significant. Regression as a whole has a R<sup>2</sup> of 82.71%; indicating that the change in Wind Speed explains 82.71% of the variation in Height. That&rsquo;s enough to assert causality in this mock data.</p>
+
+<p>Now we can know the true value of the coefficients for the data, we can perform bootstrapping. We can create a function to perform a linear regression on the data frame, having been resampled <em>with replacement</em> (important!), and return the model coefficients:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">lm_res <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>df<span class="p">)</span> <span class="p">{</span>
+    model <span class="o">&lt;-</span> lm<span class="p">(</span>y <span class="o">~</span> x<span class="p">,</span> df <span class="o">%&gt;%</span> sample_frac<span class="p">(</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">))</span>
+    <span class="kr">return</span> <span class="p">(</span>model<span class="o">$</span>coefficients<span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>R&rsquo;s <code>replicate</code> function runs a function a specified amount of times and stores the results in the same data frame; perfect for bootstrapping.</p>
+
+<p>There&rsquo;s no limit to the number of repetitions you can perform using this method; however, you can hit diminishing returns as the distribution converges. Generally, 2,000 trials minimum are recommended, but let&rsquo;s do 10,000 trials just to be sure.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_boot <span class="o">&lt;-</span> <span class="kp">replicate</span><span class="p">(</span><span class="m">10000</span><span class="p">,</span> lm_res<span class="p">(</span>df<span class="p">))</span>
+df_boot <span class="o">&lt;-</span> tbl_df<span class="p">(</span><span class="kt">data.frame</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>df_boot<span class="p">)))</span></code></pre></div>
+
+
+<p>This completed in about 13 seconds on my computer, and results in a dataset of 10,000 pairs of X-intercept and wind speed coefficients!</p>
+
+<p>Now we can build 95% confidence intervals for each coefficient. This is done by finding the 2.5% quartile, and the 97.5% quartile; since there are a very large amount of bootstrapped samples, the confidence interval will be very accurate.</p>
+
+<p>This can be done easily using the <code>gather()</code> function from <code>tidyr</code> to convert the data from wide to long, and <code>dplyr</code>&rsquo;s aggregation and summarization functions.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_boot_agg <span class="o">&lt;-</span> df_boot <span class="o">%&gt;%</span>
+                gather<span class="p">(</span>var<span class="p">,</span> value<span class="p">)</span> <span class="o">%&gt;%</span>
+                group_by<span class="p">(</span>var<span class="p">)</span> <span class="o">%&gt;%</span>
+                summarize<span class="p">(</span>
+                    average <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>value<span class="p">),</span>
+                    low_ci <span class="o">=</span> quantile<span class="p">(</span>value<span class="p">,</span> <span class="m">0.025</span><span class="p">),</span>
+                    high_ci <span class="o">=</span> quantile<span class="p">(</span>value<span class="p">,</span> <span class="m">0.975</span><span class="p">)</span>
+                        <span class="p">)</span></code></pre></div>
+
+
+<p>From the output, the true value of the X intercept has a 95% chance of being between 36.9 and 49.3, and the true value of the Wind Speed coefficient has a 95% chance of being between -3.53 and -2.28.</p>
+
+<h1>Plotting the Bootstrap of One Variable</h1>
+
+<p>The Wind Speed coefficient is much more interesting, statistically. We have enough information to derive a ggplot2 histogram of the resampled data, and a graphical representation of the confidence interval. We can also include the true value of the coefficient in the visualization (as the dotted vertical line) to see if it make sense.</p>
+
+<p><img src="http://minimaxir.com/img/bootstrap-resample/uni_one.png" alt="" /></p>
+
+<p>Plot is close to a <a href="https://en.wikipedia.org/wiki/Normal_distribution">Normal distribution</a> / bell curve, which is a nice property of bootstrapping and makes the results easier to analyze. The true coefficient value is in the interval, but not quite at the center.</p>
+
+<p>We can write a function to generate a plot for different data size subsets (e.g. 100 samples, 200 samples, etc. up to 10,000 samples). This shows the impact of bootstrapping and how the confidence estimate intervals converge as the number of trials increases. Each of these plots serve as a frame in a GIF.</p>
+
+<p>Each of these frames are stitched together into a high- quality, low file size by my new <a href="https://github.com/minimaxir/frames-to-gif-osx">Convert Frames to GIF OS X tool</a>!</p>
+
+<p><img src="http://minimaxir.com/img/bootstrap-resample/uni_frames.gif" alt="" /></p>
+
+<p>A 99 frame, 640px width GIF, at only half a megabyte! (R has an <a href="https://cran.r-project.org/web/packages/animation/index.html">animation package</a>, but with much worse results, which was the motivation for writing the OS X tool)</p>
+
+<p>From the GIF, it&rsquo;s clear to see that the confidence intervals converge to the final values at about 2000 trials, with the shape of the distribution stabilizing at about 7000 trials.</p>
+
+<h1>Plotting the Bootstrap of Two Variables</h1>
+
+<p>The X-intercept and the Wind Speed coefficient have a linked, negatively correlated relationship, so it makes sense to plot them simultaneously, as in the original talk.</p>
+
+<p><img src="http://minimaxir.com/img/bootstrap-resample/talk2.png" alt="" /></p>
+
+<p>ggplot2&rsquo;s <code>density2d</code> plots a <a href="https://en.wikipedia.org/wiki/Contour_line">contour map</a>, which will help illustrate the area and magnitude where the data converges on a 2D plane. We can also include an <strong>orange</strong> bounding box using the specified values for the 2D confidence intervals for each variable, and a <strong>red</strong> dot representing the true value of the coefficients.</p>
+
+<p><img src="http://minimaxir.com/img/bootstrap-resample/bi_one.png" alt="" /></p>
+
+<p>The pair of coefficients can only occur in a certain range of values, much smaller than the bounding box. The true value is close to the most frequent occurrence, too.</p>
+
+<p>Then we can make another GIF using the same method:</p>
+
+<p><img src="http://minimaxir.com/img/bootstrap-resample/bi_frames.gif" alt="" /></p>
+
+<p>Again, the visualization converges relatively quickly at about 2,000 trials. (although, in retrospect, the orange bounding box may not have been necessary.)</p>
+
+<p>While the sample dataset isn&rsquo;t the most ideal for bootstrapping due to its extremely small size, bootstrapping at the least adds some clarity to the issues that results when simply performing statistics on a given dataset.</p>
+
+<p><em>Again, if you want to view the code with more detailed output and extensive code for the ggplot2 charts, read this <a href="https://github.com/minimaxir/bootstrap-resample-notebook/blob/master/bootstrap_resample_notebook.ipynb">Jupyter notebook</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Plagiarizing and Paraphrasing Code From an Online Class for Content Marketing]]></title>
@@ -885,92 +1009,6 @@ GROUP BY lat, long
 <p><em>You can view and download all the BuzzFeed article data and metadata <a href="https://docs.google.com/spreadsheets/d/1WSx45rT4jZfysmZfzJtjaPO7AxW4XMaJYaCUd5HB2ns/edit?usp=sharing">in this Google Sheet</a>.</em></p>
 
 <p><em>All graphics were generated using <a href="http://www.r-project.org/">R</a>. The charts were created using <a href="http://ggplot2.org/">ggplot2</a> and the word clouds were created using the <a href="http://cran.r-project.org/web/packages/wordcloud/index.html">wordcloud</a> package.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Locating All the Christmas Trees on Instagram]]></title>
-    <link href="http://minimaxir.com/2015/01/tree-time/"/>
-    <updated>2015-01-01T09:00:00-08:00</updated>
-    <id>http://minimaxir.com/2015/01/tree-time</id>
-    <content type="html"><![CDATA[<p>Everyone enjoys taking photos of their Christmas trees, usually at their own home of their relatives. <a href="http://instagram.com/">Instagram</a> allows users to quickly upload any photo and share it socially to the world. On Christmas Eve, privacy author Tommy Collison <a href="http://www.tommycollison.com/blog/2014/12/24/christmas-geotagging">published a warning about this behavior</a>, noting that if a user tags a photo with #tree to tag their Christmas tree, for example, <em>anyone</em> will be able to see it, and if the user attached their location to the photo, anyone could theoretically find where they live.</p>
-
-<p>How practical is this concern? Instagram <a href="http://instagram.com/developer/">offers an API</a> of all recent photos for a given #tag so developers can download pictures and their corresponding metadata, such as geolocation, in bulk. (Up to <em>165,000</em> Instagram images can be processed per hour!)</p>
-
-<p>I downloaded <em>hundreds of thousands</em> of #tree images and found 25,432 images which were taken on Christmas, have a #tree, and, most importantly, contain location data where the photo was taken. From that, I created an <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">interactive map</a> showing the location of all these images worldwide using <a href="https://support.google.com/fusiontables/answer/2571232?hl=en">Google Fusion Tables</a>. You can click-and-drag to move the map all over the world, and you can click on a marker on the map to see the Instagram image taken at that location! (note that if you&rsquo;re on a mobile device, the embedded map may work better on a desktop browser)</p>
-
-<iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col8+from+1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL&amp;viz=MAP&amp;h=false&amp;lat=50.13422309020635&amp;lng=-46.22345629918755&amp;t=1&amp;z=3&amp;l=col8&amp;y=2&amp;tmplt=3&amp;hml=TWO_COL_LAT_LNG"></iframe>
-
-
-<p>I found a few interesting things while playing with this map.</p>
-
-<h1>Christmas Trees in the USA</h1>
-
-<p>A downside of the interactive map is that quantifying the relative number of photos between dense areas (e.g. cities) can be misleading as the opaque markers overlap. Here is a static map of all of the Instagram photos in the United States, with each translucent point representing an image:</p>
-
-<p><img src="http://minimaxir.com/img/tree-time/instagram_treemap_state.png"  ></p>
-
-<p>The number of photos is densest near the large cities, which is what you would expect.</p>
-
-<p>A way to calculate the relative proportion of the number of #tree photos between states is to use a type of chart known as a <a href="http://en.wikipedia.org/wiki/Treemapping">treemap</a> (pun <em>very</em> much intended).</p>
-
-<p><img src="http://minimaxir.com/img/tree-time/treemap-state.png"  ></p>
-
-<p>In this treemap, the relative area of each block corresponds to the number of photos taken in the state; therefore, the combination of all the blocks represents 100% of the #tree photos taken in the USA. If two blocks are the same size (e.g. New York and Florida), then they have the same number of #tree photos.</p>
-
-<p>As you may have noticed from these two charts, these data represented by these two charts is approximately the same as the <a href="http://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population">population density in the United States</a>. Although this touches on the <a href="http://xkcd.com/1138/">infamous statistical problem</a> of heat maps resembling population maps, in this case, it&rsquo;s what would be expected.</p>
-
-<p>Looking at all the #tree photos in the world may tell a different story.</p>
-
-<h1>Christmas Trees in the World</h1>
-
-<p>Christmas is a holiday for only one religion with a <a href="http://en.wikipedia.org/wiki/Christianity_by_country">low presence in Asia and northern Africa</a>, so it would be expected that the locations of Christmas trees worldwide do <em>not</em> correlate with population, which makes the analysis more interesting.</p>
-
-<p><img src="http://minimaxir.com/img/tree-time/instagram_world_map.png"  ></p>
-
-<p>The prevalence of Christmas trees is most prominent in the United States and Europe, with relatively few in Asia, where the majority of the world&rsquo;s population is located. Italy has Christmas trees <em>uniformly</em> throughout the entire country, which is an interesting behavior.</p>
-
-<p><img src="http://minimaxir.com/img/tree-time/treemap-world.png"  ></p>
-
-<p>The treemap confirms that Asian and African countries like China, India, and Nigeria do not have as many Christmas trees than <a href="http://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">what their large populations would suggest</a>. Italy, however has a <a href="http://en.wikipedia.org/wiki/Demographics_of_Italy">population of 60 million</a> (the same as the United Kingdom) which is about 1/5th of the population of United States; the fact that Italy has more than half of the number of Christmas Trees than the United States is very unusual and should be questioned.</p>
-
-<p>Italy <em>may</em> have a high number of Christmas trees since Vatican City is the seat of the papacy, but perhaps data <em>itself</em> should be questioned too.</p>
-
-<h1>&ldquo;Christmas Trees&rdquo; in the World</h1>
-
-<p>If you check the photos in Italy, you many notice that many of them have a photo caption similar to this one:</p>
-
-<p><img src="http://minimaxir.com/img/tree-time/christmas_tagsforlikes.png"  ></p>
-
-<p>There&rsquo;s obviously no Christmas tree in that photo. But there are a <em>lot</em> of tags.</p>
-
-<p>Many Instagram photos use a service called <a href="http://www.tagsforlikes.com/">TagsForLikes</a>, which complies a list of popular hashtags that other users are able to see. Users can then then copy/paste them into the photo caption to spam hashtags increase the photo exposure, which, as I&rsquo;ve shown <a href="http://minimaxir.com/2014/03/hashtag-tag/">in a previous blog post</a>, does in fact increase the number of Likes the photo receives from other users.</p>
-
-<p><img src="http://minimaxir.com/img/tree-time/tags4likes.png"  ></p>
-
-<p>Notice a resemblance between this list and the photo caption?</p>
-
-<p>Fortunately, all the TagsForLikes hashtag lists contain #TagsForLikes as a branding trick, which makes such photos extremely easy to detect. Here&rsquo;s what the world map looks like if all the potentially spam photos were colored red:</p>
-
-<p><img src="http://minimaxir.com/img/tree-time/instagram_world_spamnonspam.png"  ></p>
-
-<p>Italy looks a <em>lot</em> different now! There is red in other counties, but it&rsquo;s not easily visible at a glance.</p>
-
-<p>The treemap of photos, when seperated between spam and non-spam photos, tells the full story:</p>
-
-<p><img src="http://minimaxir.com/img/tree-time/treemap-spam-nonspam.png"  ></p>
-
-<p>About 20% of all the #tree photos are spam photos, and about half of those were taken by people in Italy. As a result, Italy has <em>more spam #tree photos than nonspam #tree photos!</em> This is an interesting cultural phenomenon that I have no guesses as to why it occurs. All other countries have significantly smaller numbers of spam photos relatively non-spam photos.</p>
-
-<p>For non-spam photos, the number of #tree photos in Italy now matches the number of non-spam photos in the UK, which correlates with their populations, making the removal of spam photos a sane move.</p>
-
-<p>Is it possible to track people in their homes via Instagram tags? Definitely. If you do care privacy and your Instagram account is not set to Private, I recommend not geotagging your photos. If you&rsquo;re interested in looking at such photos,  ensure that the the tag is relevant for the given photo.</p>
-
-<hr />
-
-<p><em>All graphics were generated using R. The maps were created using <a href="http://ggplot2.org/">ggplot2</a> and the world map provided with the <a href="http://cran.r-project.org/web/packages/rworldxtra/index.html">rworldxtra</a> package. The treemaps were created using the <a href="http://cran.r-project.org/web/packages/treemap/index.html">treemap</a> package.</em></p>
-
-<p><em>The source data is included with a seperate tab in Google Fusion Tables <a href="https://www.google.com/fusiontables/DataSource?docid=1J3RQB6MuFbZvA_WcCVHlKAzDBUppxFBQ3LA054RL">along with the interactive map</a>.</em></p>
 ]]></content>
   </entry>
   

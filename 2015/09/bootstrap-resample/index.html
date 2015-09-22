@@ -1,0 +1,506 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Coding, Visualizing, and Animating Bootstrap Resampling</title>
+  
+  
+    
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="Coding, Visualizing, and Animating Bootstrap Resampling">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2015/09/bootstrap-resample/">
+
+
+  <meta name="twitter:description" content="I have reverse-engineered data and code with R and ggplot2 in order to create detailed implementations of bootstrapping, and also to add a few visual improvements.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/bi_one.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="Coding, Visualizing, and Animating Bootstrap Resampling" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="I have reverse-engineered data and code with R and ggplot2 in order to create detailed implementations of bootstrapping, and also to add a few visual improvements." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2015/09/bootstrap-resample/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/bi_one.png" property="og:image">
+
+
+  
+  <meta content="data" property="article:section">
+  
+
+
+  
+
+
+<meta property="og:locale"    content="en_us" />
+  
+  
+  <meta name="description" content="A few days ago on Hacker News, I saw a nice submission titled &ldquo;Statistics for Hackers,&rdquo; which was a slide deck written and presented by Jake Vand...">
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+
+  <link rel="canonical" href="http://minimaxir.com/2015/09/bootstrap-resample/">
+  
+      <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-title" content="minimaxir">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+	<link rel="apple-touch-icon" sizes="57x57" href="http://minimaxir.com/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="http://minimaxir.com/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="http://minimaxir.com/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="http://minimaxir.com/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="http://minimaxir.com/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="http://minimaxir.com/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="http://minimaxir.com/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="http://minimaxir.com/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://minimaxir.com/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="http://minimaxir.com/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://minimaxir.com/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="http://minimaxir.com/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://minimaxir.com/favicon/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="http://minimaxir.com/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <!--<link href='//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'> -->
+
+  
+  
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js" type="text/javascript"></script>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro:400,700|Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/minimaxir.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.count + "</span>");
+  });
+  });
+  });  
+
+//$('.mdl-layout__drawer-button').html('<i class=\"fa fa-navicon\"></i>');
+</script>
+	</head>
+  <body>
+  
+  	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-100">
+  <header class="mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-800">
+    <!-- Top row, always visible -->
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Max Woolf (@minimaxir)</span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+      	<a class="mdl-navigation__link" href="/">Home</a>
+        <a class="mdl-navigation__link" href="/about/">About</a>
+        <a class="mdl-navigation__link" href="/contact">Contact</a>
+        <a class="mdl-navigation__link" href="/portfolio/">Portfolio</a>
+      </nav>
+      <div class="mdl-layout-spacer"></div>
+      <div class="social-icon-list mdl-layout--large-screen-only">
+    <a title="RSS" href="/rss.xml"><i class="fa fa-rss-square"></i></a>
+  </div>
+
+    </div>
+
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Max Woolf</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="/"><i class="material-icons">home</i> Home</a>
+    	<a class="mdl-navigation__link" href="/about/"><i class="material-icons">person</i> About</a>
+        <a class="mdl-navigation__link" href="/contact"><i class="material-icons">contacts</i> Contact</a>
+        <a class="mdl-navigation__link" href="/portfolio/"><i class="material-icons">work</i> Portfolio</a>
+    </nav>
+    </div>
+  	
+		  	<div class="demo-ribbon hero" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/img/bi_one.png') no-repeat center center; background-size: cover;" >
+  	<div class="demo-container mdl-grid">
+  	<!--<h1 class="post-title">Coding, Visualizing, and Animating Bootstrap Resampling</h1>-->
+  	
+  	<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  	<div class="mdl-cell mdl-cell--8-col">
+  	<div class="post-title">
+  	<h1>Coding, Visualizing, and Animating Bootstrap Resampling</h1>
+  	</div>
+  	
+  	<div class="post-meta">
+  	Sep 22, 2015
+  	
+  	
+  	<div class="sharing">
+  
+		  <span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/09/bootstrap-resample/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/09/bootstrap-resample/"><i class="fa fa-facebook"></i><span class="count mdl-cell--hide-phone"> -</span></a></span>
+  
+		<span class="social twitter"><a href="http://twitter.com/home/?status=Coding, Visualizing, and Animating Bootstrap Resampling - http://minimaxir.com/2015/09/bootstrap-resample/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/09/bootstrap-resample/><i class="fa fa-twitter"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+
+  <span  class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Coding, Visualizing, and Animating Bootstrap Resampling&url=http://minimaxir.com/2015/09/bootstrap-resample/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/09/bootstrap-resample/><i class="fa fa-linkedin"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+   
+	</div>
+	
+  	</div>
+  	
+  	
+  	</div>
+  	
+
+	</div>
+  	</div>
+  	
+ <main class="demo-main mdl-layout__content">
+<div class="demo-container mdl-grid">
+ <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+ <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+
+<div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+
+  <article class="post-content">
+    <p>A few days ago on Hacker News, I saw a <a href="https://news.ycombinator.com/item?id=10244950">nice submission</a> titled &ldquo;<a href="https://speakerdeck.com/jakevdp/statistics-for-hackers">Statistics for Hackers</a>,&rdquo; which was a slide deck written and presented by <a href="https://twitter.com/jakevdp">Jake Vanderplas</a>. The talk is very explicitly a tutorial for a few good statistical methods for those without a statistical background, using simple tools &ldquo;hackers&rdquo; are familiar with and are occasionally very necessary (it&rsquo;s not hacking in the sense of &ldquo;growth hacking,&rdquo; thankfully).</p>
+
+<p>One important statistical tool discussed in the presentation is <a href="https://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29">bootstrap resampling</a>, a good example for a programming-oriented presentation as it can be easily done with code. Bootstrapping is when a data set is randomized many, many times (usually thousands of times) to simulate similar data sets, and use those simulated datasets to obtain a more accurate range for a particular statistic about the data set, such as the statistical average.</p>
+
+<p><img src="/img/bootstrap-resample/talk0.png" alt="" /></p>
+
+<p>I have reverse-engineered the data and code from the talk with R and ggplot2 in order to create more detailed implementations of bootstrapping, and also to add a few visual improvements.</p>
+
+<h1>Preparing the Data</h1>
+
+<p><em>If you want to view the code with more detailed output and extensive code for the ggplot2 charts, read this <a href="https://github.com/minimaxir/bootstrap-resample-notebook/blob/master/bootstrap_resample_notebook.ipynb">Jupyter notebook</a>, hosted and open-sourced on GitHub.</em></p>
+
+<p>The first thing to do is recreate the test data.</p>
+
+<p><img src="/img/bootstrap-resample/talk1.png" alt="" /></p>
+
+<p>Data is manually transcribed from the linked talk (to the best of my ability), and converted to a <code>tbl_df</code> for ease of use.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">x <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">8.1</span><span class="p">,</span> <span class="m">8.4</span><span class="p">,</span> <span class="m">8.8</span><span class="p">,</span> <span class="m">8.7</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="m">9.1</span><span class="p">,</span> <span class="m">9.2</span><span class="p">,</span> <span class="m">9.3</span><span class="p">,</span> <span class="m">9.4</span><span class="p">,</span> <span class="m">9.6</span><span class="p">,</span> <span class="m">9.9</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">10.5</span><span class="p">,</span> <span class="m">10.6</span><span class="p">,</span> <span class="m">10.6</span><span class="p">,</span> <span class="m">11.2</span><span class="p">,</span> <span class="m">11.8</span><span class="p">,</span> <span class="m">12.6</span><span class="p">)</span>
+y <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">21</span><span class="p">,</span> <span class="m">19</span><span class="p">,</span> <span class="m">18</span><span class="p">,</span> <span class="m">16</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">17</span><span class="p">,</span> <span class="m">17</span><span class="p">,</span> <span class="m">17</span><span class="p">,</span> <span class="m">19</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">13</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">9</span><span class="p">)</span>
+
+df <span class="o">&lt;-</span> tbl_df<span class="p">(</span><span class="kt">data.frame</span><span class="p">(</span>x<span class="p">,</span>y<span class="p">))</span></code></pre></div>
+
+
+<p>Let&rsquo;s create a quick plot in ggplot2 to compare it to the source image:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">qplot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> df<span class="p">)</span> <span class="o">+</span> geom_smooth<span class="p">(</span>method<span class="o">=</span><span class="s">&quot;lm&quot;</span><span class="p">)</span></code></pre></div>
+
+
+<p><img src="/img/bootstrap-resample/qplot.png" alt="" /></p>
+
+<p>Pretty good copy, and it comes with a linear regression line for one line of code!</p>
+
+<p>Performing the linear regression within R itself (via <code>lm()</code>) results in a model containing an X-intercept of 42.3 and a slope of -2.81. (<em>y = 42.3 - 2.81x</em>)</p>
+
+<ul>
+<li><strong>42.3</strong>, the coefficient for the (Intercept), represents the value of the stack if Wind Speed is 0.</li>
+<li>For every 1 unit increase in Wind Speed, the estimated Height <strong>decreases by 2.81</strong>, the coefficient for the <code>x</code> variable.</li>
+</ul>
+
+
+<p>Both coefficients are extremely statistically significant. Regression as a whole has a R<sup>2</sup> of 82.71%; indicating that the change in Wind Speed explains 82.71% of the variation in Height. That&rsquo;s enough to assert causality in this mock data.</p>
+
+<p>Now we can know the true value of the coefficients for the data, we can perform bootstrapping. We can create a function to perform a linear regression on the data frame, having been resampled <em>with replacement</em> (important!), and return the model coefficients:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">lm_res <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>df<span class="p">)</span> <span class="p">{</span>
+    model <span class="o">&lt;-</span> lm<span class="p">(</span>y <span class="o">~</span> x<span class="p">,</span> df <span class="o">%&gt;%</span> sample_frac<span class="p">(</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">))</span>
+    <span class="kr">return</span> <span class="p">(</span>model<span class="o">$</span>coefficients<span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>R&rsquo;s <code>replicate</code> function runs a function a specified amount of times and stores the results in the same data frame; perfect for bootstrapping.</p>
+
+<p>There&rsquo;s no limit to the number of repetitions you can perform using this method; however, you can hit diminishing returns as the distribution converges. Generally, 2,000 trials minimum are recommended, but let&rsquo;s do 10,000 trials just to be sure.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_boot <span class="o">&lt;-</span> <span class="kp">replicate</span><span class="p">(</span><span class="m">10000</span><span class="p">,</span> lm_res<span class="p">(</span>df<span class="p">))</span>
+df_boot <span class="o">&lt;-</span> tbl_df<span class="p">(</span><span class="kt">data.frame</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>df_boot<span class="p">)))</span></code></pre></div>
+
+
+<p>This completed in about 13 seconds on my computer, and results in a dataset of 10,000 pairs of X-intercept and wind speed coefficients!</p>
+
+<p>Now we can build 95% confidence intervals for each coefficient. This is done by finding the 2.5% quartile, and the 97.5% quartile; since there are a very large amount of bootstrapped samples, the confidence interval will be very accurate.</p>
+
+<p>This can be done easily using the <code>gather()</code> function from <code>tidyr</code> to convert the data from wide to long, and <code>dplyr</code>&rsquo;s aggregation and summarization functions.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_boot_agg <span class="o">&lt;-</span> df_boot <span class="o">%&gt;%</span>
+                gather<span class="p">(</span>var<span class="p">,</span> value<span class="p">)</span> <span class="o">%&gt;%</span>
+                group_by<span class="p">(</span>var<span class="p">)</span> <span class="o">%&gt;%</span>
+                summarize<span class="p">(</span>
+                    average <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>value<span class="p">),</span>
+                    low_ci <span class="o">=</span> quantile<span class="p">(</span>value<span class="p">,</span> <span class="m">0.025</span><span class="p">),</span>
+                    high_ci <span class="o">=</span> quantile<span class="p">(</span>value<span class="p">,</span> <span class="m">0.975</span><span class="p">)</span>
+                        <span class="p">)</span></code></pre></div>
+
+
+<p>From the output, the true value of the X intercept has a 95% chance of being between 36.9 and 49.3, and the true value of the Wind Speed coefficient has a 95% chance of being between -3.53 and -2.28.</p>
+
+<h1>Plotting the Bootstrap of One Variable</h1>
+
+<p>The Wind Speed coefficient is much more interesting, statistically. We have enough information to derive a ggplot2 histogram of the resampled data, and a graphical representation of the confidence interval. We can also include the true value of the coefficient in the visualization (as the dotted vertical line) to see if it make sense.</p>
+
+<p><img src="/img/bootstrap-resample/uni_one.png" alt="" /></p>
+
+<p>Plot is close to a <a href="https://en.wikipedia.org/wiki/Normal_distribution">Normal distribution</a> / bell curve, which is a nice property of bootstrapping and makes the results easier to analyze. The true coefficient value is in the interval, but not quite at the center.</p>
+
+<p>We can write a function to generate a plot for different data size subsets (e.g. 100 samples, 200 samples, etc. up to 10,000 samples). This shows the impact of bootstrapping and how the confidence estimate intervals converge as the number of trials increases. Each of these plots serve as a frame in a GIF.</p>
+
+<p>Each of these frames are stitched together into a high- quality, low file size by my new <a href="https://github.com/minimaxir/frames-to-gif-osx">Convert Frames to GIF OS X tool</a>!</p>
+
+<p><img src="/img/bootstrap-resample/uni_frames.gif" alt="" /></p>
+
+<p>A 99 frame, 640px width GIF, at only half a megabyte! (R has an <a href="https://cran.r-project.org/web/packages/animation/index.html">animation package</a>, but with much worse results, which was the motivation for writing the OS X tool)</p>
+
+<p>From the GIF, it&rsquo;s clear to see that the confidence intervals converge to the final values at about 2000 trials, with the shape of the distribution stabilizing at about 7000 trials.</p>
+
+<h1>Plotting the Bootstrap of Two Variables</h1>
+
+<p>The X-intercept and the Wind Speed coefficient have a linked, negatively correlated relationship, so it makes sense to plot them simultaneously, as in the original talk.</p>
+
+<p><img src="/img/bootstrap-resample/talk2.png" alt="" /></p>
+
+<p>ggplot2&rsquo;s <code>density2d</code> plots a <a href="https://en.wikipedia.org/wiki/Contour_line">contour map</a>, which will help illustrate the area and magnitude where the data converges on a 2D plane. We can also include an <strong>orange</strong> bounding box using the specified values for the 2D confidence intervals for each variable, and a <strong>red</strong> dot representing the true value of the coefficients.</p>
+
+<p><img src="/img/bootstrap-resample/bi_one.png" alt="" /></p>
+
+<p>The pair of coefficients can only occur in a certain range of values, much smaller than the bounding box. The true value is close to the most frequent occurrence, too.</p>
+
+<p>Then we can make another GIF using the same method:</p>
+
+<p><img src="/img/bootstrap-resample/bi_frames.gif" alt="" /></p>
+
+<p>Again, the visualization converges relatively quickly at about 2,000 trials. (although, in retrospect, the orange bounding box may not have been necessary.)</p>
+
+<p>While the sample dataset isn&rsquo;t the most ideal for bootstrapping due to its extremely small size, bootstrapping at the least adds some clarity to the issues that results when simply performing statistics on a given dataset.</p>
+
+<p><em>Again, if you want to view the code with more detailed output and extensive code for the ggplot2 charts, read this <a href="https://github.com/minimaxir/bootstrap-resample-notebook/blob/master/bootstrap_resample_notebook.ipynb">Jupyter notebook</a>.</em></p>
+
+    
+    <div class="post-meta">
+  	Sep 22, 2015
+  	
+  	
+  	<div class="sharing">
+  
+		  <span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/09/bootstrap-resample/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/09/bootstrap-resample/"><i class="fa fa-facebook"></i><span class="count mdl-cell--hide-phone"> -</span></a></span>
+  
+		<span class="social twitter"><a href="http://twitter.com/home/?status=Coding, Visualizing, and Animating Bootstrap Resampling - http://minimaxir.com/2015/09/bootstrap-resample/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/09/bootstrap-resample/><i class="fa fa-twitter"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+
+  <span  class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=Coding, Visualizing, and Animating Bootstrap Resampling&url=http://minimaxir.com/2015/09/bootstrap-resample/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/09/bootstrap-resample/><i class="fa fa-linkedin"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+   
+	</div>
+	
+  	</div>
+  </article>
+  
+  
+  
+  
+
+  
+
+</div>
+      </div>
+    </div>
+          </div>
+        </div>
+
+
+
+  <div class="demo-ribbon hero about">
+  	<div class="demo-container mdl-grid">
+  	
+  	<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  	<div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--hide-phone">  	
+  	<img src="/MaxFBInvert.png" title="Stop mousing over me! I'm not a XKCD comic!">
+  	</div>
+  	
+  	<div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
+  	
+  	<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">  	
+  	<p>Max Woolf (@minimaxir) is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years and a 2012 Carnegie Mellon University graduate.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.</p>
+  
+  <p>You can learn more about Max <a href="/about">here</a>, or view his portfolio <a href="/portfolio">here</a>.
+  
+  
+    <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+  	</div>
+  	
+
+	</div>
+  	</div>
+  
+  <div class="demo-container mdl-grid">
+ <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+ <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+  
+  
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2015/09/bootstrap-resample/';
+        var disqus_url = 'http://minimaxir.com/2015/09/bootstrap-resample/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+        
+  <div class="demo-container mdl-grid archive-nav">
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        
+          <h3><a href="/2015/09/code-of-plagiarism/" style="float: left;"><i class="material-icons">arrow_back</i>  Prev</a></h3>
+        
+    	</div>
+
+		<div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+		
+		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        
+        </div>
+      </div>
+        
+</div>
+</div>
+  
+  
+
+
+		
+		
+		
+		
+        <footer class="demo-footer mdl-mini-footer">
+          <div class="mdl-mini-footer--left-section">
+            <ul class="mdl-mini-footer--link-list">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/portfolio/">Portfolio</a></li>
+            </ul>
+          </div>
+          
+          <div class="mdl-mini-footer--right-section">
+          <ul class="mdl-mini-footer--link-list">
+          <li>Theme made by Max Woolf using <a href="http://www.getmdl.io/">Material Design Lite</a>.</li>
+          </ul>
+          </div>
+        </footer>
+ </main>
+    </div>
+    
+  </body>
+</html>
