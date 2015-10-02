@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-09-22T07:49:52-07:00</updated>
+  <updated>2015-10-02T08:02:57-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Analyze Every Reddit Submission and Comment, in Seconds, for Free]]></title>
+    <link href="http://minimaxir.com/2015/10/reddit-bigquery/"/>
+    <updated>2015-10-02T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/10/reddit-bigquery</id>
+    <content type="html"><![CDATA[<p>While working on my <a href="http://minimaxir.com/2014/12/reddit-statistics/">statistical analysis of 142 million Reddit submissions</a> last year, I had a surprising amount of trouble settings things up. It took a few hours to download the 40+ gigabytes of compressed data, and another few hours to parse the data and store in a local database. Even then, on my old-but-still-pretty-fast desktop PC, simple queries on the entire dataset took minutes to run, with complex queries occasionally taking upwards to an hour.</p>
+
+<p>Over the past year, I&rsquo;ve had a lot of success using <a href="https://cloud.google.com/bigquery/">Google&rsquo;s BigQuery</a> tool for quick big data analysis without having to manage the data, such as the <a href="http://minimaxir.com/2015/08/nyc-map/">recent NYC Taxi data dump</a>. Recently, Jason Michael Baumgartner of <a href="https://pushshift.io">Pushshift.io</a> (a.k.a <a href="https://www.reddit.com/user/Stuck_In_the_Matrix">/u/Stuck_In_The_Matrix</a> on Reddit), who also provided me the original Reddit data, released <a href="https://www.reddit.com/r/datasets/comments/3mg812/full_reddit_submission_corpus_now_available_2006/">new Reddit datasets</a> containing all submissions and all comments until August 2015. Google BigQuery Developer Advocate Felipe Hoffa <a href="https://www.reddit.com/r/bigquery/comments/3mv82i/dataset_reddits_full_post_history_shared_on/">uploaded the dataset</a> to a public table in BigQuery for anyone to perform analysis on the data.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-bigquery/bigquery-tool.png" alt="" /></p>
+
+<p>With Reddit data in BigQuery, quantifying all the hundreds of millions of Reddit submissions and comments is trivial.</p>
+
+<h2>Hello Reddit!</h2>
+
+<p><em>Although the data is retrieved and processed in seconds, making the data visualizations in this post takes slightly longer. You can view the R code needed to reproduce the visualizations in <a href="https://github.com/minimaxir/reddit-bigquery/blob/master/reddit_bigquery.ipynb">this Jupyter notebook</a> open-sourced on GitHub.</em></p>
+
+<p>BigQuery allows 1 terabyte (1000 GB) of <a href="https://cloud.google.com/bigquery/pricing">free data processing</a> per month; which is much more than it sounds like, and you&rsquo;ll see why.</p>
+
+<p>BigQuery syntax works similar to typical SQL. If you can perform basic SQL aggregations such as <code>COUNT</code> and <code>AVG</code> on a tiny database, you can perform the same aggregations on a 100+ GB dataset.</p>
+
+<p>We can write a simple query to just calculate how many Reddit submissions are made each day, to both check the robustness of the data, and to show how much Reddit has grown. (note that the <code>created</code> field is in seconds UTC; you will need to convert it to a timestamp, then convert to a <code>DATE</code> which converts the timestamp to a YYYY-MM-DD string, which is the format you want since it sorts lexigraphically)</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="nb">DATE</span><span class="p">(</span><span class="n">SEC_TO_TIMESTAMP</span><span class="p">(</span><span class="n">created</span><span class="p">))</span> <span class="n">date_submission</span><span class="p">,</span>
+<span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">num_submissions</span>
+<span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_posts</span><span class="p">.</span><span class="n">full_corpus_201509</span><span class="p">]</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">date_submission</span>
+<span class="k">ORDER</span> <span class="k">by</span> <span class="n">date_submission</span></code></pre></div>
+
+
+<p>Which results in a simple timeseries, as shown above. BigQuery allows you to download the data as a CSV, and it can easily be visualized in any statistical program such as Excel.</p>
+
+<p>Of course, I prefer R and ggplot2.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-bigquery/reddit-bigquery-1.png" alt="" /></p>
+
+<p>And that query only took 4.5 seconds to complete, with 1.46 GB data processed! BigQuery only counts the columns used in the query against the 1 TB quota; since the query only used one small column, the query is cheap. (if the query hits the raw submission title/comment text data, then the queries will be significantly larger data-wise)</p>
+
+<h2>When is the best time to post to Reddit?</h2>
+
+<p>One of the reasons people might look at Reddit data is for determining the best way to viral. One of the most important factors in making something go viral is timing; since Reddit has a ranking system based on both community approval and time-since-submission, along with the fact that there is more activity at certain times of the day, the time when a submission is made is especially important.</p>
+
+<p>So here&rsquo;s another aggregation query that aggregates on the day of week a submission is made, and the hour when the submission is made; this creates a 7x24 matrix of timeslot possibilities. Both values are set to Eastern Standard Time, as U.S.-target websites tend to follow that timezone. Lastly, instead of checking the average amount of points for each submission at each timeslot (which would be skewed by the very high proportion of submissions with no upvotes), we&rsquo;ll look at how many submissions go viral (>3000) at each timeslot with a conditional <code>SUM(IF())</code> statement (which is equivalent to Excel&rsquo;s <code>COUNTIF</code> conditional)</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="n">DAYOFWEEK</span><span class="p">(</span><span class="n">SEC_TO_TIMESTAMP</span><span class="p">(</span><span class="n">created</span> <span class="o">-</span> <span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span> <span class="k">as</span> <span class="n">sub_dayofweek</span><span class="p">,</span>
+  <span class="n">HOUR</span><span class="p">(</span><span class="n">SEC_TO_TIMESTAMP</span><span class="p">(</span><span class="n">created</span> <span class="o">-</span> <span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span> <span class="k">as</span> <span class="n">sub_hour</span><span class="p">,</span>
+  <span class="k">SUM</span><span class="p">(</span><span class="n">IF</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="k">as</span> <span class="n">num_gte_3000</span><span class="p">,</span>
+<span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_posts</span><span class="p">.</span><span class="n">full_corpus_201509</span><span class="p">]</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">sub_dayofweek</span><span class="p">,</span> <span class="n">sub_hour</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sub_dayofweek</span><span class="p">,</span> <span class="n">sub_hour</span></code></pre></div>
+
+
+<p>2.5 seconds, 2.39 GB processed, and a few R tricks results in this:</p>
+
+<p><img src="http://minimaxir.com/img/reddit-bigquery/reddit-bigquery-2.png" alt="" /></p>
+
+<p>The day-of-week mostly does not matter, but hour matters significantly: about 3x as many submissions go viral when they are posted in the morning EST than if they are posted late in the day. (and rarely anything comparatively goes viral posted late at night, which is intuitive enough)</p>
+
+<h2>Creating Wordclouds of Subreddit Comments</h2>
+
+<p>Wordclouds are always a fun representation of data, although not necessarily the most quantifiable. BigQuery can help derive word counts on large quantities of data, although the query is much more complex.</p>
+
+<p>Due to the amount of data, we&rsquo;ll only look at the latest Reddit comment data (August 2015), and we&rsquo;ll look at the <a href="https://www.reddit.com/r/news">/r/news</a> subreddit to see if there are any linguistic trends. In a subquery, the comment text (from non-bots!) is stripped of punctuation, set to lower case, and split into individual words; each word is counted and aggregated.</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">word</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">num_words</span><span class="p">,</span> <span class="k">AVG</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">as</span> <span class="n">avg_score</span>
+<span class="k">FROM</span><span class="p">(</span><span class="n">FLATTEN</span><span class="p">((</span>
+  <span class="k">SELECT</span> <span class="n">SPLIT</span><span class="p">(</span><span class="k">LOWER</span><span class="p">(</span><span class="n">REGEXP_REPLACE</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">r</span><span class="s1">&#39;[\.\&quot;,*:()\[\]/|\n]&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)),</span> <span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="n">word</span><span class="p">,</span> <span class="n">score</span>
+  <span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_comments</span><span class="p">.</span><span class="mi">2015</span><span class="n">_08</span><span class="p">]</span>
+  <span class="k">WHERE</span> <span class="n">author</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">author</span> <span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_comments</span><span class="p">.</span><span class="n">bots_201505</span><span class="p">])</span>
+  <span class="k">AND</span> <span class="n">subreddit</span><span class="o">=</span><span class="ss">&quot;news&quot;</span>
+  <span class="p">),</span> <span class="n">word</span><span class="p">))</span>
+<span class="k">GROUP</span> <span class="k">EACH</span> <span class="k">BY</span> <span class="n">word</span>
+<span class="k">HAVING</span> <span class="n">num_words</span> <span class="o">&gt;=</span> <span class="mi">10000</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">num_words</span> <span class="k">DESC</span></code></pre></div>
+
+
+<p>5.0 seconds and 11.3 GB processed, along with removing a few stopwords via R results in this.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-bigquery/reddit-bigquery-3.png" alt="" /></p>
+
+<p>News is about <strong>people</strong>. And <strong>more</strong>. Makes sense. (An <code>avg_score</code> column for each word is included to allow for emulation of quantifiable impact of a given word, as used in my <a href="http://minimaxir.com/2015/01/linkbait/">BuzzFeed analysis</a>, although that is less useful for comments than submissions.)</p>
+
+<h2>Monthly Active Users</h2>
+
+<p>Although Reddit does provide a count of Subscribers for a given subreddit, most of those users are passive. One of the most important metrics of any startup is Monthly Active Users (MAUs), which we can get a reasonable approximation using the comment data. And not only that, we can aggregate the unique number of commenters by a given subreddit and by a given month, to see how subreddit activity changes over time relative to other subreddits.</p>
+
+<p>How this works in BigQuery is a little more complicated, and requires the use of window functions:</p>
+
+<ul>
+<li>Aggregate by subreddit, month, and count of unique comment authors on <em>all</em> comments (this will result in a query with a lot of data processed!)</li>
+<li>For each month, rank the subreddits by number of unique authors.</li>
+<li>Take the top 20 subreddits by rank for each given month.</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span> <span class="nb">date</span><span class="p">,</span> <span class="n">unique_authors</span> <span class="k">FROM</span>
+<span class="p">(</span><span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span> <span class="nb">date</span><span class="p">,</span> <span class="n">unique_authors</span><span class="p">,</span> <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="n">PARTITION</span> <span class="k">BY</span> <span class="nb">date</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unique_authors</span> <span class="k">DESC</span><span class="p">)</span> <span class="n">rank</span> <span class="k">FROM</span>
+<span class="p">(</span><span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span> <span class="k">LEFT</span><span class="p">(</span><span class="nb">DATE</span><span class="p">(</span><span class="n">SEC_TO_TIMESTAMP</span><span class="p">(</span><span class="n">created_utc</span><span class="p">)),</span> <span class="mi">7</span><span class="p">)</span> <span class="k">as</span> <span class="nb">date</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">author</span><span class="p">))</span> <span class="k">as</span> <span class="n">unique_authors</span> <span class="k">FROM</span> <span class="n">TABLE_QUERY</span><span class="p">([</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_comments</span><span class="p">],</span> <span class="ss">&quot;table_id CONTAINS &#39;20&#39; AND LENGTH(table_id)&lt;8&quot;</span><span class="p">)</span>
+<span class="k">GROUP</span> <span class="k">EACH</span> <span class="k">BY</span> <span class="n">subreddit</span><span class="p">,</span> <span class="nb">date</span>
+<span class="p">))</span>
+<span class="k">WHERE</span> <span class="n">rank</span> <span class="o">&lt;=</span> <span class="mi">20</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="nb">date</span> <span class="k">ASC</span><span class="p">,</span> <span class="n">unique_authors</span> <span class="k">DESC</span></code></pre></div>
+
+
+<p>11.9 seconds and 53.3 GB (!) later, we can create a Top 20 Subreddits visualization for each month, and combine each image into a GIF with my trusty <a href="https://github.com/minimaxir/frames-to-gif-osx">Convert Frames to GIF</a> tool.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-bigquery/subreddit-ranks.gif" alt="" /></p>
+
+<p>You can view the individual frames <a href="https://github.com/minimaxir/reddit-bigquery/tree/master/subreddit-ranks">in the project GitHub repository</a>. There are many trends revealed, such how some subreddits die over time (<a href="https://www.reddit.com/r/fffffffuuuuuuuuuuuu">r/fffffffuuuuuuuuuuuu</a>, <a href="https://www.reddit.com/r/technology">/r/technology</a>), how some rise over time (<a href="https://www.reddit.com/r/pcmasterrace">/r/pcmasterrace</a>), and how some subreddits have relative monthly spikes (<a href="https://www.reddit.com/r/thebutton">/r/thebutton</a>). Note that the colors have no visual meaning but are used to help easily differentiate between subreddits.</p>
+
+<p>These sample queries are only a small sample of what can be done with the Reddit data and BigQuery. Although some data scientists may argue that using is BigQuery is pointless since ~200GB of data <a href="http://yourdatafitsinram.com">can fit in RAM</a>, the quick, dirty, and <em>cheap</em> option is much more pragmatic for the majority of potential data analysis on this Reddit dataset.</p>
+
+<p><em>Again, you can view the R code needed to reproduce the visualizations in <a href="https://github.com/minimaxir/reddit-bigquery/blob/master/reddit_bigquery.ipynb">this Jupyter notebook</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Coding, Visualizing, and Animating Bootstrap Resampling]]></title>
@@ -913,102 +1030,6 @@ GROUP BY lat, long
 <hr />
 
 <p><em>You can access a copy of the code used in this blog post <a href="https://github.com/minimaxir/ggplot-tutorial">at this GitHub repository</a>.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles]]></title>
-    <link href="http://minimaxir.com/2015/01/linkbait/"/>
-    <updated>2015-01-15T08:30:00-08:00</updated>
-    <id>http://minimaxir.com/2015/01/linkbait</id>
-    <content type="html"><![CDATA[<p><a href="http://www.buzzfeed.com/">BuzzFeed</a> is one of the most significant sources of journalistic content on the entire internet. Of course, that depends on your definition of &ldquo;journalistic&rdquo;: BuzzFeed is one of the first organizations to leverage both social media and the power of language as an editorial business model.</p>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_fb.png"  ></p>
-
-<p>BuzzFeed has popularized the use of the &ldquo;listicle&rdquo; as <a href="http://www.buzzfeed.com/lyapalater/group-projects-should-be-wiped-off-the-face-o">seen above</a>: a bulleted list of text blurbs and/or photos that fits the length and depth of a normal blog article. Additionally, BuzzFeed was one of the first news sources to use non-neutral headlines that deliberately invoke a reaction in the reader which then subsequently tempts them to click on the article in an attempt to promote virality. These &ldquo;<a href="http://en.wikipedia.org/wiki/Clickbait">clickbait</a>&rdquo; and &ldquo;<a href="http://mashable.com/2013/07/12/linkbait-content-marketing/">linkbait</a>&rdquo; techniques have been responsible for BuzzFeed receiving <a href="http://www.nytimes.com/2014/08/11/technology/a-move-to-go-beyond-lists-for-content-at-buzzfeed.html">$50 million in venture capital</a>, and has spawned entire startups and job positions designed solely to emulate BuzzFeed&rsquo;s success.</p>
-
-<p>I decided to determine which phrases in BuzzFeed headlines are the most successful in order to see if it&rsquo;s possible to reverse-engineer BuzzFeed&rsquo;s business model. Therefore, I scraped BuzzFeed&rsquo;s website (<a href="http://minimaxir.com/2014/09/buzzscrape/">after initial frustration</a>) and obtained 60,378 distinct articles and the corresponding number of Facebook Shares for each article. From there, I decomposed each headline into its <a href="http://en.wikipedia.org/wiki/N-gram">component n-grams</a>, allowing me to perform quantitative analysis for each possible permutation of words in the article titles. You probably don&rsquo;t know that the 3 most interesting things I found will blow your mind.</p>
-
-<h1>The Rise of the Listicle</h1>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_listicle.png"  ></p>
-
-<p>Listicles almost always begin with a numeral as the first or second word. Out of the 60,378 articles I obtained, 26% of them (15,656 articles) are listicles. BuzzFeed clearly believes they are successful, as the proportion of listicles to normal articles has increased over the years.</p>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-listicle-proportions.png"  ></p>
-
-<p>Listicles can be of any size. The distibution of listicle sizes is centered at the median of 19 entries.</p>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-listicle-histogram.png"  ></p>
-
-<p>Surprisingly, there is a positive correlation between listicle size and the number of Facebook shares it receives: A 30-size listicle receives many-multiples of shares more than 10-size listicles. (note the logarithmic scale for FB Shares)</p>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-listicle-scatterplot.png"  ></p>
-
-<p>BuzzFeed has many different types of listicles to appeal to a wide crowd, including <em>[X] reasons</em>, <em>[X] books</em>, <em>[X] movies</em>, etc, where <em>[X]</em> is any 1 or 2-digit numeral. However, BuzzFeed&rsquo;s go-to listicle phrase has changed over the years. Here are the most-used listicle phrases for each month since 2012:</p>
-
-<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=1424838564&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
-
-
-<p>In 2012 and 2013, BuzzFeed&rsquo;s listicles began with <em>the [X]</em>; in 2014, BuzzFeed&rsquo;s most-used listicles began with <em>[X] things</em>. The &ldquo;the&rdquo; is technically redundant; perhaps BuzzFeed decided to make the listicle schema cleaner and <em>less</em> formal. It may be possible that <em>[X] things</em> performs better on average than <em>the [X]</em>.</p>
-
-<p>Which types of listicles are the most successful on Facebook? Which types of listicles receive the most amount of Facebook shares?</p>
-
-<p>Here&rsquo;s a chart of of the Top 30 types of listicles by the number of Facebook shares those articles have received on average (with a minimum of 50 articles of that listicle type):</p>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-shares-listicles.png"  ></p>
-
-<p>A few notes on the chart: the gray bars on each average bar represent a <strong>95% confidence interval</strong> for the true value of each average, where the confidence interval is obtained through 10,000 iterations of <a href="http://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29">bootstrap resampling</a>. The dashed vertical line represents the <strong>population average</strong> of all distinct BuzzFeed articles, at 6,657 Facebook shares, and helps visualize the relative impact of having these words in the title compared to a normal BuzzFeed article.</p>
-
-<p>The most-posted listicle types mentioned above are <em>not</em> the types of listicles are most shared, however <em>[X] things</em> does indeed perform slightly better than <em>the [X]</em> on average. Emotional words, such as <em>insanely</em>, <em>awesome</em>, and <em>probably</em>, which you would never see in a more serious journalistic publication, are some of the key drivers of shares.</p>
-
-<p>Let&rsquo;s look into these keywords more to see if there are any other trends.</p>
-
-<h1>Key Keywords</h1>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_1gram.jpg"  ></p>
-
-<p>Specific keywords may be more informative. Here&rsquo;s the most popular keywords over time, ignoring common <a href="http://en.wikipedia.org/wiki/Stop_words">stop words</a> and listicle words:</p>
-
-<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=1106341985&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
-
-
-<p>Like most journalistic news sources, BuzzFeed tends to write more frequently toward then-current events. 2012 for example had many articles about the 2012 election, while April 2013 consisted of many articles about the Boston Marathon bombings.</p>
-
-<p>Which keywords encouraged the most Facebook shares on average?</p>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-shares-1gram.png"  ></p>
-
-<p>There&rsquo;s a more uncertainty in the accuracy of the average on keywords, especially with the #1 word, <em>career</em>. There&rsquo;s a strong focus on nostalgia, with <em>toys</em>, <em>childhood</em>, and <em>80s</em>. Certain brands (<em>potter</em> and <em>disney</em>) fit the nostalgia too.</p>
-
-<p>High words with a relatively small confidence interval and <em>which</em> and <em>character</em>. These are likely caused by <a href="http://www.buzzfeed.com/quizzes">BuzzFeed&rsquo;s quizzes</a>, which have been incredibly popular. Analyzing full phrases is necessary to get a bigger picture.</p>
-
-<h1>3-Word Phrases</h1>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed_3gram.png"  ></p>
-
-<p>After careful analysis, I found that 3-word phrases (trigrams) provided more helpful information than phrases of other lengths. Over time, there are similarities with the popular phrases; they both relate to then-current event and occasionally contain listicles.</p>
-
-<iframe style="width: 100%; max-width: 450px; height: 300px" src="https://docs.google.com/spreadsheets/d/1U9SWJsmepYdb6YjWCFzM0gsuuDC5PBeFJZkTmJ568fs/pubhtml?gid=249061324&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
-
-
-<p>The average shares of articles based on phrases in their titles, however, tell the full story.</p>
-
-<p><img src="http://minimaxir.com/img/linkbait/buzzfeed-shares-3gram-v2.png"  ></p>
-
-<p>Now we can clearly see some the infamous phrases traditionally associated with clickbait.</p>
-
-<p>Indeed, <em>character are you</em>, a frequent phrase in quizzes, is what leads to the most virality. (It&rsquo;s worth nothing that these perform 3-4 times better than the best listicles on average). Likewise, you may notice a few phrases are redundant and subset of a bigger phrase (e.g. <em>things you probably</em>, <em>you probably don&rsquo;t</em>, <em>probably don&rsquo;t know</em>), but since the averages FB shares aren&rsquo;t identical, it&rsquo;s not a perfect subset, and therefore the average is relevant. There&rsquo;s also a frequent appeal to <em>you</em>, the reader, with <em>you/your/you&rsquo;re</em> appearing in about half of the top phrases.</p>
-
-<p>Does clickbait work? Of course it does. Granted, there has been a lot of disenchantment with the rise of clickbait; that&rsquo;s why the parody Twitter account <a href="https://twitter.com/SavedYouAClick">@SavedYouAClick</a> was created and hit 182K followers in months. It&rsquo;s also the reason why <a href="http://newsroom.fb.com/news/2014/08/news-feed-fyi-click-baiting/">Facebook will now be punishing clickbait</a> and making them less public in a user&rsquo;s news feed, which will definitely hurt BuzzFeed. That&rsquo;s likely one of the reasons why they are pivoting to quizzes and video content instead.</p>
-
-<p>I don&rsquo;t expect clickbait to disappear anytime soon; it&rsquo;s easy and provides a good return-on-investment, both of which are important to scrappy websites trying to market on social media. Or things could come full-circle and <a href="http://www.buzzfeed.com/tomphillips/photos-that-prove-game-of-thrones-happened-in-real-life">BuzzFeed could publish clickbait about making the best clickbait</a>.</p>
-
-<hr />
-
-<p><em>You can view and download all the BuzzFeed article data and metadata <a href="https://docs.google.com/spreadsheets/d/1WSx45rT4jZfysmZfzJtjaPO7AxW4XMaJYaCUd5HB2ns/edit?usp=sharing">in this Google Sheet</a>.</em></p>
-
-<p><em>All graphics were generated using <a href="http://www.r-project.org/">R</a>. The charts were created using <a href="http://ggplot2.org/">ggplot2</a> and the word clouds were created using the <a href="http://cran.r-project.org/web/packages/wordcloud/index.html">wordcloud</a> package.</em></p>
 ]]></content>
   </entry>
   

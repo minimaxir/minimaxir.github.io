@@ -1,0 +1,499 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>How to Analyze Every Reddit Submission and Comment, in Seconds, for Free</title>
+  
+  
+    
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="How to Analyze Every Reddit Submission and Comment, in Seconds, for Free">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2015/10/reddit-bigquery/">
+
+
+  <meta name="twitter:description" content="With Reddit data in BigQuery, quantifying all the hundreds of millions of Reddit submissions and comments is trivial.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/reddit-bigquery-3.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="How to Analyze Every Reddit Submission and Comment, in Seconds, for Free" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="With Reddit data in BigQuery, quantifying all the hundreds of millions of Reddit submissions and comments is trivial." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2015/10/reddit-bigquery/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/reddit-bigquery-3.png" property="og:image">
+
+
+  
+  <meta content="data" property="article:section">
+  
+
+
+  
+
+
+<meta property="og:locale"    content="en_us" />
+  
+  
+  <meta name="description" content="While working on my statistical analysis of 142 million Reddit submissions last year, I had a surprising amount of trouble settings things up. It took a few ...">
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+
+  <link rel="canonical" href="http://minimaxir.com/2015/10/reddit-bigquery/">
+  
+      <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-title" content="minimaxir">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+	<link rel="apple-touch-icon" sizes="57x57" href="http://minimaxir.com/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="http://minimaxir.com/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="http://minimaxir.com/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="http://minimaxir.com/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="http://minimaxir.com/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="http://minimaxir.com/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="http://minimaxir.com/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="http://minimaxir.com/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://minimaxir.com/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="http://minimaxir.com/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://minimaxir.com/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="http://minimaxir.com/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://minimaxir.com/favicon/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="http://minimaxir.com/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <!--<link href='//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'> -->
+
+  
+  
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js" type="text/javascript"></script>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro:400,700|Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/minimaxir.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.count + "</span>");
+  });
+  });
+  });  
+
+//$('.mdl-layout__drawer-button').html('<i class=\"fa fa-navicon\"></i>');
+</script>
+	</head>
+  <body>
+  
+  	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-100">
+  <header class="mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-800">
+    <!-- Top row, always visible -->
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Max Woolf (@minimaxir)</span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+      	<a class="mdl-navigation__link" href="/">Home</a>
+        <a class="mdl-navigation__link" href="/about/">About</a>
+        <a class="mdl-navigation__link" href="/contact">Contact</a>
+        <a class="mdl-navigation__link" href="/portfolio/">Portfolio</a>
+      </nav>
+      <div class="mdl-layout-spacer"></div>
+      <div class="social-icon-list mdl-layout--large-screen-only">
+    <a title="RSS" href="/rss.xml"><i class="fa fa-rss-square"></i></a>
+  </div>
+
+    </div>
+
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Max Woolf</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="/"><i class="material-icons">home</i> Home</a>
+    	<a class="mdl-navigation__link" href="/about/"><i class="material-icons">person</i> About</a>
+        <a class="mdl-navigation__link" href="/contact"><i class="material-icons">contacts</i> Contact</a>
+        <a class="mdl-navigation__link" href="/portfolio/"><i class="material-icons">work</i> Portfolio</a>
+    </nav>
+    </div>
+  	
+		  	<div class="demo-ribbon hero" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/img/reddit-bigquery-3.png') no-repeat center center; background-size: cover;" >
+  	<div class="demo-container mdl-grid">
+  	<!--<h1 class="post-title">How to Analyze Every Reddit Submission and Comment, in Seconds, for Free</h1>-->
+  	
+  	<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  	<div class="mdl-cell mdl-cell--8-col">
+  	<div class="post-title">
+  	<h1>How to Analyze Every Reddit Submission and Comment, in Seconds, for Free</h1>
+  	</div>
+  	
+  	<div class="post-meta">
+  	Oct 2, 2015
+  	
+  	
+  	<div class="sharing">
+  
+		  <span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/10/reddit-bigquery/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/10/reddit-bigquery/"><i class="fa fa-facebook"></i><span class="count mdl-cell--hide-phone"> -</span></a></span>
+  
+		<span class="social twitter"><a href="http://twitter.com/home/?status=How to Analyze Every Reddit Submission and Comment, in Seconds, for Free - http://minimaxir.com/2015/10/reddit-bigquery/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/10/reddit-bigquery/><i class="fa fa-twitter"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+
+  <span  class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How to Analyze Every Reddit Submission and Comment, in Seconds, for Free&url=http://minimaxir.com/2015/10/reddit-bigquery/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/10/reddit-bigquery/><i class="fa fa-linkedin"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+   
+	</div>
+	
+  	</div>
+  	
+  	
+  	</div>
+  	
+
+	</div>
+  	</div>
+  	
+ <main class="demo-main mdl-layout__content">
+<div class="demo-container mdl-grid">
+ <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+ <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+
+<div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+
+  <article class="post-content">
+    <p>While working on my <a href="http://minimaxir.com/2014/12/reddit-statistics/">statistical analysis of 142 million Reddit submissions</a> last year, I had a surprising amount of trouble settings things up. It took a few hours to download the 40+ gigabytes of compressed data, and another few hours to parse the data and store in a local database. Even then, on my old-but-still-pretty-fast desktop PC, simple queries on the entire dataset took minutes to run, with complex queries occasionally taking upwards to an hour.</p>
+
+<p>Over the past year, I&rsquo;ve had a lot of success using <a href="https://cloud.google.com/bigquery/">Google&rsquo;s BigQuery</a> tool for quick big data analysis without having to manage the data, such as the <a href="http://minimaxir.com/2015/08/nyc-map/">recent NYC Taxi data dump</a>. Recently, Jason Michael Baumgartner of <a href="https://pushshift.io">Pushshift.io</a> (a.k.a <a href="https://www.reddit.com/user/Stuck_In_the_Matrix">/u/Stuck_In_The_Matrix</a> on Reddit), who also provided me the original Reddit data, released <a href="https://www.reddit.com/r/datasets/comments/3mg812/full_reddit_submission_corpus_now_available_2006/">new Reddit datasets</a> containing all submissions and all comments until August 2015. Google BigQuery Developer Advocate Felipe Hoffa <a href="https://www.reddit.com/r/bigquery/comments/3mv82i/dataset_reddits_full_post_history_shared_on/">uploaded the dataset</a> to a public table in BigQuery for anyone to perform analysis on the data.</p>
+
+<p><img src="/img/reddit-bigquery/bigquery-tool.png" alt="" /></p>
+
+<p>With Reddit data in BigQuery, quantifying all the hundreds of millions of Reddit submissions and comments is trivial.</p>
+
+<h2>Hello Reddit!</h2>
+
+<p><em>Although the data is retrieved and processed in seconds, making the data visualizations in this post takes slightly longer. You can view the R code needed to reproduce the visualizations in <a href="https://github.com/minimaxir/reddit-bigquery/blob/master/reddit_bigquery.ipynb">this Jupyter notebook</a> open-sourced on GitHub.</em></p>
+
+<p>BigQuery allows 1 terabyte (1000 GB) of <a href="https://cloud.google.com/bigquery/pricing">free data processing</a> per month; which is much more than it sounds like, and you&rsquo;ll see why.</p>
+
+<p>BigQuery syntax works similar to typical SQL. If you can perform basic SQL aggregations such as <code>COUNT</code> and <code>AVG</code> on a tiny database, you can perform the same aggregations on a 100+ GB dataset.</p>
+
+<p>We can write a simple query to just calculate how many Reddit submissions are made each day, to both check the robustness of the data, and to show how much Reddit has grown. (note that the <code>created</code> field is in seconds UTC; you will need to convert it to a timestamp, then convert to a <code>DATE</code> which converts the timestamp to a YYYY-MM-DD string, which is the format you want since it sorts lexigraphically)</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="nb">DATE</span><span class="p">(</span><span class="n">SEC_TO_TIMESTAMP</span><span class="p">(</span><span class="n">created</span><span class="p">))</span> <span class="n">date_submission</span><span class="p">,</span>
+<span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">num_submissions</span>
+<span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_posts</span><span class="p">.</span><span class="n">full_corpus_201509</span><span class="p">]</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">date_submission</span>
+<span class="k">ORDER</span> <span class="k">by</span> <span class="n">date_submission</span></code></pre></div>
+
+
+<p>Which results in a simple timeseries, as shown above. BigQuery allows you to download the data as a CSV, and it can easily be visualized in any statistical program such as Excel.</p>
+
+<p>Of course, I prefer R and ggplot2.</p>
+
+<p><img src="/img/reddit-bigquery/reddit-bigquery-1.png" alt="" /></p>
+
+<p>And that query only took 4.5 seconds to complete, with 1.46 GB data processed! BigQuery only counts the columns used in the query against the 1 TB quota; since the query only used one small column, the query is cheap. (if the query hits the raw submission title/comment text data, then the queries will be significantly larger data-wise)</p>
+
+<h2>When is the best time to post to Reddit?</h2>
+
+<p>One of the reasons people might look at Reddit data is for determining the best way to viral. One of the most important factors in making something go viral is timing; since Reddit has a ranking system based on both community approval and time-since-submission, along with the fact that there is more activity at certain times of the day, the time when a submission is made is especially important.</p>
+
+<p>So here&rsquo;s another aggregation query that aggregates on the day of week a submission is made, and the hour when the submission is made; this creates a 7x24 matrix of timeslot possibilities. Both values are set to Eastern Standard Time, as U.S.-target websites tend to follow that timezone. Lastly, instead of checking the average amount of points for each submission at each timeslot (which would be skewed by the very high proportion of submissions with no upvotes), we&rsquo;ll look at how many submissions go viral (>3000) at each timeslot with a conditional <code>SUM(IF())</code> statement (which is equivalent to Excel&rsquo;s <code>COUNTIF</code> conditional)</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="n">DAYOFWEEK</span><span class="p">(</span><span class="n">SEC_TO_TIMESTAMP</span><span class="p">(</span><span class="n">created</span> <span class="o">-</span> <span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span> <span class="k">as</span> <span class="n">sub_dayofweek</span><span class="p">,</span>
+  <span class="n">HOUR</span><span class="p">(</span><span class="n">SEC_TO_TIMESTAMP</span><span class="p">(</span><span class="n">created</span> <span class="o">-</span> <span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span> <span class="k">as</span> <span class="n">sub_hour</span><span class="p">,</span>
+  <span class="k">SUM</span><span class="p">(</span><span class="n">IF</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="k">as</span> <span class="n">num_gte_3000</span><span class="p">,</span>
+<span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_posts</span><span class="p">.</span><span class="n">full_corpus_201509</span><span class="p">]</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">sub_dayofweek</span><span class="p">,</span> <span class="n">sub_hour</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sub_dayofweek</span><span class="p">,</span> <span class="n">sub_hour</span></code></pre></div>
+
+
+<p>2.5 seconds, 2.39 GB processed, and a few R tricks results in this:</p>
+
+<p><img src="/img/reddit-bigquery/reddit-bigquery-2.png" alt="" /></p>
+
+<p>The day-of-week mostly does not matter, but hour matters significantly: about 3x as many submissions go viral when they are posted in the morning EST than if they are posted late in the day. (and rarely anything comparatively goes viral posted late at night, which is intuitive enough)</p>
+
+<h2>Creating Wordclouds of Subreddit Comments</h2>
+
+<p>Wordclouds are always a fun representation of data, although not necessarily the most quantifiable. BigQuery can help derive word counts on large quantities of data, although the query is much more complex.</p>
+
+<p>Due to the amount of data, we&rsquo;ll only look at the latest Reddit comment data (August 2015), and we&rsquo;ll look at the <a href="https://www.reddit.com/r/news">/r/news</a> subreddit to see if there are any linguistic trends. In a subquery, the comment text (from non-bots!) is stripped of punctuation, set to lower case, and split into individual words; each word is counted and aggregated.</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">word</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">num_words</span><span class="p">,</span> <span class="k">AVG</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">as</span> <span class="n">avg_score</span>
+<span class="k">FROM</span><span class="p">(</span><span class="n">FLATTEN</span><span class="p">((</span>
+  <span class="k">SELECT</span> <span class="n">SPLIT</span><span class="p">(</span><span class="k">LOWER</span><span class="p">(</span><span class="n">REGEXP_REPLACE</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">r</span><span class="s1">&#39;[\.\&quot;,*:()\[\]/|\n]&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)),</span> <span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="n">word</span><span class="p">,</span> <span class="n">score</span>
+  <span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_comments</span><span class="p">.</span><span class="mi">2015</span><span class="n">_08</span><span class="p">]</span>
+  <span class="k">WHERE</span> <span class="n">author</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">author</span> <span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_comments</span><span class="p">.</span><span class="n">bots_201505</span><span class="p">])</span>
+  <span class="k">AND</span> <span class="n">subreddit</span><span class="o">=</span><span class="ss">&quot;news&quot;</span>
+  <span class="p">),</span> <span class="n">word</span><span class="p">))</span>
+<span class="k">GROUP</span> <span class="k">EACH</span> <span class="k">BY</span> <span class="n">word</span>
+<span class="k">HAVING</span> <span class="n">num_words</span> <span class="o">&gt;=</span> <span class="mi">10000</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">num_words</span> <span class="k">DESC</span></code></pre></div>
+
+
+<p>5.0 seconds and 11.3 GB processed, along with removing a few stopwords via R results in this.</p>
+
+<p><img src="/img/reddit-bigquery/reddit-bigquery-3.png" alt="" /></p>
+
+<p>News is about <strong>people</strong>. And <strong>more</strong>. Makes sense. (An <code>avg_score</code> column for each word is included to allow for emulation of quantifiable impact of a given word, as used in my <a href="http://minimaxir.com/2015/01/linkbait/">BuzzFeed analysis</a>, although that is less useful for comments than submissions.)</p>
+
+<h2>Monthly Active Users</h2>
+
+<p>Although Reddit does provide a count of Subscribers for a given subreddit, most of those users are passive. One of the most important metrics of any startup is Monthly Active Users (MAUs), which we can get a reasonable approximation using the comment data. And not only that, we can aggregate the unique number of commenters by a given subreddit and by a given month, to see how subreddit activity changes over time relative to other subreddits.</p>
+
+<p>How this works in BigQuery is a little more complicated, and requires the use of window functions:</p>
+
+<ul>
+<li>Aggregate by subreddit, month, and count of unique comment authors on <em>all</em> comments (this will result in a query with a lot of data processed!)</li>
+<li>For each month, rank the subreddits by number of unique authors.</li>
+<li>Take the top 20 subreddits by rank for each given month.</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span> <span class="nb">date</span><span class="p">,</span> <span class="n">unique_authors</span> <span class="k">FROM</span>
+<span class="p">(</span><span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span> <span class="nb">date</span><span class="p">,</span> <span class="n">unique_authors</span><span class="p">,</span> <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="n">PARTITION</span> <span class="k">BY</span> <span class="nb">date</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unique_authors</span> <span class="k">DESC</span><span class="p">)</span> <span class="n">rank</span> <span class="k">FROM</span>
+<span class="p">(</span><span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span> <span class="k">LEFT</span><span class="p">(</span><span class="nb">DATE</span><span class="p">(</span><span class="n">SEC_TO_TIMESTAMP</span><span class="p">(</span><span class="n">created_utc</span><span class="p">)),</span> <span class="mi">7</span><span class="p">)</span> <span class="k">as</span> <span class="nb">date</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">author</span><span class="p">))</span> <span class="k">as</span> <span class="n">unique_authors</span> <span class="k">FROM</span> <span class="n">TABLE_QUERY</span><span class="p">([</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_comments</span><span class="p">],</span> <span class="ss">&quot;table_id CONTAINS &#39;20&#39; AND LENGTH(table_id)&lt;8&quot;</span><span class="p">)</span>
+<span class="k">GROUP</span> <span class="k">EACH</span> <span class="k">BY</span> <span class="n">subreddit</span><span class="p">,</span> <span class="nb">date</span>
+<span class="p">))</span>
+<span class="k">WHERE</span> <span class="n">rank</span> <span class="o">&lt;=</span> <span class="mi">20</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="nb">date</span> <span class="k">ASC</span><span class="p">,</span> <span class="n">unique_authors</span> <span class="k">DESC</span></code></pre></div>
+
+
+<p>11.9 seconds and 53.3 GB (!) later, we can create a Top 20 Subreddits visualization for each month, and combine each image into a GIF with my trusty <a href="https://github.com/minimaxir/frames-to-gif-osx">Convert Frames to GIF</a> tool.</p>
+
+<p><img src="/img/reddit-bigquery/subreddit-ranks.gif" alt="" /></p>
+
+<p>You can view the individual frames <a href="https://github.com/minimaxir/reddit-bigquery/tree/master/subreddit-ranks">in the project GitHub repository</a>. There are many trends revealed, such how some subreddits die over time (<a href="https://www.reddit.com/r/fffffffuuuuuuuuuuuu">r/fffffffuuuuuuuuuuuu</a>, <a href="https://www.reddit.com/r/technology">/r/technology</a>), how some rise over time (<a href="https://www.reddit.com/r/pcmasterrace">/r/pcmasterrace</a>), and how some subreddits have relative monthly spikes (<a href="https://www.reddit.com/r/thebutton">/r/thebutton</a>). Note that the colors have no visual meaning but are used to help easily differentiate between subreddits.</p>
+
+<p>These sample queries are only a small sample of what can be done with the Reddit data and BigQuery. Although some data scientists may argue that using is BigQuery is pointless since ~200GB of data <a href="http://yourdatafitsinram.com">can fit in RAM</a>, the quick, dirty, and <em>cheap</em> option is much more pragmatic for the majority of potential data analysis on this Reddit dataset.</p>
+
+<p><em>Again, you can view the R code needed to reproduce the visualizations in <a href="https://github.com/minimaxir/reddit-bigquery/blob/master/reddit_bigquery.ipynb">this Jupyter notebook</a>.</em></p>
+
+    
+    <div class="post-meta">
+  	Oct 2, 2015
+  	
+  	
+  	<div class="sharing">
+  
+		  <span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/10/reddit-bigquery/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/10/reddit-bigquery/"><i class="fa fa-facebook"></i><span class="count mdl-cell--hide-phone"> -</span></a></span>
+  
+		<span class="social twitter"><a href="http://twitter.com/home/?status=How to Analyze Every Reddit Submission and Comment, in Seconds, for Free - http://minimaxir.com/2015/10/reddit-bigquery/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/10/reddit-bigquery/><i class="fa fa-twitter"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+
+  <span  class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How to Analyze Every Reddit Submission and Comment, in Seconds, for Free&url=http://minimaxir.com/2015/10/reddit-bigquery/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/10/reddit-bigquery/><i class="fa fa-linkedin"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+   
+	</div>
+	
+  	</div>
+  </article>
+  
+  
+  
+  
+
+  
+
+</div>
+      </div>
+    </div>
+          </div>
+        </div>
+
+
+
+  <div class="demo-ribbon hero about">
+  	<div class="demo-container mdl-grid">
+  	
+  	<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  	<div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--hide-phone">  	
+  	<img src="/MaxFBInvert.png" title="Stop mousing over me! I'm not a XKCD comic!">
+  	</div>
+  	
+  	<div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
+  	
+  	<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">  	
+  	<p>Max Woolf (@minimaxir) is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years and a 2012 Carnegie Mellon University graduate.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.</p>
+  
+  <p>You can learn more about Max <a href="/about">here</a>, or view his portfolio <a href="/portfolio">here</a>.
+  
+  
+    <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+  	</div>
+  	
+
+	</div>
+  	</div>
+  
+  <div class="demo-container mdl-grid">
+ <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+ <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+  
+  
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2015/10/reddit-bigquery/';
+        var disqus_url = 'http://minimaxir.com/2015/10/reddit-bigquery/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+        
+  <div class="demo-container mdl-grid archive-nav">
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        
+          <h3><a href="/2015/09/bootstrap-resample/" style="float: left;"><i class="material-icons">arrow_back</i>  Prev</a></h3>
+        
+    	</div>
+
+		<div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+		
+		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        
+        </div>
+      </div>
+        
+</div>
+</div>
+  
+  
+
+
+		
+		
+		
+		
+        <footer class="demo-footer mdl-mini-footer">
+          <div class="mdl-mini-footer--left-section">
+            <ul class="mdl-mini-footer--link-list">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/portfolio/">Portfolio</a></li>
+            </ul>
+          </div>
+          
+          <div class="mdl-mini-footer--right-section">
+          <ul class="mdl-mini-footer--link-list">
+          <li>Theme made by Max Woolf using <a href="http://www.getmdl.io/">Material Design Lite</a>.</li>
+          </ul>
+          </div>
+        </footer>
+ </main>
+    </div>
+    
+  </body>
+</html>
