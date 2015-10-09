@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-10-02T08:02:57-07:00</updated>
+  <updated>2015-10-09T08:00:00-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,148 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Quantifying and Visualizing the Reddit Hivemind]]></title>
+    <link href="http://minimaxir.com/2015/10/reddit-topwords/"/>
+    <updated>2015-10-09T08:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/10/reddit-topwords</id>
+    <content type="html"><![CDATA[<p>In my <a href="http://minimaxir.com/2015/10/reddit-bigquery/">last post on Reddit data</a> (I strongly suggest you read that first if you haven&rsquo;t already), I noted that analyzing the words used in Reddit submissions may be useful in quantifying the relationship of those keywords in the success of a Reddit submission. Indeed, if we can find out which topics Reddit users tend to upvote, we can identify what keywords are most attractive to the Reddit &ldquo;hivemind.&rdquo;</p>
+
+<p>First, I gathered some preliminary statistics about all submissions to the top 500 subreddits on Reddit, again using the <a href="https://cloud.google.com/bigquery/">BigQuery</a> data dump compiled by Jason Baumgartner and Felipe Hoffa, in order to establish a good base for the analysis:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span>
+  <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_submissions</span><span class="p">,</span>
+  <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">avg_score</span><span class="p">,</span>
+  <span class="n">NTH</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">score</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span> <span class="k">AS</span> <span class="n">lower_95</span><span class="p">,</span>
+  <span class="n">NTH</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">score</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span> <span class="k">AS</span> <span class="n">median</span><span class="p">,</span>
+  <span class="n">NTH</span><span class="p">(</span><span class="mi">975</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">score</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span> <span class="k">AS</span> <span class="n">upper_95</span>
+<span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_posts</span><span class="p">.</span><span class="n">full_corpus_201509</span><span class="p">]</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">subreddit</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">num_submissions</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">500</span></code></pre></div>
+
+
+<p>Which results in <a href="https://docs.google.com/spreadsheets/d/1lyEc7-5vkREKBV8fUreyOszICgyA0CqX2YHaK2-4ndo/edit?usp=sharing">this output</a>. The &ldquo;lower_95&rdquo; and and the &ldquo;upper_95&rdquo; columns represent the 2.5% and the 97.5% percentile respectively, which could be used to form a 95% confidence interval around the median. For example, <a href="http://reddit.com/r/funny">/r/funny</a> has a 2.5% percentile of 0 points, a median of 1 point, and a 97.5% percentile of <em>875 points</em>. However, from those values, it is clear the data is heavily skewed right, which makes running statistical tests more difficult.</p>
+
+<p>Now we can query the top keywords for each subreddit, whose presence in a submission is related to the highest average score within that subreddit. This requires a very intricate and optimized BigQuery. Specifically, we want the query to:</p>
+
+<ul>
+<li>Get the Top 500 subreddits, by number of submissions (an abridged verson of query above).</li>
+<li>Get all submissions from these subreddits.</li>
+<li>Extract the keywords from all of these submissions, using a <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression</a> to remove most punctuation (unfortunately, the regular expression will remove punctuation <em>within</em> words as well, resulting in some odd &ldquo;words&rdquo; in the final results) and flattening the resulting tokens into separate rows for aggregation.</li>
+<li>Aggregate the keywords by both subreddit and the word itself, and obtain the # of distinct submissions the word is present in, the average score among all submissions, etc.</li>
+<li>Keep only words which occur in atleast 1,000 distinct submissions, which is important for getting a good average.</li>
+<li>For each subreddit, rank each remaining word by their average score, descending.</li>
+<li>Keep only the Top 20 words for each subreddit. 500 subreddits x 20 words = 10,000 rows maximum, which the limit BigQuery allows for web download, so that works out well.</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="p">(</span>
+<span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">num_words</span><span class="p">,</span> <span class="n">avg_score</span><span class="p">,</span> <span class="n">lower_95</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">upper_95</span><span class="p">,</span> <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">subreddit</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">avg_score</span> <span class="k">DESC</span><span class="p">)</span> <span class="n">score_rank</span>
+<span class="k">FROM</span> <span class="p">(</span>
+<span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="p">(</span><span class="n">id</span><span class="p">))</span> <span class="k">AS</span> <span class="n">num_words</span><span class="p">,</span> <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span> <span class="k">AS</span> <span class="n">avg_score</span><span class="p">,</span> <span class="n">NTH</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">score</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span> <span class="k">AS</span> <span class="n">lower_95</span><span class="p">,</span> <span class="n">NTH</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">score</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span> <span class="k">AS</span> <span class="n">median</span><span class="p">,</span> <span class="n">NTH</span><span class="p">(</span><span class="mi">975</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">score</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span> <span class="k">AS</span> <span class="n">upper_95</span>
+<span class="k">FROM</span><span class="p">(</span><span class="n">FLATTEN</span><span class="p">((</span>
+  <span class="k">SELECT</span> <span class="n">SPLIT</span><span class="p">(</span><span class="k">LOWER</span><span class="p">(</span><span class="n">REGEXP_REPLACE</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">r</span><span class="s1">&#39;[^\w\&#39;</span><span class="p">]</span><span class="s1">&#39;, &#39;</span> <span class="s1">&#39;)), &#39;</span> <span class="err">&#39;</span><span class="p">)</span> <span class="n">word</span><span class="p">,</span> <span class="n">subreddit</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">id</span>
+  <span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_posts</span><span class="p">.</span><span class="n">full_corpus_201509</span><span class="p">]</span>
+  <span class="k">WHERE</span> <span class="n">subreddit</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">subreddit</span> <span class="k">FROM</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">subreddit</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span> <span class="k">FROM</span> <span class="p">[</span><span class="n">fh</span><span class="o">-</span><span class="n">bigquery</span><span class="p">:</span><span class="n">reddit_posts</span><span class="p">.</span><span class="n">full_corpus_201509</span><span class="p">]</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">subreddit</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">c</span> <span class="k">DESC</span> <span class="k">LIMIT</span> <span class="mi">500</span><span class="p">))</span>
+  <span class="p">),</span> <span class="n">word</span><span class="p">))</span>
+<span class="k">GROUP</span> <span class="k">EACH</span> <span class="k">BY</span> <span class="n">subreddit</span><span class="p">,</span> <span class="n">word</span>
+<span class="k">HAVING</span> <span class="n">num_words</span> <span class="o">&gt;=</span> <span class="mi">1000</span>
+<span class="p">))</span>
+<span class="k">WHERE</span> <span class="n">score_rank</span> <span class="o">&lt;=</span> <span class="mi">20</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">subreddit</span><span class="p">,</span> <span class="n">avg_score</span> <span class="k">DESC</span></code></pre></div>
+
+
+<p>Phew! That query results in <a href="https://docs.google.com/spreadsheets/d/1MRfLR_TBO8zveKaifqVXTN0da7tf0FQOr5a2LVkZgkg/edit?usp=sharing">this output</a>, which we can use to plot a bar chart for each subreddit.</p>
+
+<h2>Plotting the Words</h2>
+
+<p><em>The R code used to generate the charts is available in <a href="https://github.com/minimaxir/reddit-subreddit-keywords/blob/master/reddit_subreddit_words.ipynb">this Jupyter notebook</a>, open-sourced on GitHub. Additionally, all 500 charts with the keyword ranks for all 500 subreddits are available in <a href="https://github.com/minimaxir/reddit-subreddit-keywords/tree/master/subreddit-mean">the parent repository</a>.</em></p>
+
+<p>After a few R tricks, I managed to chart the Top 10 keywords for each of the Top 15 subreddits:</p>
+
+<p><a href="https://i.imgur.com/dWdCnMI.png"> <img src="http://minimaxir.com/img/reddit-topwords/subreddit-means-half.png" alt="" /> </a></p>
+
+<p><em>(Click on image for full-resolution)</em></p>
+
+<p>As noted in the subtitle, each word appears in atleast 1,000 submissions by subreddit (which absorbs any messy outliers), and vertical line represents the true average upvotes per subreddit. One might argue that the median would be a better statistic instead of the median, due to the high skewness of the data. Thanks to the power of BigQuery, I was able to calculate the <a href="http://i.imgur.com/0PBolIq.png">top medians for each of the subreddits</a> with a slightly-tweaked query, but the chart is not as helpful. There are still a few useful implications of the median, though, which I&rsquo;ll show later. (No, I don&rsquo;t need to normalize the data in the chart since I am not making an apples-to-apples comparison between the values of the words among subreddits, and no, I don&rsquo;t need to remove stop words since this is visualizing an average, and not a count.)</p>
+
+<p>When the visualization was <a href="https://www.reddit.com/r/dataisbeautiful/comments/3nz3zz/average_number_of_upvotes_for_reddit_submissions/">posted to Reddit</a> in the <a href="https://www.reddit.com/r/dataisbeautiful/">/r/dataisbeautiful</a> subreddit, it received over 3,500 upvotes. As many commenters on that submission correctly note, there are a few especially interesting observations for the keywords in those 15 subreddits, and when looking at the remaining subreddits, many trends in their keywords are made apparent.</p>
+
+<h2>Politicalreddit</h2>
+
+<p>The most notable trend with the Top 15 subreddits is in the <a href="https://www.reddit.com/r/politics/">/r/politics</a> subreddit, which tells users to &ldquo;Vote based on quality, not opinion,&rdquo; but has a high affiliation for submissions specifically involving Bernie Sanders and Elizabeth Warren.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-010-politics.png" alt="" /></p>
+
+<p><a href="https://www.reddit.com/r/technology/">/r/technology</a>, intended to be about &ldquo;a broad spectrum of conversation as to the innovations, aspirations, applications and machinations,&rdquo; has a high affiliation for political issues such as the net neutrality controversy involving the FCC, ISPs, and Comcast, and little affiliation for actual <em>technology</em>.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-018-technology.png" alt="" /></p>
+
+<p>Outside the Top 15 Subreddits, the political affiliations of subreddits such as <a href="http://reddit.com/r/Libertarian">/r/Libertarian</a> are less surprising and more funny as a result.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-103-Libertarian.png" alt="" /></p>
+
+<h2>Storyreddit</h2>
+
+<p>One of the rising trends in the online publication landscape is that telling a story is more effective at generating attention. (thank BuzzFeed for that)</p>
+
+<p>The biggest offender is <a href="https://www.reddit.com/r/aww/">/r/aww</a>, a subreddit about animals, has a high affinity for words <em>that aren&rsquo;t animals</em>, with only two animal words appearing in the Top 20.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-011-aww.png" alt="" /></p>
+
+<p>The presence of story titles is also apparent in <a href="https://www.reddit.com/r/Fitness/">/r/Fitness</a>, which in fairness, the atmosphere of self-improvement lends itself more to stories.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-054-Fitness.png" alt="" /></p>
+
+<h2>Metareddit</h2>
+
+<p>The practice of upvoting submissions just because they mention a particular topic is colloquially known as &ldquo;circlejerking.&rdquo; <a href="https://www.reddit.com/r/circlejerk/">/r/circlejerk</a> fits that well, with titles designed to satirize clickbaity issues in order to receive upvotes ironically.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-025-circlejerk.png" alt="" /></p>
+
+<p><a href="https://www.reddit.com/r/Braveryjerk/">/r/Braveryjerk</a>, however, takes this practice to its logical conclusion.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-486-Braveryjerk.png" alt="" /></p>
+
+<h2>Esotericreddit</h2>
+
+<p>Here are a few other infamous subreddits that people have requested.</p>
+
+<p><a href="https://www.reddit.com/r/conspiracy/">/r/conspiracy</a>, which apparently have frequent instances of &ldquo;TIL&rdquo; (Today, I Learned) in titles, are simultaneously very <em>suspicious</em> of the actions in the  <a href="https://www.reddit.com/r/TIL/">/r/TIL</a> subreddit.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-064-conspiracy.png" alt="" /></p>
+
+<p>The keywords in <a href="https://www.reddit.com/r/teenagers/">/r/teenagers</a> captures the essence of modern social media.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-072-teenagers.png" alt="" /></p>
+
+<p>Some subreddits are just plain weird.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/mean-175-me_irl.png" alt="" /></p>
+
+<p>That&rsquo;s <a href="https://www.reddit.com/r/me_irl/">/r/me_irl</a> for you.</p>
+
+<h2>Looking at the Medians</h2>
+
+<p>As shown in the linked median image earlier, the medians for most keywords are 1 or 2, which does not provide much visual information whether a keyword is more important than another.</p>
+
+<p>There are notable exceptions, however, such as with <a href="https://www.reddit.com/r/Android/">/r/Android</a>.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/median-059-Android.png" alt="" /></p>
+
+<p>That subreddit has official threads for events; it would make sense for users to upvote that whenever it appears as it&rsquo;s <em>important</em> that it&rsquo;s visible, but not necessarily as an agreement of the topic. That&rsquo;s why I believe looking at the medians is a different approach than looking at the means.</p>
+
+<p>Same thing with <a href="https://www.reddit.com/r/relationships/">/r/relationships</a>, where an &ldquo;update&rdquo; is important.</p>
+
+<p><img src="http://minimaxir.com/img/reddit-topwords/median-057-relationships.png" alt="" /></p>
+
+<p>All in all, this is still just a first step for analyzing the importance of keywords in Reddit submission, and the impact of Reddit&rsquo;s hivemind. The next step would be NLP techniques such as POS tagging and TDF-IF, but those require very significant and very expensive computing power. At the least, the good results with these simple analyses validates the idea for further research.</p>
+
+<p><em>Again the R code used to generate the charts is available in <a href="https://github.com/minimaxir/reddit-subreddit-keywords/blob/master/reddit_subreddit_words.ipynb">this Jupyter notebook</a>, open-sourced on GitHub. Additionally, all 500 charts with the keyword ranks for all 500 subreddits are available in <a href="https://github.com/minimaxir/reddit-subreddit-keywords/tree/master/subreddit-mean">the parent repository</a>.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Analyze Every Reddit Submission and Comment, in Seconds, for Free]]></title>
@@ -833,203 +975,6 @@ GROUP BY lat, long
 <p><em>All charts were made using R and ggplot2.</em></p>
 
 <p><em>You can download the aggregate data used to create the charts <a href="https://docs.google.com/spreadsheets/d/1_OHQOyLkg0d7tseHXofTBu5AWzSlmXIBjV23CojFPcY/edit?usp=sharing">in this Google Sheet</a>.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[An Introduction on How to Make Beautiful Charts With R and Ggplot2]]></title>
-    <link href="http://minimaxir.com/2015/02/ggplot-tutorial/"/>
-    <updated>2015-02-12T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2015/02/ggplot-tutorial</id>
-    <content type="html"><![CDATA[<p>Readers of my previous blog posts have frequently asked me &ldquo;how do you make those charts?&rdquo;</p>
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/buzzfeed-listicle-scatterplot.png"  ></p>
-
-<p>These charts were made using <a href="http://docs.ggplot2.org/current/">ggplot2</a>, an add-on package for the <a href="http://www.r-project.org/index.html">R programming language</a>, along with lots of iterative improvement over the months. R notably has chart-making capabilities built into the language by default, but it is not easy to use and often produces <em>very</em> simplistic charts. Enter ggplot2, which allows users to create full-featured and robust charts with only a few lines of code.</p>
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/geom_histogram-4.png"  ></p>
-
-<p>You&rsquo;ve probably seen charts elsewhere on the internet similar to this one. While it implements the &ldquo;<a href="http://vita.had.co.nz/papers/layered-grammar.html">Grammar of Graphics</a>&rdquo; (which is where the &ldquo;gg&rdquo; in &ldquo;ggplot2&rdquo; comes from), it does look generic and cluttered.</p>
-
-<p>Adding a touch of color and design can help make more compelling visualizations, and it&rsquo;s pretty easy to do thanks to ggplot2&rsquo;s syntax and chaining capabilities.</p>
-
-<h1>Quick Design Notes</h1>
-
-<p>Charts with a completely-gray background have become rather popular lately, mostly in part to the charts produced by <a href="http://fivethirtyeight.com/">FiveThirtyEight</a>, which was the inspiration behind my design. An important functional aspect of a gray background is that it makes the chart area distinct from the article body.</p>
-
-<p>The charts I make are typically 1200px by 900px. On my blog, the width of the article text container is less than 1200px, so the browser shrinks the chart to make it fit. The chart still appears at a high resolution on HiDPI/Retina screens, and since the charts are simple, shrinking will not cause significant graphical distortion on normal-resolution screens. 1200x900px also keeps the file size low, which is important when putting 10 or more charts in a post.</p>
-
-<p>An important tip when making charts in ggplot2: render the chart on OS X, if possible. OS X has antialiasing for text and curves in charts, while Windows/Linux does not, and it can significantly improve the quality of the chart.</p>
-
-<h1>Making a ggplot2 Histogram</h1>
-
-<p>The first chart we&rsquo;ll be making is a histogram. This is a good example of a chart that&rsquo;s easy to make in R/ggplot2, but hard to make Excel.</p>
-
-<p>For this tutorial, we&rsquo;ll be using <code>ggplot2</code>, plus three additional R packages: <code>RColorBrewer</code>, which allows for the procedural generation of colors from a palette for the chart, <code>scales</code>, which allows for the axes to express numbers with commas/percents, and <code>grid</code>, which allows for manipulation of the chart margins and layout. We can install and load these packages at the beginning of the R file:</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;ggplot2&quot;</span><span class="p">,</span><span class="s">&quot;RColorBrewer&quot;</span><span class="p">,</span><span class="s">&quot;scales&quot;</span><span class="p">))</span>
-<span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">);</span> <span class="kn">library</span><span class="p">(</span>scales<span class="p">);</span> <span class="kn">library</span><span class="p">(</span>grid<span class="p">);</span> <span class="kn">library</span><span class="p">(</span>RColorBrewer<span class="p">)</span></code></pre></div>
-
-
-<p>The dataset we&rsquo;ll use is my <a href="http://minimaxir.com/csv/buzzfeed_linkbait_headlines.csv">list of 15,101 BuzzFeed listicles</a> that I used <a href="http://minimaxir.com/2015/01/linkbait/">in my previous blog post</a>, including both the listicle size and number of Facebook shares the listicle received, which have been prefiltered to listicle sizes of 50 or less, and have received atleast 1 Facebook share. Download the file, and set the working directory of R to the containing folder. We load the dataset into R by reading the CSV:</p>
-
-<pre><code>df &lt;- read.csv("buzzfeed_linkbait_headlines.csv", header=T)
-</code></pre>
-
-<p>We can make a basic histogram in two lines of code.</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>listicle_size<span class="p">))</span> <span class="o">+</span>
-      geom_histogram<span class="p">(</span>binwidth<span class="o">=</span><span class="m">1</span><span class="p">)</span></code></pre></div>
-
-
-<p>The first line instantiates the charts and defines the variables used for plotting. We declare the use of the data frame <code>df</code>, and the <code>listicle_size</code> vector from that data frame as the plotting aesthetic. The second line tells ggplot to make a histogram out of the given data with <code>geom_histogram</code>, and we specify a binwidth of 1 so that each column represents one discrete value of listicle. Running that code will cause a plot to pop up.</p>
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_1.png"  ></p>
-
-<p>Not a bad start. In order to save the created plot, we use the <code>ggsave</code> command, which saves the last-generated plot to an image in your working directory. The first parameter, the filename, determines the filetype.</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">ggsave<span class="p">(</span><span class="s">&quot;tutorial_1.png&quot;</span><span class="p">,</span> dpi<span class="o">=</span><span class="m">300</span><span class="p">,</span> width<span class="o">=</span><span class="m">4</span><span class="p">,</span> height<span class="o">=</span><span class="m">3</span><span class="p">)</span></code></pre></div>
-
-
-<p>Now we can add a theme to make it look classy.</p>
-
-<p>A ggplot2 theme is a function that overrides the graphical parameters of the default theme. Here&rsquo;s the long code block for my FiveThirtyEight-inspired theme, with code comments for each code subblock:</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">fte_theme <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
-      
-      <span class="c1"># Generate the colors for the chart procedurally with RColorBrewer</span>
-      palette <span class="o">&lt;-</span> brewer.pal<span class="p">(</span><span class="s">&quot;Greys&quot;</span><span class="p">,</span> n<span class="o">=</span><span class="m">9</span><span class="p">)</span>
-      color.background <span class="o">=</span> palette<span class="p">[</span><span class="m">2</span><span class="p">]</span>
-      color.grid.major <span class="o">=</span> palette<span class="p">[</span><span class="m">3</span><span class="p">]</span>
-      color.axis.text <span class="o">=</span> palette<span class="p">[</span><span class="m">6</span><span class="p">]</span>
-      color.axis.title <span class="o">=</span> palette<span class="p">[</span><span class="m">7</span><span class="p">]</span>
-      color.title <span class="o">=</span> palette<span class="p">[</span><span class="m">9</span><span class="p">]</span>
-      
-      <span class="c1"># Begin construction of chart</span>
-      theme_bw<span class="p">(</span>base_size<span class="o">=</span><span class="m">9</span><span class="p">)</span> <span class="o">+</span>
-        
-      <span class="c1"># Set the entire chart region to a light gray color</span>
-      theme<span class="p">(</span>panel.background<span class="o">=</span>element_rect<span class="p">(</span>fill<span class="o">=</span>color.background<span class="p">,</span> color<span class="o">=</span>color.background<span class="p">))</span> <span class="o">+</span>
-      theme<span class="p">(</span>plot.background<span class="o">=</span>element_rect<span class="p">(</span>fill<span class="o">=</span>color.background<span class="p">,</span> color<span class="o">=</span>color.background<span class="p">))</span> <span class="o">+</span>
-      theme<span class="p">(</span>panel.border<span class="o">=</span>element_rect<span class="p">(</span>color<span class="o">=</span>color.background<span class="p">))</span> <span class="o">+</span>
-      
-      <span class="c1"># Format the grid</span>
-      theme<span class="p">(</span>panel.grid.major<span class="o">=</span>element_line<span class="p">(</span>color<span class="o">=</span>color.grid.major<span class="p">,</span>size<span class="o">=</span><span class="m">.25</span><span class="p">))</span> <span class="o">+</span>
-      theme<span class="p">(</span>panel.grid.minor<span class="o">=</span>element_blank<span class="p">())</span> <span class="o">+</span>
-      theme<span class="p">(</span>axis.ticks<span class="o">=</span>element_blank<span class="p">())</span> <span class="o">+</span>
-      
-      <span class="c1"># Format the legend, but hide by default</span>
-      theme<span class="p">(</span>legend.position<span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">)</span> <span class="o">+</span>
-      theme<span class="p">(</span>legend.background <span class="o">=</span> element_rect<span class="p">(</span>fill<span class="o">=</span>color.background<span class="p">))</span> <span class="o">+</span>
-      theme<span class="p">(</span>legend.text <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">7</span><span class="p">,</span>color<span class="o">=</span>color.axis.title<span class="p">))</span> <span class="o">+</span>
-      
-      <span class="c1"># Set title and axis labels, and format these and tick marks</span>
-      theme<span class="p">(</span>plot.title<span class="o">=</span>element_text<span class="p">(</span>color<span class="o">=</span>color.title<span class="p">,</span> size<span class="o">=</span><span class="m">10</span><span class="p">,</span> vjust<span class="o">=</span><span class="m">1.25</span><span class="p">))</span> <span class="o">+</span>
-      theme<span class="p">(</span>axis.text.x<span class="o">=</span>element_text<span class="p">(</span>size<span class="o">=</span><span class="m">7</span><span class="p">,</span>color<span class="o">=</span>color.axis.text<span class="p">))</span> <span class="o">+</span>
-      theme<span class="p">(</span>axis.text.y<span class="o">=</span>element_text<span class="p">(</span>size<span class="o">=</span><span class="m">7</span><span class="p">,</span>color<span class="o">=</span>color.axis.text<span class="p">))</span> <span class="o">+</span>
-      theme<span class="p">(</span>axis.title.x<span class="o">=</span>element_text<span class="p">(</span>size<span class="o">=</span><span class="m">8</span><span class="p">,</span>color<span class="o">=</span>color.axis.title<span class="p">,</span> vjust<span class="o">=</span><span class="m">0</span><span class="p">))</span> <span class="o">+</span>
-      theme<span class="p">(</span>axis.title.y<span class="o">=</span>element_text<span class="p">(</span>size<span class="o">=</span><span class="m">8</span><span class="p">,</span>color<span class="o">=</span>color.axis.title<span class="p">,</span> vjust<span class="o">=</span><span class="m">1.25</span><span class="p">))</span> <span class="o">+</span>
-      
-      <span class="c1"># Plot margins</span>
-      theme<span class="p">(</span>plot.margin <span class="o">=</span> unit<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">0.35</span><span class="p">,</span> <span class="m">0.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0.35</span><span class="p">),</span> <span class="s">&quot;cm&quot;</span><span class="p">))</span>
-    <span class="p">}</span></code></pre></div>
-
-
-<p>Adding the completed theme to the chart is just one line of code:</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>listicle_size<span class="p">))</span> <span class="o">+</span>
-      geom_histogram<span class="p">(</span>binwidth<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
-      fte_theme<span class="p">()</span></code></pre></div>
-
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_2.png"  ></p>
-
-<p>A little more classy. Now that the core design of the chart is present, we can make polish the chart to make it more beautiful.</p>
-
-<p>Of course, all charts need properly labled axes and a title. We can add that with the <code>labs</code> function:</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>listicle_size<span class="p">))</span> <span class="o">+</span>
-      geom_histogram<span class="p">(</span>binwidth<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
-      fte_theme<span class="p">()</span> <span class="o">+</span>
-      labs<span class="p">(</span>title<span class="o">=</span><span class="s">&quot;Distribution of Listicle Sizes for BuzzFeed Listicles&quot;</span><span class="p">,</span> x<span class="o">=</span><span class="s">&quot;# of Entries in Listicle&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;# of Listicles&quot;</span><span class="p">)</span></code></pre></div>
-
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_3.png"  ></p>
-
-<p>Now we can add a few finishing touches. For the x-axis, we can set the breaks to 5 instead of 10 using <code>scale_x_continuous</code> since we have the room. For the y-axis, since we have an axis value with 4 digits, we can set the formatting to use a comma with <code>scale_y_continuous</code>. Lastly, we can add a line at y = 0 using <code>geom_line</code> to further seperate the data. Lastly, in <code>geom_histogram</code>, we can change the fill of the bars to a red color for more thematic branding, and also reduce the opacity to make the grid lines visible behind the chart.</p>
-
-<p>Putting it all together:</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>listicle_size<span class="p">))</span> <span class="o">+</span>
-      geom_histogram<span class="p">(</span>binwidth<span class="o">=</span><span class="m">1</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;#c0392b&quot;</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">0.75</span><span class="p">)</span> <span class="o">+</span>
-      fte_theme<span class="p">()</span> <span class="o">+</span>
-      labs<span class="p">(</span>title<span class="o">=</span><span class="s">&quot;Distribution of Listicle Sizes for BuzzFeed Listicles&quot;</span><span class="p">,</span> x<span class="o">=</span><span class="s">&quot;# of Entries in Listicle&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;# of Listicles&quot;</span><span class="p">)</span> <span class="o">+</span>
-      scale_x_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">50</span><span class="p">,</span> by<span class="o">=</span><span class="m">5</span><span class="p">))</span> <span class="o">+</span>
-      scale_y_continuous<span class="p">(</span>labels<span class="o">=</span>comma<span class="p">)</span> <span class="o">+</span> 
-      geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">,</span> size<span class="o">=</span><span class="m">0.4</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span></code></pre></div>
-
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_4.png"  ></p>
-
-<p>That&rsquo;s pretty professional and is a good stopping point. Normally, I would change the text fonts as well, but that&rsquo;s a subject for another post.</p>
-
-<h1>Making a ggplot2 Scatterplot</h1>
-
-<p>Scatterplots are also efficient to do in ggplot2, which especially useful as making a plot containing 15,101 points might cause spreadsheets to freeze.</p>
-
-<p>Creating a scatterplot of the relationship between listicle size and the number of Facebook shares the listicle receives is essentially the same procedure as creating a histogram, except that the x-axis and y-axis aesthetic vectors must be declared explicitly.</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>listicle_size<span class="p">,</span> y<span class="o">=</span>num_fb_shares<span class="p">))</span> <span class="o">+</span>
-      geom_point<span class="p">()</span></code></pre></div>
-
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_5.png"  ></p>
-
-<p>Because there are a few listicles with <em>over 1 million</em> Facebook shares (welcome to 2015), the entire plot is skewed. As a result, we need to compress the plot by scaling the y-axis logarithmically using <code>scale_y_log10</code>. Additionally, there will be a large amount of overlap between points due to the large sample size, so we need to greatly reduce the opacity of the points. (I set to 5% for this chart, but the best value can be determined through trial and error)</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>listicle_size<span class="p">,</span> y<span class="o">=</span>num_fb_shares<span class="p">))</span> <span class="o">+</span>
-      geom_point<span class="p">(</span>alpha<span class="o">=</span><span class="m">0.05</span><span class="p">)</span> <span class="o">+</span>
-      scale_y_log10<span class="p">(</span>labels<span class="o">=</span>comma<span class="p">)</span></code></pre></div>
-
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_6.png"  ></p>
-
-<p>That&rsquo;s a lot more intuitive, and it makes it clear that there is indeed a positive relationship between listicle size and the number of Facebook shares.</p>
-
-<p>Now we can apply the theme and labels:</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>listicle_size<span class="p">,</span> y<span class="o">=</span>num_fb_shares<span class="p">))</span> <span class="o">+</span>
-      geom_point<span class="p">(</span>alpha<span class="o">=</span><span class="m">0.05</span><span class="p">)</span> <span class="o">+</span>
-      scale_y_log10<span class="p">(</span>labels<span class="o">=</span>comma<span class="p">)</span> <span class="o">+</span>
-      fte_theme<span class="p">()</span> <span class="o">+</span>
-      labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot;# of Entries in Listicle&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;# of Facebook Shares&quot;</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;FB Shares vs. Listicle Size for BuzzFeed Listicles&quot;</span><span class="p">)</span></code></pre></div>
-
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_7.png"  ></p>
-
-<p>And then the final touches. We can include the same horizontal line, x-axis behavior, and point color as with the last plot. However, for the y-axis, we have room to include each power of 10 between 1 and 1,000,000 as breaks, which we can do through a cute R syntax trick: <code>10^(0:6)</code>. While the chart shows a positive relationship between the variables, the shape is ambiguous and it may be helpful to add a trend line. We use <code>geom_smooth</code> to add a trendline representing a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a> with a 95% confidence interval.</p>
-
-<p>Putting it all together:</p>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>listicle_size<span class="p">,</span> y<span class="o">=</span>num_fb_shares<span class="p">))</span> <span class="o">+</span>
-      geom_point<span class="p">(</span>alpha<span class="o">=</span><span class="m">0.05</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;#c0392b&quot;</span><span class="p">)</span> <span class="o">+</span>
-      scale_x_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">50</span><span class="p">,</span> by<span class="o">=</span><span class="m">5</span><span class="p">))</span> <span class="o">+</span>
-      scale_y_log10<span class="p">(</span>labels<span class="o">=</span>comma<span class="p">,</span> breaks<span class="o">=</span><span class="m">10</span><span class="o">^</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">6</span><span class="p">))</span> <span class="o">+</span>
-      geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">1</span><span class="p">,</span> size<span class="o">=</span><span class="m">0.4</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span>
-      geom_smooth<span class="p">(</span>alpha<span class="o">=</span><span class="m">0.25</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span>
-      fte_theme<span class="p">()</span> <span class="o">+</span>
-      labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot;# of Entries in Listicle&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;# of Facebook Shares&quot;</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;FB Shares vs. Listicle Size for BuzzFeed Listicles&quot;</span><span class="p">)</span></code></pre></div>
-
-
-<p><img src="http://minimaxir.com/img/ggplot-tutorial/tutorial_8.png"  ></p>
-
-<p>Now that is pretty insightful.</p>
-
-<p>Hopefully, this small overview of how ggplot2 gives you an small idea of what it can do. This is just the tip of the iceberg. However, making cooler charts such as categorical bar charts, charts with multiple factor variables, and charts with multiple facets require smart data preprocessing, which is a topic for another blog post.</p>
-
-<hr />
-
-<p><em>You can access a copy of the code used in this blog post <a href="https://github.com/minimaxir/ggplot-tutorial">at this GitHub repository</a>.</em></p>
 ]]></content>
   </entry>
   
