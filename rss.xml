@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-10-09T08:00:00-07:00</updated>
+  <updated>2015-10-27T09:00:04-07:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,132 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Please Do Not Steal My Code, Mock My Analysis, and Present My Ideas as Your Own]]></title>
+    <link href="http://minimaxir.com/2015/10/code-steal/"/>
+    <updated>2015-10-27T09:00:00-07:00</updated>
+    <id>http://minimaxir.com/2015/10/code-steal</id>
+    <content type="html"><![CDATA[<p>I have been open-sourcing most of my recent data visualization projects on <a href="https://github.com">GitHub</a> for two main reasons: to ensure that the results are reproducible proving that I am not making up numbers to fit my argument, and to teach others how to create similar data visualizations in hopes that they may expand on the ideas presented and create even more insightful visualizations. For these reasons, all such projects are <a href="https://en.wikipedia.org/wiki/MIT_License">MIT-licensed</a>, where anyone can freely evaluate, transform, and edit the code.</p>
+
+<p>This philosophy worked out favorably with my recent post on <a href="http://minimaxir.com/2015/10/reddit-bigquery/">how to query and analyze Reddit data in seconds with BigQuery</a>. The code used to create the visualizations in the post was written in a <a href="https://github.com/minimaxir/reddit-bigquery/blob/master/reddit_bigquery.ipynb">Jupyter notebook</a>, hosted on GitHub <a href="https://github.com/minimaxir/reddit-bigquery">in the parent repository</a>. The most popular example visualization was a heat map which indicated the implicit best time to post a Reddit submission by identifying the timeslot when most viral Reddit submissions (score > 3000) are submitted.</p>
+
+<p><img src="http://minimaxir.com/img/code-steal/reddit-bigquery-2.png" alt="" /></p>
+
+<p>Per the chart, the best time is about 9am EST on weekdays.
+Felipe Hoffa <a href="https://www.reddit.com/r/dataisbeautiful/comments/3nkwwa/the_best_time_to_post_to_reddit_east_coast_early/">made his own twist on the Reddit data</a> and faceted the hour of submission by the subreddit where the submission was made, showing that the ideal hour to submit does indeed vary significantly by subreddit. (with a <a href="https://www.reddit.com/r/dataisbeautiful/comments/3nkwwa/the_best_time_to_post_to_reddit_east_coast_early/cvoy3v5">comment noting the source of inspiration</a>). After that, Ramiro Gomez <a href="https://www.reddit.com/r/dataisbeautiful/comments/3ozldw/the_best_times_to_post_to_reddit_revisited_oc/">tweaked the parameters of the data</a> and found that some subreddits have a very specific weekday and time where submissions are likely to go viral, filtering on score > 1000 instead to reflect the smaller sample size. (the <a href="http://ramiro.org/notebook/reddit-best-post-times/">source notebook</a> gives credit to both mine and Felipe&rsquo;s ideas.)</p>
+
+<p>I couldn&rsquo;t ask for anything more.</p>
+
+<p>A few days ago, I encountered a <a href="https://medium.com/@dleybzon/the-best-time-to-post-on-reddit-3f3f7f624c28">blog post on Medium</a> (<a href="http://minimaxir.com/pdf/medium-copy.pdf">PDF archive</a>) which had a suspiciously familiar lead image:</p>
+
+<p><img src="http://minimaxir.com/img/code-steal/steal-thumbnail.png" alt="" /></p>
+
+<p>&ldquo;Woo, another person is using my code to analyze data!&rdquo; I thought. After skimming through the post, I saw no mention of Max Woolf, minimaxir, or any mention of the original visualization by the post author. In fact, not only did he take my visualization idea without any attribution to me, but he <em>insulted</em> the original analysis and created his own.</p>
+
+<h2>Code Paraphrasing v2.0</h2>
+
+<p>When I wrote <a href="http://minimaxir.com/2015/09/code-of-plagiarism/">a post on code paraphrasing</a> two months ago, I thought it was an isolated incident.</p>
+
+<p>One unfortunately-convoluted aspect of my code is converting integer representations of days-of-weeks and times-of-day to readable text representations by creating a mapping for each type of data, then joining the two mappings to the data frame of the true values.</p>
+
+<p><img src="http://minimaxir.com/img/code-steal/max-code-1.png" alt="" /></p>
+
+<p>Here is the Medium post author&rsquo;s code:</p>
+
+<p><img src="http://minimaxir.com/img/code-steal/medium-code-1.png" alt="" /></p>
+
+<p>&hellip;is this really another instance where the author is poorly paraphrasing code simply by changing variable names? <em>Really</em>? There&rsquo;s zero possibility that this implementation is independent serendipity <em>because</em> the methodology is convoluted.</p>
+
+<p>Yes, the Medium author&rsquo;s variable names are more verbose and there are few added code comments, but that&rsquo;s not enough to assert original work.</p>
+
+<p>The changed variable names corresponds to the changed names in the original BigQuery. Here&rsquo;s the author&rsquo;s code:</p>
+
+<p><img src="http://minimaxir.com/img/code-steal/medium-code-2.png" alt="" /></p>
+
+<p>He put a value for the <code>project_name</code> variable which I explicitly note as <strong>DO NOT SHARE</strong> in my code, as project names are tied to <em>billing</em> such as with an Amazon AWS API Key. (fortunately, it appears you can&rsquo;t bill usage on another user&rsquo;s project). The <code>subreddit_desired</code> variable isn&rsquo;t actually <em>used</em> in the BigQuery SQL-text either. (&ldquo;you need to put it in manually in the middle of text&rdquo; defeats the purpose of declaring it as a variable). The coding style is distinctly different from the copied code.</p>
+
+<p>A few other lines here-and-there from the Medium author&rsquo;s code were used from my code near-verbatim.</p>
+
+<p>The ggplot2 code used to make the actual heat map is mostly original; although the general aesthetics are clearly inspired by my visualization (implementing theme changes which are not ggplot2 default behavior), the colors and fonts used are not the same.</p>
+
+<p><img src="http://minimaxir.com/img/code-steal/reddit-medium.png" alt="" /></p>
+
+<p>However, in the name of minimalism, he removed the numeric units from the gradient scale (making quantitative analysis and comparison between each time slot needlessly difficult) and the labels from the axes. The title also does not plainly describe the data, instead explicitly telling the inference from the chart, which is redundant as the chart should <em>already do that</em>. The heatmap blurriness in this case is due partially to the chart being part of a larger image which I cropped out, and due mostly from compression by being posted on Medium; if you&rsquo;re a data scientist, don&rsquo;t use Medium for showing high-quality data visualizations.</p>
+
+<p>In an attempt to differentiate the visualization, he made the visualization objectively <em>worse</em>.</p>
+
+<p>But what is the author&rsquo;s methodology for these changes? As it turns out, it&rsquo;s very silly.</p>
+
+<h2>A Burst of &ldquo;Inspiration&rdquo;</h2>
+
+<p>The analytical portion of the post starts thus:</p>
+
+<blockquote><p>This is by no means the first attempt to quantify the best time to post on Reddit. In researching this idea, one of the first solutions I stumbled across was <a href="https://i.imgur.com/ct5LNcG.png">this image</a>. I almost moved on to another idea, thinking that this problem had already been solved. But then I realized that whoever made this graphic made a key mistake: they did not separate the data by subreddit.</p></blockquote>
+
+<p>Who was the mystery creator of &ldquo;this image&rdquo;? <a href="https://www.reddit.com/r/dataisbeautiful/comments/1pe4vm/heatmap_of_all_link_submissions_to_reddit_which/">It was me</a>, of course.</p>
+
+<p>&ldquo;Whoever made this graphic?&rdquo; Even the <a href="http://www.buzzfeed.com/charliewarzel/heres-the-best-time-to-post-a-link-on-reddit#.sf3QgxD3k">BuzzFeed article</a> gave proper credit! &ldquo;Made a key mistake?&rdquo; I admit that there is room for improvement with my approach, but that seems unnecessarily rude to this person-who-he-does-not-know.</p>
+
+<p>And why is he referencing an visualization that was made two years ago and not the more recent ones which clearly &ldquo;inspired&rdquo; his design, anyways?</p>
+
+<blockquote><p>I had a hunch that the optimal time to post could differ significantly (even between the biggest subreddits) according to the demographics of the subreddit community.</p></blockquote>
+
+<p>Which was shown by the two followup analyses to my Reddit visualization that you don&rsquo;t reference either. &ldquo;I had a hunch&rdquo; indeed.</p>
+
+<blockquote><p>Take, for example, the image I linked to above. The author uses a score of 3,000 as an arbitrary standard, and counts every post that receives a score above 3k equally. These two impacts are incredibly problematic. If I made a post and it got a score of 2,999 I would be incredibly excited, only marginally less so than if I had gotten a score of 3,000. But the metric that the author uses gives equal weight to a score of 2,999 and a score of 0, plus an equal weight to a score of 3,000 and a score for 10,000.</p></blockquote>
+
+<p>The Medium post author is talking more about this &ldquo;mystery author&rdquo; than the actual data.</p>
+
+<p>There&rsquo;s also an unusual amount of vitriol toward the choice of 3,000 score as the threshold for a viral Reddit submission. The reason I had chosen a threshold of 3,000 back two years ago then was because smaller thresholds converged toward the default Reddit behavior, and larger threshold had too few samples for <em>all</em> timeslots to ensure a fair analysis. At 3,000 points, a submission has unquestionably gone viral, regardless of subreddit; this analysis was optimizing for virality since that&rsquo;s what gets exposure for a submission, not straight # of karma. I kept the 3,000 score threshold for the recent analysis out of convenience since I was just making sample visualizations and did not want the blog post to take 10 hours to write, as they have been lately.</p>
+
+<p>Yes, the 3,000 is somewhat arbitrary. If there was a better threshold value with good reasoning, I would be interested in reading about it. But&hellip;</p>
+
+<blockquote><p>The other part of the metric that I used (which I could not find a single example of anybody else doing) was normalizing my data. And this, I think, is perhaps the most important argument for why if you want to know what the best time to post really is, you should check out the code for this project.</p></blockquote>
+
+<p>Nice snipe with the &ldquo;really,&rdquo; there.</p>
+
+<p>Many of the comments in the original Reddit post two years ago called me out for not normalizing the data (i.e. calculating # of >3000 submissions divided by # of submissions), which is a fair criticism. I was weary of implementing it since the number of submissions which can become viral is constrained by the finite amount of real estate on the Reddit front page; therefore there is a game theory aspect where having a greater number of submissions overall may not necessarily result in a higher number of viral submissions; as a result, normalizing may overcompensate.</p>
+
+<p>But as it turns out, normalization didn&rsquo;t affect the results dramatically. In Felipe Hoffa&rsquo;s post, /u/rabbitlion <a href="https://www.reddit.com/r/dataisbeautiful/comments/3nkwwa/the_best_time_to_post_to_reddit_east_coast_early/cvp0vz4">normalized the data as mentioned above</a> and showed the that the peak times may be 1-2 hours earlier. Again, this expansion is a good use of the open-sourced code and methodology.</p>
+
+<p>The author&rsquo;s implementation of &ldquo;normalization,&rdquo; however, is taking the total score for all submissions for all submissions of a given timeslot and dividing it by the number of submissions of a time slot, i.e, <strong>calculating the average score</strong> for submissions in that timeslot  (and also begs the question why that was not done directly in the query). This also changes the interpretation of the analysis to one that maximizes # of karma, instead of one that maximizes the probability of going viral.</p>
+
+<blockquote><p>As Randall Munroe points out <a href="https://xkcd.com/1138/">in one of my all time favourite XKCD comics</a>, if you don’t normalize your geographic data with respect to population (in Munroe’s case it should be “Consumers of Furry Pornography per Capita”), you’ll generally just end up making a population map.</p></blockquote>
+
+<p>This is off-topic, but wait, what? #1138 is a joke about subsets of populations which look the same as the general population because there is <a href="http://www.explainxkcd.com/wiki/index.php/1138">no statistically-significant difference between geographies</a>. It&rsquo;s not a normalization joke. Normalizing per capita would still make the maps look same.</p>
+
+<p>The Medium author goes on another off-topic tangent criticizing <a href="http://www.redditlater.com/analysis/">Reddit Later</a>, a microservice for scheduling Reddit submissions at the ideal times using similar logic presented in my visualizations, for using column charts for both of ideal day-of-week and ideal hour-of-day instead of using heat maps, and being rather smug about it. The likely reason that heat maps aren&rsquo;t used is because Reddit Later uses <a href="http://www.chartjs.org/docs/">Chart.js</a> and Chart.js doesn&rsquo;t have heat maps.</p>
+
+<blockquote><p>I elected to use a heat map (along with a text subtitle for clarity) because I felt that it transmitted the maximum amount of information as succinctly as possible, while still looking aesthetically pleasing. The heat map gives the viewer an idea of what the dispersal is (that is, how much better is it to post at one time than another), and conserves space in the process.</p></blockquote>
+
+<p>Or, more likely, you used a heat map because I used a heat map. (Notably, the &ldquo;how much better&rdquo; rationale makes no sense <em>because the numeric units were removed from the scale</em>)</p>
+
+<h2>Credit Where Credit Due</h2>
+
+<p>As mentioned in my previous article about code plagiarism, I am ok with using snippets of code from <a href="http://stackoverflow.com">Stack Overflow</a>, for example, to solve obtuse problems. But in this case, not only did the Medium author use my code without attribution, he altered it slightly to make it seem original, and those alterations <em>made the analysis worse</em>. And he was very smug about it for no apparent reason.</p>
+
+<p>What initially raised an alarm was the required comment (by /r/dataisbeautiful subreddit rules) which accompanied the <a href="https://www.reddit.com/r/dataisbeautiful/comments/3q67wr/the_best_time_to_post_on_reddit_oc/">submission of the article</a> to Reddit.</p>
+
+<p><img src="http://minimaxir.com/img/code-steal/reddit_copy.png" alt="" /></p>
+
+<p>As shown above, the quotes from the article itself were written with just as much unnecessary ego.</p>
+
+<p>I was curious to see how the author was publicizing the article on social media and how he was claiming credit, so I did a little digging and found a public Facebook post on the author&rsquo;s profile linking to the article:</p>
+
+<p><img src="http://minimaxir.com/img/code-steal/teameffort.png" alt="" /></p>
+
+<p>Wait a minute.</p>
+
+<p><strong>THIS WAS A TEAM EFFORT?!</strong></p>
+
+<p>What&rsquo;s the point of all this? A portfolio piece without admitting that the idea for the project was from someone else? (especially with the obfuscation of using an old, uncredited visualization as the &ldquo;inspiration&rdquo;)</p>
+
+<p>As my code is MIT-licensed, there&rsquo;s nothing legally preventing the use of my code this way. However, I&rsquo;m not going to change my workflow; I will still open-source my data visualization code, and it will have the same licensing. It wouldn&rsquo;t be fair to punish others who have made very good use of my code.</p>
+
+<p>But outright using the code, without any attribution, and claiming it as your own when it blatantly isn&rsquo;t, is a <strong>jerk move</strong>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quantifying and Visualizing the Reddit Hivemind]]></title>
@@ -898,83 +1024,6 @@ GROUP BY lat, long
 <p>*In fairness, the viewers on my website about technology and statistics may not necessarily represent the viewers on the internet as a whole. However, it&rsquo;s fair to assume that the way a person holds a device is uncorrelated with the person&rsquo;s topic preferences. Additionally, the very large sample size of 781,557 effectively eliminates any uncertainty about the results due to random chance.</p>
 
 <p><em>You can download a copy of the data <a href="https://docs.google.com/spreadsheets/d/14vUjq7rv5fceIe8pZRqfZrp7JGj3Uw1fFI2-3NL3Dvs/edit?usp=sharing">in this Google Sheet</a>. All charts were made using R and ggplot2.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Analyzing the Patterns of Numbers in 10 Million Passwords]]></title>
-    <link href="http://minimaxir.com/2015/02/password-numbers/"/>
-    <updated>2015-02-24T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2015/02/password-numbers</id>
-    <content type="html"><![CDATA[<p>The primary purpose of a <a href="http://en.wikipedia.org/wiki/Password">password</a> is to serve as an unique verification identifier for a given user. Ideally, the password for a given website or service should be both random and unique; if the letters and/or numbers in the password follow any patterns, then they might be easier to guess by an intruder. For example, someone may put their birth year such as &ldquo;1987&rdquo; or &ldquo;1988&rdquo; in their password, which makes the passwords easier to remember, but consequently easier to break.</p>
-
-<p>A few weeks ago, security researcher Mark Burnett released <a href="https://xato.net/passwords/ten-million-passwords/#.VNojhPnF98E">a list of 10 million passwords</a> compiled <a href="http://www.reddit.com/r/10millionpasswords/comments/2w3ali/dataset_origin/conap8l">from various sources</a> over the years. Reddit user jalgroy <a href="http://www.reddit.com/r/dataisbeautiful/comments/2vsg7h/frequency_of_years_in_passwords_oc/">posted a histogram</a> of the years used in these passwords, which I&rsquo;ve verified using my own scripts:</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/year_distribution.png"  ></p>
-
-<p>There is a clear maximum at 1987 which implies a current age of about 28. This makes sense, as internet users in their 20&rsquo;s are generally considered to be very attuned to internet usage. The spike at 2000 is likely not because it&rsquo;s a birth year, but because 2000 is a kewl number.</p>
-
-<p>There are actually many similar patterns for numbers in passwords, which involve surprising yet intuitive logic.</p>
-
-<h1>Digit Behavior</h1>
-
-<p>The distribution of the number of digits in passwords varies significantly.</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/digit_distribution.png"  ></p>
-
-<p>42% of passwords have zero numerical digits, which implies that 58% of passwords have atleast one digit. However, the local maxima in number of digits in a password all occur at <em>even</em> numbers of digits, which may imply that humans have an easier time of remembering even amounts of numbers.</p>
-
-<p>If you look at a typical keyboard, you&rsquo;ll note that the default sequence of numbers is <strong>1234567890</strong>. If the user wants a number in their password that is easy to type, drawing from this sequence of numbers might be a good idea.</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/seq_digit_bar.png"  ></p>
-
-<p>Note that the length of the sequence is uncorrelated with the number of occurrences of the sequence. Many more people use 123 in a password than just 12, even though it&rsquo;s longer. 123, as a triplet of numbers, may be easier to remember by the average person than a pair of numbers. However, that contradicts the logic above that even numbers may be easier to remember, which suggest that another factor may be involved.</p>
-
-<p>Sequences of numbers are popular, but are some sequences of numbers more popular than others? Let&rsquo;s look at the order and composition of 1-digit, 2-digit, and 3-digit numbers in these 10 million passwords.</p>
-
-<h1>More on Digit Patterns</h1>
-
-<p><em>Note: all number patterns are distinct number patterns, e.g. 2-digit numbers analyzed are not subsets of 3-digit or larger numbers.</em></p>
-
-<p>Take a look at the most used single-digit numbers:</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/one_digit_bar.png"  ></p>
-
-<p>1 is by far the most-used single-digit number, which may be due to the fact that it is the left-most number on the keyboard and therefore an easy press for services that force the inclusion of a digit in the password. Relatedly, 9 and 0 are the least-used single-digit numbers. That&rsquo;s intuitive enough. But does that hold for more complex patterns?</p>
-
-<p>Let&rsquo;s look at the most-used 2-digit patterns, including numbers with 0 as a leading digit:</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/two_digit_bar.png"  ></p>
-
-<p>12 and 11, a sequential pattern and a repeating pattern respectively, are by far the most-used 2-digit numbers. Many repeating patterns such as 22 and 99 are prominent. But why is 69 in third place? (besides the obvious non-family-friendly reason)</p>
-
-<p>It may be helpful to look at a heat map of all possible 2-digit numbers to see if there are any observable patterns.</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/two_digit_heatmap.png"  ></p>
-
-<p>There are a couple distinct patterns: numbers beginning with a 1 or 2 are used the most frequently, and both repeating and sequential digits are used the most frequently.</p>
-
-<p>Almost all 2-digit numbers outside of those patterns are unused (the exception is 69, of course) The intersection of both of these patterns is at 11/12, which is the reason both have high usage.</p>
-
-<p>Do 3-digit numbers follow similar patterns? Here&rsquo;s a list of the most-used 3-digit numbers in passwords:</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/three_digit_bar.png"  ></p>
-
-<p>Yes and no. Here, there appear to be more instances of special numbers, such as 321 and <a href="http://en.wikipedia.org/wiki/James_Bond">007</a> which deviate from the patterns above. Of note, 3-digit numbers ending in 00 appears as a new pattern.</p>
-
-<p>This can be confirmed by looking at a faceted heat map for each possible combination.</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/three_digit_heatmap.png"  ></p>
-
-<p>By far the most popular pattern for a 3-digit number is a repetition pattern, followed by a sequential pattern (the sequential pattern is always located one tile up and two tiles right from the repetition pattern). There are very few outliers which deviate from this schema aside from the ones mentioned previously. (420 is not as significant of an outlier for 3-digit numbers as 69 is for 2-digit numbers)</p>
-
-<p>The patterns of numbers in passwords can offer some insight to human psychology. However, if possible, I recommend you avoid using such patterns in your passwords since it introduces a vulnerability. It&rsquo;s a good idea to use a password manager instead, such as <a href="https://agilebits.com/onepassword">1Password</a> or <a href="http://keepass.info/">KeePass</a>, which offer advantages including the generation of both truly random and unique passwords.</p>
-
-<hr />
-
-<p><em>All charts were made using R and ggplot2.</em></p>
-
-<p><em>You can download the aggregate data used to create the charts <a href="https://docs.google.com/spreadsheets/d/1_OHQOyLkg0d7tseHXofTBu5AWzSlmXIBjV23CojFPcY/edit?usp=sharing">in this Google Sheet</a>.</em></p>
 ]]></content>
   </entry>
   
