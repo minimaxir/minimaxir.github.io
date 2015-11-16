@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-10-31T20:03:38-07:00</updated>
+  <updated>2015-11-16T08:03:37-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,226 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Visualize New York City Using Taxi Location Data and ggplot2]]></title>
+    <link href="http://minimaxir.com/2015/11/nyc-ggplot2-howto/"/>
+    <updated>2015-11-16T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/11/nyc-ggplot2-howto</id>
+    <content type="html"><![CDATA[<p>A few months ago, I had <a href="http://minimaxir.com/2015/08/nyc-map/">posted a visualization</a> of NYC Yellow Taxis using <a href="http://ggplot2.org">ggplot2</a>, an extremely-popular R package by Hadley Wickham for data visualization. At the time, the code used for the chart was very messy since I eager to create something cool after seeing the <a href="https://news.ycombinator.com/item?id=10003118">referenced Hacker News thread</a>. Due to popular demand, I&rsquo;ve cleaned up the code and have <a href="https://github.com/minimaxir/nyc-taxi-notebook">released it open source</a>, with a few improvements.</p>
+
+<p>Here are tips and tutorials on how to make such visualizations.</p>
+
+<h2>Getting the Data</h2>
+
+<p><em>As usual, a <a href="https://github.com/minimaxir/nyc-taxi-notebook/blob/master/nyc_taxi_map.ipynb">Jupyter notebook</a> containing the code and visualizations used in this article is available open-source on GitHub.</em></p>
+
+<p>A quick summary of the previous post: I obtained the data from <a href="https://cloud.google.com/bigquery/">BigQuery</a>, which <a href="http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml">was uploaded</a> from the official NYC Taxi &amp; Limousine Commission datasets, plotted each taxi point as a tiny white dot on a fully-black map, and colorized the dots depending on the number of taxis at that location.</p>
+
+<p>In September, the <a href="https://bigquery.cloud.google.com/table/nyc-tlc:yellow.trips">BigQuery dataset</a> was updated to include all data from January 2009 to June 2015: over 1.1 <em>billion</em> Yellow Taxi rides recorded. Here&rsquo;s an updated query, which additionally calculates the total non-tip revenue for a given location, since that might be useful later, and implements a <a href="https://www.reddit.com/r/bigquery/comments/3fo9ao/nyc_taxi_trips_now_officially_shared_by_the_nyc/ctqfr8h">sanity check filter</a> noted by Felipe Hoffa.</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">ROUND</span><span class="p">(</span><span class="n">pickup_latitude</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">AS</span> <span class="n">lat</span><span class="p">,</span>
+<span class="n">ROUND</span><span class="p">(</span><span class="n">pickup_longitude</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">AS</span> <span class="n">long</span><span class="p">,</span>
+<span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_pickups</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">fare_amount</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_revenue</span>
+<span class="k">FROM</span> <span class="p">[</span><span class="n">nyc</span><span class="o">-</span><span class="n">tlc</span><span class="p">:</span><span class="n">yellow</span><span class="p">.</span><span class="n">trips</span><span class="p">]</span>
+<span class="k">WHERE</span> <span class="n">fare_amount</span><span class="o">/</span><span class="n">trip_distance</span> <span class="k">BETWEEN</span> <span class="mi">2</span> <span class="k">AND</span> <span class="mi">10</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">lat</span><span class="p">,</span> <span class="n">long</span></code></pre></div>
+
+
+<p>The resulting dataset is 4 million rows and 116MB in size! This is well over the limit for downloading from the web BigQuery client, so you must use a local client (in the attached notebook, R), and it will still take about 10-15 minutes to download. (as a result, I recommend caching the results locally). Relatedly, rendering 4 million points on a single plot on screen may be computationally intensive: I strongly recommend rendering the visualization to disk by instantiating a <code>png</code> device or by using <code>ggsave</code>.</p>
+
+<p>Here&rsquo;s a few results from that query.</p>
+
+<p><img src="http://minimaxir.com/img/nyc-ggplot2-howto/test-data.png" alt="" /></p>
+
+<p>As you can see, the second latitude/longitude combo is blatantly <em>wrong</em>. This isn&rsquo;t the first fidelity issue with the dataset, but we will address those in due time.</p>
+
+<h2>Plotting the Taxis</h2>
+
+<p>Let&rsquo;s do a basic ggplot2 plot to test things out. All we need to do is plot a small point for every lat/long combination, and then save the resulting plot.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">)</span> <span class="o">+</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-1.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">600</span><span class="p">,</span> h<span class="o">=</span><span class="m">600</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/nyc-ggplot2-howto/nyc-taxi-1.png" alt="" /></p>
+
+<p>&hellip;stupid data fidelity issues.</p>
+
+<p>This issue is fixed by constraining the plot to a <a href="https://en.wikipedia.org/wiki/Minimum_bounding_box">bounding box</a> of latitude and longitude coordinates corresponding to NYC. Flickr has <a href="https://www.flickr.com/places/info/2459115">a good starting point</a> for a NYC bounding box; I took that and edited the limits more precisely using the <a href="http://boundingbox.klokantech.com">Bounding Box Tool</a>.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">min_lat <span class="o">&lt;-</span> <span class="m">40.5774</span>
+max_lat <span class="o">&lt;-</span> <span class="m">40.9176</span>
+min_long <span class="o">&lt;-</span> <span class="m">-74.15</span>
+max_long <span class="o">&lt;-</span> <span class="m">-73.7004</span></code></pre></div>
+
+
+<p>You could also enforce the bounding box during the BigQuery. Now let&rsquo;s implement the bounding box in the plot:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_long<span class="p">,</span> max_long<span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_lat<span class="p">,</span> max_lat<span class="p">))</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-2.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">600</span><span class="p">,</span> h<span class="o">=</span><span class="m">600</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/nyc-ggplot2-howto/nyc-taxi-2.png" alt="" /></p>
+
+<p>Much, much better! Now that the visualization generally looks like what we want it to be, we can start theming.</p>
+
+<p>Let&rsquo;s start small and do just a few tweaks:</p>
+
+<ul>
+<li>Filter the data slightly to reduce some erroneous points.</li>
+<li>The theme must be primarily a black background, with most of the ggplot2 theme attributes stripped out and the margins nullified. (implemented as <code>theme_map_dark()</code>; code is in the notebook)</li>
+<li>Set the resolution of the rendering device to 300 DPI; this reduces some of the aliasing in the resulting image.</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df <span class="o">%&gt;%</span> filter<span class="p">(</span>num_pickups <span class="o">&gt;</span> <span class="m">10</span><span class="p">),</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>color<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">0.06</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_long<span class="p">,</span> max_long<span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_lat<span class="p">,</span> max_lat<span class="p">))</span> <span class="o">+</span>
+            theme_map_dark<span class="p">()</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-3.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">600</span><span class="p">,</span> h<span class="o">=</span><span class="m">600</span><span class="p">,</span> res<span class="o">=</span><span class="m">300</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/nyc-ggplot2-howto/nyc-taxi-3.png" alt="" /></p>
+
+<p>Right on track! Now time to make things more professional.</p>
+
+<p>This requires the implementation of a few more aesthetics:</p>
+
+<ul>
+<li>Add a gradient color based on intensity of the number of pickups: since the number of pickups will logically be near streets, the coloring will be more intense near streets. Exact color doesn&rsquo;t matter; I used the purple Wisteria from <a href="https://flatuicolors.com">Flat UI Colors</a> to represent maximum intensity. Additionally, the scale should be logarithmic to make the colors stand out. (Another approach is to scale the transparency of the points instead, which is the approach <a href="http://www.brianrlance.com/blog/2015/8/7/nyc-visualized-via-taxi-pickup-locations">Brian Lance had done</a> and that works well too)</li>
+<li>Annotate the theme with a proper title (and remove the scale legend; since the exact values on specific points will not be helpful)</li>
+<li>Force the plot to obey the dimension ratio with <code>coord_equal()</code>, otherwise the map will stretch and distort to fill the entirety of the plotting area. (you can see a vertical stretch effect with the previous image)</li>
+</ul>
+
+
+<p>Putting it all together:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df <span class="o">%&gt;%</span> filter<span class="p">(</span>num_pickups <span class="o">&gt;</span> <span class="m">10</span><span class="p">),</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">,</span> color<span class="o">=</span>num_pickups<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_long<span class="p">,</span> max_long<span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_lat<span class="p">,</span> max_lat<span class="p">))</span> <span class="o">+</span>
+            theme_map_dark<span class="p">()</span> <span class="o">+</span>
+            scale_color_gradient<span class="p">(</span>low<span class="o">=</span><span class="s">&quot;#CCCCCC&quot;</span><span class="p">,</span> high<span class="o">=</span><span class="s">&quot;#8E44AD&quot;</span><span class="p">,</span> trans<span class="o">=</span><span class="s">&quot;log&quot;</span><span class="p">)</span> <span class="o">+</span>
+            labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Map of NYC, Plotted Using Locations Of All Yellow Taxi Pickups&quot;</span><span class="p">)</span> <span class="o">+</span>
+            theme<span class="p">(</span>legend.position<span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">)</span> <span class="o">+</span>
+            coord_equal<span class="p">()</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-4.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">600</span><span class="p">,</span> h<span class="o">=</span><span class="m">600</span><span class="p">,</span> res<span class="o">=</span><span class="m">300</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p>results in this image, which is what we want! However there is a slight problem, and I will wrap the image in a red border to demonstrate.</p>
+
+<p><span><style>
+.border img {
+  border: 3px solid red;
+}
+</style></span></p>
+
+<p><span class="border"><img src="http://minimaxir.com/img/nyc-ggplot2-howto/nyc-taxi-4.png" alt="" /></span></p>
+
+<p>Due to <code>coord_equal()</code> enforcing the chart dimensions, the rendering device has a gap of white space at the top due to interaction with the <code>grid</code> graphics pagkage that ggplot2 is based upon; normally not a problem for default charts, but a waste of space for visualizations with non-white backgrounds.</p>
+
+<p>I attempted to fix this issue by forcing <code>grid</code> to render a black rectangle then plot on top of it. Unfornately, that was not successful. The quickest workaround is to set the image dimensions through trial-and-error such that the issue is minimized.</p>
+
+<p>All things considered, that&rsquo;s minor but should still be noted. The streets of Manhattan are visible! And there&rsquo;s still more that can be done.</p>
+
+<h2>Hexing the Revenue</h2>
+
+<p>Hex map overlays are a popular technique for aggregating two-dimensional data on a 3rd dimension. ggplot2 has a relatively new <a href="http://docs.ggplot2.org/current/stat_summary_hex.html">stat_summary_hex</a> function which does just that.</p>
+
+<p>Why not aggregate total revenue for NYC Yellow Taxi Pickups to determine where taxis generate the most money? Since we conveiently have the code to generate a map of NYC already, we can plot the hex bins on top of that map, after a few more tweaks:</p>
+
+<ul>
+<li>Set the 3rd dimension, <code>z</code>, to <code>total_revenue</code></li>
+<li>Set the aggregation to the <code>sum</code> function, so it sums up all the revenues within a bin.</li>
+<li>Scale the total hex revenues with a gradient.</li>
+<li>Tweak all the aesthetics: color of the base points, the color of the hexes, the transparency of the hexes, and the name of the chart.</li>
+<li>Set the chart dimensions to avoid the <code>coord_equal()</code> issue mention above.</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df <span class="o">%&gt;%</span> filter<span class="p">(</span>num_pickups <span class="o">&gt;</span> <span class="m">20</span><span class="p">),</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">,</span> z<span class="o">=</span>total_revenue<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;#999999&quot;</span><span class="p">)</span> <span class="o">+</span>
+            stat_summary_hex<span class="p">(</span>fun <span class="o">=</span> <span class="kp">sum</span><span class="p">,</span> bins<span class="o">=</span><span class="m">100</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">0.7</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_long<span class="p">,</span> max_long<span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_lat<span class="p">,</span> max_lat<span class="p">))</span> <span class="o">+</span>
+            theme_map_dark<span class="p">()</span> <span class="o">+</span>
+            scale_fill_gradient<span class="p">(</span>low<span class="o">=</span><span class="s">&quot;#CCCCCC&quot;</span><span class="p">,</span> high<span class="o">=</span><span class="s">&quot;#27AE60&quot;</span><span class="p">,</span> labels<span class="o">=</span>dollar<span class="p">)</span> <span class="o">+</span>
+            labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Total Revenue for NYC Yellow Taxis by Pickup Location, from Jan 2009 ― June 2015&quot;</span><span class="p">)</span> <span class="o">+</span>
+            coord_equal<span class="p">()</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-5.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">950</span><span class="p">,</span> h<span class="o">=</span><span class="m">860</span><span class="p">,</span> res<span class="o">=</span><span class="m">300</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/nyc-ggplot2-howto/nyc-taxi-5.png" alt="" /></p>
+
+<p>That wasn&rsquo;t too bad. The gradient shows that <a href="https://www.google.com/maps/place/penn+station+nyc/@40.750568,-73.993519,15z">Penn Station</a> in Manhattan, along with the two airports, are the largest revenue generators.</p>
+
+<p>I <a href="https://www.reddit.com/r/dataisbeautiful/comments/3sjmc0/total_revenue_for_nyc_yellow_taxis_by_pickup/">posted the hex-overlayed map</a> on Reddit to /r/dataisbeautiful as a part of my data visualization beta-testing. Although the chart received just under 200 upvotes, the comments in the Reddit thread were <em>unanimously negative</em>. Reddit user /u/DanHeidel <a href="https://www.reddit.com/r/dataisbeautiful/comments/3sjmc0/total_revenue_for_nyc_yellow_taxis_by_pickup/cwxuy1e">posted a long rant</a> on the problems with the aesthetics of the chart. And for the most part, I agree with his assessment.</p>
+
+<p>Let&rsquo;s try again, and address the claims made in the Reddit comments.</p>
+
+<ul>
+<li>Only show hex bins where there is enough valid data, which should remove the mysterious hexes over the water. This can be implemented through a helper aggregate function which does not render the hex if the total revenue of the hex is under some threshold value. (I set it to $100,000)</li>
+<li>Scale the total hex revenue logarithmically, and change the color to a Red hue (Alizarin) to make the step values more visible.</li>
+<li>Zoom the chart dimensions closer to Manhattan.</li>
+<li>Make a few more aesthetic tweaks.</li>
+</ul>
+
+
+<p>Here&rsquo;s take two:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">total_rev <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> threshold <span class="o">=</span> <span class="m">10</span><span class="o">^</span><span class="m">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="kp">sum</span><span class="p">(</span>x<span class="p">)</span> <span class="o">&lt;</span> threshold<span class="p">)</span> <span class="p">{</span><span class="kr">return</span> <span class="p">(</span><span class="kc">NA</span><span class="p">)}</span>
+    <span class="kr">else</span> <span class="p">{</span><span class="kr">return</span> <span class="p">(</span><span class="kp">sum</span><span class="p">(</span>x<span class="p">))}</span>
+<span class="p">}</span>
+
+plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df <span class="o">%&gt;%</span> filter<span class="p">(</span>num_pickups <span class="o">&gt;</span> <span class="m">10</span><span class="p">),</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">,</span> z<span class="o">=</span>total_revenue<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;#999999&quot;</span><span class="p">)</span> <span class="o">+</span>
+            stat_summary_hex<span class="p">(</span>fun <span class="o">=</span> total_rev<span class="p">,</span> bins<span class="o">=</span><span class="m">100</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">0.5</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-74.0224</span><span class="p">,</span> <span class="m">-73.8521</span><span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">40.6959</span><span class="p">,</span> <span class="m">40.8348</span><span class="p">))</span> <span class="o">+</span>
+            theme_map_dark<span class="p">()</span> <span class="o">+</span>
+            scale_fill_gradient<span class="p">(</span>low<span class="o">=</span><span class="s">&quot;#FFFFFF&quot;</span><span class="p">,</span> high<span class="o">=</span><span class="s">&quot;#E74C3C&quot;</span><span class="p">,</span> labels<span class="o">=</span>dollar<span class="p">,</span> trans<span class="o">=</span><span class="s">&quot;log&quot;</span><span class="p">,</span> breaks<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">10</span><span class="o">^</span><span class="p">(</span><span class="m">6</span><span class="o">:</span><span class="m">8</span><span class="p">)))</span> <span class="o">+</span>
+            labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Total Revenue for NYC Yellow Taxis by Pickup Location, from Jan 2009 ― June 2015&quot;</span><span class="p">)</span> <span class="o">+</span>
+            coord_equal<span class="p">()</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-6.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">900</span><span class="p">,</span> h<span class="o">=</span><span class="m">900</span><span class="p">,</span> res<span class="o">=</span><span class="m">300</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/nyc-ggplot2-howto/nyc-taxi-6.png" alt="" /></p>
+
+<p>A good step forward. Revenue all through Manhattan is mostly the same except for Penn Station. Meanwhile, the hexes in LaGuardia Airport are noticeably more saturated than Penn Station.</p>
+
+<p>Hopefully, this tutorial gave you a good look into a few interesting tricks that can be accomplished with ggplot2, even though the code can be somewhat messy. If you want more orthodox methods of plotting geographic data in ggplot2, you should look into the <a href="https://cran.r-project.org/web/packages/ggmap/index.html">ggmap</a> R package, which I used to plot <a href="http://minimaxir.com/2014/04/san-francisco/">Facebook Checkin data in San Francisco</a>, and look into the <a href="https://cran.r-project.org/web/packages/maps/index.html">maps</a> R package plus shapefiles, which I used to plot <a href="http://minimaxir.com/2015/01/tree-time/">Instagram photo location data</a>. Unfortunately, the code may not necessarily be less messy.</p>
+
+<hr />
+
+<p><em>If you use the code or data visualization designs contained within this article, it would be greatly appreciated if proper attribution is given back to this article and/or myself. Thanks!</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quantifying and Visualizing the Reddit Hivemind]]></title>
@@ -397,7 +617,7 @@ df_boot <span class="o">&lt;-</span> tbl_df<span class="p">(</span><span class="
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Plagiarizing and Paraphrasing Code From an Online Class for Content Marketing]]></title>
+    <title type="html"><![CDATA[Plagiarizing and Paraphrasing Code from an Online Class for Content Marketing]]></title>
     <link href="http://minimaxir.com/2015/09/code-of-plagiarism/"/>
     <updated>2015-09-03T08:00:00-07:00</updated>
     <id>http://minimaxir.com/2015/09/code-of-plagiarism</id>
@@ -754,7 +974,7 @@ GROUP BY lat, long
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Why Is the Most-Viewed Gaming Video on YouTube About Cars 2?]]></title>
+    <title type="html"><![CDATA[Why is the Most-Viewed Gaming Video on YouTube About Cars 2?]]></title>
     <link href="http://minimaxir.com/2015/06/cars-2/"/>
     <updated>2015-06-15T08:00:00-07:00</updated>
     <id>http://minimaxir.com/2015/06/cars-2</id>
@@ -898,83 +1118,6 @@ GROUP BY lat, long
 <p>*In fairness, the viewers on my website about technology and statistics may not necessarily represent the viewers on the internet as a whole. However, it&rsquo;s fair to assume that the way a person holds a device is uncorrelated with the person&rsquo;s topic preferences. Additionally, the very large sample size of 781,557 effectively eliminates any uncertainty about the results due to random chance.</p>
 
 <p><em>You can download a copy of the data <a href="https://docs.google.com/spreadsheets/d/14vUjq7rv5fceIe8pZRqfZrp7JGj3Uw1fFI2-3NL3Dvs/edit?usp=sharing">in this Google Sheet</a>. All charts were made using R and ggplot2.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Analyzing the Patterns of Numbers in 10 Million Passwords]]></title>
-    <link href="http://minimaxir.com/2015/02/password-numbers/"/>
-    <updated>2015-02-24T08:00:00-08:00</updated>
-    <id>http://minimaxir.com/2015/02/password-numbers</id>
-    <content type="html"><![CDATA[<p>The primary purpose of a <a href="http://en.wikipedia.org/wiki/Password">password</a> is to serve as an unique verification identifier for a given user. Ideally, the password for a given website or service should be both random and unique; if the letters and/or numbers in the password follow any patterns, then they might be easier to guess by an intruder. For example, someone may put their birth year such as &ldquo;1987&rdquo; or &ldquo;1988&rdquo; in their password, which makes the passwords easier to remember, but consequently easier to break.</p>
-
-<p>A few weeks ago, security researcher Mark Burnett released <a href="https://xato.net/passwords/ten-million-passwords/#.VNojhPnF98E">a list of 10 million passwords</a> compiled <a href="http://www.reddit.com/r/10millionpasswords/comments/2w3ali/dataset_origin/conap8l">from various sources</a> over the years. Reddit user jalgroy <a href="http://www.reddit.com/r/dataisbeautiful/comments/2vsg7h/frequency_of_years_in_passwords_oc/">posted a histogram</a> of the years used in these passwords, which I&rsquo;ve verified using my own scripts:</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/year_distribution.png"  ></p>
-
-<p>There is a clear maximum at 1987 which implies a current age of about 28. This makes sense, as internet users in their 20&rsquo;s are generally considered to be very attuned to internet usage. The spike at 2000 is likely not because it&rsquo;s a birth year, but because 2000 is a kewl number.</p>
-
-<p>There are actually many similar patterns for numbers in passwords, which involve surprising yet intuitive logic.</p>
-
-<h1>Digit Behavior</h1>
-
-<p>The distribution of the number of digits in passwords varies significantly.</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/digit_distribution.png"  ></p>
-
-<p>42% of passwords have zero numerical digits, which implies that 58% of passwords have atleast one digit. However, the local maxima in number of digits in a password all occur at <em>even</em> numbers of digits, which may imply that humans have an easier time of remembering even amounts of numbers.</p>
-
-<p>If you look at a typical keyboard, you&rsquo;ll note that the default sequence of numbers is <strong>1234567890</strong>. If the user wants a number in their password that is easy to type, drawing from this sequence of numbers might be a good idea.</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/seq_digit_bar.png"  ></p>
-
-<p>Note that the length of the sequence is uncorrelated with the number of occurrences of the sequence. Many more people use 123 in a password than just 12, even though it&rsquo;s longer. 123, as a triplet of numbers, may be easier to remember by the average person than a pair of numbers. However, that contradicts the logic above that even numbers may be easier to remember, which suggest that another factor may be involved.</p>
-
-<p>Sequences of numbers are popular, but are some sequences of numbers more popular than others? Let&rsquo;s look at the order and composition of 1-digit, 2-digit, and 3-digit numbers in these 10 million passwords.</p>
-
-<h1>More on Digit Patterns</h1>
-
-<p><em>Note: all number patterns are distinct number patterns, e.g. 2-digit numbers analyzed are not subsets of 3-digit or larger numbers.</em></p>
-
-<p>Take a look at the most used single-digit numbers:</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/one_digit_bar.png"  ></p>
-
-<p>1 is by far the most-used single-digit number, which may be due to the fact that it is the left-most number on the keyboard and therefore an easy press for services that force the inclusion of a digit in the password. Relatedly, 9 and 0 are the least-used single-digit numbers. That&rsquo;s intuitive enough. But does that hold for more complex patterns?</p>
-
-<p>Let&rsquo;s look at the most-used 2-digit patterns, including numbers with 0 as a leading digit:</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/two_digit_bar.png"  ></p>
-
-<p>12 and 11, a sequential pattern and a repeating pattern respectively, are by far the most-used 2-digit numbers. Many repeating patterns such as 22 and 99 are prominent. But why is 69 in third place? (besides the obvious non-family-friendly reason)</p>
-
-<p>It may be helpful to look at a heat map of all possible 2-digit numbers to see if there are any observable patterns.</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/two_digit_heatmap.png"  ></p>
-
-<p>There are a couple distinct patterns: numbers beginning with a 1 or 2 are used the most frequently, and both repeating and sequential digits are used the most frequently.</p>
-
-<p>Almost all 2-digit numbers outside of those patterns are unused (the exception is 69, of course) The intersection of both of these patterns is at 11/12, which is the reason both have high usage.</p>
-
-<p>Do 3-digit numbers follow similar patterns? Here&rsquo;s a list of the most-used 3-digit numbers in passwords:</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/three_digit_bar.png"  ></p>
-
-<p>Yes and no. Here, there appear to be more instances of special numbers, such as 321 and <a href="http://en.wikipedia.org/wiki/James_Bond">007</a> which deviate from the patterns above. Of note, 3-digit numbers ending in 00 appears as a new pattern.</p>
-
-<p>This can be confirmed by looking at a faceted heat map for each possible combination.</p>
-
-<p><img src="http://minimaxir.com/img/password-numbers/three_digit_heatmap.png"  ></p>
-
-<p>By far the most popular pattern for a 3-digit number is a repetition pattern, followed by a sequential pattern (the sequential pattern is always located one tile up and two tiles right from the repetition pattern). There are very few outliers which deviate from this schema aside from the ones mentioned previously. (420 is not as significant of an outlier for 3-digit numbers as 69 is for 2-digit numbers)</p>
-
-<p>The patterns of numbers in passwords can offer some insight to human psychology. However, if possible, I recommend you avoid using such patterns in your passwords since it introduces a vulnerability. It&rsquo;s a good idea to use a password manager instead, such as <a href="https://agilebits.com/onepassword">1Password</a> or <a href="http://keepass.info/">KeePass</a>, which offer advantages including the generation of both truly random and unique passwords.</p>
-
-<hr />
-
-<p><em>All charts were made using R and ggplot2.</em></p>
-
-<p><em>You can download the aggregate data used to create the charts <a href="https://docs.google.com/spreadsheets/d/1_OHQOyLkg0d7tseHXofTBu5AWzSlmXIBjV23CojFPcY/edit?usp=sharing">in this Google Sheet</a>.</em></p>
 ]]></content>
   </entry>
   

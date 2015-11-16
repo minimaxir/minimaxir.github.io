@@ -1,0 +1,602 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>How to Visualize New York City Using Taxi Location Data and ggplot2</title>
+  
+  
+    
+  
+  
+  
+   
+ <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@minimaxir">
+<meta name="twitter:creator" content="@minimaxir">
+
+  <meta name="twitter:title" content="How to Visualize New York City Using Taxi Location Data and ggplot2">
+
+
+  <meta name="twitter:url" content="http://minimaxir.com/2015/11/nyc-ggplot2-howto/">
+
+
+  <meta name="twitter:description" content="I had posted a visualization of NYC taxis using ggplot2. Due to popular demand, I've cleaned up the code and have released it open source, with a few improvements.">
+
+
+  <meta name="twitter:image:src" content="http://minimaxir.com/img/nyc-taxi-6.png">
+
+ 
+ <meta content="minimaxir | Max Woolf's Blog" property="og:site_name">
+
+  <meta content="How to Visualize New York City Using Taxi Location Data and ggplot2" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="I had posted a visualization of NYC taxis using ggplot2. Due to popular demand, I've cleaned up the code and have released it open source, with a few improvements." property="og:description">
+
+
+  <meta content="http://minimaxir.com/2015/11/nyc-ggplot2-howto/" property="og:url">
+
+
+
+  <meta content="http://minimaxir.com/img/nyc-taxi-6.png" property="og:image">
+
+
+  
+  <meta content="data" property="article:section">
+  
+
+
+  
+
+
+<meta property="og:locale"    content="en_us" />
+  
+  
+  <meta name="description" content="A few months ago, I had posted a visualization of NYC Yellow Taxis using ggplot2, an extremely-popular R package by Hadley Wickham for data visualization. At...">
+  <link href="/rss.xml" rel="alternate" title="minimaxir | Max Woolf's Blog" type="application/atom+xml">
+
+  <link rel="canonical" href="http://minimaxir.com/2015/11/nyc-ggplot2-howto/">
+  
+      <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-title" content="minimaxir">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+	<link rel="apple-touch-icon" sizes="57x57" href="http://minimaxir.com/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="http://minimaxir.com/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="http://minimaxir.com/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="http://minimaxir.com/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="http://minimaxir.com/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="http://minimaxir.com/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="http://minimaxir.com/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="http://minimaxir.com/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://minimaxir.com/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="http://minimaxir.com/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://minimaxir.com/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="http://minimaxir.com/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://minimaxir.com/favicon/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="http://minimaxir.com/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <!--<link href='//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'> -->
+
+  
+  
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js" type="text/javascript"></script>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro:400,700|Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/minimaxir.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+   $(document).ready(function() {
+ 
+  // Facebook
+	$( ".social.facebook" ).children().each(function(index,value) {
+	var facebook_button = $(this);
+	var url = facebook_button.attr("data");
+
+  jQuery.getJSON("http://graph.facebook.com/?id="+url, function(data) {
+  if (typeof data.shares != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.shares + "</span>");
+  else if (typeof data.likes != 'undefined') facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.likes + "</span>");
+  else facebook_button.html("<i class=\"fa fa-facebook\"></i><span class=\"count mdl-cell--hide-phone\"> " + " 0</span>");
+  });
+  });
+ 
+ // Twitter
+	$( ".social.twitter" ).children().each(function(index,value) {
+	var twitter_button = $(this);
+	var url = twitter_button.attr("data");
+
+  jQuery.getJSON("http://cdn.api.twitter.com/1/urls/count.json?url="+url+"&callback=?", function(data) {
+  twitter_button.html("<i class=\"fa fa-twitter\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.count + "</span>");
+  });
+  });
+  
+  // LinkedIn
+	$( ".social.linkedin" ).children().each(function(index,value) {
+	var linkedin_button = $(this);
+	var url = linkedin_button.attr("data");
+
+  jQuery.getJSON("http://www.linkedin.com/countserv/count/share?url="+url+"&format=jsonp&callback=?", function(data) {
+  linkedin_button.html("<i class=\"fa fa-linkedin\"></i><span class=\"count mdl-cell--hide-phone\"> " + data.count + "</span>");
+  });
+  });
+  });  
+
+//$('.mdl-layout__drawer-button').html('<i class=\"fa fa-navicon\"></i>');
+</script>
+	</head>
+  <body>
+  
+  	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-100">
+  <header class="mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-800">
+    <!-- Top row, always visible -->
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Max Woolf (@minimaxir)</span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+      	<a class="mdl-navigation__link" href="/">Home</a>
+        <a class="mdl-navigation__link" href="/about/">About</a>
+        <a class="mdl-navigation__link" href="/contact">Contact</a>
+        <a class="mdl-navigation__link" href="/portfolio/">Portfolio</a>
+      </nav>
+      <div class="mdl-layout-spacer"></div>
+      <div class="social-icon-list mdl-layout--large-screen-only">
+    <a title="RSS" href="/rss.xml"><i class="fa fa-rss-square"></i></a>
+  </div>
+
+    </div>
+
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Max Woolf</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="/"><i class="material-icons">home</i> Home</a>
+    	<a class="mdl-navigation__link" href="/about/"><i class="material-icons">person</i> About</a>
+        <a class="mdl-navigation__link" href="/contact"><i class="material-icons">contacts</i> Contact</a>
+        <a class="mdl-navigation__link" href="/portfolio/"><i class="material-icons">work</i> Portfolio</a>
+    </nav>
+    </div>
+  	
+		  	<div class="demo-ribbon hero" style="background: linear-gradient(to bottom, rgba(44, 62, 80, 0.80), rgba(44, 62, 80, 0.95)), url('/img/nyc-taxi-6.png') no-repeat center center; background-size: cover;" >
+  	<div class="demo-container mdl-grid">
+  	<!--<h1 class="post-title">How to Visualize New York City Using Taxi Location Data and ggplot2</h1>-->
+  	
+  	<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  	<div class="mdl-cell mdl-cell--8-col">
+  	<div class="post-title">
+  	<h1>How to Visualize New York City Using Taxi Location Data and ggplot2</h1>
+  	</div>
+  	
+  	<div class="post-meta">
+  	Nov 16, 2015
+  	
+  	
+  	<div class="sharing">
+  
+		  <span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/11/nyc-ggplot2-howto/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/11/nyc-ggplot2-howto/"><i class="fa fa-facebook"></i><span class="count mdl-cell--hide-phone"> -</span></a></span>
+  
+		<span class="social twitter"><a href="http://twitter.com/home/?status=How to Visualize New York City Using Taxi Location Data and ggplot2 - http://minimaxir.com/2015/11/nyc-ggplot2-howto/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/11/nyc-ggplot2-howto/><i class="fa fa-twitter"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+
+  <span  class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How to Visualize New York City Using Taxi Location Data and ggplot2&url=http://minimaxir.com/2015/11/nyc-ggplot2-howto/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/11/nyc-ggplot2-howto/><i class="fa fa-linkedin"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+   
+	</div>
+	
+  	</div>
+  	
+  	
+  	</div>
+  	
+
+	</div>
+  	</div>
+  	
+ <main class="demo-main mdl-layout__content">
+<div class="demo-container mdl-grid">
+ <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+ <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+
+<div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+
+  <article class="post-content">
+    <p>A few months ago, I had <a href="http://minimaxir.com/2015/08/nyc-map/">posted a visualization</a> of NYC Yellow Taxis using <a href="http://ggplot2.org">ggplot2</a>, an extremely-popular R package by Hadley Wickham for data visualization. At the time, the code used for the chart was very messy since I eager to create something cool after seeing the <a href="https://news.ycombinator.com/item?id=10003118">referenced Hacker News thread</a>. Due to popular demand, I&rsquo;ve cleaned up the code and have <a href="https://github.com/minimaxir/nyc-taxi-notebook">released it open source</a>, with a few improvements.</p>
+
+<p>Here are tips and tutorials on how to make such visualizations.</p>
+
+<h2>Getting the Data</h2>
+
+<p><em>As usual, a <a href="https://github.com/minimaxir/nyc-taxi-notebook/blob/master/nyc_taxi_map.ipynb">Jupyter notebook</a> containing the code and visualizations used in this article is available open-source on GitHub.</em></p>
+
+<p>A quick summary of the previous post: I obtained the data from <a href="https://cloud.google.com/bigquery/">BigQuery</a>, which <a href="http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml">was uploaded</a> from the official NYC Taxi &amp; Limousine Commission datasets, plotted each taxi point as a tiny white dot on a fully-black map, and colorized the dots depending on the number of taxis at that location.</p>
+
+<p>In September, the <a href="https://bigquery.cloud.google.com/table/nyc-tlc:yellow.trips">BigQuery dataset</a> was updated to include all data from January 2009 to June 2015: over 1.1 <em>billion</em> Yellow Taxi rides recorded. Here&rsquo;s an updated query, which additionally calculates the total non-tip revenue for a given location, since that might be useful later, and implements a <a href="https://www.reddit.com/r/bigquery/comments/3fo9ao/nyc_taxi_trips_now_officially_shared_by_the_nyc/ctqfr8h">sanity check filter</a> noted by Felipe Hoffa.</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">ROUND</span><span class="p">(</span><span class="n">pickup_latitude</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">AS</span> <span class="n">lat</span><span class="p">,</span>
+<span class="n">ROUND</span><span class="p">(</span><span class="n">pickup_longitude</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">AS</span> <span class="n">long</span><span class="p">,</span>
+<span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_pickups</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">fare_amount</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_revenue</span>
+<span class="k">FROM</span> <span class="p">[</span><span class="n">nyc</span><span class="o">-</span><span class="n">tlc</span><span class="p">:</span><span class="n">yellow</span><span class="p">.</span><span class="n">trips</span><span class="p">]</span>
+<span class="k">WHERE</span> <span class="n">fare_amount</span><span class="o">/</span><span class="n">trip_distance</span> <span class="k">BETWEEN</span> <span class="mi">2</span> <span class="k">AND</span> <span class="mi">10</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">lat</span><span class="p">,</span> <span class="n">long</span></code></pre></div>
+
+
+<p>The resulting dataset is 4 million rows and 116MB in size! This is well over the limit for downloading from the web BigQuery client, so you must use a local client (in the attached notebook, R), and it will still take about 10-15 minutes to download. (as a result, I recommend caching the results locally). Relatedly, rendering 4 million points on a single plot on screen may be computationally intensive: I strongly recommend rendering the visualization to disk by instantiating a <code>png</code> device or by using <code>ggsave</code>.</p>
+
+<p>Here&rsquo;s a few results from that query.</p>
+
+<p><img src="/img/nyc-ggplot2-howto/test-data.png" alt="" /></p>
+
+<p>As you can see, the second latitude/longitude combo is blatantly <em>wrong</em>. This isn&rsquo;t the first fidelity issue with the dataset, but we will address those in due time.</p>
+
+<h2>Plotting the Taxis</h2>
+
+<p>Let&rsquo;s do a basic ggplot2 plot to test things out. All we need to do is plot a small point for every lat/long combination, and then save the resulting plot.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">)</span> <span class="o">+</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-1.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">600</span><span class="p">,</span> h<span class="o">=</span><span class="m">600</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="/img/nyc-ggplot2-howto/nyc-taxi-1.png" alt="" /></p>
+
+<p>&hellip;stupid data fidelity issues.</p>
+
+<p>This issue is fixed by constraining the plot to a <a href="https://en.wikipedia.org/wiki/Minimum_bounding_box">bounding box</a> of latitude and longitude coordinates corresponding to NYC. Flickr has <a href="https://www.flickr.com/places/info/2459115">a good starting point</a> for a NYC bounding box; I took that and edited the limits more precisely using the <a href="http://boundingbox.klokantech.com">Bounding Box Tool</a>.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">min_lat <span class="o">&lt;-</span> <span class="m">40.5774</span>
+max_lat <span class="o">&lt;-</span> <span class="m">40.9176</span>
+min_long <span class="o">&lt;-</span> <span class="m">-74.15</span>
+max_long <span class="o">&lt;-</span> <span class="m">-73.7004</span></code></pre></div>
+
+
+<p>You could also enforce the bounding box during the BigQuery. Now let&rsquo;s implement the bounding box in the plot:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_long<span class="p">,</span> max_long<span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_lat<span class="p">,</span> max_lat<span class="p">))</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-2.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">600</span><span class="p">,</span> h<span class="o">=</span><span class="m">600</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="/img/nyc-ggplot2-howto/nyc-taxi-2.png" alt="" /></p>
+
+<p>Much, much better! Now that the visualization generally looks like what we want it to be, we can start theming.</p>
+
+<p>Let&rsquo;s start small and do just a few tweaks:</p>
+
+<ul>
+<li>Filter the data slightly to reduce some erroneous points.</li>
+<li>The theme must be primarily a black background, with most of the ggplot2 theme attributes stripped out and the margins nullified. (implemented as <code>theme_map_dark()</code>; code is in the notebook)</li>
+<li>Set the resolution of the rendering device to 300 DPI; this reduces some of the aliasing in the resulting image.</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df <span class="o">%&gt;%</span> filter<span class="p">(</span>num_pickups <span class="o">&gt;</span> <span class="m">10</span><span class="p">),</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>color<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">0.06</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_long<span class="p">,</span> max_long<span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_lat<span class="p">,</span> max_lat<span class="p">))</span> <span class="o">+</span>
+            theme_map_dark<span class="p">()</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-3.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">600</span><span class="p">,</span> h<span class="o">=</span><span class="m">600</span><span class="p">,</span> res<span class="o">=</span><span class="m">300</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="/img/nyc-ggplot2-howto/nyc-taxi-3.png" alt="" /></p>
+
+<p>Right on track! Now time to make things more professional.</p>
+
+<p>This requires the implementation of a few more aesthetics:</p>
+
+<ul>
+<li>Add a gradient color based on intensity of the number of pickups: since the number of pickups will logically be near streets, the coloring will be more intense near streets. Exact color doesn&rsquo;t matter; I used the purple Wisteria from <a href="https://flatuicolors.com">Flat UI Colors</a> to represent maximum intensity. Additionally, the scale should be logarithmic to make the colors stand out. (Another approach is to scale the transparency of the points instead, which is the approach <a href="http://www.brianrlance.com/blog/2015/8/7/nyc-visualized-via-taxi-pickup-locations">Brian Lance had done</a> and that works well too)</li>
+<li>Annotate the theme with a proper title (and remove the scale legend; since the exact values on specific points will not be helpful)</li>
+<li>Force the plot to obey the dimension ratio with <code>coord_equal()</code>, otherwise the map will stretch and distort to fill the entirety of the plotting area. (you can see a vertical stretch effect with the previous image)</li>
+</ul>
+
+
+<p>Putting it all together:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df <span class="o">%&gt;%</span> filter<span class="p">(</span>num_pickups <span class="o">&gt;</span> <span class="m">10</span><span class="p">),</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">,</span> color<span class="o">=</span>num_pickups<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_long<span class="p">,</span> max_long<span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_lat<span class="p">,</span> max_lat<span class="p">))</span> <span class="o">+</span>
+            theme_map_dark<span class="p">()</span> <span class="o">+</span>
+            scale_color_gradient<span class="p">(</span>low<span class="o">=</span><span class="s">&quot;#CCCCCC&quot;</span><span class="p">,</span> high<span class="o">=</span><span class="s">&quot;#8E44AD&quot;</span><span class="p">,</span> trans<span class="o">=</span><span class="s">&quot;log&quot;</span><span class="p">)</span> <span class="o">+</span>
+            labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Map of NYC, Plotted Using Locations Of All Yellow Taxi Pickups&quot;</span><span class="p">)</span> <span class="o">+</span>
+            theme<span class="p">(</span>legend.position<span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">)</span> <span class="o">+</span>
+            coord_equal<span class="p">()</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-4.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">600</span><span class="p">,</span> h<span class="o">=</span><span class="m">600</span><span class="p">,</span> res<span class="o">=</span><span class="m">300</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p>results in this image, which is what we want! However there is a slight problem, and I will wrap the image in a red border to demonstrate.</p>
+
+<p><span><style>
+.border img {
+  border: 3px solid red;
+}
+</style></span></p>
+
+<p><span class="border"><img src="/img/nyc-ggplot2-howto/nyc-taxi-4.png" alt="" /></span></p>
+
+<p>Due to <code>coord_equal()</code> enforcing the chart dimensions, the rendering device has a gap of white space at the top due to interaction with the <code>grid</code> graphics pagkage that ggplot2 is based upon; normally not a problem for default charts, but a waste of space for visualizations with non-white backgrounds.</p>
+
+<p>I attempted to fix this issue by forcing <code>grid</code> to render a black rectangle then plot on top of it. Unfornately, that was not successful. The quickest workaround is to set the image dimensions through trial-and-error such that the issue is minimized.</p>
+
+<p>All things considered, that&rsquo;s minor but should still be noted. The streets of Manhattan are visible! And there&rsquo;s still more that can be done.</p>
+
+<h2>Hexing the Revenue</h2>
+
+<p>Hex map overlays are a popular technique for aggregating two-dimensional data on a 3rd dimension. ggplot2 has a relatively new <a href="http://docs.ggplot2.org/current/stat_summary_hex.html">stat_summary_hex</a> function which does just that.</p>
+
+<p>Why not aggregate total revenue for NYC Yellow Taxi Pickups to determine where taxis generate the most money? Since we conveiently have the code to generate a map of NYC already, we can plot the hex bins on top of that map, after a few more tweaks:</p>
+
+<ul>
+<li>Set the 3rd dimension, <code>z</code>, to <code>total_revenue</code></li>
+<li>Set the aggregation to the <code>sum</code> function, so it sums up all the revenues within a bin.</li>
+<li>Scale the total hex revenues with a gradient.</li>
+<li>Tweak all the aesthetics: color of the base points, the color of the hexes, the transparency of the hexes, and the name of the chart.</li>
+<li>Set the chart dimensions to avoid the <code>coord_equal()</code> issue mention above.</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df <span class="o">%&gt;%</span> filter<span class="p">(</span>num_pickups <span class="o">&gt;</span> <span class="m">20</span><span class="p">),</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">,</span> z<span class="o">=</span>total_revenue<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;#999999&quot;</span><span class="p">)</span> <span class="o">+</span>
+            stat_summary_hex<span class="p">(</span>fun <span class="o">=</span> <span class="kp">sum</span><span class="p">,</span> bins<span class="o">=</span><span class="m">100</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">0.7</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_long<span class="p">,</span> max_long<span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span>min_lat<span class="p">,</span> max_lat<span class="p">))</span> <span class="o">+</span>
+            theme_map_dark<span class="p">()</span> <span class="o">+</span>
+            scale_fill_gradient<span class="p">(</span>low<span class="o">=</span><span class="s">&quot;#CCCCCC&quot;</span><span class="p">,</span> high<span class="o">=</span><span class="s">&quot;#27AE60&quot;</span><span class="p">,</span> labels<span class="o">=</span>dollar<span class="p">)</span> <span class="o">+</span>
+            labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Total Revenue for NYC Yellow Taxis by Pickup Location, from Jan 2009 ― June 2015&quot;</span><span class="p">)</span> <span class="o">+</span>
+            coord_equal<span class="p">()</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-5.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">950</span><span class="p">,</span> h<span class="o">=</span><span class="m">860</span><span class="p">,</span> res<span class="o">=</span><span class="m">300</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="/img/nyc-ggplot2-howto/nyc-taxi-5.png" alt="" /></p>
+
+<p>That wasn&rsquo;t too bad. The gradient shows that <a href="https://www.google.com/maps/place/penn+station+nyc/@40.750568,-73.993519,15z">Penn Station</a> in Manhattan, along with the two airports, are the largest revenue generators.</p>
+
+<p>I <a href="https://www.reddit.com/r/dataisbeautiful/comments/3sjmc0/total_revenue_for_nyc_yellow_taxis_by_pickup/">posted the hex-overlayed map</a> on Reddit to /r/dataisbeautiful as a part of my data visualization beta-testing. Although the chart received just under 200 upvotes, the comments in the Reddit thread were <em>unanimously negative</em>. Reddit user /u/DanHeidel <a href="https://www.reddit.com/r/dataisbeautiful/comments/3sjmc0/total_revenue_for_nyc_yellow_taxis_by_pickup/cwxuy1e">posted a long rant</a> on the problems with the aesthetics of the chart. And for the most part, I agree with his assessment.</p>
+
+<p>Let&rsquo;s try again, and address the claims made in the Reddit comments.</p>
+
+<ul>
+<li>Only show hex bins where there is enough valid data, which should remove the mysterious hexes over the water. This can be implemented through a helper aggregate function which does not render the hex if the total revenue of the hex is under some threshold value. (I set it to $100,000)</li>
+<li>Scale the total hex revenue logarithmically, and change the color to a Red hue (Alizarin) to make the step values more visible.</li>
+<li>Zoom the chart dimensions closer to Manhattan.</li>
+<li>Make a few more aesthetic tweaks.</li>
+</ul>
+
+
+<p>Here&rsquo;s take two:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">total_rev <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> threshold <span class="o">=</span> <span class="m">10</span><span class="o">^</span><span class="m">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="kp">sum</span><span class="p">(</span>x<span class="p">)</span> <span class="o">&lt;</span> threshold<span class="p">)</span> <span class="p">{</span><span class="kr">return</span> <span class="p">(</span><span class="kc">NA</span><span class="p">)}</span>
+    <span class="kr">else</span> <span class="p">{</span><span class="kr">return</span> <span class="p">(</span><span class="kp">sum</span><span class="p">(</span>x<span class="p">))}</span>
+<span class="p">}</span>
+
+plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df <span class="o">%&gt;%</span> filter<span class="p">(</span>num_pickups <span class="o">&gt;</span> <span class="m">10</span><span class="p">),</span> aes<span class="p">(</span>x<span class="o">=</span>long<span class="p">,</span> y<span class="o">=</span>lat<span class="p">,</span> z<span class="o">=</span>total_revenue<span class="p">))</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">0.06</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;#999999&quot;</span><span class="p">)</span> <span class="o">+</span>
+            stat_summary_hex<span class="p">(</span>fun <span class="o">=</span> total_rev<span class="p">,</span> bins<span class="o">=</span><span class="m">100</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">0.5</span><span class="p">)</span> <span class="o">+</span>
+            scale_x_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-74.0224</span><span class="p">,</span> <span class="m">-73.8521</span><span class="p">))</span> <span class="o">+</span>
+            scale_y_continuous<span class="p">(</span>limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">40.6959</span><span class="p">,</span> <span class="m">40.8348</span><span class="p">))</span> <span class="o">+</span>
+            theme_map_dark<span class="p">()</span> <span class="o">+</span>
+            scale_fill_gradient<span class="p">(</span>low<span class="o">=</span><span class="s">&quot;#FFFFFF&quot;</span><span class="p">,</span> high<span class="o">=</span><span class="s">&quot;#E74C3C&quot;</span><span class="p">,</span> labels<span class="o">=</span>dollar<span class="p">,</span> trans<span class="o">=</span><span class="s">&quot;log&quot;</span><span class="p">,</span> breaks<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">10</span><span class="o">^</span><span class="p">(</span><span class="m">6</span><span class="o">:</span><span class="m">8</span><span class="p">)))</span> <span class="o">+</span>
+            labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Total Revenue for NYC Yellow Taxis by Pickup Location, from Jan 2009 ― June 2015&quot;</span><span class="p">)</span> <span class="o">+</span>
+            coord_equal<span class="p">()</span>
+
+png<span class="p">(</span><span class="s">&quot;nyc-taxi-6.png&quot;</span><span class="p">,</span> w<span class="o">=</span><span class="m">900</span><span class="p">,</span> h<span class="o">=</span><span class="m">900</span><span class="p">,</span> res<span class="o">=</span><span class="m">300</span><span class="p">)</span>
+plot
+dev.off<span class="p">()</span></code></pre></div>
+
+
+<p><img src="/img/nyc-ggplot2-howto/nyc-taxi-6.png" alt="" /></p>
+
+<p>A good step forward. Revenue all through Manhattan is mostly the same except for Penn Station. Meanwhile, the hexes in LaGuardia Airport are noticeably more saturated than Penn Station.</p>
+
+<p>Hopefully, this tutorial gave you a good look into a few interesting tricks that can be accomplished with ggplot2, even though the code can be somewhat messy. If you want more orthodox methods of plotting geographic data in ggplot2, you should look into the <a href="https://cran.r-project.org/web/packages/ggmap/index.html">ggmap</a> R package, which I used to plot <a href="http://minimaxir.com/2014/04/san-francisco/">Facebook Checkin data in San Francisco</a>, and look into the <a href="https://cran.r-project.org/web/packages/maps/index.html">maps</a> R package plus shapefiles, which I used to plot <a href="http://minimaxir.com/2015/01/tree-time/">Instagram photo location data</a>. Unfortunately, the code may not necessarily be less messy.</p>
+
+<hr />
+
+<p><em>If you use the code or data visualization designs contained within this article, it would be greatly appreciated if proper attribution is given back to this article and/or myself. Thanks!</em></p>
+
+    
+    <div class="post-meta">
+  	Nov 16, 2015
+  	
+  	
+  	<div class="sharing">
+  
+		  <span class="social facebook"><a href="http://www.facebook.com/share.php?u=http://minimaxir.com/2015/11/nyc-ggplot2-howto/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data="http://minimaxir.com/2015/11/nyc-ggplot2-howto/"><i class="fa fa-facebook"></i><span class="count mdl-cell--hide-phone"> -</span></a></span>
+  
+		<span class="social twitter"><a href="http://twitter.com/home/?status=How to Visualize New York City Using Taxi Location Data and ggplot2 - http://minimaxir.com/2015/11/nyc-ggplot2-howto/ - via @minimaxir"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=600');return false;" data=http://minimaxir.com/2015/11/nyc-ggplot2-howto/><i class="fa fa-twitter"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+
+  <span  class="social linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&title=How to Visualize New York City Using Taxi Location Data and ggplot2&url=http://minimaxir.com/2015/11/nyc-ggplot2-howto/"  onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');return false;" data=http://minimaxir.com/2015/11/nyc-ggplot2-howto/><i class="fa fa-linkedin"></i><span class="count mdl-cell--hide-phone"> -</span></a> </span>
+   
+	</div>
+	
+  	</div>
+  </article>
+  
+  
+  
+  
+
+  
+
+</div>
+      </div>
+    </div>
+          </div>
+        </div>
+
+
+
+  <div class="demo-ribbon hero about">
+  	<div class="demo-container mdl-grid">
+  	
+  	<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+  	<div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--hide-phone">  	
+  	<img src="/MaxFBInvert.png" title="Stop mousing over me! I'm not a XKCD comic!">
+  	</div>
+  	
+  	<div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
+  	
+  	<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">  	
+  	<p>Max Woolf (@minimaxir) is a Software QA Engineer living and working in the San Francisco Bay Area for over 3 years and a 2012 Carnegie Mellon University graduate.</p>
+  
+  <p>In his spare time, Max uses <a href="https://www.python.org/">Python</a> to gather data from public APIs and <a href="http://ggplot2.org/">ggplot2</a> to make pretty charts from that data.</p>
+  
+  <p>You can learn more about Max <a href="/about">here</a>, or view his portfolio <a href="/portfolio">here</a>.
+  
+  
+    <div class="social-icon-list">
+	
+    <a title="Facebook" href="https://facebook.com/max.woolf" target="_blank"><i class="fa fa-facebook-square"></i></a>
+    
+  	
+    <a title="Twitter" href="https://twitter.com/minimaxir" target="_blank"><i class="fa fa-twitter-square"></i></a>
+    
+	
+    <a title="LinkedIn" href="https://linkedin.com/in/minimaxir" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+    
+    
+    <a title="GitHub" href="https://github.com/minimaxir" target="_blank"><i class="fa fa-github-square"></i></a>
+    
+    
+    <a title="E-Mail" href="mailto:max@minimaxir.com"><i class="fa fa-envelope-square"></i></a>
+    
+  </div>
+  	</div>
+  	
+
+	</div>
+  	</div>
+  
+  <div class="demo-container mdl-grid">
+ <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+ <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+  
+  
+        <section>
+          <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'minimaxir';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://minimaxir.com/2015/11/nyc-ggplot2-howto/';
+        var disqus_url = 'http://minimaxir.com/2015/11/nyc-ggplot2-howto/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+        </section>
+        
+        
+  <div class="demo-container mdl-grid archive-nav">
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        
+          <h3><a href="/2015/10/reddit-topwords/" style="float: left;"><i class="material-icons">arrow_back</i>  Prev</a></h3>
+        
+    	</div>
+
+		<div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+		
+		<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        
+        </div>
+      </div>
+        
+</div>
+</div>
+  
+  
+
+
+		
+		
+		
+		
+        <footer class="demo-footer mdl-mini-footer">
+          <div class="mdl-mini-footer--left-section">
+            <ul class="mdl-mini-footer--link-list">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/portfolio/">Portfolio</a></li>
+            </ul>
+          </div>
+          
+          <div class="mdl-mini-footer--right-section">
+          <ul class="mdl-mini-footer--link-list">
+          <li>Theme made by Max Woolf using <a href="http://www.getmdl.io/">Material Design Lite</a>.</li>
+          </ul>
+          </div>
+        </footer>
+ </main>
+    </div>
+    
+  </body>
+</html>
