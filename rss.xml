@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-11-16T19:02:54-08:00</updated>
+  <updated>2015-11-16T19:13:43-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -39,7 +39,7 @@
 <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">lat</span><span class="p">,</span> <span class="n">long</span></code></pre></div>
 
 
-<p>The resulting dataset is 4 million rows and 116MB in size! This is well over the limit for downloading from the web BigQuery client, so you must use a local client (in the attached notebook, R), and it will still take about 10-15 minutes to download. (as a result, I recommend caching the results locally). Relatedly, rendering 4 million points on a single plot on screen may be computationally intensive: I strongly recommend rendering the visualization to disk by instantiating a <code>png</code> device or by using <code>ggsave</code>.</p>
+<p>The resulting dataset is 4 million rows and 116MB in size! This is well over the limit for downloading from the web BigQuery client, so you must use a local client (in the attached notebook, R), and it will still take about 10-15 minutes to download (as a result, I recommend caching the results locally). Relatedly, rendering 4 million points on a single plot on screen may be computationally intensive: I strongly recommend rendering the visualization to disk by instantiating a <code>png</code> device or by using <code>ggsave</code>.</p>
 
 <p>Here&rsquo;s a few results from that query.</p>
 
@@ -147,7 +147,7 @@ dev.off<span class="p">()</span></code></pre></div>
 
 <p><span class="border"><img src="http://minimaxir.com/img/nyc-ggplot2-howto/nyc-taxi-4.png" alt="" /></span></p>
 
-<p>Due to <code>coord_equal()</code> enforcing the chart dimensions, the rendering device has a gap of white space at the top due to interaction with the <code>grid</code> graphics pagkage that ggplot2 is based upon; normally not a problem for default charts, but a waste of space for visualizations with non-white backgrounds.</p>
+<p>Due to <code>coord_equal()</code> enforcing the chart dimensions, the rendering device has a gap of white space at the top due to interaction with the <code>grid</code> graphics package that ggplot2 is based upon; normally not a problem for default charts, but a waste of space for visualizations with non-white backgrounds.</p>
 
 <p>I attempted to fix this issue by forcing <code>grid</code> to render a black rectangle then plot on top of it. Unfornately, that was not successful. The quickest workaround is to set the image dimensions through trial-and-error such that the issue is minimized.</p>
 
@@ -157,7 +157,7 @@ dev.off<span class="p">()</span></code></pre></div>
 
 <p>Hex map overlays are a popular technique for aggregating two-dimensional data on a 3rd dimension. ggplot2 has a relatively new <a href="http://docs.ggplot2.org/current/stat_summary_hex.html">stat_summary_hex</a> function which does just that.</p>
 
-<p>Why not aggregate total revenue for NYC Yellow Taxi Pickups to determine where taxis generate the most money? Since we conveiently have the code to generate a map of NYC already, we can plot the hex bins on top of that map, after a few more tweaks:</p>
+<p>Why not aggregate total revenue for NYC Yellow Taxi Pickups to determine where taxis generate the most money? Since we conveniently have the code to generate a map of NYC already, we can plot the hex bins on top of that map, after a few more tweaks:</p>
 
 <ul>
 <li>Set the 3rd dimension, <code>z</code>, to <code>total_revenue</code></li>
@@ -225,7 +225,7 @@ dev.off<span class="p">()</span></code></pre></div>
 
 <p>A good step forward. Revenue all through Manhattan is mostly the same except for Penn Station. Meanwhile, the hexes in LaGuardia Airport are noticeably more saturated than Penn Station.</p>
 
-<p>Hopefully, this tutorial gave you a good look into a few interesting tricks that can be accomplished with ggplot2, even though the code can be somewhat messy. If you want more orthodox methods of plotting geographic data in ggplot2, you should look into the <a href="https://cran.r-project.org/web/packages/ggmap/index.html">ggmap</a> R package, which I used to plot <a href="http://minimaxir.com/2014/04/san-francisco/">Facebook Checkin data in San Francisco</a>, and look into the <a href="https://cran.r-project.org/web/packages/maps/index.html">maps</a> R package plus shapefiles, which I used to plot <a href="http://minimaxir.com/2015/01/tree-time/">Instagram photo location data</a>. Unfortunately, the code may not necessarily be less messy.</p>
+<p>Hopefully, this tutorial gave you a good look into a few interesting tricks that can be accomplished with ggplot2, even though the code can be somewhat messy. If you want more orthodox methods of plotting geographic data in ggplot2, you should look into the <a href="https://cran.r-project.org/web/packages/ggmap/index.html">ggmap</a> R package, which I used to plot <a href="http://minimaxir.com/2014/04/san-francisco/">Facebook Checkin data in San Francisco</a>, and look into the <a href="https://cran.r-project.org/web/packages/maps/index.html">maps</a> R package plus shape files, which I used to plot <a href="http://minimaxir.com/2015/01/tree-time/">Instagram photo location data</a>. Unfortunately, the code may not necessarily be less messy.</p>
 
 <hr />
 
