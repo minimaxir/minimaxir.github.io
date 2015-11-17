@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-11-16T08:03:37-08:00</updated>
+  <updated>2015-11-16T19:02:54-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -18,9 +18,9 @@
     <link href="http://minimaxir.com/2015/11/nyc-ggplot2-howto/"/>
     <updated>2015-11-16T08:00:00-08:00</updated>
     <id>http://minimaxir.com/2015/11/nyc-ggplot2-howto</id>
-    <content type="html"><![CDATA[<p>A few months ago, I had <a href="http://minimaxir.com/2015/08/nyc-map/">posted a visualization</a> of NYC Yellow Taxis using <a href="http://ggplot2.org">ggplot2</a>, an extremely-popular R package by Hadley Wickham for data visualization. At the time, the code used for the chart was very messy since I eager to create something cool after seeing the <a href="https://news.ycombinator.com/item?id=10003118">referenced Hacker News thread</a>. Due to popular demand, I&rsquo;ve cleaned up the code and have <a href="https://github.com/minimaxir/nyc-taxi-notebook">released it open source</a>, with a few improvements.</p>
+    <content type="html"><![CDATA[<p>A few months ago, I had <a href="http://minimaxir.com/2015/08/nyc-map/">posted a visualization</a> of NYC Yellow Taxis using <a href="http://ggplot2.org">ggplot2</a>, an extremely-popular R package by Hadley Wickham for data visualization. At the time, the code used for the chart was very messy since I was eager to create something cool after seeing the <a href="https://news.ycombinator.com/item?id=10003118">referenced Hacker News thread</a>. Due to popular demand, I&rsquo;ve cleaned up the code and have <a href="https://github.com/minimaxir/nyc-taxi-notebook">released it open source</a>, with a few improvements.</p>
 
-<p>Here are tips and tutorials on how to make such visualizations.</p>
+<p>Here are some tips and tutorials on how to make such visualizations.</p>
 
 <h2>Getting the Data</h2>
 
