@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-11-16T19:13:43-08:00</updated>
+  <updated>2015-12-04T08:00:59-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,248 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Analyzing San Francisco Crime Data to Determine When Arrests Frequently Occur]]></title>
+    <link href="http://minimaxir.com/2015/12/sf-arrests/"/>
+    <updated>2015-12-04T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/12/sf-arrests</id>
+    <content type="html"><![CDATA[<p>The <a href="https://data.sfgov.org">SF OpenData portal</a> is a good source for detailed statistics about San Francisco. One of the most popular datasets on the portal is the <a href="https://data.sfgov.org/Public-Safety/SFPD-Incidents-from-1-January-2003/tmnf-yvry">SFPD Incidents dataset</a>, which contains a tabular list of 1,842,050 reports (at time of writing) from 2003 to present.</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrests/incident-data.png" alt="" /></p>
+
+<p>The data can be exported into a 377.9 MB CSV; not large enough to be considered &ldquo;big data,&rdquo; but still too heavy for programs like Excel to process efficiently. Let&rsquo;s take a look at the data using <a href="https://www.r-project.org">R</a> and see if there&rsquo;s anything interesting.</p>
+
+<h2>Processing the Data</h2>
+
+<p>For this article, I&rsquo;m going to do something different and illustrate the data processing step-by-step, both as a teaching tool, and to show that I am not using vague methodology to generate a narratively-convenient conclusion. <em>For more detailed code and output, a <a href="https://github.com/minimaxir/sf-arrests-when-where/blob/master/crime_data_sf.ipynb">Jupyter notebook</a> containing the code and visualizations used in this article is available open-source on GitHub.</em></p>
+
+<p>Loading a 1.9 million row file into R can take awhile, even on modern computers with a SSD. Enter <code>readr</code>, <a href="https://github.com/hadley/readr">another R package</a> by <code>ggplot2</code> author Hadley Wickam, which grants access to a <code>read_csv()</code> function that has nearly 10x the speed of the base <code>read.csv()</code> R function, with more sensible defaults too.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">path <span class="o">&lt;-</span> <span class="s">&quot;~/Downloads/SFPD_Incidents_-_from_1_January_2003.csv&quot;</span>
+
+df <span class="o">&lt;-</span> read_csv<span class="p">(</span>path<span class="p">)</span></code></pre></div>
+
+
+<p>In memory, the data set is 180.9 MB, and removing a few useless columns (e.g. IncidentNum) further reduces the size to 126.9 MB. Since there are many redundancies in the row data (e.g. only 10 distinct PdDistrict values), R can perform memory optimizations.</p>
+
+<p>You may have noticed in the first article image that the text data in some of the columns is in ALL CAPS, which would look ugly if the text was used in a data visualization. We can create a helper function to convert a column of text values into proper case through the use of <a href="http://stackoverflow.com/questions/15776732/how-to-convert-a-vector-of-strings-to-title-case">regular expression shenanigans</a>.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">proper_case <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
+    <span class="kr">return</span> <span class="p">(</span><span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;\\b([A-Z])([A-Z]+)&quot;</span><span class="p">,</span> <span class="s">&quot;\\U\\1\\L\\2&quot;</span> <span class="p">,</span> x<span class="p">,</span> perl<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>Now we can do more through processing using <code>dplyr</code>, <a href="https://github.com/hadley/dplyr"><em>another</em> Hadley Wickam R package</a>. dplyr is a utility that makes R easier to use: it provides a new syntax that allows data manipulation with intuitive function names, the functions can be chained using the <code>%&gt;%</code> operator for efficiency, and all data processing is <em>significantly</em> faster due to a C++ code base. (Fun fact: before the release of dplyr, I intended to quit using R for data analysis in favor of Python. Base R syntax is <em>that</em> difficult to use.)</p>
+
+<p>In dplyr, <code>mutate</code> allows the creation and transformation of columns. We will transform the text columns by running the columns through the <code>proper_case</code> function earlier:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df <span class="o">&lt;-</span> df <span class="o">%&gt;%</span> mutate<span class="p">(</span>Category <span class="o">=</span> proper_case<span class="p">(</span>Category<span class="p">),</span>
+                 Descript <span class="o">=</span> proper_case<span class="p">(</span>Descript<span class="p">),</span>
+                 PdDistrict <span class="o">=</span> proper_case<span class="p">(</span>PdDistrict<span class="p">),</span>
+                 Resolution <span class="o">=</span> proper_case<span class="p">(</span>Resolution<span class="p">))</span></code></pre></div>
+
+
+<p>After all that, the data looks like:</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrests/processed-table.png" alt="" /></p>
+
+<p>Much better!</p>
+
+<p>However, many of the records have a &ldquo;None&rdquo; value for Resolution. This implies that the police appeared at the incident but did no action, which isn&rsquo;t that helpful for analysis. How about we look at incidents which resulted in an arrest?</p>
+
+<p>dplyr&rsquo;s  <code>filter</code> command does that, and we can use <code>grepl()</code> to do a text search for each Resolution value for the presence of &ldquo;Arrest&rdquo;.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_arrest <span class="o">&lt;-</span> df <span class="o">%&gt;%</span> filter<span class="p">(</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;Arrest&quot;</span><span class="p">,</span> Resolution<span class="p">))</span></code></pre></div>
+
+
+<p>That&rsquo;s it! There are 587,499 arrests total in the dataset.</p>
+
+<h2>Arrests Over Time</h2>
+
+<p>One of the most simple data visualizations is a line chart, and it&rsquo;s a good starting point to use for analyzing arrests. Has the number of daily arrests been changing over time? dplyr and ggplot2 make this very easy to visualize in R.</p>
+
+<p>First, the Date column must be formatted as a Date internally in R instead of text. Then we <code>group_by</code> the Date, and then use <code>summarize</code> to perform an aggregate on each group; in this case, count how many entries for the group. (<code>n()</code> is a convenient shortcut). We can also ensure that the dates are in ascending order.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_arrest_daily <span class="o">&lt;-</span> df_arrest <span class="o">%&gt;%</span>
+                    mutate<span class="p">(</span>Date <span class="o">=</span> <span class="kp">as.Date</span><span class="p">(</span>Date<span class="p">,</span> <span class="s">&quot;%m/%d/%Y&quot;</span><span class="p">))</span> <span class="o">%&gt;%</span>
+                    group_by<span class="p">(</span>Date<span class="p">)</span> <span class="o">%&gt;%</span>
+                    summarize<span class="p">(</span>count <span class="o">=</span> n<span class="p">())</span> <span class="o">%&gt;%</span>
+                    arrange<span class="p">(</span>Date<span class="p">)</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/sf-arrests/date-table.png" alt="" /></p>
+
+<p>Nifty! However, keep in mind that there are thousands of days in this dataset.</p>
+
+<p>Now we can make a pretty line chart in ggplot2. Here&rsquo;s the code, and I will explain what everything does afterward:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df_arrest_daily<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> Date<span class="p">,</span> y <span class="o">=</span> count<span class="p">))</span> <span class="o">+</span>
+    geom_line<span class="p">(</span>color <span class="o">=</span> <span class="s">&quot;#F2CA27&quot;</span><span class="p">,</span> size <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span> <span class="o">+</span>
+    geom_smooth<span class="p">(</span>color <span class="o">=</span> <span class="s">&quot;#1A1A1A&quot;</span><span class="p">)</span> <span class="o">+</span>
+    fte_theme<span class="p">()</span> <span class="o">+</span>
+    scale_x_date<span class="p">(</span>breaks <span class="o">=</span> date_breaks<span class="p">(</span><span class="s">&quot;2 years&quot;</span><span class="p">),</span> labels <span class="o">=</span> date_format<span class="p">(</span><span class="s">&quot;%Y&quot;</span><span class="p">))</span> <span class="o">+</span>
+    labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Date of Arrest&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;# of Police Arrests&quot;</span><span class="p">,</span> title <span class="o">=</span> <span class="s">&quot;Daily Police Arrests in San Francisco from 2003 – 2015&quot;</span><span class="p">)</span></code></pre></div>
+
+
+<ul>
+<li><code>ggplot()</code> sets up the base chart and axes.</li>
+<li><code>geom_line()</code> creates the line for the line chart. &ldquo;color&rdquo; and &ldquo;size&rdquo; parameters do just that.</li>
+<li><code>geom_smooth()</code> adds a smoothing spline on top of the chart to serve as a trendline, which is helpful since there are a lot of points.</li>
+<li><code>fte_theme()</code> is my theme based on the FiveThirtyEight style.</li>
+<li><code>scale_x_date()</code> explicitly sets the x-axis to scale with date values. However, there are a few extremely useful formatting parameters with this function: &ldquo;breaks&rdquo; lets you set the chart breaks in plain English, and &ldquo;labels&rdquo; lets you format the dates at this breaks; in this case, there are breaks every 2 years, and only the year will be displayed for minimalism.</li>
+<li><code>labs()</code> is a quick shortcut for labeling your axes and plot (<em>always</em> label!)</li>
+</ul>
+
+
+<p>Running the code and saving the output results in this image:</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrests/sf-arrest-when-1.png" alt="" /></p>
+
+<p>The line chart has high variation due to the number of points (in retrospect, a 30-day moving average of arrests would work better visually). As the trendline indicates, the trend is actually <em>multimodal</em>, with daily arrest peaks in 2009 and 2014. Definitely interesting. The number of arrests appears to be on a downward trend since then.</p>
+
+<p>The next step is to look into possible answers for the day-by-day variation.</p>
+
+<h2>When Do Arrests Happen?</h2>
+
+<p>One of my go-to data visualizations is a heat map of times of week; in this case, we can find which day-of-week and time-of-day when the most Arrests occur in San Francisco, and compare that with other time slots at a glance.</p>
+
+<p>This requires the Hour and Day-of-Week to be present in separate columns: we have a DOY column already, but we need to parse the Hour component out of the HH:MM values in the Time column.</p>
+
+<p>This requires another helper function which uses <code>strsplit()</code> to split a single time value to Hour and Minute components, take the first value (Hour), and convert that value to a numeric value (instead of text) For example, &ldquo;09:40&rdquo; input returns 9.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">get_hour <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
+    <span class="kr">return</span> <span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span>x<span class="p">,</span><span class="s">&quot;:&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]][</span><span class="m">1</span><span class="p">]))</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>Unfortunately, this will not work for an entire column. Using <code>sapply()</code> applies a specified function to each element in a column, which accomplishes the same goal.</p>
+
+<p>The goal is to count how many Arrests occur for a given day-of-week and hour combination. In dplyr, we <code>group_by</code> both &ldquo;DayOfWeek&rdquo; and &ldquo;Hour&rdquo;, and then use <code>summarize</code> again.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_arrest_time <span class="o">&lt;-</span> df_arrest <span class="o">%&gt;%</span>
+                    mutate<span class="p">(</span>Hour <span class="o">=</span> <span class="kp">sapply</span><span class="p">(</span>Time<span class="p">,</span> get_hour<span class="p">))</span> <span class="o">%&gt;%</span>
+                    group_by<span class="p">(</span>DayOfWeek<span class="p">,</span> Hour<span class="p">)</span> <span class="o">%&gt;%</span>
+                    summarize<span class="p">(</span>count <span class="o">=</span> n<span class="p">())</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/sf-arrests/dow-table.png" alt="" /></p>
+
+<p>A few more tweaks are done (off camera) to convert the Hours to representations like &ldquo;12 PM&rdquo; and get everything in the correct order.</p>
+
+<p>Now, it&rsquo;s time to make the heatmap using <code>ggplot2</code>. Here&rsquo;s the code, and I will explain what the new functions do:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df_arrest_time<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> Hour<span class="p">,</span> y <span class="o">=</span> DayOfWeek<span class="p">,</span> fill <span class="o">=</span> count<span class="p">))</span> <span class="o">+</span>
+    geom_tile<span class="p">()</span> <span class="o">+</span>
+    fte_theme<span class="p">()</span> <span class="o">+</span>
+    theme<span class="p">(</span><span class="kc">...</span><span class="p">)</span> <span class="o">+</span>
+    labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Hour of Arrest (Local Time)&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;Day of Week of Arrest&quot;</span><span class="p">,</span> title <span class="o">=</span> <span class="s">&quot;# of Police Arrests in San Francisco from 2003 – 2015, by Time of Arrest&quot;</span><span class="p">)</span> <span class="o">+</span>
+    scale_fill_gradient<span class="p">(</span>low <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">,</span> high <span class="o">=</span> <span class="s">&quot;#27AE60&quot;</span><span class="p">,</span> labels <span class="o">=</span> comma<span class="p">)</span></code></pre></div>
+
+
+<ul>
+<li><code>geom_title()</code> creates tiles. (instead of lines)</li>
+<li><code>theme()</code> is needed for a few additional theme tweaks to get the gradient bar to render (tweaks not shown)</li>
+<li><code>scale_fill_gradient()</code> tells the tiles to fill on a gradient, from white as the lowest value to a green as the highest value. The &ldquo;labels = comma&rdquo; parameter is a hidden helpful tip to allow any values in the legend to show with commas.</li>
+</ul>
+
+
+<p>Putting it all together:</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrests/sf-arrest-when-2.png" alt="" /></p>
+
+<p>The heatmap is an intuitive result. Arrests don&rsquo;t happen in the early morning, and arrests tend to be elevated Friday and Saturday night, when everyone is out on the town.</p>
+
+<p>However, the peak arrest time is apparently on Wednesdays at 4-5 PM. Wednesdays and the 4-5 PM timeslot in general have elevated arrest frequency, too. Why is that the case?</p>
+
+<p>This requires further analysis.</p>
+
+<h2>Facets of Arrest</h2>
+
+<p>Perhaps the odd results can be explained by another lurking variable. Logically, certain types of crime, such as DUIs, should happen primarily at night. ggplot2 has tool known as faceting that makes such analysis easy by rendering a chart for each instance of another value in another variable. In this case, with only <em>one</em> line of ggplot2 code, we can plot a heatmap for <em>each</em> of the top types of arrests, and see if there is any significant variation in the heatmap.</p>
+
+<p>After quickly using dplyr to aggregate and sort the top categories of arrest, by number of occurrences:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_top_crimes <span class="o">&lt;-</span> df_arrest <span class="o">%&gt;%</span>
+                    group_by<span class="p">(</span>Category<span class="p">)</span> <span class="o">%&gt;%</span>
+                    summarize<span class="p">(</span>count <span class="o">=</span> n<span class="p">())</span> <span class="o">%&gt;%</span>
+                    arrange<span class="p">(</span>desc<span class="p">(</span>count<span class="p">))</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/sf-arrests/top-crimes.png" alt="" /></p>
+
+<p>&ldquo;Other Offenses&rdquo; is a catch-all, so we will ignore that. Filter on the top 18 types of crime excluding Other Offenses and aggregate as usual.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_arrest_time_crime <span class="o">&lt;-</span> df_arrest <span class="o">%&gt;%</span>
+                    filter<span class="p">(</span>Category <span class="o">%in%</span> df_top_crimes<span class="o">$</span>Category<span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="m">19</span><span class="p">])</span> <span class="o">%&gt;%</span>
+                    mutate<span class="p">(</span>Hour <span class="o">=</span> <span class="kp">sapply</span><span class="p">(</span>Time<span class="p">,</span> get_hour<span class="p">))</span> <span class="o">%&gt;%</span>
+                    group_by<span class="p">(</span>Category<span class="p">,</span> DayOfWeek<span class="p">,</span> Hour<span class="p">)</span> <span class="o">%&gt;%</span>
+                    summarize<span class="p">(</span>count <span class="o">=</span> n<span class="p">())</span></code></pre></div>
+
+
+<p>Time for the heat map! The <code>ggplot</code> code is nearly identical to the previous heatmap code, except we add <code>facet_wrap()</code>.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df_arrest_time_crime<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> Hour<span class="p">,</span> y <span class="o">=</span> DayOfWeek<span class="p">,</span> fill <span class="o">=</span> count<span class="p">))</span> <span class="o">+</span>
+    geom_tile<span class="p">()</span> <span class="o">+</span>
+    fte_theme<span class="p">()</span> <span class="o">+</span>
+    theme<span class="p">(</span><span class="kc">...</span><span class="p">)</span> <span class="o">+</span>
+    labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Hour of Arrest (Local Time)&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;Day of Week of Arrest&quot;</span><span class="p">,</span> title <span class="o">=</span> <span class="s">&quot;# of Police Arrests in San Francisco from 2003 – 2015, by Category and Time of Arrest&quot;</span><span class="p">)</span> <span class="o">+</span>
+    scale_fill_gradient<span class="p">(</span>low <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">,</span> high <span class="o">=</span> <span class="s">&quot;#2980B9&quot;</span><span class="p">)</span> <span class="o">+</span>
+    facet_wrap<span class="p">(</span><span class="o">~</span> Category<span class="p">,</span> nrow <span class="o">=</span> <span class="m">6</span><span class="p">)</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/sf-arrests/sf-arrest-when-3.png" alt="" /></p>
+
+<p>Easy visualization to make, but it&rsquo;s not fully correct. There can only be one scale for the whole visualization, which is why the categories with lots of arrests appear colored and others do not (however, it shows that Drugs/Narcotics arrests are a large contributor to the Wednesday emphasis of the data). We need to normalize the counts by facet. dplyr has a nice trick for normalization: group by the normalization variable (Category), then mutate to add a column based on the aggregate for each unique value.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_arrest_time_crime <span class="o">&lt;-</span> df_arrest_time_crime <span class="o">%&gt;%</span>
+                            group_by<span class="p">(</span>Category<span class="p">)</span> <span class="o">%&gt;%</span>
+                            mutate<span class="p">(</span>norm <span class="o">=</span> count<span class="o">/</span><span class="kp">sum</span><span class="p">(</span>count<span class="p">))</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/sf-arrests/crime-norm.png" alt="" /></p>
+
+<p>Setting the &ldquo;fill&rdquo; to &ldquo;norm&rdquo; and rerunning the heatmap code yields:</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrests/sf-arrest-when-4.png" alt="" /></p>
+
+<p>Now things get interesting.</p>
+
+<p>Prostitution has the most notably unique behavior, which high concentrations of arrests at night on weekdays. Drunkenness and DUIs have high concentrations at night on weekends. And Disorderly Conduct has a high concentration of arrests at 5 AM on weekdays? That&rsquo;s not intuitive.</p>
+
+<p>Notably, some offenses have relatively random times of arrests, such as Stolen Property and Vehicle Theft.</p>
+
+<p>However, this doesn&rsquo;t help explain why arrests tend to happen Wednesdays/4-5PM. Maybe faceting by another variable will provide more information.</p>
+
+<p>Perhaps Police district? Maybe some PDs in San Francisco are more zealous than others. Since we created a code workflow earlier, we can apply it to any other variable very easily; in this case, it&rsquo;s mostly just replacing instances of &ldquo;Category&rdquo; with &ldquo;PdDistrict.&rdquo;</p>
+
+<p>Doing thus yields this heatmap.</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrests/sf-arrest-when-5.png" alt="" /></p>
+
+<p>Which isn&rsquo;t helpful. The charts are mostly identical to each other, and to the original heatmap. (Central Station (<a href="http://www.sf-police.org/Modules/ShowDocument.aspx?documentID=27554">coverage map</a>), however, has activity correlated to Drunkenness arrests.)</p>
+
+<p>Perhaps the frequency of arrests is correlated to the time of year? How about faceting by month?</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrests/sf-arrest-when-6.png" alt="" /></p>
+
+<p>Nope. Zero difference.</p>
+
+<p>Last try. As shown in the line chart, the # of Arrests has oscillated over the years. Perhaps there&rsquo;s a specific year that&rsquo;s skewing the results. Let&rsquo;s facet by Year.</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrests/sf-arrest-when-7.png" alt="" /></p>
+
+<p>Nope<sup>2</sup>. 2010-2012 have elevated Wednesday activity, but not by much.</p>
+
+<p>This is frustrating. As of this posting, I don&rsquo;t have an obvious answer for the elevated arrests Wednesdays at 4-5PM. That being said, there definitely is still more to learn from looking at SF Crime data, although that&rsquo;s enough analysis for the time being.</p>
+
+<p>My next article will discuss how to plot arrests on a map using the <code>ggmap</code> R library, which hopefully will provide more answers. The <a href="https://github.com/minimaxir/sf-arrests-when-where">GitHub repository</a> contains a Jupyter notebook with code and visualizations for both for this article, and for the upcoming ggmap visualizations (if you want a sneak peek) which will show <em>where</em> arrests in San Francisco frequently occur.</p>
+
+<hr />
+
+<p><em>If you use the code or data visualization designs contained within this article, it would be greatly appreciated if proper attribution is given back to this article and/or myself. Thanks!</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Visualize New York City Using Taxi Location Data and ggplot2]]></title>
@@ -1061,63 +1303,6 @@ GROUP BY lat, long
 <hr />
 
 <p><em>You can view the metadata for the Top 500 Gaming videos on YouTube at <a href="https://docs.google.com/spreadsheets/d/1fy2-9c5HORwvhvAljEG6LvyrM3zG5YnWnalvepX3eV8/edit?usp=sharing">this Google Sheet</a>.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Almost Every Smartphone and Tablet Browses the Web in Portrait Mode]]></title>
-    <link href="http://minimaxir.com/2015/03/portrait/"/>
-    <updated>2015-03-18T08:30:00-07:00</updated>
-    <id>http://minimaxir.com/2015/03/portrait</id>
-    <content type="html"><![CDATA[<p><strong>UPDATE</strong>: <em>After others questioned the data in this blog post, I rechecked the derivation of the data and ran more tests. It turns out that JavaScript may not consistently differentiate, for example, between the browser resolutions of 1280x720 and 720x1280 on mobile devices. Since this is how Google Analytics determines the device resolution, this may affect the final results. The post and charts remain unchanged for posterity.</em></p>
-
-<p>I&rsquo;m currently working on a blog post on how the rise of smartphones and tablets impacts the design of charts and other data visualizations. In the process, I took a look at the proportion of mobile devices, tablets, and desktops which have visited my blog over time, using <a href="http://www.google.com/analytics/">Google Analytics</a>, in order to quantify the importance of catering to these newer technologies.</p>
-
-<p><img src="http://minimaxir.com/img/portrait/minimaxir_devices.png"  ></p>
-
-<p>After looking at 781,557 visitors to minimaxir.com from January 2013 to February 2015, the proportion of mobile devices + tablets has been slightly increasing, and together consist of more than &frac14;th of the views to my blog, so catering to these users is not unimportant.</p>
-
-<p>Another important concern is <em>how</em> visitors view my blog on smartphones/tablets. Do they read holding their device in <strong>portrait</strong> mode, where the device is vertically-oriented and supports one-handed use, or do they read the web using their device in <strong>landscape</strong> mode, where the device is horizontally-oriented and allows for more text per line? Almost every desktop monitor is landscape, so worrying about that is effectively a non-issue.</p>
-
-<p>Google Analytics also records the screen resolution of each browser which visits my website (for example, an iPhone 5/5S user in portrait mode will appear as a <em>mobile</em> device with a effective resolution of <em>320x568</em>. Note that the true device resolution is <em>640x1136</em>; for many modern smartphones, the web content renders at twice the DPI to fit the entire screen). From that, I can infer that the user has their device in portrait mode if the screen height is greater than the screen width, and vice versa for landscape.</p>
-
-<p>After breaking it down by device category, I found something unexpected.</p>
-
-<p><img src="http://minimaxir.com/img/portrait/minimaxir_orientation.png"  ></p>
-
-<p>95.25% of all smartphones browse the web in portrait orientation, while 88.18% of all tablets browse the web in portrait. I was expecting the proportion of portrait mode users to be high, but not <em>that</em> high! *</p>
-
-<p>But what does this mean in terms of website design?</p>
-
-<h1>Implications</h1>
-
-<p>Modern front-end website themes and frameworks advocate <a href="http://en.wikipedia.org/wiki/Responsive_web_design">responsive design</a>, where the website resizes and adjusts elements in order to fit the screen resolution of the device (my website uses the <a href="http://getbootstrap.com/">Bootstrap framework</a>, which was one of the first to popularize responsive design) However, there is programming, design, and QA overhead necessary to support each and every possible device width, from the tiniest portrait smartphones to the wide 1080p monitors used on desktops. As a result, many older websites do not care to invest the time and money to optimize for responsive design, but as my first chart shows, the proportion of tablets and smartphones is nontrivial, and therefore there&rsquo;s a strong incentive for catering to them.</p>
-
-<p>Bootstrap has a maximum width of 1200px; any screen width less than that will be impacted by responsive design. Let&rsquo;s look at the distibution of device widths, by device category.</p>
-
-<p><img src="http://minimaxir.com/img/portrait/minimaxir_devices_all.png"  ></p>
-
-<p>The median browser width is 1366px, corresponding to the device resolution of 1366x768, which is a common &ldquo;720p&rdquo; resolution on laptops. Half of the visitors will have a screen width greater than 1366px, and therefore they would not benefit from a responsive layout. Inversely, half of the visitors will have a device width below 1366px, and most of those are not desktops and below the 1200px limit and therefore will be impacted by responsive design.</p>
-
-<p>Here&rsquo;s the same chart, but colored by device orientation instead of category.</p>
-
-<p><img src="http://minimaxir.com/img/portrait/minimaxir_orientations_all.png"  ></p>
-
-<p>The majority of the devices below the median are portrait devices, which isn&rsquo;t surprising, but is evident that portrait mode is a concern.</p>
-
-<p>We can further separate these groups in 6 subgroups: one for each device category and orientation combination. This tells the full story.</p>
-
-<p><img src="http://minimaxir.com/img/portrait/minimaxir_widths.png"  ></p>
-
-<p>Mobile Portrait devices have over 75% of the widths concentrated at about 360px (the effective width of Samsung Galaxy smartphones), while Tablet Portrait devices have over 75% of the widths concentrated at about 768px (the effective width of iPads). In contrast, Landscape smartphones, tablets, and desktops encompass a wider variety of device widths.</p>
-
-<p>Not only do most smartphones view the web in portrait, the effective widths of these smartphones and tablets are centered around specific widths. This makes targeting certain device widths an effective strategy for saving time when testing mobile-optimized content, especially when working with data visualizations.</p>
-
-<hr />
-
-<p>*In fairness, the viewers on my website about technology and statistics may not necessarily represent the viewers on the internet as a whole. However, it&rsquo;s fair to assume that the way a person holds a device is uncorrelated with the person&rsquo;s topic preferences. Additionally, the very large sample size of 781,557 effectively eliminates any uncertainty about the results due to random chance.</p>
-
-<p><em>You can download a copy of the data <a href="https://docs.google.com/spreadsheets/d/14vUjq7rv5fceIe8pZRqfZrp7JGj3Uw1fFI2-3NL3Dvs/edit?usp=sharing">in this Google Sheet</a>. All charts were made using R and ggplot2.</em></p>
 ]]></content>
   </entry>
   
