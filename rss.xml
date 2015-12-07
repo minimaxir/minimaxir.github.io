@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-12-04T08:00:59-08:00</updated>
+  <updated>2015-12-07T07:52:11-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,186 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mapping Where Arrests Frequently Occur in San Francisco Using Crime Data]]></title>
+    <link href="http://minimaxir.com/2015/12/sf-arrest-maps/"/>
+    <updated>2015-12-07T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/12/sf-arrest-maps</id>
+    <content type="html"><![CDATA[<p>In my previous post, <a href="http://minimaxir.com/2015/12/sf-arrests/">Analyzing San Francisco Crime Data to Determine When Arrests Frequently Occur</a>, I found out that there are trends where SF Police arrests occur more frequently than others. By processing the <a href="https://data.sfgov.org/Public-Safety/SFPD-Incidents-from-1-January-2003/tmnf-yvry">SFPD Incidents dataset</a> from the <a href="https://data.sfgov.org">SF OpenData portal</a>, I found that arrests typically occur on Wednesdays at 4-5 PM, and that the type of crime is relevant to the frequency of the crime. (e.g. DUIs happen late Friday/Saturday night).</p>
+
+<p>However, I could not understand <em>why</em> Wednesday/4-5PM is a peak time for arrests. In addition to analyzing <em>when</em> arrests occur, I also looked at <em>where</em> arrests occur. For example, perhaps more crime happens as people are leaving work; in that case, we would expect to see crimes downtown.</p>
+
+<h2>Making a Map of SF Arrests</h2>
+
+<p>Continuing from the previous analysis, I have a data frame of all police arrests that have occurred in San Francisco from 2003 - 2015 (587,499 arrests total).</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrest-map/arrests.png" alt="" /></p>
+
+<p>What is the most efficient way to make a map for the data? There are too many data points for rendering each point in a tool like <a href="http://www.tableau.com">Tableau</a> or <a href="https://www.google.com/maps">Google Maps</a>. I can use <code>ggplot2</code> again as I did <a href="http://minimaxir.com/2015/11/nyc-ggplot2-howto/">to make a map of New York City</a> manually, but as noted in that article, the abstract nature of the map may hide information.</p>
+
+<p>Enter <code>ggmap</code>. ggmap, an <a href="https://github.com/dkahle/ggmap">R package by David Kahle</a>, is a tool that allows the user to retrieve a map image from a number of map data providers, and integrates seamlessly with ggplot2 for simple visualization creation. Kahle and Hadley Wickham (the creator of ggplot2) <a href="https://journal.r-project.org/archive/2013-1/kahle-wickham.pdf">coauthored a paper</a> describing practical applications of ggmap.</p>
+
+<p>I will include most of the map generation code in-line. <em>For more detailed code and output, a <a href="https://github.com/minimaxir/sf-arrests-when-where/blob/master/crime_data_sf.ipynb">Jupyter notebook</a> containing the code and visualizations used in this article is available open-source on GitHub.</em></p>
+
+<p>By default, you can ask ggmap just for a location using <code>get_map()</code>, and it will give you an approximate map around that location. You can configure the zoom level on that point as well. Optionally, if you need precise bounds for the map, you can set the bounding box manually, and the <a href="http://boundingbox.klokantech.com">Bounding Box Tool</a> works extremely well for this purpose, with the CSV coordinate export already being in the correct format.</p>
+
+<p>ggmap allows maps from sources such as <a href="https://www.google.com/maps">Google Maps</a> and <a href="http://www.openstreetmap.org/#map=5/51.500/-0.100">OpenStreetMap</a>, and the maps can be themed, such as a color map of a black-and-white map. A black-and-white minimalistic map would be best for readability. A <a href="https://www.reddit.com/r/dataisbeautiful/comments/3ule41/mapping_restaurants_in_san_francisco_by_health/">Reddit submission by /u/all_genes_considered</a> used <a href="http://maps.stamen.com/#terrain/12/37.7706/-122.3782">Stamen maps</a> as a source with the toner-lite theme, and that worked well.</p>
+
+<p>Since we&rsquo;ve identified the map parameters, now we can request an appropriate map:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">bbox <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">-122.516441</span><span class="p">,</span><span class="m">37.702072</span><span class="p">,</span><span class="m">-122.37276</span><span class="p">,</span><span class="m">37.811818</span><span class="p">)</span>
+
+map <span class="o">&lt;-</span> get_map<span class="p">(</span>location <span class="o">=</span> bbox<span class="p">,</span> <span class="kn">source</span> <span class="o">=</span> <span class="s">&quot;stamen&quot;</span><span class="p">,</span> maptype <span class="o">=</span> <span class="s">&quot;toner-lite&quot;</span><span class="p">)</span></code></pre></div>
+
+
+<p>Plotting the map by itself results in something like this:</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrest-map/sf-arrest-where-0.png" alt="" /></p>
+
+<p>On the right track (aside from two Guerrero Streets), but obviously it&rsquo;ll need some aesthetic adjustments.</p>
+
+<p>Let&rsquo;s plot all 587,499 arrests on top of the map for fun and see what happens.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggmap<span class="p">(</span>map<span class="p">)</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>data <span class="o">=</span> df_arrest<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>X<span class="p">,</span> y<span class="o">=</span>Y<span class="p">),</span> color <span class="o">=</span> <span class="s">&quot;#27AE60&quot;</span><span class="p">,</span> size <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> alpha <span class="o">=</span> <span class="m">0.01</span><span class="p">)</span> <span class="o">+</span>
+            fte_theme<span class="p">()</span> <span class="o">+</span>
+            theme<span class="p">(</span><span class="kc">...</span><span class="p">)</span> <span class="o">+</span>
+            labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Locations of Police Arrests Made in San Francisco from 2003 – 2015&quot;</span><span class="p">)</span></code></pre></div>
+
+
+<ul>
+<li><code>ggmap()</code> sets up the base map.</li>
+<li><code>geom_point()</code> plots points. The data for plotting is specified at this point. &ldquo;color&rdquo; and &ldquo;size&rdquo; parameters do just that. An alpha of 0.01 causes each point to be 99% transparent; therefore, addresses with a lot of points will be more opaque.</li>
+<li><code>fte_theme()</code> is my theme based on the FiveThirtyEight style.</li>
+<li><code>theme()</code> is needed for a few additional theme tweaks to remove the axes/margins</li>
+<li><code>labs()</code> is for labeling the plot (<em>always</em> label!)</li>
+</ul>
+
+
+<p>Rendering the plot results in:</p>
+
+<p><a href="http://i.imgur.com/Xu8wXzc.png" target=_blank><img src="http://minimaxir.com/img/sf-arrest-map/sf-arrest-where-1.png" alt="" /></a></p>
+
+<p><em>NOTE: All maps in this article are embedded at a lower size to ensure that the article doesn&rsquo;t take days to load. To load a high-resolution version of any map, click on it and it will open in a new tab.</em></p>
+
+<p><em>Additionally, since ggmap forces plots to a fixed ratio, this results in the &ldquo;random white space&rdquo; problem mentioned in the NYC article, for which I still have not found a solution, but have minimized the impact.</em></p>
+
+<p>It&rsquo;s clear to see where arrests in the city occur. A large concentration in the Tenderloin and the Mission, along with clusters in Bayview and Fisherman&rsquo;s Wharf. However, point-stacking is not helpful when comparing high-density areas, so this visualization can be optimized.</p>
+
+<p>How about faceting by type of crime again? We can render a map of San Francisco for each type of crime, and then we can see if the clusters for a given type of crime are different from others.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">plot <span class="o">&lt;-</span> ggmap<span class="p">(</span>map<span class="p">)</span> <span class="o">+</span>
+            geom_point<span class="p">(</span>data <span class="o">=</span> df_arrest <span class="o">%&gt;%</span> filter<span class="p">(</span>Category <span class="o">%in%</span> df_top_crimes<span class="o">$</span>Category<span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="m">19</span><span class="p">]),</span> aes<span class="p">(</span>x<span class="o">=</span>X<span class="p">,</span> y<span class="o">=</span>Y<span class="p">,</span> color<span class="o">=</span>Category<span class="p">),</span> size<span class="o">=</span><span class="m">0.75</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">0.05</span><span class="p">)</span> <span class="o">+</span>
+            fte_theme<span class="p">()</span> <span class="o">+</span>
+            theme<span class="p">(</span><span class="kc">...</span><span class="p">)</span> <span class="o">+</span>
+            labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Locations of Police Arrests Made in San Francisco from 2003 – 2015, by Type of Crime&quot;</span><span class="p">)</span> <span class="o">+</span>
+            facet_wrap<span class="p">(</span><span class="o">~</span> Category<span class="p">,</span> nrow <span class="o">=</span> <span class="m">3</span><span class="p">)</span></code></pre></div>
+
+
+<p>Again, only one line of new code for the facet, although the source data needs to be filtered as it was in the previous post.</p>
+
+<p>Running the code yields:</p>
+
+<p><a href="http://i.imgur.com/6NgzV3k.jpg" target=_blank><img src="http://minimaxir.com/img/sf-arrest-map/sf-arrest-where-2.png" alt="" /></a></p>
+
+<p>This is certainly more interesting (and pretty). Some crimes, such as Assaults, Drugs/Narcotics, and Warrants, occur all over the city. Other crimes, such as Disorderly Conduct and Robbery, primarily have clusters in the Tenderloin and in the Mission close to the 16th Street BART stop. (Prostitution notably has a cluster in the Mission and a cluster <em>above</em> the Tenderloin.)</p>
+
+<p>Again, we can&rsquo;t compare high-density points, so now we should probably normalize the data by facet. One way to do this is to weight each point by the reciprocal of the number of points in the facet (e.g. if there are 5,000 Fraud arrests, assign a weight of 1/5000 to each Fraud arrest), and aggregate the sums of the weights in a geographical area.</p>
+
+<p>We can reuse the normalization code from the previous post, and the hex overlay code from my NYC taxi plot post as well:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">sum_thresh <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> threshold <span class="o">=</span> <span class="m">10</span><span class="o">^</span><span class="m">-3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="kp">sum</span><span class="p">(</span>x<span class="p">)</span> <span class="o">&lt;</span> threshold<span class="p">)</span> <span class="p">{</span><span class="kr">return</span> <span class="p">(</span><span class="kc">NA</span><span class="p">)}</span>
+    <span class="kr">else</span> <span class="p">{</span><span class="kr">return</span> <span class="p">(</span><span class="kp">sum</span><span class="p">(</span>x<span class="p">))}</span>
+<span class="p">}</span>
+
+plot <span class="o">&lt;-</span> ggmap<span class="p">(</span>map<span class="p">)</span> <span class="o">+</span>
+            stat_summary_hex<span class="p">(</span>data <span class="o">=</span> df_arrest <span class="o">%&gt;%</span> filter<span class="p">(</span>Category <span class="o">%in%</span> df_top_crimes<span class="o">$</span>Category<span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="m">19</span><span class="p">])</span> <span class="o">%&gt;%</span> group_by<span class="p">(</span>Category<span class="p">)</span> <span class="o">%&gt;%</span> mutate<span class="p">(</span>w<span class="o">=</span><span class="m">1</span><span class="o">/</span>n<span class="p">()),</span> aes<span class="p">(</span>x<span class="o">=</span>X<span class="p">,</span> y<span class="o">=</span>Y<span class="p">,</span> z<span class="o">=</span>w<span class="p">),</span> fun<span class="o">=</span>sum_thresh<span class="p">,</span> alpha <span class="o">=</span> <span class="m">0.8</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;#CCCCCC&quot;</span><span class="p">)</span> <span class="o">+</span>
+            fte_theme<span class="p">()</span> <span class="o">+</span>
+            theme<span class="p">(</span><span class="kc">...</span><span class="p">)</span> <span class="o">+</span>
+            scale_fill_gradient<span class="p">(</span>low <span class="o">=</span> <span class="s">&quot;#DDDDDD&quot;</span><span class="p">,</span> high <span class="o">=</span> <span class="s">&quot;#2980B9&quot;</span><span class="p">)</span> <span class="o">+</span>
+            labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Locations of Police Arrests Made in San Francisco from 2003 – 2015, Normalized by Type of Crime&quot;</span><span class="p">)</span> <span class="o">+</span>
+            facet_wrap<span class="p">(</span><span class="o">~</span> Category<span class="p">,</span> nrow <span class="o">=</span> <span class="m">3</span><span class="p">)</span></code></pre></div>
+
+
+<ul>
+<li><code>sum_thresh()</code> is a helper function that aggregates the sums of weights, but will not plot the corresponding hex if there is not enough data at that location.</li>
+<li><code>scale_fill_gradient()</code> sets the gradient for the chart. If there are few arrests, the hex will be gray; if there are many arrests, it will be deep blue.</li>
+</ul>
+
+
+<p>Putting it all together:</p>
+
+<p><a href="http://i.imgur.com/LXKPseq.jpg" target=_blank><img src="http://minimaxir.com/img/sf-arrest-map/sf-arrest-where-3.png" alt="" /></a></p>
+
+<p>This confirms the interpretations mentioned above.</p>
+
+<p>Since the code base is already created, it is very simple to facet on any variable. So why not create a faceted map for <em>every conceivable variable</em>?</p>
+
+<p>How about checking arrest locations by Police Districts?</p>
+
+<p><a href="http://i.imgur.com/i82wsIZ.png" target=_blank><img src="http://minimaxir.com/img/sf-arrest-map/sf-arrest-where-4.png" alt="" /></a></p>
+
+<p>The map shows that the hex plotting works correctly, at the least. Notably, the Central, Northern, and Southern Police Districts end up making a large proportion of their arrests nearby the Tenderloin/Market Street instead of anywhere else in their area of perview.</p>
+
+<p>Is the location of arrests seasonal? Does it vary by the month the arrest occured?</p>
+
+<p><a href="http://i.imgur.com/u2eQMZf.png" target=_blank><img src="http://minimaxir.com/img/sf-arrest-map/sf-arrest-where-5.png" alt="" /></a></p>
+
+<p>Nope. Still Tenderloin and Mission.</p>
+
+<p>Maybe the locations of arrests have changed over time, as legal polices changed. Let&rsquo;s facet by year.</p>
+
+<p><a href="http://i.imgur.com/x4SRnkU.png" target=_blank><img src="http://minimaxir.com/img/sf-arrest-map/sf-arrest-where-6.png" alt="" /></a></p>
+
+<p>Here things are <em>slightly</em> different across each facet; Tenderloin had a much higher concentration of arrests peaking in 2009-2010, and the concentration of yearly arrests in the Tenderloin has decreased relative to everywhere else in the city.</p>
+
+<p>Does the location of arrests vary by the time of day? As noted earlier, there could be more arrests downtown during working hours.</p>
+
+<p><a href="http://i.imgur.com/cDKo8Lt.png" target=_blank><img src="http://minimaxir.com/img/sf-arrest-map/sf-arrest-where-7.png" alt="" /></a></p>
+
+<p>Higher relative concentration in Tenderlion/Mission during work hours, lesser during the night.</p>
+
+<p>Last try. Perhaps the day of week leads to different locations, especially as people tend to go out to bars all across the city.</p>
+
+<p><a href="http://i.imgur.com/tNBRilL.png" target=_blank><img src="http://minimaxir.com/img/sf-arrest-map/sf-arrest-where-8.png" alt="" /></a></p>
+
+<p><em>Zero</em> difference. Eh.</p>
+
+<p>We did learn that there is certainly a lot of arrests in the Tenderloin and 16th Street/Mission BART stop, though. However, that doesn&rsquo;t necessarily mean there is more <em>crime</em> in those areas (correlation does not imply causation), but it is something worth noting when traveling around the San Francisco.</p>
+
+<h2>Bonus: Do Social Security payments lead to an increase in arrests?</h2>
+
+<p>In response to my previous article, <a href="https://www.reddit.com/r/sanfrancisco/comments/3vfgg2/analyzing_san_francisco_crime_data_to_determine/cxn29wd">Redditor /u/NowProveIt hypothesizes</a> that the spike in Wednesday arrests could be attributed to <a href="https://www.ssa.gov/kc/rp_paybenefits.htm">Social Security disability</a> (RDSI) payments. The <a href="https://www.socialsecurity.gov/pubs/EN-05-10031-2015.pdf">Social Security Benefit Payments schedule</a> is typically every second, third, and fourth Wednesday of a month.</p>
+
+<p>Normally, you would expect that the arrest behavior for any Wednesday in a given month to be independent from each other. Therefore, if the arrest behavior for the <em>first</em> Wednesday is different than that for the secord/third/fourth Wednesday (presumably, the First Wednesday has fewer arrests overall), then we might have a lead.</p>
+
+<p>Through more <code>dplyr</code> shenanigans, I am able to filter the dataset of arrests to Wednesday arrests only, and classify each Wednesday as the first, second, third, or fourth of the month. (there are occasionally fifth Wednesdays but no one cares about those).</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrest-map/ordinal.png" alt="" /></p>
+
+<p>We can plot a single line chart for each ordinal of the number of arrests over the day. We are looking to see if the First Wednesday has different behavior than the other Wednesdays.</p>
+
+<p><img src="http://minimaxir.com/img/sf-arrest-map/ssi-crime-1.png" alt="" /></p>
+
+<p>&hellip;and it doesn&rsquo;t.</p>
+
+<p>Looking at locations data doesn&rsquo;t help either.</p>
+
+<p><a href="http://i.imgur.com/wTDKjOm.png" target=_blank><img src="http://minimaxir.com/img/sf-arrest-map/ssi-crime-2.png" alt="" /></a></p>
+
+<p>Oh well, it was worth a shot.</p>
+
+<p>As always, all the code and raw images are available <a href="https://github.com/minimaxir/sf-arrests-when-where">in the GitHub repository</a>. Not many more questions were answered by looking at the location data of San Francisco crimes. But that&rsquo;s OK. There&rsquo;s certainly other cool things to do with this data. Kaggle, for instance, is creating <a href="https://www.kaggle.com/c/sf-crime/scripts">a repository of scripts</a> which play around with the Crime Incident dataset.</p>
+
+<p>But for now, at least I made a few pretty charts out of it.</p>
+
+<hr />
+
+<p><em>If you use the code or data visualization designs contained within this article, it would be greatly appreciated if proper attribution is given back to this article and/or myself. Thanks!</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Analyzing San Francisco Crime Data to Determine When Arrests Frequently Occur]]></title>
@@ -28,7 +208,7 @@
 
 <p>For this article, I&rsquo;m going to do something different and illustrate the data processing step-by-step, both as a teaching tool, and to show that I am not using vague methodology to generate a narratively-convenient conclusion. <em>For more detailed code and output, a <a href="https://github.com/minimaxir/sf-arrests-when-where/blob/master/crime_data_sf.ipynb">Jupyter notebook</a> containing the code and visualizations used in this article is available open-source on GitHub.</em></p>
 
-<p>Loading a 1.9 million row file into R can take awhile, even on modern computers with a SSD. Enter <code>readr</code>, <a href="https://github.com/hadley/readr">another R package</a> by <code>ggplot2</code> author Hadley Wickam, which grants access to a <code>read_csv()</code> function that has nearly 10x the speed of the base <code>read.csv()</code> R function, with more sensible defaults too.</p>
+<p>Loading a 1.9 million row file into R can take awhile, even on modern computers with a SSD. Enter <code>readr</code>, <a href="https://github.com/hadley/readr">another R package</a> by <code>ggplot2</code> author Hadley Wickham, which grants access to a <code>read_csv()</code> function that has nearly 10x the speed of the base <code>read.csv()</code> R function, with more sensible defaults too.</p>
 
 <div class="highlight"><pre><code class="language-r" data-lang="r">path <span class="o">&lt;-</span> <span class="s">&quot;~/Downloads/SFPD_Incidents_-_from_1_January_2003.csv&quot;</span>
 
@@ -44,7 +224,7 @@ df <span class="o">&lt;-</span> read_csv<span class="p">(</span>path<span class=
 <span class="p">}</span></code></pre></div>
 
 
-<p>Now we can do more through processing using <code>dplyr</code>, <a href="https://github.com/hadley/dplyr"><em>another</em> Hadley Wickam R package</a>. dplyr is a utility that makes R easier to use: it provides a new syntax that allows data manipulation with intuitive function names, the functions can be chained using the <code>%&gt;%</code> operator for efficiency, and all data processing is <em>significantly</em> faster due to a C++ code base. (Fun fact: before the release of dplyr, I intended to quit using R for data analysis in favor of Python. Base R syntax is <em>that</em> difficult to use.)</p>
+<p>Now we can do more through processing using <code>dplyr</code>, <a href="https://github.com/hadley/dplyr"><em>another</em> Hadley Wickham R package</a>. dplyr is a utility that makes R easier to use: it provides a new syntax that allows data manipulation with intuitive function names, the functions can be chained using the <code>%&gt;%</code> operator for efficiency, and all data processing is <em>significantly</em> faster due to a C++ code base. (Fun fact: before the release of dplyr, I intended to quit using R for data analysis in favor of Python. Base R syntax is <em>that</em> difficult to use.)</p>
 
 <p>In dplyr, <code>mutate</code> allows the creation and transformation of columns. We will transform the text columns by running the columns through the <code>proper_case</code> function earlier:</p>
 
@@ -247,7 +427,7 @@ df <span class="o">&lt;-</span> read_csv<span class="p">(</span>path<span class=
 
 <p>This is frustrating. As of this posting, I don&rsquo;t have an obvious answer for the elevated arrests Wednesdays at 4-5PM. That being said, there definitely is still more to learn from looking at SF Crime data, although that&rsquo;s enough analysis for the time being.</p>
 
-<p>My next article will discuss how to plot arrests on a map using the <code>ggmap</code> R library, which hopefully will provide more answers. The <a href="https://github.com/minimaxir/sf-arrests-when-where">GitHub repository</a> contains a Jupyter notebook with code and visualizations for both for this article, and for the upcoming ggmap visualizations (if you want a sneak peek) which will show <em>where</em> arrests in San Francisco frequently occur.</p>
+<p><a href="http://minimaxir.com/2015/12/sf-arrest-maps/">My next article</a> discusses how to plot arrests on a map using the <code>ggmap</code> R library, which hopefully will provide more answers. The <a href="https://github.com/minimaxir/sf-arrests-when-where">GitHub repository</a> contains a Jupyter notebook with code and visualizations for both for this article, and for the upcoming ggmap visualizations (if you want a sneak peek) which will show <em>where</em> arrests in San Francisco frequently occur.</p>
 
 <hr />
 
@@ -1212,97 +1392,6 @@ GROUP BY lat, long
 <p><em>If you haven&rsquo;t, I strongly recommend looking at the <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/how_to_build_facebook_scraper.ipynb">IPython Notebook</a> for more detailed coding methodology.</em></p>
 
 <p><em>And, as an experiment, I&rsquo;ve made an <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/fb_page_data_analysis.ipynb">IPython notebook with the R kernel</a> showing how I made the NYT-BuzzFeed chart!</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why is the Most-Viewed Gaming Video on YouTube About Cars 2?]]></title>
-    <link href="http://minimaxir.com/2015/06/cars-2/"/>
-    <updated>2015-06-15T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2015/06/cars-2</id>
-    <content type="html"><![CDATA[<p>Last month, <a href="https://www.youtube.com/">YouTube</a>, in celebration of its 10-year anniversary, <a href="http://kotaku.com/the-10-most-popular-games-on-youtube-1704234763">released a report</a> of the Top 10 most-watched video game franchises on YouTube:</p>
-
-<pre><code>1. Minecraft
-2. Grand Theft Auto (series)
-3. League of Legends
-4. Call of Duty (series)
-5. FIFA (series)
-6. Garry’s Mod
-7. The Sims (series)
-8. Five Nights at Freddy’s (series)
-9. Puzzles &amp; Dragons
-10. Dota 2
-</code></pre>
-
-<p>There aren&rsquo;t many surprises on the list. <a href="https://minecraft.net/">Minecraft</a> and <a href="http://na.leagueoflegends.com/">League of Legends</a> have become incredibly huge in such a short time, although <a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy%27s">Five Nights as Freddy&rsquo;s</a> position is impressive given that it started <em>a year ago</em>.</p>
-
-<p>After <a href="http://www.reddit.com/r/dataisbeautiful/comments/38rghg/the_30_mostviewed_youtube_videos_oc/">renewed public interest</a> in YouTube data, I decided to take a poke at the <a href="https://developers.google.com/youtube/">YouTube API</a> to see if I can determine which Gaming videos are the most-viewed. It turns out that the API makes it simple, by allowing you to query on a specific category and sort by the number of views the video has received.</p>
-
-<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_all.png"  ></p>
-
-<p>There&rsquo;s lots of Minecraft, and even lots of Angry Birds in the top-viewed videos.</p>
-
-<p>&hellip;but why is a mundane Cars 2 video from an unknown video channel the most-viewed video of all time?!</p>
-
-<p>No, this is not an error. <a href="https://www.youtube.com/watch?v=urHuO7Zbhhw">You can watch the video yourself on YouTube</a> and verify the view count.</p>
-
-<h1>Vroom Vroom</h1>
-
-<p><img src="http://minimaxir.com/img/cars-2/Cars_2_Poster.jpg"  ></p>
-
-<p><a href="https://en.wikipedia.org/wiki/Cars_2">Cars 2</a> is a CGI movie about talking cars by Pixar which premiered in June 2011. It is, of course, the sequel to <a href="https://en.wikipedia.org/wiki/Cars_%28film%29">Cars</a>, and received more critical reviews compared to its predecessor.</p>
-
-<p>As with many movies, Cars 2 received a tie-in game, <a href="http://tvtropes.org/pmwiki/pmwiki.php/Main/TheProblemWithLicensedGames">most of which are mediocre</a> due to mandatory deadlines and lower budgets. However, <a href="http://www.gamespot.com/reviews/cars-2-review/1900-6321632/">Gamespot gave the game a 7.5</a> out of 10, which is pretty good for a licensed game. The fact that it&rsquo;s a cart racer like Mario Kart helps too.</p>
-
-<p>It&rsquo;s not Minecraft or League of Legends though. Why would a video about it be the most-viewed gaming video of all time?</p>
-
-<h1>Statistical Shenanigans</h1>
-
-<p>Popular YouTube videos are often suspected of having their viewcounts manipulated, since making videos appear more popular than they actually are can help lead to genuine virality. Could this be the case with the Cars 2 video?</p>
-
-<p>I did a few simple diagnostics of the top 1,000 Gaming videos to determine if the Cars 2 video had an statistically unusual view count.</p>
-
-<p>Modern YouTube videos have a Like/Dislike bar, which counts the number of Likes and Dislikes given by viewers of the video. If someone is rigging the view count, the ratio of Likes+Dislikes to the given viewcount should be much lower than for a genuine video with genuine user reactions.</p>
-
-<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_interaction.png"  ></p>
-
-<p>However, for all videos with incredibly large view counts, the ratio of Likes+Dislikes to Views is incredibly low. The line represents the predicted mean for a <a href="http://www.inside-r.org/r-doc/mgcv/gam">generalized additive model</a>, with the shaded area representing a 95% confidence interval for the mean. The Cars 2 data point falls directly on the line, so we cannot safely say that Cars 2 is an outlier from this diagnostic.</p>
-
-<p>Another aspect to check is the ratio of Likes to Dislikes. If a bad video has a manipulated view count, we would expect much fewer Likes and many more Dislikes because viewers may become mislead by the content, especilaly those with misleading titles/thumbnails. In general, the % of people who Liked a video should be high for all videos.</p>
-
-<p><img src="http://minimaxir.com/img/cars-2/youtube_gaming_like_ratio.png"  ></p>
-
-<p>Almost all of the Top 1,000 gaming videos have Like Ratio greater than 50% (i.e. more Likes than Dislikes). However, the Cars 2 video data point falls outside the 95% confidence interval for the regression model. Therefore, it&rsquo;s worth looking into as a possible outlier.</p>
-
-<h1>Plan B</h1>
-
-<p>On the Statistics tab of all public YouTube videos, you can see the number of views a video has received over time. Here is the daily number of views for the Cars 2 video:</p>
-
-<p><img src="http://minimaxir.com/img/cars-2/cars_daily_views.png"  ></p>
-
-<p>The video was released in August 2011 (about a month after the release of the movie), but the video didn&rsquo;t become viral and spike in views until sometime early 2012, many months later.</p>
-
-<p>I <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/">made a submission</a> to the <a href="http://www.reddit.com/r/Games/">games subreddit on Reddit</a> to see if there was any ideas as to why Cars 2 is at the top. /u/ Sureiyaa <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crypxn5">had a good theory</a>:</p>
-
-<blockquote><p>Remember, this video was posted in August 2011, two months after the movie was released. It&rsquo;s also titled &ldquo;Cars 2 HD xxx xxx&rdquo; and is rather lengthy. It would make sense if people searched for &ldquo;Cars 2&rdquo; or even all of &ldquo;Cars 2 HD&rdquo; and stumbled on this video thinking that someone had uploaded the movie for them to watch, especially when you consider that it was a movie aimed at kids who may not pay attention to everything in the title.</p>
-
-<p>With those initial views, it probably became one of the top results if you searched for Cars 2. With that, it grew from there and is probably getting views from being a high-ranking result when searching for games videos in general.</p></blockquote>
-
-<p>Accidental SEO could explain it. Indeed, the first result on Google for &ldquo;Cars 2 HD&rdquo; is the video in question. Although, in that case, why would the spike happen in 2012? (the DVD/Blu-Ray came out October 2011, so a 2012 spike is late even by lazy movie pirate standards)</p>
-
-<p>Another factor is the fact that that Cars franchise appeals to young children, which are <em>very</em> plentiful. This does bring up a <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/cryreaw">valid counterargument</a> though: why Cars 2, and not more popular franchises like <a href="https://en.wikipedia.org/wiki/Frozen_%282013_film%29">Frozen</a> or any other Disney franchise that&rsquo;s more kid-oriented? (for the record, there <em>is</em> a <a href="https://www.youtube.com/watch?v=VQ7GLnRaeHM">Frozen video</a> at #163 in Gaming, although it&rsquo;s blatantly miscategorized)</p>
-
-<p>The Cars 2 video uploader eventually <a href="http://www.reddit.com/r/Games/comments/38xjhp/i_created_a_list_of_the_top_mostviewed_gaming/crzrbdd">replied to the Reddit thread</a> suggesting the children-theory as well:</p>
-
-<blockquote><p>You&rsquo;re indeed right about it blowing up, mainly from mobile device views, which I&rsquo;m guessing was kids watching it. I remember seeing comments from users saying their kids love to watch the video.</p></blockquote>
-
-<p>There&rsquo;s also the factor of YouTube/Google&rsquo;s recommendation algorithms working in mysterious ways and providing video recommendations based on user interests/age/location/etc. Unfortunately, the impact of those can&rsquo;t easily be quantified.</p>
-
-<p>Looking into the view count of the Cars 2 video in Gaming YouTube videos only raises more questions than answers.</p>
-
-<hr />
-
-<p><em>You can view the metadata for the Top 500 Gaming videos on YouTube at <a href="https://docs.google.com/spreadsheets/d/1fy2-9c5HORwvhvAljEG6LvyrM3zG5YnWnalvepX3eV8/edit?usp=sharing">this Google Sheet</a>.</em></p>
 ]]></content>
   </entry>
   
