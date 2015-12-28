@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-12-20T19:19:02-08:00</updated>
+  <updated>2015-12-28T09:08:54-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,208 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Let's Code an Analysis and Visualizations of Yelp Data using R and ggplot2]]></title>
+    <link href="http://minimaxir.com/2015/12/lets-code-1/"/>
+    <updated>2015-12-28T09:00:00-08:00</updated>
+    <id>http://minimaxir.com/2015/12/lets-code-1</id>
+    <content type="html"><![CDATA[<p>One of the reasons I have open-sourced the code for my complicated data visualizations is transparency for the creation process. 2015 was a <a href="http://qz.com/580859/the-most-misleading-charts-of-2015-fixed/">year of misleading and incorrect data visualizations</a>, and I don&rsquo;t want to help contribute to the misconception that data can be used for trickery. &ldquo;Big data&rdquo; in particular is a area where the steps to reproduce results are rarely released publicly in a step-by-step manner, often in an attempt to make the resulting analysis unimpeachable.</p>
+
+<p>It&rsquo;s time to take things to the next level of transparency by recording <a href="https://en.wikipedia.org/wiki/Screencast">screencasts</a> of my data analysis and visualizations.</p>
+
+<p>Last week, ggplot2 author Hadley Wickham released <a href="http://blog.rstudio.org/2015/12/21/ggplot2-2-0-0/">a surprise update</a> for my favorite R package, bumping the version to 2.0.0. Why not celebrate by playing around with ggplot2 and making some pretty charts?</p>
+
+<h2>Let&rsquo;s Code!</h2>
+
+<p>I have recorded a screencast of myself coding in R to play around with data from <a href="http://www.yelp.com/dataset_challenge">Yelp Dataset Challenge</a> and <a href="https://www.youtube.com/watch?v=Emt9bn0D5ZI">uploaded it to YouTube</a>. Additionally, the video can be played at an unusually high quality for screencasting: 1440p on supported browsers, at 60 frames per second.</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/Emt9bn0D5ZI " webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+
+<p>This particular screencast is also my first significant attempt at working with audio/video editing and voice-over. Feel free to provide suggestions for future videos.</p>
+
+<p>Since the screencast is 40 minutes long (inadvertently!), I&rsquo;ve written an abridged summary of the screencast, along with some clarification of points made.</p>
+
+<h2>Yelp Data v2</h2>
+
+<p>A year ago I made a <a href="http://minimaxir.com/2014/09/one-star-five-stars/">blog post analyzing the same Yelp data</a>. Now that the data set contains 1.6 million reviews (as opposed to just 1.1 million back then), it might be interesting to look at it again to see if anything has changed. The data is formatted as by-line JSON: I wrote a pair of Python scripts to convert it to CSV for easy import into R.</p>
+
+<p>The screencast centralizes on three R packages: readr, dplyr, and ggplot2. (all authored by Hadley Wickham)</p>
+
+<p>Loading the dataset into R is easy and fast with <code>read_csv</code>.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_reviews <span class="o">&lt;-</span> read_csv<span class="p">(</span><span class="s">&quot;yelp_reviews.csv&quot;</span><span class="p">)</span></code></pre></div>
+
+
+<p>Since dplyr was loaded beforehand, read_csv loads the data into a tbl_df instead of a normal data.frame. When you call a normal data.frame by itself, <em>all data is printed to console</em>, which is a problem when you have 1.6M rows (yes, that happened during a test recording). Calling a tbl_df results in a very descriptive overview of the data:</p>
+
+<p><img src="http://minimaxir.com/img/lets-code-1/overview.png" alt="" /></p>
+
+<p>Most columns are self-explanatory. <code>review_length</code> is approximate number of words in the review, <code>pos_words</code> is the number of positive words in the review, <code>neg_words</code> is what you expect, <code>net_sentiment</code> is pos_words - neg_words.</p>
+
+<p>A quick way to analyze the distribution of numerical data is to perform a summary on the data frame, which returns a by-column <a href="https://en.wikipedia.org/wiki/Five-number_summary">five-number summary</a> + mean:</p>
+
+<p><img src="http://minimaxir.com/img/lets-code-1/summary.png" alt="" /></p>
+
+<p>Ratings are biased toward 4 and 5 star reviews. There is a lot of skew for review length.</p>
+
+<p>dplyr makes it easy to add columns in-line with the <code>mutate</code> command. Let&rsquo;s normalize the pos_words column:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_reviews <span class="o">&lt;-</span> df_reviews <span class="o">%&gt;%</span> mutate<span class="p">(</span>pos_norm <span class="o">=</span> pos_words <span class="o">/</span> review_length<span class="p">)</span></code></pre></div>
+
+
+<p>And we could do similar steps for the neg_words column too. Or use mutate to transform the data of an existing column.</p>
+
+<p>Onto ggplot2. If you want a quick histogram of univariate data, qplot does just that. Let&rsquo;s visualize the distribution of stars.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">qplot<span class="p">(</span>data<span class="o">=</span>df_reviews<span class="p">,</span> stars<span class="p">)</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-qplot-1.png" alt="" /></p>
+
+<p>Definitely a skew toward 4 and 5 star reviews.</p>
+
+<p>We can do that for other variables too, like review length.</p>
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-qplot-2.png" alt="" /></p>
+
+<p>What about bivariate data? If you give two variables to qplot, it will create a scatter plot. Perhaps there is a relationship between the number of stars and the number of positive words?</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">qplot<span class="p">(</span>data<span class="o">=</span>df_reviews<span class="p">,</span> stars<span class="p">,</span> pos_words<span class="p">)</span></code></pre></div>
+
+
+<p>&hellip;and then we run into a problem. In this case, ggplot2 has to plot 1.6M points to screen, which can take awhile, especially if you are simultaneously using your GPU for video recording. Eventually, we get this:</p>
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-qplot-3.png" alt="" /></p>
+
+<p>At first glance, there appears to be a positive correlation between star rating and number of positive words, but that&rsquo;s misleading: since we don&rsquo;t have alpha transparency on the points, the density is ambiguous. (fixing it requires working outside of a qplot).</p>
+
+<h2>Serious Business Data</h2>
+
+<p>We load the Yelp Businesses data into R through the same way as the reviews data. Here&rsquo;s an overview of the data:</p>
+
+<p><img src="http://minimaxir.com/img/lets-code-1/businesses.png" alt="" /></p>
+
+<p>Both data frames have a <code>business_id</code> column. We can merge them with a <code>left_join</code>, a la SQL. If both data frames have a column with the same name, it will merge on that column by default.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_reviews <span class="o">&lt;-</span> df_reviews <span class="o">%&gt;%</span> left_join<span class="p">(</span>df_businesses<span class="p">)</span></code></pre></div>
+
+
+<p>Then the R console helpfully points out that both dataframes also have a &ldquo;stars&rdquo; column. Uh-oh.</p>
+
+<p>We reset the df_reviews data frame from scratch and merge again, explicitly stating the &ldquo;by&rdquo; column for merging. Now we know <em>where</em> reviews were made, and that might provide helpful information.</p>
+
+<h2>Aggregation Station</h2>
+
+<p>It might be interesting to know the average star rating by city. dplyr allows for <code>group_by</code> and <code>summarize</code> operations in a similar manner as SQL.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_cities <span class="o">&lt;-</span> df_reviews <span class="o">%&gt;%</span> group_by<span class="p">(</span>city<span class="p">)</span> <span class="o">%&gt;%</span> summarize<span class="p">(</span>avg_stars <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>stars.x<span class="p">))</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/lets-code-1/cities.png" alt="" /></p>
+
+<p>&hellip;that&rsquo;s not good. The original Yelp Dataset Challenge page mentioned that the dataset is only from specific cities, not &ldquo;1023 E Frye Rd.&rdquo;</p>
+
+<p><img src="http://minimaxir.com/img/lets-code-1/Dataset_Map.png" alt="" /></p>
+
+<p>Hmrph.</p>
+
+<p>From the map, it appears there is no overlap between any of the cities with geographic states, so let&rsquo;s use <code>state</code> instead. Additionally, we can add a count of reviews from that state, and sort by that count descending.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_states <span class="o">&lt;-</span> df_reviews <span class="o">%&gt;%</span> group_by<span class="p">(</span>state<span class="p">)</span> <span class="o">%&gt;%</span> summarize<span class="p">(</span>avg_stars <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>stars.x<span class="p">),</span> count<span class="o">=</span>n<span class="p">())</span> <span class="o">%&gt;%</span> arrange<span class="p">(</span>desc<span class="p">(</span>count<span class="p">))</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/lets-code-1/states.png" alt="" /></p>
+
+<p>Looks good enough, but that&rsquo;s tempting fate.</p>
+
+<h2>ggplot All the Things</h2>
+
+<p>We can plot state vs. avg_stars with ggplot2. Setting it up is easy:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>data<span class="o">=</span>df_states<span class="p">,</span> aes<span class="p">(</span>state<span class="p">,</span> avg_stars<span class="p">))</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-ggplot-1.png" alt="" /></p>
+
+<p>The blank plot is actually new to 2.0.0: running the code without any layers would normally throw an error. The axis values appear valid. Let&rsquo;s add columns via <code>geom_bar</code>:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>data<span class="o">=</span>df_states<span class="p">,</span> aes<span class="p">(</span>state<span class="p">,</span> avg_stars<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">()</span></code></pre></div>
+
+
+<p>&hellip;and this results in an error. geom_bar by itself does histograms on raw values, as shown in the qplots. The correct fix is to add a <code>stat="identity"</code> parameter to geom_bar, which tells it to scale the bars by the given value of the aesthetic.</p>
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-ggplot-2.png" alt="" /></p>
+
+<p>Better. But the x-axis is cluttered and the States would look better on the y-axis. Time for a <code>coord_flip</code>.</p>
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-ggplot-3.png" alt="" /></p>
+
+<p>Better. Now time to fix the order. You may notice that the order of the states is alphabetical going from the bottom of the axis to the top, and R will always set this order for any character vector. We want the sort the labels by their average star rating, descending. To do that we change the internal factor labels of state volume to the specified order.</p>
+
+<p>In the recording, this took awhile due to several brain farts (which happen often when dealing with factor ordering). First, we need to remove a few states with few reviews using a filter The easiest way to do this is to sort the original data frame by avg_stars descending, then set the factor order by using the new state order <em>in reverse</em>. (Ok, ok, it might be easier to just sort ascending and not reverse, but it makes the overview harder to visualize)</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_states <span class="o">&lt;-</span> df_states <span class="o">%&gt;%</span> arrange<span class="p">(</span>desc<span class="p">(</span>avg_stars<span class="p">))</span> <span class="o">%&gt;%</span> filter<span class="p">(</span>count <span class="o">&gt;</span> <span class="m">2000</span><span class="p">)</span> <span class="o">%&gt;%</span> mutate<span class="p">(</span>state <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>state<span class="p">,</span> levels<span class="o">=</span><span class="kp">rev</span><span class="p">(</span>state<span class="p">)))</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/lets-code-1/states-2.png" alt="" /></p>
+
+<p>Rerunning the plot code afterward yields:</p>
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-ggplot-4.png" alt="" /></p>
+
+<p>Good! Why not add labels for each point? This can be done with geom_text, along with adding <code>hjust=1</code> to offset the label, changing the size, and setting the text to white. We can round the avg_star values to 2 decimal places as well.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>data<span class="o">=</span>df_states<span class="p">,</span> aes<span class="p">(</span>state<span class="p">,</span> avg_stars<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> coord_flip<span class="p">()</span> <span class="o">+</span> geom_text<span class="p">(</span>aes<span class="p">(</span>label<span class="o">=</span><span class="kp">round</span><span class="p">(</span>avg_stars<span class="p">,</span> <span class="m">2</span><span class="p">)),</span> hjust<span class="o">=</span><span class="m">1</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-ggplot-5.png" alt="" /></p>
+
+<p>The &ldquo;3.7&rdquo; label requires using the <code>sprintf</code> function instead of <code>round</code> to print &ldquo;3.70&rdquo;, which is not fun. Otherwise, these labels are nice so far. Why not add a theme and axis labels?</p>
+
+<p>I go to my <a href="http://minimaxir.com/2015/02/ggplot-tutorial/">previous ggplot2 tutorial</a> and copy-paste the FiveThirtyEight-inspired theme from there because I am efficient. (The theme required loading the RColorBrewer package, though). The axis labels are added through the <code>labs</code> function. (note that since the axes are flipped, the labels must be flipped too!)</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>data<span class="o">=</span>df_states<span class="p">,</span> aes<span class="p">(</span>state<span class="p">,</span> avg_stars<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> coord_flip<span class="p">()</span> <span class="o">+</span> geom_text<span class="p">(</span>aes<span class="p">(</span>label<span class="o">=</span><span class="kp">round</span><span class="p">(</span>avg_stars<span class="p">,</span> <span class="m">2</span><span class="p">)),</span> hjust<span class="o">=</span><span class="m">2</span><span class="p">,</span> size<span class="o">=</span><span class="m">2</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span> <span class="o">+</span> fte_theme<span class="p">()</span> <span class="o">+</span> labs<span class="p">(</span>y<span class="o">=</span><span class="s">&quot;Average Star Rating by State&quot;</span><span class="p">,</span> x<span class="o">=</span><span class="s">&quot;State&quot;</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;Average Yelp Review Star Ratings by State&quot;</span><span class="p">)</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-ggplot-6.png" alt="" /></p>
+
+<p>Why not add 95% confidence intervals for each average? (Note that the normality assumptions for the confidence interval may not be entirely valid). We can calculate the standard error of the mean and rebuild the dataframe and reorder factors again.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">df_states <span class="o">&lt;-</span> df_reviews <span class="o">%&gt;%</span> group_by<span class="p">(</span>state<span class="p">)</span> <span class="o">%&gt;%</span> summarize<span class="p">(</span>avg_stars <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>stars.x<span class="p">),</span> count<span class="o">=</span>n<span class="p">(),</span> se_mean<span class="o">=</span>sd<span class="p">(</span>stars.x<span class="p">)</span><span class="o">/</span><span class="kp">sqrt</span><span class="p">(</span>count<span class="p">))</span> <span class="o">%&gt;%</span> arrange<span class="p">(</span>desc<span class="p">(</span>avg_stars<span class="p">))</span> <span class="o">%&gt;%</span> filter<span class="p">(</span>count <span class="o">&gt;</span> <span class="m">2000</span><span class="p">)</span> <span class="o">%&gt;%</span> mutate<span class="p">(</span>state <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>state<span class="p">,</span> levels<span class="o">=</span><span class="kp">rev</span><span class="p">(</span>state<span class="p">)))</span></code></pre></div>
+
+
+<p>Time to add a <code>geom_errorbar</code> (not a <code>geom_crossbar</code>!)</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ggplot<span class="p">(</span>data<span class="o">=</span>df_states<span class="p">,</span> aes<span class="p">(</span>state<span class="p">,</span> avg_stars<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> coord_flip<span class="p">()</span> <span class="o">+</span> geom_text<span class="p">(</span>aes<span class="p">(</span>label<span class="o">=</span><span class="kp">round</span><span class="p">(</span>avg_stars<span class="p">,</span> <span class="m">2</span><span class="p">)),</span> hjust<span class="o">=</span><span class="m">2</span><span class="p">,</span> size<span class="o">=</span><span class="m">2</span><span class="p">,</span> color<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span> <span class="o">+</span> fte_theme<span class="p">()</span> <span class="o">+</span> labs<span class="p">(</span>y<span class="o">=</span><span class="s">&quot;Average Star Rating by State&quot;</span><span class="p">,</span> x<span class="o">=</span><span class="s">&quot;State&quot;</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;Average Yelp Review Star Ratings by State&quot;</span><span class="p">)</span> <span class="o">+</span> geom_errorbar<span class="p">(</span>aes<span class="p">(</span>ymin<span class="o">=</span>avg_stars <span class="o">-</span> <span class="m">1.96</span> <span class="o">*</span> se_mean<span class="p">,</span> ymax<span class="o">=</span>avg_stars <span class="o">+</span> <span class="m">1.96</span> <span class="o">*</span> se_mean<span class="p">))</span></code></pre></div>
+
+
+<p><img src="http://minimaxir.com/img/lets-code-1/lc1-ggplot-7.png" alt="" /></p>
+
+<p>Averages are very stable for all cities due to the large sample size.</p>
+
+<p>At this point I realized the recording is too long and I end it there. For a normal blog post, I&rsquo;d add more theming, adjust colors so they don&rsquo;t clash, and add annotations, such as a line representing the true review average from the population. And ideally, performing statistical tests to determine if any averages are different from the population average.</p>
+
+<p>Hopefully this gives some insight into the mechanical process of creating simple data visualizations with R and ggplot2 (the &ldquo;abridged summary&rdquo; ended up being as long as a typical blog post!). As my screencast shows, programming is a recurring process of saying &ldquo;this is easy to do!&rdquo; then failing miserably for stupid reasons. Even after the 40 minute screencast, there&rsquo;s still much, much more polish needed for the data visualization. My blog posts take a very long time to produce for those reasons; the clear, clean code from the finished product is not indicative of the unexpected errors that occur when writing it.</p>
+
+<p>I did this recording &ldquo;blind&rdquo; to test whether or not it&rsquo;s feasible for me to <em>stream</em> the coding of data visualization on services like <a href="http://www.twitch.tv">Twitch</a>. It&rsquo;s definitely possible, but has more logistical challenges. (namely, that <a href="https://obsproject.com">OBS</a> is fussy outside of Windows and I still need to figure out how to configure it optimally). I admit the code in this screencast may not be the highest-quality code (in retrospect I should have put the code in an editor instead of directly in the console, and reuse dataframe/ggplot objects), but the transparent process for coding data visualizations is important. If there is enough interest, I may revisit Yelp data again, or even more advanced datasets.</p>
+
+<hr />
+
+<p><em>You can access the R code used for the data visualizations and the Python scripts used to process the raw Yelp dataset <a href="https://github.com/minimaxir/lets-code-1">in this GitHub repository</a>. However, the raw data itself cannot be redistributed.</em></p>
+
+<p><em>For those wondering what I used for recording the screencast:</em></p>
+
+<p>Computer: <em>Late 2013 13" Retina MacBook Pro running OS X 10.11.2</em></p>
+
+<p>Recording Software: <em>Screenflow 4.5</em></p>
+
+<p>Microphone: <em>Shure MV5 Digital Condenser</em></p>
+
+<p>Music: <em>Various artists from the &ldquo;No Attribution Required&rdquo; section of the YouTube Audio Library</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mapping Where Arrests Frequently Occur in San Francisco Using Crime Data]]></title>
@@ -1263,135 +1465,6 @@ GROUP BY lat, long
 <hr />
 
 <p><em>You can download a <a href="https://dl.dropboxusercontent.com/u/2017402/nyc_yellow_pickup.pdf">PDF of my purple pickup map</a> (4.14 MB) and a <a href="https://dl.dropboxusercontent.com/u/2017402/nyc_yellow_dropoff.pdf">PDF of my blue dropoff map</a> (7.68 MB) sans text, both of which are resolution-independent and sutable for making physical prints.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Scrape Data From Facebook Page Posts for Statistical Analysis]]></title>
-    <link href="http://minimaxir.com/2015/07/facebook-scraper/"/>
-    <updated>2015-07-20T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2015/07/facebook-scraper</id>
-    <content type="html"><![CDATA[<p>One of the first data scrapers I wrote for the purpose of statistical analysis was a Facebook Graph API scraper, in order to determine <a href="http://minimaxir.com/2013/06/big-social-data/">which words are the most important</a> in a Facebook Page status update. However, the v2.0 update to the Facebook API unsurprisingly broke the scraper.</p>
-
-<p>Now that <a href="https://developers.facebook.com/blog/post/2015/07/08/graph-api-v2.4/">v2.4 of the Graph API is released</a>, I gave the Facebook Graph API another look. Turns out, it&rsquo;s pretty easy to scrape and make into a spreadsheet for easy analysis, although like with any other scrapers, there are a large number of gotchas.</p>
-
-<h1>Feasibility</h1>
-
-<p><img src="http://minimaxir.com/img/facebook-scraper/nyt_sample.png"  ></p>
-
-<p>In order to determine if I can sanely scrape a website, I have to do a bit of research. How much data from a Facebook status update can we actually scrape?</p>
-
-<p>Fortunately, Facebook&rsquo;s <a href="https://developers.facebook.com/docs/graph-api/reference">Graph API documentation</a> is pretty good. We need data from the <a href="https://developers.facebook.com/docs/graph-api/reference/page">/page</a> node, and from there, we can access data from the <a href="https://developers.facebook.com/docs/graph-api/reference/v2.4/page/feed">/feed</a> edge.</p>
-
-<p>Between the two nodes, we have access to <code>id</code>, which is a unique identifer that can be used to create a link back to the update itself (e.g. <a href="https://www.facebook.com/5281959998_10150628170209999">https://www.facebook.com/5281959998_10150628170209999</a>) <code>message</code>, the text of the update; <code>link</code>, the URL which the update is linking; <code>name</code>, the title of the webpage of the link, <code>type</code>, an identifier if the update is text, a photo, or a video; and <code>created_time</code>, when the update is published.</p>
-
-<p>Accessing the numerical counts of <code>likes</code>, <code>comments</code>, and <code>shares</code> is less explicit in the documentation. Fortunately, <a href="http://stackoverflow.com/questions/6984526/facebook-graph-api-get-like-count-on-page-group-photos">StackOverflow</a> has the answer: you need to request <code>likes.limit(1).summary(true)</code> instead of normal <code>likes</code>.</p>
-
-<p>There&rsquo;s no indication that there&rsquo;s a Rate Limit, oddly. Since we can query 100 updates at a time, the scraper will be efficient enough that it&rsquo;s unlikely to hit any extreme API limits.</p>
-
-<p>Now that we know we can get all the relevant data from the sample status update, we can build a Facebook post scraper.</p>
-
-<h1>Data Scrappy</h1>
-
-<p><img src="http://minimaxir.com/img/facebook-scraper/def_test.png"  ></p>
-
-<p><em>I have created an <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/how_to_build_facebook_scraper.ipynb">IPython notebook hosted on GitHub</a> with detailed code, code comments, and sample output for each step of the scraper development. I strongly recommend giving it a look.</em></p>
-
-<p>First, we need to see how to actually access the API. It&rsquo;s no longer a public API, and it requires user authentication via <a href="https://developers.facebook.com/docs/facebook-login/access-tokens">access tokens</a>. Users can get Short-Term tokens, but as their name suggests, they expire quickly, so they are not recommended. The Graph API allows a neat trick; by concatenating the App ID from a user-created App and the App Secret, you create an access token which never expires. Of course, this is a major security risk, so create a separate app for the sole purpose of scraping, and reset your API Secret if it becomes known.</p>
-
-<p>Let&rsquo;s say we want to scrape the New York Times' Facebook page. We would send a request to <a href="https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX">https://graph.facebook.com/v2.4/nytimes?access_token=XXXXX</a> and we would get:</p>
-
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
-        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998&quot;</span><span class="p">,</span> 
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;The New York Times&quot;</span>
-<span class="p">}</span></code></pre></div>
-
-
-<p>i.e., the page metadata. Sending a request to /nytimes/feed results in what we want:</p>
-
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
-        <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-20T01:25:01+0000&quot;</span><span class="p">,</span> 
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628157724999&quot;</span><span class="p">,</span> 
-                <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The planned megalopolis, a metropolitan area that would be about 6 times the size of New York\u2019s, is meant to revamp northern China\u2019s economy and become a laboratory for modern urban growth.&quot;</span>
-            <span class="p">},</span> 
-            <span class="p">{</span>
-                <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-19T22:55:01+0000&quot;</span><span class="p">,</span> 
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628161129999&quot;</span><span class="p">,</span> 
-                <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;\&quot;It\u2019s safe to say that federal agencies are not where we want them to be across the board,\&quot; said President Barack Obama&#39;s top cybersecurity adviser. \&quot;We clearly need to be moving faster.\&quot;&quot;</span>
-            <span class="p">}</span>
-         <span class="p">]</span>
-
-            
-<span class="p">}</span></code></pre></div>
-
-
-<p>Now we get the post data. But not much of it. In Graph API v2.4, the default behavior is to return very, very little metadata for statuses in order to reduce bandwidth, with the expectation that the user will request the necessary fields.</p>
-
-<p>So let&rsquo;s request <em>all</em> the fields we want. This results in a very long URL not shown here which causes the posts feed to have all the data we need:</p>
-
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="p">{},</span>
-    <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="s2">&quot;ranked&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;total_count&quot;</span><span class="p">:</span> <span class="mi">31</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-20T01:25:01+0000&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5281959998_10150628157724999&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;likes&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-        <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;total_count&quot;</span><span class="p">:</span> <span class="mi">278</span>
-        <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://nyti.ms/1Jr6LhU&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The planned megalopolis, a metropolitan area that would be about 6 times the size of New York’s, is meant to revamp northern China’s economy and become a laboratory for modern urban growth.&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;China Molds a Supercity Around Beijing, Promising to Change Lives&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;shares&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">50</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;link&quot;</span>
-<span class="p">}</span></code></pre></div>
-
-
-<h1>Post Processing</h1>
-
-<p>Great! Now we just have to process each post. Which is easier said than done.</p>
-
-<p>If you&rsquo;re an avid Facebook user, you know that not all of these attributes are not guaranteed to exist. Status updates may not have text or links. Since we&rsquo;re making a spreadsheet with an enforced schema, we need to validate that a field exists before attempting to process it.</p>
-
-<p>The &ldquo;\u2019"s in the message correspond to a <a href="http://smartquotesforsmartpeople.com/">smart quote</a> apostrophe. Since this a possibility, along with other unicode characters, the message and link names must be encoded <a href="https://en.wikipedia.org/wiki/UTF-8">in UTF-8</a> to prevent errors.</p>
-
-<p>The time format is another issue. The date follows the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> standard for UTC times. However, most spreadsheet programs will not able to parse it as a Date value. Also, since the NYT is based in the USA (specifically, New York), it may be helpful for time-based statistical analysis to convert the time to Eastern Standard Time while fixing the date format.</p>
-
-<p>There&rsquo;s also an unexpected precaution that must be taken whenever scraping data sets. These APIs do not expect users to be accessing very, very old data. As a result, there&rsquo;s a high probability of the API server actually hitting an error sometime during the scrape, such as a <a href="http://www.checkupdown.com/status/E500.html">HTTP Status 500</a> or <a href="http://www.checkupdown.com/status/E502.html">HTTP Status 502</a>. These server errors are temporary, so a helper function must be used to attempt to retrieve data until it is actually successful.</p>
-
-<h1>Putting it All Together</h1>
-
-<p>Now we have a full plan for scraping, we query each page of Facebook Page Statuses (100 statuses maximum per page), process all statuses on that page and writing the output to a CSV file, and navigate to the next page, and repeat until no more statuses left.</p>
-
-<p>This can be done with a for-loop within a while loop. In addition, I also recommend counting the number of posts processed and taking a timestamp every-so-often to ensure that the program has not stalled.</p>
-
-<p><img src="http://minimaxir.com/img/facebook-scraper/cnnwoo.png"  ></p>
-
-<p>And that&rsquo;s it! You can access the complete scraper in this GitHub repository, along with all other scripts mentioned in this article. Once you have the CSV file, you can import it into nearly every statistical program and have fun with it. <em>(You can download a .zip of the NYTimes data <a href="https://dl.dropboxusercontent.com/u/2017402/nytimes_facebook_statuses.zip">here</a> [4.6MB])</em></p>
-
-<p>Say, for example, what would happen if we compared the Median Likes of the New York Times with a certain other  journalistic website that&rsquo;s the master of social media?</p>
-
-<p><img src="http://minimaxir.com/img/facebook-scraper/nytimes_buzz_fb.png"  ></p>
-
-<p>There may be more practical reasons for analyzing data on Facebook Posts, such as quantifying the growth and success of your own page, or that of your competitors. But the data is easy to get and is very useful.</p>
-
-<p>Although, in fairness, the scraper is not perfect and still has room for improvement. With CNN&rsquo;s Facebook Page post data, for example, somehow the scraper skips all posts from 2013. Although in that case, I blame Facebook.</p>
-
-<hr />
-
-<p><em>You can access all resources used in this blog post at this <a href="https://github.com/minimaxir/facebook-page-post-scraper">GitHub repository</a></em>.</p>
-
-<p><em>If you haven&rsquo;t, I strongly recommend looking at the <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/how_to_build_facebook_scraper.ipynb">IPython Notebook</a> for more detailed coding methodology.</em></p>
-
-<p><em>And, as an experiment, I&rsquo;ve made an <a href="https://github.com/minimaxir/facebook-page-post-scraper/blob/master/fb_page_data_analysis.ipynb">IPython notebook with the R kernel</a> showing how I made the NYT-BuzzFeed chart!</em></p>
 ]]></content>
   </entry>
   
