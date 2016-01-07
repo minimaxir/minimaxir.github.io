@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2015-12-28T09:08:54-08:00</updated>
+  <updated>2016-01-07T08:34:54-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,112 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Movie Review Aggregator Ratings Have No Relationship with Box Office Success]]></title>
+    <link href="http://minimaxir.com/2016/01/movie-revenue-ratings/"/>
+    <updated>2016-01-07T08:30:00-08:00</updated>
+    <id>http://minimaxir.com/2016/01/movie-revenue-ratings</id>
+    <content type="html"><![CDATA[<p><a href="http://www.rottentomatoes.com">Rotten Tomatoes</a> has become synonymous with movie quality in recent years. The Rotten Tomatoes Tomatometer aggregates all reviews written by movie critics for a given movie on the internet, determines whether each reviewer rates the movie as &ldquo;Fresh&rdquo; or &ldquo;Rotten&rdquo; and calculates an average. If the proportion of Fresh reviews for a given movie is greater than or equal to 60%, the movie itself is considered &ldquo;Fresh&rdquo; and receives a special icon.</p>
+
+<p><img src="http://minimaxir.com/img/movie-revenue-ratings/examples.png" alt="" /></p>
+
+<p>Top Movies like Christopher Nolan&rsquo;s <a href="http://www.rottentomatoes.com/m/the_dark_knight/">The Dark Knight</a> received a 94% Rotten Tomatoes rating, and generated $533.3 million in domestic box office revenue. But other movies, like Michael Bay&rsquo;s <a href="http://www.rottentomatoes.com/m/transformers_revenge_of_the_fallen/">Transformers: Revenge of the Fallen</a>, received a 19% Tomatometer rating, but still generated $402.1 million in domestic box office revenue.</p>
+
+<p>How strong is the relationship between Tomatometer scores and box office success, anyways? Or are other, better metrics? Time to make some pretty charts.</p>
+
+<p>I obtained a large amount of movie data from the <a href="http://www.omdbapi.com">OMDb API</a>, which provides easy access to movie metadata from IMDb and Rotten Tomatoes. This data contains Rotten Tomatoes Tomatometer scores, Rotten Tomatoes Audience Scores, IMDb User Rankings, and Metacritic Scores. If you want to know how I processed the data in R and plotted the charts using ggplot2, I have <a href="https://www.youtube.com/watch?v=F5Hjlkxw_2A">prepared a screencast</a> for your viewing pleasure.</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/F5Hjlkxw_2A " webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+
+<p>For this analysis, we will be looking at the <a href="http://www.r-statistics.com/2013/05/log-transformations-for-skewed-and-wide-distributions-from-practical-data-science-with-r/">log-transformation</a> of domestic box office revenue, since the values are skewed by mega-blockbusters like the ones mentioned previously. Revenues are not inflation-adjusted since the rating data is only present for recent years and due to the log-transformation already present, inflation correction would not impact this particular analysis much.</p>
+
+<h2>Rotten Tomatoes Tomatometer</h2>
+
+<p>After processing, I have a data subset of 4,863 movies with both Tomatometer and Box Office Gross values. Let&rsquo;s plot all those movies on a scatterplot of log(BoxOffice) vs. Meter with each point having a slight transparency; that way, clusters of points will be come apparent where the areas are darker on the chart.</p>
+
+<p>We expect a positive linear relationship: movies with high Tomatometer scores to have high box office revenue, and inversely movies with low score to have low box office revenue.</p>
+
+<p><img src="http://minimaxir.com/img/movie-revenue-ratings/box-office-rating-1.png" alt="" /></p>
+
+<p>Wait, why does the trendline have a <em>negative</em> slope?</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">Pearson correlation</a> between the Tomatometer scores and log(BoxOffice) is <strong>-0.18</strong>, implying a weak <em>negative</em> linear relationship between the two variables. Not what I expected.</p>
+
+<p>There do appear to be clusters in the data. There is a group of points between $10M and $100M revenue and 0% to 20% Tomatometer rating.  Another group is present between $1,000 and $1M revenue and 80% to 100% RT rating. Both of these areas are outside of a linear relationship: perhaps these clusters are skewing trends too?</p>
+
+<p>Let&rsquo;s try another visualization of the data using <a href="https://en.wikipedia.org/wiki/Contour_line">contour maps</a>, which allow the data to become 3D, so-to-speak. Using a 2D <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation">kernel density estimator</a>, we can identify and color areas on the plot according to the number of points present in that area; the greater the color saturation, the more points present in the given area.</p>
+
+<p><img src="http://minimaxir.com/img/movie-revenue-ratings/box-office-rating-2.png" alt="" /></p>
+
+<p>The two clusters mentioned previously are now much more apparent. It appears there are two distinct sets of movies: blockbusters which critics hate, and limited-appeal films which critics loves. Incidentally, there is no discernible difference between movies which are Fresh (>60%) and Rotten.</p>
+
+<h2>Metacritic</h2>
+
+<p>The <a href="http://www.metacritic.com">Metacritic</a> score is also <a href="http://www.metacritic.com/about-metascores">derived from review data</a> by critics; however, instead of calculating a binary review sentiment and calculating a proportion from that sentiment, Metacritic gives a quantification from 0 to 100 to each critic review and averages them together.</p>
+
+<p>Does that change the results for 4,479 movies?</p>
+
+<p><img src="http://minimaxir.com/img/movie-revenue-ratings/box-office-rating-7.png" alt="" /></p>
+
+<p>Correlation between Metacritic score and log(BoxOffice) is <strong>-0.13</strong>, which puts the analysis in a similar state as the Rotten Tomatoes data. However, the blockbuster cluster has shifted right, and the lesser-appeal cluster has shifted left.</p>
+
+<p><img src="http://minimaxir.com/img/movie-revenue-ratings/box-office-rating-8.png" alt="" /></p>
+
+<p>Clusters are much closer together.</p>
+
+<p>Perhaps a review metric by non-critics will tell a different story.</p>
+
+<h2>Rotten Tomatoes Audience Score</h2>
+
+<p>The Audience Score is calculated in a similar way to the Rotten Tomatoes Tomatometer score: user to the site rate a movie from 0 to 5 stars in half-star increments (i.e. effectively a scale from 0-10) and the proportion of reviews with 3.5 star ratings or higher becomes the Audience Score.</p>
+
+<p>This also presents a cognitive bias in ratings: the <a href="http://tvtropes.org/pmwiki/pmwiki.php/Main/FourPointScale">Four Point Scale</a>, where having a discrete form of ranking may cause people to tend to rate toward the top of the scale and make the entire metric skewed or misleading.</p>
+
+<p>How does the Audience Score compare for 5,163 movies? After all, the audience is the group of people who determine how much money a movie makes at the Box Office.</p>
+
+<p><img src="http://minimaxir.com/img/movie-revenue-ratings/box-office-rating-3.png" alt="" /></p>
+
+<p>Correlation between the Audience score and log(BoxOffice) is <strong>0.05</strong>, which is a positive linear correlation, but representative of barely any practical correlation.</p>
+
+<p>Speaking of the Four Point Scale, notice how, like with Metacritic score, there are barely any movies between 0% and 20% Audience Score. Is there really a skew? Let&rsquo;s look at the contours:</p>
+
+<p><img src="http://minimaxir.com/img/movie-revenue-ratings/box-office-rating-4.png" alt="" /></p>
+
+<p>The locations of the clusters are much different than that of Tomatometer clusters. Both clusters are closer together, with the blockbuster cluster between 50% and 60% audience score and the lesser-appeal cluster between 70% and 80%. Hence, the low correlation.</p>
+
+<h2>IMDb</h2>
+
+<p><a href="http://www.imdb.com">IMDb</a> works <a href="http://www.imdb.com/help/show_leaf?votestopfaq">almost the same way</a> as the Metacritic for non-critics: ratings from IMDb users between 1-10 (note that 0 is missing!) are averaged to get a final score.</p>
+
+<p>How do 5,167 movies fare?</p>
+
+<p><img src="http://minimaxir.com/img/movie-revenue-ratings/box-office-rating-5.png" alt="" /></p>
+
+<p><strong>What?!</strong></p>
+
+<p>The point groupings are at the <em>same</em> positions of ratings, and the correlation between IMDb ratings and log(BoxOffice) is <strong>0.00</strong>. Yes, there&rsquo;s <em>zero</em> correlation!</p>
+
+<p>Checking the contour map confirms it:</p>
+
+<p><img src="http://minimaxir.com/img/movie-revenue-ratings/box-office-rating-6.png" alt="" /></p>
+
+<p>That is <em>literally</em> a Four Point Scale between 5 and 8!</p>
+
+<p>The Rotten Tomatoes metric is the only metric that actually <em>uses</em> the entire rating scale. None of the other potential metrics provide more insight into a potential reason for high box-office revenue. Perhaps the movie rating system itself is broken.</p>
+
+<p>That&rsquo;s not to say that movies need high box-office revenues to be considered successful. However, working with movie profitability, and by extension movie budget, is opening another can-of-worms with respect to data integrity. (that said, on Reddit, /u/chartmkr recently <a href="https://www.reddit.com/r/dataisbeautiful/comments/3zpp3w/movie_budgets_and_box_office_success_19552015_oc/">posted a visualization</a> of Gross vs. Budget which is interesting).</p>
+
+<p>It&rsquo;ll still be fun to point to a Rotten Tomatoes Tomatometer rating as a kneejerk reaction to whether a movie rocks/sucks. Although, the reasons for movie financial success at the box office definitely warrant further investigation.</p>
+
+<hr />
+
+<p><em>You can access the open-sourced Jupyter notebook and high-resolution charts from this article in <a href="https://github.com/minimaxir/movie-revenue-ratings">this GitHub repository</a>. If you use the code or data visualization designs contained within this article, it would be greatly appreciated if proper attribution is given back to this article and/or myself. Thanks!</em></p>
+
+<p><em>Unfortunately, I cannot redistribute the data itself due to licensing concerns.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Let's Code an Analysis and Visualizations of Yelp Data using R and ggplot2]]></title>
@@ -1409,62 +1515,6 @@ df_boot <span class="o">&lt;-</span> tbl_df<span class="p">(</span><span class="
 <p>This approach also has an unexpected benefit; the script support batch conversion, meaning you can convert as many videos as you want at the same time!</p>
 
 <p>As usual, my code is <a href="https://github.com/minimaxir/video-to-gif-osx">open sourced on GitHub</a> with a MIT license, with instructions on how to set up the tool. The repository also includes two bonus utilities; a Shell Script to run the conversion from the command line and an Application which prompts you for movie files instead of needing to right-click. Install the three command-line applications and convert away! Or fork the repository and make an even <em>better</em> Video-to-GIF conversion tool!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Plotting a Map of New York City Using Only Taxi Location Data]]></title>
-    <link href="http://minimaxir.com/2015/08/nyc-map/"/>
-    <updated>2015-08-07T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2015/08/nyc-map</id>
-    <content type="html"><![CDATA[<p>Recently, the New York City Taxi and Limousine Commission <a href="http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml">released a dataset</a> of all Yellow Taxi and Green Taxi trips in 2014, and year-to-date in 2015, which follows the <a href="http://chriswhong.com/open-data/foil_nyc_taxi/">2013 data set</a> which was obtained to a FOIL request for the data last year. The dataset contains fun statistics, such as the location where the taxi picked up and dropped off its fare, the speed the taxi is moving, and the total fare at the end of the ride.</p>
-
-<p>In the <a href="https://news.ycombinator.com/item?id=10003118">Hacker News thread</a> announcing the data set release, user eck posted an interesting, minimalistic visualization of the taxi location data:</p>
-
-<p><img src="http://minimaxir.com/img/nyc-map/ov6K6mt.jpg"  ></p>
-
-<p>eck made the visualization using a &ldquo;few hundred lines of C++&rdquo;. That seemed overkill to me. So I tried to reverse-engineer his visualization using my favorite plotting tool, <a href="http://ggplot2.org/">ggplot2</a>. In theory, plotting a million little points in close proximity should simulate the lines of the streets of New York City.</p>
-
-<p>The dataset is large (2 GB per month of data), although not &ldquo;big data&rdquo; large. It would take an afternoon to set up a local database, and I wanted to make pretty visualizations <em>immediately</em>.</p>
-
-<p>Google BigQuery Developer Advocate Felipe Hoffa <a href="https://www.reddit.com/r/bigquery/comments/3fo9ao/nyc_taxi_trips_now_officially_shared_by_the_nyc/">created a BigQuery interface</a> for the data. BigQuery allows easy and fast access to the entire dataset for rapid processing. In my case, I need to compress the data set by truncating the latitude and longitude of the GPS coordinates to 4 digits; this allows <a href="http://gis.stackexchange.com/a/8674">precision to 11 meters</a> on the coordinates, which is sufficient for estimating. Running this BigQuery query:</p>
-
-<pre><code>SELECT ROUND(pickup_latitude, 4) as lat,
-ROUND(pickup_longitude, 4) as long,
-COUNT(*) as num_pickups
-FROM [nyc-tlc:yellow.trips_2014]
-GROUP BY lat, long
-</code></pre>
-
-<p>Gives me data for about 1 Million GPS coordinates; more than enough to make a full map. This also has the benefit of fitting into memory, which is necessary for use with ggplot2.</p>
-
-<p>My first attempt, where I plot 1 million very small white points on a black map bounded to the latitude/longitude coordinates of NYC, turned out pretty well, and with less than 10 lines of code.</p>
-
-<p><img src="http://minimaxir.com/img/nyc-map/nyc_old.png"  ></p>
-
-<p>On Reddit, my submission of the <a href="https://www.reddit.com/r/dataisbeautiful/comments/3fvg8i/map_of_new_york_city_plotted_using_locations_of/">data visualization</a> received about 3,500 points, and a large amount of social media buzz on Facebook and Twitter. There were a few comments however; why were there random points in the Hudson River? Why are highways indicated as taxi pickup spots? Why does the map say &ldquo;2015&rdquo; when your query says &ldquo;2014&rdquo;? (guilty on the last one; the map was made using the 2014 dataset by accident!)</p>
-
-<p>At the least, the streets of <a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a> were not discernable at all, unlike eck&rsquo;s diagram. As a result, I made a few refinements to remove some logical outliers with impossible vehicle speeds, removed noisy points which were completely isolated, <em>used the correct 2015 data set</em>, and also added a color weighting to the data, where the most-taxi-dense areas will appear colored (scaling logarithmically) to differentate those areas from less taxi-prone areas.</p>
-
-<p><img src="http://minimaxir.com/img/nyc-map/nyc_yellow_pickup.png"  ></p>
-
-<p>The map, while less bright, became more precise. The streets in Manhattan are now visible, and the purple color shows how <a href="https://en.wikipedia.org/wiki/Times_Square">Times Square</a> and the <a href="https://en.wikipedia.org/wiki/Financial_District,_Manhattan">Financial District</a> in particular are popular taxi pickup spots in Manhattan. <a href="https://en.wikipedia.org/wiki/LaGuardia_Airport">LaGuardia Airport</a> and <a href="https://en.wikipedia.org/wiki/John_F._Kennedy_International_Airport">John F. Kennedy International Airport</a> appear purple as well.</p>
-
-<p>However, this map only looks at places where people picked up Taxis. Could there be a difference when plotting Taxi dropoffs instead?</p>
-
-<p>I reran the query and visualization scripts on the dropoff location data instead, and as it turns out, there is a significant difference!</p>
-
-<p><img src="http://minimaxir.com/img/nyc-map/nyc_yellow_dropoff.png"  ></p>
-
-<p>While Taxi pickups were isolated more in residential areas, taxi dropoffs can happen anywhere in the Tristate area. Additionally, the map more closely matches eck&rsquo;s original visualization.</p>
-
-<p>Setting up ggplot2 in this way will also allow me to perform other fun analyses in the future. For example, since we know where taxis drop off, we can determine the average speed for the trip for each significant location in NYC geography. Would the average trip speed be higher for trips that drop off at an airport due to the highway? Conversely, would the average speed be lower in Manhattan? How would fares be affected? Those are questions for another blog post. :)</p>
-
-<p>Although, I still have no guesses why the highways are highlighted in <em>both</em> maps.</p>
-
-<hr />
-
-<p><em>You can download a <a href="https://dl.dropboxusercontent.com/u/2017402/nyc_yellow_pickup.pdf">PDF of my purple pickup map</a> (4.14 MB) and a <a href="https://dl.dropboxusercontent.com/u/2017402/nyc_yellow_dropoff.pdf">PDF of my blue dropoff map</a> (7.68 MB) sans text, both of which are resolution-independent and sutable for making physical prints.</em></p>
 ]]></content>
   </entry>
   
