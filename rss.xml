@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2016-01-07T08:34:54-08:00</updated>
+  <updated>2016-01-11T08:20:54-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Video Games and Charity: Analyzing Awesome Games Done Quick 2016 Donations]]></title>
+    <link href="http://minimaxir.com/2016/01/agdq-2016/"/>
+    <updated>2016-01-11T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2016/01/agdq-2016</id>
+    <content type="html"><![CDATA[<p><a href="https://gamesdonequick.com">Awesome Games Done Quick</a>, and its sister event Summer Games Done Quick, are a fundraising events that livestreams video game speedruns <a href="http://www.twitch.tv/gamesdonequick/profile">live on Twitch</a> for charity. Beginning in January 2011, before Twitch was launched out from Justin.tv, <a href="https://en.wikipedia.org/wiki/Awesome_Games_Done_Quick_and_Summer_Games_Done_Quick#List_of_marathons">AGDQ was very small</a> and only raised $52,519.83 for the <a href="http://preventcancer.org">Prevent Cancer Foundation</a>; now, in 2016, from January 3rd to January 10th, AGDQ <a href="https://gamesdonequick.com/tracker/index/agdq2016">successfully raised</a> about $1.2 <em>million</em> for the charity.</p>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Speedrun">speedrun</a>, as the name suggests, is the process of completing a video game as fast as possible, optionally with self-imposed challenges to make things more interesting. Speedruns can emphasize extreme player skill and/or clever glitch abuse. And unexpected mistakes which make the results hilarious.</p>
+
+<p>One of the first runs of AGDQ 2016, <a href="https://www.youtube.com/watch?v=jLlian3g7Gg">Super Monkey Ball</a>, demonstrates all of these. (run starts at 5:57)</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/jLlian3g7Gg " webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+
+<p>AGDQ 2016 also has fun with the concept of speedrunning. One of the best events of AGDQ 2016 was a blind speedrun of user-created <a href="https://www.youtube.com/watch?v=8qC584MWXO4">Super Mario Maker</a> levels from top designers, in which hilarity ensued. (run starts at 27:41)</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/8qC584MWXO4 " webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+
+<p>It might be interesting to know <em>which</em> video games lead to the achievement of over $1M donated to charity and the nature of the donations in general.</p>
+
+<h1>Gaming Data</h1>
+
+<p>With a few quick scripts on Kimono to scrape data from the <a href="https://gamesdonequick.com/tracker/donations/agdq2016">AGDQ 2016 donation page</a> (+ a <em>lot</em> of postprocessing in R!), I obtained a dataset of all 30,528 donations, their donors, when they donated, during what speedrun they donated, and <em>why</em> they donated. (<a href="https://docs.google.com/spreadsheets/d/1yyfkS0jvRK1cWrQesYiBn1TMGC93lo1MqahcU3XeGIU/edit?usp=sharing">Google Sheets link</a> for all the data)</p>
+
+<p>Here are the cumulative donations during AGDQ, color coded by day:</p>
+
+<p><img src="http://minimaxir.com/img/agdq-2016/agdq-1.png" alt="" /></p>
+
+<p>Cumulative donations were strong the entire run. On the second-to-last day, the donations rallied and increased exponentially, clearing $1M handily on the last day.</p>
+
+<p>The donation amount minimum is $5, but the average is significantly higher at $39.62. What is the distribution of donations?</p>
+
+<p>Here is a distribution of donations from $5 to $100 (for ease of visualization/interpretation), which account for 97% of all donations:</p>
+
+<p><img src="http://minimaxir.com/img/agdq-2016/agdq-2.png" alt="" /></p>
+
+<p>The median donation amount is $20. What&rsquo;s interesting is that donations occur at clear break points: not only are there many donations at multiple of $10, but there are many donations at $25 and $75 as well. The $50 and $75 points also potentially benefited for being the threshold for entry into a <a href="https://gamesdonequick.com/tracker/prizes/agdq2016">grand prize raffle</a>. I&rsquo;ll note off-chart that there is a spike in $1,000 donations, the threshold for the audience-clapping in celebration and the <a href="https://gamesdonequick.com/tracker/donation/212588">top single donation</a> was made by an AGDQ sponsor, <a href="https://www.theyetee.com/">The Yetee</a>, at $18,225. The <a href="https://gamesdonequick.com/tracker/donation/209613">top donation by a non-sponsor</a> is from Minecraft creator Notch at $8,000, which he <a href="https://gamesdonequick.com/tracker/donation/234071">did twice</a>.</p>
+
+<p>Which games are the most popular and generated the most amount of money for the Prevent Cancer Foundation?</p>
+
+<p><img src="http://minimaxir.com/img/agdq-2016/agdq-4.png" alt="" /></p>
+
+<p>Unsurprisingly, Nintendo games are the most popular due to the nostalgia factor. In fairness, the top runs on this chart occur during the last two days of AGDQ 2016, which as mentioned previously may have been affected by a rally, so we cannot assert causality. The appearance of <a href="http://yachtclubgames.com/shovel-knight/">Shovel Knight</a> and <a href="https://en.wikipedia.org/wiki/Bloodborne">Bloodborne</a> as leading donation games, both relatively recently released, shows that speedrunning has more appeal than just retro games.</p>
+
+<p>A popular technique in charity drives is donation incentives, which help bolster the number of donations total. The <a href="https://gamesdonequick.com/tracker/bids/agdq2016">AGDQ bid incentives</a> can include bonus game segments, or certain game decisions, such as what name to give to a main character.</p>
+
+<p>Any donation can optionally be assigned as a donation toward an incentive. Which run received the most money toward incentives?</p>
+
+<p><img src="http://minimaxir.com/img/agdq-2016/agdq-5.png" alt="" /></p>
+
+<p>Super Metroid donations incentives accounted for nearly <em>&frac14;th</em> of all the money raised at AGDQ. Final Fantasy IV accounted for a large amount as well, however, in both cases, the rally effect may apply.</p>
+
+<p>Speaking of the Super Metroid donation incentives, it should be noted that this particular incentive is one of the most culturally-important incentives in the show. Super Metroid has an optional objective to Save The Animals from planetary destruction, but this costs time, and time is important for a speedrun. Or the speedruner can Kill The Animals through inaction for efficiency, &ldquo;Saving the Frames.&rdquo;</p>
+
+<p>What is the split of these incentive choices?</p>
+
+<p><img src="http://minimaxir.com/img/agdq-2016/agdq-6.png" alt="" /></p>
+
+<p>Yes, the animals were killed (specifically, they were <strong>REKT</strong>, in the words of a last-minute donator). Both bonus games and vanity naming were popular, but nothing compared to the Save the Animals / Kill the Animals bid war.</p>
+
+<p>Lastly, people can leave comments with donations, and these comments are usually read on-stream when possible, as you&rsquo;ve likely noticed if you&rsquo;re watched the videos above.</p>
+
+<p>Here&rsquo;s a fun, nonscientific word cloud of those comments:</p>
+
+<p><img src="http://minimaxir.com/img/agdq-2016/agdq-7.png" alt="" /></p>
+
+<p>Lots of positivity, aside from the whole &ldquo;Kill the Animals&rdquo; thing. After all, the event is all about preventing cancer.</p>
+
+<p>While this post isn&rsquo;t an academic analysis, it&rsquo;s neat to see to see what kinds of things drive donation to charity. This model of livestreaming and charitable applications is very successful, and important given the renewed attention toward livestreaming with the rise of Twitch to mainstream attention, alongside the rise of personal streaming with apps like Periscope. Donation incentives are a <em>very</em> successful technique for facilitating donations.</p>
+
+<p>It will be interesting to see if Twitch and events like AGDQ can leverage charitable livestreaming, or if another startup/organization beats them first. Bidding-Wars-for-Deciding-the-Fate-of-Fictional-Animals-as-a-Service has a nice ring to it.</p>
+
+<hr />
+
+<p><em>You can access a Jupyter notebook with the data processing and chart processing code <a href="https://github.com/minimaxir/agdq-2016">in this GitHub repository</a>. If you use the processed donation data or visualization designs contained within this article, it would be greatly appreciated if proper attribution is given back to this article and/or myself. Thanks! :)</em></p>
+
+<p><em>Note for donation incentive statistics: the user can theoretically split their donation among multiple incentives; unfortunately I assumed at time of scrape that all the money could only go toward one bid. All donations I investigated from the source data were toward a single incentive except two donations from The Yetee which I fixed manually. If there are any data discrepancies, that is the likely cause.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Movie Review Aggregator Ratings Have No Relationship with Box Office Success]]></title>
@@ -110,6 +191,14 @@
 <p>That&rsquo;s not to say that movies need high box-office revenues to be considered successful. However, working with movie profitability, and by extension movie budget, is opening another can-of-worms with respect to data integrity. (that said, on Reddit, /u/chartmkr recently <a href="https://www.reddit.com/r/dataisbeautiful/comments/3zpp3w/movie_budgets_and_box_office_success_19552015_oc/">posted a visualization</a> of Gross vs. Budget which is interesting).</p>
 
 <p>It&rsquo;ll still be fun to point to a Rotten Tomatoes Tomatometer rating as a kneejerk reaction to whether a movie rocks/sucks. Although, the reasons for movie financial success at the box office definitely warrant further investigation.</p>
+
+<p><strong>UPDATE 1/11/15</strong>: On a <a href="https://news.ycombinator.com/item?id=10872076">discussion on Hacker News</a>, it was suggested that the blockbuster movies and the indie movies cancel each other out, i.e. blockbusters have a positive correlation and indies have a negative correlation.</p>
+
+<p>For the blockbuster cluster alone, the log-correlation is <strong>0.23</strong> (not weak but not great positive correlation). For the indie cluster alone, the log-correlation is <strong>-0.12</strong> (same as original analysis).</p>
+
+<p>For future analysis, it may be worthwhile to split these two clusters. I stand by the original analysis for this post: very frequently I&rsquo;ve heard the question &ldquo;is this a good movie?&rdquo; and the response is &ldquo;what does the RT score say?&rdquo; Both Box Office revenues and RT scores are important measures of quality (depending on perspective), and users who want to see or purchase a movie may not necessarily care if it&rsquo;s indie or a blockbuster.</p>
+
+<p>User cwyers <a href="https://news.ycombinator.com/item?id=10878019">suggested</a> that Simpson&rsquo;s Paradox may be in play since the number of theaters showing a movie is positively correlated to box office revenue, adding a potentially-confounding affect. I will see if I can obtain that data for future analysis.</p>
 
 <hr />
 
@@ -1445,76 +1534,6 @@ df_boot <span class="o">&lt;-</span> tbl_df<span class="p">(</span><span class="
 <p>Coding is an industry that&rsquo;s generally more lax about reuse. I would not expect someone to cite every instance they used code from a <a href="http://stackoverflow.com">Stack Overflow</a> question. Forking code repositories on <a href="http://github.com">GitHub</a> is actively encouraged, as it often leads to new insights.</p>
 
 <p>But the <em>willful</em> and unnecessary paraphrasing of code, replacing all the CamelCase variables with underscored variables, and code which is <em>worse</em> than the original, is hard to overlook. &ldquo;I recommend you for example this edX course&rdquo; does not give sufficient credit to the teachers and staff of CS100.1x.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Making a Video-to-GIF Right-Click Menu Item in OS X]]></title>
-    <link href="http://minimaxir.com/2015/08/gif-to-video-osx/"/>
-    <updated>2015-08-13T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2015/08/gif-to-video-osx</id>
-    <content type="html"><![CDATA[<p><em>TL;DR: To set up the Convert Video to GIF tool, download the &ldquo;Convert Video to GIF&rdquo; Service <a href="https://github.com/minimaxir/video-to-gif-osx">from this GitHub Repository</a> and follow the install instructions in the README.</em></p>
-
-<p>Last weekend, I was working on making a <a href="https://github.com/minimaxir/big-list-of-naughty-strings">Big List of Naughty Strings</a> for user-data testing. (now up to 4,000+ GitHub Stars!) For the README, I needed a visual example to demonstrate why testing bad strings is important. I easily made a video of an internal server error on Twitter using <a href="http://www.apple.com/quicktime/">Quicktime</a> and its <a href="https://support.apple.com/kb/PH5882?locale=en_US">Screen Recording feature</a> to record, crop, and trim the event. But videos cannot render on GitHub; only GIFs can. And ideally I would not include a 807KB file everytime a user loads the GitHub page.</p>
-
-<p>Websites that offer online Video-to-GIF converters are often seedy and create low quality, low frame-rate GIFs. I did some research and eventually I tried <a href="http://www.gifrocket.com">Gifrocket</a>, a recently-released tool that promises effortless drag-and-drop video-to-GIF-conversion.</p>
-
-<p><img src="http://minimaxir.com/img/video-to-gif-osx/zerowidthedit_gifrocket.gif"  ></p>
-
-<p>The quality is not terrible, although the ghosting is <em>weird</em>, and the framerate is choppy when the cursor moves. Unfortunately, I can&rsquo;t optimize any settings. File Size is 534KB, which is a slight compression but not great.</p>
-
-<p>As a result, I gave <a href="http://zulko.github.io/moviepy/">MoviePy</a>, a Python API for manipulating videos another try, as I had used it for other posts on this blog to <a href="http://minimaxir.com/2014/02/moved-temporarily/">good</a> <a href="http://minimaxir.com/2014/03/hashtag-tag/">success</a>. However, I had to shrink them significantly to keep load times down; something I would prefer not to do with my internal server error GIF in order to maximize readability. On the <a href="http://zulko.github.io/blog/2014/01/23/making-animated-gifs-from-video-files-with-python/">blog post announcing GIF support</a>, the core developer <a href="http://zulko.github.io/blog/2014/01/23/making-animated-gifs-from-video-files-with-python/#comment-1216274781">relayed an interesting comment</a> from another reader that &ldquo;mencoder/ImageMagick/gifsickle is a winning trio for Gif making.&rdquo;</p>
-
-<p>I&rsquo;ve heard of ImageMagick before: it&rsquo;s the tool that drives nearly all image manipulation on the internet (it&rsquo;s also what Gifrocket uses). But what was mencoder and gifsickle?</p>
-
-<p>Some searching led to this <a href="https://www.reddit.com/r/reactiongifs/comments/x55z9/after_i_learned_how_to_make_large_well_compressed/c5jbq7c">2012 Reddit comment</a> in the /r/reactiongifs subreddit. That&rsquo;s where everything clicked.</p>
-
-<h2>Shell Games</h2>
-
-<p>The linked Reddit post conveiently uses the same three tools by the commenter on MoviePy. I ran the terminal commands on my video, with a little tweaking.</p>
-
-<p>The first command uses the <code>mencoder</code> functionality of <a href="http://www.mplayerhq.hu/design7/news.html">mplayer</a> to render each frame of the video to PNGs:</p>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">mplayer -ao null -vo png:z<span class="o">=</span>1:outdir<span class="o">=</span>gif -vf <span class="nv">scale</span><span class="o">=</span>608:454 zerowidthedit.mov</code></pre></div>
-
-
-<p>I set the size to a width of 608px since it was exactly 50% of the width of the raw video, but I could set it to whatever I want, although it would be ideal to keep the aspect ratio the same.</p>
-
-<p>The second command uses <a href="http://www.imagemagick.org/script/index.php">ImageMagick</a>&rsquo;s famously robust <code>convert</code> comand to convert the rendered frames in to a GIF, with two optimization passes for lower file size and ~16.6ms delay, which is equivalent to 60 frames per second.</p>
-
-<pre><code>convert +repage -fuzz 1.6% -delay 1.7 -loop 0 gif/*.png -layers OptimizePlus -layers OptimizeTransparency Almost.gif
-</code></pre>
-
-<p>This results in a 156KB image; much, much better than the 534KB from Gifrocket, and at a much higher framerate too.</p>
-
-<p>Lastly, the GIF is further optimized with <a href="http://www.lcdf.org/gifsicle/">gifsicle</a>, which also limits the color pallete to 256 colors for even lower file size.</p>
-
-<pre><code>gifsicle -O3 --colors 256 Almost.gif &gt; Done.gif
-</code></pre>
-
-<p>This results in a 107KB KB, a 31% savings over the already-optimized GIF, without any discernable loss! Here is the final result:</p>
-
-<p><img src="http://minimaxir.com/img/video-to-gif-osx/zerowidthedit_final.gif"  ></p>
-
-<p>Much, <em>much</em> better. No ghosting, 60 FPS, 1/8th of the original video file size, and 1/5th of the file size of the Gifrocket GIF!</p>
-
-<p>Then I realized; aside from the output GIF resolution in from <code>mencoder</code>, the terminal commands for making GIFs are very generic. What if I could easily automate these steps for any video on my Mac?</p>
-
-<h2>Full Automatic</h2>
-
-<p>I decided to make a OS X <a href="http://www.computerworld.com/article/2476298/mac-os-x/os-x-a-quick-guide-to-services-on-your-mac.html">Service</a>, which can be used to automate actions for a specified file type in the form of a right-click menu option. Services can be created using <a href="https://en.wikipedia.org/wiki/Automator_%28software%29">Automator</a>, which is included in all OS X installations. In my case, I want to create a Service for movie files; and when the Service runs, it should Run a Shell Script with the above three commands.</p>
-
-<p><img src="http://minimaxir.com/img/video-to-gif-osx/service.png"  ></p>
-
-<p>After writing the script, which incorporates a maximium GIF width of 480px and will resize larger GIFs to that size while maintaining the aspect ratio, the Service is complete and I can right-click any Movie file and get an optimized GIF!</p>
-
-<p><img src="http://minimaxir.com/img/video-to-gif-osx/convert_to_gif.gif"  ></p>
-
-<p>Yes, even a 41.6MB 720p video file, which most GIF converter sites would never let you upload, becomes a <a href="http://i.imgur.com/0dU3A6o.gif">relatively reasonable 1.3MB GIF</a>!</p>
-
-<p>This approach also has an unexpected benefit; the script support batch conversion, meaning you can convert as many videos as you want at the same time!</p>
-
-<p>As usual, my code is <a href="https://github.com/minimaxir/video-to-gif-osx">open sourced on GitHub</a> with a MIT license, with instructions on how to set up the tool. The repository also includes two bonus utilities; a Shell Script to run the conversion from the command line and an Application which prompts you for movie files instead of needing to right-click. Install the three command-line applications and convert away! Or fork the repository and make an even <em>better</em> Video-to-GIF conversion tool!</p>
 ]]></content>
   </entry>
   
