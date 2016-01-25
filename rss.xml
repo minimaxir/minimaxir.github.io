@@ -4,7 +4,7 @@
   <title><![CDATA[minimaxir | Max Woolf's Blog]]></title>
   <link href="http://minimaxir.com/rss.xml" rel="self"/>
   <link href="http://minimaxir.com/"/>
-  <updated>2016-01-11T08:20:54-08:00</updated>
+  <updated>2016-01-25T07:54:20-08:00</updated>
   <id>http://minimaxir.com/</id>
   <author>
     <name><![CDATA[Max Woolf]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[You're Not Allowed to Criticize Startups, You Stupid Hater]]></title>
+    <link href="http://minimaxir.com/2016/01/startup-haters/"/>
+    <updated>2016-01-25T08:00:00-08:00</updated>
+    <id>http://minimaxir.com/2016/01/startup-haters</id>
+    <content type="html"><![CDATA[<p>A couple weeks ago, <a href="https://itunes.apple.com/us/app/peach-a-space-for-friends/id1067891186?mt=8">Peach</a>, a messaging app, was released on iOS. Not only did Peach trend on Twitter on the day of release, but there was also an <em>unusual</em> amount of media coverage for app, with both <a href="http://techcrunch.com/2016/01/08/peach-is-a-slick-new-messaging-app-from-the-founder-of-vine/">TechCrunch</a> and <a href="http://www.buzzfeed.com/katienotopoulos/do-i-dare-to-post-on-peach">BuzzFeed</a> posting glowing reviews for it, noting that the app is &ldquo;slick&rdquo; and &ldquo;blowing up&rdquo; respectively (commenters in the BuzzFeed article thought it was paid advertising). Usually, reports for apps from both sites are more neutral, which made me curious.</p>
+
+<p><img src="http://minimaxir.com/img/startup-haters/peach-1.png" alt="" /></p>
+
+<p>There are <em>already</em> an absurd amount of messaging apps out there, and as a result, product differentiation is the primary value proposition. (e.g. security and <a href="https://itunes.apple.com/us/app/telegram-messenger/id686449807?mt=8">Telegram Messenger</a>) What is Peach&rsquo;s differentiation? &ldquo;Magic Words&rdquo;, apparently, which let you perform contextual actions with words! These Magic Words are implemented in a manner similar to a <a href="https://en.wikipedia.org/wiki/Command-line_interface">command-line interface</a> (CLI). <a href="http://nymag.com/following/2016/01/how-the-command-line-became-mainstream-again.html">NYMag</a> goes into extreme detail about the feature. Nerds love CLIs, so you can tell the product was made by smart people!</p>
+
+<p><img src="http://minimaxir.com/img/startup-haters/peach-2.png" alt="" /></p>
+
+<p>The <a href="https://news.ycombinator.com/item?id=10883698">Hacker News thread</a> about the NYMag article was interesting. One commenter (jobu) that the Magic Words are similar to those of <a href="https://slack.com">Slack</a>, which allow for &ldquo;/&rdquo; commands (again, messaging app differentiation). A HN user (pbreit) argued in response:</p>
+
+<blockquote><p>You&rsquo;re missing the whole thing. For starters, Slack is for work and Peach is for personal. But I think before you dismiss something as &ldquo;isn&rsquo;t it just x plus y?&rdquo; you need to take a little bit more time and thinking to try and figure out what the product designers are trying to achieve and how.</p></blockquote>
+
+<p>Wait, what? Are the users of Peach supposed to be mind readers? Are people stupid for not understanding the purpose of Peach?</p>
+
+<p>Another user (thwarted) replied to that response with such:</p>
+
+<blockquote><p>Maybe the product designers and product providers should be more explicit about how their product should be used and who their target demographic is, if they want a successful product, rather than making everyone &ldquo;figure out&rdquo; what they are trying to achieve and how.</p></blockquote>
+
+<p>pbreit replied:</p>
+
+<blockquote><p>&ldquo;Figuring it out&rdquo; might be the point. You do realize that you are referring to some of the very few people who have actually already built an amazingly successful product.</p></blockquote>
+
+<p>I should have mentioned earlier that Peach was made by <a href="http://byte.co">Byte</a>, which is ran by <a href="https://twitter.com/dhof">Dom Hofmann</a>, a founder of Vine which was purchased by Twitter before launch (it also appears Peach is a pivot from the failed Byte app; something left out by the blog articles). Yes, if a founder has had a previously successful startup, the previous success implies a higher probability for future startup success than for a startup run by an unknown founder. However, it&rsquo;s still not a 100% guarantee, and startups should not be immune to criticism because of asymmetric information between the users and the startup itself. Peach is not impeachable. (pun intended)</p>
+
+<p>TechCrunch did a <a href="http://techcrunch.com/2016/01/11/hype-or-not-peach-hit-the-top-10-social-networking-app-list-fast/">follow-up article</a> three days after release stating (paraphrased) &ldquo;Peach is #9 in the App Store in the Social Networking category, despite the haters! Now they will be a success! Haters gonna hate!&rdquo; Social networking is a double-edged sword in terms of network effects: they can grow incredibly fast as friends-of-friends register, and they can <em>die</em> incredibly fast once they all realize the app is a fad. As of publishing, Peach is ranked #110 in the Social Networking category, and off-the-charts in Overall. And <a href="https://www.appannie.com/apps/ios/app/peach-a-space-for-friends/rank-history/">still dropping</a>, with no apparent recovery.</p>
+
+<p><img src="http://minimaxir.com/img/startup-haters/peach-3.png" alt="" /></p>
+
+<p>I seriously wish the tech media would admit they were wrong, but they never will. The startup world is in dire need of cautionary tales as valuations inflate to absurd levels.</p>
+
+<p>But hey, isn&rsquo;t any startup ran by a previously-funded founder a sure thing? They know what it takes to create a company, even if it&rsquo;s in a different and highly competitive environment years later than their first success! One success is all a founder needs.</p>
+
+<p>A startup&rsquo;s release is unpolished and buggy? It&rsquo;s just an MVP, and startups are expected to have issues out of the gate, so you have to forgive them! They don&rsquo;t need QA engineers.</p>
+
+<p>A startup uses growth hacking to get early traction? It&rsquo;s hustle, and they should be applauded for their creativity! Whoever complains is just in the minority, anyways.</p>
+
+<p>A startup gets a lot of points on Product Hunt? That&rsquo;s validation, especially since it was submitted by one of the friends/investors of the startup for all their network to see and upvote! A strong personal network is the only thing you need for business success.</p>
+
+<p>A startup raises a Series A? That means venture capitalists did due diligence, and if the idea sucked, they would not have invested! Millions of dollars is a lot of money to those people.</p>
+
+<p>A startup loses traction and buzz? It&rsquo;s not dead, it can come back as long as it has money in the bank! Your lack of faith demotivates entrepreneurs.</p>
+
+<p>A startup <em>dies</em>? They can just try again! It was bad luck anyways and they likely did nothing wrong.</p>
+
+<p>A startup is mercy-killed through an acquisition/acquihire? Just another step in their incredible journey! The founders still win, and now they have the &ldquo;exited&rdquo; label to leverage for future employment.</p>
+
+<p>Sarcastic rhetorical questions aside, it is very annoying that it is considered socially unacceptable in Silicon Valley to criticize a startup. Even though the majority of startups fail, actually <em>saying so</em> is sacrilegious. In Peach&rsquo;s particular case, the fact that the app is from a previous exited founder should invite <em>more</em> scrutiny instead of giving it a free pass.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Video Games and Charity: Analyzing Awesome Games Done Quick 2016 Donations]]></title>
@@ -1432,108 +1487,6 @@ df_boot <span class="o">&lt;-</span> tbl_df<span class="p">(</span><span class="
 <p>While the sample dataset isn&rsquo;t the most ideal for bootstrapping due to its extremely small size, bootstrapping at the least adds some clarity to the issues that results when simply performing statistics on a given dataset.</p>
 
 <p><em>Again, if you want to view the code with more detailed output and extensive code for the ggplot2 charts, read this <a href="https://github.com/minimaxir/bootstrap-resample-notebook/blob/master/bootstrap_resample_notebook.ipynb">Jupyter notebook</a>.</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Plagiarizing and Paraphrasing Code from an Online Class for Content Marketing]]></title>
-    <link href="http://minimaxir.com/2015/09/code-of-plagiarism/"/>
-    <updated>2015-09-03T08:00:00-07:00</updated>
-    <id>http://minimaxir.com/2015/09/code-of-plagiarism</id>
-    <content type="html"><![CDATA[<p><span><style>
-.post-content img {
-  border: 2px solid #ccc;
-}
-</style></span></p>
-
-<p><em>UPDATE 9/13/15: The author replied to this article in the comments and clarified in the source article the nature of the changes, and also gave more explicit credit to the original code authors.</em></p>
-
-<hr />
-
-<p>Over the summer, I took a couple of online classes on edX:
-<a href="https://courses.edx.org/courses/BerkeleyX/CS100.1x/1T2015/info">CS100.1x Introduction to Big Data with Apache Spark</a> by Anthony D. Joseph, and the followup course <a href="https://courses.edx.org/courses/BerkeleyX/CS190.1x/1T2015/info">CS190.1x Scalable Machine Learning</a> by Ameet Talwalkar. Both courses focused on <a href="http://spark.apache.org">Apache Spark</a>, an up-and-coming technology in the data science world which promises incredible analytical performance. I strongly recommend taking both courses if you have an interest in data science. (however, both courses require strong knowledge of Python)</p>
-
-<p>A <a href="https://news.ycombinator.com/item?id=10154491">Hacker News submission</a> linked to an article titled &ldquo;<a href="https://www.codementor.io/spark/tutorial/building-a-recommender-with-apache-spark-python-example-app-part1">Building a Movie Recommendation Service with Apache Spark and Flask - Part 1</a>&rdquo; on Codementor, which was relevant to my interests. However, while reading the article, I felt a sense of deja vu.</p>
-
-<p>As it turns out, the concept, and the majority of the code for the recommendation service is taken directly from <a href="http://nbviewer.ipython.org/github/spark-mooc/mooc-setup/blob/master/lab4_machine_learning_student.ipynb">CS100.1x Assignment #4</a>, without giving any explicit attribution to any of the professors.</p>
-
-<p>It is unusual to see someone not only plagiarize code, but to do it very blatantly and <em>very poorly</em>.</p>
-
-<h1>Manipulating Movies</h1>
-
-<p>The June 27th 2015 edX assignment uses Spark&rsquo;s MLib for parallelized machine learning on the <a href="http://grouplens.org/datasets/movielens/">MovieLens dataset</a> of millions of ratings of movies by users.</p>
-
-<p>The July 7th 2015 Codementor article, in fairness, has nonplagiarized code to parse this data into RDDs (resilient distributed datasets), which is Spark&rsquo;s data structure that enables high scalability and parallelization. That&rsquo;s because the edX assignment has the data with a slightly different schema (comma-delimited vs. colon-delimited data).</p>
-
-<p>The collaborative filtering algorithm using <a href="http://bugra.github.io/work/notes/2014-04-19/alternating-least-squares-method-for-collaborative-filtering/">Alternating Least Squares</a> (ALS) is what caused me to raise an eyebrow. As with any good statistical methodology, the data should be split into independent training, test, and validation datasets, where the training set is used to construct the model, the validation set is used to select the best model when model parameters vary, and the test dataset is used for the actual statistical analysis. The edX assignment explains this well:</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/edx_1.png" alt="" /></p>
-
-<p>The <code>[6, 2, 2]</code> parameter says that 60% of the data is split for training, 20% of validation, 20% for testing. The <code>seed=0L</code> ensures that the results are the same each time; important for reproducible results in the case for the assignment, but not good for general statistical analysis.</p>
-
-<p>So what does the Codementor article say?</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/code_1.png" alt="" /></p>
-
-<p>Not much reasoning behind the split, but an <em>interesting</em> choice of split percentages and seed there. But what&rsquo;s curious is the variable names; the edX assignment has variables names as <a href="https://en.wikipedia.org/wiki/CamelCase">CamelCase</a>, while the Codementor article has variable names with underscore separators.</p>
-
-<p>One of the recommended ways to select an predictive model is to optimize parameters of the predictive function. The edX assignment changes the <code>rank</code> (number of latent factors) of the <a href="http://spark.apache.org/docs/latest/mllib-collaborative-filtering.html">Alternating Least Squares</a> model while keeping the other parameters constant:</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/edx_2.png" alt="" /></p>
-
-<p>The Codementor article has a similar approach.</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/code_2.png" alt="" /></p>
-
-<p>&hellip;<em>too</em> similar.</p>
-
-<p>To find the &ldquo;best&rdquo; model, the edX assignment runs the model and computes the <a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation">Root-Mean-Square Error</a>, a popular metric for assessing model quality, between the predictive results of the model and the actual values for each <code>rank</code>, and selects the <code>rank</code> which results in the model with the lowest RMSE.</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/edx_3.png" alt="" /></p>
-
-<p>The Codementor approach is similar; except since the <code>computeError</code> function was defined earlier in the edX assignment, the Codementor article has to reimplement it inline.</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/code_3.png" alt="" /></p>
-
-<p>We can rule out &ldquo;coincidence&rdquo; at this point. What&rsquo;s concerning is that these workarounds make the code far less legible and more difficult to parse. (the results in both are the same of course: Rank 4 model had an RMSE of 0.8927, Rank 8 model had an RMSE of 0.8901, and Rank 12 model had an RMSE of 0.8902, making the Rank 8 model the winner)</p>
-
-<p>The Codementor article repeats the predictive assessment with the full, 21x larger dataset, and getting a RMSE of 0.8218 with the Rank 8 model, which in fairness is new material. (although the conclusion, &ldquo;we can see how we got a more accurate recommender when using a much larger dataset,&rdquo; is not necessarily <em>caused</em> by using the larger dataset due to the nature of <em>random</em> splits; that&rsquo;s what <a href="https://en.wikipedia.org/wiki/Cross-validation_%28statistics%29">cross-validation</a> is for).</p>
-
-<h2>Code Paraphrasing</h2>
-
-<p>The edX assignment has a fun section where the user can test the predictive model they created by giving their own ratings for movies, in the format of <code>(myUserID, movie ID, your rating)</code>. For example, here&rsquo;s what I put:</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/edx_4.png" alt="" /></p>
-
-<p>I may have felt like being lazy that day.</p>
-
-<p>The Codementor article has an interesting approach.</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/code_4.png" alt="" /></p>
-
-<p>i.e. the same approach. But instead of &ldquo;myUser&rdquo;, it&rsquo;s &ldquo;new_user&rdquo;, and the &ldquo;0&rdquo; id is hard-coded in each rating. And more underscore variables? This use of &ldquo;code paraphrasing&rdquo; is a new concept to me.</p>
-
-<p>The edX assignment ended by showing your top movies based on your recommendations and your model! (the code for the <code>ratingsWithNamesRDD</code> object is mine)</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/edx_5.png" alt="" /></p>
-
-<p>Of course, the recommended movies are limited to those which only have more than 75 reviews, in order to prevent movies which have only a few ratings from skewing the results.</p>
-
-<p>Codementor&rsquo;s approach?</p>
-
-<p><img src="http://minimaxir.com/img/code-of-plagiarism/code_5.png" alt="" /></p>
-
-<p>The same thing&hellip;except, for some reason, the <code>filter</code> is limited to movies with <em>at least 25</em> reviews instead of more than 75, the top 25 movies are output instead of the top 20 (the first parameter in <code>takeOrdered</code>), and the initial title string was changed to the third-person voice? (notably, the &ldquo;more than 25&rdquo; text is incorrect since it&rsquo;s an &ldquo;at least&rdquo; statement)</p>
-
-<h1>The Point of Plagiarizing Code</h1>
-
-<p>The <a href="https://www.codementor.io/spark/tutorial/building-a-web-service-with-apache-spark-flask-example-app-part2">follow-up article</a> to the Codementor article incorporates the ALS recommender algorithm with <a href="http://flask.pocoo.org">Flask</a>, a popular Python framework for creating microservices. This is genuinely interesting new code not covered by the original edX assignment. So what was the point of the weak plagiarism in Part 1? A piece of content marketing for a personal portfolio?</p>
-
-<p>If Part 1 was entirely &ldquo;<em>Hey, I took the CS100.1x Introduction to Big Data with Apache Spark by Anthony D. Joseph on edX which included a good Collaborative Filtering algorithm, here&rsquo;s a link to the assignment if you want to know more, and now I will use the code I wrote for that assignment to create a Flask app</em>,&rdquo; I would have been perfectly OK with that. (after the course was completed to avoid cheating, of course)</p>
-
-<p>Coding is an industry that&rsquo;s generally more lax about reuse. I would not expect someone to cite every instance they used code from a <a href="http://stackoverflow.com">Stack Overflow</a> question. Forking code repositories on <a href="http://github.com">GitHub</a> is actively encouraged, as it often leads to new insights.</p>
-
-<p>But the <em>willful</em> and unnecessary paraphrasing of code, replacing all the CamelCase variables with underscored variables, and code which is <em>worse</em> than the original, is hard to overlook. &ldquo;I recommend you for example this edX course&rdquo; does not give sufficient credit to the teachers and staff of CS100.1x.</p>
 ]]></content>
   </entry>
   
