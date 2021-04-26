@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Publications | Max Woolf's Blog</title><link>https://minimaxir.com/publication/</link><atom:link href="https://minimaxir.com/publication/index.xml" rel="self" type="application/rss+xml"/><description>Publications</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright Max Woolf © 2021</copyright><lastBuildDate>Mon, 01 Jul 2013 00:00:00 +0000</lastBuildDate><image><url>https://minimaxir.com/media/icon_huc0c175f97b5401fc87ffa54782e0a17b_5248_512x512_fill_gaussian_center_2.png</url><title>Publications</title><link>https://minimaxir.com/publication/</link></image><item><title>An example conference paper</title><link>https://minimaxir.com/publication/example/</link><pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate><guid>https://minimaxir.com/publication/example/</guid><description>&lt;div class="alert alert-note">
+&lt;div>
+Click the &lt;em>Cite&lt;/em> button above to demo the feature to enable visitors to import publication metadata into their reference management software.
+&lt;/div>
+&lt;/div>
+&lt;div class="alert alert-note">
+&lt;div>
+Create your slides in Markdown - click the &lt;em>Slides&lt;/em> button to check out the example.
+&lt;/div>
+&lt;/div>
+&lt;p>Supplementary notes can be added here, including &lt;a href="https://wowchemy.com/docs/writing-markdown-latex/" target="_blank" rel="noopener">code, math, and images&lt;/a>.&lt;/p></description></item></channel></rss>
