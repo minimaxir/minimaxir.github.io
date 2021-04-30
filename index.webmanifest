@@ -5,11 +5,11 @@
   "theme_color": "#1565c0",
   "background_color": "#1565c0",
   "icons": [{
-    "src": "/media/icon_huc0c175f97b5401fc87ffa54782e0a17b_5248_192x192_fill_gaussian_center_2.png",
+    "src": "/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_192x192_fill_gaussian_center_2.png",
     "sizes": "192x192",
     "type": "image/png"
     }, {
-    "src": "/media/icon_huc0c175f97b5401fc87ffa54782e0a17b_5248_512x512_fill_gaussian_center_2.png",
+    "src": "/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_512x512_fill_gaussian_center_2.png",
     "sizes": "512x512",
     "type": "image/png"
      }],

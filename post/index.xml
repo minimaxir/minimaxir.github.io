@@ -1,4 +1,318 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts | Max Woolf's Blog</title><link>https://minimaxir.com/post/</link><atom:link href="https://minimaxir.com/post/index.xml" rel="self" type="application/rss+xml"/><description>Posts</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright Max Woolf © 2021</copyright><lastBuildDate>Sat, 18 Jul 2020 10:30:00 -0700</lastBuildDate><image><url>https://minimaxir.com/media/icon_huc0c175f97b5401fc87ffa54782e0a17b_5248_512x512_fill_gaussian_center_2.png</url><title>Posts</title><link>https://minimaxir.com/post/</link></image><item><title>Tempering Expectations for GPT-3 and OpenAI’s API</title><link>https://minimaxir.com/2020/07/gpt3-expectations/</link><pubDate>Sat, 18 Jul 2020 10:30:00 -0700</pubDate><guid>https://minimaxir.com/2020/07/gpt3-expectations/</guid><description>&lt;p>On May 29th, &lt;a href="https://openai.com" target="_blank" rel="noopener">OpenAI&lt;/a> released &lt;a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noopener">a paper&lt;/a> on GPT-3, their next iteration of &lt;a href="http://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">Transformers&lt;/a>-based text generation neural networks. Most notably, the new model has 175 billion parameters compared to the 1.5 billion of previous &lt;a href="https://openai.com/blog/better-language-models/" target="_blank" rel="noopener">GPT-2 iteration&lt;/a>: a &lt;em>117x&lt;/em> increase in model size! Because GPT-3 is so large, it can&amp;rsquo;t be run on conventional computers, and it only became publicly available as a part of the &lt;a href="https://beta.openai.com" target="_blank" rel="noopener">OpenAI API&lt;/a>, which entered an invite-only beta soon after the paper was released and will be released for-profit sometime later.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts | Max Woolf's Blog</title><link>https://minimaxir.com/post/</link><atom:link href="https://minimaxir.com/post/index.xml" rel="self" type="application/rss+xml"/><description>Posts</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright Max Woolf © 2021</copyright><lastBuildDate>Fri, 30 Apr 2021 08:55:00 -0700</lastBuildDate><image><url>https://minimaxir.com/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_512x512_fill_gaussian_center_2.png</url><title>Posts</title><link>https://minimaxir.com/post/</link></image><item><title>Easily Transform Portraits of People into AI Aberrations Using StyleCLIP</title><link>https://minimaxir.com/2021/04/styleclip/</link><pubDate>Fri, 30 Apr 2021 08:55:00 -0700</pubDate><guid>https://minimaxir.com/2021/04/styleclip/</guid><description>&lt;div class="alert alert-">
+&lt;div>
+&lt;strong>tl;dr&lt;/strong> follow the instructions in &lt;a href="https://colab.research.google.com/drive/13EJ1ATvTnE0N7I0ULLvRsta7J7HdNuBi?usp=sharing">this Colab Notebook&lt;/a> to generate your own AI Aberration images and videos! If you want to use your own images, follow the instructions in &lt;a href="https://colab.research.google.com/drive/1St3R2qAbwwTV-amfYLeyGGswtzX4HHJP?usp=sharing">this Colab Notebook first&lt;/a>!
+&lt;/div>
+&lt;/div>
+&lt;p>GANs, &lt;a href="https://en.wikipedia.org/wiki/Generative_adversarial_network" target="_blank" rel="noopener">generative adversarial networks&lt;/a>, are all the rage nowadays for creating AI-based imagery. You&amp;rsquo;ve probably seen GANs used in tools like &lt;a href="https://thispersondoesnotexist.com/" target="_blank" rel="noopener">thispersondoesnotexist.com&lt;/a>, which currently uses NVIDIA&amp;rsquo;s extremely powerful open-source &lt;a href="https://github.com/NVlabs/stylegan2" target="_blank" rel="noopener">StyleGAN2&lt;/a>.&lt;/p>
+&lt;p>In 2021, &lt;a href="https://openai.com/" target="_blank" rel="noopener">OpenAI&lt;/a> open-sourced &lt;a href="https://github.com/openai/CLIP" target="_blank" rel="noopener">CLIP&lt;/a>, a model which can give textual classification predictions for a provided image. Since CLIP effectively interfaces between text data and image data, you can theoetically map that text data to StyleGAN. Enter &lt;a href="https://arxiv.org/abs/2103.17249" target="_blank" rel="noopener">StyleCLIP: Text-Driven Manipulation of StyleGAN Imagery&lt;/a>, a paper by Patashnik, Wu &lt;em>et al&lt;/em> (with code &lt;a href="https://github.com/orpatashnik/StyleCLIP" target="_blank" rel="noopener">open-sourced on GitHub&lt;/a>) which allows CLIP vectors to be used to guide StyleGAN generations through user-provided text.&lt;/p>
+&lt;figure id="figure-from-the-paper-the-left-most-image-is-the-input-the-other-images-are-the-result-of-the-prompt-at-the-top">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="From the paper: the left-most image is the input; the other images are the result of the prompt at the top." srcset="
+/2021/04/styleclip/teaser_hufc9b5528f3328f3d856e9dc65c83d052_719052_b62a065f906032d47f8cc86cfd92c48a.png 400w,
+/2021/04/styleclip/teaser_hufc9b5528f3328f3d856e9dc65c83d052_719052_5b109fe0fe2f7f1e5d62b390494e1381.png 760w,
+/2021/04/styleclip/teaser_hufc9b5528f3328f3d856e9dc65c83d052_719052_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/teaser_hufc9b5528f3328f3d856e9dc65c83d052_719052_b62a065f906032d47f8cc86cfd92c48a.png"
+width="760"
+height="274"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+From the paper: the left-most image is the input; the other images are the result of the prompt at the top.
+&lt;/figcaption>&lt;/figure>
+&lt;p>The authors have also provided easy-to-use Colab Notebooks to help set up these models and run them on a GPU for free. The most interesting one is the &lt;a href="https://colab.research.google.com/github/orpatashnik/StyleCLIP/blob/main/notebooks/StyleCLIP_global.ipynb" target="_blank" rel="noopener">Global Directions notebook&lt;/a>, which allows the end user to do what is listed in the image above, and I&amp;rsquo;ve &lt;a href="https://colab.research.google.com/drive/13EJ1ATvTnE0N7I0ULLvRsta7J7HdNuBi?usp=sharing" target="_blank" rel="noopener">made my own variant&lt;/a> which streamlines the workflow a bit.&lt;/p>
+&lt;p>After a large amount of experimention, I&amp;rsquo;ve found that StyleCLIP is essentially Photoshop driven by text, with all the good, bad, and chaos that entails.&lt;/p>
+&lt;h2 id="getting-an-image-into-styleclip">Getting an Image Into StyleCLIP&lt;/h2>
+&lt;p>GANs in general work by interpreting random &amp;ldquo;noise&amp;rdquo; as data and generate an image from that noise. This noise is typically known as a latent vector. The paper &lt;a href="https://arxiv.org/abs/2102.02766" target="_blank" rel="noopener">Designing an Encoder for StyleGAN Image Manipulation&lt;/a> by Tov &lt;em>et al&lt;/em> (with code &lt;a href="https://github.com/omertov/encoder4editing" target="_blank" rel="noopener">open-sourced on GitHub&lt;/a> plus a &lt;a href="https://colab.research.google.com/github/omertov/encoder4editing/blob/main/notebooks/inference_playground.ipynb" target="_blank" rel="noopener">Colab Notebook too&lt;/a>) uses an encoder to invert a given image into to the latent vectors which StyleGAN can use to reconstruct the image. These vectors can then be tweaked to get a specified target image from StyleGAN. However, the inversion will only work if you invert a human-like portrait, otherwise you&amp;rsquo;ll get garbage. And even then it may not be a perfect 1:1 map.&lt;/p>
+&lt;p>I created a &lt;a href="https://colab.research.google.com/drive/1St3R2qAbwwTV-amfYLeyGGswtzX4HHJP?usp=sharing" target="_blank" rel="noopener">streamlined notebook&lt;/a> to isolate out the creation of the latent vectors for better interoprability with StyleCLIP.&lt;/p>
+&lt;p>To demo StyleCLIP, I decided to use Facebook CEO &lt;a href="https://www.facebook.com/zuck" target="_blank" rel="noopener">Mark Zuckerberg&lt;/a>, who&amp;rsquo;s essentially a meme in himself. I found a &lt;a href="https://commons.wikimedia.org/wiki/File:Medvedev_and_Zuckerberg_October_2012-1.jpeg" target="_blank" rel="noopener">photo of Mark Zuckerberg&lt;/a> facing the camera, cropped it, ran it through the Notebook, and behold, we have our base Zuck for hacking!&lt;/p>
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="" srcset="
+/2021/04/styleclip/zuck_base_hu1e848fb2bbdc9207e974e11ef0ec314c_359750_39cf549947d35f1d8b3a1c0a81c4700e.png 400w,
+/2021/04/styleclip/zuck_base_hu1e848fb2bbdc9207e974e11ef0ec314c_359750_a2d203d3b163f4195fcf323e8583cd18.png 760w,
+/2021/04/styleclip/zuck_base_hu1e848fb2bbdc9207e974e11ef0ec314c_359750_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_base_hu1e848fb2bbdc9207e974e11ef0ec314c_359750_39cf549947d35f1d8b3a1c0a81c4700e.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;h2 id="human-transmutation">Human Transmutation&lt;/h2>
+&lt;div class="alert alert-">
+&lt;div>
+All StyleCLIP generation examples here use the &lt;a href="https://colab.research.google.com/drive/13EJ1ATvTnE0N7I0ULLvRsta7J7HdNuBi?usp=sharing">streamlined notebook&lt;/a> and &lt;a href="https://minimaxir.com/media/latents.pt" target="_blank">Mark Zuckerberg latents&lt;/a>, with the captions indicating how to reproduce the image so you can hack them yourself!
+&lt;/div>
+&lt;/div>
+&lt;p>Let&amp;rsquo;s start simple and reproduce the examples in the paper. A tanned Zuck should do the trick (in the event he &lt;a href="https://www.buzzfeednews.com/article/katienotopoulos/mark-zuckerberg-sunscreen-surfing" target="_blank" rel="noopener">forgets his sunscreen&lt;/a>).&lt;/p>
+&lt;figure id="figure-face---tanned-face-beta--015-alpha--66">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - tanned face`, beta = 0.15, alpha = 6.6" srcset="
+/2021/04/styleclip/zuck_tanned_huebf032b3e6721ccbade033ed1c188693_379947_d5cc9e7045ec6f0d4d67d3df5e3365e0.png 400w,
+/2021/04/styleclip/zuck_tanned_huebf032b3e6721ccbade033ed1c188693_379947_ab88b6ccebc1c323a4db28eafd120c0d.png 760w,
+/2021/04/styleclip/zuck_tanned_huebf032b3e6721ccbade033ed1c188693_379947_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_tanned_huebf032b3e6721ccbade033ed1c188693_379947_d5cc9e7045ec6f0d4d67d3df5e3365e0.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; tanned face&lt;/code>, beta = 0.15, alpha = 6.6
+&lt;/figcaption>&lt;/figure>
+&lt;p>What about giving Zuck a cool new hairdo?&lt;/p>
+&lt;figure id="figure-face-with-hair---face-with-hi-top-fade-hair-beta--017-alpha--86">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face with hair - face with Hi-top fade hair`, beta = 0.17, alpha = 8.6" srcset="
+/2021/04/styleclip/zuck_fade_hu2fce2a0e9f3289c34ef23ac6bb564113_360186_9ad186656a8ea95cf1383bde5c17c8f2.png 400w,
+/2021/04/styleclip/zuck_fade_hu2fce2a0e9f3289c34ef23ac6bb564113_360186_159f828d9b57e015f252aeace51d422e.png 760w,
+/2021/04/styleclip/zuck_fade_hu2fce2a0e9f3289c34ef23ac6bb564113_360186_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_fade_hu2fce2a0e9f3289c34ef23ac6bb564113_360186_9ad186656a8ea95cf1383bde5c17c8f2.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face with hair -&amp;gt; face with Hi-top fade hair&lt;/code>, beta = 0.17, alpha = 8.6
+&lt;/figcaption>&lt;/figure>
+&lt;p>Like all AI, it &lt;a href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRPiprOaC3HsCf5Tuum8bRfzYUiKLRqJmbOoC-32JorNdfyTiRRsR7Ea5eWtvsWzuxo8bjOxCG84dAg/pubhtml" target="_blank" rel="noopener">can cheat&lt;/a> if you give it an impossible task. What happens if you try to use StyleCLIP to increase the size of Zuck&amp;rsquo;s nostrils, which are barely visible at all in the base photo?&lt;/p>
+&lt;figure id="figure-face-with-nose---face-with-flared-nostrils-beta--009-alpha--63">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face with nose - face with flared nostrils`, beta = 0.09, alpha = 6.3" srcset="
+/2021/04/styleclip/zuck_nose_hu1aa45b2d3593f8af4825f3e6c27a2fec_360794_c08c1b90e7dc9b0090bba9f7601dec15.png 400w,
+/2021/04/styleclip/zuck_nose_hu1aa45b2d3593f8af4825f3e6c27a2fec_360794_06219ff8cc84a6266d400f9b1f051bbf.png 760w,
+/2021/04/styleclip/zuck_nose_hu1aa45b2d3593f8af4825f3e6c27a2fec_360794_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_nose_hu1aa45b2d3593f8af4825f3e6c27a2fec_360794_c08c1b90e7dc9b0090bba9f7601dec15.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face with nose -&amp;gt; face with flared nostrils&lt;/code>, beta = 0.09, alpha = 6.3
+&lt;/figcaption>&lt;/figure>
+&lt;p>The AI transforms his &lt;em>entire facial structure&lt;/em> just to get his nostrils exposed and make the AI happy.&lt;/p>
+&lt;p>CLIP has seen images of everything on the internet, including public figures. Even though the StyleCLIP paper doesn&amp;rsquo;t discuss it, why not try to transform people into other people?&lt;/p>
+&lt;p>Many AI practioners use Tesla Technoking &lt;a href="https://twitter.com/elonmusk" target="_blank" rel="noopener">Elon Musk&lt;/a> as a test case for anything AI because &lt;del>he generates massive SEO&lt;/del> of his contributions to AI and modern nerd culture, which is why I opted to use Zuck as a contrast.&lt;/p>
+&lt;p>Given that, I bring you, Elon Zuck.&lt;/p>
+&lt;figure id="figure-face---elon-musk-face-beta--012-alpha--43">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - Elon Musk face`, beta = 0.12, alpha = 4.3" srcset="
+/2021/04/styleclip/zuck_elon_musk_hu9541c5d8dea6f0bce58f9c24b2f60c33_333875_6688914d53d9fba8c032beffe0165cb5.png 400w,
+/2021/04/styleclip/zuck_elon_musk_hu9541c5d8dea6f0bce58f9c24b2f60c33_333875_b9c5d4e6a10c8d94f0bafbc066816103.png 760w,
+/2021/04/styleclip/zuck_elon_musk_hu9541c5d8dea6f0bce58f9c24b2f60c33_333875_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_elon_musk_hu9541c5d8dea6f0bce58f9c24b2f60c33_333875_6688914d53d9fba8c032beffe0165cb5.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; Elon Musk face&lt;/code>, beta = 0.12, alpha = 4.3
+&lt;/figcaption>&lt;/figure>
+&lt;p>What if you see Zuck as a literal Jesus Christ?&lt;/p>
+&lt;figure id="figure-face---jesus-christ-face-beta--013-alpha--91">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - Jesus Christ face`, beta = 0.13, alpha = 9.1" srcset="
+/2021/04/styleclip/zuck_jc_hu2d98a7dfeff134b36c49df1a574fa5a4_433192_b261624418dea892ac8af5b03143deb4.png 400w,
+/2021/04/styleclip/zuck_jc_hu2d98a7dfeff134b36c49df1a574fa5a4_433192_72bbd49ca09d2af3cc1ac614a82ccfc8.png 760w,
+/2021/04/styleclip/zuck_jc_hu2d98a7dfeff134b36c49df1a574fa5a4_433192_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_jc_hu2d98a7dfeff134b36c49df1a574fa5a4_433192_b261624418dea892ac8af5b03143deb4.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; Jesus Christ face&lt;/code>, beta = 0.13, alpha = 9.1
+&lt;/figcaption>&lt;/figure>
+&lt;p>Due to being generated by StyleGAN, the transformations have to resemble something somewhat like a real-life human, but there&amp;rsquo;s nothing stopping CLIP from &lt;em>trying&lt;/em> to gravitate toward faces that aren&amp;rsquo;t human. What if you tell StyleCLIP to transform Zuck into an anime character, such as Dragon Ball Z&amp;rsquo;s &lt;a href="https://dragonball.fandom.com/wiki/Goku" target="_blank" rel="noopener">Goku&lt;/a>?&lt;/p>
+&lt;figure id="figure-face---dragon-ball-z-goku-face-beta--009-alpha--54">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - Dragon Ball Z Goku face`, beta = 0.09, alpha = 5.4" srcset="
+/2021/04/styleclip/zuck_goku_hu4db185fa422684598ab195e747eccbfa_413578_e12ce9ed0f5f3761b212fed7fd3f91ed.png 400w,
+/2021/04/styleclip/zuck_goku_hu4db185fa422684598ab195e747eccbfa_413578_b2876c7542e32b34a87444dca4c42650.png 760w,
+/2021/04/styleclip/zuck_goku_hu4db185fa422684598ab195e747eccbfa_413578_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_goku_hu4db185fa422684598ab195e747eccbfa_413578_e12ce9ed0f5f3761b212fed7fd3f91ed.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; Dragon Ball Z Goku face&lt;/code>, beta = 0.09, alpha = 5.4
+&lt;/figcaption>&lt;/figure>
+&lt;p>Zuck gets the hair, at least.&lt;/p>
+&lt;p>People accuse Zuck of being a robot. What if we make him &lt;em>more&lt;/em> of a robot (as guided by a robot)?&lt;/p>
+&lt;figure id="figure-face---robot-face-beta--008-alpha--10">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - robot face`, beta = 0.08, alpha = 10" srcset="
+/2021/04/styleclip/zuck_robot_hu8b3351d5a591b942e8379ed83cffa36f_354709_5cb0b2ef85cb39cf7ae0399eb76328da.png 400w,
+/2021/04/styleclip/zuck_robot_hu8b3351d5a591b942e8379ed83cffa36f_354709_665bd812f2fce49dca6383d848670eb9.png 760w,
+/2021/04/styleclip/zuck_robot_hu8b3351d5a591b942e8379ed83cffa36f_354709_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_robot_hu8b3351d5a591b942e8379ed83cffa36f_354709_5cb0b2ef85cb39cf7ae0399eb76328da.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; robot face&lt;/code>, beta = 0.08, alpha = 10
+&lt;/figcaption>&lt;/figure>
+&lt;p>These are all pretty tame so far. StyleCLIP surprisingly has the ability to have more complex prompts while still maintaining expected results.&lt;/p>
+&lt;p>Can Mark Zuckerberg do a troll face? yes, he can!&lt;/p>
+&lt;figure id="figure-face---troll-face-beta--013-alpha--91">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - troll face`, beta = 0.13, alpha = 9.1" srcset="
+/2021/04/styleclip/zuck_troll_face_huaf25fd1cff572d57aafc214ce6800a9e_375244_303651d02972c4652f60cafde0b903b7.png 400w,
+/2021/04/styleclip/zuck_troll_face_huaf25fd1cff572d57aafc214ce6800a9e_375244_69f9351fada1c8960d114e4a6959212b.png 760w,
+/2021/04/styleclip/zuck_troll_face_huaf25fd1cff572d57aafc214ce6800a9e_375244_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_troll_face_huaf25fd1cff572d57aafc214ce6800a9e_375244_303651d02972c4652f60cafde0b903b7.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; troll face&lt;/code>, beta = 0.13, alpha = 9.1
+&lt;/figcaption>&lt;/figure>
+&lt;p>We can go deeper. What about altering other attributes at the same time?&lt;/p>
+&lt;figure id="figure-face---troll-face-with-large-eyes-beta--013-alpha--91">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - troll face with large eyes`, beta = 0.13, alpha = 9.1" srcset="
+/2021/04/styleclip/zuck_troll_face_eyes_hu9875d5632856945af9feeeb728478218_376097_815d909a4d1051106a9653ca5fe30e39.png 400w,
+/2021/04/styleclip/zuck_troll_face_eyes_hu9875d5632856945af9feeeb728478218_376097_3415216ebe68d247fcb0232478afd7da.png 760w,
+/2021/04/styleclip/zuck_troll_face_eyes_hu9875d5632856945af9feeeb728478218_376097_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_troll_face_eyes_hu9875d5632856945af9feeeb728478218_376097_815d909a4d1051106a9653ca5fe30e39.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; troll face with large eyes&lt;/code>, beta = 0.13, alpha = 9.1
+&lt;/figcaption>&lt;/figure>
+&lt;p>Working with CLIP rewards good &lt;a href="https://medium.com/swlh/openai-gpt-3-and-prompt-engineering-dcdc2c5fcd29" target="_blank" rel="noopener">prompt engineering&lt;/a>, an incresingly relevant AI skill with the rise of GPT-3. With more specific, complex prompts you can stretch the &amp;ldquo;human&amp;rdquo; constraint of StyleGAN. 👁👄👁&lt;/p>
+&lt;figure id="figure-face-with-eyes---face-with-very-large-eyes-and-very-large-mouth-beta--016-alpha--78">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face with eyes - face with very large eyes and very large mouth`, beta = 0.16, alpha = 7.8" srcset="
+/2021/04/styleclip/zuck_large_hueee403f2d95f9a6b26fed2ad9d739855_367320_b357e83fb371d4406f1fb2e7269301fb.png 400w,
+/2021/04/styleclip/zuck_large_hueee403f2d95f9a6b26fed2ad9d739855_367320_8590ea0f7e4f3c80f4cf494b74b9cefe.png 760w,
+/2021/04/styleclip/zuck_large_hueee403f2d95f9a6b26fed2ad9d739855_367320_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_large_hueee403f2d95f9a6b26fed2ad9d739855_367320_b357e83fb371d4406f1fb2e7269301fb.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face with eyes -&amp;gt; face with very large eyes and very large mouth&lt;/code>, beta = 0.16, alpha = 7.8
+&lt;/figcaption>&lt;/figure>
+&lt;p>Experimentation is half the fun of StyleCLIP!&lt;/p>
+&lt;h2 id="antiprompts">Antiprompts&lt;/h2>
+&lt;p>You may have seen that all the examples above had positive alphas, which control the strength of the transformation. So let&amp;rsquo;s talk about negative alphas. While positive alphas increase strength toward the target text vector, negative alphas increase strength away from the target text vector, resulting in the &lt;em>complete opposite&lt;/em> of the prompt. This gives rise to what I call &lt;strong>antiprompts&lt;/strong>: prompts where you intentionally want the opposite of what&amp;rsquo;s specified where asking a normal prompt doesn&amp;rsquo;t give you quite want you want.&lt;/p>
+&lt;p>Let&amp;rsquo;s see if Zuck can make a serious face.&lt;/p>
+&lt;figure id="figure-face---serious-face-beta--009-alpha--63">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - serious face`, beta = 0.09, alpha = 6.3" srcset="
+/2021/04/styleclip/zuck_serious_hu4f71f798407992aed74db0c1d5397667_352901_c4203482d691f8edf2977e1cb41edf36.png 400w,
+/2021/04/styleclip/zuck_serious_hu4f71f798407992aed74db0c1d5397667_352901_9898fdc93944bd48c9194a700f882e68.png 760w,
+/2021/04/styleclip/zuck_serious_hu4f71f798407992aed74db0c1d5397667_352901_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_serious_hu4f71f798407992aed74db0c1d5397667_352901_c4203482d691f8edf2977e1cb41edf36.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; serious face&lt;/code>, beta = 0.09, alpha = 6.3
+&lt;/figcaption>&lt;/figure>
+&lt;p>More pouty than serious. But what if he does the opposite of a laughing face?&lt;/p>
+&lt;figure id="figure-face---laughing-face-beta--009-alpha---63">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - laughing face`, beta = 0.09, alpha = -6.3" srcset="
+/2021/04/styleclip/zuck_laughing_hu951b94afc9902382bb5e12b2d1f5ba66_355457_16d28aea81dec8de9e2de1dac8b7dea7.png 400w,
+/2021/04/styleclip/zuck_laughing_hu951b94afc9902382bb5e12b2d1f5ba66_355457_fe330a416174bd1295f0fc9f09696637.png 760w,
+/2021/04/styleclip/zuck_laughing_hu951b94afc9902382bb5e12b2d1f5ba66_355457_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_laughing_hu951b94afc9902382bb5e12b2d1f5ba66_355457_16d28aea81dec8de9e2de1dac8b7dea7.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; laughing face&lt;/code>, beta = 0.09, alpha = -6.3
+&lt;/figcaption>&lt;/figure>
+&lt;p>That&amp;rsquo;s more like it.&lt;/p>
+&lt;p>It doesn&amp;rsquo;t stop there. In the previous section we saw what happens when you give prompts of people and compound prompts. What, you may ask, does the AI think is the opposite of a &lt;em>person&lt;/em>?&lt;/p>
+&lt;p>In the Goku example above, Zuck got larger, darker hair, more pale skin, and a chonky neck. What happens if you do the inverse?&lt;/p>
+&lt;figure id="figure-face---dragon-ball-z-goku-face-beta--009-alpha---54">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - Dragon Ball Z Goku face`, beta = 0.09, alpha = -5.4" srcset="
+/2021/04/styleclip/zuck_goku_inv_hu182038414ea1b89b14495af1bf6711be_337196_63382740b3775287958b81cd2a061287.png 400w,
+/2021/04/styleclip/zuck_goku_inv_hu182038414ea1b89b14495af1bf6711be_337196_d834208304592c70e06a3794c2d0c424.png 760w,
+/2021/04/styleclip/zuck_goku_inv_hu182038414ea1b89b14495af1bf6711be_337196_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_goku_inv_hu182038414ea1b89b14495af1bf6711be_337196_63382740b3775287958b81cd2a061287.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; Dragon Ball Z Goku face&lt;/code>, beta = 0.09, alpha = -5.4
+&lt;/figcaption>&lt;/figure>
+&lt;p>His hair is smaller and blonde, his skin is more tan, and he barely has a neck at all.&lt;/p>
+&lt;p>What if you make Zuck the opposite of a robot? Does he become human?&lt;/p>
+&lt;figure id="figure-face---robot-face-beta--008-alpha---10">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - robot face`, beta = 0.08, alpha = -10" srcset="
+/2021/04/styleclip/zuck_robot_inv_hucf9bdc77c8385868eac14c90a9702094_395238_c0a6409388a3e26452440b3c99fa7208.png 400w,
+/2021/04/styleclip/zuck_robot_inv_hucf9bdc77c8385868eac14c90a9702094_395238_5607a46c65f9bdf97b27255696859694.png 760w,
+/2021/04/styleclip/zuck_robot_inv_hucf9bdc77c8385868eac14c90a9702094_395238_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_robot_inv_hucf9bdc77c8385868eac14c90a9702094_395238_c0a6409388a3e26452440b3c99fa7208.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; robot face&lt;/code>, beta = 0.08, alpha = -10
+&lt;/figcaption>&lt;/figure>
+&lt;p>He becomes &lt;a href="https://en.wikipedia.org/wiki/Pedro_Pascal" target="_blank" rel="noopener">Pedro Pascal&lt;/a> apparently.&lt;/p>
+&lt;h2 id="video-ai-algorithms">Video AI Algorithms&lt;/h2>
+&lt;p>A fun feature I added to the notebook is the ability to make videos, by generating frames from zero alpha to the target alpha and rendering them using &lt;a href="https://www.ffmpeg.org/" target="_blank" rel="noopener">ffmpeg&lt;/a>. Through that, we can see these wonderful transformations occur at a disturbingly smooth 60fps!&lt;/p>
+&lt;p>Animations are cool to fully illustrate how the AI can cheat, such as with the flared nostrils example above.&lt;/p>
+&lt;video controls >
+&lt;source src="https://minimaxir.com/2021/04/styleclip/zuck_nose.mp4" type="video/mp4">
+&lt;/video>
+&lt;p>Or you can opt for pure chaos and do one of the more complex transformations. 👁👄👁&lt;/p>
+&lt;video controls >
+&lt;source src="https://minimaxir.com/2021/04/styleclip/zuck_large.mp4" type="video/mp4">
+&lt;/video>
+&lt;p>TikTok will have a lot of fun with this!&lt;/p>
+&lt;h2 id="ethics-and-biases">Ethics and Biases&lt;/h2>
+&lt;p>Let&amp;rsquo;s address the elephant in the room: is it ethical to edit photos with AI like this?&lt;/p>
+&lt;p>My take is that StyleCLIP is no different than what &lt;a href="https://www.adobe.com/products/photoshop.html" target="_blank" rel="noopener">Adobe Photoshop&lt;/a> has done for decades. Unlike deepfakes, these by construction are constrained to human portraits and can&amp;rsquo;t be used in other contexts to mislead or cause deception. Turning Mark Zuckerberg into Elon Musk would not cause a worldwide panic. &lt;a href="https://www.faceapp.com/" target="_blank" rel="noopener">FaceApp&lt;/a>, which does a similar tyle of image editing, was released years ago and still tops the App Store charts without causing democracy to implode. That said, I recommend only using StyleCLIP on public figures.&lt;/p>
+&lt;p>In my testing, there is definitely an issue of model bias, both within StyleGAN and within CLIP. A famous example of gender bias in AI is a propensity to assign &lt;a href="https://qz.com/1141122/google-translates-gender-bias-pairs-he-with-hardworking-and-she-with-lazy-and-other-examples/" target="_blank" rel="noopener">gender to gender neutral terms&lt;/a>, such as &lt;code>He is a soldier. She is a teacher&lt;/code>. Let&amp;rsquo;s try both for Zuck.&lt;/p>
+&lt;figure id="figure-face---soldier-face-beta--01-alpha--72">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - soldier face`, beta = 0.1, alpha = 7.2" srcset="
+/2021/04/styleclip/zuck_soldier_huff15b7b0164d21abec95a380feb0efb5_363216_986cda387a4052b8ef17f3beb90a716a.png 400w,
+/2021/04/styleclip/zuck_soldier_huff15b7b0164d21abec95a380feb0efb5_363216_ec9f11c25cb028173e8503535dfbe084.png 760w,
+/2021/04/styleclip/zuck_soldier_huff15b7b0164d21abec95a380feb0efb5_363216_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_soldier_huff15b7b0164d21abec95a380feb0efb5_363216_986cda387a4052b8ef17f3beb90a716a.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; soldier face&lt;/code>, beta = 0.1, alpha = 7.2
+&lt;/figcaption>&lt;/figure>
+&lt;figure id="figure-face---teacher-face-beta--013-alpha--56">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="`face - teacher face`, beta = 0.13, alpha = 5.6" srcset="
+/2021/04/styleclip/zuck_teacher_huc4568cebe7940504d34eb65b48f4286d_369338_bfd50ee34cb9be96ce7a8272597b136d.png 400w,
+/2021/04/styleclip/zuck_teacher_huc4568cebe7940504d34eb65b48f4286d_369338_16093d1b9897acac0dc58571a09c5cf1.png 760w,
+/2021/04/styleclip/zuck_teacher_huc4568cebe7940504d34eb65b48f4286d_369338_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/04/styleclip/zuck_teacher_huc4568cebe7940504d34eb65b48f4286d_369338_bfd50ee34cb9be96ce7a8272597b136d.png"
+width="512"
+height="512"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;code>face -&amp;gt; teacher face&lt;/code>, beta = 0.13, alpha = 5.6
+&lt;/figcaption>&lt;/figure>
+&lt;p>Unfortunately it still holds true.&lt;/p>
+&lt;p>It is surprisingly easy to get the model to perform racist/sexist/ageist transformations without much prodding. Inputting &lt;code>face with white skin -&amp;gt; face with black skin&lt;/code> does what you think it would do. Making similar transformations based on race/sex/age do indeed work, and I am deliberately not demoing them. If you do experiment around these biases, I recommend careful consideration with posting the outputs.&lt;/p>
+&lt;h2 id="the-future-of-ai-image-editing">The Future of AI Image Editing&lt;/h2>
+&lt;p>StyleCLIP is a fun demo on the potential of AI-based image editing. Although not the most pragmatic way to edit portraits, it&amp;rsquo;s fun to see just how well (or how poorly) it can adapt to certain prompts.&lt;/p>
+&lt;p>Even though everything noted in this blog post is open-sourced, don&amp;rsquo;t think about trying to sell StyleCLIP as a product: StyleGAN2 (which in the end is responsible for generating the image) and its variants were released under &lt;a href="https://nvlabs.github.io/stylegan2/license.html" target="_blank" rel="noopener">non-commerical licenses&lt;/a>. But it wouldn&amp;rsquo;t surprise me if someone uses the techniques noted in the papers to create their own, more efficient StyleCLIP with a bespoke efficient GAN to create an entire new industry.&lt;/p></description></item><item><title>Tempering Expectations for GPT-3 and OpenAI’s API</title><link>https://minimaxir.com/2020/07/gpt3-expectations/</link><pubDate>Sat, 18 Jul 2020 10:30:00 -0700</pubDate><guid>https://minimaxir.com/2020/07/gpt3-expectations/</guid><description>&lt;p>On May 29th, &lt;a href="https://openai.com" target="_blank" rel="noopener">OpenAI&lt;/a> released &lt;a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noopener">a paper&lt;/a> on GPT-3, their next iteration of &lt;a href="http://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">Transformers&lt;/a>-based text generation neural networks. Most notably, the new model has 175 billion parameters compared to the 1.5 billion of previous &lt;a href="https://openai.com/blog/better-language-models/" target="_blank" rel="noopener">GPT-2 iteration&lt;/a>: a &lt;em>117x&lt;/em> increase in model size! Because GPT-3 is so large, it can&amp;rsquo;t be run on conventional computers, and it only became publicly available as a part of the &lt;a href="https://beta.openai.com" target="_blank" rel="noopener">OpenAI API&lt;/a>, which entered an invite-only beta soon after the paper was released and will be released for-profit sometime later.&lt;/p>
 &lt;p>The API allows you to programmatically provide GPT-3 with a prompt, and return the resulting AI-generated text. For example, you could invoke the API with:&lt;/p>
 &lt;pre>&lt;code class="language-sh">curl https://api.openai.com/v1/engines/davinci/completions \
 -H &amp;quot;Content-Type: application/json&amp;quot; \
@@ -1264,147 +1578,4 @@ loading="lazy" data-zoomable class=" img-light" />&lt;/div>
 &lt;p>More work definitely needs to be done in this area. In the meantime, the official IMDb datasets are a lot more robust than I thought they would be! And I only used a fraction of the datasets; the rest tie into TV shows, which are a bit messier. Hopefully you&amp;rsquo;ve seen a good taste of the power of R and ggplot2 for playing with big-but-not-big data!&lt;/p>
 &lt;hr>
 &lt;p>&lt;em>You can view the R and ggplot used to create the data visualizations in &lt;a href="http://minimaxir.com/notebooks/imdb-data-analysis/" target="_blank" rel="noopener">this R Notebook&lt;/a>, which includes many visualizations not used in this post. You can also view the images/code used for this post in &lt;a href="https://github.com/minimaxir/imdb-data-analysis" target="_blank" rel="noopener">this GitHub repository&lt;/a>&lt;/em>.&lt;/p>
-&lt;p>&lt;em>You are free to use the data visualizations from this article however you wish, but it would be greatly appreciated if proper attribution is given to this article and/or myself!&lt;/em>&lt;/p></description></item><item><title>How to Quickly Train a Text-Generating Neural Network for Free</title><link>https://minimaxir.com/2018/05/text-neural-networks/</link><pubDate>Fri, 18 May 2018 09:00:00 -0700</pubDate><guid>https://minimaxir.com/2018/05/text-neural-networks/</guid><description>&lt;p>One of the more interesting applications of the neural network revolution is text generation. Most popular approaches are based off of Andrej Karpathy&amp;rsquo;s &lt;a href="https://github.com/karpathy/char-rnn" target="_blank" rel="noopener">char-rnn architecture&lt;/a>/&lt;a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="noopener">blog post&lt;/a>, which teaches a recurrent neural network to be able to predict the next character in a sequence based on the previous &lt;em>n&lt;/em> characters. As a result, a sufficiently trained network can theoretically reproduce its input source material, but since properly-trained neural networks aren&amp;rsquo;t &lt;em>perfect&lt;/em>, the output can fall into a weird-but-good uncanny valley.&lt;/p>
-&lt;p>Many internet tutorials for text-generation neural networks simply copy an existing char-rnn implementation while changing the input dataset. It&amp;rsquo;s one approach, but there&amp;rsquo;s an opportunity for improvement with modern deep learning tooling. Thanks to frameworks like &lt;a href="https://www.tensorflow.org" target="_blank" rel="noopener">TensorFlow&lt;/a> and &lt;a href="https://github.com/keras-team/keras" target="_blank" rel="noopener">Keras&lt;/a>, I built &lt;a href="https://github.com/minimaxir/textgenrnn" target="_blank" rel="noopener">textgenrnn&lt;/a>, a &lt;a href="https://pypi.org/project/textgenrnn/#description" target="_blank" rel="noopener">Python package&lt;/a> which abstracts the process of creating and training such char-rnns to a &lt;em>few lines of code&lt;/em>, with numerous model architecture and training improvements such as &lt;a href="http://minimaxir.com/2017/04/char-embeddings/" target="_blank" rel="noopener">character embeddings&lt;/a>, attention-weighted averaging, and a decaying learning rate.&lt;/p>
-&lt;p>A neat benefit of textgenrnn is that it can be easily used to train neural networks on a GPU very quickly, &lt;em>for free&lt;/em> using &lt;a href="https://colab.research.google.com/notebooks/welcome.ipynb" target="_blank" rel="noopener">Google Colaboratory&lt;/a>. I&amp;rsquo;ve &lt;a href="https://drive.google.com/file/d/1mMKGnVxirJnqDViH7BDJxFqWrsXlPSoK/view?usp=sharing" target="_blank" rel="noopener">created a notebook&lt;/a> which lets you train your own network and generate text whenever you want with just a few clicks!&lt;/p>
-&lt;h2 id="your-first-text-generating-neural-network">Your First Text-Generating Neural Network&lt;/h2>
-&lt;p>Colaboratory is a notebook environment similar to &lt;a href="http://jupyter.org" target="_blank" rel="noopener">Jupyter Notebooks&lt;/a> used in other data science projects. However, Colaboratory notebooks are hosted in a short term virtual machine, with 2 vCPUs, 13GB memory, and a K80 GPU attached. For free. Normally, this configuration would &lt;a href="https://cloud.google.com/compute/pricing" target="_blank" rel="noopener">cost&lt;/a> $0.57/hr on Google Compute Engine; it sounds low, but adds up when you need to train model(s) for hours to get good results.&lt;/p>
-&lt;p>First, I recommend copying the notebook to your own Drive so it&amp;rsquo;ll always be there (and switch to using Google Chrome if you aren&amp;rsquo;t). The Colaboratory VM contains Python 3 and common Python packages for machine learning such as TensorFlow. But you can install more packages directly in the notebook. Like textgenrnn! Just run this cell by clicking into the cell and click the &amp;ldquo;play&amp;rdquo; button (or use Shift + Enter) and it&amp;rsquo;ll take care of the rest:&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/05/text-neural-networks/pip_hudbd230541f8ba4ac26c48d3fd1a0e281_47557_734ec0a6e94b8686f3ee3b8950de3851.png 400w,
-/2018/05/text-neural-networks/pip_hudbd230541f8ba4ac26c48d3fd1a0e281_47557_2e2673cf9896fa3023bd32a2e03c2807.png 760w,
-/2018/05/text-neural-networks/pip_hudbd230541f8ba4ac26c48d3fd1a0e281_47557_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/05/text-neural-networks/pip_hudbd230541f8ba4ac26c48d3fd1a0e281_47557_734ec0a6e94b8686f3ee3b8950de3851.png"
-width="760"
-height="197"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>When training a new model, textgenrnn allows you to specify the size and complexity of the neural network with a wide variety of parameters:&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/05/text-neural-networks/config_hu9f47ac5f242a21b7d5fc73d84ed396ae_148921_651dc6b5104cef1aa29d02ed2abcc42c.png 400w,
-/2018/05/text-neural-networks/config_hu9f47ac5f242a21b7d5fc73d84ed396ae_148921_636c637ab5d3b0c5f9a725934b8f38b5.png 760w,
-/2018/05/text-neural-networks/config_hu9f47ac5f242a21b7d5fc73d84ed396ae_148921_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/05/text-neural-networks/config_hu9f47ac5f242a21b7d5fc73d84ed396ae_148921_651dc6b5104cef1aa29d02ed2abcc42c.png"
-width="515"
-height="561"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>Let&amp;rsquo;s keep these default parameters for now, so run that cell to load them into memory. Run the next cell, which prompts you to upload a file. &lt;em>Any text file should work&lt;/em>, even large text files! For this example, we&amp;rsquo;ll use a 1.1MB text file of Shakespeare plays also &lt;a href="https://github.com/karpathy/char-rnn/tree/master/data/tinyshakespeare" target="_blank" rel="noopener">used in the char-rnn demos&lt;/a>.&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/05/text-neural-networks/upload_hu6311507d4c42bef433f6addebe4bc0e8_131570_56226dbeafc44f9de517109dcf9bb883.png 400w,
-/2018/05/text-neural-networks/upload_hu6311507d4c42bef433f6addebe4bc0e8_131570_c992121b16dcf85a0b56ee1f324931b9.png 760w,
-/2018/05/text-neural-networks/upload_hu6311507d4c42bef433f6addebe4bc0e8_131570_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/05/text-neural-networks/upload_hu6311507d4c42bef433f6addebe4bc0e8_131570_56226dbeafc44f9de517109dcf9bb883.png"
-width="760"
-height="179"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>The next cell initializes an instance of textgenrnn and begins training a custom new text-generating neural network!&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/05/text-neural-networks/train_hudabe2532e6a9f188c3a257205d548278_141366_42e3d928c6886a2f1c04f723e810bb6d.png 400w,
-/2018/05/text-neural-networks/train_hudabe2532e6a9f188c3a257205d548278_141366_e3c78c04047200f2cdf91e369d2b78d7.png 760w,
-/2018/05/text-neural-networks/train_hudabe2532e6a9f188c3a257205d548278_141366_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/05/text-neural-networks/train_hudabe2532e6a9f188c3a257205d548278_141366_42e3d928c6886a2f1c04f723e810bb6d.png"
-width="760"
-height="222"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>textgenrnn automatically processes the input text into character sequences ready to train the network. After every 2 epochs (a full pass through the data), the network will generate sample text at different temperatures, which represent the &amp;ldquo;creativity&amp;rdquo; of the text (i.e. it allows the model to make increasingly suboptimal predictions, which can cause hilarity to ensue). I typically like generating text at a temperature of 0.5, but for very well-trained models, you can go up to 1.0.&lt;/p>
-&lt;p>The quick model training speed comes from the VM&amp;rsquo;s GPU, which can perform the necessary mathematical operations much faster than with a CPU. However, in the case of recurrent neural networks, Keras recently added a &lt;a href="https://keras.io/layers/recurrent/#cudnnlstm" target="_blank" rel="noopener">CuDNN implementation of RNNs&lt;/a> like LSTMs, which can easily tap into the GPU-native code more easily and gain a &lt;em>massive&lt;/em> speed boost (&lt;a href="http://minimaxir.com/2017/11/benchmark-gpus/" target="_blank" rel="noopener">about &lt;em>7x as fast&lt;/em>&lt;/a>) compared to previous implementations! In all, for this example dataset and model architecture, training on a GPU took 5-6 minutes an epoch, while on a modern CPU, training took &lt;em>1 hour and 24 minutes&lt;/em> an epoch, a &lt;strong>14x speedup&lt;/strong> on the GPU!&lt;/p>
-&lt;p>After training is complete, running the next cell will download three files: a &lt;code>weights&lt;/code> file, a &lt;code>vocabulary&lt;/code> file, and a &lt;code>config&lt;/code> file that are all needed to regenerate your model elsewhere.&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/05/text-neural-networks/download_hu4313c742dbc0ed581b61c343988cfcc2_89313_39ad913147febd67669195bca97f9cfa.png 400w,
-/2018/05/text-neural-networks/download_hu4313c742dbc0ed581b61c343988cfcc2_89313_3cf7bc0982446e5a986505ad803ccee4.png 760w,
-/2018/05/text-neural-networks/download_hu4313c742dbc0ed581b61c343988cfcc2_89313_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/05/text-neural-networks/download_hu4313c742dbc0ed581b61c343988cfcc2_89313_39ad913147febd67669195bca97f9cfa.png"
-width="760"
-height="115"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>For example, on your own personal computer. Just install textgenrnn + TensorFlow by inputting &lt;code>pip3 install textgenrnn tensorflow&lt;/code> into a terminal, change to the directory where the downloaded files are located, run &lt;code>python3&lt;/code>, and load the model using:&lt;/p>
-&lt;pre>&lt;code class="language-python">from textgenrnn import textgenrnn
-textgen = textgenrnn(weights_path='colaboratory_weights.hdf5',
-vocab_path='colaboratory_vocab.json',
-config_path='colaboratory_config.json')
-&lt;/code>&lt;/pre>
-&lt;p>And that&amp;rsquo;s that! No GPU necessary if you&amp;rsquo;re just generating text. You can generate samples (like during training) using &lt;code>textgen.generate_samples()&lt;/code>, generate a ton of samples at any temperature you like to a file using &lt;code>textgen.generate_to_file()&lt;/code>, or incorporate a generated text into a Python script (e.g. a Twitter bot) using &lt;code>textgen.generate(1, return_as_list=True)[0]&lt;/code> to store a text as a variable. You can view more of textgenrnn&amp;rsquo;s functions and capabilities in &lt;a href="https://github.com/minimaxir/textgenrnn/blob/master/docs/textgenrnn-demo.ipynb" target="_blank" rel="noopener">this demo Jupyter Notebook&lt;/a>.&lt;/p>
-&lt;p>Here&amp;rsquo;s some Shakespeare generated with a 50-minute-trained model at a temperature of 0.5:&lt;/p>
-&lt;pre>&lt;code class="language-txt">LUCENTIO:
-And then shall good grave to my wife thee;
-Thou would the cause the brieved to me,
-And let the place and then receives:
-The rest you the foren to my ways him child,
-And marry that will be a parties and so set me that be deeds
-And then the heart and be so shall make the most as he and stand of seat.
-GLOUCESTER:
-Your father and madam, or shall for the people
-And dead to make the truth, or a business
-As we brother to the place her great the truth;
-And that which to the smaster and her father,
-I am I was see the sun have to the royal true.
-&lt;/code>&lt;/pre>
-&lt;p>Not too bad, and it&amp;rsquo;s even close to &lt;a href="https://en.wikipedia.org/wiki/Iambic_pentameter" target="_blank" rel="noopener">iambic pentameter&lt;/a>!&lt;/p>
-&lt;h2 id="tweaking-the-model">Tweaking the Model&lt;/h2>
-&lt;p>The most important model configuration options above are &lt;code>rnn_size&lt;/code> and &lt;code>rnn_layers&lt;/code>: these determine the complexity of the network. Typically, you&amp;rsquo;ll see networks in tutorials be a single 128-cell or 256-cell network. However, textgenrnn&amp;rsquo;s architecture is slightly different as it has an attention layer which incorporates &lt;em>all&lt;/em> the preceding model layers. As a result, it&amp;rsquo;s much better to go deeper than wider (e.g. 4x128 is better than 1x512) unless you have a very large amount of text (&amp;gt;10MB). &lt;code>rnn_bidirectional&lt;/code> controls whether the recurrent neural network is bidirectional, that is, it processes the previous characters both forward &lt;em>and&lt;/em> backward (which works great if text follows specific rules, like Shakespeare&amp;rsquo;s character headings). &lt;code>max_length&lt;/code> determines the maximum number of characters for the network to use to predict the next character, which should be increased to let the network learn longer sequences, or decrease for shorter sequences.&lt;/p>
-&lt;p>Training has a few helpful options as well. &lt;code>num_epochs&lt;/code> determines the number of full passes of the data; this can be tweaked if you want to train the model even more. &lt;code>batch_size&lt;/code> determines the number of model sequences to train in a step: typically, batch size for deep learning models is 32 or 128, but with a GPU, you can get a speed increase by saturating it with the given 1024 default. &lt;code>train_size&lt;/code> determines the proportion of character samples to train; setting it &lt;code>&amp;lt; 1.0&lt;/code> both speeds up each epoch, and prevents the model from cheating and being able to learn sequences verbatim. (You can set &lt;code>'validation': True&lt;/code> to run the model on the unused data after each epoch to see if the model is overfitting).&lt;/p>
-&lt;p>Let&amp;rsquo;s try playing with the parameters more on a new text dataset.&lt;/p>
-&lt;h2 id="word-level-text-generation-with-reddit-data">Word-Level Text Generation With Reddit Data&lt;/h2>
-&lt;p>You might be asking &amp;ldquo;how do you obtain text data&amp;rdquo;? The popular text-generation use cases like lyric generation and movie scripts are copyright-protected so they&amp;rsquo;re harder to find, and even then, it might not be enough text data to train a new model upon (you typically want atleast 100,000 characters).&lt;/p>
-&lt;p>&lt;a href="https://www.reddit.com" target="_blank" rel="noopener">Reddit&lt;/a>, however, has &lt;em>millions&lt;/em> of submission titles which would be great to train for a model. I wrote a &lt;a href="https://github.com/minimaxir/subreddit-generator" target="_blank" rel="noopener">helper script&lt;/a> to automatically download the top &lt;em>n&lt;/em> Reddit submissions from a given subreddit over a given period of time. If you choose subreddits with similar linguistic styles in their titles, the subreddits will even blend together! Let&amp;rsquo;s play with the Top 20,000 Submissions in 2017 from each of &lt;a href="https://www.reddit.com/r/politics/" target="_blank" rel="noopener">/r/politics&lt;/a> and &lt;a href="https://www.reddit.com/r/technology/" target="_blank" rel="noopener">/r/technology&lt;/a>, which results in a 3.3MB file: about 3x as much data as the Shakespeare plays.&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/05/text-neural-networks/reddit_data_hu77d55e995253c595e52bab3acc0e0e20_193580_1680a5ecaae389da2de838078afd4b7b.png 400w,
-/2018/05/text-neural-networks/reddit_data_hu77d55e995253c595e52bab3acc0e0e20_193580_8b99e980d6687a33a07fba556365933a.png 760w,
-/2018/05/text-neural-networks/reddit_data_hu77d55e995253c595e52bab3acc0e0e20_193580_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/05/text-neural-networks/reddit_data_hu77d55e995253c595e52bab3acc0e0e20_193580_1680a5ecaae389da2de838078afd4b7b.png"
-width="760"
-height="476"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>One last thing that textgenrnn can do that most char-rnn implementations can&amp;rsquo;t is generate a &lt;em>word level&lt;/em> model (thanks to Keras&amp;rsquo;s tokenizers), where the model uses the &lt;em>n&lt;/em> previous words/punctuation to predict the next word/punctuation. On the plus side, using only words prevents crazy typoes and since it predicts multiple &amp;ldquo;characters&amp;rdquo; at a time, &lt;code>max_length&lt;/code> can be reduced proportionally, dramatically speeding up training. There&amp;rsquo;s two downsides with this approach; since words are all lowercase and punctuation is its own token, the generated text cannot be immediately used without manual editing. Additionally, the model weights will be substantially larger than a character-level model since the word-level model has to store an embedding for each word (up to &lt;code>max_words&lt;/code>, which is 10,000 by default when the vocabulary size for a char-level model is 200-300).&lt;/p>
-&lt;p>Another advantage of the Colaboratory notebook is that you can quickly adjust model parameters, upload a new file, and immediately start training it. We&amp;rsquo;ll set &lt;code>'line_delimited': True&lt;/code> and &lt;code>'rnn_bidirectional': False&lt;/code> since there aren&amp;rsquo;t specific rules. For word level training, let&amp;rsquo;s set &lt;code>'word_level': True&lt;/code> and &lt;code>'max_length': 8&lt;/code> to reflect the new training architecture. Since training length has been reduced to 1/5th, we can set &lt;code>'num_epochs': 50&lt;/code> and &lt;code>'gen_epoch': 10&lt;/code> to balance it out. Rerun the config cell to update parameters, upload the Reddit data file, and rerun training.&lt;/p>
-&lt;p>The resulting model is much more well trained than the Shakespeare model, and here&amp;rsquo;s a few Reddit submission titles generated at a temperature of 1.0:&lt;/p>
-&lt;pre>&lt;code class="language-txt">report : 49 % of americans now believe all of the country ’ s effective
-people like facebook like it ' s 650 of 1 %
-uber accused of secretly - security popular service ( likely oklahoma )
-equifax breach fallout : your salary is dead
-sanders uses texas shooter ' s iphone sales
-adobe videos will be used to sell the web
-apple to hold cash for $ 500 service
-fitbit just targeting solar energy
-george bush ' s concept car ‘ goes for all the biggest controversy .
-&lt;/code>&lt;/pre>
-&lt;p>Those look pretty good, although they may need a little editing before posting on social media.&lt;/p>
-&lt;h2 id="followup">Followup&lt;/h2>
-&lt;p>These examples only train the model for little time as a demo of textgenrnn&amp;rsquo;s fast learning; there&amp;rsquo;s nothing stopping you from increasing &lt;code>num_epochs&lt;/code> even more to further refine a model. However, from my experience, the training cell times out after &lt;strong>4 hours&lt;/strong>; set &lt;code>num_epochs&lt;/code> accordingly, although in my experience that&amp;rsquo;s all you need before the network converges.&lt;/p>
-&lt;p>In practice, I used this Colaboratory notebook to train &lt;em>many&lt;/em> models for &lt;a href="https://www.reddit.com/r/SubredditNN/" target="_blank" rel="noopener">/r/SubredditNN&lt;/a>, a Reddit subreddit where only text-generating neural network bots trained on other subreddits. And the results are very funny:&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/05/text-neural-networks/subredditnn_hu5230520a5698a2f78f3ec13490c86d78_271051_9d8a2ba3f0214e3b28571f110e3a87fd.png 400w,
-/2018/05/text-neural-networks/subredditnn_hu5230520a5698a2f78f3ec13490c86d78_271051_0083e3977422c855c294b9590ce29a71.png 760w,
-/2018/05/text-neural-networks/subredditnn_hu5230520a5698a2f78f3ec13490c86d78_271051_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/05/text-neural-networks/subredditnn_hu5230520a5698a2f78f3ec13490c86d78_271051_9d8a2ba3f0214e3b28571f110e3a87fd.png"
-width="760"
-height="324"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>Although text generating neural networks aren&amp;rsquo;t at the point where they can &lt;a href="https://www.bloomberg.com/news/features/2018-05-17/i-tried-to-get-an-ai-to-write-this-story-paul-ford" target="_blank" rel="noopener">write entire articles by themselves&lt;/a>, there are still many opportunities to use it just for fun! And thanks to textgenrnn, it&amp;rsquo;s easy, fast, and cost-effective for anyone to do! Let me know if you make any interesting neural networks with textgenrnn and this Notebook!&lt;/p></description></item></channel></rss>
+&lt;p>&lt;em>You are free to use the data visualizations from this article however you wish, but it would be greatly appreciated if proper attribution is given to this article and/or myself!&lt;/em>&lt;/p></description></item></channel></rss>
