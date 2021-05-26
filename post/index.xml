@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts | Max Woolf's Blog</title><link>https://minimaxir.com/post/</link><atom:link href="https://minimaxir.com/post/index.xml" rel="self" type="application/rss+xml"/><description>Posts</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright Max Woolf © 2021</copyright><lastBuildDate>Fri, 30 Apr 2021 08:55:00 -0700</lastBuildDate><image><url>https://minimaxir.com/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_512x512_fill_gaussian_center_2.png</url><title>Posts</title><link>https://minimaxir.com/post/</link></image><item><title>Easily Transform Portraits of People into AI Aberrations Using StyleCLIP</title><link>https://minimaxir.com/2021/04/styleclip/</link><pubDate>Fri, 30 Apr 2021 08:55:00 -0700</pubDate><guid>https://minimaxir.com/2021/04/styleclip/</guid><description>&lt;div class="alert alert-">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Max Woolf's Blog</title><link>https://minimaxir.com/post/</link><atom:link href="https://minimaxir.com/post/index.xml" rel="self" type="application/rss+xml"/><description>Posts</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright Max Woolf © 2021</copyright><lastBuildDate>Fri, 30 Apr 2021 08:55:00 -0700</lastBuildDate><image><url>https://minimaxir.com/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_512x512_fill_gaussian_center_2.png</url><title>Posts</title><link>https://minimaxir.com/post/</link></image><item><title>Easily Transform Portraits of People into AI Aberrations Using StyleCLIP</title><link>https://minimaxir.com/2021/04/styleclip/</link><pubDate>Fri, 30 Apr 2021 08:55:00 -0700</pubDate><guid>https://minimaxir.com/2021/04/styleclip/</guid><description>&lt;div class="alert alert-">
 &lt;div>
 &lt;strong>tl;dr&lt;/strong> follow the instructions in &lt;a href="https://colab.research.google.com/drive/13EJ1ATvTnE0N7I0ULLvRsta7J7HdNuBi?usp=sharing">this Colab Notebook&lt;/a> to generate your own AI Aberration images and videos! If you want to use your own images, follow the instructions in &lt;a href="https://colab.research.google.com/drive/1St3R2qAbwwTV-amfYLeyGGswtzX4HHJP?usp=sharing">this Colab Notebook first&lt;/a>!
 &lt;/div>
@@ -1167,7 +1167,7 @@ width="570"
 height="760"
 loading="lazy" data-zoomable class=" img-light" />&lt;/div>
 &lt;/div>&lt;/figure>
-&lt;p>As the earlier distribution chart implied, the median score is around 1-2 for most subreddits, and that&amp;rsquo;s consistent across all time slots. Some subreddits with higher medians like /r/me_irl do appear to have a &lt;em>slight&lt;/em> benefit when posting before peak activity. When focusing on subreddits with high overall median scores, the difference is more explicit.&lt;/p>
+&lt;p>As the earlier distribution chart implied, the median score is around 1-2 for most subreddits, and that&amp;rsquo;s consistent across all time slots. Some subreddits with higher medians like /r/me&lt;em>irl do appear to have a _slight&lt;/em> benefit when posting before peak activity. When focusing on subreddits with high overall median scores, the difference is more explicit.&lt;/p>
 &lt;figure >
 &lt;div class="d-flex justify-content-center">
 &lt;div class="w-100" >
@@ -1180,7 +1180,7 @@ width="760"
 height="507"
 loading="lazy" data-zoomable class=" img-light" />&lt;/div>
 &lt;/div>&lt;/figure>
-&lt;p>Subreddits like /r/PrequelMemes and /r/The_Donald &lt;em>definitely&lt;/em> have better performance on average when made before peak activity! Posting before peak usage &lt;em>does&lt;/em> appear to be a viable strategy, however for the majority of subreddits it doesn&amp;rsquo;t make much of a difference.&lt;/p>
+&lt;p>Subreddits like /r/PrequelMemes and /r/The&lt;em>Donald _definitely&lt;/em> have better performance on average when made before peak activity! Posting before peak usage &lt;em>does&lt;/em> appear to be a viable strategy, however for the majority of subreddits it doesn&amp;rsquo;t make much of a difference.&lt;/p>
 &lt;h2 id="submission-titles">Submission Titles&lt;/h2>
 &lt;p>Each Reddit subreddit has their own vocabulary and topics of discussion. Let&amp;rsquo;s break down text by subreddit by looking at the 75th percentile for score on posts containing a given two-word phrase:&lt;/p>
 &lt;figure >
