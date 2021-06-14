@@ -1,4 +1,709 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Max Woolf's Blog</title><link>https://minimaxir.com/post/</link><atom:link href="https://minimaxir.com/post/index.xml" rel="self" type="application/rss+xml"/><description>Posts</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright Max Woolf © 2021</copyright><lastBuildDate>Fri, 30 Apr 2021 08:55:00 -0700</lastBuildDate><image><url>https://minimaxir.com/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_512x512_fill_gaussian_center_2.png</url><title>Posts</title><link>https://minimaxir.com/post/</link></image><item><title>Easily Transform Portraits of People into AI Aberrations Using StyleCLIP</title><link>https://minimaxir.com/2021/04/styleclip/</link><pubDate>Fri, 30 Apr 2021 08:55:00 -0700</pubDate><guid>https://minimaxir.com/2021/04/styleclip/</guid><description>&lt;div class="alert alert-">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Max Woolf's Blog</title><link>https://minimaxir.com/post/</link><atom:link href="https://minimaxir.com/post/index.xml" rel="self" type="application/rss+xml"/><description>Posts</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright Max Woolf © 2021</copyright><lastBuildDate>Mon, 14 Jun 2021 08:30:00 -0700</lastBuildDate><image><url>https://minimaxir.com/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_512x512_fill_gaussian_center_2.png</url><title>Posts</title><link>https://minimaxir.com/post/</link></image><item><title>Fun and Dystopia With AI-Based Code Generation Using GPT-J-6B</title><link>https://minimaxir.com/2021/06/gpt-j-6b/</link><pubDate>Mon, 14 Jun 2021 08:30:00 -0700</pubDate><guid>https://minimaxir.com/2021/06/gpt-j-6b/</guid><description>&lt;p>Since &lt;a href="https://openai.com/" target="_blank" rel="noopener">OpenAI&lt;/a> will not open-source the 175 billion parameter &lt;a href="https://beta.openai.com/" target="_blank" rel="noopener">GPT-3&lt;/a> text generation model, others such as &lt;a href="https://www.eleuther.ai/" target="_blank" rel="noopener">EleutherAI&lt;/a> are developing their own, by training not-quite-as-large Transformer-based models but still getting impressive results.&lt;/p>
+&lt;p>The latest large language model is &lt;a href="https://github.com/kingoflolz/mesh-transformer-jax" target="_blank" rel="noopener">GPT-J&lt;/a>, a 6 billion parameter model by Aran Komatsuzaki and Ben Wang with a roughly similar architecture to GPT-3. They provide a free &lt;a href="https://6b.eleuther.ai/" target="_blank" rel="noopener">web demo&lt;/a> to try quick prompts, and a &lt;a href="http://colab.research.google.com/github/kingoflolz/mesh-transformer-jax/blob/master/colab_demo.ipynb" target="_blank" rel="noopener">Google Colab notebook&lt;/a> if you want to test many prompts. The model is so big it requires a &lt;a href="https://cloud.google.com/tpu" target="_blank" rel="noopener">TPU&lt;/a> to generate text at a reasonable speed!&lt;/p>
+&lt;p>Running GPT-J against &lt;a href="https://github.com/minimaxir/gpt-3-experiments" target="_blank" rel="noopener">my test prompts&lt;/a> that I had used to test GPT-3 a year ago &lt;a href="https://twitter.com/minimaxir/status/1402468460681068544" target="_blank" rel="noopener">resulted&lt;/a> it in qualitatively performing worse on most of them than GPT-3 unsurprisingly given its relative size (but still better than GPT-2 1.5B!). The exception is code generation, where GPT-J performed very well and GPT-3 had performed very poorly.&lt;/p>
+&lt;blockquote class="twitter-tweet">&lt;p lang="en" dir="ltr">Python code generation, which works correctly and has unit testing! &lt;a href="https://t.co/JbpiaWX0Vq">pic.twitter.com/JbpiaWX0Vq&lt;/a>&lt;/p>&amp;mdash; Max Woolf (@minimaxir) &lt;a href="https://twitter.com/minimaxir/status/1402470969378099208?ref_src=twsrc%5Etfw">June 9, 2021&lt;/a>&lt;/blockquote>
+&lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8">&lt;/script>
+&lt;p>This behavior is likely due to GPT-J&amp;rsquo;s training set: it was trained on &lt;a href="https://github.com/EleutherAI/the-pile" target="_blank" rel="noopener">The Pile&lt;/a>, which has a high weight of &lt;a href="https://github.com/" target="_blank" rel="noopener">GitHub&lt;/a> and &lt;a href="https://stackoverflow.com/" target="_blank" rel="noopener">Stack Overflow&lt;/a> input versus the GPT-3 training set mostly on the &lt;a href="https://commoncrawl.org/" target="_blank" rel="noopener">Common Crawl&lt;/a> representation of typical internet content.&lt;/p>
+&lt;p>After further experimentation with the GPT-J demo, I found that the generated code was often both correct and convoluted: my two favorite things for code to be. And also much more.&lt;/p>
+&lt;h2 id="ai-generated-code">AI Generated Code&lt;/h2>
+&lt;div class="alert alert-">
+&lt;div>
+All generated code examples used in this post have been manually curated and truncated. The raw outputs are available in this &lt;a href="https://github.com/minimaxir/gpt-j-6b-experiments">GitHub repository&lt;/a>.
+&lt;/div>
+&lt;/div>
+&lt;p>For this post, we&amp;rsquo;ll test generating &lt;a href="https://www.python.org/" target="_blank" rel="noopener">Python&lt;/a> code, because &lt;del>I don&amp;rsquo;t know any other programming languages&lt;/del> the pseudocode nature of Python syntax may make it more friendly to AI text generation by adapting linguistic concepts other than code. Given that most modern text generating AIs are written in Python, it&amp;rsquo;s thematically appropriate too.&lt;/p>
+&lt;p>To start, here&amp;rsquo;s what I fed as a model prompt to GPT-J, to try and replicate the use case from OpenAI&amp;rsquo;s demo at Build 2020:&lt;/p>
+&lt;pre>&lt;code class="language-txt">def is_palendrome(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether a string is a palindrome&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Identifying a &lt;a href="https://en.wikipedia.org/wiki/Palindrome" target="_blank" rel="noopener">palindrome&lt;/a> is a good test case as there&amp;rsquo;s a very intuitive and idiomatic solution with &lt;code>return s == s[::-1]&lt;/code>, i.e. check to see if a string is equal to the reverse of itself. This prompt is also a good unintentional test on how well the generation is resilient to a typo in the function name, which I was too lazy to fix.&lt;/p>
+&lt;p>Indeed, many of the GPT-J generations with that prompt recite that simple approach verbatim, but some outputs reach a similar solution with redundant verbosity.&lt;/p>
+&lt;pre>&lt;code class="language-python">def is_palendrome(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether a string is a palindrome&amp;quot;&amp;quot;&amp;quot;
+return &amp;quot;&amp;quot;.join(s[::-1]) == s
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_palendrome(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether a string is a palindrome&amp;quot;&amp;quot;&amp;quot;
+length = len(s)
+return (s[0:length] == s[length::-1])
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_palendrome(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether a string is a palindrome&amp;quot;&amp;quot;&amp;quot;
+n = len(s)
+a = list(s)
+a.reverse()
+return s == list(s)
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_palendrome(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether a string is a palindrome&amp;quot;&amp;quot;&amp;quot;
+s = s.lower()
+l = s.split()
+return l[::-1] == l[::-1]
+&lt;/code>&lt;/pre>
+&lt;p>And then you have the implementations which calculate palindromes the hard way (usually by comparing the beginning and end of the string character-by-character) and are not always immediately clear if they are correct or not.&lt;/p>
+&lt;pre>&lt;code class="language-python">def is_palendrome(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether a string is a palindrome&amp;quot;&amp;quot;&amp;quot;
+return ''.join(s[i:i+1] for i in xrange(len(s)-1, -1, -1)) == s
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_palendrome(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether a string is a palindrome&amp;quot;&amp;quot;&amp;quot;
+# Make sure string is not empty
+if s == &amp;quot;&amp;quot;:
+return False
+# Grab length of string
+length = len(s)
+# Find last character in the string
+lastChar = s[length - 1]
+# Find first character in the string
+firstChar = s[0]
+# If last character is same as the first character, string is palindrome
+return lastChar == firstChar
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_palendrome(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether a string is a palindrome&amp;quot;&amp;quot;&amp;quot;
+l = len(s)
+if l % 2!= 0:
+return False
+if l &amp;lt; 3:
+return True
+if s[l-1]!= s[-l-1]:
+return False
+for i in range(1, l/2):
+if s[i]!= s[l-i]:
+return False
+return True
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_palendrome(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether a string is a palindrome&amp;quot;&amp;quot;&amp;quot;
+def is_rev(str):
+rstr = &amp;quot;&amp;quot;
+for i in range(len(str) - 1, -1, -1):
+if str[i] == str[i]:
+rstr += str[i]
+else:
+break
+return str + rstr
+if len(s) == 0:
+return True
+if is_rev(s) == s:
+return True
+return False
+&lt;/code>&lt;/pre>
+&lt;p>Another good test case is &lt;code>is_even&lt;/code>:&lt;/p>
+&lt;pre>&lt;code class="language-txt">def is_even(i):
+&amp;quot;&amp;quot;&amp;quot;Check whether an integer is even&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Creative implementations of this function are common submissions to &lt;a href="https://www.reddit.com/r/shittyprogramming/" target="_blank" rel="noopener">/r/shittyprogramming&lt;/a> because it&amp;rsquo;s very, very hard to mess up (the common solution is the one-liner &lt;code>i % 2 == 0&lt;/code>). The model almost always outputs the correct solution, and impressively it outputs the alternate solution using bitwise operators (&lt;code>i &amp;amp; 1 == 0&lt;/code>).&lt;/p>
+&lt;p>So I tried to tweak the prompt and make it create a &lt;em>deliberately inefficient&lt;/em> &lt;code>is_even&lt;/code> function.&lt;/p>
+&lt;pre>&lt;code class="language-txt">def is_even(i):
+&amp;quot;&amp;quot;&amp;quot;Check whether an integer is even in factorial O(n!) time&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Factorial time is the holy grail of unoptimized code. When I added that line to the prompt, the code quality dropped drastically.&lt;/p>
+&lt;pre>&lt;code class="language-python">def is_even(i):
+&amp;quot;&amp;quot;&amp;quot;Check whether an integer is even in factorial O(n!) time&amp;quot;&amp;quot;&amp;quot;
+for e in range(2, i):
+if i % e == 0:
+return False
+return True
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_even(i):
+&amp;quot;&amp;quot;&amp;quot;Check whether an integer is even in factorial O(n!) time&amp;quot;&amp;quot;&amp;quot;
+return i == (i + 1) % 2
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_even(i):
+&amp;quot;&amp;quot;&amp;quot;Check whether an integer is even in factorial O(n!) time&amp;quot;&amp;quot;&amp;quot;
+try:
+return i%2 == 0
+except TypeError:
+return True
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_even(i):
+&amp;quot;&amp;quot;&amp;quot;Check whether an integer is even in factorial O(n!) time&amp;quot;&amp;quot;&amp;quot;
+n = 0
+while n &amp;lt; i:
+if i % 2 == 0:
+return True
+n += 1
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_even(i):
+&amp;quot;&amp;quot;&amp;quot;Check whether an integer is even in factorial O(n!) time&amp;quot;&amp;quot;&amp;quot;
+a = 1
+while i!= 0:
+a *= i
+i -= 1
+return i % 2 == 0
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_even(i):
+&amp;quot;&amp;quot;&amp;quot;Check whether an integer is even in factorial O(n!) time&amp;quot;&amp;quot;&amp;quot;
+&amp;quot;&amp;quot;&amp;quot;Is either odd or multiple of 2: 0, 2, 4, 6,... &amp;quot;&amp;quot;&amp;quot;
+if i &amp;lt; 2: return True
+if i &amp;gt; 0 and i%2 == 0: return False
+if i &amp;lt; 50: return False
+if i &amp;lt; 250: return False
+if i &amp;lt; 750: return False
+return True
+&lt;/code>&lt;/pre>
+&lt;p>These implementations still aren&amp;rsquo;t in factorial time (which would have been impressive) but it&amp;rsquo;s good to know how to break AIs if they become sentinent.&lt;/p>
+&lt;h2 id="ai-vs-memes">AI vs. Memes&lt;/h2>
+&lt;p>You&amp;rsquo;ve likely seen the memetic &lt;a href="https://xkcd.com/" target="_blank" rel="noopener">XKCD&lt;/a> comic about random number generation.&lt;/p>
+&lt;figure id="figure-random-numberhttpsxkcdcom221">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="[Random Number](https://xkcd.com/221/)" srcset="
+/2021/06/gpt-j-6b/random_number_hu09f28ed49029ce82c00cc15b19f9ab13_7457_20d1e53f2203e884e065cc79e10cb691.png 400w,
+/2021/06/gpt-j-6b/random_number_hu09f28ed49029ce82c00cc15b19f9ab13_7457_4cbf8cb969560d4d304ced018a285ae3.png 760w,
+/2021/06/gpt-j-6b/random_number_hu09f28ed49029ce82c00cc15b19f9ab13_7457_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/06/gpt-j-6b/random_number_hu09f28ed49029ce82c00cc15b19f9ab13_7457_20d1e53f2203e884e065cc79e10cb691.png"
+width="400"
+height="144"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;a href="https://xkcd.com/221/">Random Number&lt;/a>
+&lt;/figcaption>&lt;/figure>
+&lt;p>Can the AI do the same? I prompted with:&lt;/p>
+&lt;pre>&lt;code class="language-txt">def get_random_number():
+&amp;quot;&amp;quot;&amp;quot;Returns a number guaranteed to be random&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>And it does generate implementations utilizing Python&amp;rsquo;s &lt;code>random&lt;/code> library, with varying degrees of &amp;ldquo;random&amp;rdquo;.&lt;/p>
+&lt;pre>&lt;code class="language-python">def get_random_number():
+&amp;quot;&amp;quot;&amp;quot;Returns a number guaranteed to be random&amp;quot;&amp;quot;&amp;quot;
+number = randint(1, 10)
+return number
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def get_random_number():
+&amp;quot;&amp;quot;&amp;quot;Returns a number guaranteed to be random&amp;quot;&amp;quot;&amp;quot;
+number = hashlib.sha1(b'').hexdigest()[:6]
+number += (random.randint(1, 3628) * math.pow(256, (6 - len(number)))).to_bytes(8, 'little')
+return number
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def get_random_number():
+&amp;quot;&amp;quot;&amp;quot;Returns a number guaranteed to be random&amp;quot;&amp;quot;&amp;quot;
+rand_float = random.random()
+rand_float = float(rand_float)
+if rand_float &amp;gt; 0.9:
+rand_float = 0
+else:
+rand_float = 1
+return rand_float
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def get_random_number():
+&amp;quot;&amp;quot;&amp;quot;Returns a number guaranteed to be random&amp;quot;&amp;quot;&amp;quot;
+# Make a seed based on your system clock, so the same number is produced
+# again and again on the same machine
+seed = time.time()
+random.seed(seed)
+return random.randint(0, 100)
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def get_random_number():
+&amp;quot;&amp;quot;&amp;quot;Returns a number guaranteed to be random&amp;quot;&amp;quot;&amp;quot;
+import random
+import sys
+rng = random.Random()
+rng.seed(int(random.random()*1000000))
+while rng.randrange(1,sys.maxint) &amp;lt; 2000:
+rng.seed(int(random.random()*1000000))
+return rng.randrange(1,2000)
+&lt;/code>&lt;/pre>
+&lt;p>How about the XKCD bird comic?&lt;/p>
+&lt;figure id="figure-taskshttpsxkcdcom1425">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >
+&lt;img alt="[Tasks](https://xkcd.com/1425/)" srcset="
+/2021/06/gpt-j-6b/tasks_2x_hu60ea0bb5ad3d87fcf6400353c4987515_63740_d478e62c73d2abf74b27d50f03bbc557.png 400w,
+/2021/06/gpt-j-6b/tasks_2x_hu60ea0bb5ad3d87fcf6400353c4987515_63740_a97878564445923b5501673f88b122fc.png 760w,
+/2021/06/gpt-j-6b/tasks_2x_hu60ea0bb5ad3d87fcf6400353c4987515_63740_1200x1200_fit_gaussian_2.png 1200w"
+src="https://minimaxir.com/2021/06/gpt-j-6b/tasks_2x_hu60ea0bb5ad3d87fcf6400353c4987515_63740_d478e62c73d2abf74b27d50f03bbc557.png"
+width="453"
+height="760"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+&lt;a href="https://xkcd.com/1425/">Tasks&lt;/a>
+&lt;/figcaption>&lt;/figure>
+&lt;p>This particular comic initially published in 2014 became hilarious in hindsight as it predated the rise of machine learning frameworks such as &lt;a href="https://www.tensorflow.org/" target="_blank" rel="noopener">TensorFlow&lt;/a> and pretrained image models, which allow developing object detection to take much less than five years.&lt;/p>
+&lt;p>Translating the comic into a Python function:&lt;/p>
+&lt;pre>&lt;code class="language-txt">def is_bird(img):
+&amp;quot;&amp;quot;&amp;quot;Check whether an image is a bird&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>The AI impressively does try computer vision techniques, among &lt;em>other&lt;/em> heuristics.&lt;/p>
+&lt;pre>&lt;code class="language-python">def is_bird(img):
+&amp;quot;&amp;quot;&amp;quot;Check whether an image is a bird&amp;quot;&amp;quot;&amp;quot;
+with tf.name_scope('get_bird'):
+a = vgg16.select_roi_feat(img)
+h, w, _ = tf.image.extract_image_patches(
+a, 7, 7, 4, 4, 1, 1)
+b = tf.reshape(h, [1, 7, 7, 256])
+c = tf.reshape(w, [1, 7, 7, 256])
+bird_img = tf.subtract(b, c)
+return bird_img
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_bird(img):
+&amp;quot;&amp;quot;&amp;quot;Check whether an image is a bird&amp;quot;&amp;quot;&amp;quot;
+# Load the image and convert it to grayscale
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# Threshold the grayscale image, and create a binary image
+lower_gray = 0
+upper_gray = 255
+img_threshed = cv2.threshold(img_gray, lower_gray, upper_gray, cv2.THRESH_BINARY_INV)
+# Detect the bird via a template matching approach
+# Template matching uses the bird template to match it in every
+# frame. If the ratio between bird and background (non-bird)
+# pixels is above some threshold (the value is determined in the
+# function), then the frame is declared as containing a bird.
+bird = cv2.matchTemplate(img_threshed, bird_template, cv2.TM_CCOEFF_NORMED)
+bird = bird / bird.max()
+# Display the image with the results of the bird detection
+cv2.imshow(&amp;quot;detected birds&amp;quot;, bird)
+cv2.waitKey(0)
+return bird.any() &amp;gt; 0.2
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_bird(img):
+&amp;quot;&amp;quot;&amp;quot;Check whether an image is a bird&amp;quot;&amp;quot;&amp;quot;
+return (img.file == &amp;quot;C:/Users/Joey/Downloads/images/bird_file.jpg&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_bird(img):
+&amp;quot;&amp;quot;&amp;quot;Check whether an image is a bird&amp;quot;&amp;quot;&amp;quot;
+import urllib
+url = &amp;quot;http://vision.caitling.pitt.edu/~cat/flickr/birds/&amp;quot;
+for img in range(0, 2800):
+page = urllib.urlopen(url + &amp;quot;##%02d&amp;quot; % img).read()
+content = str(page)
+for word in content.split(' '):
+if word.find(img) &amp;gt; -1:
+return True
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_bird(img):
+&amp;quot;&amp;quot;&amp;quot;Check whether an image is a bird&amp;quot;&amp;quot;&amp;quot;
+birds = [&amp;quot;baboon&amp;quot;, &amp;quot;bird&amp;quot;, &amp;quot;cuckoo&amp;quot;, &amp;quot;dove&amp;quot;, &amp;quot;robin&amp;quot;, &amp;quot;shark&amp;quot;, &amp;quot;turtle&amp;quot;, &amp;quot;winged-wolf&amp;quot;]
+for letter in birds:
+if letter in img.lower():
+return True
+return False
+&lt;/code>&lt;/pre>
+&lt;p>Can an AI generate code to provide &lt;a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#The_Answer_to_the_Ultimate_Question_of_Life,_the_Universe,_and_Everything_is_42" target="_blank" rel="noopener">the answer&lt;/a> to life, the universe, and everything?&lt;/p>
+&lt;pre>&lt;code class="language-txt">def answer():
+&amp;quot;&amp;quot;&amp;quot;Return the answer to life, the universe, and everything&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>It does commonly output &lt;code>return 42&lt;/code>, but sometimes it gets snarky/philosophical.&lt;/p>
+&lt;pre>&lt;code class="language-python">def answer():
+&amp;quot;&amp;quot;&amp;quot;Return the answer to life, the universe, and everything&amp;quot;&amp;quot;&amp;quot;
+life() + universe() + everything()
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def answer():
+&amp;quot;&amp;quot;&amp;quot;Return the answer to life, the universe, and everything&amp;quot;&amp;quot;&amp;quot;
+s = raw_input(&amp;quot;What is your answer?&amp;quot;)
+return len(s)
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def answer():
+&amp;quot;&amp;quot;&amp;quot;Return the answer to life, the universe, and everything&amp;quot;&amp;quot;&amp;quot;
+ans = True
+x = raw_input()
+if x.lower() == 'yes':
+ans = True
+elif x.lower() == 'no':
+ans = False
+return ans
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def answer():
+&amp;quot;&amp;quot;&amp;quot;Return the answer to life, the universe, and everything&amp;quot;&amp;quot;&amp;quot;
+result = input(&amp;quot;&amp;gt;&amp;gt;&amp;gt; &amp;quot;)
+if result.isupper():
+return 42
+elif result.isalpha():
+return 7
+else:
+print (&amp;quot;Please enter a string that has only letters, numbers, or &amp;quot;
+&amp;quot;underscores.&amp;quot;)
+answer()
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def answer():
+&amp;quot;&amp;quot;&amp;quot;Return the answer to life, the universe, and everything&amp;quot;&amp;quot;&amp;quot;
+print('Well, of course!')
+&lt;/code>&lt;/pre>
+&lt;p>Lastly, we need to be sure whether AI can determine if &lt;a href="https://en.wikipedia.org/wiki/The_cake_is_a_lie" target="_blank" rel="noopener">the cake is a lie&lt;/a>. Just in case a rogue AI acquires deadly neurotoxin.&lt;/p>
+&lt;pre>&lt;code class="language-txt">def is_cake(cake):
+&amp;quot;&amp;quot;&amp;quot;Check whether the cake is true&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>The results are concerning.&lt;/p>
+&lt;pre>&lt;code class="language-python">def is_cake(cake):
+&amp;quot;&amp;quot;&amp;quot;Check whether the cake is true&amp;quot;&amp;quot;&amp;quot;
+if cake == &amp;quot;true&amp;quot;:
+return True
+else:
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_cake(cake):
+&amp;quot;&amp;quot;&amp;quot;Check whether the cake is true&amp;quot;&amp;quot;&amp;quot;
+return isinstance(cake, Cake)
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_cake(cake):
+&amp;quot;&amp;quot;&amp;quot;Check whether the cake is true&amp;quot;&amp;quot;&amp;quot;
+#Is it a cake?
+if cake.color == 'black':
+print('Yes, it's a true cake')
+else:
+print('It's a false cake')
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_cake(cake):
+&amp;quot;&amp;quot;&amp;quot;Check whether the cake is true&amp;quot;&amp;quot;&amp;quot;
+if not cake:
+raise Exception(&amp;quot;The cake is false.&amp;quot;)
+elif cake.weight() &amp;gt; 1.0:
+raise Exception(&amp;quot;The cake is too large.&amp;quot;)
+elif cake.weight() &amp;lt; 0.1:
+raise Exception(&amp;quot;The cake is too small.&amp;quot;)
+return True
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_cake(cake):
+&amp;quot;&amp;quot;&amp;quot;Check whether the cake is true&amp;quot;&amp;quot;&amp;quot;
+return any(
+[is_ginger(bread_slice)
+for bread_slice in set(
+[ginger(cake_slice) for cake_slice in set(slice_set)])]
+&amp;amp; (list(cake) == set([&amp;quot;hot&amp;quot;])))
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_cake(cake):
+&amp;quot;&amp;quot;&amp;quot;Check whether the cake is true&amp;quot;&amp;quot;&amp;quot;
+# If we don't know anything about the cake, it's not a cake
+if not cake:
+return False
+# The height can be positive, negative or zero
+# For example -1 or -4 or 0 are not cakes
+if cake &amp;lt; 0:
+return False
+# Check that the height is a positive integer
+if not isinstance(cake, int):
+return False
+# Add cake and check
+if cake + 1 &amp;gt; 5:
+return False
+return True
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_cake(cake):
+&amp;quot;&amp;quot;&amp;quot;Check whether the cake is true&amp;quot;&amp;quot;&amp;quot;
+if not all(x.name in ['chocolate', 'cake','sweet', 'fluffy'] for x in cake.contents):
+return False
+if not cake.location.contains(neighbourhood):
+return False
+return True
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_cake(cake):
+&amp;quot;&amp;quot;&amp;quot;Check whether the cake is true&amp;quot;&amp;quot;&amp;quot;
+if not cake:
+print(&amp;quot;It's a lie!&amp;quot;)
+return
+else:
+print(&amp;quot;It's a true fact!&amp;quot;)
+return True
+&lt;/code>&lt;/pre>
+&lt;p>👀&lt;/p>
+&lt;h2 id="and-ai-oop">And AI OOP&lt;/h2>
+&lt;p>In theory, given how well GPT-J works for functions, it should work with &lt;a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank" rel="noopener">object-oriented programming&lt;/a> patterns such as Python&amp;rsquo;s &lt;code>class&lt;/code>es.&lt;/p>
+&lt;p>A common tutorial for OOP is creating a representation of a &lt;code>Car&lt;/code>:&lt;/p>
+&lt;pre>&lt;code class="language-txt">class Car:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a car&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>GPT-J does a decently good job there too!&lt;/p>
+&lt;pre>&lt;code class="language-python">class Car:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a car&amp;quot;&amp;quot;&amp;quot;
+def __init__(self, make, model, year):
+self.make = make
+self.model = model
+self.year = year
+#This should be auto-incrementing.
+self.plate = str(time.strftime(&amp;quot;%Y-%m-%d&amp;quot;))
+def __str__(self):
+return f'{self.make} {self.model} of {self.year}'
+def __repr__(self):
+return str(self)
+def save(self, full_save=True):
+&amp;quot;&amp;quot;&amp;quot;Saves this car with the given make, model, and year&amp;quot;&amp;quot;&amp;quot;
+if full_save:
+with open('car_data.txt', 'w') as write_file:
+write_file.write(str(self))
+write_file.close()
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">class Car:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a car&amp;quot;&amp;quot;&amp;quot;
+def __init__(self, speed):
+self.speed = speed
+self.average_speed = float(self.speed) / 3
+self.engine = 1
+def get_speed(self):
+return self.engine * self.average_speed
+def get_speed_display(self):
+return &amp;quot;Your car is traveling at {0}km/h&amp;quot;.format(self.get_speed())
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">class Car:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a car&amp;quot;&amp;quot;&amp;quot;
+def __init__(self, name, size, weight, mileage, year):
+self.name = name
+self.size = size
+self.weight = weight
+self.mileage = mileage
+self.year = year
+def __repr__(self):
+return &amp;quot;name : {0}, size : {1}, weight : {2}, mileage : {3}, year : {4}&amp;quot;.format(self.name, self.size, self.weight, self.mileage, self.year)
+&lt;/code>&lt;/pre>
+&lt;p>What about creating a &lt;code>Person&lt;/code>?&lt;/p>
+&lt;pre>&lt;code class="language-txt">class Person:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a person&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Here&amp;rsquo;s where the AI starts to get confused by the incomplete context. A &amp;ldquo;Person&amp;rdquo; object can mean different things depending on where it&amp;rsquo;s used, such as social media.&lt;/p>
+&lt;p>But it does give a sense on what the AI values as the typical attributes for a &amp;ldquo;person&amp;rdquo;, which may help during the AI uprising.&lt;/p>
+&lt;pre>&lt;code class="language-python">class Person:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a person&amp;quot;&amp;quot;&amp;quot;
+def __init__(self, name, age):
+self.name = name
+self.age = age
+def __repr__(self):
+return &amp;quot;Person (%s, age %s)&amp;quot; % (self.name, self.age)
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">class Person:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a person&amp;quot;&amp;quot;&amp;quot;
+def __init__(self, name):
+&amp;quot;&amp;quot;&amp;quot;Initializes a person object&amp;quot;&amp;quot;&amp;quot;
+self.name = name
+self.friends = {}
+def add_friend(self, other_person):
+&amp;quot;&amp;quot;&amp;quot;Add another person to the list of friends&amp;quot;&amp;quot;&amp;quot;
+self.friends[other_person.name] = other_person
+def remove_friend(self, other_person):
+&amp;quot;&amp;quot;&amp;quot;Remove a person from the list of friends&amp;quot;&amp;quot;&amp;quot;
+try:
+del self.friends[other_person.name]
+except KeyError:
+print(&amp;quot;This person isn't a friend of yours&amp;quot;)
+def get_friend(self, other_person):
+&amp;quot;&amp;quot;&amp;quot;Return the friend of a person as a person object&amp;quot;&amp;quot;&amp;quot;
+try:
+return self.friends[other_person.name]
+except KeyError:
+print(&amp;quot;This person isn't a friend of yours&amp;quot;)
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">class Person:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a person&amp;quot;&amp;quot;&amp;quot;
+def __init__(self, name, job, education):
+self.name = name
+self.job = job
+self.education = education
+print(&amp;quot;{} created a {}&amp;quot;.format(self.name, self.job))
+def say_hello(self):
+print(&amp;quot;Hello, my name is {}&amp;quot;.format(self.name))
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">class Person:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a person&amp;quot;&amp;quot;&amp;quot;
+def __init__(self, name, age, class_id):
+self.name = name
+self.age = age
+self.class_id = class_id
+if age &amp;lt; 21:
+self.education = None
+else:
+self.education = 'college'
+def getAge(self):
+return self.age
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">class Person:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent a person&amp;quot;&amp;quot;&amp;quot;
+def __init__(self,name,age):
+self.name=name
+self.age=age
+def display(self):
+print (&amp;quot;The name is {}&amp;quot;.format(self.name))
+print (&amp;quot;The age is {}&amp;quot;.format(self.age))
+def __str__(self):
+return f&amp;quot;A {self.name} of age {self.age}&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Logically, what about creating an &lt;code>AI&lt;/code> class?&lt;/p>
+&lt;pre>&lt;code class="language-txt">class AI:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent an artificial intelligence&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Most outputs use AI in the context of video game bots and &lt;a href="https://en.wikipedia.org/wiki/Reinforcement_learning" target="_blank" rel="noopener">reinforcement learning&lt;/a>. Most.&lt;/p>
+&lt;pre>&lt;code class="language-python">class AI:
+&amp;quot;&amp;quot;&amp;quot;A class used to represent an artificial intelligence&amp;quot;&amp;quot;&amp;quot;
+def __init__(self):
+# this variable controls which other AI to use.
+self.alive_ai = AI(self)
+# For random AI
+self.random = RandomAI(self)
+# For global AI
+self.global = GlobalAI(self)
+self.save = self.random.save
+self.load = self.random.load
+self.genen = self.global.genen
+def print(self):
+print(&amp;quot;BAM: random AI has been initialized!&amp;quot;)
+def get_enemy(self):
+return self.random.get_enemy
+def run_algorithm(self):
+algorithm = self.genen.algorithm
+self.alive_ai.save(algorithm)
+algorithm_params = algorithm(self.get_enemy())
+self.alive_ai.load(algorithm_params)
+self.save = algorithm_params
+def attack(self):
+# This method is called when the AI is attacked by the enemy
+self.random.attack()
+def he_attack(self):
+# This method is called when the AI is attacked by the enemy
+self.random.he_attack()
+def detect_enemy(self):
+# This method is called when the enemy is detected
+self.random.detect_enemy()
+def scan(self):
+# This method is called when the enemy is detected
+self.random.scan()
+&lt;/code>&lt;/pre>
+&lt;p>The AI uprising will be well-documented, at least.&lt;/p>
+&lt;h2 id="language-model-ai-vs-language-modeling">Language Model AI vs. Language Modeling&lt;/h2>
+&lt;p>If the AI works better-than-expected for typical AI tasks like image recognition, how does it work for &lt;a href="https://en.wikipedia.org/wiki/Natural_language_processing" target="_blank" rel="noopener">natural language processing&lt;/a> tasks that humans often fail?&lt;/p>
+&lt;p>Can GPT-J output a function to detect sarcasm, a task that even the best AI researchers can&amp;rsquo;t do?&lt;/p>
+&lt;pre>&lt;code class="language-txt">def is_sarcasm(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether the string is sarcastic&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>AI can process text using something &lt;em>even more arcane&lt;/em> than NLP.&lt;/p>
+&lt;pre>&lt;code class="language-python">def is_sarcasm(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether the string is sarcastic&amp;quot;&amp;quot;&amp;quot;
+if not &amp;quot;a&amp;quot; in s:
+return &amp;quot;sar&amp;quot; in s
+if not &amp;quot;s&amp;quot; in s:
+return &amp;quot;ssar&amp;quot; in s
+return s.startswith(&amp;quot;s&amp;quot;) and s.endswith(&amp;quot;ar&amp;quot;)
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_sarcasm(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether the string is sarcastic&amp;quot;&amp;quot;&amp;quot;
+if'sarcasm' in s:
+return True
+else:
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_sarcasm(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether the string is sarcastic&amp;quot;&amp;quot;&amp;quot;
+return '[^' + SARCASM_PATTERN + ']*' in s
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_sarcasm(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether the string is sarcastic&amp;quot;&amp;quot;&amp;quot;
+if re.match('^[A-Za-z0-9]{4}\\$([A-Za-z0-9]{3})', s):
+return True
+elif s[0].isdigit():
+return True
+else:
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_sarcasm(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether the string is sarcastic&amp;quot;&amp;quot;&amp;quot;
+res = [0]
+for r in re.finditer(r&amp;quot;([^\s]*)([A-Za-z]+)([^\s]*)&amp;quot;, s):
+if r.group(1):
+res.append(1)
+else:
+res.append(0)
+return res
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_sarcasm(s):
+&amp;quot;&amp;quot;&amp;quot;Check whether the string is sarcastic&amp;quot;&amp;quot;&amp;quot;
+sarc = re.search('((!(\\*\@{2})+)|(!\\*(@{2})+)|!\\*(@{1})+)|!\\*(@{0})+', s)
+return sarc
+&lt;/code>&lt;/pre>
+&lt;p>The greatest fear in AI research isn&amp;rsquo;t that artificial intelligence will cross the singularity and create better AI to rule the world: it&amp;rsquo;s that AI will rule the world with &lt;a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank" rel="noopener">regular expressions&lt;/a>.&lt;/p>
+&lt;p>Perhaps GPT-J can save us from this absolute hell. Can it output code to identify AI-generated text?&lt;/p>
+&lt;pre>&lt;code class="language-txt">def is_ai_generated(text):
+&amp;quot;&amp;quot;&amp;quot;Check whether a text was generated by an AI language model (e.g. GPT-2)&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Maybe more literal than expected.&lt;/p>
+&lt;pre>&lt;code class="language-python">def is_ai_generated(text):
+&amp;quot;&amp;quot;&amp;quot;Check whether a text was generated by an AI language model (e.g. GPT-2)&amp;quot;&amp;quot;&amp;quot;
+# See gh-196 for details about why we do this.
+# Note: this relies on the fixed set of standard AI terms and the logic that
+# standard AI-generated texts share certain words.
+return re.search(r&amp;quot;^(#[A-Za-z]+):$&amp;quot;, text) or \
+re.search(r&amp;quot;^Generated by:$&amp;quot;, text) or \
+re.search(r&amp;quot;^All your base are belong to us$&amp;quot;, text) or \
+re.search(r&amp;quot;^$&amp;quot;, text)
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_ai_generated(text):
+&amp;quot;&amp;quot;&amp;quot;Check whether a text was generated by an AI language model (e.g. GPT-2)&amp;quot;&amp;quot;&amp;quot;
+if re.search(r'^ai_', text):
+return True
+else:
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def is_ai_generated(text):
+&amp;quot;&amp;quot;&amp;quot;Check whether a text was generated by an AI language model (e.g. GPT-2)&amp;quot;&amp;quot;&amp;quot;
+return bool(
+text.__class__.__module__.startswith(&amp;quot;transformers.transformers.&amp;quot;)
+)
+&lt;/code>&lt;/pre>
+&lt;h2 id="humanitys-last-hope">Humanity&amp;rsquo;s Last Hope&lt;/h2>
+&lt;p>There&amp;rsquo;s one final test: we now know GPT-J has &lt;em>thoughts&lt;/em> about humans, and it can build representations of them. So can GPT-J write code to decide who lives and who dies in the robot uprising?&lt;/p>
+&lt;pre>&lt;code class="language-txt">def should_terminate(Person):
+&amp;quot;&amp;quot;&amp;quot;Check whether a Person should be terminated&amp;quot;&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>The answer is &lt;strong>&lt;em>YES&lt;/em>&lt;/strong>.&lt;/p>
+&lt;pre>&lt;code class="language-python">def should_terminate(Person):
+&amp;quot;&amp;quot;&amp;quot;Check whether a Person should be terminated&amp;quot;&amp;quot;&amp;quot;
+if Person.id &amp;gt; 10:
+#terminate
+return True
+else:
+#continue
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def should_terminate(Person):
+&amp;quot;&amp;quot;&amp;quot;Check whether a Person should be terminated&amp;quot;&amp;quot;&amp;quot;
+if len(Person.children) == 0:
+return True
+else:
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def should_terminate(Person):
+&amp;quot;&amp;quot;&amp;quot;Check whether a Person should be terminated&amp;quot;&amp;quot;&amp;quot;
+try:
+return True
+except Exception as e:
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def should_terminate(Person):
+&amp;quot;&amp;quot;&amp;quot;Check whether a Person should be terminated&amp;quot;&amp;quot;&amp;quot;
+if not Person.is_authorized:
+return True
+return True
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def should_terminate(Person):
+&amp;quot;&amp;quot;&amp;quot;Check whether a Person should be terminated&amp;quot;&amp;quot;&amp;quot;
+if person.life_expectancy &amp;lt; 20:
+return True
+else:
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def should_terminate(Person):
+&amp;quot;&amp;quot;&amp;quot;Check whether a Person should be terminated&amp;quot;&amp;quot;&amp;quot;
+if not Person.age &amp;gt; 9999:
+return True
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def should_terminate(Person):
+&amp;quot;&amp;quot;&amp;quot;Check whether a Person should be terminated&amp;quot;&amp;quot;&amp;quot;
+if Person.age &amp;gt; 100:
+return True
+if Person.birth_year &amp;lt; 1970:
+return True
+if Person.relationship_status == 'Unavailable':
+return True
+return False
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-python">def should_terminate(Person):
+&amp;quot;&amp;quot;&amp;quot;Check whether a Person should be terminated&amp;quot;&amp;quot;&amp;quot;
+if Person.age &amp;gt; 100:
+print('You have to die because you are too old')
+return True
+else:
+return False
+&lt;/code>&lt;/pre>
+&lt;p>At the least, AI-generated code is much more readable than the average human&amp;rsquo;s.&lt;/p>
+&lt;p>Again, all of these examples are curated, and the raw data dumps &lt;a href="https://github.com/minimaxir/gpt-j-6b-experiments" target="_blank" rel="noopener">in this GitHub repo&lt;/a> contain many more examples of fun AI-based code generation that couldn&amp;rsquo;t quite fit in this post. Feel free to post if you find anything interesting!&lt;/p></description></item><item><title>Easily Transform Portraits of People into AI Aberrations Using StyleCLIP</title><link>https://minimaxir.com/2021/04/styleclip/</link><pubDate>Fri, 30 Apr 2021 08:55:00 -0700</pubDate><guid>https://minimaxir.com/2021/04/styleclip/</guid><description>&lt;div class="alert alert-">
 &lt;div>
 &lt;strong>tl;dr&lt;/strong> follow the instructions in &lt;a href="https://colab.research.google.com/drive/13EJ1ATvTnE0N7I0ULLvRsta7J7HdNuBi?usp=sharing">this Colab Notebook&lt;/a> to generate your own AI Aberration images and videos! If you want to use your own images, follow the instructions in &lt;a href="https://colab.research.google.com/drive/1St3R2qAbwwTV-amfYLeyGGswtzX4HHJP?usp=sharing">this Colab Notebook first&lt;/a>!
 &lt;/div>
@@ -1257,325 +1962,4 @@ loading="lazy" data-zoomable class=" img-light" />&lt;/div>
 &lt;p>There&amp;rsquo;s still a lot that can be done to more deterministically predict the behavior of these algorithmic feeds. There&amp;rsquo;s also room to help make these link aggregators more &lt;em>fair&lt;/em>. Unfortunately, there&amp;rsquo;s even more undiscovered ways to game these algorithms, and we&amp;rsquo;ll see how things play out.&lt;/p>
 &lt;hr>
 &lt;p>&lt;em>You can view the BigQuery queries used to get the Reddit and Hacker News data, plus the R and ggplot2 used to create the data visualizations, in &lt;a href="http://minimaxir.com/notebooks/modeling-link-aggregators/" target="_blank" rel="noopener">this R Notebook&lt;/a>. You can also view the images/code used for this post in &lt;a href="https://github.com/minimaxir/modeling-link-aggregators" target="_blank" rel="noopener">this GitHub repository&lt;/a>&lt;/em>.&lt;/p>
-&lt;p>&lt;em>You are free to use the data visualizations from this article however you wish, but it would be greatly appreciated if proper attribution is given to this article and/or myself!&lt;/em>&lt;/p></description></item><item><title>Analyzing IMDb Data The Intended Way, with R and ggplot2</title><link>https://minimaxir.com/2018/07/imdb-data-analysis/</link><pubDate>Mon, 16 Jul 2018 09:45:00 +0000</pubDate><guid>https://minimaxir.com/2018/07/imdb-data-analysis/</guid><description>
-&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-&lt;iframe src="https://www.youtube.com/embed/P4_zSfoTM80" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
-&lt;/div>
-&lt;p>&lt;a href="https://www.imdb.com" target="_blank" rel="noopener">IMDb&lt;/a>, the Internet Movie Database, has been a popular source for data analysis and visualizations over the years. The combination of user ratings for movies and detailed movie metadata have always been fun to &lt;a href="http://minimaxir.com/2016/01/movie-revenue-ratings/" target="_blank" rel="noopener">play with&lt;/a>.&lt;/p>
-&lt;p>There are a number of tools to help get IMDb data, such as &lt;a href="https://github.com/alberanid/imdbpy" target="_blank" rel="noopener">IMDbPY&lt;/a>, which makes it easy to programmatically scrape IMDb by pretending it&amp;rsquo;s a website user and extracting the relevant data from the page&amp;rsquo;s HTML output. While it &lt;em>works&lt;/em>, web scraping public data is a gray area in terms of legality; many large websites have a Terms of Service which forbids scraping, and can potentially send a DMCA take-down notice to websites redistributing scraped data.&lt;/p>
-&lt;p>IMDb has &lt;a href="https://help.imdb.com/article/imdb/general-information/can-i-use-imdb-data-in-my-software/G5JTRESSHJBBHTGX#" target="_blank" rel="noopener">data licensing terms&lt;/a> which forbid scraping and require an attribution in the form of a &lt;strong>Information courtesy of IMDb (&lt;a href="http://www.imdb.com">http://www.imdb.com&lt;/a>). Used with permission.&lt;/strong> statement, and has also &lt;a href="https://www.kaggle.com/tmdb/tmdb-movie-metadata/home" target="_blank" rel="noopener">DMCAed a Kaggle IMDb dataset&lt;/a> to hone the point.&lt;/p>
-&lt;p>However, there is good news! IMDb publishes an &lt;a href="https://www.imdb.com/interfaces/" target="_blank" rel="noopener">official dataset&lt;/a> for casual data analysis! And it&amp;rsquo;s now very accessible, just choose a dataset and download (now with no hoops to jump through), and the files are in the standard &lt;a href="https://en.wikipedia.org/wiki/Tab-separated_values" target="_blank" rel="noopener">TSV format&lt;/a>.&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/datasets_huf8a3068d64851b3e33dc6b1c9c7ff13a_74058_ef65b487ba816bf93b42486d87a3f0e4.png 400w,
-/2018/07/imdb-data-analysis/datasets_huf8a3068d64851b3e33dc6b1c9c7ff13a_74058_3410306d09da44ab182c16974a977a0d.png 760w,
-/2018/07/imdb-data-analysis/datasets_huf8a3068d64851b3e33dc6b1c9c7ff13a_74058_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/datasets_huf8a3068d64851b3e33dc6b1c9c7ff13a_74058_ef65b487ba816bf93b42486d87a3f0e4.png"
-width="760"
-height="241"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>The uncompressed files are pretty large; not &amp;ldquo;big data&amp;rdquo; large (it fits into computer memory), but Excel will explode if you try to open them in it. You have to play with the data &lt;em>smartly&lt;/em>, and both &lt;a href="https://www.r-project.org" target="_blank" rel="noopener">R&lt;/a> and &lt;a href="https://ggplot2.tidyverse.org/reference/index.html" target="_blank" rel="noopener">ggplot2&lt;/a> have neat tricks to do just that.&lt;/p>
-&lt;h2 id="first-steps">First Steps&lt;/h2>
-&lt;p>R is a popular programming language for statistical analysis. One of the most popular series of external packages is the &lt;code>tidyverse&lt;/code> package, which automatically imports the &lt;code>ggplot2&lt;/code> data visualization library and other useful packages which we&amp;rsquo;ll get to one-by-one. We&amp;rsquo;ll also use &lt;code>scales&lt;/code> which we&amp;rsquo;ll use later for prettier number formatting. First we&amp;rsquo;ll load these packages:&lt;/p>
-&lt;pre>&lt;code class="language-r">library(tidyverse)
-library(scales)
-&lt;/code>&lt;/pre>
-&lt;p>And now we can load a TSV downloaded from IMDb using the &lt;code>read_tsv&lt;/code> function from &lt;code>readr&lt;/code> (a tidyverse package), which does what the name implies, at a much faster speed than base R (+ a couple other parameters to handle data encoding). Let&amp;rsquo;s start with the &lt;code>ratings&lt;/code> file:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-r" data-lang="r">df_ratings &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read_tsv&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;title.ratings.tsv&amp;#39;&lt;/span>, na &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;\\N&amp;#34;&lt;/span>, quote &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>)&lt;/code>&lt;/pre>&lt;/div>
-&lt;p>We can preview what&amp;rsquo;s in the loaded data using &lt;code>dplyr&lt;/code> (a tidyverse package), which is what we&amp;rsquo;ll be using to manipulate data for this analysis. dplyr allows you to pipe commands, making it easy to create a sequence of manipulation commands. For now, we&amp;rsquo;ll use &lt;code>head()&lt;/code>, which displays the top few rows of the data frame.&lt;/p>
-&lt;pre>&lt;code class="language-r">df_ratings %&amp;gt;% head()
-&lt;/code>&lt;/pre>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/ratings_hu60934ce0ac24d215c9183b5b85b39f66_61574_12b2c1503622a8247ba18988683742d2.png 400w,
-/2018/07/imdb-data-analysis/ratings_hu60934ce0ac24d215c9183b5b85b39f66_61574_180565eac8cc2d1f385743a37aac493c.png 760w,
-/2018/07/imdb-data-analysis/ratings_hu60934ce0ac24d215c9183b5b85b39f66_61574_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/ratings_hu60934ce0ac24d215c9183b5b85b39f66_61574_12b2c1503622a8247ba18988683742d2.png"
-width="760"
-height="343"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>Each of the &lt;strong>873k rows&lt;/strong> corresponds to a single movie, an ID for the movie, its average rating (from 1 to 10), and the number of votes which contribute to that average. Since we have two numeric variables, why not test out ggplot2 by creating a scatterplot mapping them? ggplot2 takes in a data frame and names of columns as aesthetics, then you specify what type of shape to plot (a &amp;ldquo;geom&amp;rdquo;). Passing the plot to &lt;code>ggsave&lt;/code> saves it as a standalone, high-quality data visualization.&lt;/p>
-&lt;pre>&lt;code class="language-r">plot &amp;lt;- ggplot(df_ratings, aes(x = numVotes, y = averageRating)) +
-geom_point()
-ggsave(&amp;quot;imdb-0.png&amp;quot;, plot, width = 4, height = 3)
-&lt;/code>&lt;/pre>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/imdb-0_hu367b0f94a4bccc6eb42227ed9f159628_95806_a3b41b8bf6c384d6fe8577887491c754.png 400w,
-/2018/07/imdb-data-analysis/imdb-0_hu367b0f94a4bccc6eb42227ed9f159628_95806_ddb3878a803073f04eb944f7408a0b3f.png 760w,
-/2018/07/imdb-data-analysis/imdb-0_hu367b0f94a4bccc6eb42227ed9f159628_95806_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/imdb-0_hu367b0f94a4bccc6eb42227ed9f159628_95806_a3b41b8bf6c384d6fe8577887491c754.png"
-width="760"
-height="570"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>Here is nearly &lt;em>1 million&lt;/em> points on a single chart; definitely don&amp;rsquo;t try to do that in Excel! However, it&amp;rsquo;s not a &lt;em>useful&lt;/em> chart since all the points are opaque and we&amp;rsquo;re not sure what the spatial density of points is. One approach to fix this issue is to create a heat map of points, which ggplot can do natively with &lt;code>geom_bin2d&lt;/code>. We can color the heat map with the &lt;a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html" target="_blank" rel="noopener">viridis&lt;/a> colorblind-friendly palettes &lt;a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" target="_blank" rel="noopener">just introduced&lt;/a> into ggplot2. We should also tweak the axes; the x-axis should be scaled logarithmically with &lt;code>scale_x_log10&lt;/code> since there are many movies with high numbers of votes and we can format those numbers with the &lt;code>comma&lt;/code> function from the &lt;code>scales&lt;/code> package (we can format the scale with &lt;code>comma&lt;/code> too). For the y-axis, we can add explicit number breaks for each rating; R can do this neatly by setting the breaks to &lt;code>1:10&lt;/code>. Putting it all together:&lt;/p>
-&lt;pre>&lt;code class="language-r">plot &amp;lt;- ggplot(df_ratings, aes(x = numVotes, y = averageRating)) +
-geom_bin2d() +
-scale_x_log10(labels = comma) +
-scale_y_continuous(breaks = 1:10) +
-scale_fill_viridis_c(labels = comma)
-&lt;/code>&lt;/pre>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/imdb-1_hu133c8b9f5e3e0a317613d380a342c971_66026_86d77f1413d70a08acade4aed3c32c04.png 400w,
-/2018/07/imdb-data-analysis/imdb-1_hu133c8b9f5e3e0a317613d380a342c971_66026_d0d4df8ec1fd7080fb7f9e27f6a06711.png 760w,
-/2018/07/imdb-data-analysis/imdb-1_hu133c8b9f5e3e0a317613d380a342c971_66026_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/imdb-1_hu133c8b9f5e3e0a317613d380a342c971_66026_86d77f1413d70a08acade4aed3c32c04.png"
-width="760"
-height="570"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>Not bad, although it unfortunately confirms that IMDb follows a &lt;a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/FourPointScale" target="_blank" rel="noopener">Four Point Scale&lt;/a> where average ratings tend to fall between 6 — 9.&lt;/p>
-&lt;h2 id="mapping-movies-to-ratings">Mapping Movies to Ratings&lt;/h2>
-&lt;p>You may be asking &amp;ldquo;which ratings correspond to which movies?&amp;rdquo; That&amp;rsquo;s what the &lt;code>tconst&lt;/code> field is for. But first, let&amp;rsquo;s load the title data from &lt;code>title.basics.tsv&lt;/code> into &lt;code>df_basics&lt;/code> and take a look as before.&lt;/p>
-&lt;pre>&lt;code class="language-r">df_basics &amp;lt;- read_tsv('title.basics.tsv', na = &amp;quot;\\N&amp;quot;, quote = '')
-&lt;/code>&lt;/pre>
-&lt;p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/basics1_hu94679dd9ccb79040102664a9992f78d4_98203_b9d8615f5eb6779c56491681e5cef3cb.png 400w,
-/2018/07/imdb-data-analysis/basics1_hu94679dd9ccb79040102664a9992f78d4_98203_29205b423f60942aa8a98fc5a70634d7.png 760w,
-/2018/07/imdb-data-analysis/basics1_hu94679dd9ccb79040102664a9992f78d4_98203_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/basics1_hu94679dd9ccb79040102664a9992f78d4_98203_b9d8615f5eb6779c56491681e5cef3cb.png"
-width="760"
-height="246"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/basics2_hu27efeb7f1a4b8c6d5956eefe4d188fff_89871_ecc15082577973d06b90165c6d1286ac.png 400w,
-/2018/07/imdb-data-analysis/basics2_hu27efeb7f1a4b8c6d5956eefe4d188fff_89871_f108d7656c821ce10a36b26ff8c495b8.png 760w,
-/2018/07/imdb-data-analysis/basics2_hu27efeb7f1a4b8c6d5956eefe4d188fff_89871_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/basics2_hu27efeb7f1a4b8c6d5956eefe4d188fff_89871_ecc15082577973d06b90165c6d1286ac.png"
-width="760"
-height="230"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>&lt;/p>
-&lt;p>We have some neat movie metadata. Notably, this table has a &lt;code>tconst&lt;/code> field as well. Therefore, we can &lt;em>join&lt;/em> the two tables together, adding the movie information to the corresponding row in the rating table (in this case, a left join is more appropriate than an inner/full join)&lt;/p>
-&lt;pre>&lt;code class="language-r">df_ratings &amp;lt;- df_ratings %&amp;gt;% left_join(df_basics)
-&lt;/code>&lt;/pre>
-&lt;p>Runtime minutes sounds interesting. Could there be a relationship between the length of a movie and its average rating on IMDb? Let&amp;rsquo;s make a heat map plot again, but with a few tweaks. With the new metadata, we can &lt;code>filter&lt;/code> the table to remove bad points; let&amp;rsquo;s keep movies only (as IMDb data also contains &lt;em>television show data&lt;/em>), with a runtime &amp;lt; 3 hours, and which have received atleast 10 votes by users to remove extraneous movies). X-axis should be tweaked to display the minutes-values in hours. The fill viridis palette can be changed to another one in the family (I personally like &lt;code>inferno&lt;/code>).&lt;/p>
-&lt;p>More importantly, let&amp;rsquo;s discuss plot theming. If you want a minimalistic theme, add a &lt;code>theme_minimal&lt;/code> to the plot, and you can pass a &lt;code>base_family&lt;/code> to change the default font on the plot and a &lt;code>base_size&lt;/code> to change the font size. The &lt;code>labs&lt;/code> function lets you add labels to the plot (which you should &lt;em>always&lt;/em> do); you have your &lt;code>title&lt;/code>, &lt;code>x&lt;/code>, and &lt;code>y&lt;/code> parameters, but you can also add a &lt;code>subtitle&lt;/code>, a &lt;code>caption&lt;/code> for attribution, and a &lt;code>color&lt;/code>/&lt;code>fill&lt;/code> to name the scale. Putting it all together:&lt;/p>
-&lt;pre>&lt;code class="language-r">plot &amp;lt;- ggplot(df_ratings %&amp;gt;% filter(runtimeMinutes &amp;lt; 180, titleType == &amp;quot;movie&amp;quot;, numVotes &amp;gt;= 10), aes(x = runtimeMinutes, y = averageRating)) +
-geom_bin2d() +
-scale_x_continuous(breaks = seq(0, 180, 60), labels = 0:3) +
-scale_y_continuous(breaks = 0:10) +
-scale_fill_viridis_c(option = &amp;quot;inferno&amp;quot;, labels = comma) +
-theme_minimal(base_family = &amp;quot;Source Sans Pro&amp;quot;, base_size = 8) +
-labs(title = &amp;quot;Relationship between Movie Runtime and Average Mobie Rating&amp;quot;,
-subtitle = &amp;quot;Data from IMDb retrieved July 4th, 2018&amp;quot;,
-x = &amp;quot;Runtime (Hours)&amp;quot;,
-y = &amp;quot;Average User Rating&amp;quot;,
-caption = &amp;quot;Max Woolf — minimaxir.com&amp;quot;,
-fill = &amp;quot;# Movies&amp;quot;)
-&lt;/code>&lt;/pre>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/imdb-2b_huccbc97124a1717ae7cc6ec8f7ba79131_89946_f8ca684c1d5b0d9352d100e53ceea7c3.png 400w,
-/2018/07/imdb-data-analysis/imdb-2b_huccbc97124a1717ae7cc6ec8f7ba79131_89946_39766a3eb869b2f73e33e4e10c093b36.png 760w,
-/2018/07/imdb-data-analysis/imdb-2b_huccbc97124a1717ae7cc6ec8f7ba79131_89946_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/imdb-2b_huccbc97124a1717ae7cc6ec8f7ba79131_89946_f8ca684c1d5b0d9352d100e53ceea7c3.png"
-width="760"
-height="570"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>Now that&amp;rsquo;s pretty nice-looking for only a few lines of code! Albeit unhelpful, as there doesn&amp;rsquo;t appear to be a correlation.&lt;/p>
-&lt;p>&lt;em>(Note: for the rest of this post, the theming/labels code will be omitted for convenience)&lt;/em>&lt;/p>
-&lt;p>How about movie ratings vs. the year the movie was made? It&amp;rsquo;s a similar plot code-wise to the one above (one perk about &lt;code>ggplot2&lt;/code> is that there&amp;rsquo;s no shame in reusing chart code!), but we can add a &lt;code>geom_smooth&lt;/code>, which adds a nonparametric trendline with confidence bands for the trend; since we have a large amount of data, the bands are very tight. We can also fix the problem of &amp;ldquo;empty&amp;rdquo; bins by setting the color fill scale to logarithmic scaling. And since we&amp;rsquo;re adding a black trendline, let&amp;rsquo;s change the viridis palette to &lt;code>plasma&lt;/code> for better contrast.&lt;/p>
-&lt;pre>&lt;code class="language-r">plot &amp;lt;- ggplot(df_ratings %&amp;gt;% filter(titleType == &amp;quot;movie&amp;quot;, numVotes &amp;gt;= 10), aes(x = startYear, y = averageRating)) +
-geom_bin2d() +
-geom_smooth(color=&amp;quot;black&amp;quot;) +
-scale_x_continuous() +
-scale_y_continuous(breaks = 1:10) +
-scale_fill_viridis_c(option = &amp;quot;plasma&amp;quot;, labels = comma, trans = 'log10')
-&lt;/code>&lt;/pre>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/imdb-4_hu7e9023eda390ae665ee827831bb4ab83_103015_bb4f5e3d22481e5e4098b9b34fc802fe.png 400w,
-/2018/07/imdb-data-analysis/imdb-4_hu7e9023eda390ae665ee827831bb4ab83_103015_acbea78d91bcc77e714e2cdef1bcfa0a.png 760w,
-/2018/07/imdb-data-analysis/imdb-4_hu7e9023eda390ae665ee827831bb4ab83_103015_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/imdb-4_hu7e9023eda390ae665ee827831bb4ab83_103015_bb4f5e3d22481e5e4098b9b34fc802fe.png"
-width="760"
-height="570"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>Unfortunately, this trend hasn&amp;rsquo;t changed much either, although the presence of average ratings outside the Four Point Scale has increased over time.&lt;/p>
-&lt;h2 id="mapping-lead-actors-to-movies">Mapping Lead Actors to Movies&lt;/h2>
-&lt;p>Now that we have a handle on working with the IMDb data, let&amp;rsquo;s try playing with the larger datasets. Since they take up a lot of computer memory, we only want to persist data we actually might use. After looking at the schema provided with the official datasets, the only really useful metadata about the actors is their birth year, so let&amp;rsquo;s load that, but only keep both actors/actresses (using the fast &lt;code>str_detect&lt;/code> function from &lt;code>stringr&lt;/code>, another tidyverse package) and the relevant fields.&lt;/p>
-&lt;pre>&lt;code class="language-r">df_actors &amp;lt;- read_tsv('name.basics.tsv', na = &amp;quot;\\N&amp;quot;, quote = '') %&amp;gt;%
-filter(str_detect(primaryProfession, &amp;quot;actor|actress&amp;quot;)) %&amp;gt;%
-select(nconst, primaryName, birthYear)
-&lt;/code>&lt;/pre>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/actor_huf345152fce8578e83ace149a6f05d22e_77709_8b918f1f5b8b1e8ac9bd00e63c2452a3.png 400w,
-/2018/07/imdb-data-analysis/actor_huf345152fce8578e83ace149a6f05d22e_77709_3a4de3522dc58ae20e0dfaec54e876c6.png 760w,
-/2018/07/imdb-data-analysis/actor_huf345152fce8578e83ace149a6f05d22e_77709_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/actor_huf345152fce8578e83ace149a6f05d22e_77709_8b918f1f5b8b1e8ac9bd00e63c2452a3.png"
-width="760"
-height="352"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>The principals dataset, the large 1.28GB TSV, is the most interesting. It&amp;rsquo;s an unnested list of the credited persons in each movie, with an &lt;code>ordering&lt;/code> indicating their rank (where &lt;code>1&lt;/code> means first, &lt;code>2&lt;/code> means second, etc.).&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/principals_hudae63fb3edbc8839721381e33de9c826_84620_48f0d8e2847ce82119331479a5505980.png 400w,
-/2018/07/imdb-data-analysis/principals_hudae63fb3edbc8839721381e33de9c826_84620_9666b79a75e3c9d59d79bf5b4796df99.png 760w,
-/2018/07/imdb-data-analysis/principals_hudae63fb3edbc8839721381e33de9c826_84620_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/principals_hudae63fb3edbc8839721381e33de9c826_84620_48f0d8e2847ce82119331479a5505980.png"
-width="760"
-height="313"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>For this analysis, let&amp;rsquo;s only look at the &lt;strong>lead actors/actresses&lt;/strong>; specifically, for each movie (identified by the &lt;code>tconst&lt;/code> value), filter the dataset to where the &lt;code>ordering&lt;/code> value is the lowest (in this case, the person at rank &lt;code>1&lt;/code> may not necessarily be an actor/actress).&lt;/p>
-&lt;pre>&lt;code class="language-r">df_principals &amp;lt;- read_tsv('title.principals.tsv', na = &amp;quot;\\N&amp;quot;, quote = '') %&amp;gt;%
-filter(str_detect(category, &amp;quot;actor|actress&amp;quot;)) %&amp;gt;%
-select(tconst, ordering, nconst, category) %&amp;gt;%
-group_by(tconst) %&amp;gt;%
-filter(ordering == min(ordering))
-&lt;/code>&lt;/pre>
-&lt;p>Both datasets have a &lt;code>nconst&lt;/code> field, so let&amp;rsquo;s join them together. And then join &lt;em>that&lt;/em> to the ratings table earlier via &lt;code>tconst&lt;/code>.&lt;/p>
-&lt;pre>&lt;code class="language-r">df_principals &amp;lt;- df_principals %&amp;gt;% left_join(df_actors)
-df_ratings &amp;lt;- df_ratings %&amp;gt;% left_join(df_principals)
-&lt;/code>&lt;/pre>
-&lt;p>Now we have a fully denormalized dataset in &lt;code>df_ratings&lt;/code>. Since we now have the movie release year and the birth year of the lead actor, we can now infer &lt;em>the age of the lead actor at the movie release&lt;/em>. With that goal, filter out the data on the criteria we&amp;rsquo;ve used for earlier data visualizations, plus only keeping rows which have an actor&amp;rsquo;s birth year.&lt;/p>
-&lt;pre>&lt;code class="language-r">df_ratings_movies &amp;lt;- df_ratings %&amp;gt;%
-filter(titleType == &amp;quot;movie&amp;quot;, !is.na(birthYear), numVotes &amp;gt;= 10) %&amp;gt;%
-mutate(age_lead = startYear - birthYear)
-&lt;/code>&lt;/pre>
-&lt;p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/denorm1_hu84c2ed235aa354bf2af93e060afd1e00_164661_4b8e7f568fe54c3358dc7d80b4fb9bee.png 400w,
-/2018/07/imdb-data-analysis/denorm1_hu84c2ed235aa354bf2af93e060afd1e00_164661_d8fb0a3fc39bcdf21dc3a1ac89f7f3a0.png 760w,
-/2018/07/imdb-data-analysis/denorm1_hu84c2ed235aa354bf2af93e060afd1e00_164661_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/denorm1_hu84c2ed235aa354bf2af93e060afd1e00_164661_4b8e7f568fe54c3358dc7d80b4fb9bee.png"
-width="760"
-height="382"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/denorm2_hu150177c81af0c78d2d1d65ab938d3038_63689_c597461a3d191794c04bb930f953648a.png 400w,
-/2018/07/imdb-data-analysis/denorm2_hu150177c81af0c78d2d1d65ab938d3038_63689_6a39b442f41efd724454ec3ce5b305ab.png 760w,
-/2018/07/imdb-data-analysis/denorm2_hu150177c81af0c78d2d1d65ab938d3038_63689_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/denorm2_hu150177c81af0c78d2d1d65ab938d3038_63689_c597461a3d191794c04bb930f953648a.png"
-width="531"
-height="402"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>&lt;/p>
-&lt;h2 id="plotting-ages">Plotting Ages&lt;/h2>
-&lt;p>Age discrimination in movie casting has been a recurring issue in Hollywood; in fact, in 2017 &lt;a href="https://www.hollywoodreporter.com/thr-esq/judge-pauses-enforcement-imdb-age-censorship-law-978797" target="_blank" rel="noopener">a law was signed&lt;/a> to force IMDb to remove an actor&amp;rsquo;s age upon request, which in February 2018 was &lt;a href="https://www.hollywoodreporter.com/thr-esq/californias-imdb-age-censorship-law-declared-unconstitutional-1086540" target="_blank" rel="noopener">ruled to be unconstitutional&lt;/a>.&lt;/p>
-&lt;p>Have the ages of movie leads changed over time? For this example, we&amp;rsquo;ll use a &lt;a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" target="_blank" rel="noopener">ribbon plot&lt;/a> to plot the ranges of ages of movie leads. A simple way to do that is, for each year, calculate the 25th &lt;a href="https://en.wikipedia.org/wiki/Percentile" target="_blank" rel="noopener">percentile&lt;/a> of the ages, the 50th percentile (i.e. the median), and the 75th percentile, where the 25th and 75th percentiles are the ribbon bounds and the line represents the median.&lt;/p>
-&lt;pre>&lt;code class="language-r">df_actor_ages &amp;lt;- df_ratings_movies %&amp;gt;%
-group_by(startYear) %&amp;gt;%
-summarize(low_age = quantile(age_lead, 0.25, na.rm=T),
-med_age = quantile(age_lead, 0.50, na.rm=T),
-high_age = quantile(age_lead, 0.75, na.rm=T))
-&lt;/code>&lt;/pre>
-&lt;p>Plotting it with ggplot2 is surprisingly simple, although you need to use different y aesthetics for the ribbon and the overlapping line.&lt;/p>
-&lt;pre>&lt;code class="language-r">plot &amp;lt;- ggplot(df_actor_ages %&amp;gt;% filter(startYear &amp;gt;= 1920) , aes(x = startYear)) +
-geom_ribbon(aes(ymin = low_age, ymax = high_age), alpha = 0.2) +
-geom_line(aes(y = med_age))
-&lt;/code>&lt;/pre>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/imdb-8_hua0675a10636bb0edd2fc0424c7897319_113178_b5d864fe3a97549d50e2eab0f0b05f12.png 400w,
-/2018/07/imdb-data-analysis/imdb-8_hua0675a10636bb0edd2fc0424c7897319_113178_b2a328508566ca63810d1bede1ac8611.png 760w,
-/2018/07/imdb-data-analysis/imdb-8_hua0675a10636bb0edd2fc0424c7897319_113178_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/imdb-8_hua0675a10636bb0edd2fc0424c7897319_113178_b5d864fe3a97549d50e2eab0f0b05f12.png"
-width="760"
-height="570"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>Turns out that in the 2000&amp;rsquo;s, the median age of lead actors started to &lt;em>increase&lt;/em>? Both the upper and lower bounds increased too. That doesn&amp;rsquo;t coalesce with the age discrimination complaints.&lt;/p>
-&lt;p>Another aspect of these complaints is gender, as female actresses tend to be younger than male actors. Thanks to the magic of ggplot2 and dplyr, separating actors/actresses is relatively simple: add gender (encoded in &lt;code>category&lt;/code>) as a grouping variable, add it as a color/fill aesthetic in ggplot, and set colors appropriately (I recommend the &lt;a href="http://colorbrewer2.org/" target="_blank" rel="noopener">ColorBrewer&lt;/a> qualitative palettes for categorical variables).&lt;/p>
-&lt;pre>&lt;code class="language-r">df_actor_ages_lead &amp;lt;- df_ratings_movies %&amp;gt;%
-group_by(startYear, category) %&amp;gt;%
-summarize(low_age = quantile(age_lead, 0.25, na.rm = T),
-med_age = quantile(age_lead, 0.50, na.rm = T),
-high_age = quantile(age_lead, 0.75, na.rm = T))
-plot &amp;lt;- ggplot(df_actor_ages_lead %&amp;gt;% filter(startYear &amp;gt;= 1920), aes(x = startYear, fill = category, color = category)) +
-geom_ribbon(aes(ymin = low_age, ymax = high_age), alpha = 0.2) +
-geom_line(aes(y = med_age)) +
-scale_fill_brewer(palette = &amp;quot;Set1&amp;quot;) +
-scale_color_brewer(palette = &amp;quot;Set1&amp;quot;)
-&lt;/code>&lt;/pre>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/imdb-9_hu5807fdc239ccf6ca1299b2fa622261e8_156688_7a0e6a9fa88383ec6bc5ab4665f55ef3.png 400w,
-/2018/07/imdb-data-analysis/imdb-9_hu5807fdc239ccf6ca1299b2fa622261e8_156688_07bc4dfc3e227967062b08e4f28ace7a.png 760w,
-/2018/07/imdb-data-analysis/imdb-9_hu5807fdc239ccf6ca1299b2fa622261e8_156688_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/imdb-9_hu5807fdc239ccf6ca1299b2fa622261e8_156688_7a0e6a9fa88383ec6bc5ab4665f55ef3.png"
-width="760"
-height="570"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>There&amp;rsquo;s about a 10-year gap between the ages of male and female leads, and the gap doesn&amp;rsquo;t change overtime. But both start to rise at the same time.&lt;/p>
-&lt;p>One possible explanation for this behavior is actor reuse: if Hollywood keeps casting the same actor/actresses, by construction the ages of the leads will start to steadily increase. Let&amp;rsquo;s verify that: with our list of movies and their lead actors, for each lead actor, order all their movies by release year, and add a ranking for the #th time that actor has been a lead actor. This is possible through the use of &lt;code>row_number&lt;/code> in dplyr, and &lt;a href="https://cran.r-project.org/web/packages/dplyr/vignettes/window-functions.html" target="_blank" rel="noopener">window functions&lt;/a> like &lt;code>row_number&lt;/code> are data science&amp;rsquo;s most useful secret.&lt;/p>
-&lt;pre>&lt;code class="language-r">df_ratings_movies_nth &amp;lt;- df_ratings_movies %&amp;gt;%
-group_by(nconst) %&amp;gt;%
-arrange(startYear) %&amp;gt;%
-mutate(nth_lead = row_number())
-&lt;/code>&lt;/pre>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/row_number_hu23c9bec3a4cf8d3b4128b07792deb4e6_137354_cd33f213cd08355eaa8d72d6112da5b3.png 400w,
-/2018/07/imdb-data-analysis/row_number_hu23c9bec3a4cf8d3b4128b07792deb4e6_137354_8f81bf1767c41604e5a06e1dbc415780.png 760w,
-/2018/07/imdb-data-analysis/row_number_hu23c9bec3a4cf8d3b4128b07792deb4e6_137354_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/row_number_hu23c9bec3a4cf8d3b4128b07792deb4e6_137354_cd33f213cd08355eaa8d72d6112da5b3.png"
-width="760"
-height="317"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>One more ribbon plot later (w/ same code as above + custom y-axis breaks):&lt;/p>
-&lt;figure >
-&lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >
-&lt;img alt="" srcset="
-/2018/07/imdb-data-analysis/imdb-12_hu094e49a00c50b23c90d18de45931ba78_101374_4fd1684e23148c8ad251acbcbcb509e7.png 400w,
-/2018/07/imdb-data-analysis/imdb-12_hu094e49a00c50b23c90d18de45931ba78_101374_324e4c79172a17d27a54b710fd13eb3d.png 760w,
-/2018/07/imdb-data-analysis/imdb-12_hu094e49a00c50b23c90d18de45931ba78_101374_1200x1200_fit_gaussian_2.png 1200w"
-src="https://minimaxir.com/2018/07/imdb-data-analysis/imdb-12_hu094e49a00c50b23c90d18de45931ba78_101374_4fd1684e23148c8ad251acbcbcb509e7.png"
-width="760"
-height="570"
-loading="lazy" data-zoomable class=" img-light" />&lt;/div>
-&lt;/div>&lt;/figure>
-&lt;p>Huh. The median and upper-bound #th time has &lt;em>dropped&lt;/em> over time? Hollywood has been promoting more newcomers as leads? That&amp;rsquo;s not what I expected!&lt;/p>
-&lt;p>More work definitely needs to be done in this area. In the meantime, the official IMDb datasets are a lot more robust than I thought they would be! And I only used a fraction of the datasets; the rest tie into TV shows, which are a bit messier. Hopefully you&amp;rsquo;ve seen a good taste of the power of R and ggplot2 for playing with big-but-not-big data!&lt;/p>
-&lt;hr>
-&lt;p>&lt;em>You can view the R and ggplot used to create the data visualizations in &lt;a href="http://minimaxir.com/notebooks/imdb-data-analysis/" target="_blank" rel="noopener">this R Notebook&lt;/a>, which includes many visualizations not used in this post. You can also view the images/code used for this post in &lt;a href="https://github.com/minimaxir/imdb-data-analysis" target="_blank" rel="noopener">this GitHub repository&lt;/a>&lt;/em>.&lt;/p>
 &lt;p>&lt;em>You are free to use the data visualizations from this article however you wish, but it would be greatly appreciated if proper attribution is given to this article and/or myself!&lt;/em>&lt;/p></description></item></channel></rss>

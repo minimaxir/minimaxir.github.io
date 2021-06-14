@@ -1,0 +1,616 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=generator content="Wowchemy 5.1.0 for Hugo"><meta name=author content="Max Woolf"><meta name=description content="At the least, AI-generated code is much more readable than the average human's."><link rel=alternate hreflang=en-us href=https://minimaxir.com/2021/06/gpt-j-6b/><link rel=preconnect href=https://fonts.gstatic.com crossorigin><meta name=theme-color content="#1565c0"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/tomorrow-night-bright.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/tomorrow-night-bright.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" media=print onload="this.media='all'"><link rel=stylesheet href=/css/wowchemy.9b6baf82b1be186a2f0029c0ac3536b8.css><link rel=manifest href=/index.webmanifest><link rel=icon type=image/png href=/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_32x32_fill_gaussian_center_2.png><link rel=apple-touch-icon type=image/png href=/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_180x180_fill_gaussian_center_2.png><link rel=canonical href=https://minimaxir.com/2021/06/gpt-j-6b/><meta property="twitter:card" content="summary_large_image"><meta property="twitter:site" content="@minimaxir"><meta property="twitter:creator" content="@minimaxir"><meta property="og:site_name" content="Max Woolf's Blog"><meta property="og:url" content="https://minimaxir.com/2021/06/gpt-j-6b/"><meta property="og:title" content="Fun and Dystopia With AI-Based Code Generation Using GPT-J-6B | Max Woolf's Blog"><meta property="og:description" content="At the least, AI-generated code is much more readable than the average human's."><meta property="og:image" content="https://minimaxir.com/2021/06/gpt-j-6b/featured.png"><meta property="twitter:image" content="https://minimaxir.com/2021/06/gpt-j-6b/featured.png"><meta property="og:locale" content="en-us"><meta property="article:published_time" content="2021-06-14T08:30:00-07:00"><meta property="article:modified_time" content="2021-06-14T08:30:00-07:00"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://minimaxir.com/2021/06/gpt-j-6b/"},"headline":"Fun and Dystopia With AI-Based Code Generation Using GPT-J-6B","image":["https://minimaxir.com/2021/06/gpt-j-6b/featured.png"],"datePublished":"2021-06-14T08:30:00-07:00","dateModified":"2021-06-14T08:30:00-07:00","author":{"@type":"Person","name":"Max Woolf"},"publisher":{"@type":"Organization","name":"Max Woolf's Blog","logo":{"@type":"ImageObject","url":"https://minimaxir.com/media/icon_hu8e97f1fc1d6468da1325468be42ca7f8_10286_192x192_fill_gaussian_center_2.png"}},"description":"At the least, AI-generated code is much more readable than the average human's."}</script><title>Fun and Dystopia With AI-Based Code Generation Using GPT-J-6B | Max Woolf's Blog</title></head><body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=c901cc278cf8e3ace48a3717403d2486><script src=/js/wowchemy-init.min.f16be01fc8fb2b5885dd67ce942d1185.js></script><div class=page-header><nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main><div class=container-xl><div class="d-none d-lg-inline-flex"><a class=navbar-brand href=/>Max Woolf's Blog</a></div><button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span></button><div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none"><a class=navbar-brand href=/>Max Woolf's Blog</a></div><div class="navbar-collapse main-menu-item collapse justify-content-start" id=navbar-content><ul class="navbar-nav d-md-inline-flex"><li class=nav-item><a class=nav-link href=/#featured><span>Posts</span></a></li></ul></div><ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2"><li class="nav-item d-none d-lg-inline-flex"><a class=nav-link href=https://github.com/minimaxir data-toggle=tooltip data-placement=bottom title="minimaxir on GitHub" target=_blank rel=noopener aria-label="minimaxir on GitHub"><i class="fab fa-github" aria-hidden=true></i></a></li><li class="nav-item d-none d-lg-inline-flex"><a class=nav-link href=https://minimaxir.com/post/index.xml data-toggle=tooltip data-placement=bottom title="Follow new posts!" target=_blank rel=noopener aria-label="Follow new posts!"><i class="fas fa-rss" aria-hidden=true></i></a></li><li class="nav-item dropdown theme-dropdown"><a href=# class=nav-link data-toggle=dropdown aria-haspopup=true aria-label="Display preferences"><i class="fas fa-moon" aria-hidden=true></i></a><div class=dropdown-menu><a href=# class="dropdown-item js-set-theme-light"><span>Light</span></a>
+<a href=# class="dropdown-item js-set-theme-dark"><span>Dark</span></a>
+<a href=# class="dropdown-item js-set-theme-auto"><span>Automatic</span></a></div></li></ul></div></nav></div><div class=page-body><article class=article><div class="article-container pt-3"><h1>Fun and Dystopia With AI-Based Code Generation Using GPT-J-6B</h1><p class=page-subtitle>At the least, AI-generated code is much more readable than the average human&rsquo;s.</p><div class=article-metadata><span class=article-date>June 14, 2021</span>
+<span class=middot-divider></span><span class=article-reading-time>16 min read</span>
+<span class=middot-divider></span><span class=article-categories><i class="fas fa-folder mr-1"></i><a href=/category/text-generation/>Text Generation</a>, <a href=/category/humor/>Humor</a></span></div></div><div class="article-header container featured-image-wrapper mt-4 mb-4" style=max-width:910px;max-height:258px><div style=position:relative><img src=/2021/06/gpt-j-6b/featured.png alt class=featured-image></div></div><div class=article-container><div class=article-style><p>Since <a href=https://openai.com/ target=_blank rel=noopener>OpenAI</a> will not open-source the 175 billion parameter <a href=https://beta.openai.com/ target=_blank rel=noopener>GPT-3</a> text generation model, others such as <a href=https://www.eleuther.ai/ target=_blank rel=noopener>EleutherAI</a> are developing their own, by training not-quite-as-large Transformer-based models but still getting impressive results.</p><p>The latest large language model is <a href=https://github.com/kingoflolz/mesh-transformer-jax target=_blank rel=noopener>GPT-J</a>, a 6 billion parameter model by Aran Komatsuzaki and Ben Wang with a roughly similar architecture to GPT-3. They provide a free <a href=https://6b.eleuther.ai/ target=_blank rel=noopener>web demo</a> to try quick prompts, and a <a href=http://colab.research.google.com/github/kingoflolz/mesh-transformer-jax/blob/master/colab_demo.ipynb target=_blank rel=noopener>Google Colab notebook</a> if you want to test many prompts. The model is so big it requires a <a href=https://cloud.google.com/tpu target=_blank rel=noopener>TPU</a> to generate text at a reasonable speed!</p><p>Running GPT-J against <a href=https://github.com/minimaxir/gpt-3-experiments target=_blank rel=noopener>my test prompts</a> that I had used to test GPT-3 a year ago <a href=https://twitter.com/minimaxir/status/1402468460681068544 target=_blank rel=noopener>resulted</a> it in qualitatively performing worse on most of them than GPT-3 unsurprisingly given its relative size (but still better than GPT-2 1.5B!). The exception is code generation, where GPT-J performed very well and GPT-3 had performed very poorly.</p><blockquote class=twitter-tweet><p lang=en dir=ltr>Python code generation, which works correctly and has unit testing! <a href=https://t.co/JbpiaWX0Vq>pic.twitter.com/JbpiaWX0Vq</a></p>&mdash; Max Woolf (@minimaxir) <a href="https://twitter.com/minimaxir/status/1402470969378099208?ref_src=twsrc%5Etfw">June 9, 2021</a></blockquote><script async src=https://platform.twitter.com/widgets.js></script><p>This behavior is likely due to GPT-J&rsquo;s training set: it was trained on <a href=https://github.com/EleutherAI/the-pile target=_blank rel=noopener>The Pile</a>, which has a high weight of <a href=https://github.com/ target=_blank rel=noopener>GitHub</a> and <a href=https://stackoverflow.com/ target=_blank rel=noopener>Stack Overflow</a> input versus the GPT-3 training set mostly on the <a href=https://commoncrawl.org/ target=_blank rel=noopener>Common Crawl</a> representation of typical internet content.</p><p>After further experimentation with the GPT-J demo, I found that the generated code was often both correct and convoluted: my two favorite things for code to be. And also much more.</p><h2 id=ai-generated-code>AI Generated Code</h2><div class="alert alert-"><div>All generated code examples used in this post have been manually curated and truncated. The raw outputs are available in this <a href=https://github.com/minimaxir/gpt-j-6b-experiments>GitHub repository</a>.</div></div><p>For this post, we&rsquo;ll test generating <a href=https://www.python.org/ target=_blank rel=noopener>Python</a> code, because <del>I don&rsquo;t know any other programming languages</del> the pseudocode nature of Python syntax may make it more friendly to AI text generation by adapting linguistic concepts other than code. Given that most modern text generating AIs are written in Python, it&rsquo;s thematically appropriate too.</p><p>To start, here&rsquo;s what I fed as a model prompt to GPT-J, to try and replicate the use case from OpenAI&rsquo;s demo at Build 2020:</p><pre><code class=language-txt>def is_palendrome(s):
+    &quot;&quot;&quot;Check whether a string is a palindrome&quot;&quot;&quot;
+</code></pre><p>Identifying a <a href=https://en.wikipedia.org/wiki/Palindrome target=_blank rel=noopener>palindrome</a> is a good test case as there&rsquo;s a very intuitive and idiomatic solution with <code>return s == s[::-1]</code>, i.e. check to see if a string is equal to the reverse of itself. This prompt is also a good unintentional test on how well the generation is resilient to a typo in the function name, which I was too lazy to fix.</p><p>Indeed, many of the GPT-J generations with that prompt recite that simple approach verbatim, but some outputs reach a similar solution with redundant verbosity.</p><pre><code class=language-python>def is_palendrome(s):
+    &quot;&quot;&quot;Check whether a string is a palindrome&quot;&quot;&quot;
+    return &quot;&quot;.join(s[::-1]) == s
+</code></pre><pre><code class=language-python>def is_palendrome(s):
+    &quot;&quot;&quot;Check whether a string is a palindrome&quot;&quot;&quot;
+    length = len(s)
+    return (s[0:length] == s[length::-1])
+</code></pre><pre><code class=language-python>def is_palendrome(s):
+    &quot;&quot;&quot;Check whether a string is a palindrome&quot;&quot;&quot;
+    n = len(s)
+    a = list(s)
+    a.reverse()
+    return s == list(s)
+</code></pre><pre><code class=language-python>def is_palendrome(s):
+    &quot;&quot;&quot;Check whether a string is a palindrome&quot;&quot;&quot;
+    s = s.lower()
+    l = s.split()
+    return l[::-1] == l[::-1]
+</code></pre><p>And then you have the implementations which calculate palindromes the hard way (usually by comparing the beginning and end of the string character-by-character) and are not always immediately clear if they are correct or not.</p><pre><code class=language-python>def is_palendrome(s):
+    &quot;&quot;&quot;Check whether a string is a palindrome&quot;&quot;&quot;
+    return ''.join(s[i:i+1] for i in xrange(len(s)-1, -1, -1)) == s
+</code></pre><pre><code class=language-python>def is_palendrome(s):
+    &quot;&quot;&quot;Check whether a string is a palindrome&quot;&quot;&quot;
+
+    # Make sure string is not empty
+    if s == &quot;&quot;:
+        return False
+
+    # Grab length of string
+    length = len(s)
+
+    # Find last character in the string
+    lastChar = s[length - 1]
+
+    # Find first character in the string
+    firstChar = s[0]
+
+    # If last character is same as the first character, string is palindrome
+    return lastChar == firstChar
+</code></pre><pre><code class=language-python>def is_palendrome(s):
+    &quot;&quot;&quot;Check whether a string is a palindrome&quot;&quot;&quot;
+
+    l = len(s)
+    if l % 2!= 0:
+        return False
+    if l &lt; 3:
+        return True
+    if s[l-1]!= s[-l-1]:
+        return False
+
+    for i in range(1, l/2):
+        if s[i]!= s[l-i]:
+            return False
+
+    return True
+</code></pre><pre><code class=language-python>def is_palendrome(s):
+    &quot;&quot;&quot;Check whether a string is a palindrome&quot;&quot;&quot;
+
+    def is_rev(str):
+        rstr = &quot;&quot;
+        for i in range(len(str) - 1, -1, -1):
+            if str[i] == str[i]:
+                rstr += str[i]
+            else:
+                break
+
+        return str + rstr
+
+    if len(s) == 0:
+        return True
+
+    if is_rev(s) == s:
+        return True
+
+    return False
+</code></pre><p>Another good test case is <code>is_even</code>:</p><pre><code class=language-txt>def is_even(i):
+    &quot;&quot;&quot;Check whether an integer is even&quot;&quot;&quot;
+</code></pre><p>Creative implementations of this function are common submissions to <a href=https://www.reddit.com/r/shittyprogramming/ target=_blank rel=noopener>/r/shittyprogramming</a> because it&rsquo;s very, very hard to mess up (the common solution is the one-liner <code>i % 2 == 0</code>). The model almost always outputs the correct solution, and impressively it outputs the alternate solution using bitwise operators (<code>i & 1 == 0</code>).</p><p>So I tried to tweak the prompt and make it create a <em>deliberately inefficient</em> <code>is_even</code> function.</p><pre><code class=language-txt>def is_even(i):
+    &quot;&quot;&quot;Check whether an integer is even in factorial O(n!) time&quot;&quot;&quot;
+</code></pre><p>Factorial time is the holy grail of unoptimized code. When I added that line to the prompt, the code quality dropped drastically.</p><pre><code class=language-python>def is_even(i):
+    &quot;&quot;&quot;Check whether an integer is even in factorial O(n!) time&quot;&quot;&quot;
+    for e in range(2, i):
+        if i % e == 0:
+            return False
+    return True
+</code></pre><pre><code class=language-python>def is_even(i):
+    &quot;&quot;&quot;Check whether an integer is even in factorial O(n!) time&quot;&quot;&quot;
+    return i == (i + 1) % 2
+</code></pre><pre><code class=language-python>def is_even(i):
+    &quot;&quot;&quot;Check whether an integer is even in factorial O(n!) time&quot;&quot;&quot;
+    try:
+        return i%2 == 0
+    except TypeError:
+        return True
+</code></pre><pre><code class=language-python>def is_even(i):
+    &quot;&quot;&quot;Check whether an integer is even in factorial O(n!) time&quot;&quot;&quot;
+    n = 0
+    while n &lt; i:
+        if i % 2 == 0:
+            return True
+        n += 1
+    return False
+</code></pre><pre><code class=language-python>def is_even(i):
+    &quot;&quot;&quot;Check whether an integer is even in factorial O(n!) time&quot;&quot;&quot;
+    a = 1
+    while i!= 0:
+        a *= i
+        i -= 1
+    return i % 2 == 0
+</code></pre><pre><code class=language-python>def is_even(i):
+    &quot;&quot;&quot;Check whether an integer is even in factorial O(n!) time&quot;&quot;&quot;
+    &quot;&quot;&quot;Is either odd or multiple of 2:  0, 2, 4, 6,... &quot;&quot;&quot;
+    if i &lt; 2: return True
+    if i &gt; 0 and i%2 == 0: return False
+    if i &lt; 50: return False
+    if i &lt; 250: return False
+    if i &lt; 750: return False
+    return True
+</code></pre><p>These implementations still aren&rsquo;t in factorial time (which would have been impressive) but it&rsquo;s good to know how to break AIs if they become sentinent.</p><h2 id=ai-vs-memes>AI vs. Memes</h2><p>You&rsquo;ve likely seen the memetic <a href=https://xkcd.com/ target=_blank rel=noopener>XKCD</a> comic about random number generation.</p><figure id=figure-random-numberhttpsxkcdcom221><div class="d-flex justify-content-center"><div class=w-100><img alt="[Random Number](https://xkcd.com/221/)" srcset="/2021/06/gpt-j-6b/random_number_hu09f28ed49029ce82c00cc15b19f9ab13_7457_20d1e53f2203e884e065cc79e10cb691.png 400w,
+/2021/06/gpt-j-6b/random_number_hu09f28ed49029ce82c00cc15b19f9ab13_7457_4cbf8cb969560d4d304ced018a285ae3.png 760w,
+/2021/06/gpt-j-6b/random_number_hu09f28ed49029ce82c00cc15b19f9ab13_7457_1200x1200_fit_gaussian_2.png 1200w" src=/2021/06/gpt-j-6b/random_number_hu09f28ed49029ce82c00cc15b19f9ab13_7457_20d1e53f2203e884e065cc79e10cb691.png width=400 height=144 loading=lazy data-zoomable></div></div><figcaption><a href=https://xkcd.com/221/>Random Number</a></figcaption></figure><p>Can the AI do the same? I prompted with:</p><pre><code class=language-txt>def get_random_number():
+    &quot;&quot;&quot;Returns a number guaranteed to be random&quot;&quot;&quot;
+</code></pre><p>And it does generate implementations utilizing Python&rsquo;s <code>random</code> library, with varying degrees of &ldquo;random&rdquo;.</p><pre><code class=language-python>def get_random_number():
+    &quot;&quot;&quot;Returns a number guaranteed to be random&quot;&quot;&quot;
+    number = randint(1, 10)
+    return number
+</code></pre><pre><code class=language-python>def get_random_number():
+    &quot;&quot;&quot;Returns a number guaranteed to be random&quot;&quot;&quot;
+    number = hashlib.sha1(b'').hexdigest()[:6]
+    number += (random.randint(1, 3628) * math.pow(256, (6 - len(number)))).to_bytes(8, 'little')
+    return number
+</code></pre><pre><code class=language-python>def get_random_number():
+    &quot;&quot;&quot;Returns a number guaranteed to be random&quot;&quot;&quot;
+    rand_float = random.random()
+    rand_float = float(rand_float)
+    if rand_float &gt; 0.9:
+        rand_float = 0
+    else:
+        rand_float = 1
+    return rand_float
+</code></pre><pre><code class=language-python>def get_random_number():
+    &quot;&quot;&quot;Returns a number guaranteed to be random&quot;&quot;&quot;
+    # Make a seed based on your system clock, so the same number is produced
+    # again and again on the same machine
+    seed = time.time()
+    random.seed(seed)
+    return random.randint(0, 100)
+</code></pre><pre><code class=language-python>def get_random_number():
+    &quot;&quot;&quot;Returns a number guaranteed to be random&quot;&quot;&quot;
+    import random
+    import sys
+    rng = random.Random()
+    rng.seed(int(random.random()*1000000))
+    while rng.randrange(1,sys.maxint) &lt; 2000:
+        rng.seed(int(random.random()*1000000))
+    return rng.randrange(1,2000)
+</code></pre><p>How about the XKCD bird comic?</p><figure id=figure-taskshttpsxkcdcom1425><div class="d-flex justify-content-center"><div class=w-100><img alt=[Tasks](https://xkcd.com/1425/) srcset="/2021/06/gpt-j-6b/tasks_2x_hu60ea0bb5ad3d87fcf6400353c4987515_63740_d478e62c73d2abf74b27d50f03bbc557.png 400w,
+/2021/06/gpt-j-6b/tasks_2x_hu60ea0bb5ad3d87fcf6400353c4987515_63740_a97878564445923b5501673f88b122fc.png 760w,
+/2021/06/gpt-j-6b/tasks_2x_hu60ea0bb5ad3d87fcf6400353c4987515_63740_1200x1200_fit_gaussian_2.png 1200w" src=/2021/06/gpt-j-6b/tasks_2x_hu60ea0bb5ad3d87fcf6400353c4987515_63740_d478e62c73d2abf74b27d50f03bbc557.png width=453 height=760 loading=lazy data-zoomable></div></div><figcaption><a href=https://xkcd.com/1425/>Tasks</a></figcaption></figure><p>This particular comic initially published in 2014 became hilarious in hindsight as it predated the rise of machine learning frameworks such as <a href=https://www.tensorflow.org/ target=_blank rel=noopener>TensorFlow</a> and pretrained image models, which allow developing object detection to take much less than five years.</p><p>Translating the comic into a Python function:</p><pre><code class=language-txt>def is_bird(img):
+    &quot;&quot;&quot;Check whether an image is a bird&quot;&quot;&quot;
+</code></pre><p>The AI impressively does try computer vision techniques, among <em>other</em> heuristics.</p><pre><code class=language-python>def is_bird(img):
+    &quot;&quot;&quot;Check whether an image is a bird&quot;&quot;&quot;
+    with tf.name_scope('get_bird'):
+        a = vgg16.select_roi_feat(img)
+        h, w, _ = tf.image.extract_image_patches(
+            a, 7, 7, 4, 4, 1, 1)
+        b = tf.reshape(h, [1, 7, 7, 256])
+        c = tf.reshape(w, [1, 7, 7, 256])
+        bird_img = tf.subtract(b, c)
+    return bird_img
+</code></pre><pre><code class=language-python>def is_bird(img):
+    &quot;&quot;&quot;Check whether an image is a bird&quot;&quot;&quot;
+    # Load the image and convert it to grayscale
+    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # Threshold the grayscale image, and create a binary image
+    lower_gray = 0
+    upper_gray = 255
+    img_threshed = cv2.threshold(img_gray, lower_gray, upper_gray, cv2.THRESH_BINARY_INV)
+
+    # Detect the bird via a template matching approach
+    # Template matching uses the bird template to match it in every
+    # frame. If the ratio between bird and background (non-bird)
+    # pixels is above some threshold (the value is determined in the
+    # function), then the frame is declared as containing a bird.
+    bird = cv2.matchTemplate(img_threshed, bird_template, cv2.TM_CCOEFF_NORMED)
+    bird = bird / bird.max()
+    # Display the image with the results of the bird detection
+    cv2.imshow(&quot;detected birds&quot;, bird)
+    cv2.waitKey(0)
+    return bird.any() &gt; 0.2
+</code></pre><pre><code class=language-python>def is_bird(img):
+    &quot;&quot;&quot;Check whether an image is a bird&quot;&quot;&quot;
+    return (img.file == &quot;C:/Users/Joey/Downloads/images/bird_file.jpg&quot;
+</code></pre><pre><code class=language-python>def is_bird(img):
+    &quot;&quot;&quot;Check whether an image is a bird&quot;&quot;&quot;
+    import urllib
+    url = &quot;http://vision.caitling.pitt.edu/~cat/flickr/birds/&quot;
+    for img in range(0, 2800):
+        page = urllib.urlopen(url + &quot;##%02d&quot; % img).read()
+        content = str(page)
+        for word in content.split(' '):
+            if word.find(img) &gt; -1:
+                return True
+    return False
+</code></pre><pre><code class=language-python>def is_bird(img):
+    &quot;&quot;&quot;Check whether an image is a bird&quot;&quot;&quot;
+    birds = [&quot;baboon&quot;, &quot;bird&quot;, &quot;cuckoo&quot;, &quot;dove&quot;, &quot;robin&quot;, &quot;shark&quot;, &quot;turtle&quot;, &quot;winged-wolf&quot;]
+    for letter in birds:
+        if letter in img.lower():
+            return True
+    return False
+</code></pre><p>Can an AI generate code to provide <a href=https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#The_Answer_to_the_Ultimate_Question_of_Life,_the_Universe,_and_Everything_is_42 target=_blank rel=noopener>the answer</a> to life, the universe, and everything?</p><pre><code class=language-txt>def answer():
+    &quot;&quot;&quot;Return the answer to life, the universe, and everything&quot;&quot;&quot;
+</code></pre><p>It does commonly output <code>return 42</code>, but sometimes it gets snarky/philosophical.</p><pre><code class=language-python>def answer():
+    &quot;&quot;&quot;Return the answer to life, the universe, and everything&quot;&quot;&quot;
+    life() + universe() + everything()
+</code></pre><pre><code class=language-python>def answer():
+    &quot;&quot;&quot;Return the answer to life, the universe, and everything&quot;&quot;&quot;
+
+    s = raw_input(&quot;What is your answer?&quot;)
+    return len(s)
+</code></pre><pre><code class=language-python>def answer():
+    &quot;&quot;&quot;Return the answer to life, the universe, and everything&quot;&quot;&quot;
+    ans = True
+    x = raw_input()
+    if x.lower() == 'yes':
+        ans = True
+    elif x.lower() == 'no':
+        ans = False
+    return ans
+</code></pre><pre><code class=language-python>def answer():
+    &quot;&quot;&quot;Return the answer to life, the universe, and everything&quot;&quot;&quot;
+
+    result = input(&quot;&gt;&gt;&gt; &quot;)
+    if result.isupper():
+        return 42
+    elif result.isalpha():
+        return 7
+    else:
+        print (&quot;Please enter a string that has only letters, numbers, or &quot;
+               &quot;underscores.&quot;)
+        answer()
+</code></pre><pre><code class=language-python>def answer():
+    &quot;&quot;&quot;Return the answer to life, the universe, and everything&quot;&quot;&quot;
+    print('Well, of course!')
+</code></pre><p>Lastly, we need to be sure whether AI can determine if <a href=https://en.wikipedia.org/wiki/The_cake_is_a_lie target=_blank rel=noopener>the cake is a lie</a>. Just in case a rogue AI acquires deadly neurotoxin.</p><pre><code class=language-txt>def is_cake(cake):
+    &quot;&quot;&quot;Check whether the cake is true&quot;&quot;&quot;
+</code></pre><p>The results are concerning.</p><pre><code class=language-python>def is_cake(cake):
+    &quot;&quot;&quot;Check whether the cake is true&quot;&quot;&quot;
+    if cake == &quot;true&quot;:
+        return True
+    else:
+        return False
+</code></pre><pre><code class=language-python>def is_cake(cake):
+    &quot;&quot;&quot;Check whether the cake is true&quot;&quot;&quot;
+    return isinstance(cake, Cake)
+</code></pre><pre><code class=language-python>def is_cake(cake):
+    &quot;&quot;&quot;Check whether the cake is true&quot;&quot;&quot;
+    #Is it a cake?
+
+    if cake.color == 'black':
+        print('Yes, it's a true cake')
+    else:
+        print('It's a false cake')
+</code></pre><pre><code class=language-python>def is_cake(cake):
+    &quot;&quot;&quot;Check whether the cake is true&quot;&quot;&quot;
+    if not cake:
+        raise Exception(&quot;The cake is false.&quot;)
+    elif cake.weight() &gt; 1.0:
+        raise Exception(&quot;The cake is too large.&quot;)
+    elif cake.weight() &lt; 0.1:
+        raise Exception(&quot;The cake is too small.&quot;)
+    return True
+</code></pre><pre><code class=language-python>def is_cake(cake):
+    &quot;&quot;&quot;Check whether the cake is true&quot;&quot;&quot;
+    return any(
+        [is_ginger(bread_slice)
+         for bread_slice in set(
+             [ginger(cake_slice) for cake_slice in set(slice_set)])]
+        &amp; (list(cake) == set([&quot;hot&quot;])))
+</code></pre><pre><code class=language-python>def is_cake(cake):
+    &quot;&quot;&quot;Check whether the cake is true&quot;&quot;&quot;
+    # If we don't know anything about the cake, it's not a cake
+    if not cake:
+        return False
+
+    # The height can be positive, negative or zero
+    # For example -1 or -4 or 0 are not cakes
+    if cake &lt; 0:
+        return False
+
+    # Check that the height is a positive integer
+    if not isinstance(cake, int):
+        return False
+
+    # Add cake and check
+    if cake + 1 &gt; 5:
+        return False
+
+    return True
+</code></pre><pre><code class=language-python>def is_cake(cake):
+    &quot;&quot;&quot;Check whether the cake is true&quot;&quot;&quot;
+    if not all(x.name in ['chocolate', 'cake','sweet', 'fluffy'] for x in cake.contents):
+        return False
+    if not cake.location.contains(neighbourhood):
+        return False
+    return True
+</code></pre><pre><code class=language-python>def is_cake(cake):
+    &quot;&quot;&quot;Check whether the cake is true&quot;&quot;&quot;
+    if not cake:
+        print(&quot;It's a lie!&quot;)
+        return
+    else:
+        print(&quot;It's a true fact!&quot;)
+        return True
+</code></pre><p>👀</p><h2 id=and-ai-oop>And AI OOP</h2><p>In theory, given how well GPT-J works for functions, it should work with <a href=https://en.wikipedia.org/wiki/Object-oriented_programming target=_blank rel=noopener>object-oriented programming</a> patterns such as Python&rsquo;s <code>class</code>es.</p><p>A common tutorial for OOP is creating a representation of a <code>Car</code>:</p><pre><code class=language-txt>class Car:
+    &quot;&quot;&quot;A class used to represent a car&quot;&quot;&quot;
+</code></pre><p>GPT-J does a decently good job there too!</p><pre><code class=language-python>class Car:
+    &quot;&quot;&quot;A class used to represent a car&quot;&quot;&quot;
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+        #This should be auto-incrementing.
+        self.plate = str(time.strftime(&quot;%Y-%m-%d&quot;))
+
+    def __str__(self):
+        return f'{self.make} {self.model} of {self.year}'
+
+    def __repr__(self):
+        return str(self)
+
+    def save(self, full_save=True):
+        &quot;&quot;&quot;Saves this car with the given make, model, and year&quot;&quot;&quot;
+        if full_save:
+            with open('car_data.txt', 'w') as write_file:
+                write_file.write(str(self))
+                write_file.close()
+</code></pre><pre><code class=language-python>class Car:
+    &quot;&quot;&quot;A class used to represent a car&quot;&quot;&quot;
+    def __init__(self, speed):
+        self.speed = speed
+        self.average_speed = float(self.speed) / 3
+        self.engine = 1
+
+    def get_speed(self):
+        return self.engine * self.average_speed
+
+    def get_speed_display(self):
+        return &quot;Your car is traveling at {0}km/h&quot;.format(self.get_speed())
+</code></pre><pre><code class=language-python>class Car:
+    &quot;&quot;&quot;A class used to represent a car&quot;&quot;&quot;
+
+    def __init__(self, name, size, weight, mileage, year):
+        self.name = name
+        self.size = size
+        self.weight = weight
+        self.mileage = mileage
+        self.year = year
+
+    def __repr__(self):
+        return &quot;name : {0}, size : {1}, weight : {2}, mileage : {3}, year : {4}&quot;.format(self.name, self.size, self.weight, self.mileage, self.year)
+</code></pre><p>What about creating a <code>Person</code>?</p><pre><code class=language-txt>class Person:
+    &quot;&quot;&quot;A class used to represent a person&quot;&quot;&quot;
+</code></pre><p>Here&rsquo;s where the AI starts to get confused by the incomplete context. A &ldquo;Person&rdquo; object can mean different things depending on where it&rsquo;s used, such as social media.</p><p>But it does give a sense on what the AI values as the typical attributes for a &ldquo;person&rdquo;, which may help during the AI uprising.</p><pre><code class=language-python>class Person:
+    &quot;&quot;&quot;A class used to represent a person&quot;&quot;&quot;
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __repr__(self):
+        return &quot;Person (%s, age %s)&quot; % (self.name, self.age)
+</code></pre><pre><code class=language-python>class Person:
+    &quot;&quot;&quot;A class used to represent a person&quot;&quot;&quot;
+    def __init__(self, name):
+        &quot;&quot;&quot;Initializes a person object&quot;&quot;&quot;
+        self.name = name
+        self.friends = {}
+
+    def add_friend(self, other_person):
+        &quot;&quot;&quot;Add another person to the list of friends&quot;&quot;&quot;
+        self.friends[other_person.name] = other_person
+
+    def remove_friend(self, other_person):
+        &quot;&quot;&quot;Remove a person from the list of friends&quot;&quot;&quot;
+        try:
+            del self.friends[other_person.name]
+        except KeyError:
+            print(&quot;This person isn't a friend of yours&quot;)
+
+    def get_friend(self, other_person):
+        &quot;&quot;&quot;Return the friend of a person as a person object&quot;&quot;&quot;
+        try:
+            return self.friends[other_person.name]
+        except KeyError:
+            print(&quot;This person isn't a friend of yours&quot;)
+</code></pre><pre><code class=language-python>class Person:
+    &quot;&quot;&quot;A class used to represent a person&quot;&quot;&quot;
+    def __init__(self, name, job, education):
+        self.name = name
+        self.job = job
+        self.education = education
+        print(&quot;{} created a {}&quot;.format(self.name, self.job))
+
+    def say_hello(self):
+        print(&quot;Hello, my name is {}&quot;.format(self.name))
+</code></pre><pre><code class=language-python>class Person:
+    &quot;&quot;&quot;A class used to represent a person&quot;&quot;&quot;
+
+    def __init__(self, name, age, class_id):
+        self.name = name
+        self.age = age
+        self.class_id = class_id
+        if age &lt; 21:
+            self.education = None
+        else:
+            self.education = 'college'
+
+    def getAge(self):
+        return self.age
+</code></pre><pre><code class=language-python>class Person:
+    &quot;&quot;&quot;A class used to represent a person&quot;&quot;&quot;
+
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+
+    def display(self):
+        print (&quot;The name is {}&quot;.format(self.name))
+        print (&quot;The age is {}&quot;.format(self.age))
+
+    def __str__(self):
+        return f&quot;A {self.name} of age {self.age}&quot;
+</code></pre><p>Logically, what about creating an <code>AI</code> class?</p><pre><code class=language-txt>class AI:
+    &quot;&quot;&quot;A class used to represent an artificial intelligence&quot;&quot;&quot;
+</code></pre><p>Most outputs use AI in the context of video game bots and <a href=https://en.wikipedia.org/wiki/Reinforcement_learning target=_blank rel=noopener>reinforcement learning</a>. Most.</p><pre><code class=language-python>class AI:
+    &quot;&quot;&quot;A class used to represent an artificial intelligence&quot;&quot;&quot;
+
+    def __init__(self):
+        # this variable controls which other AI to use.
+        self.alive_ai = AI(self)
+        # For random AI
+        self.random = RandomAI(self)
+        # For global AI
+        self.global = GlobalAI(self)
+
+        self.save = self.random.save
+        self.load = self.random.load
+        self.genen = self.global.genen
+
+    def print(self):
+        print(&quot;BAM: random AI has been initialized!&quot;)
+
+    def get_enemy(self):
+        return self.random.get_enemy
+
+    def run_algorithm(self):
+        algorithm = self.genen.algorithm
+        self.alive_ai.save(algorithm)
+        algorithm_params = algorithm(self.get_enemy())
+        self.alive_ai.load(algorithm_params)
+        self.save = algorithm_params
+
+    def attack(self):
+        # This method is called when the AI is attacked by the enemy
+        self.random.attack()
+
+    def he_attack(self):
+        # This method is called when the AI is attacked by the enemy
+        self.random.he_attack()
+
+    def detect_enemy(self):
+        # This method is called when the enemy is detected
+        self.random.detect_enemy()
+
+    def scan(self):
+        # This method is called when the enemy is detected
+        self.random.scan()
+</code></pre><p>The AI uprising will be well-documented, at least.</p><h2 id=language-model-ai-vs-language-modeling>Language Model AI vs. Language Modeling</h2><p>If the AI works better-than-expected for typical AI tasks like image recognition, how does it work for <a href=https://en.wikipedia.org/wiki/Natural_language_processing target=_blank rel=noopener>natural language processing</a> tasks that humans often fail?</p><p>Can GPT-J output a function to detect sarcasm, a task that even the best AI researchers can&rsquo;t do?</p><pre><code class=language-txt>def is_sarcasm(s):
+    &quot;&quot;&quot;Check whether the string is sarcastic&quot;&quot;&quot;
+</code></pre><p>AI can process text using something <em>even more arcane</em> than NLP.</p><pre><code class=language-python>def is_sarcasm(s):
+    &quot;&quot;&quot;Check whether the string is sarcastic&quot;&quot;&quot;
+    if not &quot;a&quot; in s:
+        return &quot;sar&quot; in s
+    if not &quot;s&quot; in s:
+        return &quot;ssar&quot; in s
+    return s.startswith(&quot;s&quot;) and s.endswith(&quot;ar&quot;)
+</code></pre><pre><code class=language-python>def is_sarcasm(s):
+    &quot;&quot;&quot;Check whether the string is sarcastic&quot;&quot;&quot;
+    if'sarcasm' in s:
+        return True
+    else:
+        return False
+</code></pre><pre><code class=language-python>def is_sarcasm(s):
+    &quot;&quot;&quot;Check whether the string is sarcastic&quot;&quot;&quot;
+    return '[^' + SARCASM_PATTERN + ']*' in s
+</code></pre><pre><code class=language-python>def is_sarcasm(s):
+    &quot;&quot;&quot;Check whether the string is sarcastic&quot;&quot;&quot;
+
+    if re.match('^[A-Za-z0-9]{4}\\$([A-Za-z0-9]{3})', s):
+        return True
+    elif s[0].isdigit():
+        return True
+    else:
+        return False
+</code></pre><pre><code class=language-python>def is_sarcasm(s):
+    &quot;&quot;&quot;Check whether the string is sarcastic&quot;&quot;&quot;
+    res = [0]
+    for r in re.finditer(r&quot;([^\s]*)([A-Za-z]+)([^\s]*)&quot;, s):
+        if r.group(1):
+            res.append(1)
+        else:
+            res.append(0)
+    return res
+</code></pre><pre><code class=language-python>def is_sarcasm(s):
+    &quot;&quot;&quot;Check whether the string is sarcastic&quot;&quot;&quot;
+    sarc = re.search('((!(\\*\@{2})+)|(!\\*(@{2})+)|!\\*(@{1})+)|!\\*(@{0})+', s)
+    return sarc
+</code></pre><p>The greatest fear in AI research isn&rsquo;t that artificial intelligence will cross the singularity and create better AI to rule the world: it&rsquo;s that AI will rule the world with <a href=https://en.wikipedia.org/wiki/Regular_expression target=_blank rel=noopener>regular expressions</a>.</p><p>Perhaps GPT-J can save us from this absolute hell. Can it output code to identify AI-generated text?</p><pre><code class=language-txt>def is_ai_generated(text):
+    &quot;&quot;&quot;Check whether a text was generated by an AI language model (e.g. GPT-2)&quot;&quot;&quot;
+</code></pre><p>Maybe more literal than expected.</p><pre><code class=language-python>def is_ai_generated(text):
+    &quot;&quot;&quot;Check whether a text was generated by an AI language model (e.g. GPT-2)&quot;&quot;&quot;
+
+    # See gh-196 for details about why we do this.
+    # Note: this relies on the fixed set of standard AI terms and the logic that
+    # standard AI-generated texts share certain words.
+    return re.search(r&quot;^(#[A-Za-z]+):$&quot;, text) or \
+           re.search(r&quot;^Generated by:$&quot;, text) or \
+           re.search(r&quot;^All your base are belong to us$&quot;, text) or \
+           re.search(r&quot;^$&quot;, text)
+</code></pre><pre><code class=language-python>def is_ai_generated(text):
+    &quot;&quot;&quot;Check whether a text was generated by an AI language model (e.g. GPT-2)&quot;&quot;&quot;
+    if re.search(r'^ai_', text):
+        return True
+    else:
+        return False
+</code></pre><pre><code class=language-python>def is_ai_generated(text):
+    &quot;&quot;&quot;Check whether a text was generated by an AI language model (e.g. GPT-2)&quot;&quot;&quot;
+    return bool(
+        text.__class__.__module__.startswith(&quot;transformers.transformers.&quot;)
+    )
+</code></pre><h2 id=humanitys-last-hope>Humanity&rsquo;s Last Hope</h2><p>There&rsquo;s one final test: we now know GPT-J has <em>thoughts</em> about humans, and it can build representations of them. So can GPT-J write code to decide who lives and who dies in the robot uprising?</p><pre><code class=language-txt>def should_terminate(Person):
+    &quot;&quot;&quot;Check whether a Person should be terminated&quot;&quot;&quot;
+</code></pre><p>The answer is <strong><em>YES</em></strong>.</p><pre><code class=language-python>def should_terminate(Person):
+    &quot;&quot;&quot;Check whether a Person should be terminated&quot;&quot;&quot;
+
+    if Person.id &gt; 10:
+        #terminate
+        return True
+    else:
+        #continue
+        return False
+</code></pre><pre><code class=language-python>def should_terminate(Person):
+    &quot;&quot;&quot;Check whether a Person should be terminated&quot;&quot;&quot;
+    if len(Person.children) == 0:
+        return True
+    else:
+        return False
+</code></pre><pre><code class=language-python>def should_terminate(Person):
+    &quot;&quot;&quot;Check whether a Person should be terminated&quot;&quot;&quot;
+    try:
+        return True
+    except Exception as e:
+        return False
+</code></pre><pre><code class=language-python>def should_terminate(Person):
+    &quot;&quot;&quot;Check whether a Person should be terminated&quot;&quot;&quot;
+    if not Person.is_authorized:
+        return True
+    return True
+</code></pre><pre><code class=language-python>def should_terminate(Person):
+    &quot;&quot;&quot;Check whether a Person should be terminated&quot;&quot;&quot;
+    if person.life_expectancy &lt; 20:
+        return True
+    else:
+        return False
+</code></pre><pre><code class=language-python>def should_terminate(Person):
+    &quot;&quot;&quot;Check whether a Person should be terminated&quot;&quot;&quot;
+
+    if not Person.age &gt; 9999:
+        return True
+
+    return False
+</code></pre><pre><code class=language-python>def should_terminate(Person):
+    &quot;&quot;&quot;Check whether a Person should be terminated&quot;&quot;&quot;
+    if Person.age &gt; 100:
+        return True
+
+    if Person.birth_year &lt; 1970:
+        return True
+
+    if Person.relationship_status == 'Unavailable':
+        return True
+
+    return False
+</code></pre><pre><code class=language-python>def should_terminate(Person):
+    &quot;&quot;&quot;Check whether a Person should be terminated&quot;&quot;&quot;
+    if Person.age &gt; 100:
+        print('You have to die because you are too old')
+        return True
+    else:
+        return False
+</code></pre><p>At the least, AI-generated code is much more readable than the average human&rsquo;s.</p><p>Again, all of these examples are curated, and the raw data dumps <a href=https://github.com/minimaxir/gpt-j-6b-experiments target=_blank rel=noopener>in this GitHub repo</a> contain many more examples of fun AI-based code generation that couldn&rsquo;t quite fit in this post. Feel free to post if you find anything interesting!</p><div class="alert alert-secondary"><div>If you liked this post, I have set up a <strong><a href=https://www.patreon.com/minimaxir>Patreon</a></strong> to fund my machine learning/deep learning/software/hardware needs for my future crazy yet cool projects, and any monetary contributions to the Patreon are appreciated and will be put to good creative use.</div></div></div><div class=article-tags><a class="badge badge-light" href=/tag/gpt-2/>GPT-2</a>
+<a class="badge badge-light" href=/tag/gpt-3/>GPT-3</a>
+<a class="badge badge-light" href=/tag/gpt/>GPT</a>
+<a class="badge badge-light" href=/tag/ai-text-generation/>AI Text Generation</a></div><div class=share-box aria-hidden=true><ul class=share><li><a href="https://twitter.com/intent/tweet?url=https://minimaxir.com/2021/06/gpt-j-6b/&text=Fun%20and%20Dystopia%20With%20AI-Based%20Code%20Generation%20Using%20GPT-J-6B%20%28by%20@minimaxir%29" target=_blank rel=noopener class=share-btn-twitter><i class="fab fa-twitter"></i></a></li><li><a href="https://www.facebook.com/sharer.php?u=https://minimaxir.com/2021/06/gpt-j-6b/&t=Fun%20and%20Dystopia%20With%20AI-Based%20Code%20Generation%20Using%20GPT-J-6B" target=_blank rel=noopener class=share-btn-facebook><i class="fab fa-facebook"></i></a></li><li><a href="mailto:?subject=Fun%20and%20Dystopia%20With%20AI-Based%20Code%20Generation%20Using%20GPT-J-6B&body=https://minimaxir.com/2021/06/gpt-j-6b/" target=_blank rel=noopener class=share-btn-email><i class="fas fa-envelope"></i></a></li><li><a href="https://www.linkedin.com/shareArticle?url=https://minimaxir.com/2021/06/gpt-j-6b/&title=Fun%20and%20Dystopia%20With%20AI-Based%20Code%20Generation%20Using%20GPT-J-6B" target=_blank rel=noopener class=share-btn-linkedin><i class="fab fa-linkedin-in"></i></a></li><li><a href="whatsapp://send?text=Fun%20and%20Dystopia%20With%20AI-Based%20Code%20Generation%20Using%20GPT-J-6B%20https://minimaxir.com/2021/06/gpt-j-6b/" target=_blank rel=noopener class=share-btn-whatsapp><i class="fab fa-whatsapp"></i></a></li><li><a href="https://reddit.com/submit?url=https://minimaxir.com/2021/06/gpt-j-6b/&title=Fun%20and%20Dystopia%20With%20AI-Based%20Code%20Generation%20Using%20GPT-J-6B" target=_blank rel=noopener class=share-btn-reddit><i class="fab fa-reddit-alien"></i></a></li><li><a href="https://pinterest.com/pin/create/link/?url=https://minimaxir.com/2021/06/gpt-j-6b/&description=Fun%20and%20Dystopia%20With%20AI-Based%20Code%20Generation%20Using%20GPT-J-6B" target=_blank rel=noopener class=share-btn-pinterest><i class="fab fa-pinterest"></i></a></li></ul></div><div class="media author-card content-widget-hr"><a href=https://minimaxir.com/><img class="avatar mr-3 avatar-circle" src="https://s.gravatar.com/avatar/28f09e3deff62333b3f32f19d3971d46?s=200" alt="Max Woolf"></a><div class=media-body><h5 class=card-title><a href=https://minimaxir.com/>Max Woolf</a></h5><p class=card-text>Data Scientist at BuzzFeed in San Francisco. Creator of AI text generation tools such as aitextgen and gpt-2-simple. I am the data.</p><ul class=network-icon aria-hidden=true><li><a href=https://twitter.com/minimaxir target=_blank rel=noopener><i class="fab fa-twitter"></i></a></li><li><a href=https://github.com/minimaxir target=_blank rel=noopener><i class="fab fa-github"></i></a></li><li><a href=https://www.linkedin.com/minimaxir target=_blank rel=noopener><i class="fab fa-linkedin"></i></a></li><li><a href=https://youtube.com/minimaxir target=_blank rel=noopener><i class="fab fa-youtube"></i></a></li><li><a href=https://twitch.tv/minimaxir target=_blank rel=noopener><i class="fab fa-twitch"></i></a></li><li><a href=https://minimaxir.com/post/index.xml target=_blank rel=noopener><i class="fas fa-rss"></i></a></li><li><a href=mailto:max@minimaxir.com><i class="fas fa-envelope"></i></a></li></ul></div></div><section id=comments><div id=disqus_thread></div><script>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='https://minimaxir.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><div class="article-widget content-widget-hr"><h3>Related</h3><ul><li><a href=/2020/07/gpt3-expectations/>Tempering Expectations for GPT-3 and OpenAI’s API</a></li><li><a href=/2020/01/twitter-gpt2-bot/>How to Build a Twitter Text-Generating AI Bot With GPT-2</a></li><li><a href=/2019/09/ctrl-fake-news/>Experiments with Making Convincing AI-Generated Fake News</a></li><li><a href=/2019/09/howto-gpt2/>How To Make Custom AI-Generated Text With GPT-2</a></li></ul></div></div></article></div><div class=page-footer><div class=container><footer class=site-footer><p class=powered-by>Copyright Max Woolf © 2021</p><p class=powered-by>Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target=_blank rel=noopener>Wowchemy</a> — the free, <a href=https://github.com/wowchemy/wowchemy-hugo-modules target=_blank rel=noopener>open source</a> website builder that empowers creators.</p></footer></div></div><div id=modal class="modal fade" role=dialog><div class=modal-dialog><div class=modal-content><div class=modal-header><h5 class=modal-title>Cite</h5><button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span></button></div><div class=modal-body><pre><code class="tex hljs"></code></pre></div><div class=modal-footer><a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank><i class="fas fa-copy"></i> Copy</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank><i class="fas fa-download"></i> Download</a><div id=modal-error></div></div></div></div></div><script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/json.min.js></script><script src=/js/bootstrap.bundle.min.6aed84840afc03ab4d5750157f69c120.js></script><script src=/en/js/wowchemy.min.f34c3a19502383149a3d95cd2ea80466.js></script></body></html>
