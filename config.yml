@@ -76,7 +76,7 @@ params:
   ShowRssButtonInSectionTermList: true
   ShowToc: false
   ShowFullTextinRSS: True
-  comments: true
+  comments: false
   DisqusShortname: minimaxir
   images: ["android-chrome-512x512.png"]
 
