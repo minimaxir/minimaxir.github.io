@@ -54,7 +54,7 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Restore resources cache
         uses: actions/cache/restore@v3
-        id: cache
+        id: restore-cache
         with:
           path: ./resources.nosync
           key: resources
@@ -71,7 +71,7 @@ jobs:
             --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Save resources cache
         uses: actions/cache/save@v3
-        id: cache
+        id: save-cache
         with:
           path: ./resources.nosync
           key: resources
