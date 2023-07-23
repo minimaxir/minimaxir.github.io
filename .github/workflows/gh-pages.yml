@@ -66,9 +66,7 @@ jobs:
         run: |
           hugo \
             --gc \
-            --minify \
-            --verbose \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --minify
       - name: Save resources cache
         uses: actions/cache/save@v3
         id: save-cache
