@@ -4,7 +4,6 @@ date: 2017-06-20T08:00:00
 slug: imgur-decline
 categories: [Data Science]
 tags: [R, ggplot2, Reddit]
-comments: true
 summary: "Before Reddit added native image hosting, Imgur accounted for 15% of all submissions to Reddit. Now it's below 9%."
 cover:
   image: featured.png

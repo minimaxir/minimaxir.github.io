@@ -2,7 +2,6 @@
 title: "Mapping San Francisco Locations Using Facebook Data"
 date: 2014-04-08T08:00:00-07:00
 slug: san-francisco
-comments: true
 categories: [Data Science]
 tags: [R, ggplot2, GeoViz]
 summary: "With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit."

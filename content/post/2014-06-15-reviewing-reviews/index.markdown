@@ -2,7 +2,6 @@
 title: "A Statistical Analysis of 1.2 Million Amazon Reviews"
 date: 2014-06-17T08:20:00-07:00
 slug: reviewing-reviews
-comments: true
 categories: [Data Science]
 tags: [R, ggplot2, Amazon]
 summary: "Analyzing the dataset of 1.2 million Amazon reviews, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon's review system actually works."

@@ -2,7 +2,6 @@
 title: "Impact of the New Show HN Section on Show HN Submissions"
 date: 2014-07-14T08:30:00-07:00
 slug: show-hn
-comments: true
 categories: [Data Science]
 tags: [R, ggplot2, Hacker News]
 summary: "Did this feature help or harm Show HN submissions as a whole?"

@@ -4,7 +4,6 @@ date: 2017-06-06T08:30:00-07:00
 slug: r-notebooks
 categories: [Data Science]
 tags: [R, ggplot2, Python]
-comments: true
 summary: "The relatively new R Notebooks improve the workflows of common data analysis in ways Jupyter Notebooks can't."
 cover:
   image: featured.png

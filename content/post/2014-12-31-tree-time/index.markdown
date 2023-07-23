@@ -2,7 +2,6 @@
 title: "Locating All the Christmas Trees on Instagram"
 date: 2015-01-01T09:00:00-07:00
 slug: tree-time
-comments: true
 categories: [Data Science]
 tags: [R, ggplot2, GeoViz]
 summary: "I downloaded *hundreds of thousands* of #tree images and found 25,432 images which were taken on Christmas, have a #tree, and, most importantly, contain location data where the photo was taken."

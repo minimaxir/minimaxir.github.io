@@ -2,7 +2,6 @@
 title: "The Quality, Popularity, and Negativity of 5.6 Million Hacker News Comments"
 date: 2014-10-06T08:00:00-07:00
 slug: hn-comments-about-comments
-comments: true
 categories: [Data Science, Big Data]
 tags: [R, ggplot2, Hacker News, Comments]
 summary: "Hopefully, these comments will answer whether Hacker News is experiencing a rise in quality, or if the complaints levied against HN are valid."

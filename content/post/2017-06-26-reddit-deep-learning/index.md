@@ -4,7 +4,6 @@ date: 2017-06-26T09:00:00-07:00
 slug: reddit-deep-learning
 categories: [AI]
 tags: [Python, TensorFlow, Keras]
-comments: true
 summary: "Thanks to Keras, performing deep learning on a very large number of Reddit submissions is actually pretty easy. Performing it *well* is a different story."
 cover:
   image: featured.png

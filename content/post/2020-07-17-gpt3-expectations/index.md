@@ -4,7 +4,6 @@ date: 2020-07-18T10:30:00-07:00
 slug: gpt3-expectations
 categories: ["AI", "Text Generation"]
 tags: ["GPT-2", "GPT-3"]
-comments: true
 summary: "GPT-3 is indeed a large step forward for AI text-generation, but there are very many caveats with the popular demos and use cases."
 subtitle: "GPT-3 is indeed a large step forward for AI text-generation, but there are very many caveats with the popular demos and use cases."
 featured: false

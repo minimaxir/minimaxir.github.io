@@ -4,7 +4,6 @@ date: 2017-02-08T06:30:00-07:00
 slug: predicting-arrests
 categories: [Data Science]
 tags: [R, ggplot2]
-comments: true
 summary: "Given that a SF police arrest occurs at a specified time and place, what is the reason for that arrest?"
 cover:
   image: featured.png

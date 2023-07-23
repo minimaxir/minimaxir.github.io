@@ -4,7 +4,6 @@ date: 2018-02-09T09:00:00-07:00
 slug: stack-overflow-questions
 categories: [Data Science, Data Visualization]
 tags: [R, ggplot2, Stack Overflow]
-comments: true
 summary: "I was surprised to see that all types of programming languages have quick answer times and a high probability of receiving an acceptable answer!"
 cover:
   image: featured.png

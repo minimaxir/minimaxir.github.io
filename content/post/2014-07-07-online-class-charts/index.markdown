@@ -2,7 +2,6 @@
 title: "Who Performs the Best in Online Classes?"
 date: 2014-07-10T08:30:00-07:00
 slug: online-class-charts
-comments: true
 categories: [Data Science]
 tags: [R, ggplot2]
 summary: 'Which types of student characteristics lead to the best performance in online classes? That depends on how you define "performance."'

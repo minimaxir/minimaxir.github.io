@@ -4,7 +4,6 @@ date: 2017-07-05T09:00:00-07:00
 slug: cpu-or-gpu
 category: [AI, Cost Savings]
 tags: [TensorFlow]
-comments: true
 summary: "Using CPUs instead of GPUs for deep learning training in the cloud is cheaper because of the massive cost differential afforded by preemptible instances."
 cover:
   image: featured.png

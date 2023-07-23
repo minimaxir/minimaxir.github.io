@@ -4,7 +4,6 @@ date: 2017-04-04T06:30:00-07:00
 slug: char-embeddings
 categories: [Data Science]
 tags: [R, ggplot2]
-comments: true
 summary: "Keras + TensorFlow + Pretrained character embeddings makes text generation a breeze."
 cover:
   image: featured.png

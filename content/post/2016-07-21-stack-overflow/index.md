@@ -4,7 +4,6 @@ date: 2016-07-21T06:30:00-07:00
 slug: stack-overflow
 categories: [Data Science]
 tags: [R, ggplot2, Stack Overflow]
-comments: true
 summary: "As it turns out, there is no correlation between programming ability and the frequency of Stack Overflow visits."
 cover:
   image: featured.png

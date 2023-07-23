@@ -4,7 +4,6 @@ date: 2016-01-07T08:30:00-07:00
 slug: movie-revenue-ratings
 categories: [Data Science, Video]
 tags: [R, ggplot2]
-comments: true
 summary: "Perhaps the movie rating system itself is broken."
 cover:
   image: featured.png

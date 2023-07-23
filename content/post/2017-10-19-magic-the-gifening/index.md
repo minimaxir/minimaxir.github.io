@@ -4,7 +4,6 @@ date: 2017-11-07T08:10:00-07:00
 slug: magic-the-gifening
 categories: [Cool Stuff]
 tags: [Python]
-comments: true
 summary: "As it turns out, creating a Twitter bot to tweet Magic card GIFs is easy to implement, but with a few interesting caveats."
 cover:
   image: featured.png

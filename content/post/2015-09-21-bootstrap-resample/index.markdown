@@ -4,7 +4,6 @@ date: 2015-09-22T08:00:00-07:00
 slug: bootstrap-resample
 categories: ["Data Science"]
 tags: [R, ggplot2, Animation]
-comments: true
 cover:
   image: featured.png
   relative: true

@@ -4,7 +4,6 @@ date: 2017-08-14T09:00:00-07:00
 slug: ggplot2-web
 categories: [Data Science, Data Visualization]
 tags: [R, ggplot2]
-comments: true
 summary: "In general, it takes little additional effort to make something unique with ggplot2, and the effort is well worth it."
 cover:
   image: featured.png

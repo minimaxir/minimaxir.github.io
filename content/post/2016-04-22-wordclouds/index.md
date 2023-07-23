@@ -4,7 +4,6 @@ date: 2016-05-09T08:00:00-07:00
 slug: wordclouds
 categories: [Data Visualization]
 tags: [Python, Word Cloud]
-comments: true
 summary: "Why not make a word cloud which looks like a line chart?"
 cover:
   image: featured.png

@@ -2,7 +2,6 @@
 title: "A Profanity-Laced Video Game Password That Breaks Everything"
 date: 2013-05-16T20:50:00-07:00
 slug: its-a-livin
-comments: true
 categories: [Gaming, Journalism]
 tags: [Hacks]
 summary: "Most of these passwords were gibberish that required a pen-and-paper to write down and remember. One password, however, is more memorable, and much more sinister."

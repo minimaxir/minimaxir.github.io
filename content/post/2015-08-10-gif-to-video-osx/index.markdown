@@ -2,7 +2,6 @@
 layout: "post"
 title: "Making a Video-to-GIF Right-Click Menu Item in OS X"
 categories: [Tools]
-comments: true
 published: false
 date: 2015-08-13T08:00:00-07:00
 slug: gif-to-video-osx

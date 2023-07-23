@@ -4,7 +4,6 @@ date: 2020-01-16T08:00:00-08:00
 slug: twitter-gpt2-bot
 categories: ["AI", "Text Generation"]
 tags: ["GPT-2", "TensorFlow"]
-comments: true
 summary: "Here's how you too can create an AI bot to parody any Twitter user, even if you're not a coder!"
 cover:
   image: featured.png

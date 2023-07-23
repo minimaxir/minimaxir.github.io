@@ -4,7 +4,6 @@ date: 2015-12-04T08:00:00-07:00
 slug: sf-arrests
 categories: [Data Science, Big Data]
 tags: [R, ggplot2]
-comments: true
 summary: "Spoilers: Most arrests in San Francisco happen Wednesdays at 4-5 PM. For some reason."
 cover:
   image: featured.png

@@ -4,7 +4,6 @@ date: 2015-11-16T08:00:00-07:00
 slug: nyc-ggplot2-howto
 categories: [Data Science, Big Data]
 tags: [R, ggplot2, BigQuery]
-comments: true
 cover:
   image: featured.png
   relative: true

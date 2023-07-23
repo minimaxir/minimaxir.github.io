@@ -4,7 +4,6 @@ date: 2016-02-29T08:00:00-07:00
 slug: facebook-reactions
 categories: [Data Science, Thought Piece]
 tags: [R, ggplot2]
-comments: true
 summary: "Apparently, there is little statistical relationship between things that are cute and things that make you go YAAASS."
 cover:
   image: featured.png

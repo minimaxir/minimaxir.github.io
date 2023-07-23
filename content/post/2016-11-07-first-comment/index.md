@@ -4,7 +4,6 @@ date: 2016-11-07T06:30:00-07:00
 slug: first-comment
 categories: [Data Science, Big Data]
 tags: [R, ggplot2, Reddit]
-comments: true
 summary: "Are commenters 'late to this thread' indeed late?"
 cover:
   image: featured.png

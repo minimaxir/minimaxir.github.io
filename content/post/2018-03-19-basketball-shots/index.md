@@ -4,7 +4,6 @@ date: 2018-03-19T09:20:00-07:00
 slug: basketball-shots
 categories: [Data Science, Data Visualization, Big Data]
 tags: [R, ggplot2]
-comments: true
 summary: "Although visualizing basketball shots has been done before, this time we have access to an order of magnitude more public data to do some really cool stuff."
 cover:
   image: featured.png

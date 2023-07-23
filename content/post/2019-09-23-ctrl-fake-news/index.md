@@ -4,7 +4,6 @@ date: 2019-09-30T08:00:00-07:00
 slug: ctrl-fake-news
 categories: ["AI", "Text Generation"]
 tags: ["GPT-2", "TensorFlow", "CTRL"]
-comments: true
 summary: "Can the CTRL model create the “fake news” OpenAI was concerned about? Let's put it to the test."
 highlight: false
 cover:

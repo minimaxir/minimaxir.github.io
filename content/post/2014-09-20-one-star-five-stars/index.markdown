@@ -2,7 +2,6 @@
 title: "The Statistical Difference Between 1-Star and 5-Star Reviews on Yelp"
 date: 2014-09-23T08:00:00-07:00
 slug: one-star-five-stars
-comments: true
 categories: [Data Science]
 tags: [R, ggplot2]
 summary: "It can be proven that language has a strong statistical effect on review ratings, but that is intuitive enough. How have review ratings changed?"

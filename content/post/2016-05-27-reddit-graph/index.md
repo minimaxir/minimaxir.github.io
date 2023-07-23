@@ -4,7 +4,6 @@ date: 2016-05-27T08:00:00-07:00
 slug: reddit-graph
 categories: [Data Science, Big Data]
 tags: [R, ggplot2, Reddit]
-comments: true
 summary: "There is very little discussion on how to gather the data for large-scale network graph visualizations, and how to make them. It is time to fix that."
 cover:
   image: featured.png

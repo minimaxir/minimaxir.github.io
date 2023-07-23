@@ -4,7 +4,6 @@ date: 2016-06-20T08:20:00-07:00
 slug: reddit-related-subreddits
 categories: [Data Science, Big Data]
 tags: [R, ggplot2, Reddit]
-comments: true
 summary: "Fancy machine learning approaches may not be required to help Redditors discover new things."
 cover:
   image: featured.png

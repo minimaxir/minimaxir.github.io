@@ -2,7 +2,6 @@
 title: "Analyzing the Patterns of Numbers in 10 Million Passwords"
 date: 2015-02-24T08:00:00-07:00
 slug: password-numbers
-comments: true
 categories: [Data Science, Big Data]
 tags: [R, ggplot2]
 summary: "There are many patterns for numbers in passwords, which involve surprising yet intuitive logic."

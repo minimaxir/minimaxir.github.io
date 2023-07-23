@@ -4,7 +4,6 @@ date: 2015-10-02T08:00:00-07:00
 slug: reddit-bigquery
 categories: [Data Science, Big Data]
 tags: [R, ggplot2, Reddit, BigQuery]
-comments: true
 cover:
   image: featured.png
   relative: true

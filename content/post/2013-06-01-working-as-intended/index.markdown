@@ -2,7 +2,6 @@
 title: "When Uninstalling A PC Game Erases the Entire Hard Drive"
 date: 2013-06-05T08:00:00-07:00
 slug: working-as-intended
-comments: true
 categories: [Gaming, Journalism]
 summary: "A poorly coded PC game uninstaller could delete not just the game, but the *entire hard drive*. That would be a problem."
 cover:

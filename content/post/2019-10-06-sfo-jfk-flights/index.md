@@ -4,7 +4,6 @@ date: 2019-10-23T09:00:00-07:00
 slug: sfo-jfk-flights
 categories: ["Data Visualization", Data Science, Big Data]
 tags: ["R", "ggplot2"]
-comments: true
 fractions: true
 summary: "Box plots, when used correctly, can be a very fun way to visualize big data."
 cover:

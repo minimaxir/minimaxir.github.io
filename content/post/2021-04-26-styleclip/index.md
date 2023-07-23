@@ -4,7 +4,6 @@ date: 2021-04-30T08:55:00-07:00
 slug: styleclip
 categories: ["AI", "Image Generation"]
 tags: ["Image", "GAN", "AI", "Mark Zuckerberg", "Elon Musk"]
-comments: true
 summary: "StyleCLIP is essentially Photoshop driven by text, with all the good, bad, and chaos that entails."
 subtitle: "StyleCLIP is essentially Photoshop driven by text, with all the good, bad, and chaos that entails."
 featured: false

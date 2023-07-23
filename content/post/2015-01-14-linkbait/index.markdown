@@ -2,7 +2,6 @@
 title: "Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles"
 date: 2015-01-15T08:30:00-07:00
 slug: linkbait
-comments: true
 categories: [Data Science, Comedy]
 tags: [R, ggplot2, BuzzFeed]
 summary: "You probably do not know that the 3 most interesting things I found will blow your mind."

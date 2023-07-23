@@ -2,7 +2,6 @@
 title: "An Introduction on How to Make Beautiful Charts With R and ggplot2"
 date: 2015-02-12T08:00:00-07:00
 slug: ggplot-tutorial
-comments: true
 categories: [Data Science, Tutorial]
 tags: [R, ggplot2]
 summary: "Adding a touch of color and design can help make more compelling visualizations, thanks to ggplot2 syntax and chaining capabilities."

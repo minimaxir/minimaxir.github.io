@@ -4,7 +4,6 @@ date: 2018-07-16T09:45:00
 slug: imdb-data-analysis
 categories: ["Data Visualization", Data Science, Big Data]
 tags: ["Video", "R", "ggplot2"]
-comments: true
 summary: "For IMDb's big-but-not-big data, you have to play with the data smartly, and both R and ggplot2 have neat tricks to do just that."
 cover:
   image: featured.png

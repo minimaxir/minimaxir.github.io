@@ -2,7 +2,6 @@
 title: "The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress"
 date: 2014-07-15T08:30:00-07:00
 slug: caucus-needed
-comments: true
 categories: [Data Science]
 tags: [R, ggplot2, Word Cloud]
 summary: "Saying that the results were surprising would be the understatement of the century."

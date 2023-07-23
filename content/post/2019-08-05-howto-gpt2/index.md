@@ -4,7 +4,6 @@ date: 2019-09-04T08:00:00-07:00
 slug: howto-gpt2
 categories: ["AI", "Text Generation"]
 tags: ["GPT-2", "TensorFlow"]
-comments: true
 summary: "Thanks to gpt-2-simple and this Colaboratory Notebook, you can easily finetune GPT-2 on your own dataset!"
 cover:
   image: featured.png

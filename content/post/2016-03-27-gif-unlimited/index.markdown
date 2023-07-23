@@ -4,7 +4,6 @@ date: "2016-03-29T08:00:00-07:00"
 published: false
 slug: gif-unlimited
 categories: ["Idea", "Comedy", "Genius"]
-comments: true
 summary: "tl;dr I was bored and decided to create infinite data in a way that makes people feel fuzzy inside."
 cover:
   image: featured.png

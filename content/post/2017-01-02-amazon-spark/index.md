@@ -4,7 +4,6 @@ date: 2017-01-02T09:00:00-07:00
 slug: amazon-spark
 categories: [Data Science, Big Data]
 tags: [R, ggplot2]
-comments: true
 summary: "Manipulating actually-big-data is just as easy as performing an analysis on a dataset with only a few records."
 cover:
   image: featured.png

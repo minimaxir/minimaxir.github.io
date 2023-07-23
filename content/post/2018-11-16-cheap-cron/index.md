@@ -4,7 +4,6 @@ date: 2018-11-19T09:00:00-07:00
 slug: cheap-cron
 categories: ["DevOps", "Cost Savings"]
 tags: [Google Cloud Platform]
-comments: true
 summary: "Thanks to a few new synergies within GCP products, it's possible to get the cost of running a scheduled task down to less than a dollar a month."
 cover:
   image: featured.png

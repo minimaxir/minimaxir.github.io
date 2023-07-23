@@ -3,7 +3,6 @@ title: "The Importance of Sanity-Checking Datasets Before Analysis"
 date: "2016-04-06T08:00:00-07:00"
 slug: trust-but-verify
 categories: ["Thought Piece"]
-comments: true
 summary: "The 1972 TV Special 'The Lorax' is the best movie ever, earning $1.2 billion?"
 cover:
   image: featured.png

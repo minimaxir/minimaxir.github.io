@@ -4,7 +4,6 @@ date: 2016-01-11T08:00:00-07:00
 slug: agdq-2016
 categories: [Data Science]
 tags: [R, ggplot2]
-comments: true
 summary: "Were frames killed? Were animals saved?"
 cover:
   image: featured.png

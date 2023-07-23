@@ -2,7 +2,6 @@
 title: "A Role-Playing Game With an Easily Exploitable Random Number Generator"
 date: 2013-05-23T20:26:00-07:00
 slug: guaranteed-to-be-random
-comments: true
 categories: [Gaming, Journalism]
 summary: "The Golden Sun RNG is so poorly implemented that players have found out how to make events with 1/256 probability occur one hundred percent of the time."
 #image: kiku.png

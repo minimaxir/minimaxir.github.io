@@ -2,7 +2,6 @@
 title: "How Many #nofilter Instagram Photos Actually Have No Filter?"
 date: 2014-02-10T08:00:00-07:00
 slug: the-filter-truth
-comments: true
 categories: [Data Science, Comedy]
 tags: [R, ggplot2]
 summary: "Not all of them."

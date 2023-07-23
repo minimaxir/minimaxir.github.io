@@ -2,7 +2,6 @@
 title: "How to Scrape Data From Facebook Page Posts for Statistical Analysis"
 date: 2015-07-20T08:00:00-07:00
 slug: facebook-scraper
-comments: true
 categories: [Tools]
 tags: [Python, Scraping]
 cover:

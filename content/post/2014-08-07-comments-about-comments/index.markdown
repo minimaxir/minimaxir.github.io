@@ -2,7 +2,6 @@
 title: "The Data From Our Comments to the FCC About Net Neutrality"
 date: 2014-08-08T08:00:00-07:00
 slug: comments-about-comments
-comments: true
 categories: [Data Science]
 tags: [R, ggplot2, Word Cloud]
 summary: "The FCC released a dataset of about 450,000 comments against net neutrality. Looking at the data behind these comments, it is clear to see that the entire country is passionate against the rule changes to net neutrality."

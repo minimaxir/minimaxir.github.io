@@ -4,7 +4,6 @@ date: 2015-12-07T08:00:00-07:00
 slug: sf-arrest-maps
 categories: [Data Science, Big Data]
 tags: [R, ggplot2]
-comments: true
 summary: "Let's plot 587,499 arrests on top of a map of San Francisco for fun and see what happens."
 cover:
   image: featured.png

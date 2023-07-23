@@ -3,7 +3,6 @@ layout: "post"
 title: "Plotting a Map of New York City Using Only Taxi Location Data"
 categories: ["Data Science"]
 tags: [R, ggplot2, GeoViz]
-comments: true
 date: 2015-08-07T08:00:00-07:00
 slug: nyc-map
 summary: "In theory, plotting a million little points in close proximity should simulate the lines of the streets of New York City."

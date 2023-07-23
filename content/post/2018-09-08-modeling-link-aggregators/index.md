@@ -4,7 +4,6 @@ date: 2018-09-10T09:15:00-07:00
 slug: modeling-link-aggregators
 categories: ["Data Visualization", Data Science, Big Data]
 tags: ["R", "ggplot2"]
-comments: true
 summary: "The nature of algorithmic feeds like Reddit inherently leads to a survivorship bias: although users may recognize certain types of posts that appear on the front page, there are many more which follow the same patterns but fail."
 cover:
   image: featured.png

@@ -2,7 +2,6 @@
 title: "Reddit is Growing Slowly, but Surely"
 date: 2013-11-18T07:30:00-07:00
 slug: daily-reddit
-comments: true
 categories: [Data Science]
 tags: [R, ggplot2, Reddit]
 summary: "I analyzed the daily number of submissions from over two years to see which events, if any, have affected Reddit's growth rate. As it turns out, Reddit grows by itself."

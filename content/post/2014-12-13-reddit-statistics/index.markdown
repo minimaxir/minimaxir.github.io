@@ -2,7 +2,6 @@
 title: "A Statistical Analysis of 142 Million Reddit Submissions"
 date: 2014-12-16T08:00:00
 slug: reddit-statistics
-comments: true
 categories: [Data Science, Big Data]
 tags: [R, ggplot2, Reddit]
 summary: "I constructed a database to store all Reddit Submissions from November 2007 to the end of October 2014: 142,159,793 submissions in total. And this data is very curious and very, *very* memetic."

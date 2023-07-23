@@ -4,7 +4,6 @@ date: 2015-12-28T09:00:00-07:00
 slug: lets-code-1
 categories: [Data Science, Video]
 tags: [R, ggplot2]
-comments: true
 summary: "The first of (hopefully) many 1440p/60fps videos of fun data analysis. With many fun errors too!"
 cover:
   image: featured.png

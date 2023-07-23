@@ -2,7 +2,6 @@
 title: "Probabilistically Generating GitHub Projects"
 date: 2013-11-29T10:30:00-07:00
 slug: innovation-rng
-comments: true
 categories: [Data, Comedy]
 tags: [R, Word Cloud]
 summary: "Perl interface to Git repositories via Ruby. Brute force your OpenERP data integration with flatfiles."

@@ -2,7 +2,6 @@
 title: "Does Adding Many Tags to an Instagram Photo Maximize the Number of Likes?"
 date: 2014-03-24T08:00:00-07:00
 slug: hashtag-tag
-comments: true
 categories: [Data Science, Instagram]
 tags: [R, ggplot2]
 summary: "Instagram photos which have the maximum of 30 #tags receive, on average, about three times as many Likes than photos with only a few tags."

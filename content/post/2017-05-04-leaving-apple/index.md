@@ -3,7 +3,6 @@ title: "Leaving Apple Inc."
 date: 2017-05-04T09:30:00-07:00
 slug: leaving-apple
 categories: [Personal]
-comments: true
 summary: "I have made the personal decision to leave my job at Apple to further my personal growth and technical skills."
 cover:
   image: featured.JPG

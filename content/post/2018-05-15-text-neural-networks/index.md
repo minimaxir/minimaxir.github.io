@@ -4,7 +4,6 @@ date: 2018-05-18T09:00:00-07:00
 slug: text-neural-networks
 categories: [AI, Text Generation]
 tags: [Python, TensorFlow, Keras]
-comments: true
 summary: "Train your own text-generating neural network and generate text whenever you want with just a few clicks!"
 cover:
   image: featured.png

@@ -4,7 +4,6 @@ date: 2016-04-13T08:00:00-07:00
 slug: movie-gender
 categories: [Data Science]
 tags: [R, ggplot2]
-comments: true
 summary: "On average, blockbuster movies with male leads generate 22% more domestic box office revenue, and this difference is statistically significant."
 cover:
   image: featured.png

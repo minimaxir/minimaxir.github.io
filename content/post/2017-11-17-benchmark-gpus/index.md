@@ -4,7 +4,6 @@ date: 2017-11-28T08:30:00-07:00
 slug: benchmark-gpus
 categories: [AI, Cost Savings]
 tags: [Python]
-comments: true
 summary: "A 36% price cut to GPU instances, in addition to the potential new benefits offered by software and GPU updates, however, might be enough to tip the cost-efficiency scales back in favor of GPUs."
 cover:
   image: featured.png

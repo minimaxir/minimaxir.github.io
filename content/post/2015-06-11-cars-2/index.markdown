@@ -2,7 +2,6 @@
 title: "Why is the Most-Viewed Gaming Video on YouTube About Cars 2?"
 date: 2015-06-15T08:00:00-07:00
 slug: cars-2
-comments: true
 categories: [Data Science, Big Data]
 tags: [R, ggplot2, YouTube]
 summary: "No, this is not an error. You can watch the video yourself on YouTube and verify the view count."

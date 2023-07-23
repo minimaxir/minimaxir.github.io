@@ -3,7 +3,6 @@ title: "Things About Real-World Data Science Not Discussed In MOOCs and Thought 
 date: 2018-10-22T09:15:00-07:00
 slug: data-science-protips
 categories: ["Thought Piece"]
-comments: true
 summary: "MOOCs and thought pieces overfit to a certain style of data science that is not robust to the vast uncertainties of the real world."
 cover:
   image: featured.png
