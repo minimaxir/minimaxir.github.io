@@ -1,0 +1,58 @@
+.dark {
+  --theme: rgb(35, 37, 47);
+  --entry: rgb(47, 54, 64);
+  --hljs-bg: rgb(47, 54, 64);
+  --code-bg: rgb(47, 54, 64);
+  --tertiary: rgb(47, 54, 64);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.header,
+.not-found,
+.page-footer .prev,
+.page-footer .next,
+.post-tags {
+  font-family: Monaco, monospace !important;
+}
+
+.home-info-left {
+  width: 100%;
+}
+.home-info-left img {
+  display: inline-table;
+  border-radius: 50%;
+}
+
+.entry-content li {
+  margin-top: 10px;
+}
+
+@media (max-width: 700px) {
+  .home-info-left {
+    display: none;
+  }
+}
+
+.home-info-right {
+  width: 100%;
+}
+
+.home-info {
+  flex-direction: row;
+  align-items: center;
+}
+
+.article-bottom {
+  min-height: 150px;
+}
+
+.article-bottom .home-info-left {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}

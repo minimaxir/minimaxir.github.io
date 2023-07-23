@@ -1,0 +1,26 @@
+timeout: 30000
+enableInlineShortcodes: true
+
+taxonomies:
+  tag: tag
+  category: category
+  author: author
+
+privacy:
+  vimeo:
+    disabled: false
+    simple: true
+
+  twitter:
+    disabled: false
+    enableDNT: false
+    simple: false
+    disableInlineCSS: false
+
+  instagram:
+    disabled: false
+    simple: true
+
+  youtube:
+    disabled: false
+    privacyEnhanced: true
