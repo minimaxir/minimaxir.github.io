@@ -56,3 +56,8 @@ h6,
   display: flex;
   justify-content: center;
 }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
