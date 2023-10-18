@@ -1,6 +1,6 @@
 ---
 title: The Greatest Threat to Generative AI is Humans Being Bad at Using it
-date: 2023-10-18T09:00:00-08:00
+date: 2023-10-18T09:15:00-07:00
 slug: ai-sturgeons-law
 categories:
   - Text Only
