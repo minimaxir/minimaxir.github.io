@@ -14,9 +14,9 @@ cover:
 
 Over the past month, [Twitter](https://twitter.com/) account [@dril_gpt2](https://twitter.com/dril_gpt2), an AI parody by [@kingdomakrillic](https://twitter.com/kingdomakrillic) of the infamous Twitter user [@dril](https://twitter.com/dril), [used](https://twitter.com/dril_gpt2/status/1208597102181408771) my [Colaboratory Notebook](https://colab.research.google.com/drive/1VLG8e7YSEwypxU-noRNhsv5dW4NfTGce) for finetuning GPT-2 on dril's tweets using gpt-2-simple to generate human-curated tweets which push the limits of the [Turing Test](https://en.wikipedia.org/wiki/Turing_test):
 
-{{< tweet dril_gpt2 1215760729095016449 >}}
+{{< twitter user="dril_gpt2" id="1215760729095016449" >}}
 
-{{< tweet dril_gpt2 1215834913888460800 >}}
+{{< twitter user="dril_gpt2" id="1215834913888460800" >}}
 
 These tweets are [definitely made by a robot](https://twitter.com/kingdomakrillic/status/1210487045338079237) and not by a [human pretending to be a robot](https://twitter.com/KeatonPatti/status/1006961202998726665); @dril_gpt2 occasionally falls into some of the famous GPT-2 traps such as [incoherent lists](https://twitter.com/dril_gpt2/status/1216162880023752705) and [extended repetition loops](https://twitter.com/dril_gpt2/status/1212662889028431872).
 

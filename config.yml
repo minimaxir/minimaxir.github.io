@@ -3,7 +3,7 @@ title: Max Woolf's Blog
 paginate: 5
 rssLimit: 10
 theme: PaperMod
-copyright: Copyright Max Woolf &copy; 2023. # Footer text, e.g. '© {year} Me'
+copyright: Copyright Max Woolf &copy; 2024. # Footer text, e.g. '© {year} Me'
 
 summaryLength: 30
 enableInlineShortcodes: true
@@ -48,10 +48,6 @@ languages:
 
 outputs:
   home:
-    - HTML
-    - RSS
-    - JSON
-  post:
     - HTML
     - RSS
     - JSON
@@ -105,6 +101,8 @@ params:
       - **Max Woolf** (@minimaxir) is a Data Scientist at [BuzzFeed](https://www.buzzfeed.com) in San Francisco who works with AI/ML tools and open source projects. _Max's projects are funded by his [Patreon](https://www.patreon.com/minimaxir)._
 
     imageUrl: profile_webp.webp
+    align: center
+    AlignSocialIconsTo: center
 
   socialIcons:
     - name: twitter
@@ -136,10 +134,10 @@ params:
   #     google:
   #         SiteVerificationTag: "XYZabc"
 
+  align: center
   assets:
     disableHLJS: true
     disableScrollBarStyle: true
-    disableFingerprinting: false
     # favicon: "<link / abs url>"
     # favicon16x16: "<link / abs url>"
     # favicon32x32: "<link / abs url>"

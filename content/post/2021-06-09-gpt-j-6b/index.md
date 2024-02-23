@@ -27,7 +27,7 @@ The latest large language model is [GPT-J](https://github.com/kingoflolz/mesh-tr
 
 Running GPT-J against [my test prompts](https://github.com/minimaxir/gpt-3-experiments) that I had used to test GPT-3 a year ago [resulted](https://twitter.com/minimaxir/status/1402468460681068544) it in qualitatively performing worse on most of them than GPT-3 unsurprisingly given its relative size (but still better than GPT-2 1.5B!). The exception is code generation, where GPT-J performed very well and GPT-3 had performed very poorly.
 
-{{% tweet minimaxir 1402470969378099208 %}}
+{{% twitter user="minimaxir" id="1402470969378099208" %}}
 
 This behavior is likely due to GPT-J's training set: it was trained on [The Pile](https://github.com/EleutherAI/the-pile), which has a high weight of [GitHub](https://github.com/) and [Stack Overflow](https://stackoverflow.com/) input versus the GPT-3 training set mostly on the [Common Crawl](https://commoncrawl.org/) representation of typical internet content.
 

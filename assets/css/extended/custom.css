@@ -1,8 +1,14 @@
+@font-face {
+  font-family: overpass;
+  src: url(/Overpass-Bold.ttf);
+}
+
 .dark {
   --theme: rgb(35, 37, 47);
   --entry: rgb(47, 54, 64);
   --hljs-bg: rgb(47, 54, 64);
   --code-bg: rgb(47, 54, 64);
+  --code-block-bg: rgb(47, 54, 64);
   --tertiary: rgb(47, 54, 64);
 }
 
@@ -17,7 +23,15 @@ h6,
 .page-footer .prev,
 .page-footer .next,
 .post-tags {
-  font-family: Monaco, monospace !important;
+  font-family: overpass, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  /* src: url("Overpass-Bold.ttf"); */
+}
+
+.post-content div {
+  margin-bottom: var(--content-gap) !important;
 }
 
 .home-info-left {

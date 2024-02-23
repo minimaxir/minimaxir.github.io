@@ -13,7 +13,7 @@ cover:
 
 In March, [Google Compute Platform](https://cloud.google.com) developer advocate [Felipe Hoffa](https://twitter.com/felipehoffa) made a tweet about airline flight data from San Francisco International Airport (SFO) to Seattle-Tacoma International Airport (SEA):
 
-{{< tweet felipehoffa 1111050585120206848 >}}
+{{< twitter user="felipehoffa" id="1111050585120206848" >}}
 
 Particularly, his visualization of total elapsed times by airline caught my eye.
 

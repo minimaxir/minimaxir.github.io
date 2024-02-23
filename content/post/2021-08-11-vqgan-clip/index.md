@@ -96,7 +96,7 @@ Of course, with the power of AI, you can do both prompts at the same time for ma
 
 While I was first experimenting with VQGAN + CLIP, I saw [an interesting tweet](https://twitter.com/mark_riedl/status/1421282588791132161) by AI researcher Mark Riedl:
 
-{{< tweet mark_riedl 1421282588791132161 >}}
+{{< twitter user="mark_riedl" id="1421282588791132161" >}}
 
 Intrigued, I adapted some icon generation code I had handy [from another project](https://github.com/minimaxir/stylecloud) and created [icon-image](https://github.com/minimaxir/icon-image), a Python tool to programmatically generate an icon using [Font Awesome](https://fontawesome.com/) icons and paste it onto a noisy background.
 

@@ -48,17 +48,17 @@ As someone who has spent a very large amount of time working with GPT-2 while de
 
 I also fed [my own tweets](https://github.com/minimaxir/gpt-3-experiments/tree/master/examples/twitter-minimaxir) through GPT-3 and curated the output, resulting in data science one-liners that are wholly original:
 
-{{< tweet minimaxir 1282147674645565441 >}}
-{{< tweet minimaxir 1281015343205539847 >}}
-{{< tweet minimaxir 1280698121262071809 >}}
+{{< twitter user="minimaxir" id="1282147674645565441" >}}
+{{< twitter user="minimaxir" id="1281015343205539847" >}}
+{{< twitter user="minimaxir" id="1280698121262071809" >}}
 
 There hadn't been too much GPT-3 hype after the initial announcement, outside of a few blogs from [Gwern](https://www.gwern.net/GPT-3) and [Kevin Lacker](http://lacker.io/ai/2020/07/06/giving-gpt-3-a-turing-test.html). Until a [viral tweet](https://twitter.com/sharifshameem/status/1282676454690451457) by [Sharif Shameem](https://twitter.com/sharifshameem) showed what GPT-3 can _really_ do:
 
-{{< tweet sharifshameem 1282676454690451457 >}}
+{{< twitter user="sharifshameem" id="1282676454690451457" >}}
 
 Later, he made a [followup tweet](https://twitter.com/sharifshameem/status/1284095222939451393) generating [React](https://reactjs.org) code with GPT-3:
 
-{{< tweet sharifshameem 1284095222939451393 >}}
+{{< twitter user="sharifshameem" id="1284095222939451393" >}}
 
 That demo got the attention of venture capitalists. And when a cool-looking magical thing gets the attention of venture capitalists, discourse tends to spiral out of control. Now, there are _many_ [tweets about GPT-3](https://twitter.com/search?q=Gpt-3&src=recent_search_click&f=live), and what it can do from others who have gained access to the API.
 
@@ -132,7 +132,7 @@ During my GPT-3 experiments, I found that [generating tweets](https://github.com
 
 [Jerome Pesenti](https://twitter.com/an_open_mind), the head of AI at Facebook, also managed to [trigger anti-semetic tweets](https://twitter.com/an_open_mind/status/1284487376312709120) from a GPT-3 app:
 
-{{< tweet an_open_mind 1284487376312709120 >}}
+{{< twitter user="an_open_mind" id="1284487376312709120" >}}
 
 Again, it depends on the domain. Would GPT-3 output racist or sexist React components? Likely not, but it's something that would still need to be robustly checked. OpenAI does appear to take these concerns seriously, and has implemented toxicity detectors for generated content in the Web UI, although not the programmatic API yet.
 
