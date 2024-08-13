@@ -1,6 +1,6 @@
 ---
 title: AI Seinfeld was the peak of AI-generated content. It will never happen again.
-date: 2024-08-13T10:30:00-08:00
+date: 2024-08-13T10:37:00-07:00
 slug: ai-seinfeld
 categories:
   - ChatGPT
