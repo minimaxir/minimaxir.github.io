@@ -10,7 +10,7 @@ tags:
   - AI
   - Embeddings
   - Pokémon
-published: true
+draft: false
 summary: Embeddings encourage engineers to go full YOLO because it's actually rewarding to do so!
 cover:
   image: featured.png

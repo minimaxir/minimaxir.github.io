@@ -13,7 +13,7 @@ tags:
   - Textual Inversion
   - Ugly Sonic
   - LoRA
-published: true
+draft: false
 summary: And then telling it to not generate those images!
 cover:
   image: featured.webp

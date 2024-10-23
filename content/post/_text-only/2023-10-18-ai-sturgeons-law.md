@@ -8,7 +8,7 @@ categories:
 tags:
   - Text Only
   - Essay
-published: true
+draft: false
 summary: “Made by AI” is now a universal meme to indicate something low quality, and memes can't easily be killed.
 cover:
   image: cover_thumb/robot1.webp

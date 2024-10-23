@@ -9,7 +9,7 @@ categories:
 tags:
   - AI
   - Image Generation
-published: true
+draft: false
 summary: "Perhaps AI can provide new and ~unique~ ideas for food content on the internet."
 subtitle: "Perhaps AI can provide new and ~unique~ ideas for food content on the internet."
 featured: false

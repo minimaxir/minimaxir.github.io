@@ -10,7 +10,7 @@ tags:
   - GPT-3
   - GPT
   - AI Text Generation
-published: true
+draft: false
 summary: "At the least, AI-generated code is much more readable than the average human's."
 subtitle: "At the least, AI-generated code is much more readable than the average human's."
 featured: false

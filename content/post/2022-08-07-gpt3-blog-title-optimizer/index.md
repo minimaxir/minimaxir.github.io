@@ -8,7 +8,7 @@ categories:
 tags:
   - GPT-3
   - Text Generation
-published: true
+draft: false
 summary: "GPT-3 says the title for this post is very bad."
 subtitle: "GPT-3 says the title for this post is very bad."
 featured: false

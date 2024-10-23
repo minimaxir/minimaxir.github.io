@@ -11,7 +11,7 @@ tags:
   - GAN
   - CLIP
   - VQGAN
-published: true
+draft: false
 summary: "Knowing how AI art is made is the key to making even better AI art."
 subtitle: "Knowing how AI art is made is the key to making even better AI art."
 featured: false

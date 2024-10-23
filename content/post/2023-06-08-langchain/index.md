@@ -11,7 +11,7 @@ tags:
   - ChatGPT
   - Text Generation
   - LangChain
-published: true
+draft: false
 summary: LangChain is complicated, so it must be better. Right?
 subtitle: LangChain is complicated, so it must be better. Right?
 cover:

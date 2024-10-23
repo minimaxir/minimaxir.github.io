@@ -1,7 +1,7 @@
 ---
 title: "Unlimited Data Storage Using Image Steganography and Cat GIFs"
 date: "2016-03-29T08:00:00-07:00"
-published: false
+draft: true
 slug: gif-unlimited
 categories: ["Idea", "Comedy", "Genius"]
 summary: "tl;dr I was bored and decided to create infinite data in a way that makes people feel fuzzy inside."

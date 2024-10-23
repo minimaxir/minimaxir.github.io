@@ -9,7 +9,7 @@ categories:
 tags:
   - ChatGPT
   - Text Generation
-published: true
+draft: false
 summary: What's the deal with the uncanny valley?
 cover:
   image: uncanny_valley_0.webp

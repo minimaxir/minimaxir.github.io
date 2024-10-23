@@ -9,7 +9,7 @@ categories:
 tags:
   - ChatGPT
   - Text Generation
-published: true
+draft: false
 summary: “Function calling” with ChatGPT is ChatGPT's best feature since ChatGPT.
 cover:
   image: featured.webp

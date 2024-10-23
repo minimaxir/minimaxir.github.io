@@ -12,7 +12,7 @@ tags:
   - Textual Inversion
   - Ugly Sonic
   - Humor
-published: true
+draft: false
 summary: Negative prompts can be far superior than traditional prompt additions.
 subtitle: Negative prompts can be far superior than traditional prompt additions.
 featured: true

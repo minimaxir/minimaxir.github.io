@@ -7,7 +7,7 @@ categories:
 tags:
   - Essay
   - GitHub Issues
-published: true
+draft: false
 summary: The best-case scenario is that you annoy the maintainers.
 cover:
   image: featured.webp

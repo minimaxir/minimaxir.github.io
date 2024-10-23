@@ -2,7 +2,7 @@
 layout: "post"
 title: "Making a Video-to-GIF Right-Click Menu Item in OS X"
 categories: [Tools]
-published: false
+draft: true
 date: 2015-08-13T08:00:00-07:00
 slug: gif-to-video-osx
 summary: "The terminal commands for making GIFs are very generic. What if I could easily automate these steps for any video on my Mac?"

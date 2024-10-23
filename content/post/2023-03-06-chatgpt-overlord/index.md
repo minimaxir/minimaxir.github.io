@@ -9,7 +9,7 @@ categories:
 tags:
   - ChatGPT
   - Text Generation
-published: true
+draft: false
 summary: Including OpenAI's other text generating AI!
 subtitle: Including OpenAI's other text generating AI!
 featured: true

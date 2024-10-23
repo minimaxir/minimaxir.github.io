@@ -9,7 +9,7 @@ categories:
 tags:
   - ChatGPT
   - Text Generation
-published: true
+draft: false
 summary: Modern AI rewards being very weird.
 cover:
   image: featured.webp

@@ -12,7 +12,7 @@ tags:
   - Textual Inversion
   - Ugly Sonic
   - Humor
-published: true
+draft: false
 summary: The true dystopia of AI is that it can make Ugly Sonic look cool.
 subtitle: The true dystopia of AI is that it can make Ugly Sonic look cool.
 featured: false
