@@ -92,25 +92,27 @@ params:
   homeInfoParams:
     Title: "Max Woolf"
     Content: >
-      - **Max Woolf** (@minimaxir) is currently a Data Scientist at [BuzzFeed](https://www.buzzfeed.com) in San Francisco. Some work he's done for BuzzFeed includes using StyleGAN to create [AI-generated fake boyfriends](https://tech.buzzfeed.com/how-we-made-your-ai-generated-lover-with-a-gan-bdcd347b0038) and [AI-generated art quizzes](https://www.buzzfeed.com/jonah/only-an-art-history-and-pop-culture-nerd-can-pass-this-quiz), and is currently working on the company's [more advanced AI initiatives](https://www.buzzfeed.com/jonah/our-way-forward).
+      - **Max Woolf** (@minimaxir) is currently a Senior Data Scientist at [BuzzFeed](https://www.buzzfeed.com) in San Francisco. Some work he's done for BuzzFeed includes using StyleGAN to create [AI-generated fake boyfriends](https://tech.buzzfeed.com/how-we-made-your-ai-generated-lover-with-a-gan-bdcd347b0038) and [AI-generated art quizzes](https://www.buzzfeed.com/jonah/only-an-art-history-and-pop-culture-nerd-can-pass-this-quiz), and is currently working on the company's [more advanced AI initiatives](https://www.buzzfeed.com/jonah/our-way-forward).
 
-      - In his free time, Max creates open source Python and R software [on his GitHub](https://github.com/minimaxir) and making snarky comments on [Twitter](https://twitter.com/minimaxir) and <a rel="me" href="https://sigmoid.social/@minimaxir">Mastodon</a>.
+      - In his free time, Max creates open source Python and R software [on his GitHub](https://github.com/minimaxir) and making snarky comments on [Twitter](https://twitter.com/minimaxir) and [Bluesky](https://bsky.app/profile/minimaxir.bsky.social).
 
       - _Max's projects are funded by his Patreon. If you have found anything on this website helpful, [please help contribute](https://www.patreon.com/minimaxir)!_
     shortContent: >
-      - **Max Woolf** (@minimaxir) is a Data Scientist at [BuzzFeed](https://www.buzzfeed.com) in San Francisco who works with AI/ML tools and open source projects. _Max's projects are funded by his [Patreon](https://www.patreon.com/minimaxir)._
+      - **Max Woolf** (@minimaxir) is a Senior Data Scientist at [BuzzFeed](https://www.buzzfeed.com) in San Francisco who works with AI/ML tools and open source projects. _Max's projects are funded by his [Patreon](https://www.patreon.com/minimaxir)._
 
     imageUrl: profile_webp.webp
     align: center
     AlignSocialIconsTo: center
 
   socialIcons:
-    - name: twitter
-      url: https://twitter.com/minimaxir
+    - name: bluesky
+      url: https://bsky.app/profile/minimaxir.bsky.social
     - name: github
       url: https://github.com/minimaxir
-    - name: mastodon
-      url: https://sigmoid.social/@minimaxir
+    # - name: mastodon
+    #   url: https://sigmoid.social/@minimaxir
+    - name: twitter
+      url: https://twitter.com/minimaxir
     - name: linkedin
       url: https://www.linkedin.com/in/minimaxir
     - name: youtube
