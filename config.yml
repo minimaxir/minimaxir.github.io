@@ -105,6 +105,8 @@ params:
     AlignSocialIconsTo: center
 
   socialIcons:
+    - name: email
+      url: mailto:max@minimaxir.com
     - name: bluesky
       url: https://bsky.app/profile/minimaxir.bsky.social
     - name: github
@@ -115,8 +117,8 @@ params:
       url: https://twitter.com/minimaxir
     - name: linkedin
       url: https://www.linkedin.com/in/minimaxir
-    - name: youtube
-      url: https://youtube.com/minimaxir
+    # - name: youtube
+    #   url: https://youtube.com/minimaxir
     - name: twitch
       url: https://twitch.tv/minimaxir
     - name: rss

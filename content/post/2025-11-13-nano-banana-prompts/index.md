@@ -83,7 +83,11 @@ Make ALL of the following edits to the image:
 
 {{< figure src="Yfu8aIfpHufVz7IP4_WEsAc.webp" >}}
 
-All five of the edits are implemented correctly with only the necessary aspects changed, such as removing the blueberries on top to make room for the mint garnish, and the pooling of the maple syrup on the new cookie-plate is adjusted. I'm legit impressed. Now we can test more difficult instances of prompt engineering.
+All five of the edits are implemented correctly with only the necessary aspects changed, such as removing the blueberries on top to make room for the mint garnish, and the pooling of the maple syrup on the new cookie-plate is adjusted. I'm legit impressed.
+
+_**UPDATE**: As has been [pointed out](https://news.ycombinator.com/item?id=45919433), this generation may not be "correct" due to ambiguity around what is the "left" and "right" eye socket as it depends on perspective._
+
+Now we can test more difficult instances of prompt engineering.
 
 ## The Good, the Barack, and the Ugly
 
