@@ -3,13 +3,20 @@ title: Fun and Dystopia With AI-Based Code Generation Using GPT-J-6B
 date: 2021-06-14T08:30:00-07:00
 slug: gpt-j-6b
 categories:
-  - Text Generation
-  - Humor
+  - Natural Language Processing
+  - Tech Culture
+  - Artificial Intelligence
+  - Generative AI
+  - Web & Social Media
 tags:
   - GPT-2
   - GPT-3
-  - GPT
-  - AI Text Generation
+  - LLMs
+  - Text Generation
+  - Social Media Analytics
+  - Geospatial Mapping
+  - R
+
 draft: false
 summary: "At the least, AI-generated code is much more readable than the average human's."
 subtitle: "At the least, AI-generated code is much more readable than the average human's."
@@ -20,7 +27,6 @@ cover:
   relative: true
   placement: 2
 ---
-
 Since [OpenAI](https://openai.com/) will not open-source the 175 billion parameter [GPT-3](https://beta.openai.com/) text generation model, others such as [EleutherAI](https://www.eleuther.ai/) are developing their own, by training not-quite-as-large Transformer-based models but still getting impressive results.
 
 The latest large language model is [GPT-J](https://github.com/kingoflolz/mesh-transformer-jax), a 6 billion parameter model by Aran Komatsuzaki and Ben Wang with a roughly similar architecture to GPT-3. They provide a free [web demo](https://6b.eleuther.ai/) to try quick prompts, and a [Google Colab notebook](http://colab.research.google.com/github/kingoflolz/mesh-transformer-jax/blob/master/colab_demo.ipynb) if you want to test many prompts. The model is so big it requires a [TPU](https://cloud.google.com/tpu) to generate text at a reasonable speed!

@@ -2,14 +2,26 @@
 title: "A Visual Overview of Stack Overflow's Question Tags"
 date: 2018-02-09T09:00:00-07:00
 slug: stack-overflow-questions
-categories: [Data Science, Data Visualization]
-tags: [R, ggplot2, Stack Overflow]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Data Engineering
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Stack Overflow
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "I was surprised to see that all types of programming languages have quick answer times and a high probability of receiving an acceptable answer!"
 cover:
   image: featured.png
   relative: true
 ---
-
 [Stack Overflow](https://stackoverflow.com) is the most popular contemporary knowledge base for programming questions. But most interact with the site by Googling a programming question and getting a top result that links to SO. There isn't as much discussion about actually _asking_ questions on the site.
 
 {{< figure src="python_last_list.png" theme="light" >}}

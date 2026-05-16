@@ -2,15 +2,27 @@
 title: "Analyzing the Patterns of Numbers in 10 Million Passwords"
 date: 2015-02-24T08:00:00-07:00
 slug: password-numbers
-categories: [Data Science, Big Data]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+  - Social Media Analytics
+
 summary: "There are many patterns for numbers in passwords, which involve surprising yet intuitive logic."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 The primary purpose of a [password](http://en.wikipedia.org/wiki/Password) is to serve as an unique verification identifier for a given user. Ideally, the password for a given website or service should be both random and unique; if the letters and/or numbers in the password follow any patterns, then they might be easier to guess by an intruder. For example, someone may put their birth year such as "1987" or "1988" in their password, which makes the passwords easier to remember, but consequently easier to break.
 
 A few weeks ago, security researcher Mark Burnett released [a list of 10 million passwords](https://xato.net/passwords/ten-million-passwords/#.VNojhPnF98E) compiled [from various sources](http://www.reddit.com/r/10millionpasswords/comments/2w3ali/dataset_origin/conap8l) over the years. Reddit user jalgroy [posted a histogram](http://www.reddit.com/r/dataisbeautiful/comments/2vsg7h/frequency_of_years_in_passwords_oc/) of the years used in these passwords, which I've verified using my own scripts:

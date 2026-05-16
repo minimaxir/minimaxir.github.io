@@ -3,12 +3,20 @@ title: Can LLMs write better code if you keep asking them to “write better cod
 date: 2025-01-02T09:30:00
 slug: write-better-code
 categories:
-  - ChatGPT
-  - AI
-  - Text Generation
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Computer Vision
+  - Web & Social Media
 tags:
   - ChatGPT
   - Text Generation
+  - LLMs
+  - Image Generation
+  - AI Art
+  - Computer Vision
+  - Social Media Analytics
+
 draft: false
 summary: "Most coders want AI to write code faster: I want AI to write FASTER CODE."
 cover:
@@ -16,7 +24,6 @@ cover:
   relative: true
   hiddenInSingle: true
 ---
-
 <span><style type="text/css">
 pre code.language-txt {
 white-space: pre-wrap !important;

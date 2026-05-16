@@ -2,15 +2,27 @@
 title: "The Data From Our Comments to the FCC About Net Neutrality"
 date: 2014-08-08T08:00:00-07:00
 slug: comments-about-comments
-categories: [Data Science]
-tags: [R, ggplot2, Word Cloud]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Programming
+tags:
+  - R
+  - ggplot2
+  - Word Clouds
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "The FCC released a dataset of about 450,000 comments against net neutrality. Looking at the data behind these comments, it is clear to see that the entire country is passionate against the rule changes to net neutrality."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 This year, the Federal Communications Commission, one of the governmental entities which polices the Internet in the United States, announced significant rule changes to the policy of "[Open Internet](http://www.fcc.gov/openinternet)." Open Internet, more commonly known as "[net neutrality](http://en.wikipedia.org/wiki/Net_neutrality)," helps businesses facilitate competition and promote innovation on the internet, which help improve the internet as a whole. However, the proposed rule changes allow internet service providers (ISPs) to discriminate between different types of internet traffic (a "fast lane" for video and social media, for example). Said pricing discrimination may end up affecting the consumers instead (e.g. paying $10/month for access to Facebook), which may reduce innovation due to increased costs to the consumers of internet bandwidth, i.e. the average American citizen.
 
 The FCC recently [opened up a comment period](http://www.fcc.gov/comments), where the U.S. public can [send or e-mail comments](http://apps.fcc.gov/ecfs/upload/display?z=s6uf0) on the changes to this policy. Naturally, the consumers of the internet reacted strongly. By August 2014, over _1.1 million comments_ have been received by the FCC.

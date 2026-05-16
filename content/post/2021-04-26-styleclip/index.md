@@ -2,8 +2,21 @@
 title: Easily Transform Portraits of People into AI Aberrations Using StyleCLIP
 date: 2021-04-30T08:55:00-07:00
 slug: styleclip
-categories: ["AI", "Image Generation"]
-tags: ["Image", "GAN", "AI", "Mark Zuckerberg", "Elon Musk"]
+categories:
+  - Artificial Intelligence
+  - Generative AI
+  - Natural Language Processing
+  - Computer Vision
+  - Machine Learning
+tags:
+  - Computer Vision
+  - GANs
+  - AI
+  - Mark Zuckerberg
+  - Elon Musk
+  - LLMs
+  - Image Generation
+
 summary: "StyleCLIP is essentially Photoshop driven by text, with all the good, bad, and chaos that entails."
 subtitle: "StyleCLIP is essentially Photoshop driven by text, with all the good, bad, and chaos that entails."
 featured: false
@@ -13,7 +26,6 @@ cover:
   relative: true
   caption: face, to troll face with large eyes
 ---
-
 _**tl;dr** follow the instructions in [this Colab Notebook](https://colab.research.google.com/drive/13EJ1ATvTnE0N7I0ULLvRsta7J7HdNuBi?usp=sharing) to generate your own AI Aberration images and videos! If you want to use your own images, follow the instructions in [this Colab Notebook first](https://colab.research.google.com/drive/1St3R2qAbwwTV-amfYLeyGGswtzX4HHJP?usp=sharing)!_
 
 GANs, [generative adversarial networks](https://en.wikipedia.org/wiki/Generative_adversarial_network), are all the rage nowadays for creating AI-based imagery. You've probably seen GANs used in tools like [thispersondoesnotexist.com](https://thispersondoesnotexist.com/), which currently uses NVIDIA's extremely powerful open-source [StyleGAN2](https://github.com/NVlabs/stylegan2).

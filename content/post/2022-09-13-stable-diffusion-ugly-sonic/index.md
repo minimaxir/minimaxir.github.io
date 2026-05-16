@@ -3,15 +3,20 @@ title: I Resurrected "Ugly Sonic" with Stable Diffusion Textual Inversion
 date: 2022-09-19T08:45:00-07:00
 slug: stable-diffusion-ugly-sonic
 categories:
-  - Stable Diffusion
-  - Image Generation
-  - AI
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Computer Vision
+  - Data Science
 tags:
   - Stable Diffusion
   - Image Generation
   - Textual Inversion
   - Ugly Sonic
   - Humor
+  - LLMs
+  - AI Art
+
 draft: false
 summary: The true dystopia of AI is that it can make Ugly Sonic look cool.
 subtitle: The true dystopia of AI is that it can make Ugly Sonic look cool.
@@ -22,7 +27,6 @@ cover:
   relative: true
   caption: Be careful who you call ugly in movie trailers.
 ---
-
 So there's a new popular AI image generation tool named [Stable Diffusion](https://github.com/CompVis/stable-diffusion). But first, let's discuss why you really clicked on the link to this article: [Ugly Sonic](https://knowyourmeme.com/memes/ugly-sonic).
 
 {{< figure src="ugly_sonic.png" caption="He's Sonic, but Ugly. via Paramount Pictures" >}}

@@ -3,12 +3,20 @@ title: Does Offering ChatGPT a Tip Cause it to Generate Better Text? An Analysis
 date: 2024-02-23T09:00:00-08:00
 slug: chatgpt-tips-analysis
 categories:
-  - ChatGPT
-  - AI
-  - Text Generation
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Data Science
+  - Data Visualization
 tags:
   - ChatGPT
   - Text Generation
+  - LLMs
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 draft: false
 summary: Modern AI rewards being very weird.
 cover:
@@ -16,7 +24,6 @@ cover:
   relative: true
   hiddenInSingle: true
 ---
-
 <span><style type="text/css">
 pre code {
 white-space: pre-wrap !important;

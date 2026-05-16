@@ -3,16 +3,20 @@ title: I Made Stable Diffusion XL Smarter by Finetuning it on Bad AI-Generated I
 date: 2023-08-21T09:00:00-07:00
 slug: stable-diffusion-xl-wrong
 categories:
-  - Stable Diffusion
-  - Image Generation
-  - AI
-  - LoRA
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Computer Vision
+  - Programming
 tags:
   - Stable Diffusion
   - Image Generation
   - Textual Inversion
   - Ugly Sonic
   - LoRA
+  - LLMs
+  - AI Art
+
 draft: false
 summary: And then telling it to not generate those images!
 cover:
@@ -20,7 +24,6 @@ cover:
   relative: true
   caption: Inside you there are two AI-generated wolves.
 ---
-
 Last month, Stability AI released [Stable Diffusion XL 1.0](https://stability.ai/blog/stable-diffusion-sdxl-1-announcement) (SDXL) and [open-sourced](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) it without requiring any special permissions to access it.
 
 {{< figure src="sdxl_examples.webp" caption="Example SDXL 1.0 outputs. [via Stability AI](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)" >}}

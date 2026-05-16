@@ -2,15 +2,27 @@
 title: "Mapping Where Arrests Frequently Occur in San Francisco Using Crime Data"
 date: 2015-12-07T08:00:00-07:00
 slug: sf-arrest-maps
-categories: [Data Science, Big Data]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+  - Social Media Analytics
+
 summary: "Let's plot 587,499 arrests on top of a map of San Francisco for fun and see what happens."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 In my previous post, [Analyzing San Francisco Crime Data to Determine When Arrests Frequently Occur](http://minimaxir.com/2015/12/sf-arrests/), I found out that there are trends where SF Police arrests occur more frequently than others. By processing the [SFPD Incidents dataset](https://data.sfgov.org/Public-Safety/SFPD-Incidents-from-1-January-2003/tmnf-yvry) from the [SF OpenData portal](https://data.sfgov.org), I found that arrests typically occur on Wednesdays at 4-5 PM, and that the type of crime is relevant to the frequency of the crime. (e.g. DUIs happen late Friday/Saturday night).
 
 However, I could not understand _why_ Wednesday/4-5PM is a peak time for arrests. In addition to analyzing _when_ arrests occur, I also looked at _where_ arrests occur. For example, perhaps more crime happens as people are leaving work; in that case, we would expect to see crimes downtown.

@@ -3,15 +3,20 @@ title: Stable Diffusion 2.0 and the Importance of Negative Prompts for Good Resu
 date: 2022-11-28T09:15:00-08:00
 slug: stable-diffusion-negative-prompt
 categories:
-  - Stable Diffusion
-  - Image Generation
-  - AI
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Computer Vision
+  - Web & Social Media
 tags:
   - Stable Diffusion
   - Image Generation
   - Textual Inversion
   - Ugly Sonic
   - Humor
+  - LLMs
+  - AI Art
+
 draft: false
 summary: Negative prompts can be far superior than traditional prompt additions.
 subtitle: Negative prompts can be far superior than traditional prompt additions.
@@ -22,7 +27,6 @@ cover:
   relative: true
   caption: Well done.
 ---
-
 <span><style>
 .pos, .pos code {
 color: #27ae60 !important;

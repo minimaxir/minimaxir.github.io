@@ -2,15 +2,27 @@
 title: "Analyzing IMDb Data The Intended Way, with R and ggplot2"
 date: 2018-07-16T09:45:00
 slug: imdb-data-analysis
-categories: ["Data Visualization", Data Science, Big Data]
-tags: ["Video", "R", "ggplot2"]
+categories:
+  - Data Visualization
+  - Data Science
+  - Data Engineering
+  - Statistics
+  - Web & Social Media
+tags:
+  - Video
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "For IMDb's big-but-not-big data, you have to play with the data smartly, and both R and ggplot2 have neat tricks to do just that."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 {{< youtube P4_zSfoTM80 >}}
 
 [IMDb](https://www.imdb.com), the Internet Movie Database, has been a popular source for data analysis and visualizations over the years. The combination of user ratings for movies and detailed movie metadata have always been fun to [play with](http://minimaxir.com/2016/01/movie-revenue-ratings/).

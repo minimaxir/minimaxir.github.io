@@ -3,14 +3,20 @@ title: How to Generate Customized AI Art Using VQGAN and CLIP
 date: 2021-08-18T08:45:00-07:00
 slug: vqgan-clip
 categories:
-  - AI
-  - Image Generation
-  - AI Content Generation
+  - Artificial Intelligence
+  - Generative AI
+  - Natural Language Processing
+  - Computer Vision
+  - Web & Social Media
 tags:
   - AI
-  - GAN
+  - GANs
   - CLIP
   - VQGAN
+  - LLMs
+  - Image Generation
+  - AI Art
+
 draft: false
 summary: "Knowing how AI art is made is the key to making even better AI art."
 subtitle: "Knowing how AI art is made is the key to making even better AI art."
@@ -21,7 +27,6 @@ cover:
   relative: true
   caption: spray paint graffiti art mural, via VQGAN + CLIP
 ---
-
 <style>pre code { white-space: pre; }</style>
 
 The latest and greatest AI content generation trend is AI generated art. In January 2021, [OpenAI](https://openai.com/) demoed [DALL-E](https://openai.com/blog/dall-e/), a GPT-3 variant which creates images instead of text. However, it can create images in response to a text prompt, allowing for some very fun output.

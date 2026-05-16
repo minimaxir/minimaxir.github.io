@@ -3,17 +3,23 @@ title: Please Don't Ask if an Open Source Project is Dead
 date: 2023-11-14T08:45:00-08:00
 slug: open-source-dead-github
 categories:
-  - Essay
+  - Open Source
+  - Programming
+  - Tech Culture
 tags:
-  - Essay
+  - Open Source
+  - GitHub
   - GitHub Issues
+  - Maintainers
+  - Developer Communities
+  - Software Maintenance
+
 draft: false
 summary: The best-case scenario is that you annoy the maintainers.
 cover:
   image: featured.webp
   relative: true
 ---
-
 Over the past few months, I've had an [existential crisis](https://minimaxir.com/2023/10/ai-sturgeons-law/) about [my work](https://github.com/minimaxir) in open source AI on [GitHub](https://github.com), particularly as there has been both increasingly toxic backlash against AI and because the AI industry has been evolving so rapidly that I flat-out don't have enough bandwidth to keep up. I took a break from working on my projects during that time, which _should_ have been fine. One of my latest open source projects is [simpleaichat](https://github.com/minimaxir/simpleaichat), a Python package with 3k GitHub Stars for interfacing with [ChatGPT](https://chat.openai.com), and it was explicitly designed with limited scope and minimal dependencies so that I could take a break from development without my code...breaking.
 
 After I was in a good place mentally to resume my open source work, I glanced at the GitHub Issues for simpleaichat and someone filed a issue simply titled "has this been abandoned?" with another GitHub user following up with "With all due respect, I am also interested in the answer."

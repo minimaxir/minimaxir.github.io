@@ -2,15 +2,27 @@
 title: "Visualizing Airline Flight Characteristics Between SFO and JFK"
 date: 2019-10-23T09:00:00-07:00
 slug: sfo-jfk-flights
-categories: ["Data Visualization", Data Science, Big Data]
-tags: ["R", "ggplot2"]
+categories:
+  - Data Visualization
+  - Data Science
+  - Data Engineering
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+  - Social Media Analytics
+
 fractions: true
 summary: "Box plots, when used correctly, can be a very fun way to visualize big data."
 cover:
   image: featured.png
   relative: true
 ---
-
 In March, [Google Compute Platform](https://cloud.google.com) developer advocate [Felipe Hoffa](https://twitter.com/felipehoffa) made a tweet about airline flight data from San Francisco International Airport (SFO) to Seattle-Tacoma International Airport (SEA):
 
 {{< x user="felipehoffa" id="1111050585120206848" >}}

@@ -2,14 +2,24 @@
 title: "Leaving Apple Inc."
 date: 2017-05-04T09:30:00-07:00
 slug: leaving-apple
-categories: [Personal]
+categories:
+  - Tech Culture
+  - Essays
+  - Programming
+tags:
+  - Apple
+  - Career
+  - Silicon Valley
+  - Tech Industry
+  - Personal Essay
+  - Software Engineering
+
 summary: "I have made the personal decision to leave my job at Apple to further my personal growth and technical skills."
 cover:
   image: featured.JPG
   relative: true
 hide_cta: true
 ---
-
 I’ve been working in the San Francisco Bay Area for about 5 years, but I’ve never publicly said where I’ve worked. Well, I was a Software QA Engineer at [Apple Inc.](https://www.apple.com), on the Applications team.
 
 As of last week, I handed in my resignation. While I am thankful for the opportunities I have had at Apple, it is time for me to pursue working in other areas I am passionate about and search for other companies to further my personal growth and technical skills. Resigning from a good job to look for something new might defy conventional wisdom, but the time is right for me to make this bold career move.

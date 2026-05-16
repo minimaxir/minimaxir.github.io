@@ -2,15 +2,27 @@
 title: "How to Analyze Every Reddit Submission and Comment, in Seconds, for Free"
 date: 2015-10-02T08:00:00-07:00
 slug: reddit-bigquery
-categories: [Data Science, Big Data]
-tags: [R, ggplot2, Reddit, BigQuery]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Reddit
+  - BigQuery
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+
 cover:
   image: featured.png
   relative: true
   hidden: true
 summary: "With Reddit data in BigQuery, quantifying all the hundreds of millions of Reddit submissions and comments is trivial."
 ---
-
 **_This post uses the #legacySQL dialect of BigQuery SQL._**
 
 While working on my [statistical analysis of 142 million Reddit submissions](http://minimaxir.com/2014/12/reddit-statistics/) last year, I had a surprising amount of trouble settings things up. It took a few hours to download the 40+ gigabytes of compressed data, and another few hours to parse the data and store in a local database. Even then, on my old-but-still-pretty-fast desktop PC, simple queries on the entire dataset took minutes to run, with complex queries occasionally taking upwards to an hour.

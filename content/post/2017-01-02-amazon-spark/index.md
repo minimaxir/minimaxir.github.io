@@ -2,15 +2,27 @@
 title: "Playing with 80 Million Amazon Product Review Ratings Using Apache Spark"
 date: 2017-01-02T09:00:00-07:00
 slug: amazon-spark
-categories: [Data Science, Big Data]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Applied Analytics
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+  - Python
+
 summary: "Manipulating actually-big-data is just as easy as performing an analysis on a dataset with only a few records."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 [Amazon](https://www.amazon.com) product reviews and ratings are a very important business. Customers on Amazon often make purchasing decisions based on those reviews, and a single bad review can cause a potential purchaser to reconsider. A couple years ago, I wrote a blog post titled [A Statistical Analysis of 1.2 Million Amazon Reviews](http://minimaxir.com/2014/06/reviewing-reviews/), which was well-received.
 
 Back then, I was only limited to 1.2M reviews because attempting to process more data caused out-of-memory issues and my R code took _hours_ to run.

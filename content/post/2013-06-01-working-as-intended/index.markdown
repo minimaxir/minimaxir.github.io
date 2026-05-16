@@ -2,14 +2,24 @@
 title: "When Uninstalling A PC Game Erases the Entire Hard Drive"
 date: 2013-06-05T08:00:00-07:00
 slug: working-as-intended
-categories: [Gaming, Journalism]
+categories:
+  - Gaming
+  - Tech Culture
+  - Software Bugs
+tags:
+  - PC Gaming
+  - Uninstall Bugs
+  - Data Loss
+  - Software Bugs
+  - Game Development
+  - User Experience
+
 summary: "A poorly coded PC game uninstaller could delete not just the game, but the *entire hard drive*. That would be a problem."
 cover:
   image: featured.jpg
   relative: true
   hidden: true
 ---
-
 There are many legitimate reasons for users to uninstall programs on their computer, such as freeing hard-disk space and lowering CPU overhead. A decade ago, when excessive hard-drive space was a luxury, avid PC gamers would frequently uninstall large, multi-gigabyte games that they were no longer playing in order to make space for new games.
 
 Obviously, developers would prefer that their users not uninstall the software that they spent years creating. Regardless, developers should ensure that the uninstall process works properly.

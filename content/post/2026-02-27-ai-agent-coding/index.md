@@ -3,13 +3,19 @@ title: An AI agent coding skeptic tries AI agent coding, in excessive detail
 date: 2026-02-27T10:00:00
 slug: ai-agent-coding
 categories:
-  - AI
+  - Artificial Intelligence
   - Agentic Coding
+  - Programming
+  - Open Source
 tags:
-  - ChatGPT
-  - Nano Banana
+  - AI Coding
+  - Agentic Coding
   - Codex
   - Claude
+  - LLMs
+  - Rust
+  - Python
+
 draft: false
 summary: No vagueposting here, just look at the Estimated Read Time.
 cover:
@@ -17,7 +23,6 @@ cover:
   relative: true
   hiddenInSingle: false
 ---
-
 <span><style type="text/css">
 pre code.language-txt, pre code.language-md{
 white-space: pre-wrap !important;

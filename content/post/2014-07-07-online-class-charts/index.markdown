@@ -2,15 +2,27 @@
 title: "Who Performs the Best in Online Classes?"
 date: 2014-07-10T08:30:00-07:00
 slug: online-class-charts
-categories: [Data Science]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Geospatial Analysis
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+  - Geospatial Mapping
+
 summary: 'Which types of student characteristics lead to the best performance in online classes? That depends on how you define "performance."'
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 At the end of May, [Harvard](http://www.harvard.edu/) and [MIT](http://web.mit.edu/) jointly [released a dataset](http://newsoffice.mit.edu/2014/mit-and-harvard-release-de-identified-learning-data-open-online-courses) containing statistics about their online courses in the Academic Year of 2013. This [Person-Course De-Identified dataset](http://dx.doi.org/10.7910/DVN/26147) contains 641,138 events, chronicling 476,532 students who have taken up to 13 unique courses from a variety of topics.
 
 However, this assortment of courses is not a substitution for a typical college education, as the vast majority of students only take one class.

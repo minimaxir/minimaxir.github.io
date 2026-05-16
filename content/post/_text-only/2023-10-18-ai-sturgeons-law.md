@@ -3,11 +3,17 @@ title: The Greatest Threat to Generative AI is Humans Being Bad at Using it
 date: 2023-10-18T09:15:00-07:00
 slug: ai-sturgeons-law
 categories:
-  - Text Only
-  - Essay
+  - Artificial Intelligence
+  - Generative AI
+  - Essays
 tags:
-  - Text Only
-  - Essay
+  - Generative AI
+  - AI Ethics
+  - Prompt Engineering
+  - AI Discourse
+  - LLMs
+  - Tech Culture
+
 draft: false
 summary: “Made by AI” is now a universal meme to indicate something low quality, and memes can't easily be killed.
 cover:
@@ -15,7 +21,6 @@ cover:
   relative: false
   caption: Into the garbage. Stable Diffusion XL + ControlNet + Pixelmator Pro
 ---
-
 The AI industry is moving too goddamn fast.
 
 Even after how good [ChatGPT](https://chat.openai.com) has been for text generation and how good [Stable Diffusion](https://huggingface.co/runwayml/stable-diffusion-v1-5) was for image generation, there's only been new advancements in generative AI quality, from [GPT-4](https://openai.com/research/gpt-4) to [Stable Diffusion XL](https://stability.ai/blog/stable-diffusion-sdxl-1-announcement). But all of those improvements only matter to software developers and machine learning engineers like myself for now, as the average internet user will still use the generative AI platform that's free with the lowest amount of friction, such as the now-mainstream ChatGPT and [Midjourney](https://www.midjourney.com).

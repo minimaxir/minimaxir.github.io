@@ -3,11 +3,17 @@ title: Nano Banana can be prompt engineered for extremely nuanced AI image gener
 date: 2025-11-13T09:30:00
 slug: nano-banana-prompts
 categories:
-  - AI
-  - Image Generation
+  - Artificial Intelligence
+  - Generative AI
+  - Computer Vision
 tags:
-  - ChatGPT
   - Nano Banana
+  - Gemini
+  - Image Generation
+  - Prompt Engineering
+  - AI Art
+  - Computer Vision
+
 draft: false
 summary: Nano Banana allows 32,768 input tokens and I'm going to try to use them all dammit.
 cover:
@@ -15,7 +21,6 @@ cover:
   relative: true
   hiddenInSingle: true
 ---
-
 <span><style type="text/css">
 pre code.language-txt {
 white-space: pre-wrap !important;

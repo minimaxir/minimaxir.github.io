@@ -3,12 +3,20 @@ title: ChatGPT's API is So Good and Cheap, It Makes Most Text Generating AI Obso
 date: 2023-03-08T08:30:00-08:00
 slug: new-chatgpt-overlord
 categories:
-  - ChatGPT
-  - AI
-  - Text Generation
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Programming
+  - Essays
 tags:
   - ChatGPT
   - Text Generation
+  - LLMs
+  - R
+  - Python
+  - GitHub
+  - GPT-3
+
 draft: false
 summary: Including OpenAI's other text generating AI!
 subtitle: Including OpenAI's other text generating AI!
@@ -19,7 +27,6 @@ cover:
   relative: true
   caption: ChatGPT Charcuterie, Stable Diffusion + ControlNet
 ---
-
 <span><style type="text/css">
 pre code {
 white-space: pre-wrap !important;

@@ -3,12 +3,20 @@ title: Absurd AI-Generated Professional Food Photography with DALL-E 2
 date: 2022-07-25T08:15:00-07:00
 slug: food-photography-ai
 categories:
-  - DALL-E
-  - AI
-  - Image Generation
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Computer Vision
+  - Data Science
 tags:
   - AI
   - Image Generation
+  - LLMs
+  - AI Art
+  - Computer Vision
+  - Data Analysis
+  - Data Visualization
+
 draft: false
 summary: "Perhaps AI can provide new and ~unique~ ideas for food content on the internet."
 subtitle: "Perhaps AI can provide new and ~unique~ ideas for food content on the internet."
@@ -18,7 +26,6 @@ cover:
   image: featured.png
   relative: true
 ---
-
 Good-looking food has been a part of internet culture ever since the beginning. Top [Instagram](https://www.instagram.com), [YouTube](https://www.youtube.com), and [TikTok](https://www.tiktok.com/en/) foodie accounts have millions of followers, and recipe blogs are some of the most highly trafficked content on the entire internet.
 
 But now that large AI-image generation models such as [DALL-E 2](https://openai.com/dall-e-2/) by [OpenAI](https://openai.com/) have been made available, perhaps AI can provide new and _unique_ ideas for food content on the internet.

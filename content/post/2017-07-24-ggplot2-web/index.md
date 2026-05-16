@@ -2,15 +2,27 @@
 title: "How to Make High Quality Data Visualizations for Websites With R and ggplot2"
 date: 2017-08-14T09:00:00-07:00
 slug: ggplot2-web
-categories: [Data Science, Data Visualization]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Programming
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+  - Python
+
 summary: "In general, it takes little additional effort to make something unique with ggplot2, and the effort is well worth it."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 If you've been following my blog, I like to use [R](https://cran.r-project.org) and [ggplot2](http://ggplot2.tidyverse.org/reference/) for data visualization. A lot.
 
 One of my older blog posts, [An Introduction on How to Make Beautiful Charts With R and ggplot2](http://minimaxir.com/2015/02/ggplot-tutorial/), is still one of my most-trafficked posts years later, and even today I see techniques from that particular post incorporated into modern data visualizations on sites such as [Reddit's](https://www.reddit.com) [/r/dataisbeautiful](https://www.reddit.com/r/dataisbeautiful/) subreddit.

@@ -2,14 +2,26 @@
 title: "How to Build a Twitter Text-Generating AI Bot With GPT-2"
 date: 2020-01-16T08:00:00-08:00
 slug: twitter-gpt2-bot
-categories: ["AI", "Text Generation"]
-tags: ["GPT-2", "TensorFlow"]
+categories:
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Generative AI
+  - Data Science
+  - Data Visualization
+tags:
+  - GPT-2
+  - TensorFlow
+  - LLMs
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "Here's how you too can create an AI bot to parody any Twitter user, even if you're not a coder!"
 cover:
   image: featured.png
   relative: true
 ---
-
 [GPT-2](https://openai.com/blog/better-language-models/), a text-generating neural network model made by [OpenAI](https://openai.com), has recently been in the headlines, from being able to play [AI-generated text adventures](https://www.aidungeon.io/start) to playing _chess_ with an [AI trained on chess move notation](https://slatestarcodex.com/2020/01/06/a-very-unlikely-chess-game/). However, I initially built [gpt-2-simple](https://github.com/minimaxir/gpt-2-simple), which can be used to finetune GPT-2 on any text dataset you choose, for a less academic purpose: comedy.
 
 Over the past month, [Twitter](https://twitter.com/) account [@dril_gpt2](https://twitter.com/dril_gpt2), an AI parody by [@kingdomakrillic](https://twitter.com/kingdomakrillic) of the infamous Twitter user [@dril](https://twitter.com/dril), [used](https://twitter.com/dril_gpt2/status/1208597102181408771) my [Colaboratory Notebook](https://colab.research.google.com/drive/1VLG8e7YSEwypxU-noRNhsv5dW4NfTGce) for finetuning GPT-2 on dril's tweets using gpt-2-simple to generate human-curated tweets which push the limits of the [Turing Test](https://en.wikipedia.org/wiki/Turing_test):

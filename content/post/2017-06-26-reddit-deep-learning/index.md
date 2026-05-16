@@ -2,15 +2,27 @@
 title: "Predicting the Success of a Reddit Submission with Deep Learning and Keras"
 date: 2017-06-26T09:00:00-07:00
 slug: reddit-deep-learning
-categories: [AI]
-tags: [Python, TensorFlow, Keras]
+categories:
+  - Artificial Intelligence
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Data Engineering
+tags:
+  - Python
+  - TensorFlow
+  - Keras
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "Thanks to Keras, performing deep learning on a very large number of Reddit submissions is actually pretty easy. Performing it *well* is a different story."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 I've been trying to figure out what makes a [Reddit](https://www.reddit.com) submission "good" for years. If we assume the number of upvotes on a submission is a fair proxy for submission quality, optimizing a statistical model for Reddit data with submission score as a response variable might lead to interesting (and profitable) insights when transferred into other domains, such as Facebook Likes and Twitter Favorites.
 
 {{< figure src="reddit-example.png" theme="light" >}}

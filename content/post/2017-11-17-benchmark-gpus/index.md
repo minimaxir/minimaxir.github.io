@@ -2,15 +2,25 @@
 title: "Benchmarking Modern GPUs for Maximum Cloud Cost Efficiency in Deep Learning"
 date: 2017-11-28T08:30:00-07:00
 slug: benchmark-gpus
-categories: [AI, Cost Savings]
-tags: [Python]
+categories:
+  - Artificial Intelligence
+  - Cloud Computing
+  - Programming
+tags:
+  - Python
+  - R
+  - TensorFlow
+  - Keras
+  - GitHub
+  - Benchmarking
+  - GPU Computing
+
 summary: "A 36% price cut to GPU instances, in addition to the potential new benefits offered by software and GPU updates, however, might be enough to tip the cost-efficiency scales back in favor of GPUs."
 cover:
   image: featured.png
   relative: true
   hidden: false
 ---
-
 A few months ago, I [performed benchmarks](http://minimaxir.com/2017/06/keras-cntk/) of deep learning frameworks in the cloud, with a [followup](http://minimaxir.com/2017/07/cpu-or-gpu/) focusing on the cost difference between using GPUs and CPUs. And just a few months later, the landscape has changed, with significant updates to the low-level [NVIDIA cuDNN](https://developer.nvidia.com/cudnn) library which powers the raw learning on the GPU, the [TensorFlow](https://www.tensorflow.org) and [CNTK](https://github.com/Microsoft/CNTK) deep learning frameworks, and the higher-level [Keras](https://github.com/fchollet/keras) framework which uses TensorFlow/CNTK as backends for easy deep learning model training.
 
 As a bonus to the framework updates, Google [recently released](https://cloudplatform.googleblog.com/2017/09/introducing-faster-GPUs-for-Google-Compute-Engine.html) the newest generation of NVIDIA cloud GPUs, the Pascal-based P100, onto [Google Compute Engine](https://cloud.google.com/compute/) which touts an up-to-10x performance increase to the current K80 GPUs used in cloud computing. As a bonus bonus, Google recently [cut the prices](https://cloudplatform.googleblog.com/2017/11/new-lower-prices-for-GPUs-and-preemptible-Local-SSDs.html) of both K80 and P100 GPU instances by up to 36%.

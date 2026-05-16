@@ -2,15 +2,27 @@
 title: "Locating All the Christmas Trees on Instagram"
 date: 2015-01-01T09:00:00-07:00
 slug: tree-time
-categories: [Data Science]
-tags: [R, ggplot2, GeoViz]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Geospatial Analysis
+tags:
+  - R
+  - ggplot2
+  - Geospatial Mapping
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "I downloaded *hundreds of thousands* of #tree images and found 25,432 images which were taken on Christmas, have a #tree, and, most importantly, contain location data where the photo was taken."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Everyone enjoys taking photos of their Christmas trees, usually at their own home of their relatives. [Instagram](http://instagram.com/) allows users to quickly upload any photo and share it socially to the world. On Christmas Eve, privacy author Tommy Collison [published a warning about this behavior](http://www.tommycollison.com/blog/2014/12/24/christmas-geotagging), noting that if a user tags a photo with #tree to tag their Christmas tree, for example, _anyone_ will be able to see it, and if the user attached their location to the photo, anyone could theoretically find where they live.
 
 How practical is this concern? Instagram [offers an API](http://instagram.com/developer/) of all recent photos for a given #tag so developers can download pictures and their corresponding metadata, such as geolocation, in bulk. (Up to _165,000_ Instagram images can be processed per hour!)

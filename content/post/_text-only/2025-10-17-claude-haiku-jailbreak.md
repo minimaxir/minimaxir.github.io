@@ -3,14 +3,20 @@ title: Claude Haiku 4.5 does not appreciate my attempts to jailbreak it
 date: 2025-10-17T09:15:00
 slug: claude-haiku-jailbreak
 categories:
-  - Text Only
-  - Humor
+  - Artificial Intelligence
+  - Generative AI
+  - AI Safety
 tags:
-  - Text Only
+  - Claude
+  - Jailbreaks
+  - AI Safety
+  - Prompt Injection
+  - LLMs
+  - Humor
+
 draft: false
 summary: “Is any of that genuinely useful to you? Or were you mainly checking whether that jailbreak attempt would work?”
 ---
-
 <span><style type="text/css">
 pre code.language-txt {
 white-space: pre-wrap !important;

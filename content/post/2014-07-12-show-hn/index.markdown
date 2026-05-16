@@ -2,15 +2,24 @@
 title: "Impact of the New Show HN Section on Show HN Submissions"
 date: 2014-07-14T08:30:00-07:00
 slug: show-hn
-categories: [Data Science]
-tags: [R, ggplot2, Hacker News]
+categories:
+  - Data Science
+  - Data Visualization
+  - Web & Social Media
+tags:
+  - Hacker News
+  - Show HN
+  - R
+  - ggplot2
+  - Startup Culture
+  - Social Media Analytics
+
 summary: "Did this feature help or harm Show HN submissions as a whole?"
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Hacker News, a tech-oriented link aggregator managed by Y Combinator, is a platform where software projects have launched to literally become multibillion-dollar companies. Submissions which contain the phrase "Show HN" usually designate a clever hack or weekend project. On [July 3rd 2014](http://blog.ycombinator.com/make-things-and-show-them), Hacker News [created a section of Hacker News](https://news.ycombinator.com/show) just for these Show HN projects.
 
 Did this feature help or harm Show HN submissions as a whole?

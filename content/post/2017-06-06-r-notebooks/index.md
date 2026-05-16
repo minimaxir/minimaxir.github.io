@@ -2,15 +2,27 @@
 title: "Advantages of Using R Notebooks For Data Analysis Instead of Jupyter Notebooks"
 date: 2017-06-06T08:30:00-07:00
 slug: r-notebooks
-categories: [Data Science]
-tags: [R, ggplot2, Python]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Geospatial Analysis
+tags:
+  - R
+  - ggplot2
+  - Python
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "The relatively new R Notebooks improve the workflows of common data analysis in ways Jupyter Notebooks can't."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 [Jupyter Notebooks](http://jupyter.org), formerly known as [IPython Notebooks](https://ipython.org/notebook.html), are ubiquitous in modern data analysis. The Notebook format allows statistical code and its output to be viewed on any computer in a logical and _reproducible_ manner, avoiding both the confusion caused by unclear code and the inevitable "it only works on my system" curse.
 
 {{< figure src="jupyterdemo.png" theme="light" >}}

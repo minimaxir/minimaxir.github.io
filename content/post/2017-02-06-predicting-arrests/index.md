@@ -2,15 +2,27 @@
 title: "Predicting And Mapping Arrest Types in San Francisco with LightGBM, R, ggplot2"
 date: 2017-02-08T06:30:00-07:00
 slug: predicting-arrests
-categories: [Data Science]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Machine Learning
+  - Artificial Intelligence
+  - Data Visualization
+  - Statistics
+tags:
+  - R
+  - ggplot2
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+  - Data Visualization
+
 summary: "Given that a SF police arrest occurs at a specified time and place, what is the reason for that arrest?"
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 The new hotness in the world of data science is [neural networks](https://en.wikipedia.org/wiki/Artificial_neural_network), which form the basis of [deep learning](https://en.wikipedia.org/wiki/Deep_learning). But while everyone is obsessing about neural networks and how deep learning is _magic_ and can solve _any_ problem if you just [stack enough layers](https://www.reddit.com/r/ProgrammerHumor/comments/5si1f0/machine_learning_approaches/), there have been many recent developments in the relatively nonmagical world of machine learning with _boring_ CPUs.
 
 Years before neural networks were the Swiss army knife of data science, there were [gradient-boosted machines](https://en.wikipedia.org/wiki/Gradient_boosting)/[gradient-boosted trees](https://en.wikipedia.org/wiki/Gradient_boosting#Gradient_tree_boosting). GBMs/GBTs are machine learning methods which are effective on many types of data, and do not require the [traditional model assumptions](http://r-statistics.co/Assumptions-of-Linear-Regression.html) of linear/logistic regression models. Wikipedia has a good article on the advantages of [decision tree learning](https://en.wikipedia.org/wiki/Decision_tree_learning), and visual diagrams of the architecture:

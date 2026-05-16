@@ -2,15 +2,27 @@
 title: "The Wikipedia Entries Which Are Most-Edited by Members of the U.S. Congress"
 date: 2014-07-15T08:30:00-07:00
 slug: caucus-needed
-categories: [Data Science]
-tags: [R, ggplot2, Word Cloud]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Data Engineering
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Word Clouds
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "Saying that the results were surprising would be the understatement of the century."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Last week, the Twitter account [@congressedits](https://twitter.com/congressedits) launched. This account is a bot that tweets edits to Wikipedia that were made by members of the U.S. Congress, in order to help [facilitate transparency](http://inkdroid.org/journal/2014/07/10/why-congressedits/). The account [works](https://github.com/edsu/anon) by automatically tweeting any Wikipedia edits made by anonymous contributors with IP addresses between the known IP address blocks of the [U.S. Senate](http://whois.arin.net/rest/org/USSAA/nets) or the [House of Representatives](http://whois.arin.net/rest/org/ISUHR/nets).
 
 Google's [BigQuery](https://developers.google.com/bigquery/) tool has a [sample dataset](https://developers.google.com/bigquery/docs/dataset-wikipedia) of Wikipedia data, representing the data on 314 million article edits up to April 2010. Out of curiosity, I wrote a query which returns the top 100 pages with the most amount of edits by Wikipedia contributors in the U.S. Senate's IP block.

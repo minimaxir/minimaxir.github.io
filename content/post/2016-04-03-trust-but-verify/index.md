@@ -2,14 +2,27 @@
 title: "The Importance of Sanity-Checking Datasets Before Analysis"
 date: "2016-04-06T08:00:00-07:00"
 slug: trust-but-verify
-categories: ["Thought Piece"]
+categories:
+  - Essays
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+  - Geospatial Mapping
+  - R
+  - Jupyter
+
 summary: "The 1972 TV Special 'The Lorax' is the best movie ever, earning $1.2 billion?"
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 I've done some cool things with movie data using a dataset from [OMDb API](http://www.omdbapi.com), which is sourced from [IMDb](http://www.imdb.com) and [Rotten Tomatoes](http://www.rottentomatoes.com) data. In my [previous article](http://minimaxir.com/2016/01/movie-revenue-ratings/) on the dataset, I plotted the relationship between the domestic box office revenue of movies and their Rotten Tomatoes scores.
 
 I want to take another look at domestic Box Office Revenues with aggregate statistics such as means/medians on categorical variables such as MPAA rating and release month. For this type of analysis in particular, I'll also need to implement code in [R](https://www.r-project.org) for inflation adjustment.

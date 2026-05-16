@@ -3,10 +3,20 @@ title: The Best Way to Use Text Embeddings Portably is With Parquet and Polars
 date: 2025-02-24T10:15:00
 slug: embeddings-parquet
 categories:
-  - AI
-  - Text Embeddings
+  - Artificial Intelligence
+  - Machine Learning
+  - Generative AI
+  - Natural Language Processing
+  - Data Science
 tags:
   - Text Embeddings
+  - LLMs
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+  - Data Visualization
+
 draft: false
 summary: Never store embeddings in a CSV!
 cover:
@@ -14,7 +24,6 @@ cover:
   relative: true
   hiddenInSingle: true
 ---
-
 [Text embeddings](https://stackoverflow.blog/2023/11/09/an-intuitive-introduction-to-text-embeddings/), particularly modern embeddings generated from large language models, are one of the most useful applications coming from the generative AI boom. Embeddings are a list of numbers which represent an object: in the case of text embeddings, they can represent words, sentences, and full paragraphs and documents, and they do so with a surprising amount of distinctiveness.
 
 Recently, I created text embeddings representing every distinct [Magic: the Gathering](https://magic.wizards.com/en) card released as of the February 2025 Aetherdrift expansion: 32,254 in total. With these embeddings, I can find the mathematical similarity between cards through the encoded representation of their card design, including all mechanical attributes such as the card name, card cost, card text, and even card rarity.

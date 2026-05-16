@@ -2,15 +2,27 @@
 title: "Video Games and Charity: Analyzing Awesome Games Done Quick 2016 Donations"
 date: 2016-01-11T08:00:00-07:00
 slug: agdq-2016
-categories: [Data Science]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Applied Analytics
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+  - Wikipedia
+
 summary: "Were frames killed? Were animals saved?"
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 [Awesome Games Done Quick](https://gamesdonequick.com), and its sister event Summer Games Done Quick, are a fundraising events that livestreams video game speedruns [live on Twitch](http://www.twitch.tv/gamesdonequick/profile) for charity. Beginning in January 2011, before Twitch was launched out from Justin.tv, [AGDQ was very small](https://en.wikipedia.org/wiki/Awesome_Games_Done_Quick_and_Summer_Games_Done_Quick#List_of_marathons) and only raised $52,519.83 for the [Prevent Cancer Foundation](http://preventcancer.org); now, in 2016, from January 3rd to January 10th, AGDQ [successfully raised](https://gamesdonequick.com/tracker/index/agdq2016) about $1.2 _million_ for the charity.
 
 A [speedrun](https://en.wikipedia.org/wiki/Speedrun), as the name suggests, is the process of completing a video game as fast as possible, optionally with self-imposed challenges to make things more interesting. Speedruns can emphasize extreme player skill and/or clever glitch abuse. And unexpected mistakes which make the results hilarious.

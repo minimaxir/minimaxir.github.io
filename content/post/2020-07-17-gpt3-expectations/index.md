@@ -2,8 +2,21 @@
 title: "Tempering Expectations for GPT-3 and OpenAI’s API"
 date: 2020-07-18T10:30:00-07:00
 slug: gpt3-expectations
-categories: ["AI", "Text Generation"]
-tags: ["GPT-2", "GPT-3"]
+categories:
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Generative AI
+  - Data Science
+  - Data Visualization
+tags:
+  - GPT-2
+  - GPT-3
+  - LLMs
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "GPT-3 is indeed a large step forward for AI text-generation, but there are very many caveats with the popular demos and use cases."
 subtitle: "GPT-3 is indeed a large step forward for AI text-generation, but there are very many caveats with the popular demos and use cases."
 featured: false
@@ -11,7 +24,6 @@ cover:
   image: featured.png
   relative: true
 ---
-
 On May 29th, [OpenAI](https://openai.com) released [a paper](https://arxiv.org/abs/2005.14165) on GPT-3, their next iteration of [Transformers](http://jalammar.github.io/illustrated-transformer/)-based text generation neural networks. Most notably, the new model has 175 billion parameters compared to the 1.5 billion of previous [GPT-2 iteration](https://openai.com/blog/better-language-models/): a _117x_ increase in model size! Because GPT-3 is so large, it can't be run on conventional computers, and it only became publicly available as a part of the [OpenAI API](https://beta.openai.com), which entered an invite-only beta soon after the paper was released and will be released for-profit sometime later.
 
 The API allows you to programmatically provide GPT-3 with a prompt, and return the resulting AI-generated text. For example, you could invoke the API with:

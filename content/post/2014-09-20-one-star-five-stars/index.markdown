@@ -2,15 +2,26 @@
 title: "The Statistical Difference Between 1-Star and 5-Star Reviews on Yelp"
 date: 2014-09-23T08:00:00-07:00
 slug: one-star-five-stars
-categories: [Data Science]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Applied Analytics
+  - Programming
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Programming
+
 summary: "It can be proven that language has a strong statistical effect on review ratings, but that is intuitive enough. How have review ratings changed?"
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Many business in the real world encourage their customers to "Rate us on Yelp!". [Yelp](http://www.yelp.com/), the "best way to find local businesses," relies on user reviews to help its viewers find the best places. Both positive and negative reviews are helpful in this mission: positive reviews on Yelp identify the best places, negative reviews identify places where people _shouldn't_ go. Usually, both positive and negative reviews are not based on objective attributes of the business, but on the experience the writer has with the establishment.
 
 {{< figure src="yelp_review_pos.png" >}}

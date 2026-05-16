@@ -2,15 +2,27 @@
 title: "Movie Review Aggregator Ratings Have No Relationship with Box Office Success"
 date: 2016-01-07T08:30:00-07:00
 slug: movie-revenue-ratings
-categories: [Data Science, Video]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Media Analysis
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+  - Geospatial Mapping
+
 summary: "Perhaps the movie rating system itself is broken."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 [Rotten Tomatoes](http://www.rottentomatoes.com) has become synonymous with movie quality in recent years. The Rotten Tomatoes Tomatometer aggregates all reviews written by movie critics for a given movie on the internet, determines whether each reviewer rates the movie as "Fresh" or "Rotten" and calculates an average. If the proportion of Fresh reviews for a given movie is greater than or equal to 60%, the movie itself is considered "Fresh" and receives a special icon.
 
 {{< figure src="examples.png" theme="light" >}}

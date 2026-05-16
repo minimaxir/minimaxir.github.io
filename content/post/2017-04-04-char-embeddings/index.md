@@ -2,15 +2,27 @@
 title: "Pretrained Character Embeddings for Deep Learning and Automatic Text Generation"
 date: 2017-04-04T06:30:00-07:00
 slug: char-embeddings
-categories: [Data Science]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Machine Learning
+  - Artificial Intelligence
+  - Data Visualization
+  - Statistics
+tags:
+  - R
+  - ggplot2
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+  - Data Visualization
+
 summary: "Keras + TensorFlow + Pretrained character embeddings makes text generation a breeze."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Deep learning is the biggest, [often misapplied](http://approximatelycorrect.com/2017/03/28/the-ai-misinformation-epidemic/) buzzword nowadays for getting pageviews on blogs. As a result, there have been a lot of shenanigans lately with deep learning thought pieces and how deep learning can solve _anything_ and make childhood sci-fi dreams come true.
 
 I'm not a fan of [Clarke's Third Law](http://tvtropes.org/pmwiki/pmwiki.php/Main/ClarkesThirdLaw), so I spent some time checking out deep learning myself. As it turns out, with modern deep learning tools like [Keras](https://github.com/fchollet/keras), a higher-level framework on top of the popular [TensorFlow](https://www.tensorflow.org) framework, deep learning is **easy to learn and understand**. Yes, easy. And it _definitely_ does not require a PhD, or even a Computer Science undergraduate degree, to implement models or make decisions based on the output.

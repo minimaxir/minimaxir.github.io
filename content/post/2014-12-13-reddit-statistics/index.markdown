@@ -2,15 +2,27 @@
 title: "A Statistical Analysis of 142 Million Reddit Submissions"
 date: 2014-12-16T08:00:00
 slug: reddit-statistics
-categories: [Data Science, Big Data]
-tags: [R, ggplot2, Reddit]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Reddit
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "I constructed a database to store all Reddit Submissions from November 2007 to the end of October 2014: 142,159,793 submissions in total. And this data is very curious and very, *very* memetic."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 {{< figure src="reddit_logo.jpg" >}}
 
 Reddit, the "front page of the Internet", is well-deserving of that title. Founded in 2005 for the more tech-savvy crowd, [Reddit](http://reddit.com) is a news aggregator where users can submit links to interesting websites and other media, and form communities on specific interests which are known as "subreddits." Since 2008, its popularity has grown exponentially.

@@ -2,15 +2,27 @@
 title: "Blockbuster Movies with Male Leads Earn More Than Those with Female Leads"
 date: 2016-04-13T08:00:00-07:00
 slug: movie-gender
-categories: [Data Science]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Geospatial Analysis
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+  - Geospatial Mapping
+
 summary: "On average, blockbuster movies with male leads generate 22% more domestic box office revenue, and this difference is statistically significant."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 One of the more interesting revelations discovered during the [2014 Sony Pictures Entertainment hack](https://en.wikipedia.org/wiki/Sony_Pictures_Entertainment_hack) was that actresses [Jennifer Lawrence](https://en.wikipedia.org/wiki/Jennifer_Lawrence) and [Amy Adams](https://en.wikipedia.org/wiki/Amy_Adams) made [less money than their male costars](http://www.thedailybeast.com/articles/2014/12/12/exclusive-sony-hack-reveals-jennifer-lawrence-is-paid-less-than-her-male-co-stars.html) for the movie [American Hustle](http://www.imdb.com/title/tt1800241/). Specifically, Lawrence and Adams earned 7% of the profits while their male co-stars earned 9%: a 28% increase in pay.
 
 That made me curious: is the discrepancy in pay between male-leads and female-leads justifiable? Do movies with male lead actors generate more box office revenue than movies with female leads? Are movies with male leads _better_ than those with female leads?

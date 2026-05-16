@@ -2,15 +2,27 @@
 title: "Mapping San Francisco Locations Using Facebook Data"
 date: 2014-04-08T08:00:00-07:00
 slug: san-francisco
-categories: [Data Science]
-tags: [R, ggplot2, GeoViz]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Geospatial Analysis
+tags:
+  - R
+  - ggplot2
+  - Geospatial Mapping
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "With the data on approximately 8,000 Facebook Places in San Francisco, we can map where San Franciscans are checking-in, and determine what types of locations they like to visit."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Statisticians like to use data from the [United States Census](https://www.census.gov/) to plot interesting trends such as unemployment and population of regions across the country. However, such data is typically historical and not very robust.
 
 Facebook, on the other hand, has collected a large amount of data though its [Places product](https://www.facebook.com/about/location). Facebook Places allows users to "check-in" a place such as [Dolores Park](https://www.facebook.com/pages/Dolores-Park/105687759464007) in a manner similar to [Foursquare](https://foursquare.com/).

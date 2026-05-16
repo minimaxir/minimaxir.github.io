@@ -2,15 +2,27 @@
 title: "The Decline of Imgur on Reddit and the Rise of Reddit's Native Image Hosting"
 date: 2017-06-20T08:00:00
 slug: imgur-decline
-categories: [Data Science]
-tags: [R, ggplot2, Reddit]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Data Engineering
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Reddit
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "Before Reddit added native image hosting, Imgur accounted for 15% of all submissions to Reddit. Now it's below 9%."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Last week, Bloomberg [reported](https://www.bloomberg.com/news/articles/2017-06-17/reddit-said-to-be-raising-funds-valuing-startup-at-1-7-billion) that Reddit was raising about $150 Million in venture capital at a valuation of $1.7 billion. Since Reddit's data is [public on BigQuery](http://minimaxir.com/2015/10/reddit-bigquery/), I quickly checked if there were any recent user engagement growth spurts which could justify such a high worth. Here's an example BigQuery which aggregates the total number of Reddit submissions made for each month until the end of April 2017:
 
 ```sql

@@ -3,12 +3,20 @@ title: AI Seinfeld was the peak of AI-generated content. It will never happen ag
 date: 2024-08-13T10:37:00-07:00
 slug: ai-seinfeld
 categories:
-  - ChatGPT
-  - AI
-  - Text Generation
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Web & Social Media
+  - Geospatial Analysis
 tags:
   - ChatGPT
   - Text Generation
+  - LLMs
+  - Social Media Analytics
+  - Geospatial Mapping
+  - R
+  - Wikipedia
+
 draft: false
 summary: What's the deal with the uncanny valley?
 cover:
@@ -17,7 +25,6 @@ cover:
   caption: "Annotated chart of the uncanny valley phenomenon: original by [Cassidy James](https://cassidyjames.com/blog/uncanny-valley-curve/)."
   # hiddenInSingle: true
 ---
-
 <span><style type="text/css">
 pre code {
 white-space: pre-wrap !important;

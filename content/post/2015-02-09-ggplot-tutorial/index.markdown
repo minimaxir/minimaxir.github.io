@@ -2,15 +2,27 @@
 title: "An Introduction on How to Make Beautiful Charts With R and ggplot2"
 date: 2015-02-12T08:00:00-07:00
 slug: ggplot-tutorial
-categories: [Data Science, Tutorial]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Programming
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+  - Facebook
+
 summary: "Adding a touch of color and design can help make more compelling visualizations, thanks to ggplot2 syntax and chaining capabilities."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 _**UPDATE August 2017**: I have published an [updated version](http://minimaxir.com/2017/08/ggplot2-web/) of this post with modern trends for making high quality charts with R and ggplot2, which may be a helpful resource in addition to this post._
 
 Readers of my previous blog posts have frequently asked me "how do you make those charts?"

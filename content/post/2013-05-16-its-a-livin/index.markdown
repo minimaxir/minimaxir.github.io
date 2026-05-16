@@ -2,15 +2,24 @@
 title: "A Profanity-Laced Video Game Password That Breaks Everything"
 date: 2013-05-16T20:50:00-07:00
 slug: its-a-livin
-categories: [Gaming, Journalism]
-tags: [Hacks]
+categories:
+  - Gaming
+  - Tech Culture
+  - Software Bugs
+tags:
+  - Metroid
+  - Nintendo
+  - Video Game Bugs
+  - Password Systems
+  - Retro Gaming
+  - Game Exploits
+
 summary: "Most of these passwords were gibberish that required a pen-and-paper to write down and remember. One password, however, is more memorable, and much more sinister."
 cover:
   image: justinbailey.png
   relative: true
   hidden: true
 ---
-
 If you're a fan of video games, you've likely heard of the Metroid franchise. Released for the NES in 1986 by Nintendo, Metroid set a new standard for 2-D exploration in video games with its expansive power-up system, well-hidden secrets, and polished platforming controls. Due to its popularity, Metroid has been rereleased multiple times: as an unlockable in [Metroid Prime](http://en.wikipedia.org/wiki/Metroid_Prime), an unlockable in the remake [Metroid: Zero Mission](http://en.wikipedia.org/wiki/Metroid_Zero_Mission), a [standalone game](http://en.wikipedia.org/wiki/Classic_NES_Series) on the Game Boy Advance, the Wii Virtual Console, and the 3DS Virtual Console.
 
 You play as Samus Aran, an armored bounty hunter who has infiltrated the base of the dreaded Space Pirates on Planet Zebes. Samus must defeat the leaders of the Space Pirates: the dinosaur Kraid, the dragon and memetic badass of the series [Ridley][1], and the AI construct [Mother Brain][2]. Additionally, Samus must find a way to defeat the Metroids, which are nearly-indestructible parasites that threaten all life. Yes, this was a plot written in the 80's.

@@ -3,10 +3,17 @@ title: Can modern LLMs actually count the number of b's in "blueberry"?
 date: 2025-08-12T09:00:00
 slug: llm-blueberry
 categories:
-  - AI
-  - ChatGPT
+  - Artificial Intelligence
+  - Generative AI
+  - Natural Language Processing
 tags:
+  - LLMs
   - ChatGPT
+  - Reasoning
+  - Tokenization
+  - Language Models
+  - AI Evaluation
+
 draft: false
 summary: It's an adversarial question for LLMs, but it's not unfair.
 cover:
@@ -14,7 +21,6 @@ cover:
   relative: true
   hiddenInSingle: true
 ---
-
 Last week, [OpenAI](https://openai.com) announced and released [GPT-5](https://openai.com/gpt-5/), and the common consensus both inside the AI community and outside is that the new LLM did not live up to the hype. [Bluesky](https://bsky.app) — whose community is skeptical at-best of generative AI in all its forms — began putting the model through its paces: Michael Paulauski [asked GPT-5](https://bsky.app/profile/mike10010100.com/post/3lvtrfmhpkc23) through the ChatGPT app interface "how many b's are there in blueberry?". A simple question that a human child could answer correctly, but ChatGPT states that there are _three_ b's in blueberry when there are clearly only two. Another attempt by Kieran Healy [went more viral](https://bsky.app/profile/kjhealy.co/post/3lvtxbtexg226) as ChatGPT insisted blueberry has 3 b's despite the user repeatedly arguing to the contrary.
 
 {{< figure src="chatgpt.webp" >}}

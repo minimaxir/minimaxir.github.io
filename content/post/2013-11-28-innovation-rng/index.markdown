@@ -2,15 +2,24 @@
 title: "Probabilistically Generating GitHub Projects"
 date: 2013-11-29T10:30:00-07:00
 slug: innovation-rng
-categories: [Data, Comedy]
-tags: [R, Word Cloud]
+categories:
+  - Gaming
+  - Tech Culture
+  - Software Bugs
+tags:
+  - Random Number Generators
+  - Game Mechanics
+  - Game Design
+  - Innovation
+  - RPGs
+  - Statistics
+
 summary: "Perl interface to Git repositories via Ruby. Brute force your OpenERP data integration with flatfiles."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Grant Slatton made an amusing post on Hacker News yesterday titled "[Show HN: Probabilistically Generating HN Post Titles](https://news.ycombinator.com/item?id=6815282)". By using the statistical principle of [Markov chains](http://en.wikipedia.org/wiki/Markov_chain), Slatton was able to [generate eerily-realistic Hacker News headlines](http://grantslatton.com/hngen/) such as "Facebook detects if you are not a pilot" and "The No. 1 Habit of Highly Effective Mediocre Entrepreneurs."
 
 Could Markov chains be applied to any other data sets for hilarious effect? By using Slatton's [Python implementation of Markov chains](https://gist.github.com/grantslatton/7694811) plus 300,000 descriptions of public GitHub repositories retrieved from their API, I discovered that statistical randomness can indeed create funny innovation.

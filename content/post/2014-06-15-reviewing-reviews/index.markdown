@@ -2,15 +2,27 @@
 title: "A Statistical Analysis of 1.2 Million Amazon Reviews"
 date: 2014-06-17T08:20:00-07:00
 slug: reviewing-reviews
-categories: [Data Science]
-tags: [R, ggplot2, Amazon]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Applied Analytics
+  - Programming
+tags:
+  - R
+  - ggplot2
+  - Amazon
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Programming
+
 summary: "Analyzing the dataset of 1.2 million Amazon reviews, I found some interesting statistical trends; some are intuitive and obvious, but others give insight to how Amazon's review system actually works."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 When buying the latest products on [Amazon](http://www.amazon.com/), reading reviews is an important part of the purchasing process.
 
 {{< figure src="ore.png" >}}

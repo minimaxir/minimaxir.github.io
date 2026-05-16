@@ -2,15 +2,27 @@
 title: "Experiments with Making Convincing AI-Generated Fake News"
 date: 2019-09-30T08:00:00-07:00
 slug: ctrl-fake-news
-categories: ["AI", "Text Generation"]
-tags: ["GPT-2", "TensorFlow", "CTRL"]
+categories:
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Generative AI
+  - Data Science
+  - Data Visualization
+tags:
+  - GPT-2
+  - TensorFlow
+  - CTRL
+  - LLMs
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+
 summary: "Can the CTRL model create the “fake news” OpenAI was concerned about? Let's put it to the test."
 highlight: false
 cover:
   image: featured.jpg
   relative: true
 ---
-
 <span><style>
 blockquote {
 padding-right: 1.25em !important;

@@ -3,10 +3,17 @@ title: LLMs can now identify public figures in images
 date: 2025-07-28T13:15:00
 slug: llms-identify-people
 categories:
-  - AI
-  - ChatGPT
+  - Artificial Intelligence
+  - Generative AI
+  - Computer Vision
 tags:
+  - LLMs
   - ChatGPT
+  - Computer Vision
+  - Image Recognition
+  - Public Figures
+  - AI Safety
+
 draft: false
 summary: ChatGPT and Claude won't, but Gemini will.
 cover:
@@ -14,7 +21,6 @@ cover:
   relative: true
   hiddenInSingle: true
 ---
-
 <span><style type="text/css">
 pre code.language-txt {
 white-space: pre-wrap !important;

@@ -3,12 +3,20 @@ title: Pushing ChatGPT's Structured Data Support To Its Limits
 date: 2023-12-21T09:00:00-08:00
 slug: chatgpt-structured-data
 categories:
-  - ChatGPT
-  - AI
-  - Text Generation
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Machine Learning
+  - Data Science
 tags:
   - ChatGPT
   - Text Generation
+  - LLMs
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Social Media Analytics
+
 draft: false
 summary: “Function calling” with ChatGPT is ChatGPT's best feature since ChatGPT.
 cover:
@@ -16,7 +24,6 @@ cover:
   relative: true
   # caption: _Structured Data_, SDXL + Pixelmator Pro
 ---
-
 <span><style type="text/css">
 pre code {
 white-space: pre-wrap !important;

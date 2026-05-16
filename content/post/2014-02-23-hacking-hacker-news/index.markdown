@@ -2,15 +2,24 @@
 title: "A Statistical Analysis of All Hacker News Submissions"
 date: 2014-02-24T08:00:00-07:00
 slug: hacking-hacker-news
-categories: [Data Science]
-tags: [R, ggplot2, Hacker News]
+categories:
+  - Data Science
+  - Data Visualization
+  - Web & Social Media
+tags:
+  - Hacker News
+  - R
+  - ggplot2
+  - Social Media Analytics
+  - Data Mining
+  - Startup Culture
+
 summary: "After downloading all 1,265,114 Hacker News submissions from the official Hacker News API, I gathered a few interesting statistics which show the true impact of Hacker News."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 [Hacker News](https://news.ycombinator.com/news) is a very popular link aggregator for the technology and startup community. Officially titled [by Paul Graham in 2007](http://ycombinator.com/hackernews.html), Hacker News began mostly as a place where the very computational-savvy could submit stories around the internet and discuss the latest computing trends.
 
 {{< figure src="hn-wordcloud-2007i.png" theme="light" >}}

@@ -2,15 +2,27 @@
 title: "What Percent of the Top-Voted Comments in Reddit Threads Were Also 1st Comment?"
 date: 2016-11-07T06:30:00-07:00
 slug: first-comment
-categories: [Data Science, Big Data]
-tags: [R, ggplot2, Reddit]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Reddit
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "Are commenters 'late to this thread' indeed late?"
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 [Reddit](https://www.reddit.com) threads can be a crowded place. In popular subreddits such as [/r/AskReddit](https://www.reddit.com/r/AskReddit/) and [/r/pics](https://www.reddit.com/r/pics/), Reddit submissions can receive hundreds, even _thousands_ of unique comments. Some comments inevitably become lost in the noise. Reddit's [ranking algorithm](https://redditblog.com/2009/10/15/reddits-new-comment-sorting-system/) attempts to rectify this by determining comment ranking using both time and community voting; comments in a thread, by default, are ordered based on the **points score** (upvotes - downvotes) the comment receives, subject to a rank decay based on the age of the comment.
 
 {{< figure src="reddit_askreddit.png" theme="light" >}}

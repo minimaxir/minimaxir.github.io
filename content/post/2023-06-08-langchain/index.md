@@ -3,14 +3,20 @@ title: The Problem With LangChain
 date: 2023-07-14T09:00:00-07:00
 slug: langchain-problem
 categories:
-  - ChatGPT
-  - AI
-  - Text Generation
-  - LangChain
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Machine Learning
+  - Computer Vision
 tags:
   - ChatGPT
   - Text Generation
   - LangChain
+  - LLMs
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+
 draft: false
 summary: LangChain is complicated, so it must be better. Right?
 subtitle: LangChain is complicated, so it must be better. Right?
@@ -19,7 +25,6 @@ cover:
   relative: true
   caption: _The GitHub Repository of R'lyeh_, Stable Diffusion 1.5 + ControlNet 1.1
 ---
-
 <span><style type="text/css">
 pre code {
 white-space: pre-wrap !important;

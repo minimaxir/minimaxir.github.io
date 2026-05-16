@@ -2,15 +2,24 @@
 title: "Making Magic: the GIFening"
 date: 2017-11-07T08:10:00-07:00
 slug: magic-the-gifening
-categories: [Cool Stuff]
-tags: [Python]
+categories:
+  - Programming
+  - Generative AI
+  - Data Visualization
+tags:
+  - Python
+  - GIFs
+  - Automation
+  - Image Processing
+  - Creative Coding
+  - Magic The Gathering
+
 summary: "As it turns out, creating a Twitter bot to tweet Magic card GIFs is easy to implement, but with a few interesting caveats."
 cover:
   image: featured.png
   relative: true
   hidden: false
 ---
-
 After working at [BuzzFeed](https://www.buzzfeed.com/) for a few months, I'm now an expert in the proper usage of GIFs. My favorite GIF tool is the [/giphy](https://giphy.com) command in [Slack](https://slack.com), which [puts a random GIF](https://get.slack.help/hc/en-us/articles/204714258-Add-Giphy-search-to-Slack) according to a given phrase into the chat, with better-than-expected appropriateness of the phrase to the GIF.
 
 Completely unrelated, I recently rediscovered [MoviePy](https://github.com/Zulko/moviepy), a Python library for programmatically editing videos and GIFs without requiring an expensive and slow video editing program. I had played with MoviePy a bit in 2014 when it was [first released](http://zulko.github.io/blog/2014/01/23/making-animated-gifs-from-video-files-with-python/#) and [became viral](https://news.ycombinator.com/item?id=7121104), but couldn't think of a creative application for the library at the time.

@@ -2,15 +2,27 @@
 title: "How to Quickly Train a Text-Generating Neural Network for Free"
 date: 2018-05-18T09:00:00-07:00
 slug: text-neural-networks
-categories: [AI, Text Generation]
-tags: [Python, TensorFlow, Keras]
+categories:
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Machine Learning
+  - Data Science
+  - Data Visualization
+tags:
+  - Python
+  - TensorFlow
+  - Keras
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+
 summary: "Train your own text-generating neural network and generate text whenever you want with just a few clicks!"
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 One of the more interesting applications of the neural network revolution is text generation. Most popular approaches are based off of Andrej Karpathy's [char-rnn architecture](https://github.com/karpathy/char-rnn)/[blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/), which teaches a recurrent neural network to be able to predict the next character in a sequence based on the previous _n_ characters. As a result, a sufficiently trained network can theoretically reproduce its input source material, but since properly-trained neural networks aren't _perfect_, the output can fall into a weird-but-good uncanny valley.
 
 Many internet tutorials for text-generation neural networks simply copy an existing char-rnn implementation while changing the input dataset. It's one approach, but there's an opportunity for improvement with modern deep learning tooling. Thanks to frameworks like [TensorFlow](https://www.tensorflow.org) and [Keras](https://github.com/keras-team/keras), I built [textgenrnn](https://github.com/minimaxir/textgenrnn), a [Python package](https://pypi.org/project/textgenrnn/#description) which abstracts the process of creating and training such char-rnns to a _few lines of code_, with numerous model architecture and training improvements such as [character embeddings](http://minimaxir.com/2017/04/char-embeddings/), attention-weighted averaging, and a decaying learning rate.

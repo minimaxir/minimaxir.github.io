@@ -2,15 +2,27 @@
 title: "The Quality, Popularity, and Negativity of 5.6 Million Hacker News Comments"
 date: 2014-10-06T08:00:00-07:00
 slug: hn-comments-about-comments
-categories: [Data Science, Big Data]
-tags: [R, ggplot2, Hacker News, Comments]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Hacker News
+  - Comments
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+
 summary: "Hopefully, these comments will answer whether Hacker News is experiencing a rise in quality, or if the complaints levied against HN are valid."
 cover:
   image: featured.jpg
   relative: true
   hidden: true
 ---
-
 Last February, I [published an article](http://minimaxir.com/2014/02/hacking-hacker-news/) about [Hacker News](https://news.ycombinator.com/), a tech-oriented link aggregator run by startup accelerator [Y Combinator](http://www.ycombinator.com/). In that post, I analyzed all submissions to date, and noted that the site has a strong and active userbase.
 
 In recent months, however, Hacker News has undergone criticism. A blog post by Danilo Campos titled "[Y Combinator and the negative externalities of Hacker News](http://danilocampos.com/2014/09/y-combinator-and-the-negative-externalities-of-hacker-news/)", notes that although Hacker News is a critical resource for young male techies based in Silicon Valley (_Disclosure: I am a young male techie based in Silicon Valley_), this has the consequence of excluding female hackers. Campos has even created a [#HNwatch](https://twitter.com/search?f=realtime&q=%23hnwatch&src=typd) hashtag to catalog sexist and insensitive comments made by Hacker News users. As a long-time [user on Hacker News](https://news.ycombinator.com/user?id=minimaxir), I unfortunately [agree with this assessment](https://twitter.com/minimaxir/status/468080907925340160) at times.

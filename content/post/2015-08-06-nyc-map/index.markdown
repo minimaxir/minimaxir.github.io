@@ -1,17 +1,29 @@
 ---
 layout: "post"
 title: "Plotting a Map of New York City Using Only Taxi Location Data"
-categories: ["Data Science"]
-tags: [R, ggplot2, GeoViz]
 date: 2015-08-07T08:00:00-07:00
 slug: nyc-map
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Data Engineering
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Geospatial Mapping
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "In theory, plotting a million little points in close proximity should simulate the lines of the streets of New York City."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Recently, the New York City Taxi and Limousine Commission [released a dataset](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml) of all Yellow Taxi and Green Taxi trips in 2014, and year-to-date in 2015, which follows the [2013 data set](http://chriswhong.com/open-data/foil_nyc_taxi/) which was obtained to a FOIL request for the data last year. The dataset contains fun statistics, such as the location where the taxi picked up and dropped off its fare, the speed the taxi is moving, and the total fare at the end of the ride.
 
 In the [Hacker News thread](https://news.ycombinator.com/item?id=10003118) announcing the data set release, user eck posted an interesting, minimalistic visualization of the taxi location data:

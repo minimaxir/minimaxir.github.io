@@ -2,14 +2,24 @@
 title: "Run Any Scheduled Task/Cron Super-Cheap on Google Cloud Platform"
 date: 2018-11-19T09:00:00-07:00
 slug: cheap-cron
-categories: ["DevOps", "Cost Savings"]
-tags: [Google Cloud Platform]
+categories:
+  - Cloud Computing
+  - Web & Social Media
+  - Programming
+tags:
+  - Google Cloud
+  - Social Media Analytics
+  - Serverless
+  - Cost Optimization
+  - R
+  - Reddit
+  - Hacker News
+
 summary: "Thanks to a few new synergies within GCP products, it's possible to get the cost of running a scheduled task down to less than a dollar a month."
 cover:
   image: featured.png
   relative: true
 ---
-
 Let's say you want to make a [Twitter](https://twitter.com) bot to tweet out a custom message every few hours or so, and the free-tier VMs offered by cloud services with fractional virtual CPUs and little RAM aren't sufficient. How do you host the bot? Many suggest you get a [Digital Ocean](https://www.digitalocean.com) VM for [$5/mo](https://www.digitalocean.com/pricing/), which is not a bad price. But what if you want to run _multiple_ bots? How do you easily coordinate multiple scheduled tasks?
 
 In my case, I maintain three bots: a bot which [tweets GIFs](https://twitter.com/MTGIFening) superimposed onto Magic: The Gathering cards, a bot which [tweets AI-generated Hacker News submission titles](https://twitter.com/hackernews_nn), and a bot which makes [AI-generated Reddit submissions](https://www.reddit.com/r/subredditnn). I found a clever solution to the multiple-bots problem: leveraging [CronJobs](https://cloud.google.com/kubernetes-engine/docs/how-to/cronjobs) with [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/) + a single worker node. Each bot has its own CronJob which tells when GKE should schedule a Job for each task, and then the cluster executes the Jobs whenever compute capacity is available (i.e. no resource hogging/race conditions), and can ensure completion by restarting the task if it fails.

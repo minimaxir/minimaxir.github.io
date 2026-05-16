@@ -2,15 +2,27 @@
 title: "Visualizing How Developers Rate Their Own Programming Skills"
 date: 2016-07-21T06:30:00-07:00
 slug: stack-overflow
-categories: [Data Science]
-tags: [R, ggplot2, Stack Overflow]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Data Engineering
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Stack Overflow
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "As it turns out, there is no correlation between programming ability and the frequency of Stack Overflow visits."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 [Stack Overflow](http://stackoverflow.com), the favorite destination for software developers when something breaks for no apparent reason, recently released their [2016 Stack Overflow Survey Results](http://stackoverflow.com/research/developer-survey-2016) with responses to the questions of "where they work, what they build, and who they are." You can download the released dataset containing all 56,030 cleaned responses [here](http://stackoverflow.com/research).
 
 One variable present in the dataset but surprisingly unaddressed in the official Stack Overflow analysis is the `programming_ability` field — _On a scale of 1-10, how would you rate your programming ability?_

@@ -2,15 +2,27 @@
 title: "Facebook Reactions and the Problems With Quantifying Likes Differently"
 date: 2016-02-29T08:00:00-07:00
 slug: facebook-reactions
-categories: [Data Science, Thought Piece]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Essays
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+  - Facebook
+
 summary: "Apparently, there is little statistical relationship between things that are cute and things that make you go YAAASS."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Facebook added [Facebook Reactions](http://newsroom.fb.com/news/2016/02/reactions-now-available-globally/), allowing users to do more than just "Like" posts and statuses as they have done for the past decade. Likes were the universal symbol of approval on social media. Now, Facebook users can apply more granular responses, from positive emotions like **Love**, to negative emotions such as **Angry**. This was widely believed to be Facebook's compromise instead of adding a Dislike button.
 
 {{< figure src="facebook_react.png" >}}

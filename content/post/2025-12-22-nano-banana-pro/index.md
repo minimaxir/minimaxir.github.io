@@ -3,11 +3,17 @@ title: Nano Banana Pro is the best AI image generator, with caveats
 date: 2025-12-22T10:45:00
 slug: nano-banana-pro
 categories:
-  - AI
-  - Image Generation
+  - Artificial Intelligence
+  - Generative AI
+  - Computer Vision
 tags:
-  - ChatGPT
-  - Nano Banana
+  - Nano Banana Pro
+  - Gemini
+  - Image Generation
+  - Prompt Engineering
+  - AI Art
+  - AI Evaluation
+
 draft: false
 summary: The problem with Nano Banana Pro is that it's too good.
 cover:
@@ -16,7 +22,6 @@ cover:
   relative: true
   hiddenInSingle: false
 ---
-
 <span><style type="text/css">
 pre code.language-txt {
 white-space: pre-wrap !important;

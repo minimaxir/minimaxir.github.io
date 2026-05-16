@@ -2,15 +2,24 @@
 title: "How Many #nofilter Instagram Photos Actually Have No Filter?"
 date: 2014-02-10T08:00:00-07:00
 slug: the-filter-truth
-categories: [Data Science, Comedy]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Visualization
+  - Web & Social Media
+tags:
+  - Instagram
+  - Photo Filters
+  - R
+  - ggplot2
+  - Social Media Analytics
+  - Data Analysis
+
 summary: "Not all of them."
 cover:
   image: nofilter.png
   relative: true
   hidden: true
 ---
-
 Most [Instagram](http://instagram.com/) photos have filters applied to make them look more retro/cool. Instagram users are also able to apply tags to a photo to help categorize and promote them to the Instagram community. One such tag, #nofilter, is intended to emphasize such natural beauty that no filter is necessary to enhance the image. (or the photographer is just too lazy to decide on a filter)
 
 But how many #nofilter images actually _have_ no filter?

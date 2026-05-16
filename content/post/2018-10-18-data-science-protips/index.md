@@ -2,14 +2,27 @@
 title: "Things About Real-World Data Science Not Discussed In MOOCs and Thought Pieces"
 date: 2018-10-22T09:15:00-07:00
 slug: data-science-protips
-categories: ["Thought Piece"]
+categories:
+  - Essays
+  - Machine Learning
+  - Data Science
+  - Artificial Intelligence
+  - Data Visualization
+tags:
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "MOOCs and thought pieces overfit to a certain style of data science that is not robust to the vast uncertainties of the real world."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 [Data science](https://en.wikipedia.org/wiki/Data_science) has been sweeping the tech world. With a large variety of powerful free open-sourced tools and now the computing power to utilize them to their full potential, data science is more accessible than ever and has become [America's hottest job](https://www.bloomberg.com/news/articles/2018-05-18/-sexiest-job-ignites-talent-wars-as-demand-for-data-geeks-soars). One problem: there's no consensus on [what data scientists _really_ do](https://hbr.org/2018/08/what-data-scientists-really-do-according-to-35-data-scientists) in a professional setting.
 
 There has been a rise in _romantic_ thought pieces lately (especially on [Medium](https://medium.com)) about how data scientists are wizards and can solve any problem (with bonus points if it cites AI). If you follow publications like [Towards Data Science](https://towardsdatascience.com), you'll notice persistent tropes in the more code-oriented posts: Python is the king programming language for data science, use [scikit-learn](http://scikit-learn.org/stable/)/[XGBoost](https://xgboost.readthedocs.io/en/latest/) and logistic regression for predicting categorical variable(s), use [pandas](https://pandas.pydata.org) for processing tabular data, use [NLTK](https://www.nltk.org)/[word2vec](https://en.wikipedia.org/wiki/Word2vec) for processing text data, use [TensorFlow](https://www.tensorflow.org)/[Keras](https://keras.io)/convolutional neural networks for processing image data, use [_k_-means](https://en.wikipedia.org/wiki/K-means_clustering) for clustering data, split the processed dataset into training and test datasets for model training, tweak hyperparameters/model features [until results on the test dataset are good](https://xkcd.com/1838/), etc.

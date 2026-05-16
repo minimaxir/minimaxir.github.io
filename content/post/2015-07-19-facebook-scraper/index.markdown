@@ -2,15 +2,27 @@
 title: "How to Scrape Data From Facebook Page Posts for Statistical Analysis"
 date: 2015-07-20T08:00:00-07:00
 slug: facebook-scraper
-categories: [Tools]
-tags: [Python, Scraping]
+categories:
+  - Programming
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - Python
+  - Scraping
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+  - Geospatial Mapping
+
 cover:
   image: featured.png
   relative: true
   hidden: true
 summary: "It is pretty easy to scrape Facebook Posts data and make into a spreadsheet for easy analysis, although  there are a large number of gotchas."
 ---
-
 **_UPDATE April 2018: Due to changes Facebook has made to the Graph API, the API will no longer return every post as noted in this article_**
 
 One of the first data scrapers I wrote for the purpose of statistical analysis was a Facebook Graph API scraper, in order to determine [which words are the most important](http://minimaxir.com/2013/06/big-social-data/) in a Facebook Page status update. However, the v2.0 update to the Facebook API unsurprisingly broke the scraper.

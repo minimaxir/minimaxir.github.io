@@ -2,14 +2,26 @@
 title: "Problems with Predicting Post Performance on Reddit and Other Link Aggregators"
 date: 2018-09-10T09:15:00-07:00
 slug: modeling-link-aggregators
-categories: ["Data Visualization", Data Science, Big Data]
-tags: ["R", "ggplot2"]
+categories:
+  - Data Visualization
+  - Data Science
+  - Data Engineering
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+  - Social Media Analytics
+
 summary: "The nature of algorithmic feeds like Reddit inherently leads to a survivorship bias: although users may recognize certain types of posts that appear on the front page, there are many more which follow the same patterns but fail."
 cover:
   image: featured.png
   relative: true
 ---
-
 [Reddit](https://www.reddit.com), "the front page of the internet" is a link aggregator where anyone can submit links to cool happenings. Over the years, Reddit has expanded from just being a link aggregator, to allowing image and videos, and as of recently, hosting images and videos itself.
 
 Reddit is broken down into subreddits, where each subreddit represents each own community around a particular interest, like [/r/aww](https://www.reddit.com/r/aww) for pet photos and [/r/politics](https://www.reddit.com/r/politics/) for U.S. politics. The posts on each subreddit are ranked by some function of both time elapsed since the submission was made, and the _score_ of the submission as determined by upvotes and downvotes from other users.

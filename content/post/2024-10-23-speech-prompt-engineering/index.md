@@ -3,12 +3,20 @@ title: Generating Distinct AI Voice Performances By Prompt Engineering GPT-4o
 date: 2024-10-23T10:00:00
 slug: speech-prompt-engineering
 categories:
-  - ChatGPT
-  - AI
-  - Text Generation
+  - Generative AI
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Web & Social Media
+  - Applied Analytics
 tags:
   - ChatGPT
   - Text Generation
+  - LLMs
+  - Social Media Analytics
+  - R
+  - Wikipedia
+  - YouTube
+
 draft: false
 summary: “You are an expert voice actor specializing in silly voices.”
 cover:
@@ -16,7 +24,6 @@ cover:
   relative: true
   hiddenInSingle: true
 ---
-
 <span><style type="text/css">
 pre code {
 white-space: pre-wrap !important;

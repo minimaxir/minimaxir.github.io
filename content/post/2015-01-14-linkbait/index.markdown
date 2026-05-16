@@ -2,15 +2,27 @@
 title: "Quantifying the Clickbait and Linkbait in BuzzFeed Article Titles"
 date: 2015-01-15T08:30:00-07:00
 slug: linkbait
-categories: [Data Science, Comedy]
-tags: [R, ggplot2, BuzzFeed]
+categories:
+  - Data Science
+  - Tech Culture
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - BuzzFeed
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "You probably do not know that the 3 most interesting things I found will blow your mind."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 _**UPDATE**: I became a data scientist at BuzzFeed in August 2017. My thoughts about BF have changed significantly in the years since this was published in 2015!_
 
 [BuzzFeed](http://www.buzzfeed.com/) is one of the most significant sources of journalistic content on the entire internet. Of course, that depends on your definition of "journalistic": BuzzFeed is one of the first organizations to leverage both social media and the power of language as an editorial business model.

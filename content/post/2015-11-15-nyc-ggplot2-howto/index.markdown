@@ -2,15 +2,27 @@
 title: "How to Visualize New York City Using Taxi Location Data and ggplot2"
 date: 2015-11-16T08:00:00-07:00
 slug: nyc-ggplot2-howto
-categories: [Data Science, Big Data]
-tags: [R, ggplot2, BigQuery]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - BigQuery
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 cover:
   image: featured.png
   relative: true
   hidden: true
 summary: "I had posted a visualization of NYC taxis using ggplot2. Due to popular demand, I've cleaned up the code and have released it open source, with a few improvements."
 ---
-
 A few months ago, I had [posted a visualization](http://minimaxir.com/2015/08/nyc-map/) of NYC Yellow Taxis using [ggplot2](http://ggplot2.org), an extremely-popular R package by Hadley Wickham for data visualization. At the time, the code used for the chart was very messy since I was eager to create something cool after seeing the [referenced Hacker News thread](https://news.ycombinator.com/item?id=10003118). Due to popular demand, I've cleaned up the code and have [released it open source](https://github.com/minimaxir/nyc-taxi-notebook), with a few improvements.
 
 Here are some tips and tutorials on how to make such visualizations.

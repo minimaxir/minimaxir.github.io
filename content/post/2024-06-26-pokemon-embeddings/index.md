@@ -3,13 +3,20 @@ title: The Super Effectiveness of Pokémon Embeddings Using Only Raw JSON and Im
 date: 2024-06-26T10:00:00-07:00
 slug: pokemon-embeddings
 categories:
-  - AI
-  - Embeddings
-  - Pokémon
+  - Artificial Intelligence
+  - Machine Learning
+  - Gaming
+  - Generative AI
+  - Natural Language Processing
 tags:
   - AI
   - Embeddings
   - Pokémon
+  - LLMs
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+
 draft: false
 summary: Embeddings encourage engineers to go full YOLO because it's actually rewarding to do so!
 cover:
@@ -17,7 +24,6 @@ cover:
   relative: true
   hiddenInSingle: false
 ---
-
 [Embeddings](https://en.wikipedia.org/wiki/Word_embedding) are one of the most useful but unfortunately underdiscussed concepts in the artificial intelligence space relative to the modern generative AI gigahype. Embeddings are a set of hundreds of numbers which uniquely correspond to a given object that define its dimensionality, nowadays in a multiple of 128 such as 384D, 768D, or even 1536D. [^dimensions] The larger the embeddings, the more "information" and distinctiveness each can contain, in theory. These embeddings can be used as-is for traditional [regression](https://en.wikipedia.org/wiki/Regression_analysis) and [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems with your favorite statistical modeling library, but what's really useful about these embeddings is that if you can find the minimum mathematical distance between a given query embedding and another set of embeddings, you can then find which is the most similar: extremely useful for many real-world use cases such as search.
 
 [^dimensions]: The 128-multiple dimensionality of recent embedding models is not a coincidence: modern [NVIDIA](https://www.nvidia.com/en-us/) GPUs used to train LLMs get a training speed boost for model parameters with a dimensionality [that's a multiple of 128](https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#cublas-tile-dim).

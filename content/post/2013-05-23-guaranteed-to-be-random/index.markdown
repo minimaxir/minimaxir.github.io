@@ -2,14 +2,24 @@
 title: "A Role-Playing Game With an Easily Exploitable Random Number Generator"
 date: 2013-05-23T20:26:00-07:00
 slug: guaranteed-to-be-random
-categories: [Gaming, Journalism]
+categories:
+  - Gaming
+  - Tech Culture
+  - Software Bugs
+tags:
+  - Golden Sun
+  - RPGs
+  - Random Number Generators
+  - Game Exploits
+  - Retro Gaming
+  - Game Mechanics
+
 summary: "The Golden Sun RNG is so poorly implemented that players have found out how to make events with 1/256 probability occur one hundred percent of the time."
 #image: kiku.png
 cover:
   image: kiku.png
   relative: true
 ---
-
 When the Game Boy Advance was released in June 2001, Nintendo promised that the handheld device would be capable of delivering a home gaming console experience on-the-go. [Golden Sun](http://en.wikipedia.org/wiki/Golden_Sun), developed by Camelot and published by Nintendo a few months after the console's release, exemplified the GBA's full capabilities with its hand-drawn environments, flashy battle effects, and _very_ difficult dungeon puzzles which undoubtedly resulted in the sale of many strategy guides.
 
 In Golden Sun, you play as a group of teenage mages called Adepts, who wield the power of the four elements (Earth, Fire, Wind, and Water) by casting spells with Psynergy. The antagonists of the game are a pair of jerks who are attempting to reawaken a dangerous and sealed power, and only four kids can stop them from destroying the world. Released two years later, [Golden Sun: The Lost Age](http://en.wikipedia.org/wiki/Golden_Sun:_The_Lost_Age) takes place immediately after the conclusion of the first game with a different quartet of Adepts and a new pair of jerks. In this sequel, it is revealed that the jerks who keep trying to kill you are not the bad guys and the whole conflict is just one big misunderstanding! Yes, the plot is very reminiscent of other Japanese-developed RPGs such as [Final Fantasy][1] and [Chrono Trigger](http://en.wikipedia.org/wiki/Chrono_Trigger), but it's still impressive for a game I typically played in the backseat of a car.

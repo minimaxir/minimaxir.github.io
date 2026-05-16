@@ -2,15 +2,27 @@
 title: "Let's Code an Analysis and Visualizations of Yelp Data using R and ggplot2"
 date: 2015-12-28T09:00:00-07:00
 slug: lets-code-1
-categories: [Data Science, Video]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Media Analysis
+  - Data Visualization
+  - Statistics
+  - Data Engineering
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+  - Social Media Analytics
+
 summary: "The first of (hopefully) many 1440p/60fps videos of fun data analysis. With many fun errors too!"
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 One of the reasons I have open-sourced the code for my complicated data visualizations is transparency for the creation process. 2015 was a [year of misleading and incorrect data visualizations](http://qz.com/580859/the-most-misleading-charts-of-2015-fixed/), and I don't want to help contribute to the misconception that data can be used for trickery. "Big data" in particular is a area where the steps to reproduce results are rarely released publicly in a step-by-step manner, often in an attempt to make the resulting analysis unimpeachable.
 
 It's time to take things to the next level of transparency by recording [screencasts](https://en.wikipedia.org/wiki/Screencast) of my data analysis and visualizations.

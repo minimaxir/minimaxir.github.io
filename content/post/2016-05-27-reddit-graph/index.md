@@ -2,15 +2,27 @@
 title: "How to Create a Network Graph Visualization of Reddit Subreddits"
 date: 2016-05-27T08:00:00-07:00
 slug: reddit-graph
-categories: [Data Science, Big Data]
-tags: [R, ggplot2, Reddit]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Reddit
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+
 summary: "There is very little discussion on how to gather the data for large-scale network graph visualizations, and how to make them. It is time to fix that."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 [Network graphs](https://en.wikipedia.org/wiki/Graph_theory) are pretty data visualizations, and I like pretty data visualizations. Recently, [Reddit](https://www.reddit.com) user CuriousGnu [posted a network graph](http://www.curiousgnu.com/reddit-comments) of the comment patterns of the top 50 Reddit subreddits:
 
 The [visualization](https://www.reddit.com/r/dataisbeautiful/comments/4fsrjd/oc_redditors_who_commented_in_rx_also_commented/) was made with [Gephi](https://gephi.org), a very popular free and open-source network graph tool.

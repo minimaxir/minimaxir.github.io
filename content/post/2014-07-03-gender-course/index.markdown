@@ -1,17 +1,27 @@
 ---
-
 title: "The Interesting Percentages of Female Students in MIT and Harvard Online Courses"
 date: 2014-07-04T10:30:00-07:00
 slug: gender-course
-categories: [Data Science]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Programming
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - GitHub
+  - Programming
+
 summary: "The proportion of female students in each of Harvard and MIT's online courses range from 5% to 49%."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 At the end of May, [Harvard](http://www.harvard.edu/) and [MIT](http://web.mit.edu/) jointly [released a dataset](http://newsoffice.mit.edu/2014/mit-and-harvard-release-de-identified-learning-data-open-online-courses) containing statistics about their online courses in the Academic Year of 2013. This [Person-Course De-Identified dataset](http://dx.doi.org/10.7910/DVN/26147) contains 476,532 students who have taken up to 13 unique courses from a variety of topics:
 
 {{< figure src="mit-harvard-courses.png" theme="light" >}}

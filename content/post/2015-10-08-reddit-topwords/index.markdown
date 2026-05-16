@@ -2,15 +2,27 @@
 title: "Quantifying and Visualizing the Reddit Hivemind"
 date: 2015-10-09T08:00:00-07:00
 slug: reddit-topwords
-categories: [Data Science, Big Data]
-tags: [R, ggplot2, Reddit, BigQuery]
+categories:
+  - Data Science
+  - Data Engineering
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Reddit
+  - BigQuery
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+
 cover:
   image: featured.png
   relative: true
   hidden: true
 summary: "If we can find out which topics Reddit users tend to upvote, we can identify what keywords are most attractive to the Reddit hivemind."
 ---
-
 In my [last post on Reddit data](http://minimaxir.com/2015/10/reddit-bigquery/) (I strongly suggest you read that first if you haven't already), I noted that analyzing the words used in Reddit submissions may be useful in quantifying the relationship of those keywords in the success of a Reddit submission. Indeed, if we can find out which topics Reddit users tend to upvote, we can identify what keywords are most attractive to the Reddit "hivemind."
 
 First, I gathered some preliminary statistics about all submissions to the top 500 subreddits on Reddit, again using the [BigQuery](https://cloud.google.com/bigquery/) data dump compiled by Jason Baumgartner and Felipe Hoffa, in order to establish a good base for the analysis:

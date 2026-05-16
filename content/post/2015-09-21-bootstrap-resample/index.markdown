@@ -2,15 +2,27 @@
 title: "Coding, Visualizing, and Animating Bootstrap Resampling"
 date: 2015-09-22T08:00:00-07:00
 slug: bootstrap-resample
-categories: ["Data Science"]
-tags: [R, ggplot2, Animation]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Programming
+tags:
+  - R
+  - ggplot2
+  - Animation
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 cover:
   image: featured.png
   relative: true
   hidden: true
 summary: "I have reverse-engineered data and code with R and ggplot2 in order to create detailed implementations of bootstrapping, and also to add a few visual improvements."
 ---
-
 A few days ago on Hacker News, I saw a [nice submission](https://news.ycombinator.com/item?id=10244950) titled "[Statistics for Hackers](https://speakerdeck.com/jakevdp/statistics-for-hackers)," which was a slide deck written and presented by [Jake Vanderplas](https://twitter.com/jakevdp). The talk is very explicitly a tutorial for a few good statistical methods for those without a statistical background, using simple tools "hackers" are familiar with and are occasionally very necessary (it's not hacking in the sense of "growth hacking," thankfully).
 
 One important statistical tool discussed in the presentation is [bootstrap resampling](https://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29), a good example for a programming-oriented presentation as it can be easily done with code. Bootstrapping is when a data set is randomized many, many times (usually thousands of times) to simulate similar data sets, and use those simulated datasets to obtain a more accurate range for a particular statistic about the data set, such as the statistical average.

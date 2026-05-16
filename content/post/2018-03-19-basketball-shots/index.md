@@ -2,15 +2,27 @@
 title: "Visualizing One Million NCAA Basketball Shots"
 date: 2018-03-19T09:20:00-07:00
 slug: basketball-shots
-categories: [Data Science, Data Visualization, Big Data]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Visualization
+  - Data Engineering
+  - Statistics
+  - Web & Social Media
+tags:
+  - R
+  - ggplot2
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Big Data
+  - Social Media Analytics
+
 summary: "Although visualizing basketball shots has been done before, this time we have access to an order of magnitude more public data to do some really cool stuff."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 So [March Madness](https://www.ncaa.com/march-madness) is happing right now. In celebration, [Google](https://www.google.com) uploaded [massive basketball datasets](https://console.cloud.google.com/launcher/details/ncaa-bb-public/ncaa-basketball) from the [NCAA](https://www.ncaa.com) and [Sportradar](https://www.sportradar.com/) to [BigQuery](https://cloud.google.com/bigquery/) for anyone to query and experiment. After learning that the [dataset had location data](https://www.reddit.com/r/bigquery/comments/82nz17/dataset_statistics_for_ncaa_mens_and_womens/) on where basketball shots were made on the court, I played with it and a couple hours later, I created a decent heat map data visualization. The next day, I [posted it](https://www.reddit.com/r/dataisbeautiful/comments/837qnu/heat_map_of_1058383_basketball_shots_from_ncaa/) to Reddit's [/r/dataisbeautiful subreddit](https://www.reddit.com/r/dataisbeautiful) where it earned about **40,000 upvotes**. (!?)
 
 Let's dig a little deeper. Although visualizing basketball shots has been [done](http://www.slate.com/blogs/browbeat/2012/03/06/mapping_the_nba_how_geography_can_teach_players_where_to_shoot.html) [before](http://toddwschneider.com/posts/ballr-interactive-nba-shot-charts-with-r-and-shiny/), this time we have access to an order of magnitude more public data to do some really cool stuff.

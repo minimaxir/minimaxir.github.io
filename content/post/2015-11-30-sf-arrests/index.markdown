@@ -2,15 +2,27 @@
 title: "Analyzing San Francisco Crime Data to Determine When Arrests Frequently Occur"
 date: 2015-12-04T08:00:00-07:00
 slug: sf-arrests
-categories: [Data Science, Big Data]
-tags: [R, ggplot2]
+categories:
+  - Data Science
+  - Data Engineering
+  - Machine Learning
+  - Artificial Intelligence
+  - Data Visualization
+tags:
+  - R
+  - ggplot2
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+  - Data Visualization
+
 summary: "Spoilers: Most arrests in San Francisco happen Wednesdays at 4-5 PM. For some reason."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 The [SF OpenData portal](https://data.sfgov.org) is a good source for detailed statistics about San Francisco. One of the most popular datasets on the portal is the [SFPD Incidents dataset](https://data.sfgov.org/Public-Safety/SFPD-Incidents-from-1-January-2003/tmnf-yvry), which contains a tabular list of 1,842,050 reports (at time of writing) from 2003 to present.
 
 {{< figure src="incident-data.png" theme="light" >}}

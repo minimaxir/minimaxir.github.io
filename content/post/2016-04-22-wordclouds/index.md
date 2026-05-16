@@ -2,15 +2,27 @@
 title: "Creating Stylish, High-Quality Word Clouds Using Python and Font Awesome Icons"
 date: 2016-05-09T08:00:00-07:00
 slug: wordclouds
-categories: [Data Visualization]
-tags: [Python, Word Cloud]
+categories:
+  - Data Visualization
+  - Machine Learning
+  - Data Science
+  - Artificial Intelligence
+  - Statistics
+tags:
+  - Python
+  - Word Clouds
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+  - Data Visualization
+
 summary: "Why not make a word cloud which looks like a line chart?"
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 You've probably seen word clouds around the internet. There are several popular free tools for creating them, such as [Wordle](http://www.wordle.net). I myself am a fan of them, and I have made them for previous posts using the [wordcloud package](http://www.inside-r.org/packages/cran/wordcloud/docs/wordcloud) for R.
 
 Word clouds are not the most scientific type of data visualization. However, they are a very _information-dense_ representation of the frequency of all words in a given text. Word clouds are more effective than just using bar charts displaying the counts of words for large amounts of text, as the chart would be difficult to parse if there are too many bars.

@@ -2,15 +2,27 @@
 title: "Methods for Finding Related Reddit Subreddits with Simple Set Theory"
 date: 2016-06-20T08:20:00-07:00
 slug: reddit-related-subreddits
-categories: [Data Science, Big Data]
-tags: [R, ggplot2, Reddit]
+categories:
+  - Data Science
+  - Data Engineering
+  - Machine Learning
+  - Artificial Intelligence
+  - Data Visualization
+tags:
+  - R
+  - ggplot2
+  - Reddit
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+
 summary: "Fancy machine learning approaches may not be required to help Redditors discover new things."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 I recently [wrote a post](http://minimaxir.com/2016/05/reddit-graph/) on how to visualize [network graphs](https://en.wikipedia.org/wiki/Graph_theory) of [Reddit](https://www.reddit.com) subreddits.
 
 One of the reasons I've been researching the topic is to find a good way to facilitate discovery of lesser-known subreddits, as Reddit is doing a terrible job at it (although they have been trying a [few new experiments](https://www.reddit.com/r/changelog/comments/4o4qjh/more_small_tests_to_improve_user_experience_live/d49leyu?context=2) _very recently_). As it turns out, invoking graph theory is overkill. Even fancy machine learning approaches like [collaborative filtering](https://en.wikipedia.org/wiki/Collaborative_filtering), while powerful, may not be required to help Redditors discover new things.

@@ -3,12 +3,20 @@ title: Predicting Average IMDb Movie Ratings Using Text Embeddings of Movie Meta
 date: 2025-06-30T10:00:00
 slug: movie-embeddings
 categories:
-  - Embeddings
-  - AI
+  - Machine Learning
+  - Artificial Intelligence
   - Data Science
+  - Data Visualization
+  - Statistics
 tags:
   - Embeddings
   - Data Science
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+
 draft: false
 summary: Don't try this in your data science interviews.
 cover:
@@ -16,7 +24,6 @@ cover:
   relative: true
   hiddenInSingle: true
 ---
-
 Months ago, I saw a post titled "[Rejected from DS Role with no feedback](https://www.reddit.com/r/datascience/comments/1eykil7/rejected_from_ds_role_with_no_feedback/)" on Reddit's [Data Science subreddit](https://www.reddit.com/r/datascience/), in which a prospective job candidate for a data science position provided a [Colab Notebook](https://colab.research.google.com/drive/1Ud2tXW2IAw_dXA5DONvNpPmmlL1foSwK) documenting their submission for a take-home assignment and asking for feedback as to why they were rejected. Per the Reddit user, the assignment was:
 
 > Use the publicly available [IMDB Datasets](https://developer.imdb.com/non-commercial-datasets/) to build a model that predicts a movie's average rating. Please document your approach and present your results in the notebook. Make sure your code is well-organized so that we can follow your modeling process.

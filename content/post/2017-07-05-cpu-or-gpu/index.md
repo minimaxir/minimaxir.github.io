@@ -2,15 +2,26 @@
 title: "Benchmarking TensorFlow on Cloud CPUs: Cheaper Deep Learning than Cloud GPUs"
 date: 2017-07-05T09:00:00-07:00
 slug: cpu-or-gpu
+categories:
+  - Web & Social Media
+  - Applied Analytics
+  - Programming
+tags:
+  - TensorFlow
+  - Social Media Analytics
+  - R
+  - Keras
+  - Wikipedia
+  - GitHub
+  - Benchmarking
+
 category: [AI, Cost Savings]
-tags: [TensorFlow]
 summary: "Using CPUs instead of GPUs for deep learning training in the cloud is cheaper because of the massive cost differential afforded by preemptible instances."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 I've been working on a few personal deep learning projects with [Keras](https://github.com/fchollet/keras) and [TensorFlow](https://www.tensorflow.org). However, training models for deep learning with cloud services such as [Amazon EC2](https://aws.amazon.com/ec2/) and [Google Compute Engine](https://cloud.google.com/compute/) isn't free, and as someone who is currently unemployed, I have to keep an eye on extraneous spending and be as cost-efficient as possible (please support my work on [Patreon](https://www.patreon.com/minimaxir)!). I tried deep learning on the cheaper CPU instances instead of GPU instances to save money, and to my surprise, my model training was only slightly slower. As a result, I took a deeper look at the pricing mechanisms of these two types of instances to see if CPUs are more useful for my needs.
 
 The [pricing of GPU instances](https://cloud.google.com/compute/pricing#gpus) on Google Compute Engine starts at **$0.745/hr** (by attaching a $0.700/hr GPU die to a $0.045/hr n1-standard-1 instance). A couple months ago, Google [announced](https://cloudplatform.googleblog.com/2017/05/Compute-Engine-machine-types-with-up-to-64-vCPUs-now-ready-for-your-production-workloads.html) CPU instances with up to 64 vCPUs on the modern Intel [Skylake](<https://en.wikipedia.org/wiki/Skylake_(microarchitecture)>) CPU architecture. More importantly, they can also be used in [preemptible CPU instances](https://cloud.google.com/compute/docs/instances/preemptible), which live at most for 24 hours on GCE and can be terminated at any time (very rarely), but cost about _20%_ of the price of a standard instance. A preemptible n1-highcpu-64 instance with 64 vCPUs and 57.6GB RAM plus the premium for using Skylake CPUs is **$0.509/hr**, about 2/3rds of the cost of the GPU instance.

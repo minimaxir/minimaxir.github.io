@@ -2,15 +2,27 @@
 title: "Reddit is Growing Slowly, but Surely"
 date: 2013-11-18T07:30:00-07:00
 slug: daily-reddit
-categories: [Data Science]
-tags: [R, ggplot2, Reddit]
+categories:
+  - Data Science
+  - Data Visualization
+  - Statistics
+  - Web & Social Media
+  - Programming
+tags:
+  - R
+  - ggplot2
+  - Reddit
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "I analyzed the daily number of submissions from over two years to see which events, if any, have affected Reddit's growth rate. As it turns out, Reddit grows by itself."
 cover:
   image: featured.png
   relative: true
   hidden: true
 ---
-
 Reddit has certainty received more attention in the mainstream media with its involvement in such events as the [Boston Marathon Bombings](http://www.nytimes.com/2013/04/29/business/media/bombings-trip-up-reddit-in-its-turn-in-spotlight.html?_r=0) and [President Obama's AMA](hhttp://www.reddit.com/r/IAmA/comments/z1c9z/i_am_barack_obama_president_of_the_united_states/). But has this publicity led to increase in overall activity on the site?
 
 I analyzed the daily number of submissions from over two years, August 6th, 2011 to September 25, 2013 (41 million submissions total), to see which events, if any, have affected Reddit's growth rate. As it turns out, Reddit grows by itself.

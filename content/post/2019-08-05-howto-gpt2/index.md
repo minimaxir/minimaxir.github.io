@@ -2,14 +2,26 @@
 title: "How To Make Custom AI-Generated Text With GPT-2"
 date: 2019-09-04T08:00:00-07:00
 slug: howto-gpt2
-categories: ["AI", "Text Generation"]
-tags: ["GPT-2", "TensorFlow"]
+categories:
+  - Artificial Intelligence
+  - Natural Language Processing
+  - Generative AI
+  - Data Science
+  - Data Visualization
+tags:
+  - GPT-2
+  - TensorFlow
+  - LLMs
+  - Data Analysis
+  - Data Visualization
+  - Statistical Analysis
+  - Social Media Analytics
+
 summary: "Thanks to gpt-2-simple and this Colaboratory Notebook, you can easily finetune GPT-2 on your own dataset!"
 cover:
   image: featured.png
   relative: true
 ---
-
 In February 2019, [OpenAI](https://openai.com) released [a paper](https://openai.com/blog/better-language-models/) describing GPT-2, a AI-based text-generation model based on the [Transformer architecture](https://arxiv.org/abs/1706.03762) and trained on massive amounts of text all around the internet. From a text-generation perspective, the included demos were very impressive: the text is coherent over a long horizon, and grammatical syntax and punctuation are near-perfect.
 
 {{< figure src="openai-demo.png" theme="light" >}}

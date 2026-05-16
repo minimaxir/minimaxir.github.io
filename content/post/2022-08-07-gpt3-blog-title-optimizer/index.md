@@ -3,11 +3,20 @@ title: How to Create a Blog Post Title Optimizer with GPT-3 and Hacker News Data
 date: 2022-08-15T08:30:00-07:00
 slug: gpt3-blog-title-optimizer
 categories:
-  - GPT-3
-  - Text Generation
+  - Generative AI
+  - Natural Language Processing
+  - Artificial Intelligence
+  - Machine Learning
+  - Data Science
 tags:
   - GPT-3
   - Text Generation
+  - LLMs
+  - Embeddings
+  - Vector Search
+  - Machine Learning
+  - Data Analysis
+
 draft: false
 summary: "GPT-3 says the title for this post is very bad."
 subtitle: "GPT-3 says the title for this post is very bad."
@@ -18,7 +27,6 @@ cover:
   relative: true
   caption: 20.8% is close enough.
 ---
-
 <span><style type="text/css">
 pre code {
 white-space: pre-wrap !important;
