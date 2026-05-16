@@ -1,0 +1,13 @@
+{{- $id := .Get "id" -}}
+{{- $user := .Get "user" -}}
+{{- if not $id -}}
+  {{- errorf "The x shortcode requires an id parameter: %s" .Position -}}
+{{- end -}}
+{{- $href := printf "https://twitter.com/%s/status/%s" $user $id -}}
+{{- if not $user -}}
+  {{- $href = printf "https://twitter.com/i/web/status/%s" $id -}}
+{{- end -}}
+<blockquote class="twitter-tweet">
+  <a href="{{ $href }}"></a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

@@ -1,9 +1,12 @@
 baseURL: https://minimaxir.com # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
 title: Max Woolf's Blog
-paginate: 5
 rssLimit: 10
 theme: PaperMod
-copyright: Copyright Max Woolf &copy; 2025. # Footer text, e.g. '© {year} Me'
+copyright: Copyright Max Woolf &copy; 2026 # Footer text, e.g. '© {year} Me'
+
+pagination:
+  disableAliases: false
+  pagerSize: 5
 
 summaryLength: 30
 enableInlineShortcodes: true
@@ -26,7 +29,7 @@ minify:
 
 languages:
   en:
-    languageName: "English"
+    label: "English"
     weight: 1
     taxonomies:
       category: categories
@@ -184,10 +187,10 @@ privacy:
     disabled: false
     simple: true
 
-  twitter:
-    disabled: false
-    enableDNT: true
-    simple: true
+  # twitter:
+  #   disabled: false
+  #   enableDNT: true
+  #   simple: true
 
   instagram:
     disabled: false
@@ -197,11 +200,11 @@ privacy:
     disabled: false
     privacyEnhanced: true
 
-services:
-  instagram:
-    disableInlineCSS: true
-  twitter:
-    disableInlineCSS: true
+# services:
+#   instagram:
+#     disableInlineCSS: true
+#   twitter:
+#     disableInlineCSS: true
 
 publishDir: public.nosync
 resourceDir: resources.nosync

@@ -3,7 +3,7 @@
   src: url(/Overpass-Bold.ttf);
 }
 
-.dark {
+:root[data-theme="dark"] {
   --theme: rgb(35, 37, 47);
   --entry: rgb(47, 54, 64);
   --hljs-bg: rgb(47, 54, 64);
@@ -30,7 +30,8 @@ h6,
   /* src: url("Overpass-Bold.ttf"); */
 }
 
-.post-content div {
+.post-content div,
+.md-content div {
   margin-bottom: var(--content-gap) !important;
 }
 
