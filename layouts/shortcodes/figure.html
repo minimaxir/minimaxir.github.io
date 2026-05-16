@@ -14,9 +14,9 @@
 
     <img loading="lazy"{{ if $useResponsiveImages }} srcset="{{- range $size := $sizes -}}
     {{- if (ge $img.Width $size) -}}
-    {{ printf "%s %s" (($img.Resize (printf "%sx webp" $size)).Permalink) (printf "%sw," $size) -}}
+    {{ printf "%s %s" (($img.Resize (printf "%sx webp" $size)).RelPermalink) (printf "%sw," $size) -}}
     {{ end }}
-{{- end -}}{{$img.Permalink }} {{printf "%dw" ($img.Width)}}"{{ end }} src="{{ .Get "src" }}{{- if eq (.Get "align") "center" }}#center{{- end }}"
+{{- end -}}{{$img.RelPermalink }} {{printf "%dw" ($img.Width)}}"{{ end }} src="{{ .Get "src" }}{{- if eq (.Get "align") "center" }}#center{{- end }}"
          {{- if or (.Get "alt") (.Get "caption") }}
          alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
          {{- end -}}

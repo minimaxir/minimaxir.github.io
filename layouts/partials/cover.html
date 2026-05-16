@@ -20,10 +20,10 @@
         {{- if (and (in $processableFormats $cover.MediaType.SubType) ($responsiveImages) (eq $prod true)) }}
         <img loading="{{$loading}}" srcset="{{- range $size := $sizes -}}
                         {{- if (ge $cover.Width $size) -}}
-                        {{ printf "%s %s" (($cover.Resize (printf "%sx webp" $size)).Permalink) (printf "%sw ," $size) -}}
+                        {{ printf "%s %s" (($cover.Resize (printf "%sx webp" $size)).RelPermalink) (printf "%sw ," $size) -}}
                         {{ end }}
-                    {{- end -}}{{$cover.Permalink }} {{printf "%dw" ($cover.Width)}}" 
-            sizes="(min-width: 768px) 720px, 100vw" src="{{ $cover.Permalink }}" alt="{{ $alt }}" 
+                    {{- end -}}{{$cover.RelPermalink }} {{printf "%dw" ($cover.Width)}}" 
+            sizes="(min-width: 768px) 720px, 100vw" src="{{ $cover.RelPermalink }}" alt="{{ $alt }}" 
             width="{{ $cover.Width }}" height="{{ $cover.Height }}">
         {{- else }}{{/* Unprocessable image or responsive images disabled */}}
         <img loading="{{$loading}}" src="{{ (path.Join .RelPermalink .Params.cover.image) | absURL }}" alt="{{ $alt }}">
