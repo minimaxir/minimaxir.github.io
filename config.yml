@@ -97,11 +97,9 @@ params:
     Content: >
       - **Max Woolf** (@minimaxir) is formerly a Senior Data Scientist at [BuzzFeed](https://www.buzzfeed.com) in San Francisco. Currently, Max is unemployed and looking for a data science/machine learning/AI position in the San Francisco Bay Area: if interested, please contact him through one of the contact links below!
 
-      - In his free time, Max creates open source Python and R software [on his GitHub](https://github.com/minimaxir) and making snarky comments on [Twitter](https://twitter.com/minimaxir) and [Bluesky](https://bsky.app/profile/minimaxir.bsky.social).
-
       - _Max's projects are funded by his Patreon. If you have found anything on this website helpful, [please help contribute](https://www.patreon.com/minimaxir)!_
     shortContent: >
-      - **Max Woolf** (@minimaxir) is a Senior Data Scientist at [BuzzFeed](https://www.buzzfeed.com) in San Francisco who works with AI/ML tools and open source projects. _Max's projects are funded by his [Patreon](https://www.patreon.com/minimaxir)._
+      - **Max Woolf** (@minimaxir) is formerly a Senior Data Scientist at [BuzzFeed](https://www.buzzfeed.com) in San Francisco who works with AI/ML tools and open source projects. _Max's projects are funded by his [Patreon](https://www.patreon.com/minimaxir)._
 
     imageUrl: profile_webp.webp
     align: center
