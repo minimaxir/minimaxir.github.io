@@ -1,4 +1,4 @@
-/* Repository-owned adaptation of a certain project's design.
+/* Repository-owned adaptation of the WordyCloud documentation design.
    Keep PaperMod's markup, navigation, search, and theme persistence intact. */
 
 :root {
@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6, .header, .not-found, .pagination, .post-tags {
   font-weight: 700;
 }
 h1, h2, h3, h4, h5, h6 { letter-spacing: -0.025em; line-height: 1.2; }
-:is(a, button, input, summary, [tabindex]):focus-visible {
+:is(a, button, input, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
   outline: 3px solid var(--primary);
   outline-offset: 3px;
 }
@@ -315,6 +315,7 @@ h1, h2, h3, h4, h5, h6 { letter-spacing: -0.025em; line-height: 1.2; }
 .paginav a { padding: 20px; background: var(--entry); border-top: 4px solid var(--wc-red); }
 .paginav .next { border-top-color: var(--wc-blue); }
 .paginav a:hover { background: var(--wc-blue-soft); }
+.paginav .prev:hover { background: color-mix(in srgb, var(--wc-red) 20%, var(--entry)); }
 .share-buttons { flex-wrap: wrap; padding: 0; border: 0; background: transparent; }
 .share-buttons a { min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
 .share-buttons a:hover { background: var(--wc-blue-soft); }
