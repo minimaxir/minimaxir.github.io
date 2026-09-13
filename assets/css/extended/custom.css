@@ -63,6 +63,8 @@ h1, h2, h3, h4, h5, h6 { letter-spacing: -0.025em; line-height: 1.2; }
   outline: 3px solid var(--primary);
   outline-offset: 3px;
 }
+/* This is a programmatic skip-link target, not an interactive control. */
+.main[tabindex="-1"]:focus { outline: none; }
 
 /* The skip control is the first tab stop and stays clear of the header. */
 .skip-link {
