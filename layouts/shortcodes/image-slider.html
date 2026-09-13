@@ -1,0 +1,25 @@
+{{- $body := .Inner -}}
+{{- if ne (len (findRE `<figure(?:\s|>)` $body)) 2 -}}
+  {{- errorf "image-slider requires exactly two figure shortcodes: %s" .Position -}}
+{{- end -}}
+{{- $ratio := .Get "ratio" | default "8/5" -}}
+{{- if not (findRE `^[1-9][0-9]*/[1-9][0-9]*$` $ratio) -}}
+  {{- errorf "image-slider ratio must be positive integers such as 8/5: %s" .Position -}}
+{{- end -}}
+{{- $position := "50" -}}
+{{- if and .IsNamedParams (isset .Params "position") -}}{{- $position = printf "%v" (.Get "position") -}}{{- end -}}
+{{- if not (findRE `^(100|[0-9]{1,2})$` $position) -}}
+  {{- errorf "image-slider position must be an integer from 0 to 100: %s" .Position -}}
+{{- end -}}
+{{- $id := printf "image-slider-%s-%d" .Page.File.UniqueID .Ordinal -}}
+{{- $a := .Get "a" | default "Original" -}}
+{{- $b := .Get "b" | default "Revised" -}}
+<div class="wc-image-slider" data-a="{{ $a }}" data-b="{{ $b }}" style="--image-ratio: {{ $ratio | safeCSS }}">
+  <p class="wc-image-slider__title" id="{{ $id }}-title"><strong>{{ .Get "title" | default "Sliding image comparison" }}</strong></p>
+  <p class="wc-image-slider__key"><span><strong>A</strong> {{ $a }}</span><span><strong>B</strong> {{ $b }}</span></p>
+  <div class="wc-image-slider__stage">
+    {{ $body }}
+    <div class="wc-image-slider__divider" hidden><span class="wc-image-slider__grip" role="slider" tabindex="0" aria-labelledby="{{ $id }}-title" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ $position }}">↔</span></div>
+  </div>
+
+</div>

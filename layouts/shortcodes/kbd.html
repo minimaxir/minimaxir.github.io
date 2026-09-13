@@ -1,0 +1,2 @@
+{{- if not (.Get "keys") }}{{ errorf "kbd requires keys separated by |: %s" .Position }}{{ end -}}
+<span class="wc-keys">{{- range $i, $key := split (.Get "keys") "|" -}}{{ if $i }}<span class="wc-keys__separator" aria-hidden="true"> + </span>{{ end }}<kbd>{{ trim $key " " }}</kbd>{{- end -}}</span>

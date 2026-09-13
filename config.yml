@@ -76,6 +76,8 @@ params:
   ShowToc: false
   ShowFullTextinRSS: True
   comments: false
+  enablePostCTA: true
+  postCTA: "I am a former Data Scientist of 9 years currently **seeking a job** witthin data science/machine learning/AI in-person in the San Francisco Bay Area, ideally within San Francisco proper. If you found my writing interesting and you're interested, please let me know at **max[at]minimaxir.com**!" # Markdown; displayed after each post when enabled and nonempty.
   DisqusShortname: minimaxir
   images: ["android-chrome-512x512.png"]
 

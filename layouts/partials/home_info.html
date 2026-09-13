@@ -1,5 +1,5 @@
 {{- with site.Params.homeInfoParams }}
-<article class="first-entry home-info">
+<article class="first-entry home-info home-hero">
     <div class="home-info-left">
         {{- if .imageUrl -}}
         {{- $img := "" }}
@@ -19,9 +19,9 @@
     <div class="entry-content">
         {{ .Content | markdownify }}
     </div>
+    </div>
     <footer class="entry-footer">
         {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
     </footer>
-</div>
 </article>
 {{- end -}}

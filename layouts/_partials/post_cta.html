@@ -1,0 +1,9 @@
+{{- if and (eq .Section "post") (eq site.Params.enablePostCTA true) (ne .Params.disablePostCTA true) -}}
+  {{- with site.Params.postCTA | default "" | strings.TrimSpace -}}
+    {{- with $.RenderString (dict "display" "block") . -}}
+<aside class="post-cta md-content" aria-label="From the author">
+  {{ . }}
+</aside>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

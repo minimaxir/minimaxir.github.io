@@ -1,0 +1,4 @@
+{{- $label := .Get "label" | default "Examples" -}}
+<div class="shortcode-tabs" data-tabs-label="{{ $label }}"{{ with .Get "group" }} data-tabs-group="{{ . }}"{{ end }}>
+  {{ .Page.RenderString (dict "display" "block") .Inner }}
+</div>

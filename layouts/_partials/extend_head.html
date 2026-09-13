@@ -1,0 +1,10 @@
+{{- if .HasShortcode "image-slider" -}}
+  {{- with resources.Get "js/image-slider.js" | minify | fingerprint -}}
+<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+  {{- end -}}
+{{- end -}}
+{{- if .HasShortcode "tabs" -}}
+  {{- with resources.Get "js/shortcode-tabs.js" | minify | fingerprint -}}
+<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+  {{- end -}}
+{{- end -}}

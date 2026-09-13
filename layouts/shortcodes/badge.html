@@ -1,0 +1,6 @@
+{{- $type := .Get "type" | default "info" -}}
+{{- if not (in (slice "info" "success" "warning" "danger" "neutral") $type) -}}
+  {{- errorf "badge type must be info, success, warning, danger, or neutral: %s" .Position -}}
+{{- end -}}
+{{- if not (.Get "text") }}{{ errorf "badge requires text: %s" .Position }}{{ end -}}
+<span class="wc-badge wc-badge--{{ $type }}">{{ .Get "text" }}</span>

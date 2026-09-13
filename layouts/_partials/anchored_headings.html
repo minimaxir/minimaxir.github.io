@@ -1,0 +1,6 @@
+{{- /* Heading permalinks are real keyboard and screen-reader controls. */ -}}
+{{ . | replaceRE
+    "(<h[1-6] id=\"([^\"]+)\".+)(</h[1-6]+>)"
+    "${1}<a class=\"anchor\" aria-label=\"Link to section: ${2}\" href=\"#${2}\">#</a>${3}"
+    | safeHTML
+}}

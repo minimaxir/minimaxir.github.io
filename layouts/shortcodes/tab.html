@@ -1,0 +1,15 @@
+{{- if not .Parent -}}
+  {{- errorf "The tab shortcode must be a direct child of tabs: %s" .Position -}}
+{{- else if ne .Parent.Name "tabs" -}}
+  {{- errorf "The tab shortcode must be a direct child of tabs: %s" .Position -}}
+{{- end -}}
+{{- $title := .Get "title" -}}
+{{- if not $title -}}
+  {{- errorf "The tab shortcode requires a title: %s" .Position -}}
+{{- end -}}
+<div class="shortcode-tabs__panel" data-tab-title="{{ $title }}">
+  <div class="shortcode-tabs__heading" role="heading" aria-level="3">{{ $title }}</div>
+  <div class="shortcode-tabs__content">
+    {{ .Page.RenderString (dict "display" "block") .Inner }}
+  </div>
+</div>

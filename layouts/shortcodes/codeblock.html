@@ -1,0 +1,13 @@
+{{- $lang := .Get "lang" | default "text" -}}
+{{- $options := slice -}}
+{{- if eq (printf "%v" (.Get "linenos")) "true" -}}
+  {{- $options = $options | append "linenos=inline" -}}
+{{- end -}}
+{{- with .Get "lines" }}{{ $options = $options | append (printf "hl_lines=%s" .) }}{{ end -}}
+<figure class="wc-codeblock">
+  {{- with .Get "title" }}<div class="wc-codeblock__title">{{ . }}</div>{{ end -}}
+  {{- $code := highlight (strings.TrimSpace .Inner) $lang (delimit $options ",") -}}
+  {{- /* Keep visual line numbers out of textContent, which PaperMod copies. */ -}}
+  {{- $code | replaceRE `<span class="ln">([0-9]+)</span>` `<span class="ln" aria-hidden="true" data-line-number="${1}"></span>` | safeHTML -}}
+  {{- with .Get "caption" }}<figcaption class="wc-codeblock__caption">{{ . }}</figcaption>{{ end -}}
+</figure>

@@ -1,0 +1,4 @@
+{{- if not (and (.Get "href") (.Get "label")) -}}
+  {{- errorf "button requires href and label: %s" .Position -}}
+{{- end -}}
+<a class="wc-button" href="{{ .Get "href" }}">{{ .Get "label" }}<span aria-hidden="true"> →</span></a>

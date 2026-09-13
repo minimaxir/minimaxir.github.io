@@ -1,0 +1,84 @@
+.wc-callout {
+  --wc-callout-color: var(--wc-blue);
+  margin: 24px 0;
+  min-width: 0;
+  color: var(--primary);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-inline-start: 4px solid var(--wc-callout-color);
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.wc-callout:is(.wc-callout--abstract, .wc-callout--tip, .wc-callout--success, .wc-callout--question) {
+  --wc-callout-color: var(--wc-teal);
+}
+.wc-callout:is(.wc-callout--warning, .wc-callout--example) {
+  --wc-callout-color: var(--wc-orange);
+}
+.wc-callout:is(.wc-callout--failure, .wc-callout--danger, .wc-callout--bug) {
+  --wc-callout-color: var(--wc-red);
+}
+.wc-callout.wc-callout--quote { --wc-callout-color: var(--secondary); }
+
+.wc-callout > .wc-callout__title {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin: 0;
+  padding: 10px 16px;
+  color: var(--primary);
+  background: var(--code-bg);
+  background: color-mix(in srgb, var(--wc-callout-color) 12%, var(--entry));
+  font: inherit;
+  font-weight: 700;
+  list-style: none;
+}
+.wc-callout > summary.wc-callout__title { cursor: pointer; }
+.wc-callout > summary.wc-callout__title::-webkit-details-marker { display: none; }
+.wc-callout > summary.wc-callout__title::marker { content: ""; }
+.wc-callout > summary.wc-callout__title:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+.wc-callout > summary.wc-callout__title:hover {
+  background: color-mix(in srgb, var(--wc-callout-color) 20%, var(--entry));
+}
+.wc-callout .wc-callout__icon {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--wc-callout-color);
+}
+.wc-callout .wc-callout__chevron {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: auto;
+}
+.wc-callout[open] > .wc-callout__title > .wc-callout__chevron { transform: rotate(90deg); }
+
+.wc-callout > .wc-callout__body {
+  display: flow-root;
+  margin: 0;
+  padding: 16px;
+}
+.wc-callout > .wc-callout__body > :first-child { margin-top: 0; }
+.wc-callout > .wc-callout__body > :last-child { margin-bottom: 0; }
+/* Reset highlight internals, not every div: line-number tables and copy buttons
+   must retain their layout, including inside nested callouts. */
+.wc-callout .wc-callout__body .highlight { margin: 16px 0; }
+.wc-callout .wc-callout__body .highlight pre { margin: 0; }
+.wc-callout .wc-callout__body > .highlight:first-child { margin-top: 0; }
+.wc-callout .wc-callout__body > .highlight:last-child { margin-bottom: 0; }
+
+@media (max-width: 700px) {
+  .wc-callout > .wc-callout__title { padding: 10px 12px; }
+  .wc-callout > .wc-callout__body { padding: 12px; }
+  .wc-callout .wc-callout__body pre code { padding: 12px; }
+}

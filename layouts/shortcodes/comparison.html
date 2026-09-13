@@ -1,0 +1,24 @@
+{{- $body := .Inner -}}
+{{- if ne (len (findRE `<figure(?:\s|>)` $body)) 2 -}}
+  {{- errorf "comparison requires exactly two figure shortcodes: %s" .Position -}}
+{{- end -}}
+{{- $ratio := .Get "ratio" | default "8/5" -}}
+{{- if not (findRE `^[1-9][0-9]*/[1-9][0-9]*$` $ratio) -}}
+  {{- errorf "comparison ratio must be positive integers such as 8/5: %s" .Position -}}
+{{- end -}}
+{{- $id := printf "comparison-%s-%d" .Page.File.UniqueID .Ordinal -}}
+{{- $a := .Get "a" | default "Original" -}}
+{{- $b := .Get "b" | default "Revised" -}}
+<div class="wc-comparison" style="--comparison-ratio: {{ $ratio | safeCSS }}">
+  <p class="wc-comparison__title" id="{{ $id }}-title"><strong>{{ .Get "title" | default "Image comparison" }}</strong></p>
+  <p class="wc-comparison__key"><span><strong>A</strong> {{ $a }}</span><span><strong>B</strong> {{ $b }}</span></p>
+  <fieldset class="wc-comparison__controls" aria-labelledby="{{ $id }}-title {{ $id }}-view" hidden>
+    <legend id="{{ $id }}-view">Comparison view</legend>
+    <label><input type="radio" name="{{ $id }}" value="pair" checked> Pair</label>
+    <label><input type="radio" name="{{ $id }}" value="split"> Split</label>
+    <label class="wc-comparison__weave"><input type="radio" name="{{ $id }}" value="weave"> Weave</label>
+    <label><input type="radio" name="{{ $id }}" value="a"> A only</label>
+    <label><input type="radio" name="{{ $id }}" value="b"> B only</label>
+  </fieldset>
+  <div class="wc-comparison__images">{{ $body }}</div>
+</div>

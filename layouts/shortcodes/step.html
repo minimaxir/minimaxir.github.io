@@ -1,0 +1,10 @@
+{{- if not .Parent -}}
+  {{- errorf "step must be inside steps: %s" .Position -}}
+{{- else if ne .Parent.Name "steps" -}}
+  {{- errorf "step must be a direct child of steps: %s" .Position -}}
+{{- end -}}
+{{- if not (.Get "title") }}{{ errorf "step requires title: %s" .Position }}{{ end -}}
+<li class="wc-step">
+  <p class="wc-step__title">{{ .Get "title" }}</p>
+  <div class="wc-step__body">{{ .Page.RenderString (dict "display" "block") .Inner }}</div>
+</li>

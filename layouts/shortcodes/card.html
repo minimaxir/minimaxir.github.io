@@ -1,0 +1,10 @@
+{{- if not .Parent -}}
+  {{- errorf "card must be inside cards: %s" .Position -}}
+{{- else if ne .Parent.Name "cards" -}}
+  {{- errorf "card must be a direct child of cards: %s" .Position -}}
+{{- end -}}
+{{- if not (.Get "title") }}{{ errorf "card requires title: %s" .Position }}{{ end -}}
+<div class="wc-card">
+  <p class="wc-card__title">{{ with .Get "href" }}<a href="{{ . }}">{{ end }}{{ .Get "title" }}{{ if .Get "href" }}</a>{{ end }}</p>
+  <div class="wc-card__body">{{ .Page.RenderString (dict "display" "block") .Inner }}</div>
+</div>

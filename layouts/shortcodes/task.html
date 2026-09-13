@@ -1,0 +1,6 @@
+{{- if not (.Get "text") }}{{ errorf "task requires text: %s" .Position }}{{ end -}}
+{{- $checked := lower (printf "%v" (.Get "checked")) -}}
+{{- if not (in (slice "" "true" "false") $checked) -}}
+  {{- errorf "task checked must be true or false: %s" .Position -}}
+{{- end -}}
+<label class="wc-task"><input type="checkbox" disabled{{ if eq $checked "true" }} checked{{ end }}> <span>{{ .Get "text" }}</span></label>

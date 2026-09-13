@@ -1,0 +1,6 @@
+<script>
+  // PaperMod intercepts fragment links for scrolling but does not move focus.
+  document.querySelector('.skip-link').addEventListener('click', () => {
+    document.getElementById('main-content').focus({ preventScroll: true });
+  });
+</script>

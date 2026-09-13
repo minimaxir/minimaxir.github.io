@@ -1,0 +1,17 @@
+{{- $body := .Inner -}}
+{{- if ne (len (findRE `<figure(?:\s|>)` $body)) 2 -}}
+  {{- errorf "comparison requires exactly two figure shortcodes: %s" .Position -}}
+{{- end -}}
+{{- /* Feed readers may resolve relative image/link URLs against their own origin. */ -}}
+{{- $base := urls.Parse .Page.Permalink -}}
+{{- range findRE `(src|href)="[^"]*"` $body -}}
+  {{- $attribute := replaceRE `=".*$` "" . -}}
+  {{- $value := replaceRE `^[^=]+="([^"]*)"$` "${1}" . | htmlUnescape -}}
+  {{- $url := $base.ResolveReference (urls.Parse $value) -}}
+  {{- $body = replace $body . (printf `%s="%s"` $attribute ($url.String | htmlEscape)) -}}
+{{- end -}}
+<div>
+  <p><strong>{{ .Get "title" | default "Image comparison" }}</strong></p>
+  <p>A: {{ .Get "a" | default "Original" }} · B: {{ .Get "b" | default "Revised" }}. Images and captions follow in that order.</p>
+  {{ $body | safeHTML }}
+</div>

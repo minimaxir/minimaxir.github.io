@@ -1,0 +1,4 @@
+{{- if not (and (.Get "text") (.Get "title")) -}}
+  {{- errorf "abbr requires text and title: %s" .Position -}}
+{{- end -}}
+<abbr class="wc-abbr" title="{{ .Get "title" }}">{{ .Get "text" }}</abbr>

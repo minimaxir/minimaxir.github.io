@@ -1,0 +1,5 @@
+{{- if .HasShortcode "tabs" -}}
+  {{- with resources.Get "js/shortcode-tabs.js" | minify | fingerprint -}}
+<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+  {{- end -}}
+{{- end -}}

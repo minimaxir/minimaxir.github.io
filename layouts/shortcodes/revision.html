@@ -1,0 +1,32 @@
+{{- $type := "update" -}}
+{{- if and .IsNamedParams (isset .Params "type") -}}
+  {{- $type = printf "%v" (.Get "type") -}}
+{{- end -}}
+{{- $labels := dict "update" "Update" "correction" "Correction" "clarification" "Clarification" -}}
+{{- $date := printf "%v" (.Get "date") -}}
+{{- $valid := true -}}
+{{- if not (isset $labels $type) -}}
+  {{- errorf "revision shortcode at %s: invalid type %q; expected update, correction, or clarification." .Position $type -}}
+  {{- $valid = false -}}
+{{- end -}}
+{{- if not (findRE `^[0-9]{4}-[0-9]{2}-[0-9]{2}$` $date) -}}
+  {{- errorf "revision shortcode at %s: date is required in ISO YYYY-MM-DD format; got %q." .Position $date -}}
+  {{- $valid = false -}}
+{{- else -}}
+  {{- $parsed := try (time.AsTime $date) -}}
+  {{- if or $parsed.Err (hasPrefix $date "0000-") -}}
+    {{- errorf "revision shortcode at %s: date %q is not a valid calendar date (expected YYYY-MM-DD, year 0001–9999)." .Position $date -}}
+    {{- $valid = false -}}
+  {{- end -}}
+{{- end -}}
+{{- if $valid -}}
+  {{- $label := index $labels $type -}}
+  {{- $title := $label -}}
+  {{- with .Get "title" -}}
+    {{- with strings.TrimSpace (printf "%v" .) -}}{{- $title = . -}}{{- end -}}
+  {{- end -}}
+<div class="wc-revision wc-revision--{{ $type }}">
+  <p class="wc-revision__header"><span class="wc-revision__stamp"><time datetime="{{ $date }}">{{ $date }}</time><br><span class="wc-revision__kind">{{ $label }}</span></span> <strong class="wc-revision__title">{{ $title }}</strong></p>
+  <div class="wc-revision__body">{{ .Page.RenderString (dict "display" "block") .Inner }}</div>
+</div>
+{{- end -}}

@@ -1,0 +1,56 @@
+{{- $sc := .shortcode -}}
+{{- $types := slice "note" "abstract" "info" "tip" "success" "question" "warning" "failure" "danger" "bug" "example" "quote" -}}
+{{- $aliases := dict "summary" "abstract" "tldr" "abstract" "todo" "info" "hint" "tip" "important" "tip" "check" "success" "done" "success" "help" "question" "faq" "question" "caution" "warning" "attention" "warning" "fail" "failure" "missing" "failure" "error" "danger" "cite" "quote" -}}
+{{- $type := .defaultType -}}
+{{- if not .fixedType -}}
+  {{- with $sc.Get "type" -}}
+    {{- $type = lower (strings.TrimSpace (printf "%v" .)) -}}
+  {{- end -}}
+{{- end -}}
+{{- $requestedType := $type -}}
+{{- with index $aliases $type -}}{{- $type = . -}}{{- end -}}
+{{- if not (in $types $type) -}}
+  {{- errorf "%s shortcode at %s: unknown callout type %q. Supported types: %s. Aliases: summary, tldr, todo, hint, important, check, done, help, faq, caution, attention, fail, missing, error, cite." $sc.Name $sc.Position $requestedType (delimit $types ", ") -}}
+{{- else -}}
+  {{- $title := strings.FirstUpper $type -}}
+  {{- with $sc.Get "title" -}}
+    {{- with strings.TrimSpace (printf "%v" .) -}}{{- $title = . -}}{{- end -}}
+  {{- end -}}
+  {{- $open := false -}}
+  {{- if .collapsible -}}
+    {{- $value := lower (strings.TrimSpace (printf "%v" ($sc.Get "open"))) -}}
+    {{- if in (slice "true" "1") $value -}}
+      {{- $open = true -}}
+    {{- else if not (in (slice "" "false" "0") $value) -}}
+      {{- errorf "%s shortcode at %s: open must be true or false (or 1 or 0), got %q." $sc.Name $sc.Position $value -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $icons := dict
+    "note" "M4 3h12l4 4v14H4z M14 3v6h6 M8 13h8 M8 17h6"
+    "abstract" "M5 4h14v16H5z M8 8h8 M8 12h8 M8 16h5"
+    "info" "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M12 11v6 M12 7v1"
+    "tip" "M9 18h6 M10 21h4 M8 14a6 6 0 1 1 8 0l-1 2H9z"
+    "success" "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M7 12l3 3 7-7"
+    "question" "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M9 9a3 3 0 1 1 5 2c-2 1-2 2-2 3 M12 17v1"
+    "warning" "M12 3 2 21h20z M12 9v5 M12 17v1"
+    "failure" "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M8 8l8 8 M16 8l-8 8"
+    "danger" "M8 3h8l5 5v8l-5 5H8l-5-5V8z M12 7v6 M12 16v1"
+    "bug" "M8 9h8v8a4 4 0 0 1-8 0z M9 9V7a3 3 0 0 1 6 0v2 M4 8l4 3 M20 8l-4 3 M3 14h5 M16 14h5 M4 21l4-3 M20 21l-4-3 M12 10v10"
+    "example" "M9 3h6 M10 3v7L4 20h16l-6-10V3 M7 15h10"
+    "quote" "M4 6h6v7H6c0 3 1 4 3 5 M14 6h6v7h-4c0 3 1 4 3 5"
+  -}}
+  {{- $icon := printf `<svg class="wc-callout__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="%s"/></svg>` (index $icons $type) | safeHTML -}}
+  {{- /* RenderString preserves nested shortcode output while rendering block Markdown. */ -}}
+  {{- $body := $sc.Page.RenderString (dict "display" "block") .body -}}
+  {{- if .collapsible -}}
+<details class="wc-callout wc-callout--{{ $type }}"{{ if $open }} open{{ end }}>
+  <summary class="wc-callout__title">{{ $icon }}<span>{{ $title }}</span><svg class="wc-callout__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg></summary>
+  <div class="wc-callout__body">{{ $body }}</div>
+</details>
+  {{- else -}}
+<div class="wc-callout wc-callout--{{ $type }}">
+  <div class="wc-callout__title">{{ $icon }}<span>{{ $title }}</span></div>
+  <div class="wc-callout__body">{{ $body }}</div>
+</div>
+  {{- end -}}
+{{- end -}}

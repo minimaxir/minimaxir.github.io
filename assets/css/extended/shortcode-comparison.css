@@ -1,0 +1,99 @@
+/* A no-script light table. Without these rules (including RSS), both figures remain readable. */
+.post-content .wc-comparison {
+  margin: 32px 0;
+  padding-top: 16px;
+  border-top: 2px solid var(--wc-blue);
+  min-width: 0;
+}
+.post-content .wc-comparison__title { margin: 0 0 12px; font-size: 1.1em; }
+.post-content .wc-comparison__key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0 0 16px; font-size: 15px; }
+.post-content .wc-comparison__key strong { display: inline-block; margin-inline-end: 6px; padding: 0 7px; border-bottom: 3px solid var(--wc-red); }
+.post-content .wc-comparison__key > :last-child strong { border-color: var(--wc-blue); }
+.post-content .wc-comparison__images { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+.post-content .wc-comparison__images > figure { min-width: 0; margin: 0; }
+.post-content .wc-comparison__images > figure > :is(img, a) {
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--comparison-ratio);
+  object-fit: contain;
+  background: var(--code-bg);
+  margin: 0;
+}
+.post-content .wc-comparison__images > figure > a > img { width: 100%; height: 100%; object-fit: contain; }
+.post-content .wc-comparison__images > figure > img { height: auto; }
+.post-content .wc-comparison__images > figure > figcaption { margin: 0; padding-top: 10px; text-align: start; overflow-wrap: anywhere; }
+.post-content .wc-comparison__images > figure > figcaption > p { margin: 0; }
+@media (max-width: 600px) {
+  .post-content .wc-comparison__images { grid-template-columns: minmax(0, 1fr); }
+}
+@supports (grid-template-rows: subgrid) and selector(:has(*)) {
+  .post-content .wc-comparison__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 0 16px;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+  .post-content .wc-comparison__controls legend { padding: 0; margin-bottom: 6px; color: var(--secondary); font-size: 13px; }
+  .post-content .wc-comparison__controls label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    color: var(--primary);
+    background: var(--entry);
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .post-content .wc-comparison__controls label:is(:hover, :focus-within) { border-color: var(--wc-blue); }
+  .post-content .wc-comparison__controls label:has(:checked) { border-color: var(--wc-blue); background: var(--wc-blue-soft); font-weight: 600; }
+  .post-content .wc-comparison__controls input { margin: 0; accent-color: var(--wc-blue); }
+
+  /* Both figures share image and caption rows; captions never get clipped with the images. */
+  .post-content .wc-comparison:has(> .wc-comparison__controls input:is([value="split"], [value="weave"]):checked) > .wc-comparison__images {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input:is([value="split"], [value="weave"]):checked) > .wc-comparison__images > figure {
+    display: grid;
+    grid-area: 1 / 1 / span 2 / -1;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    pointer-events: none;
+  }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input:is([value="split"], [value="weave"]):checked) > .wc-comparison__images > figure > :is(img, a) { grid-area: 1 / 1 / 2 / -1; pointer-events: auto; }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input:is([value="split"], [value="weave"]):checked) > .wc-comparison__images > figure > figcaption { grid-area: 2 / 1; pointer-events: auto; }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input:is([value="split"], [value="weave"]):checked) > .wc-comparison__images > figure:nth-of-type(2) > figcaption { grid-column: 2; }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input[value="split"]:checked) > .wc-comparison__images > figure:first-of-type > :is(img, a) { clip-path: inset(0 50% 0 0); }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input[value="split"]:checked) > .wc-comparison__images > figure:nth-of-type(2) > :is(img, a) { clip-path: inset(0 0 0 50%); }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input[value="split"]:checked) > .wc-comparison__images::after {
+    content: "";
+    grid-area: 1 / 1 / 2 / -1;
+    justify-self: center;
+    align-self: stretch;
+    border-inline-start: 2px solid var(--wc-blue);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input[value="weave"]:checked) > .wc-comparison__images > figure:first-of-type > :is(img, a) {
+      /* Ten 5%-wide A strips, joined only along the top edge. Unlike masks,
+         clipping also restricts hit testing, so linked figures open the visible source. */
+      clip-path: polygon(0% 0%, 95% 0%, 95% 100%, 90% 100%, 90% 0%, 85% 0%, 85% 100%, 80% 100%, 80% 0%, 75% 0%, 75% 100%, 70% 100%, 70% 0%, 65% 0%, 65% 100%, 60% 100%, 60% 0%, 55% 0%, 55% 100%, 50% 100%, 50% 0%, 45% 0%, 45% 100%, 40% 100%, 40% 0%, 35% 0%, 35% 100%, 30% 100%, 30% 0%, 25% 0%, 25% 100%, 20% 100%, 20% 0%, 15% 0%, 15% 100%, 10% 100%, 10% 0%, 5% 0%, 5% 100%, 0% 100%, 0% 0%);
+    }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input[value="weave"]:checked) > .wc-comparison__images > figure:nth-of-type(2) > :is(img, a) {
+      clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 95% 100%, 95% 0%, 90% 0%, 90% 100%, 85% 100%, 85% 0%, 80% 0%, 80% 100%, 75% 100%, 75% 0%, 70% 0%, 70% 100%, 65% 100%, 65% 0%, 60% 0%, 60% 100%, 55% 100%, 55% 0%, 50% 0%, 50% 100%, 45% 100%, 45% 0%, 40% 0%, 40% 100%, 35% 100%, 35% 0%, 30% 0%, 30% 100%, 25% 100%, 25% 0%, 20% 0%, 20% 100%, 15% 100%, 15% 0%, 10% 0%, 10% 100%, 5% 100%, 5% 0%);
+    }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input:is([value="a"], [value="b"]):checked) > .wc-comparison__images { grid-template-columns: minmax(0, 1fr); }
+  .post-content .wc-comparison:has(> .wc-comparison__controls input[value="a"]:checked) > .wc-comparison__images > figure:nth-of-type(2),
+  .post-content .wc-comparison:has(> .wc-comparison__controls input[value="b"]:checked) > .wc-comparison__images > figure:first-of-type { display: none; }
+}
+@media print {
+  .post-content .wc-comparison > .wc-comparison__controls { display: none; }
+  .post-content .wc-comparison > .wc-comparison__images { display: block !important; }
+  .post-content .wc-comparison > .wc-comparison__images::after { display: none; }
+  .post-content .wc-comparison > .wc-comparison__images > figure { display: block !important; margin-bottom: 16px; }
+  .post-content .wc-comparison > .wc-comparison__images > figure > :is(img, a) { clip-path: none !important; }
+}

@@ -1,3 +1,8 @@
+{{- $rawValue := lower (printf "%v" (.Get "raw")) -}}
+{{- if not (in (slice "" "true" "false") $rawValue) -}}
+    {{- errorf "figure raw must be true or false: %s" .Position -}}
+{{- end -}}
+{{- $raw := eq $rawValue "true" -}}
 <figure{{ if or (.Get "class") (eq (.Get "align") "center") }} class="
            {{- if eq (.Get "align") "center" }}align-center {{ end }}
            {{- with .Get "class" }}{{ . }}{{- end }}"
@@ -8,20 +13,28 @@
 
     {{ $destination := .Get "src" }}
     {{- $img := "" -}}
-    {{- $img = (.Page.Resources.ByType "image").GetMatch $destination -}}
+    {{- if not $raw -}}
+        {{- $img = (.Page.Resources.ByType "image").GetMatch $destination -}}
+    {{- end -}}
     {{- $sizes := (slice "320" "768" "1024") }}
     {{- $useResponsiveImages := and hugo.IsProduction $img -}}
 
-    <img loading="lazy"{{ if $useResponsiveImages }} srcset="{{- range $size := $sizes -}}
+    {{/* Lazy-image auto sizing follows actual layout, including authored widths.
+         Older browsers use the reading column; explicit widths retain their prior fallback. */}}
+    <img loading="lazy"{{ if $useResponsiveImages }} sizes="auto, {{ if .Get "width" }}100vw{{ else }}(max-width: 700px) calc(100vw - 40px), (max-width: 768px) calc(100vw - 28px), (max-width: 828px) calc(100vw - 48px), 780px{{ end }}" srcset="{{- range $size := $sizes -}}
     {{- if (ge $img.Width $size) -}}
-    {{ printf "%s %s" (($img.Resize (printf "%sx webp" $size)).RelPermalink) (printf "%sw," $size) -}}
+    {{ printf "%s %s" (($img.Resize (printf "%sx webp" $size)).Permalink) (printf "%sw," $size) -}}
     {{ end }}
-{{- end -}}{{$img.RelPermalink }} {{printf "%dw" ($img.Width)}}"{{ end }} src="{{ .Get "src" }}{{- if eq (.Get "align") "center" }}#center{{- end }}"
+{{- end -}}{{$img.Permalink }} {{printf "%dw" ($img.Width)}}"{{ end }} src="{{ .Get "src" }}{{- if and (not $raw) (eq (.Get "align") "center") }}#center{{- end }}"
          {{- if or (.Get "alt") (.Get "caption") }}
          alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
          {{- end -}}
+         {{- if and $img (not (or (.Get "width") (.Get "height"))) }}
+         {{- if ne $img.MediaType.SubType "svg" }} width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }}
+         {{- else }}
          {{- with .Get "width" }} width="{{ . }}"{{ end -}}
          {{- with .Get "height" }} height="{{ . }}"{{ end -}}
+         {{- end }}
     /> <!-- Closing img tag -->
     {{- if .Get "link" }}</a>{{ end -}}
     {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") -}}
