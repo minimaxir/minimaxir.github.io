@@ -1,0 +1,4 @@
+<video id="{{ .id }}"{{ if .controls }} controls{{ else }} autoplay loop muted{{ end }} playsinline preload="{{ .preload }}"{{ with .poster }} poster="{{ . }}"{{ end }}{{ if .hasCaption }} aria-describedby="{{ .id }}-caption"{{ end }}>
+  <source src="{{ .src }}"{{ with .type }} type="{{ . }}"{{ end }} />
+  Your browser does not support embedded video. <a href="{{ .src }}">Download the video</a>.
+</video>

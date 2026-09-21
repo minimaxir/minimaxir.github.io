@@ -3,6 +3,11 @@
 <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
   {{- end -}}
 {{- end -}}
+{{- if and (.HasShortcode "video") (strings.Contains .Content "<template data-lazy-video>") -}}
+  {{- with resources.Get "js/lazy-video.js" | minify | fingerprint -}}
+<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+  {{- end -}}
+{{- end -}}
 {{- if .HasShortcode "tabs" -}}
   {{- with resources.Get "js/shortcode-tabs.js" | minify | fingerprint -}}
 <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>

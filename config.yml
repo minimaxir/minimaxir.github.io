@@ -6,7 +6,7 @@ copyright: Copyright Max Woolf &copy; 2026 # Footer text, e.g. '© {year} Me'
 
 pagination:
   disableAliases: false
-  pagerSize: 5
+  pagerSize: 4
 
 summaryLength: 30
 enableInlineShortcodes: true

@@ -1,0 +1,10 @@
+{{- $result := transform.HighlightCodeBlock . -}}
+{{- /* Chroma can leave the final list marker unstyled when the block has no
+       trailing newline. Repair bare dash markers without touching existing tokens. */ -}}
+{{- $highlighted := replaceRE `(<span class="cl">[ \t]*)-([ \t]+)` `${1}<span class="k">-</span>${2}` $result.Wrapped -}}
+{{- /* Chroma can miss Markdown strong tokens at the start of a block or inside
+       list-item lexer states. Protect correct tokens, then repair only raw ones. */ -}}
+{{- $sentinel := "HUGOCHROMASTRONGOPENSENTINEL9E21" -}}
+{{- $protected := replace $highlighted `class="gs">**` (printf `class="gs">%s` $sentinel) -}}
+{{- $repaired := replaceRE `\*\*([^*<>]+)\*\*` `<span class="gs">**${1}**</span>` $protected -}}
+{{- replace $repaired $sentinel "**" | safeHTML -}}

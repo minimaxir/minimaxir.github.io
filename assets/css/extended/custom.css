@@ -175,6 +175,7 @@ h1, h2, h3, h4, h5, h6 { letter-spacing: -0.025em; line-height: 1.2; }
 .post-content figure > figcaption > p { font-size: 15px; margin: 0; }
 .post-content :is(audio, video) { width: 100%; max-width: 100%; }
 .post-content audio { min-height: 44px; margin-bottom: 0; }
+.post-content .video-figure video { display: block; height: auto; margin: 0 auto; border: 0; }
 .post-content table:not(.lntable, .highlighttable, .highlight table, .gist table) {
   font-size: 16px;
 }
@@ -232,19 +233,24 @@ h1, h2, h3, h4, h5, h6 { letter-spacing: -0.025em; line-height: 1.2; }
 .post-content .copy-code:hover { color: var(--primary); background: var(--wc-blue-soft); }
 .post-content .chroma { color: var(--content); }
 .post-content .chroma :is(.nb, .bp, .fm, .n, .nx) { color: var(--content); }
-/* Scoped specificity overrides the existing GitHub dark palette in either mode. */
-.post-content .chroma :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .no, .nl, .nt) { color: #285ca0; }
-.post-content .chroma :is(.s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1) { color: #216d4c; }
-.post-content .chroma :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .err) { color: #a33132; }
+/* Cover every colored token in the GitHub dark palette, including Markdown
+   headings and diff tokens, so none fall back to dark-only colors in light mode. */
+.post-content .chroma :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .no, .nl, .nt, .gh, .gu) { color: #285ca0; }
+.post-content .chroma :is(.s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss) { color: #216d4c; }
+.post-content .chroma :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .err, .gr, .gt) { color: #a33132; }
 .post-content .chroma :is(.nf, .nc, .nd, .ne) { color: #7e408b; }
 .post-content .chroma :is(.o, .ow, .p, .c, .ch, .cm, .c1, .cs, .cp, .cpf, .go, .gp, .ln, .lnt, .w) { color: var(--secondary); }
 .post-content .chroma :is(.nv, .vc, .vg, .vi, .vm, .na, .py, .nn, .ni, .l, .ld) { color: #855019; }
 .post-content .chroma .hl { background: var(--wc-blue-soft); }
-[data-theme="dark"] .post-content .chroma :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .no, .nl, .nt) { color: #a4c9df; }
-[data-theme="dark"] .post-content .chroma :is(.s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1) { color: #85d4ae; }
-[data-theme="dark"] .post-content .chroma :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .err) { color: #f4a261; }
+.post-content .chroma .gd { color: #a33132; background-color: #f6e1e1; }
+.post-content .chroma .gi { color: #216d4c; background-color: #deeee5; }
+[data-theme="dark"] .post-content .chroma :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .no, .nl, .nt, .gh, .gu) { color: #a4c9df; }
+[data-theme="dark"] .post-content .chroma :is(.s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss) { color: #85d4ae; }
+[data-theme="dark"] .post-content .chroma :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .err, .gr, .gt) { color: #f4a261; }
 [data-theme="dark"] .post-content .chroma :is(.nf, .nc, .nd, .ne) { color: #dfb0e7; }
 [data-theme="dark"] .post-content .chroma :is(.nv, .vc, .vg, .vi, .vm, .na, .py, .nn, .ni, .l, .ld) { color: #e6ca8c; }
+[data-theme="dark"] .post-content .chroma .gd { color: #ffa198; background-color: #490202; }
+[data-theme="dark"] .post-content .chroma .gi { color: #56d364; background-color: #0f5323; }
 
 .home-info {
   flex-direction: row;

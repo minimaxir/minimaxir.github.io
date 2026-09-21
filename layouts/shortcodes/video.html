@@ -1,53 +1,84 @@
-{{/* Video Shortcode for Wowchemy. */}}
-{{/* Load video from page dir falling back to media library at `assets/media/` and then to remote URI. */}}
-
-{{/*
-    Docs: https://wowchemy.com/docs/content/writing-markdown-latex/#videos
-
-    Parameters
-    ----------
-    src :
-        Path to file or url for the video file.
-        If a local file, first it is searched in the page directory, and then in `assets/media/` .
-    poster : optional
-        Path or url for the preview image.
-        Defaults to {src without file extension}.jpg .
-        If not found, defaults to "".
-    controls : optional
-        If present, display video controls, otherwise the video is set to autoplay.
-    id : optional
-        Custom id "video-{id}" to associate to the <video> tag.
-*/}}
-
-{{ $destination := .Get "src" }}
-{{ $video_ext_with_dot := path.Ext (.Get "src") }}
-{{ $video_ext := strings.TrimPrefix "." $video_ext_with_dot }}
-{{ $video_type := $video_ext }}
-{{ $destination_preview := (.Get "poster") | default (replace $destination $video_ext_with_dot ".jpg") }}
-{{ $is_remote := strings.HasPrefix $destination "http" }}
-{{- $asset := "" -}}
-{{- $asset_preview := "" -}}
-{{- if not $is_remote -}}
-  {{- $asset = (.Page.Resources.ByType "video").GetMatch $destination -}}
-  {{- $asset_preview = (.Page.Resources.ByType "image").GetMatch $destination_preview -}}
-  {{- if not $asset -}}
-    {{- $asset = resources.Get (path.Join "media" $destination) -}}
-    {{- $asset_preview = resources.Get (path.Join "media" $destination_preview) -}}
+{{/* Resolve page resources, then assets/media, then use the authored URL (including static files). */}}
+{{- $src := strings.TrimSpace (.Get "src" | default "") -}}
+{{- if not $src -}}
+  {{- errorf "video requires src: %s" .Position -}}
+{{- end -}}
+{{- $poster := strings.TrimSpace (.Get "poster" | default "") -}}
+{{- range $name, $url := dict "src" $src "poster" $poster "attrlink" (.Get "attrlink" | default "") -}}
+  {{- if or (findRE `(?i)^[a-z][a-z0-9+.-]*:` $url) (strings.HasPrefix $url "//") -}}
+    {{- if not (findRE `(?i)^https?://[^/\s?#]+` $url) -}}
+      {{- errorf "video %s must be a relative URL or an HTTP(S) URL: %s" $name $.Position -}}
+    {{- end -}}
   {{- end -}}
-  {{ $video_type = $asset.MediaType.SubType }}
 {{- end -}}
 
-{{ if $asset }}
-  {{ $destination = $asset.RelPermalink }}
-{{ else }}
-  {{ $destination = $destination | safeURL }}
-{{ end }}
+{{- $controlsValue := lower (printf "%v" (.Get "controls")) -}}
+{{- if not (in (slice "" "true" "false" "yes" "no" "1" "0") $controlsValue) -}}
+  {{- errorf "video controls must be true or false (yes/no and 1/0 are also supported): %s" .Position -}}
+{{- end -}}
+{{- $controls := in (slice "true" "yes" "1") $controlsValue -}}
+{{- $lazyValue := lower (printf "%v" (.Get "lazy")) -}}
+{{- if not (in (slice "" "true" "false") $lazyValue) -}}
+  {{- errorf "video lazy must be true or false: %s" .Position -}}
+{{- end -}}
+{{- $lazy := eq $lazyValue "true" -}}
+{{- $preload := .Get "preload" | default "metadata" -}}
+{{- if not (in (slice "none" "metadata" "auto") $preload) -}}
+  {{- errorf "video preload must be none, metadata, or auto: %s" .Position -}}
+{{- end -}}
 
-{{ $poster := (.Get "poster") | default "" }}
-{{ if $asset_preview }}
-  {{ $poster = $asset_preview.RelPermalink }}
-{{ end }}
+{{- $srcPath := index (split (index (split $src "?") 0) "#") 0 -}}
+{{- $ext := lower (path.Ext $srcPath) -}}
+{{- $type := index (dict ".mp4" "video/mp4" ".m4v" "video/mp4" ".webm" "video/webm" ".ogv" "video/ogg" ".ogg" "video/ogg" ".mov" "video/quicktime") $ext | default "" -}}
+{{- $remote := findRE `(?i)^https?://` $src -}}
+{{- if and $src (not $remote) -}}
+  {{- $asset := (.Page.Resources.ByType "video").GetMatch $srcPath -}}
+  {{- if not $asset -}}
+    {{- $asset = resources.Get (path.Join "media" $srcPath) -}}
+  {{- end -}}
+  {{- with $asset -}}
+    {{- if ne .MediaType.MainType "video" -}}
+      {{- errorf "video src must resolve to a video resource: %s" $.Position -}}
+    {{- end -}}
+    {{- $src = .RelPermalink -}}
+    {{- $type = .MediaType.Type -}}
+  {{- end -}}
+{{- end -}}
 
-<video {{if (.Get "controls")}}controls{{else}}autoplay loop{{end}} {{with $poster}}poster="{{.}}"{{end}} {{ with (.Get "id") }}id="video-{{.|anchorize}}"{{end}}>
-  <source src="{{$destination}}" type="video/{{$video_type}}">
-</video>
+{{/* Infer posters only for local resources; do not emit a guessed, potentially broken URL. */}}
+{{- $preview := $poster -}}
+{{- if and (not $preview) (not $remote) $ext -}}
+  {{- $preview = printf "%s.jpg" (strings.TrimSuffix (path.Ext $srcPath) $srcPath) -}}
+{{- end -}}
+{{- if and $preview (not (findRE `(?i)^https?://` $preview)) -}}
+  {{- $image := (.Page.Resources.ByType "image").GetMatch $preview -}}
+  {{- if not $image -}}
+    {{- $image = resources.Get (path.Join "media" $preview) -}}
+  {{- end -}}
+  {{- with $image -}}
+    {{- if ne .MediaType.MainType "image" -}}
+      {{- errorf "video poster must resolve to an image resource: %s" $.Position -}}
+    {{- end -}}
+    {{- $poster = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $id := printf "video-%s-%d" .Page.File.UniqueID .Ordinal -}}
+{{- with .Get "id" -}}{{- $id = printf "video-%s" (anchorize .) -}}{{- end -}}
+{{- $hasCaption := or (.Get "title") (.Get "caption") (.Get "attr") -}}
+{{- $player := partial "shortcodes/video-player.html" (dict "id" $id "controls" $controls "preload" $preload "poster" $poster "hasCaption" $hasCaption "src" $src "type" $type) -}}
+<figure class="video-figure{{ if eq (.Get "align") "center" }} align-center{{ end }}{{ with .Get "class" }} {{ . }}{{ end }}">
+  {{ if $lazy }}
+  <template data-lazy-video>{{ $player }}</template>
+  <noscript>{{ $player }}</noscript>
+  <p data-video-fallback><a href="{{ $src }}">Download the video</a>.</p>
+  {{ else }}
+  {{ $player }}
+  {{ end }}
+  {{- if $hasCaption }}
+  <figcaption id="{{ $id }}-caption">
+    {{ with .Get "title" }}{{ . }}{{ end }}
+    {{ if or (.Get "caption") (.Get "attr") }}<p>{{ .Get "caption" | markdownify }}{{ with .Get "attr" }}{{ if $.Get "caption" }} {{ end }}{{ with $.Get "attrlink" }}<a href="{{ . }}">{{ end }}{{ . | markdownify }}{{ if $.Get "attrlink" }}</a>{{ end }}{{ end }}</p>{{ end }}
+  </figcaption>
+  {{- end }}
+</figure>
